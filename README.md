@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/Automattic/mehandibysana.svg?branch=master)](https://travis-ci.org/Automattic/mehandibysana)
-
-mehandibysana
+mehandibysana.com
 ===
 * A modern workflow with a pre-made command-line interface to turn your project into a more pleasant experience.
 * A just right amount of lean, well-commented, modern, HTML5 templates.
