@@ -6,8 +6,8 @@ import { useState, useEffect, useRef, FormEvent } from 'react';
    Constants — change these to update copy/links
 ───────────────────────────────────────────── */
 const BRAND = {
-  name: 'Mehendi by Sana',
-  tagline: 'Mehendi artist · Srinagar, J&K || Bengaluru, KA',
+  name: 'Mehandi by Sana',
+  tagline: 'Mehandi artist · Srinagar, J&K || Bengaluru, KA',
   instagram: 'https://instagram.com/mehandibysana',
   igHandle: '@mehandibysana',
   phone: '+91 9149648717', // ← update
@@ -181,11 +181,13 @@ function SignupForm() {
       return;
     }
     setStatus('loading');
-    // ── Replace this with your actual signup endpoint (Mailchimp, Resend, etc.) ──
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus('success');
-    setMsg("You're on the list — we'll be in touch soon.");
-    setEmail('');
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error();
   };
 
   return (
@@ -420,7 +422,7 @@ export default function ComingSoonPage() {
               color: 'var(--text)',
             }}
           >
-            Mehendi{' '}
+            Mehandi{' '}
             <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>
               by Sana
             </span>
@@ -521,7 +523,7 @@ export default function ComingSoonPage() {
               animation: 'fadeUp 0.7s 0.35s var(--ease-out) both',
             }}
           >
-            A new home for traditional bridal mehendi, contemporary henna art &
+            A new home for traditional bridal Mehandi, contemporary henna art &
             curated products — thoughtfully crafted for every occasion.
             We&apos;re putting the finishing touches on. Leave your email and
             you&apos;ll be the first to know.
@@ -634,7 +636,7 @@ export default function ComingSoonPage() {
             letterSpacing: '0.06em',
           }}
         >
-          © {new Date().getFullYear()} Mehendi by Sana. All rights reserved.
+          © {new Date().getFullYear()} Mehandi by Sana. All rights reserved.
         </p>
 
         <a

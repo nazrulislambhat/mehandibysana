@@ -1,6 +1,6 @@
-# Mehendi by Sana — mehandibysana.com
+# Mehandi by Sana — mehandibysana.com
 
-> Minimal portfolio + e-commerce site for a mehendi artist.
+> Minimal portfolio + e-commerce site for a Mehandi artist.
 > Portfolio built in **React JS** · Shop powered by **WordPress + WooCommerce** on **Hostinger**.
 
 ---
@@ -18,15 +18,15 @@ The two parts are independent deployments that share the same domain. The React 
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
-| Portfolio frontend | React JS (Vite) |
-| Shop backend | WordPress 6.x + WooCommerce |
-| WordPress theme | Mehendi by Sana (custom, `mehandibysana-theme`) |
-| Hosting | Hostinger (hPanel) |
-| Cache | LiteSpeed Cache plugin |
-| Fonts | Cormorant Garamond + DM Sans (Google Fonts) |
-| Styling | CSS custom properties, light/dark mode via `data-theme` attribute |
+| Layer              | Technology                                                        |
+| ------------------ | ----------------------------------------------------------------- |
+| Portfolio frontend | React JS (Vite)                                                   |
+| Shop backend       | WordPress 6.x + WooCommerce                                       |
+| WordPress theme    | Mehandi by Sana (custom, `mehandibysana-theme`)                   |
+| Hosting            | Hostinger (hPanel)                                                |
+| Cache              | LiteSpeed Cache plugin                                            |
+| Fonts              | Cormorant Garamond + DM Sans (Google Fonts)                       |
+| Styling            | CSS custom properties, light/dark mode via `data-theme` attribute |
 
 ---
 
@@ -110,11 +110,11 @@ In Hostinger hPanel → Websites → Add website, or install via the 1-click Wor
 
 ### 2. Install required plugins
 
-| Plugin | Purpose |
-|---|---|
-| WooCommerce | Core e-commerce engine |
-| LiteSpeed Cache | Performance + cache management |
-| Wordfence (optional) | Security |
+| Plugin               | Purpose                        |
+| -------------------- | ------------------------------ |
+| WooCommerce          | Core e-commerce engine         |
+| LiteSpeed Cache      | Performance + cache management |
+| Wordfence (optional) | Security                       |
 
 ### 3. Upload the theme
 
@@ -124,13 +124,13 @@ Go to **Appearance → Themes → Add New → Upload Theme**, upload `mehandibys
 
 Navigate to **Theme Settings** in the WordPress sidebar:
 
-| Tab | Key settings |
-|---|---|
-| General & Hero | Accent colours, dark/light default |
-| About | Bio text, stats |
-| Contact | Receiving email, phone, booking types |
-| Shop | Products per page, grid columns |
-| Social & Footer | Instagram, WhatsApp, Facebook URLs |
+| Tab             | Key settings                          |
+| --------------- | ------------------------------------- |
+| General & Hero  | Accent colours, dark/light default    |
+| About           | Bio text, stats                       |
+| Contact         | Receiving email, phone, booking types |
+| Shop            | Products per page, grid columns       |
+| Social & Footer | Instagram, WhatsApp, Facebook URLs    |
 
 ### 5. Add your photo
 
@@ -204,17 +204,17 @@ Both the React app and WordPress theme use the same CSS custom property names:
 
 ```css
 /* Light mode */
---bg:           #FAF8F5;
---bg2:          #F2EFE9;
---text:         #1A1510;
---text2:        #6B5E4E;
---accent:       #8B4513;    /* henna terracotta */
---accent-light: #C1693A;
+--bg: #faf8f5;
+--bg2: #f2efe9;
+--text: #1a1510;
+--text2: #6b5e4e;
+--accent: #8b4513; /* henna terracotta */
+--accent-light: #c1693a;
 
 /* Dark mode — applied via data-theme="dark" on <html> */
---bg:           #110E0A;
---accent:       #C1693A;
---accent-light: #D4845A;
+--bg: #110e0a;
+--accent: #c1693a;
+--accent-light: #d4845a;
 ```
 
 Accent colours are also configurable per-site from **Theme Settings → General** in WordPress.
@@ -276,15 +276,15 @@ The receiving email defaults to your WordPress admin email. Change it under **Th
 
 ## Support & maintenance
 
-| Task | Where |
-|---|---|
-| Edit hero text, bio, stats | Theme Settings → General / About |
-| Add/edit products | WordPress → Products |
-| Add testimonials | WordPress → Testimonials |
-| View orders | WordPress → WooCommerce → Orders |
-| Flush cache manually | LiteSpeed Cache → Toolbox → Purge All |
-| Update React content | Edit `src/` files and redeploy |
+| Task                       | Where                                 |
+| -------------------------- | ------------------------------------- |
+| Edit hero text, bio, stats | Theme Settings → General / About      |
+| Add/edit products          | WordPress → Products                  |
+| Add testimonials           | WordPress → Testimonials              |
+| View orders                | WordPress → WooCommerce → Orders      |
+| Flush cache manually       | LiteSpeed Cache → Toolbox → Purge All |
+| Update React content       | Edit `src/` files and redeploy        |
 
 ---
 
-*Built with love for Mehendi by Sana · Srinagar, J&K || Bengaluru, Karnataka*
+_Built with love for Mehandi by Sana · Srinagar, J&K || Bengaluru, Karnataka_
