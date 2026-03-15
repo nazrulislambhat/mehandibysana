@@ -287,4 +287,4 @@ The receiving email defaults to your WordPress admin email. Change it under **Th
 
 ---
 
-*Built with love for Mehendi by Sana · Jammu, J&K*
+*Built with love for Mehendi by Sana · Srinagar, J&K || Bengaluru, Karnataka*
