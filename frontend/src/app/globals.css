@@ -1,74 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Urbanist:wght@300;400;500;600;700;800&display=swap');
 
-:root {
-  /* Palette - Light Theme */
-  --bg-primary: #FAF8F5;
-  --bg-secondary: #F3EFE9;
+/* ========================================================
+   ARTISAN KASHMIRI LUXURY DESIGN TOKENS
+   Mehandi By Sana Atelier & Apothecary
+   ======================================================== */
+
+:root,
+[data-theme='light'],
+.theme-light {
+  /* Surface & Base - Warm Alabaster Silk */
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #F3ECE2;
+  --bg-tertiary: #EBE2D4;
   --bg-card: #FFFFFF;
-  --bg-card-hover: #F8F5F0;
-  --bg-glass: rgba(255, 255, 255, 0.85);
-  
-  --text-primary: #1A1C29;
-  --text-secondary: #5A5E73;
-  --text-muted: #8E92A4;
+  --bg-card-hover: #FCFAF7;
+  --bg-glass: rgba(250, 247, 242, 0.88);
+  --bg-overlay: rgba(22, 18, 14, 0.6);
+
+  /* Typography */
+  --text-primary: #1A1613;
+  --text-secondary: #5C544D;
+  --text-muted: #8E847A;
   --text-inverse: #FFFFFF;
 
-  --brand-primary: #F55536; /* Authentic Henna Terracotta */
-  --brand-primary-hover: #D94426;
-  --brand-accent: #29339B; /* Royal Kashmiri Indigo */
-  --brand-cream: #F1FEC6; /* Artisanal Pistachio Cream */
-  --brand-sage: #D6FFB7;
-  --brand-gold: #D4AF37;
+  /* Botanical Henna & Heritage Kashmir Colors */
+  --brand-primary: #C04A26; /* Authentic Deep Lawsone Terracotta */
+  --brand-primary-hover: #A63B1C;
+  --brand-accent: #1E2568; /* Royal Kashmiri Indigo */
+  --brand-accent-hover: #151A4D;
+  --brand-gold: #C59B27; /* Antique Saffron Gold */
+  --brand-gold-hover: #B0881F;
+  --brand-cream: #F4F8E8; /* Pistachio Infusion */
+  --brand-sage: #D2E4BC;
+  --brand-burgundy: #681525; /* 48hr Peak Henna Stain */
 
-  --border-subtle: rgba(26, 28, 41, 0.08);
-  --border-focus: rgba(245, 85, 54, 0.4);
-  
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
-  --shadow-brand: 0 8px 25px rgba(245, 85, 54, 0.25);
+  /* Borders & Dividers */
+  --border-subtle: rgba(92, 84, 77, 0.12);
+  --border-medium: rgba(92, 84, 77, 0.22);
+  --border-focus: rgba(192, 74, 38, 0.5);
+  --border-gold: rgba(197, 155, 39, 0.35);
 
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(35, 24, 18, 0.05);
+  --shadow-md: 0 10px 30px rgba(35, 24, 18, 0.08);
+  --shadow-lg: 0 20px 50px rgba(35, 24, 18, 0.12);
+  --shadow-brand: 0 10px 30px rgba(192, 74, 38, 0.22);
+  --shadow-gold: 0 8px 25px rgba(197, 155, 39, 0.25);
+
+  /* Fonts */
+  --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Urbanist', system-ui, -apple-system, sans-serif;
+
+  /* Radii */
+  --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-lg: 22px;
   --radius-full: 9999px;
 
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-theme='dark'] {
-  /* Palette - Dark Luxury Henna Theme */
-  --bg-primary: #0F111A;
-  --bg-secondary: #161926;
-  --bg-card: #1D2133;
-  --bg-card-hover: #242940;
-  --bg-glass: rgba(22, 25, 38, 0.85);
+[data-theme='dark'],
+.theme-dark {
+  /* Surface & Base - Velvety Henna Noir */
+  --bg-primary: #0C0D12;
+  --bg-secondary: #13151F;
+  --bg-tertiary: #1A1D2B;
+  --bg-card: #161824;
+  --bg-card-hover: #1E2132;
+  --bg-glass: rgba(12, 13, 18, 0.88);
+  --bg-overlay: rgba(0, 0, 0, 0.75);
 
-  --text-primary: #F0F2FA;
-  --text-secondary: #A6ACCD;
-  --text-muted: #6B728F;
-  --text-inverse: #0F111A;
+  /* Typography */
+  --text-primary: #F7F5F2;
+  --text-secondary: #B2ADBA;
+  --text-muted: #7A7685;
+  --text-inverse: #0C0D12;
 
-  --brand-primary: #F55536;
-  --brand-primary-hover: #FF6E52;
-  --brand-accent: #6C79EE;
-  --brand-cream: #F1FEC6;
-  --brand-sage: #D6FFB7;
-  --brand-gold: #F3CA65;
+  /* Botanical Henna & Heritage Kashmir Colors */
+  --brand-primary: #F05A32; /* Luminous Terracotta */
+  --brand-primary-hover: #FF734D;
+  --brand-accent: #6C79EE; /* Kashmiri Night Violet-Indigo */
+  --brand-accent-hover: #838FFF;
+  --brand-gold: #E5C158; /* Gilded Kashmiri Leaf */
+  --brand-gold-hover: #F2D277;
+  --brand-cream: #1F2E23;
+  --brand-sage: #B4DB97;
+  --brand-burgundy: #C9425A;
 
-  --border-subtle: rgba(240, 242, 250, 0.08);
-  --border-focus: rgba(245, 85, 54, 0.6);
+  /* Borders & Dividers */
+  --border-subtle: rgba(247, 245, 242, 0.08);
+  --border-medium: rgba(247, 245, 242, 0.16);
+  --border-focus: rgba(240, 90, 50, 0.6);
+  --border-gold: rgba(229, 193, 88, 0.3);
 
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 50px rgba(0, 0, 0, 0.6);
-  --shadow-brand: 0 8px 30px rgba(245, 85, 54, 0.35);
+  /* Shadows */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 35px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
+  --shadow-brand: 0 10px 35px rgba(240, 90, 50, 0.3);
+  --shadow-gold: 0 8px 30px rgba(229, 193, 88, 0.25);
 }
+
+/* ========================================================
+   BASE RESETS & DEFAULTS
+   ======================================================== */
 
 * {
   box-sizing: border-box;
@@ -76,7 +117,12 @@
   margin: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -84,8 +130,10 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  letter-spacing: -0.01em;
   transition: background-color var(--transition-normal), color var(--transition-normal);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -99,6 +147,7 @@ button {
   border: none;
   background: none;
   outline: none;
+  touch-action: manipulation;
 }
 
 img {
@@ -117,51 +166,104 @@ img {
   padding-right: 1.5rem;
 }
 
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 /* Typography Utility */
 .font-serif {
   font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
 }
 
 .font-sans {
   font-family: var(--font-sans);
 }
 
-/* Buttons */
+/* ========================================================
+   LUXURY BUTTONS & TACTILE CONTROLS
+   ======================================================== */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.55rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.75rem 1.6rem;
   border-radius: var(--radius-sm);
   transition: all var(--transition-normal);
   white-space: nowrap;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn-primary {
   background: var(--brand-primary);
   color: #ffffff;
   box-shadow: var(--shadow-brand);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .btn-primary:hover {
   background: var(--brand-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(245, 85, 54, 0.4);
+  box-shadow: 0 14px 35px rgba(240, 90, 50, 0.4);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--brand-gold) 0%, #D8A933 100%);
+  color: #1A1613;
+  font-weight: 800;
+  box-shadow: var(--shadow-gold);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(197, 155, 39, 0.45);
 }
 
 .btn-cream {
   background: var(--brand-cream);
-  color: #1A1C29;
+  color: var(--text-primary);
   font-weight: 700;
+  border: 1px solid var(--border-gold);
 }
 
 .btn-cream:hover {
-  background: #ffffff;
+  background: var(--bg-card);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(241, 254, 198, 0.4);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transform: translateY(-2px);
 }
 
 .btn-outline {
@@ -174,83 +276,232 @@ img {
   border-color: var(--brand-primary);
   color: var(--brand-primary);
   background: var(--bg-card-hover);
+  transform: translateY(-1px);
 }
 
-/* Badges */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  padding: 0.5rem 0.8rem;
+}
+
+.btn-ghost:hover {
+  background: var(--border-subtle);
+  color: var(--brand-primary);
+}
+
+/* ========================================================
+   BADGES & ARTISANAL PILLS
+   ======================================================== */
+
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   padding: 0.3rem 0.65rem;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
+  line-height: 1;
 }
 
 .badge-sale {
-  background: #FF3A20;
+  background: #E03520;
   color: #ffffff;
+  box-shadow: 0 2px 8px rgba(224, 53, 32, 0.3);
 }
 
 .badge-instock {
-  background: var(--brand-cream);
-  color: #1B1F3B;
+  background: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
+  border: 1px solid rgba(46, 125, 50, 0.25);
+}
+[data-theme='dark'] .badge-instock {
+  background: rgba(76, 175, 80, 0.15);
+  color: #81c784;
+  border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 .badge-perishable {
-  background: rgba(245, 85, 54, 0.15);
+  background: rgba(240, 90, 50, 0.12);
   color: var(--brand-primary);
-  border: 1px solid rgba(245, 85, 54, 0.3);
+  border: 1px solid rgba(240, 90, 50, 0.3);
 }
 
 .badge-organic {
-  background: rgba(214, 255, 183, 0.2);
-  color: #559632;
-  border: 1px solid rgba(214, 255, 183, 0.4);
-}
-[data-theme='dark'] .badge-organic {
-  color: var(--brand-sage);
+  background: rgba(197, 155, 39, 0.12);
+  color: var(--brand-gold);
+  border: 1px solid var(--border-gold);
 }
 
-/* Cards */
+.badge-artisan {
+  background: rgba(30, 37, 104, 0.1);
+  color: var(--brand-accent);
+  border: 1px solid rgba(30, 37, 104, 0.2);
+}
+[data-theme='dark'] .badge-artisan {
+  background: rgba(108, 121, 238, 0.15);
+  color: var(--brand-accent);
+  border: 1px solid rgba(108, 121, 238, 0.3);
+}
+
+/* Interactive Variant Pill Selector */
+.variant-selector-pill {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.variant-selector-pill:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  background: var(--bg-card-hover);
+}
+
+.variant-selector-pill.active {
+  border-color: var(--brand-primary);
+  background: var(--brand-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(240, 90, 50, 0.25);
+}
+
+/* ========================================================
+   CARDS & SURFACES
+   ======================================================== */
+
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  transition: all var(--transition-normal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
   overflow: hidden;
+  position: relative;
 }
 
 .card:hover {
-  border-color: rgba(245, 85, 54, 0.25);
+  border-color: rgba(192, 74, 38, 0.3);
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 
-/* Glassmorphism Navigation */
+/* Glassmorphism Navigation Header */
 .header-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   background: var(--bg-glass);
   border-bottom: 1px solid var(--border-subtle);
-  transition: all var(--transition-normal);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
 }
 
-/* Drawer & Modal Overlay */
+/* ========================================================
+   BENTO GRID SYSTEM
+   ======================================================== */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.bento-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.bento-card:hover {
+  border-color: rgba(197, 155, 39, 0.4);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(192, 74, 38, 0.08);
+  transform: translateY(-3px);
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-col-12 { grid-column: span 12; }
+.bento-col-8 { grid-column: span 8; }
+.bento-col-7 { grid-column: span 7; }
+.bento-col-6 { grid-column: span 6; }
+.bento-col-5 { grid-column: span 5; }
+.bento-col-4 { grid-column: span 4; }
+.bento-col-3 { grid-column: span 3; }
+
+.bento-row-2 { grid-row: span 2; }
+
+@media (max-width: 1024px) {
+  .bento-col-8, .bento-col-7, .bento-col-6, .bento-col-5, .bento-col-4 {
+    grid-column: span 6;
+  }
+  .bento-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .bento-col-12, .bento-col-8, .bento-col-7, .bento-col-6, .bento-col-5, .bento-col-4, .bento-col-3 {
+    grid-column: span 1;
+  }
+  .bento-row-2 {
+    grid-row: span 1;
+  }
+  .bento-card {
+    padding: 1.35rem;
+  }
+}
+
+/* ========================================================
+   SLIDE-OVER CART DRAWER & BACKDROP
+   ======================================================== */
+
 .drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--transition-normal);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .drawer-backdrop.active {
@@ -264,12 +515,12 @@ img {
   right: 0;
   bottom: 0;
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   background: var(--bg-card);
-  box-shadow: var(--shadow-lg);
-  z-index: 1001;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
   transform: translateX(100%);
-  transition: transform var(--transition-normal);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
@@ -278,28 +529,112 @@ img {
   transform: translateX(0);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ========================================================
+   MICRO-ANIMATIONS & KEYFRAMES
+   ======================================================== */
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-pulse {
+  animation: badgePulse 2.4s infinite ease-in-out;
 }
 
-/* Custom Scrollbar */
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    rgba(197, 155, 39, 0.05) 0%,
+    rgba(197, 155, 39, 0.25) 50%,
+    rgba(197, 155, 39, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerEffect 3s infinite linear;
+}
+
+@keyframes floatGently {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float {
+  animation: floatGently 4s ease-in-out infinite;
+}
+
+@keyframes toastSlideUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.toast-slide-up {
+  animation: toastSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ========================================================
+   CUSTOM LUXURY SCROLLBAR
+   ======================================================== */
+
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-secondary);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
+  background: var(--border-medium);
   border-radius: var(--radius-full);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--brand-primary);
+}
+
+/* ========================================================
+   MOBILE ULTRA-RESPONSIVENESS (<= 480px)
+   ======================================================== */
+@media (max-width: 480px) {
+  .cart-drawer {
+    max-width: 100vw;
+  }
+  .bento-card {
+    padding: 1.15rem;
+    border-radius: var(--radius-md);
+  }
+  .btn {
+    padding: 0.72rem 1.25rem;
+    font-size: 0.88rem;
+  }
+  .container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
 }

@@ -4,7 +4,7 @@ import { INITIAL_PRODUCTS } from '@/lib/catalog';
 import ProductDetailClient from './ProductDetailClient';
 import type { Metadata } from 'next';
 
-export const instant = false;
+export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return INITIAL_PRODUCTS.map((product) => ({

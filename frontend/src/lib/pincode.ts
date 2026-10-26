@@ -190,3 +190,6 @@ export function evaluatePincode(pincode: string): PincodeCheckResult {
       : `Prepaid only for PIN code ${cleanPin}. Cash on Delivery is unavailable in this zone.`,
   };
 }
+
+export const checkPincode = evaluatePincode;
+

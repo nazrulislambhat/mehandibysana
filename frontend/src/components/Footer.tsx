@@ -80,6 +80,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/registration-form" style={{ color: 'var(--text-secondary)' }}>
+                  🎓 Mehandi Masterclass Registration
+                </Link>
+              </li>
+              <li>
+                <Link href="/mehandi-class-terms-conditions" style={{ color: 'var(--text-secondary)' }}>
+                  Mehandi Class Terms & Rules
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" style={{ color: 'var(--text-secondary)' }}>
                   About Sumaiya Rashid
                 </Link>
@@ -99,17 +109,29 @@ export default function Footer() {
                 marginBottom: '1.25rem',
               }}
             >
-              Freshness & Care
+              Customer Care & Tracking
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.92rem' }}>
+              <li>
+                <Link href="/order-tracking" style={{ color: 'var(--brand-primary)', fontWeight: 600 }}>
+                  🚚 Track Your Henna Order
+                </Link>
+              </li>
+              <li>
+                <Link href="/my-account" style={{ color: 'var(--text-secondary)' }}>
+                  My Account & Past Orders
+                </Link>
+              </li>
+              <li>
+                <Link href="/cart" style={{ color: 'var(--text-secondary)' }}>
+                  Bag & Delivery Date Planner
+                </Link>
+              </li>
               <li>
                 <span style={{ color: 'var(--text-secondary)' }}>❄️ Keep cones frozen upon delivery</span>
               </li>
               <li>
                 <span style={{ color: 'var(--text-secondary)' }}>🌿 Zero PPD / No Chemical Dye</span>
-              </li>
-              <li>
-                <span style={{ color: 'var(--text-secondary)' }}>📦 Express delivery across India</span>
               </li>
               <li>
                 <Link href="/terms-conditions" style={{ color: 'var(--text-secondary)' }}>
@@ -119,6 +141,11 @@ export default function Footer() {
               <li>
                 <Link href="/privacy-policy" style={{ color: 'var(--text-secondary)' }}>
                   Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/changelog" style={{ color: 'var(--text-secondary)' }}>
+                  Platform Changelog
                 </Link>
               </li>
             </ul>
@@ -145,10 +172,12 @@ export default function Footer() {
               <br />
               Jammu & Kashmir, 190005
             </p>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-              📞 <strong>Direct:</strong> +91-9149648717
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+              📞 <strong>Direct / WhatsApp:</strong> +91-9149648717
               <br />
               ✉️ <strong>Email:</strong> sana@mehandibysana.com
+              <br />
+              ✉️ <strong>General:</strong> mehandibysana@gmail.com
             </p>
           </div>
         </div>
@@ -168,14 +197,20 @@ export default function Footer() {
           }}
         >
           <div>
-            © 2026 Mehandi By Sana. All rights reserved.
+            © 2026 Mehandi By Sana. All rights reserved. Handcrafted with organic purity in Srinagar, Kashmir.
           </div>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <Link href="/order-tracking" style={{ color: 'var(--text-muted)' }}>
+              Track Order
+            </Link>
             <Link href="/terms-conditions" style={{ color: 'var(--text-muted)' }}>
               Terms & Conditions
             </Link>
             <Link href="/privacy-policy" style={{ color: 'var(--text-muted)' }}>
               Privacy Policy
+            </Link>
+            <Link href="/changelog" style={{ color: 'var(--text-muted)' }}>
+              Changelog
             </Link>
           </div>
         </div>

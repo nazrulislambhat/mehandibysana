@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { checkPincode } from '@/lib/pincode';
 
 export default function CartDrawer() {
   const {
@@ -20,7 +21,39 @@ export default function CartDrawer() {
     setDeliveryDetails,
   } = useCart();
 
-  if (!isCartOpen) return null;
+  const [pinInput, setPinInput] = useState('');
+  const [pinResult, setPinResult] = useState<any>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll and handle Escape key when cart is open
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsCartOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isCartOpen, setIsCartOpen]);
+
+  const handlePincodeEstimate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!pinInput || pinInput.trim().length !== 6) return;
+    const res = checkPincode(pinInput.trim());
+    setPinResult(res);
+  };
+
+  if (!mounted) return null;
 
   return (
     <>
@@ -28,11 +61,16 @@ export default function CartDrawer() {
       <div
         className={`drawer-backdrop ${isCartOpen ? 'active' : ''}`}
         onClick={() => setIsCartOpen(false)}
-        aria-hidden="true"
+        aria-hidden={!isCartOpen}
       />
 
-      {/* Drawer */}
-      <aside className={`cart-drawer ${isCartOpen ? 'open' : ''}`} role="dialog" aria-label="Shopping Cart">
+      {/* Slide-over Drawer */}
+      <aside
+        className={`cart-drawer ${isCartOpen ? 'open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Artisan Shopping Bag"
+      >
         {/* Header */}
         <div
           style={{
@@ -41,37 +79,43 @@ export default function CartDrawer() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            background: 'var(--bg-card)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <h2 className="font-serif" style={{ fontSize: '1.25rem', fontWeight: 700 }}>
-              Your Bag
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <h2 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+              Artisan Bag
             </h2>
             <span
               style={{
-                fontSize: '0.8rem',
-                color: 'var(--text-muted)',
-                fontWeight: 600,
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                color: 'var(--brand-primary)',
+                background: 'rgba(192, 74, 38, 0.1)',
+                padding: '0.2rem 0.55rem',
+                borderRadius: 'var(--radius-full)',
               }}
             >
-              ({cart.length} {cart.length === 1 ? 'item' : 'items'})
+              {cart.reduce((sum, item) => sum + item.quantity, 0)} Items
             </span>
           </div>
+
           <button
             id="close-cart-btn"
             onClick={() => setIsCartOpen(false)}
             aria-label="Close Bag"
             style={{
-              padding: '0.5rem',
+              padding: '0.55rem',
               borderRadius: 'var(--radius-sm)',
               color: 'var(--text-secondary)',
               background: 'var(--bg-secondary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              transition: 'all var(--transition-fast)',
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -84,21 +128,18 @@ export default function CartDrawer() {
             padding: '0.85rem 1.5rem',
             background: 'var(--bg-secondary)',
             borderBottom: '1px solid var(--border-subtle)',
-            fontSize: '0.85rem',
+            fontSize: '0.84rem',
           }}
         >
           {subtotal >= freeShippingThreshold ? (
-            <div style={{ color: '#2EB85C', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span>🎉</span>
-              <span>You unlocked Free Nationwide Shipping!</span>
+            <div style={{ color: '#2EB85C', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <span>✨</span>
+              <span>Congratulations! Free Express Shipping unlocked!</span>
             </div>
           ) : (
             <div style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
-              Add{' '}
-              <strong style={{ color: 'var(--brand-primary)' }}>
-                ₹{freeShippingThreshold - subtotal}
-              </strong>{' '}
-              more to qualify for <strong>Free Shipping</strong>
+              Add <strong style={{ color: 'var(--brand-primary)' }}>₹{freeShippingThreshold - subtotal}</strong> more for{' '}
+              <strong style={{ color: 'var(--text-primary)' }}>Free India Delivery</strong>
             </div>
           )}
           <div
@@ -117,7 +158,7 @@ export default function CartDrawer() {
                 height: '100%',
                 background: subtotal >= freeShippingThreshold ? '#2EB85C' : 'var(--brand-primary)',
                 borderRadius: 'var(--radius-full)',
-                transition: 'width 0.3s ease',
+                transition: 'width 0.4s ease',
               }}
             />
           </div>
@@ -131,31 +172,33 @@ export default function CartDrawer() {
             padding: '1.25rem 1.5rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem',
+            gap: '1rem',
           }}
         >
           {cart.length === 0 ? (
             <div
               style={{
                 textAlign: 'center',
-                margin: 'auto',
-                padding: '2rem 1rem',
+                padding: '4rem 1rem',
+                color: 'var(--text-secondary)',
               }}
             >
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌿</div>
-              <h3 className="font-serif" style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🛍️</div>
+              <h3 className="font-serif" style={{ fontSize: '1.35rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
                 Your bag is empty
               </h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-                Explore our fresh organic henna cones and artisanal kits.
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.75rem' }}>
+                Discover freshly formulated organic henna cones, DIY master kits, and natural botanical elixirs.
               </p>
-              <Link
-                href="/shop"
+              <button
                 onClick={() => setIsCartOpen(false)}
                 className="btn btn-primary"
+                style={{ padding: '0.75rem 1.8rem', borderRadius: 'var(--radius-md)' }}
               >
-                Browse Shop
-              </Link>
+                <Link href="/shop" style={{ color: '#ffffff' }}>
+                  Explore Collection →
+                </Link>
+              </button>
             </div>
           ) : (
             cart.map((item) => (
@@ -164,155 +207,226 @@ export default function CartDrawer() {
                 style={{
                   display: 'flex',
                   gap: '1rem',
-                  paddingBottom: '1.25rem',
-                  borderBottom: '1px solid var(--border-subtle)',
+                  padding: '1rem',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--border-subtle)',
+                  position: 'relative',
                 }}
               >
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
+                {/* Thumbnail */}
+                <Link
+                  href={`/product/${item.handle}`}
+                  onClick={() => setIsCartOpen(false)}
                   style={{
                     width: '74px',
                     height: '74px',
-                    objectFit: 'cover',
                     borderRadius: 'var(--radius-sm)',
-                    background: 'var(--bg-secondary)',
+                    overflow: 'hidden',
+                    background: 'var(--bg-card)',
+                    flexShrink: 0,
+                    display: 'block',
                   }}
-                />
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <h4 style={{ fontSize: '0.92rem', fontWeight: 600 }}>{item.title}</h4>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      aria-label="Remove item"
-                      style={{
-                        color: 'var(--text-muted)',
-                        padding: '0.2rem',
-                        transition: 'color var(--transition-fast)',
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--brand-primary)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-                    >
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="3 6 5 6 21 6" />
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                      </svg>
-                    </button>
-                  </div>
+                >
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </Link>
 
-                  {item.variantTitle && (
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-                      {item.variantTitle}
-                    </p>
-                  )}
-
-                  <div
+                {/* Details */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <Link
+                    href={`/product/${item.handle}`}
+                    onClick={() => setIsCartOpen(false)}
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginTop: '0.75rem',
+                      fontSize: '0.92rem',
+                      fontWeight: 700,
+                      color: 'var(--text-primary)',
+                      display: 'block',
+                      lineHeight: 1.3,
+                      marginBottom: '0.2rem',
                     }}
                   >
-                    {/* Quantity controls */}
+                    {item.title}
+                  </Link>
+                  {item.variantTitle && (
+                    <span
+                      style={{
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        color: 'var(--brand-primary)',
+                        display: 'block',
+                        marginBottom: '0.4rem',
+                      }}
+                    >
+                      {item.variantTitle}
+                    </span>
+                  )}
+                  <div
+                    style={{
+                      fontSize: '0.98rem',
+                      fontWeight: 800,
+                      color: 'var(--text-primary)',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
+                    ₹{item.price}
+                  </div>
+
+                  {/* Quantity Stepper & Remove */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <div
                       style={{
-                        display: 'flex',
+                        display: 'inline-flex',
                         alignItems: 'center',
-                        border: '1px solid var(--border-subtle)',
+                        background: 'var(--bg-card)',
                         borderRadius: 'var(--radius-sm)',
-                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border-subtle)',
+                        height: '30px',
                       }}
                     >
                       <button
                         onClick={() => updateQuantity(item.id, -1)}
                         style={{
-                          padding: '0.3rem 0.65rem',
-                          fontSize: '0.9rem',
-                          color: 'var(--text-primary)',
+                          width: '28px',
+                          height: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--text-secondary)',
+                          fontSize: '1rem',
                         }}
                       >
                         -
                       </button>
-                      <span style={{ fontSize: '0.85rem', fontWeight: 700, minWidth: '24px', textAlign: 'center' }}>
+                      <span
+                        style={{
+                          minWidth: '24px',
+                          textAlign: 'center',
+                          fontSize: '0.85rem',
+                          fontWeight: 700,
+                        }}
+                      >
                         {item.quantity}
                       </span>
                       <button
                         onClick={() => updateQuantity(item.id, 1)}
                         style={{
-                          padding: '0.3rem 0.65rem',
-                          fontSize: '0.9rem',
-                          color: 'var(--text-primary)',
+                          width: '28px',
+                          height: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--text-secondary)',
+                          fontSize: '1rem',
                         }}
                       >
                         +
                       </button>
                     </div>
 
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>
-                      ₹{item.price * item.quantity}
-                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      aria-label="Remove item"
+                      style={{
+                        color: 'var(--text-muted)',
+                        fontSize: '0.78rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.25rem',
+                        transition: 'color var(--transition-fast)',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = '#E03520')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
+                      <span>Remove</span>
+                    </button>
                   </div>
                 </div>
               </div>
             ))
           )}
+
+          {/* Inline Quick Pincode Checker inside Drawer */}
+          {cart.length > 0 && (
+            <div
+              style={{
+                marginTop: '0.5rem',
+                padding: '0.9rem',
+                background: 'var(--bg-card)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px dashed var(--border-medium)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                <span>📍</span>
+                <span>Check Delivery to Your Pincode</span>
+              </div>
+              <form onSubmit={handlePincodeEstimate} style={{ display: 'flex', gap: '0.4rem' }}>
+                <input
+                  type="text"
+                  maxLength={6}
+                  placeholder="Enter 6-digit PIN"
+                  value={pinInput}
+                  onChange={(e) => setPinInput(e.target.value.replace(/\D/g, ''))}
+                  style={{
+                    flex: 1,
+                    padding: '0.45rem 0.75rem',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid var(--border-subtle)',
+                    background: 'var(--bg-secondary)',
+                    color: 'var(--text-primary)',
+                    fontSize: '0.82rem',
+                  }}
+                />
+                <button type="submit" className="btn btn-secondary" style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}>
+                  Check
+                </button>
+              </form>
+              {pinResult && (
+                <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: pinResult.isSupported ? '#2EB85C' : '#E03520' }}>
+                  {pinResult.isSupported
+                    ? `✓ ${pinResult.zoneName} (${pinResult.estimatedDays}) • Shipping: ${pinResult.isFreeDelivery ? 'FREE' : `₹${pinResult.charge}`}`
+                    : `⚠️ We do not currently ship perishable items to ${pinInput}`}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Footer / Checkout */}
+        {/* Footer with Checkout CTA */}
         {cart.length > 0 && (
           <div
             style={{
               padding: '1.25rem 1.5rem',
               borderTop: '1px solid var(--border-subtle)',
               background: 'var(--bg-card)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.85rem',
             }}
           >
-            {/* Target Delivery Date (Important for Fresh Perishable Henna) */}
-            <div style={{ marginBottom: '1rem' }}>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.04em',
-                  color: 'var(--text-secondary)',
-                  marginBottom: '0.4rem',
-                }}
-              >
-                Desired Delivery / Function Date
-              </label>
-              <input
-                id="cart-delivery-date"
-                type="date"
-                value={deliveryDetails.targetDate || ''}
-                min="2026-01-01"
-                onChange={(e) => setDeliveryDetails((prev) => ({ ...prev, targetDate: e.target.value }))}
-                style={{
-                  width: '100%',
-                  padding: '0.6rem 0.85rem',
-                  borderRadius: 'var(--radius-sm)',
-                  border: '1px solid var(--border-subtle)',
-                  background: 'var(--bg-secondary)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.88rem',
-                }}
-              />
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', marginTop: '0.25rem' }}>
-                Helps us time preparation so your henna paste arrives at peak stain freshness.
-              </span>
-            </div>
-
-            {/* Calculations */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginBottom: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+            {/* Price breakdown */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', fontSize: '0.88rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
                 <span>Subtotal</span>
-                <span>₹{subtotal}</span>
+                <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₹{subtotal}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                <span>Standard Express Shipping</span>
-                <span>{shippingFee === 0 ? <strong style={{ color: '#2EB85C' }}>FREE</strong> : `₹${shippingFee}`}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
+                <span>Shipping</span>
+                <span>
+                  {shippingFee === 0 ? (
+                    <strong style={{ color: '#2EB85C' }}>FREE</strong>
+                  ) : (
+                    `₹${shippingFee}`
+                  )}
+                </span>
               </div>
               <div
                 style={{
@@ -320,25 +434,66 @@ export default function CartDrawer() {
                   justifyContent: 'space-between',
                   fontSize: '1.15rem',
                   fontWeight: 800,
-                  marginTop: '0.4rem',
-                  paddingTop: '0.4rem',
+                  color: 'var(--text-primary)',
+                  paddingTop: '0.5rem',
                   borderTop: '1px solid var(--border-subtle)',
                 }}
               >
                 <span>Total</span>
-                <span>₹{total}</span>
+                <span style={{ color: 'var(--brand-primary)' }}>₹{total}</span>
               </div>
             </div>
 
-            <Link
-              href="/checkout"
-              id="checkout-cta-btn"
-              onClick={() => setIsCartOpen(false)}
-              className="btn btn-primary"
-              style={{ width: '100%', padding: '0.85rem', fontSize: '1rem' }}
-            >
-              Proceed to Checkout • ₹{total}
-            </Link>
+            {/* Checkout & Direct Bag actions */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <Link
+                href="/checkout"
+                onClick={() => setIsCartOpen(false)}
+                className="btn btn-primary"
+                style={{
+                  width: '100%',
+                  padding: '0.9rem',
+                  fontSize: '0.98rem',
+                  borderRadius: 'var(--radius-md)',
+                  boxShadow: 'var(--shadow-brand)',
+                }}
+              >
+                <span>Proceed to Checkout</span>
+                <span>•</span>
+                <span>₹{total}</span>
+              </Link>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <Link
+                  href="/cart"
+                  onClick={() => setIsCartOpen(false)}
+                  className="btn btn-secondary"
+                  style={{
+                    flex: 1,
+                    padding: '0.65rem',
+                    fontSize: '0.82rem',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  View Full Cart & Planner
+                </Link>
+                <button
+                  onClick={() => setIsCartOpen(false)}
+                  className="btn btn-outline"
+                  style={{
+                    flex: 1,
+                    padding: '0.65rem',
+                    fontSize: '0.82rem',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  Continue Shopping
+                </button>
+              </div>
+            </div>
+
+            <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+              🔒 100% Secure Razorpay Checkout • UPI / Cards / NetBanking / COD
+            </div>
           </div>
         )}
       </aside>
