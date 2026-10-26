@@ -20,7 +20,13 @@ function runValidation() {
   const manifestFile = path.join(rawDir, 'manifest.json');
 
   if (!fs.existsSync(manifestFile)) {
-    console.error(`[Error] Manifest file ${manifestFile} not found. Please run 'npm run extract' and 'npm run transform' first.`);
+    console.error(`\n[Notice] No extracted WooCommerce data found at ${manifestFile}.\n`);
+    console.log('The migration pipeline runs in 3 steps:');
+    console.log('  Step 1: Extract data');
+    console.log('          - From MySQL dump: place dump at migration/data/dump.sql and run `npm run migrate:sql`');
+    console.log('          - From REST API: set credentials in migration/.env and run `npm run migrate:extract`');
+    console.log('  Step 2: Transform schema: `npm run migrate:transform`');
+    console.log('  Step 3: Validate parity: `npm run migrate:validate`\n');
     process.exit(1);
   }
 

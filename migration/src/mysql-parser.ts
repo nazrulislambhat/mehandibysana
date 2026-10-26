@@ -314,9 +314,32 @@ export class WooCommerceSqlParser {
     // Save Pincode rules / options extracted from DB
     fs.writeFileSync(path.join(outputDir, 'extracted_options.json'), JSON.stringify(options, null, 2));
 
+    const totalRev = rawOrders
+      .filter((o) => o.status !== 'cancelled' && o.status !== 'failed')
+      .reduce((sum, o) => sum + parseFloat(o.total || '0'), 0)
+      .toFixed(2);
+
+    const manifest = {
+      startedAt: new Date().toISOString(),
+      completedAt: new Date().toISOString(),
+      source: 'mysql_dump',
+      counts: {
+        categories: 0,
+        products: rawProducts.length,
+        productVariations: variationPosts.length,
+        customers: rawCustomers.length,
+        orders: rawOrders.length,
+        coupons: 0,
+        reviews: 0,
+      },
+      totalRevenue: totalRev,
+      currency: 'INR',
+    };
+    fs.writeFileSync(path.join(outputDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
+
     console.log('[MySQL Parser] Extraction completed successfully!');
     console.log(`- Products: ${rawProducts.length} (Variations: ${variationPosts.length})`);
-    console.log(`- Orders: ${rawOrders.length}`);
+    console.log(`- Orders: ${rawOrders.length} (Revenue: ₹${totalRev})`);
     console.log(`- Customers: ${rawCustomers.length}`);
 
     return {
