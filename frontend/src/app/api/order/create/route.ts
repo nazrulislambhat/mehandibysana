@@ -215,7 +215,51 @@ export async function POST(req: NextRequest) {
       </html>
     `;
 
-    // 3. Persist Order to disk / order log for zero data loss
+    // 3. Sync Order to MedusaJS v2 Backend
+    let medusaOrderId: string | null = null;
+    let medusaDisplayId: number | null = null;
+    let medusaError: string | null = null;
+
+    try {
+      const medusaBackendUrl = process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000';
+      const publishableKey =
+        process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY ||
+        'pk_866da77cbf7bcac1e6681e9aa0e882b373d390df3e25eb1fb87a100932c11f7c';
+
+      const medusaRes = await fetch(`${medusaBackendUrl}/store/place-order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-publishable-api-key': publishableKey,
+        },
+        body: JSON.stringify({
+          orderNumber,
+          customer: body.customer,
+          items: body.items,
+          pricing: body.pricing,
+          payment: body.payment,
+          deliveryDetails: body.deliveryDetails,
+        }),
+      });
+
+      if (medusaRes.ok) {
+        const medusaData = await medusaRes.json();
+        medusaOrderId = medusaData.order?.id || null;
+        medusaDisplayId = medusaData.order?.display_id || null;
+        console.log(
+          `[Medusa Sync] Successfully created order ${orderNumber} in Medusa backend (ID: ${medusaOrderId}, #${medusaDisplayId})`
+        );
+      } else {
+        const errText = await medusaRes.text();
+        medusaError = `Medusa responded with ${medusaRes.status}: ${errText}`;
+        console.warn('[Medusa Sync Notice]:', medusaError);
+      }
+    } catch (mErr: any) {
+      medusaError = mErr.message;
+      console.warn('[Medusa Sync Error]: Could not reach Medusa backend:', mErr.message);
+    }
+
+    // 4. Persist Order to disk / order log for zero data loss
     try {
       const ordersLogPath = path.join(process.cwd(), 'data', 'orders_live.json');
       const dir = path.dirname(ordersLogPath);
@@ -232,6 +276,8 @@ export async function POST(req: NextRequest) {
 
       currentOrders.unshift({
         id: orderNumber,
+        medusaOrderId,
+        medusaDisplayId,
         createdAt: new Date().toISOString(),
         customer: body.customer,
         items: body.items,
@@ -340,10 +386,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       orderNumber,
+      medusaOrderId,
+      medusaDisplayId,
       emailDispatched,
       emailProvider,
       emailStatusMessage,
-      message: `Order #${orderNumber} processed successfully.`,
+      message: `Order #${orderNumber} processed and synchronized with Medusa backend (#${medusaDisplayId || 'synced'}).`,
     });
   } catch (error: any) {
     console.error('Order creation error:', error);

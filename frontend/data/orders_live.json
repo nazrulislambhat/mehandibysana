@@ -1,5 +1,38 @@
 [
   {
+    "id": "MBS-777888",
+    "medusaOrderId": "order_01M5WGV7HSY4ADHA05X9N8086G",
+    "medusaDisplayId": 3492,
+    "createdAt": "2026-10-26T16:31:38.097Z",
+    "customer": {
+      "firstName": "Zubaida",
+      "lastName": "Shah",
+      "email": "zubaida.shah@example.com",
+      "phone": "9419012345",
+      "address": "Karan Nagar",
+      "city": "Srinagar",
+      "state": "Jammu & Kashmir",
+      "pincode": "190010"
+    },
+    "items": [
+      {
+        "id": "prod_1",
+        "title": "Fresh Henna Paste (500g Jar)",
+        "price": 600,
+        "quantity": 1
+      }
+    ],
+    "pricing": {
+      "subtotal": 600,
+      "shippingFee": 0,
+      "total": 600
+    },
+    "payment": {
+      "method": "cod",
+      "status": "pending_cod"
+    }
+  },
+  {
     "id": "MBS-480146",
     "createdAt": "2026-10-26T16:17:23.238Z",
     "customer": {
