@@ -21,29 +21,30 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Luxurious Top Announcement Bar */}
+      {/* Apple-style clean announcement banner */}
       <div
         style={{
-          background: 'linear-gradient(90deg, #9C3316 0%, #C04A26 40%, #A63B1C 100%)',
-          color: '#ffffff',
-          fontSize: '0.8rem',
-          fontWeight: 700,
+          background: 'var(--bg-secondary)',
+          color: 'var(--text-secondary)',
+          fontSize: '0.78rem',
+          fontWeight: 600,
           textAlign: 'center',
-          padding: '0.45rem 1rem',
-          letterSpacing: '0.04em',
+          padding: '0.5rem 1rem',
+          letterSpacing: '0.01em',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           gap: '0.75rem',
-          textTransform: 'uppercase',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          borderBottom: '1px solid var(--border-subtle)',
         }}
       >
-        <span>🌿 100% Homemade, Halal & Organic Sojat Henna</span>
-        <span style={{ opacity: 0.5 }}>•</span>
+        <span>Fresh Organic Henna Atelier • Srinagar</span>
+        <span style={{ opacity: 0.35 }}>|</span>
         <span>Free Express Delivery Across India Over ₹999</span>
-        <span style={{ opacity: 0.5 }}>•</span>
-        <span>❄️ Fresh & Perishable Hand-Rolled Cones</span>
+        <span style={{ opacity: 0.35 }}>|</span>
+        <Link href="/shop" style={{ color: 'var(--text-primary)', textDecoration: 'underline', fontWeight: 700 }}>
+          Order Fresh Cones →
+        </Link>
       </div>
 
       {/* Main Glassmorphic Header */}
@@ -54,7 +55,7 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: '78px',
+            height: '72px',
           }}
         >
           {/* Brand & Logo */}
@@ -76,16 +77,16 @@ export default function Navbar() {
                 color: 'var(--text-primary)',
               }}
             >
-              Mehandi <span style={{ color: 'var(--brand-primary)', fontStyle: 'italic' }}>By Sana</span>
+              Mehandi <span style={{ color: 'var(--brand-accent)', fontStyle: 'italic' }}>By Sana</span>
             </span>
             <span
               className="font-display"
               style={{
-                fontSize: '0.66rem',
+                fontSize: '0.64rem',
                 fontWeight: 700,
                 textTransform: 'uppercase',
-                letterSpacing: '0.22em',
-                color: 'var(--brand-gold)',
+                letterSpacing: '0.2em',
+                color: 'var(--text-muted)',
                 marginTop: '0.1rem',
               }}
             >

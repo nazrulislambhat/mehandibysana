@@ -173,9 +173,17 @@ export default function CartPage() {
                 Delivery Destination & PIN Code
               </h3>
               <PincodeChecker
-                onPincodeSelected={(pin, fee) => {
+                initialPin={deliveryDetails.pincode}
+                onPincodeSelected={(pin, fee, res) => {
                   setEnteredPin(pin);
                   setPinFee(fee);
+                  setDeliveryDetails((prev) => ({
+                    ...prev,
+                    pincode: pin,
+                    city: res?.city,
+                    state: res?.state,
+                    shippingFee: fee,
+                  }));
                 }}
               />
             </div>
@@ -190,7 +198,7 @@ export default function CartPage() {
               </p>
               <input
                 type="date"
-                min="2026-10-27"
+                min={new Date().toISOString().split('T')[0]}
                 value={deliveryDetails.targetDate || ''}
                 onChange={(e) =>
                   setDeliveryDetails({

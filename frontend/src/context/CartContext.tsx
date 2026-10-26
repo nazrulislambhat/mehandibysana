@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { CartItem, DeliveryDetails } from '@/types';
+import { evaluatePincode } from '@/lib/pincode';
 
 interface CartContextType {
   cart: CartItem[];
@@ -36,9 +37,25 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setCart(JSON.parse(saved));
       }
       const savedDelivery = localStorage.getItem('mbs_delivery');
+      let parsedDelivery: DeliveryDetails = {};
       if (savedDelivery) {
-        setDeliveryDetails(JSON.parse(savedDelivery));
+        parsedDelivery = JSON.parse(savedDelivery);
       }
+
+      const savedPin = localStorage.getItem('mbs_pincode');
+      if (savedPin && savedPin.length === 6 && !parsedDelivery.pincode) {
+        const pinRes = evaluatePincode(savedPin);
+        if (pinRes.isServiceable) {
+          parsedDelivery = {
+            ...parsedDelivery,
+            pincode: savedPin,
+            city: pinRes.city,
+            state: pinRes.state,
+            shippingFee: pinRes.shippingFee,
+          };
+        }
+      }
+      setDeliveryDetails(parsedDelivery);
     } catch (e) {
       console.warn('Failed to load cart from localStorage', e);
     }
@@ -102,9 +119,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const freeShippingThreshold = 999;
+
+  // Dynamic pincode evaluation
+  const activePinResult = deliveryDetails.pincode && deliveryDetails.pincode.length === 6
+    ? evaluatePincode(deliveryDetails.pincode)
+    : null;
+
+  const freeShippingThreshold = activePinResult?.freeShippingAbove || 999;
   const freeShippingProgress = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));
-  const shippingFee = subtotal >= freeShippingThreshold || subtotal === 0 ? 0 : 80;
+  const baseShipping = activePinResult ? activePinResult.shippingFee : (deliveryDetails.shippingFee ?? 80);
+  const shippingFee = subtotal >= freeShippingThreshold || subtotal === 0 ? 0 : baseShipping;
   const total = subtotal + shippingFee;
 
   return (

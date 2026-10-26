@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
-import { checkPincode } from '@/lib/pincode';
+import PincodeChecker from '@/components/PincodeChecker';
 
 export default function CartDrawer() {
   const {
@@ -21,8 +21,6 @@ export default function CartDrawer() {
     setDeliveryDetails,
   } = useCart();
 
-  const [pinInput, setPinInput] = useState('');
-  const [pinResult, setPinResult] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -45,13 +43,6 @@ export default function CartDrawer() {
       document.body.style.overflow = '';
     }
   }, [isCartOpen, setIsCartOpen]);
-
-  const handlePincodeEstimate = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!pinInput || pinInput.trim().length !== 6) return;
-    const res = checkPincode(pinInput.trim());
-    setPinResult(res);
-  };
 
   if (!mounted) return null;
 
@@ -358,44 +349,29 @@ export default function CartDrawer() {
             <div
               style={{
                 marginTop: '0.5rem',
-                padding: '0.9rem',
+                padding: '0.85rem',
                 background: 'var(--bg-card)',
                 borderRadius: 'var(--radius-md)',
                 border: '1px dashed var(--border-medium)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 <span>📍</span>
-                <span>Check Delivery to Your Pincode</span>
+                <span>Delivery & COD Eligibility Check</span>
               </div>
-              <form onSubmit={handlePincodeEstimate} style={{ display: 'flex', gap: '0.4rem' }}>
-                <input
-                  type="text"
-                  maxLength={6}
-                  placeholder="Enter 6-digit PIN"
-                  value={pinInput}
-                  onChange={(e) => setPinInput(e.target.value.replace(/\D/g, ''))}
-                  style={{
-                    flex: 1,
-                    padding: '0.45rem 0.75rem',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid var(--border-subtle)',
-                    background: 'var(--bg-secondary)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.82rem',
-                  }}
-                />
-                <button type="submit" className="btn btn-secondary" style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}>
-                  Check
-                </button>
-              </form>
-              {pinResult && (
-                <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: pinResult.isSupported ? '#2EB85C' : '#E03520' }}>
-                  {pinResult.isSupported
-                    ? `✓ ${pinResult.zoneName} (${pinResult.estimatedDays}) • Shipping: ${pinResult.isFreeDelivery ? 'FREE' : `₹${pinResult.charge}`}`
-                    : `⚠️ We do not currently ship perishable items to ${pinInput}`}
-                </div>
-              )}
+              <PincodeChecker
+                compact
+                initialPin={deliveryDetails.pincode}
+                onPincodeSelected={(pin, fee, res) => {
+                  setDeliveryDetails((prev) => ({
+                    ...prev,
+                    pincode: pin,
+                    city: res?.city,
+                    state: res?.state,
+                    shippingFee: fee,
+                  }));
+                }}
+              />
             </div>
           )}
         </div>

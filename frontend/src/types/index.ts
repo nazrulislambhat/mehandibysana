@@ -50,6 +50,10 @@ export interface CartItem {
 }
 
 export interface DeliveryDetails {
+  pincode?: string;
+  city?: string;
+  state?: string;
+  shippingFee?: number;
   targetDate?: string;
   specialInstructions?: string;
   isGift?: boolean;

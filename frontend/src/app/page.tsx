@@ -4,17 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { INITIAL_PRODUCTS } from '@/lib/catalog';
 import { useCart } from '@/context/CartContext';
-import { checkPincode } from '@/lib/pincode';
 import ProductCard from '@/components/ProductCard';
+import PincodeChecker from '@/components/PincodeChecker';
 
 export default function HomePage() {
   const { addToCart } = useCart();
   const [bestsellerAdded, setBestsellerAdded] = useState(false);
   const [bestsellerQty, setBestsellerQty] = useState(3);
-
-  // Pincode checker state
-  const [pincodeInput, setPincodeInput] = useState('');
-  const [pincodeResult, setPincodeResult] = useState<any>(null);
 
   // Featured products for the curated bento row
   const organicCone = INITIAL_PRODUCTS.find((p) => p.handle === 'organic-henna-cones') || INITIAL_PRODUCTS[0];
@@ -43,31 +39,8 @@ export default function HomePage() {
     }
   };
 
-  const handleCheckPincode = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!pincodeInput || pincodeInput.trim().length !== 6) return;
-    const res = checkPincode(pincodeInput.trim());
-    setPincodeResult(res);
-  };
-
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '6rem' }}>
-      {/* Top Banner Notice */}
-      <div
-        style={{
-          background: 'linear-gradient(90deg, #9C3316 0%, #C04A26 40%, #A63B1C 100%)',
-          color: '#FFFFFF',
-          padding: '0.45rem 1rem',
-          textAlign: 'center',
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-        }}
-      >
-        🌿 100% Homemade Rajasthani Sojat Henna • Zero Chemicals • Freshly Rolled in Srinagar • Express India Delivery
-      </div>
-
       <div className="container" style={{ paddingTop: '2.5rem' }}>
         {/* Bento Grid Header */}
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
@@ -485,58 +458,7 @@ export default function HomePage() {
               Instant transit time, delivery fee, and COD status across all Indian postcodes.
             </p>
 
-            <form onSubmit={handleCheckPincode} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <input
-                type="text"
-                placeholder="Enter 6-digit PIN"
-                maxLength={6}
-                value={pincodeInput}
-                onChange={(e) => setPincodeInput(e.target.value.replace(/\D/g, ''))}
-                style={{
-                  flex: 1,
-                  padding: '0.65rem 0.85rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border-subtle)',
-                  background: 'var(--bg-secondary)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                }}
-              />
-              <button
-                type="submit"
-                className="btn btn-secondary"
-                style={{
-                  padding: '0.65rem 1rem',
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--radius-md)',
-                }}
-              >
-                Check
-              </button>
-            </form>
-
-            {pincodeResult && (
-              <div
-                style={{
-                  background: pincodeResult.serviceable ? 'rgba(46, 125, 50, 0.08)' : 'rgba(192, 74, 38, 0.08)',
-                  border: `1px solid ${pincodeResult.serviceable ? 'rgba(46, 125, 50, 0.25)' : 'rgba(192, 74, 38, 0.25)'}`,
-                  padding: '0.75rem',
-                  borderRadius: 'var(--radius-md)',
-                  fontSize: '0.85rem',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                  <strong>{pincodeResult.areaName}</strong>
-                  <span style={{ color: 'var(--brand-primary)', fontWeight: 800 }}>
-                    ₹{pincodeResult.deliveryCharge} Delivery
-                  </span>
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                  ⏱️ {pincodeResult.estimatedDays} • {pincodeResult.codAvailable ? '💵 COD Available' : '💳 Prepaid Only'}
-                </div>
-              </div>
-            )}
+            <PincodeChecker />
           </div>
 
           {/* 4. BOTANICAL PURITY & HALAL STAIN CARD (Span 4 cols) */}

@@ -1,110 +1,112 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Urbanist:wght@300;400;500;600;700;800&display=swap');
 
 /* ========================================================
-   ARTISAN KASHMIRI LUXURY DESIGN TOKENS
+   APPLE-MINIMAL LUXURY DESIGN TOKENS
    Mehandi By Sana Atelier & Apothecary
    ======================================================== */
 
 :root,
 [data-theme='light'],
 .theme-light {
-  /* Surface & Base - Warm Alabaster Silk */
-  --bg-primary: #FAF7F2;
-  --bg-secondary: #F3ECE2;
-  --bg-tertiary: #EBE2D4;
+  /* Apple Signature Light Canvas */
+  --bg-primary: #FBFBFD;
+  --bg-secondary: #F5F5F7;
+  --bg-tertiary: #E8E8ED;
   --bg-card: #FFFFFF;
-  --bg-card-hover: #FCFAF7;
-  --bg-glass: rgba(250, 247, 242, 0.88);
-  --bg-overlay: rgba(22, 18, 14, 0.6);
+  --bg-card-hover: #FFFFFF;
+  --bg-glass: rgba(251, 251, 253, 0.82);
+  --bg-overlay: rgba(0, 0, 0, 0.4);
 
-  /* Typography */
-  --text-primary: #1A1613;
-  --text-secondary: #5C544D;
-  --text-muted: #8E847A;
+  /* Apple Precision Typography */
+  --text-primary: #1D1D1F;
+  --text-secondary: #6E6E73;
+  --text-muted: #86868B;
   --text-inverse: #FFFFFF;
 
-  /* Botanical Henna & Heritage Kashmir Colors */
-  --brand-primary: #C04A26; /* Authentic Deep Lawsone Terracotta */
-  --brand-primary-hover: #A63B1C;
-  --brand-accent: #1E2568; /* Royal Kashmiri Indigo */
-  --brand-accent-hover: #151A4D;
-  --brand-gold: #C59B27; /* Antique Saffron Gold */
+  /* Restrained Botanical Henna Accents */
+  --brand-primary: #1D1D1F; /* Obsidian Pill */
+  --brand-primary-hover: #000000;
+  --brand-primary-btn-text: #FFFFFF;
+  --brand-accent: #9E381C; /* Rich Artisan Henna */
+  --brand-accent-hover: #832C14;
+  --brand-gold: #C59B27;
   --brand-gold-hover: #B0881F;
-  --brand-cream: #F4F8E8; /* Pistachio Infusion */
+  --brand-cream: #F5F5F7;
   --brand-sage: #D2E4BC;
-  --brand-burgundy: #681525; /* 48hr Peak Henna Stain */
+  --brand-burgundy: #591924;
 
-  /* Borders & Dividers */
-  --border-subtle: rgba(92, 84, 77, 0.12);
-  --border-medium: rgba(92, 84, 77, 0.22);
-  --border-focus: rgba(192, 74, 38, 0.5);
-  --border-gold: rgba(197, 155, 39, 0.35);
+  /* Apple Hairline Borders */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.14);
+  --border-focus: rgba(0, 113, 227, 0.45);
+  --border-gold: rgba(197, 155, 39, 0.3);
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(35, 24, 18, 0.05);
-  --shadow-md: 0 10px 30px rgba(35, 24, 18, 0.08);
-  --shadow-lg: 0 20px 50px rgba(35, 24, 18, 0.12);
-  --shadow-brand: 0 10px 30px rgba(192, 74, 38, 0.22);
-  --shadow-gold: 0 8px 25px rgba(197, 155, 39, 0.25);
+  /* Diffused Soft Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.08);
+  --shadow-brand: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-gold: 0 4px 16px rgba(197, 155, 39, 0.15);
 
   /* Fonts */
   --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
   --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Urbanist', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Urbanist', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 
-  /* Radii */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-full: 9999px;
+  /* Apple Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 980px;
 
   /* Transitions */
-  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme='dark'],
 .theme-dark {
-  /* Surface & Base - Velvety Henna Noir */
-  --bg-primary: #0C0D12;
-  --bg-secondary: #13151F;
-  --bg-tertiary: #1A1D2B;
-  --bg-card: #161824;
-  --bg-card-hover: #1E2132;
-  --bg-glass: rgba(12, 13, 18, 0.88);
+  /* Apple OLED True Black Canvas */
+  --bg-primary: #000000;
+  --bg-secondary: #161617;
+  --bg-tertiary: #242426;
+  --bg-card: #1C1C1E;
+  --bg-card-hover: #262629;
+  --bg-glass: rgba(22, 22, 23, 0.82);
   --bg-overlay: rgba(0, 0, 0, 0.75);
 
-  /* Typography */
-  --text-primary: #F7F5F2;
-  --text-secondary: #B2ADBA;
-  --text-muted: #7A7685;
-  --text-inverse: #0C0D12;
+  /* Apple Precision Typography */
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
+  --text-muted: #6E6E73;
+  --text-inverse: #000000;
 
-  /* Botanical Henna & Heritage Kashmir Colors */
-  --brand-primary: #F05A32; /* Luminous Terracotta */
-  --brand-primary-hover: #FF734D;
-  --brand-accent: #6C79EE; /* Kashmiri Night Violet-Indigo */
-  --brand-accent-hover: #838FFF;
-  --brand-gold: #E5C158; /* Gilded Kashmiri Leaf */
+  /* Dark Mode Accents */
+  --brand-primary: #FFFFFF; /* High-contrast Apple White Pill */
+  --brand-primary-hover: #E5E5EA;
+  --brand-primary-btn-text: #000000;
+  --brand-accent: #E05A36;
+  --brand-accent-hover: #F06E4B;
+  --brand-gold: #E5C158;
   --brand-gold-hover: #F2D277;
-  --brand-cream: #1F2E23;
+  --brand-cream: #1C1C1E;
   --brand-sage: #B4DB97;
   --brand-burgundy: #C9425A;
 
-  /* Borders & Dividers */
-  --border-subtle: rgba(247, 245, 242, 0.08);
-  --border-medium: rgba(247, 245, 242, 0.16);
-  --border-focus: rgba(240, 90, 50, 0.6);
-  --border-gold: rgba(229, 193, 88, 0.3);
+  /* Apple Hairline Borders */
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-focus: rgba(0, 113, 227, 0.55);
+  --border-gold: rgba(229, 193, 88, 0.25);
 
-  /* Shadows */
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 10px 35px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
-  --shadow-brand: 0 10px 35px rgba(240, 90, 50, 0.3);
-  --shadow-gold: 0 8px 30px rgba(229, 193, 88, 0.25);
+  /* Deep Dark Shadows */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 24px 65px rgba(0, 0, 0, 0.8);
+  --shadow-brand: 0 4px 16px rgba(255, 255, 255, 0.12);
+  --shadow-gold: 0 4px 16px rgba(229, 193, 88, 0.2);
 }
 
 /* ========================================================
@@ -190,80 +192,98 @@ img {
 }
 
 /* ========================================================
-   LUXURY BUTTONS & TACTILE CONTROLS
+   APPLE-MINIMAL LUXURY BUTTONS & PAGE TRANSITIONS
    ======================================================== */
+
+@keyframes applePageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.apple-page-transition {
+  animation: applePageFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.92rem;
-  padding: 0.75rem 1.6rem;
-  border-radius: var(--radius-sm);
+  padding: 0.72rem 1.6rem;
+  border-radius: var(--radius-full);
   transition: all var(--transition-normal);
   white-space: nowrap;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   position: relative;
-  overflow: hidden;
   user-select: none;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.975);
 }
 
 .btn-primary {
   background: var(--brand-primary);
-  color: #ffffff;
+  color: var(--brand-primary-btn-text);
   box-shadow: var(--shadow-brand);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-primary:hover {
   background: var(--brand-primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 35px rgba(240, 90, 50, 0.4);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, var(--brand-gold) 0%, #D8A933 100%);
-  color: #1A1613;
-  font-weight: 800;
-  box-shadow: var(--shadow-gold);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #1D1D1F 0%, #2D2D30 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: var(--shadow-brand);
+  border: 1px solid var(--border-subtle);
+}
+
+.theme-dark .btn-gold {
+  background: #FFFFFF;
+  color: #000000;
 }
 
 .btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(197, 155, 39, 0.45);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-cream {
-  background: var(--brand-cream);
+  background: var(--bg-secondary);
   color: var(--text-primary);
-  font-weight: 700;
-  border: 1px solid var(--border-gold);
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-cream:hover {
-  background: var(--bg-card);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  background: var(--bg-tertiary);
+  transform: scale(1.02);
 }
 
 .btn-secondary {
   background: var(--bg-secondary);
   color: var(--text-primary);
-  border: 1px solid var(--border-medium);
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-secondary:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--brand-primary);
-  color: var(--brand-primary);
-  transform: translateY(-2px);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transform: scale(1.02);
 }
 
 .btn-outline {
