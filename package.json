@@ -1,0 +1,28 @@
+{
+  "name": "mehandibysana",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mehandi By Sana - MedusaJS v2 Backend & Next.js Custom Storefront",
+  "workspaces": [
+    "frontend",
+    "migration"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run dev --prefix backend/apps/backend",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build:backend": "npm run build --prefix backend/apps/backend",
+    "migrate:extract": "npm run extract --workspace=migration",
+    "migrate:transform": "npm run transform --workspace=migration",
+    "migrate:validate": "npm run validate --workspace=migration"
+  },
+  "keywords": [
+    "mehandibysana",
+    "nextjs",
+    "medusajs",
+    "ecommerce"
+  ],
+  "author": "Mehandi By Sana",
+  "license": "UNLICENSED"
+}
