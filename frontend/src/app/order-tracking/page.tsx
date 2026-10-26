@@ -9,42 +9,64 @@ export default function OrderTrackingPage() {
   const [searching, setSearching] = useState(false);
   const [orderResult, setOrderResult] = useState<any>(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleTrack = (e: React.FormEvent) => {
+  const handleTrack = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!orderId || !billingEmail) return;
 
     setSearching(true);
     setHasSearched(false);
+    setErrorMessage('');
+    setOrderResult(null);
 
-    // Simulate look up against Medusa / historical orders
-    setTimeout(() => {
+    try {
+      const res = await fetch(
+        `/api/order/track?orderId=${encodeURIComponent(orderId)}&email=${encodeURIComponent(billingEmail)}`
+      );
+      const data = await res.json();
+      if (res.ok && data.success && data.order) {
+        setOrderResult({
+          orderNumber: data.order.id,
+          email: billingEmail,
+          date: data.order.date,
+          status: data.order.status,
+          carrier: data.order.carrier,
+          trackingNumber: data.order.trackingNumber,
+          estimatedDelivery: '2–3 Business Days',
+          items: data.order.items,
+          shippingAddress: data.order.shippingAddress,
+          timeline: [
+            { title: 'Order Confirmed in WooCommerce', time: data.order.date, done: true },
+            {
+              title: 'Artisanal Batch Freshly Rolled at Srinagar Atelier',
+              time: 'Cold-Chain Queue',
+              done: data.order.rawStatus === 'processing' || data.order.rawStatus === 'completed',
+              current: data.order.rawStatus === 'processing',
+            },
+            {
+              title: 'Handed to Express Air Courier with Gel Ice Packs',
+              time: data.order.carrier,
+              done: data.order.rawStatus === 'completed',
+              pending: data.order.rawStatus !== 'completed',
+            },
+            {
+              title: 'Out for Doorstep Delivery',
+              time: 'Arriving Shortly',
+              pending: data.order.rawStatus !== 'completed',
+              done: data.order.rawStatus === 'completed',
+            },
+          ],
+        });
+      } else {
+        setErrorMessage(data.message || 'No order found matching this Order ID and Email.');
+      }
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Error tracking order. Please check your internet connection.');
+    } finally {
       setSearching(false);
       setHasSearched(true);
-
-      // Check if order exists or generate realistic order lifecycle state
-      setOrderResult({
-        orderNumber: orderId.replace(/\D/g, '') || '224456',
-        email: billingEmail,
-        date: 'October 24, 2026',
-        status: 'In Transit',
-        carrier: 'Delhivery Express / DTDC Air',
-        trackingNumber: `MBS-IN-${Math.floor(10000000 + Math.random() * 90000000)}`,
-        estimatedDelivery: '2–3 Business Days',
-        items: [
-          { name: 'Organic Henna Cones', quantity: 5, price: '₹300' },
-          { name: 'Aftercare Henna Balm (Lemongrass)', quantity: 1, price: '₹95' },
-        ],
-        shippingAddress: 'Srinagar, Jammu & Kashmir, 190001',
-        timeline: [
-          { title: 'Order Confirmed & Payment Received', time: 'Oct 24, 2026 - 08:30 PM', done: true },
-          { title: 'Artisanal Batch Rolled & Chilled at Atelier', time: 'Oct 25, 2026 - 10:15 AM', done: true },
-          { title: 'Handed to Express Air Courier with Gel Ice Packs', time: 'Oct 25, 2026 - 04:45 PM', done: true },
-          { title: 'In Transit to Destination Hub', time: 'Oct 26, 2026 - 09:20 AM', current: true },
-          { title: 'Out for Delivery to Your Doorstep', time: 'Expected Tomorrow', pending: true },
-        ],
-      });
-    }, 900);
+    }
   };
 
   return (
@@ -138,6 +160,24 @@ export default function OrderTrackingPage() {
           </button>
         </form>
       </div>
+
+      {errorMessage && (
+        <div
+          style={{
+            padding: '1.25rem',
+            borderRadius: 'var(--radius-md)',
+            background: 'rgba(235, 87, 87, 0.08)',
+            border: '1px solid rgba(235, 87, 87, 0.25)',
+            color: '#EB5757',
+            marginBottom: '2rem',
+            textAlign: 'center',
+            fontSize: '0.95rem',
+            fontWeight: 600,
+          }}
+        >
+          {errorMessage}
+        </div>
+      )}
 
       {hasSearched && orderResult && (
         <div className="card" style={{ padding: '2rem' }}>

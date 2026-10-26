@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
+import { createWooCommerceOrder } from '@/lib/woocommerce';
 
 interface OrderItem {
   id: string;
@@ -56,8 +57,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // 0. Primary: Create Authentic Order in WordPress / WooCommerce Backend
+    let wooOrderId: number | string | null = null;
+    let wooOrderNumber: string | null = null;
+    let wooSyncStatus = 'pending';
+
+    try {
+      const wooOrder = await createWooCommerceOrder({
+        customer: body.customer,
+        items: body.items,
+        pricing: body.pricing,
+        payment: body.payment,
+        deliveryDetails: body.deliveryDetails,
+      });
+
+      if (wooOrder && wooOrder.id) {
+        wooOrderId = wooOrder.id;
+        wooOrderNumber = String(wooOrder.number || wooOrder.id);
+        wooSyncStatus = `synced_wc_${wooOrderNumber}`;
+        console.log(`[WooCommerce Decoupled] Created real order #${wooOrderNumber} in WordPress WooCommerce!`);
+      }
+    } catch (wooErr: any) {
+      wooSyncStatus = `woo_error: ${wooErr.message}`;
+      console.warn('[WooCommerce Decoupled Warning]:', wooErr.message);
+    }
+
     const orderNumber =
-      body.orderNumber || `MBS-${Math.floor(100000 + Math.random() * 900000)}`;
+      wooOrderNumber || body.orderNumber || `MBS-${Math.floor(100000 + Math.random() * 900000)}`;
     const orderDate = new Date().toLocaleDateString('en-IN', {
       day: 'numeric',
       month: 'long',
@@ -276,6 +302,7 @@ export async function POST(req: NextRequest) {
 
       currentOrders.unshift({
         id: orderNumber,
+        wooOrderId,
         medusaOrderId,
         medusaDisplayId,
         createdAt: new Date().toISOString(),
@@ -386,12 +413,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       orderNumber,
+      wooOrderId,
+      wooSyncStatus,
       medusaOrderId,
       medusaDisplayId,
       emailDispatched,
       emailProvider,
       emailStatusMessage,
-      message: `Order #${orderNumber} processed and synchronized with Medusa backend (#${medusaDisplayId || 'synced'}).`,
+      message: wooOrderId
+        ? `Order #${orderNumber} processed and synchronized with WordPress WooCommerce backend!`
+        : `Order #${orderNumber} processed successfully.`,
     });
   } catch (error: any) {
     console.error('Order creation error:', error);
