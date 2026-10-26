@@ -5,6 +5,7 @@
   "description": "Zero-data-loss ETL migration pipeline from WooCommerce to MedusaJS",
   "scripts": {
     "extract": "tsx src/extract.ts",
+    "extract:sql": "tsx src/run-sql-import.ts",
     "transform": "tsx src/transform.ts",
     "validate": "tsx src/validate.ts"
   },
