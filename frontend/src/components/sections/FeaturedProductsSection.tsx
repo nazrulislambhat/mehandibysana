@@ -119,8 +119,7 @@ export function FeaturedProductsSection({
   const leadImage = leadProduct.images[0] ?? null;
   const leadDefaultVar =
     leadProduct.variations.find((v) => v.inStock) ?? leadProduct.variations[0] ?? null;
-  const leadHasMultiVariants =
-    leadProduct.variations.length > 1 || leadProduct.attributes.length > 0;
+  const leadHasMultiVariants = leadProduct.variations.length > 1;
 
   return (
     <div className="space-y-8">
@@ -129,7 +128,7 @@ export function FeaturedProductsSection({
         <div
           role="tablist"
           aria-label="Filter featured studio showcase"
-          className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-divider/80 bg-canvas p-1 self-start"
+          className="inline-flex max-w-full overflow-x-auto whitespace-nowrap items-center gap-1 rounded-full border border-divider/80 bg-canvas p-1 self-start"
         >
           {(
             [
@@ -204,10 +203,10 @@ export function FeaturedProductsSection({
               </span>
             </div>
 
-            {/* Crisp White Studio Cutout Window (preserves full bottle/box framing) */}
+            {/* Edge-to-edge Square Studio Image Frame */}
             <Link
               href={`/product/${leadProduct.slug}`}
-              className="block relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-canvas border border-inverse/15 mb-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
+              className="block relative aspect-square w-full overflow-hidden rounded-xl bg-canvas border border-inverse/15 mb-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
             >
               {leadImage ? (
                 <Image
@@ -216,7 +215,7 @@ export function FeaturedProductsSection({
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 38vw"
-                  className="object-contain p-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                  className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                 />
               ) : (
                 <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center bg-canvas text-ink">
@@ -289,8 +288,7 @@ export function FeaturedProductsSection({
             const indexLabel = `0${idx + 2}`;
             const defaultVar =
               product.variations.find((v) => v.inStock) ?? product.variations[0] ?? null;
-            const hasMultiVar =
-              product.variations.length > 1 || product.attributes.length > 0;
+            const hasMultiVar = product.variations.length > 1;
 
             return (
               <article
@@ -300,7 +298,7 @@ export function FeaturedProductsSection({
                 <div>
                   <Link
                     href={`/product/${product.slug}`}
-                    className="block relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-hairline bg-canvas mb-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
+                    className="block relative aspect-square sm:aspect-[5/4] w-full overflow-hidden rounded-xl border border-hairline bg-canvas mb-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
                   >
                     {/* Index Number & Availability */}
                     <span className="absolute top-2.5 left-2.5 z-10 inline-flex items-center rounded-full bg-ink px-2.5 py-0.5 font-serif text-[11px] italic text-inverse">
@@ -329,7 +327,7 @@ export function FeaturedProductsSection({
                         alt={img.alt || product.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-contain p-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+                        className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                       />
                     ) : (
                       <div className="h-full w-full flex flex-col items-center justify-center p-4 text-center bg-canvas">
@@ -349,7 +347,7 @@ export function FeaturedProductsSection({
                     href={`/product/${product.slug}`}
                     className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus rounded-sm"
                   >
-                    <h3 className="font-serif text-xl font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-1 transition-colors">
+                    <h3 className="font-serif text-xl font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 transition-colors">
                       {product.name}
                     </h3>
                   </Link>

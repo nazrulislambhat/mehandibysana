@@ -1,10 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { TextReveal } from '@/components/ui/TextReveal';
-import {
-  HennaPlateArtwork,
-  type HennaPlateId,
-} from '@/components/graphics/HennaArtworkPlates';
 
 interface SelectedWorkPlate {
   id: string;
@@ -12,9 +9,8 @@ interface SelectedWorkPlate {
   tag: string;
   title: string;
   caption: string;
-  plateId: HennaPlateId;
+  src: string;
   alt: string;
-  isDarkPlate?: boolean;
   aspectClass: string;
   colClass: string;
 }
@@ -27,8 +23,8 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     title: 'Full Bridal Arms & Soles Mandala',
     caption:
       'Symmetrical bridal mandala with traditional peacock motifs, floral vines, and personalized initials.',
-    plateId: 'bridal-mandala',
-    alt: 'Full bridal arms and soles mandala henna graphic featuring symmetrical petals and wrist lace border by Mehandi by Sana',
+    src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-23.webp',
+    alt: 'Full bridal arms and soles mandala henna featuring peacock motifs and floral vines by Mehandi by Sana',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-6',
   },
@@ -39,9 +35,8 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     title: 'Chinar Leaf Silhouette Study',
     caption:
       'Kashmiri Chinar leaf silhouette inspired by Dal Lake in fine 0.38mm cone linework.',
-    plateId: 'chinar-silhouette',
-    alt: 'Kashmiri Chinar leaf silhouette henna study in ink black, cream, and burnt orange',
-    isDarkPlate: true,
+    src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-22.webp',
+    alt: 'Kashmiri Chinar leaf silhouette mehndi woven into a modern floral palm design',
     aspectClass: 'aspect-square',
     colClass: 'lg:col-span-3',
   },
@@ -52,8 +47,8 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     title: 'Eid Sunburst Medallion',
     caption:
       'Rich 48-hour natural mahogany oxidation from freshly rolled organic Sojat henna paste.',
-    plateId: 'sunburst-medallion',
-    alt: 'Eid sunburst medallion botanical henna graphic plate',
+    src: 'https://mehandibysana.com/wp-content/uploads/2023/08/176480.jpg',
+    alt: 'Deep natural mahogany stain oxidation on palm mandala from fresh organic henna paste',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-3 lg:mt-10',
   },
@@ -64,8 +59,8 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     title: 'Botanical Lotus & Jali Grid',
     caption:
       'Delicate jali latticework framed by floating lotus blossoms and soft botanical shading.',
-    plateId: 'lotus-jali',
-    alt: 'Botanical lotus and fine jali lattice grid henna plate',
+    src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
+    alt: 'Botanical lotus and fine jali grid mehndi work on hands for engagement',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-4',
   },
@@ -76,9 +71,8 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     title: 'Royal Shalimar Archways',
     caption:
       'Architectural arches and domes echoing Shalimar Bagh gardens across palms and forearms.',
-    plateId: 'mughal-archways',
-    alt: 'Royal Mughal archways bridal henna motif study on ink black backdrop',
-    isDarkPlate: true,
+    src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-19.jpg',
+    alt: 'Royal Mughal archways bridal mehndi design on forearms and palms',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-4 lg:mt-8',
   },
@@ -89,8 +83,8 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     title: 'Minimalist Hathphool Cuff',
     caption:
       'Jewelry-inspired henna draping from the wrists across the knuckles with airy negative space.',
-    plateId: 'hathphool-cuff',
-    alt: 'Minimalist hathphool cuff contemporary henna jewelry study',
+    src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-20.jpg',
+    alt: 'Minimalist hathphool cuff contemporary henna design with negative space',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-4',
   },
@@ -139,15 +133,22 @@ export function GalleryPreviewSection() {
             >
               <figure className="group flex flex-col gap-3">
                 <div
-                  role="img"
-                  aria-label={item.alt}
-                  className={`relative ${item.aspectClass} w-full overflow-hidden rounded-lg border border-hairline ${
-                    item.isDarkPlate ? 'bg-ink' : 'bg-paper'
-                  }`}
+                  className={`relative ${item.aspectClass} w-full overflow-hidden rounded-xl border border-hairline bg-linen`}
                 >
-                  <HennaPlateArtwork
-                    plateId={item.plateId}
-                    className="w-full h-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                  <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink/90 backdrop-blur-sm border border-inverse/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-inverse">
+                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+                    {item.plate}
+                  </span>
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes={
+                      idx === 0
+                        ? '(max-width: 1024px) 100vw, 48vw'
+                        : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw'
+                    }
+                    className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
                   />
                 </div>
                 <figcaption className="space-y-1">
