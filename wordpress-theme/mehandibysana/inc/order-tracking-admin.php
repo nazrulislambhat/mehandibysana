@@ -469,3 +469,4 @@ function mbs_ajax_track_order() {
 }
 add_action( 'wp_ajax_mbs_track_order', 'mbs_ajax_track_order' );
 add_action( 'wp_ajax_nopriv_mbs_track_order', 'mbs_ajax_track_order' );
+

@@ -258,3 +258,4 @@ function mbs_ajax_remove_bag_item() {
 }
 add_action( 'wp_ajax_mbs_remove_bag_item', 'mbs_ajax_remove_bag_item' );
 add_action( 'wp_ajax_nopriv_mbs_remove_bag_item', 'mbs_ajax_remove_bag_item' );
+

@@ -226,3 +226,4 @@ add_filter( 'body_class', function ( $classes ) {
 	}
 	return $classes;
 } );
+

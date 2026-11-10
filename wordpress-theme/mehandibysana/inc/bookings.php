@@ -233,3 +233,4 @@ function mbs_ajax_submit_booking() {
 }
 add_action( 'wp_ajax_mbs_submit_booking', 'mbs_ajax_submit_booking' );
 add_action( 'wp_ajax_nopriv_mbs_submit_booking', 'mbs_ajax_submit_booking' );
+

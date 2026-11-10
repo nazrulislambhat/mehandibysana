@@ -413,3 +413,4 @@ function mbs_svg_plate_artwork( $plate_id = 'bridal-mandala', $class = '' ) {
 	}
 	return ob_get_clean();
 }
+

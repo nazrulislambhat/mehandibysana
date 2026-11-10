@@ -371,3 +371,4 @@ function mbs_render_orders_list_dispatch_column( $column, $post_or_order ) {
 }
 add_action( 'manage_shop_order_posts_custom_column', 'mbs_render_orders_list_dispatch_column', 20, 2 );
 add_action( 'manage_woocommerce_page_wc-orders_custom_column', 'mbs_render_orders_list_dispatch_column', 20, 2 );
+
