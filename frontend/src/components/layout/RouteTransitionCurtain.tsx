@@ -241,8 +241,8 @@ export function RouteTransitionCurtain() {
                 className="ck-curtain-col"
                 style={
                   {
-                    '--col-cover-delay': `${idx * 22}ms`,
-                    '--col-reveal-delay': `${idx * 28}ms`,
+                    '--col-cover-delay': `${idx * 45}ms`,
+                    '--col-reveal-delay': `${idx * 55}ms`,
                   } as React.CSSProperties
                 }
               />

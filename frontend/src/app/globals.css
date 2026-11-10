@@ -84,7 +84,7 @@
 }
 
 .hero-rise {
-  animation: heroGentleRise 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroGentleRise 1050ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* CargoKite-inspired masked typography, staggered lifts & arch veil reveals */
@@ -99,7 +99,7 @@
 
 .ck-mask-line {
   display: block;
-  animation: ckMaskLineIn 760ms cubic-bezier(0.16, 1, 0.3, 1)
+  animation: ckMaskLineIn 1150ms cubic-bezier(0.16, 1, 0.3, 1)
     calc(var(--ck-nav-delay, 0ms) + var(--ck-delay, 0ms)) both;
   will-change: transform;
 }
@@ -114,7 +114,7 @@
 }
 
 .ck-stagger-up {
-  animation: ckStaggerUp 680ms cubic-bezier(0.16, 1, 0.3, 1)
+  animation: ckStaggerUp 1050ms cubic-bezier(0.16, 1, 0.3, 1)
     calc(var(--ck-nav-delay, 0ms) + var(--ck-delay, 0ms)) both;
   will-change: transform;
 }
@@ -129,8 +129,8 @@
 }
 
 .ck-arch-artwork {
-  animation: ckArchArtworkSettle 900ms cubic-bezier(0.16, 1, 0.3, 1)
-    calc(var(--ck-nav-delay, 0ms) + 80ms) both;
+  animation: ckArchArtworkSettle 1450ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--ck-nav-delay, 0ms) + 180ms) both;
   will-change: transform;
 }
 
@@ -156,8 +156,8 @@
   background-color: var(--color-surface);
   border-top: 2px solid var(--color-accent);
   transform-origin: bottom center;
-  animation: ckArchVeilUnseal 760ms cubic-bezier(0.16, 1, 0.3, 1)
-    calc(var(--ck-nav-delay, 0ms) + 80ms) both;
+  animation: ckArchVeilUnseal 1250ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--ck-nav-delay, 0ms) + 180ms) both;
   will-change: transform, opacity;
 }
 
@@ -166,8 +166,8 @@
   transform: translate3d(0, 0, 0);
   opacity: 1;
   transition:
-    transform 760ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 500ms ease-out;
+    transform 1150ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 820ms ease-out;
   will-change: transform, opacity;
 }
 
@@ -185,8 +185,8 @@
   transform: translate3d(0, 0, 0);
   opacity: 1;
   transition:
-    transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 540ms ease-out;
+    transform 1050ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 800ms ease-out;
   will-change: transform, opacity;
 }
 
@@ -471,7 +471,7 @@
 }
 
 .page-transition-shell {
-  animation: pageTransitionEnter 560ms cubic-bezier(0.16, 1, 0.3, 1)
+  animation: pageTransitionEnter 950ms cubic-bezier(0.16, 1, 0.3, 1)
     var(--ck-nav-delay, 0ms) both;
   will-change: transform;
 }
@@ -493,7 +493,7 @@
 
 .route-progress-bar {
   transform-origin: left center;
-  animation: routeSweepBar 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: routeSweepBar 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes ckCurtainCover {
@@ -584,13 +584,13 @@
 
 .ck-curtain-wrapper[data-phase="covering"] .ck-curtain-col {
   transform-origin: top center;
-  animation: ckCurtainCover 220ms cubic-bezier(0.76, 0, 0.24, 1)
+  animation: ckCurtainCover 480ms cubic-bezier(0.76, 0, 0.24, 1)
     var(--col-cover-delay, 0ms) both;
 }
 
 .ck-curtain-wrapper[data-phase="revealing"] .ck-curtain-col {
   transform-origin: bottom center;
-  animation: ckCurtainReveal 390ms cubic-bezier(0.76, 0, 0.24, 1)
+  animation: ckCurtainReveal 760ms cubic-bezier(0.76, 0, 0.24, 1)
     var(--col-reveal-delay, 0ms) both;
 }
 
@@ -605,21 +605,21 @@
 }
 
 .ck-curtain-wrapper[data-phase="covering"] .ck-curtain-emblem {
-  animation: ckEmblemIn 260ms cubic-bezier(0.16, 1, 0.3, 1) 70ms both;
+  animation: ckEmblemIn 460ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
 }
 
 .ck-curtain-wrapper[data-phase="revealing"] .ck-curtain-emblem {
-  animation: ckEmblemOut 260ms cubic-bezier(0.4, 0, 1, 1) 0ms both;
+  animation: ckEmblemOut 400ms cubic-bezier(0.4, 0, 1, 1) 0ms both;
 }
 
 /* Pointer-Aware Directional Button Hover (2-layer CargoKite + Radial Sweep) */
 .btn-dir {
   transition:
-    color 240ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms ease;
+    color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 360ms ease;
 }
 
 .btn-dir:active:not(:disabled) {
@@ -653,23 +653,23 @@
 }
 
 .btn-dir-lead {
-  transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1) 50ms;
+  transition: transform 760ms cubic-bezier(0.25, 1, 0.5, 1) 80ms;
 }
 
 .btn-dir-fill {
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
+  transition: transform 680ms cubic-bezier(0.25, 1, 0.5, 1) 0ms;
 }
 
 .btn-dir:hover:not(:disabled) .btn-dir-lead,
 .btn-dir:focus-visible:not(:disabled) .btn-dir-lead {
   transform: translate3d(-50%, -50%, 0) scale(1);
-  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
+  transition: transform 780ms cubic-bezier(0.25, 1, 0.5, 1) 0ms;
 }
 
 .btn-dir:hover:not(:disabled) .btn-dir-fill,
 .btn-dir:focus-visible:not(:disabled) .btn-dir-fill {
   transform: translate3d(-50%, -50%, 0) scale(1);
-  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1) 50ms;
+  transition: transform 860ms cubic-bezier(0.25, 1, 0.5, 1) 90ms;
 }
 
 .btn-dir-content {
@@ -695,6 +695,25 @@
 
 .btn-dir--accent .btn-dir-fill {
   background-color: var(--color-accent-hover);
+}
+
+.btn-dir--secondary {
+  transition:
+    color 300ms cubic-bezier(0.25, 1, 0.5, 1) 0ms,
+    border-color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 360ms ease;
+}
+
+.btn-dir--secondary:hover:not(:disabled),
+.btn-dir--secondary:focus-visible:not(:disabled) {
+  transition:
+    color 180ms cubic-bezier(0.4, 0, 0.2, 1) 240ms,
+    border-color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 520ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 360ms ease;
 }
 
 .btn-dir--secondary .btn-dir-lead {
@@ -748,7 +767,7 @@
   height: 1px;
   width: 100%;
   background-color: currentColor;
-  transition: transform 520ms cubic-bezier(0.66, 0, 0.15, 1);
+  transition: transform 900ms cubic-bezier(0.66, 0, 0.15, 1);
 }
 
 .link-kinetic::before {
