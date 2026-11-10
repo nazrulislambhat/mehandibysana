@@ -1,16 +1,22 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Privacy Policy & Data Protection',
   description:
-    'Detailed privacy practices, DPDP Act 2023 compliance, Razorpay PCI-DSS payment handling, cookies/local storage disclosure, and Grievance Officer contact for Mehandi by Sana.',
-};
+    'Privacy practices, India DPDP Act 2023 compliance, Razorpay PCI-DSS payment security, essential storage disclosure, and Grievance Officer details for Mehandi by Sana.',
+  canonicalPath: '/privacy-policy',
+  keywords: [
+    'Mehandi by Sana privacy policy',
+    'DPDP Act 2023 henna store privacy',
+  ],
+});
 
 const TOC: PolicyTocItem[] = [
   { id: 'data-fiduciary', number: '01', title: 'Data Fiduciary & Scope' },

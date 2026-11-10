@@ -1,17 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Terms & Conditions',
   description:
-    'Detailed storefront, small-batch botanical product, Razorpay & COD payment, shipping, and bridal booking terms for Mehandi by Sana (Srinagar & Bangalore).',
-};
+    'Storefront, small-batch organic botanical product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi by Sana (Srinagar & Bangalore).',
+  canonicalPath: '/terms-conditions',
+  keywords: [
+    'Mehandi by Sana terms and conditions',
+    'henna apothecary storefront terms India',
+  ],
+});
 
 const TOC: PolicyTocItem[] = [
   { id: 'definitions-scope', number: '01', title: 'Definitions & Studio Identity' },

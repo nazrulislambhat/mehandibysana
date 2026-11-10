@@ -1,14 +1,27 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildContactPageJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import { BookingForm } from '@/components/sections/BookingForm';
 import { TextReveal } from '@/components/ui/TextReveal';
 
-export const metadata: Metadata = {
-  title: 'Contact & Booking Inquiries',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Contact & Bridal Mehndi Bookings',
   description:
-    'Request bridal mehndi availability, celebration bookings, or product guidance from Mehandi by Sana.',
-};
+    'Inquire for bridal mehndi dates, celebration henna appointments, 15-day workshops, or botanical order guidance from Mehandi by Sana across Srinagar & Bangalore.',
+  canonicalPath: '/contact',
+  keywords: [
+    'book bridal mehndi Srinagar',
+    'book bridal mehndi Bangalore',
+    'Mehandi by Sana contact',
+    'henna consultation India',
+  ],
+});
 
 interface ContactPageProps {
   searchParams: Promise<{ service?: string }>;
@@ -22,13 +35,41 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       ? params.service
       : 'bridal';
 
+  const contactJson = serializeJsonLd(buildContactPageJsonLd());
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Contact', path: '/contact' },
+    ])
+  );
+
   return (
     <div className="bg-canvas pb-20 md:pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: contactJson }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+      />
+
       <section
         aria-labelledby="contact-page-heading"
         className="border-b border-hairline bg-canvas"
       >
-        <div className="editorial-container py-12 md:py-16">
+        <div className="editorial-container py-10 md:py-16">
+          <nav
+            aria-label="Breadcrumb"
+            className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber mb-6"
+          >
+            <Link href="/" className="hover:text-terracotta">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink font-medium">Contact</span>
+          </nav>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <div className="flex items-center gap-2 mb-3">

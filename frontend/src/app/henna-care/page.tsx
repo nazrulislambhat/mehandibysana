@@ -1,6 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+import {
+  buildHennaCareHowToJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
@@ -8,11 +13,19 @@ import {
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';
 import { LinkButton } from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Henna Storage, Application & 48-Hour Stain Care Guide',
   description:
-    'Learn how to freeze fresh organic henna cones (-18°C), thaw properly without condensation, seal designs for peak bridal mahogany stain, and care for pure Sojat hair henna.',
-};
+    'Learn how to freeze fresh organic henna cones (-18°C), thaw gently without condensation, seal bridal mehndi for dark mahogany stain, and mix Sojat hair henna.',
+  canonicalPath: '/henna-care',
+  keywords: [
+    'how to store organic henna cones',
+    'henna aftercare 48 hour stain',
+    'freeze fresh mehndi cones',
+    'natural henna stain progression',
+    'hair henna mixing guide',
+  ],
+});
 
 const TOC: PolicyTocItem[] = [
   { id: 'freezer-storage', number: '01', title: 'Freezer Storage Within 48 Hours' },
@@ -24,6 +37,8 @@ const TOC: PolicyTocItem[] = [
 ];
 
 export default function HennaCarePage() {
+  const howToJson = serializeJsonLd(buildHennaCareHowToJsonLd());
+
   return (
     <PolicyDocumentLayout
       eyebrow="Botanical Ritual & Care"
@@ -39,6 +54,10 @@ export default function HennaCarePage() {
         </div>
       }
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: howToJson }}
+      />
       <section
         id="freezer-storage"
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"

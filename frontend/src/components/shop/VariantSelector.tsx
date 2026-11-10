@@ -166,6 +166,9 @@ export function VariantSelector({
     .filter(Boolean)
     .join(' · ');
 
+  const selectableGroups = attributeGroups.filter((group) => group.options.length > 1);
+  const fixedSpecs = attributeGroups.filter((group) => group.options.length === 1);
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-hairline pb-5">
@@ -202,9 +205,25 @@ export function VariantSelector({
         </div>
       </div>
 
-      {attributeGroups.length > 0 ? (
+      {fixedSpecs.length > 0 ? (
+        <div className="flex flex-wrap gap-2">
+          {fixedSpecs.map((spec) => (
+            <span
+              key={spec.name}
+              className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3.5 py-1.5 text-xs text-umber"
+            >
+              <span className="font-semibold uppercase tracking-[0.12em] text-[10px]">
+                {spec.name}:
+              </span>
+              <span className="font-medium text-ink">{spec.options[0]}</span>
+            </span>
+          ))}
+        </div>
+      ) : null}
+
+      {selectableGroups.length > 0 ? (
         <div className="space-y-5">
-          {attributeGroups.map((group) => (
+          {selectableGroups.map((group) => (
             <fieldset key={group.name} className="space-y-2.5">
               <legend className="text-[11px] font-semibold uppercase tracking-[0.14em] text-umber">
                 {group.name}:{' '}
@@ -297,6 +316,7 @@ export function VariantSelector({
         <div className="flex-1">
           <AddToCartButton
             productId={activeVariation?.id ?? product.id}
+            medusaVariantId={activeVariation?.medusaVariantId}
             variation={
               variationPayload.length > 0 ? variationPayload : undefined
             }

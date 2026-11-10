@@ -2,14 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata, toAbsoluteUrl } from '@/lib/seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildGalleryJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import { LinkButton } from '@/components/ui/Button';
 import { TextReveal } from '@/components/ui/TextReveal';
-
-export const metadata: Metadata = {
-  title: 'Portfolio & Botanical Gallery',
-  description:
-    'Selected bridal henna designs, Kashmiri Chinar motifs, and natural mahogany stain studies by Sumaiya Rashid Magray (Sana).',
-};
 
 interface GalleryPlate {
   id: string;
@@ -110,15 +110,63 @@ const GALLERY_PLATES: GalleryPlate[] = [
   },
 ];
 
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Bridal Mehndi Portfolio & Botanical Stain Gallery',
+  description:
+    'Selected bridal henna designs, Kashmiri Chinar leaf motifs, Royal Mughal archways, and 48-hour natural mahogany stain studies by Sumaiya Rashid Magray (Sana).',
+  canonicalPath: '/gallery',
+  keywords: [
+    'Kashmiri bridal mehndi designs',
+    'Chinar mehndi motif',
+    'organic henna stain gallery',
+    'Sumaiya Rashid Magray portfolio',
+    'Mehandi by Sana gallery',
+  ],
+  images: [
+    {
+      url: toAbsoluteUrl(GALLERY_PLATES[0].imageSrc),
+      alt: GALLERY_PLATES[0].imageAlt,
+    },
+  ],
+});
+
 export default function GalleryPage() {
+  const galleryJson = serializeJsonLd(buildGalleryJsonLd(GALLERY_PLATES));
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Gallery', path: '/gallery' },
+    ])
+  );
+
   return (
     <div className="bg-canvas pb-20 md:pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: galleryJson }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+      />
+
       {/* Crisp White Asymmetric Archive Masthead */}
       <section
         aria-labelledby="gallery-page-heading"
         className="border-b border-hairline bg-canvas"
       >
-        <div className="editorial-container py-12 md:py-16">
+        <div className="editorial-container py-10 md:py-16">
+          <nav
+            aria-label="Breadcrumb"
+            className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber mb-6"
+          >
+            <Link href="/" className="hover:text-terracotta">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink font-medium">Gallery</span>
+          </nav>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <div className="flex items-center gap-2 mb-3">
@@ -165,9 +213,12 @@ export default function GalleryPage() {
       </section>
 
       <section
-        aria-label="Gallery plates"
+        aria-labelledby="gallery-plates-heading"
         className="editorial-container py-16 md:py-24"
       >
+        <h2 id="gallery-plates-heading" className="sr-only">
+          Curated Studio Henna Plates
+        </h2>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {GALLERY_PLATES.map((plate, idx) => (
             <TextReveal
@@ -195,9 +246,12 @@ export default function GalleryPage() {
                 </div>
 
                 <figcaption className="space-y-1.5 max-w-xl px-1">
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-terracotta">
-                    {plate.category} &mdash; {plate.title}
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
+                    {plate.category}
                   </p>
+                  <h3 className="font-serif text-xl sm:text-2xl font-medium text-ink leading-snug">
+                    {plate.title}
+                  </h3>
                   <p className="text-sm text-umber leading-relaxed">
                     {plate.caption}
                   </p>

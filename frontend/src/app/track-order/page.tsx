@@ -1,28 +1,67 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+import {
+  buildBreadcrumbJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import {
   OrderTrackerClient,
   type TrackedOrder,
 } from '@/components/shop/OrderTrackerClient';
 import { getServerEnv } from '@/lib/env';
 
-export const metadata: Metadata = {
-  title: 'Track Your Order',
-  description:
-    'Check live preparation and courier dispatch status for your Mehandi by Sana organic henna cones, kits, and studio tools.',
-};
-
 interface TrackOrderPageProps {
   searchParams: Promise<{ order?: string; email?: string }>;
+}
+
+export async function generateMetadata({
+  searchParams,
+}: TrackOrderPageProps): Promise<Metadata> {
+  const resolved = await searchParams;
+  const hasLookupParams = Boolean(
+    (typeof resolved.order === 'string' && resolved.order.trim()) ||
+      (typeof resolved.email === 'string' && resolved.email.trim())
+  );
+
+  return buildPageMetadata({
+    title: 'Track Your Studio Order',
+    description:
+      'Check live small-batch preparation, PIN-zone courier dispatch, and AWB tracking milestones for your Mehandi by Sana organic henna order.',
+    canonicalPath: '/track-order',
+    keywords: [
+      'Mehandi by Sana order tracker',
+      'track organic henna parcel India',
+    ],
+    ...(hasLookupParams
+      ? {
+          robots: {
+            index: false,
+            follow: false,
+          },
+        }
+      : {}),
+  });
+}
+
+interface InitialOrderLookupResult {
+  attempted: boolean;
+  order: TrackedOrder | null;
+  errorMessage: string | null;
 }
 
 async function fetchInitialOrder(
   orderNumber: string,
   email: string
-): Promise<TrackedOrder | null> {
-  if (!orderNumber.trim() || !email.trim()) return null;
+): Promise<InitialOrderLookupResult> {
+  if (!orderNumber.trim() || !email.trim()) {
+    return { attempted: false, order: null, errorMessage: null };
+  }
   const { medusaBackendUrl, medusaPublishableKey } = getServerEnv();
-  if (!medusaBackendUrl) return null;
+  if (!medusaBackendUrl) {
+    return { attempted: false, order: null, errorMessage: null };
+  }
 
   try {
     const headers: Record<string, string> = { Accept: 'application/json' };
@@ -31,29 +70,92 @@ async function fetchInitialOrder(
     }
     const res = await fetch(
       `${medusaBackendUrl}/store/track-order?orderNumber=${encodeURIComponent(orderNumber.trim())}&email=${encodeURIComponent(email.trim())}`,
-      { headers, cache: 'no-store' }
+      {
+        headers,
+        cache: 'no-store',
+        signal: AbortSignal.timeout(4000),
+      }
     );
-    if (!res.ok) return null;
-    const data = (await res.json()) as { found?: boolean; order?: TrackedOrder };
-    return data.found && data.order ? data.order : null;
+    const data = (await res
+      .json()
+      .catch(() => null)) as {
+      found?: boolean;
+      order?: TrackedOrder;
+      message?: string;
+    } | null;
+
+    if (res.ok && data?.found && data.order) {
+      return { attempted: true, order: data.order, errorMessage: null };
+    }
+    if (res.status === 404 || (res.ok && data?.found === false)) {
+      return {
+        attempted: true,
+        order: null,
+        errorMessage:
+          data?.message ||
+          'No matching order was found. Check your Order Reference and Email Address.',
+      };
+    }
+    return { attempted: false, order: null, errorMessage: null };
   } catch {
-    return null;
+    return { attempted: false, order: null, errorMessage: null };
   }
+}
+
+async function TrackedOrderSection({
+  initialOrder,
+  initialEmail,
+}: {
+  initialOrder: string;
+  initialEmail: string;
+}) {
+  const result = await fetchInitialOrder(initialOrder, initialEmail);
+  return (
+    <OrderTrackerClient
+      initialOrder={initialOrder}
+      initialEmail={initialEmail}
+      initialTrackedOrder={result.order}
+      initialLookupError={result.errorMessage}
+      initialLookupAttempted={result.attempted}
+    />
+  );
 }
 
 export default async function TrackOrderPage({ searchParams }: TrackOrderPageProps) {
   const resolved = await searchParams;
   const initialOrder = typeof resolved.order === 'string' ? resolved.order : '';
   const initialEmail = typeof resolved.email === 'string' ? resolved.email : '';
-  const initialTrackedOrder = await fetchInitialOrder(initialOrder, initialEmail);
+  const hasInitialLookup = Boolean(initialOrder.trim() && initialEmail.trim());
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Track Order', path: '/track-order' },
+    ])
+  );
 
   return (
     <div className="bg-canvas pb-20 md:pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+      />
+
       <section
         aria-labelledby="track-order-heading"
         className="border-b border-hairline bg-canvas"
       >
-        <div className="editorial-container py-12 md:py-16">
+        <div className="editorial-container py-10 md:py-16">
+          <nav
+            aria-label="Breadcrumb"
+            className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber mb-6"
+          >
+            <Link href="/" className="hover:text-terracotta">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink font-medium">Track Order</span>
+          </nav>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <div className="flex items-center gap-2 mb-3">
@@ -94,11 +196,20 @@ export default async function TrackOrderPage({ searchParams }: TrackOrderPagePro
       </section>
 
       <section className="editorial-container pt-12 md:pt-16">
-        <OrderTrackerClient
-          initialOrder={initialOrder}
-          initialEmail={initialEmail}
-          initialTrackedOrder={initialTrackedOrder}
-        />
+        <Suspense
+          fallback={
+            <OrderTrackerClient
+              initialOrder={initialOrder}
+              initialEmail={initialEmail}
+              isCheckingInitial={hasInitialLookup}
+            />
+          }
+        >
+          <TrackedOrderSection
+            initialOrder={initialOrder}
+            initialEmail={initialEmail}
+          />
+        </Suspense>
       </section>
     </div>
   );

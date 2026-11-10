@@ -119,7 +119,9 @@ export function FeaturedProductsSection({
   const leadImage = leadProduct.images[0] ?? null;
   const leadDefaultVar =
     leadProduct.variations.find((v) => v.inStock) ?? leadProduct.variations[0] ?? null;
-  const leadHasMultiVariants = leadProduct.variations.length > 1;
+  const leadHasMultiVariants =
+    leadProduct.variations.length > 1 ||
+    leadProduct.attributes.some((attr) => attr.options.length > 1);
 
   return (
     <div className="space-y-8">
@@ -262,7 +264,8 @@ export function FeaturedProductsSection({
 
             {leadProduct.inStock && !leadHasMultiVariants ? (
               <AddToCartButton
-                productId={leadProduct.id}
+                productId={leadDefaultVar?.id ?? leadProduct.id}
+                medusaVariantId={leadDefaultVar?.medusaVariantId}
                 inStock={leadProduct.inStock}
                 variation={leadDefaultVar?.attributes}
                 variant="accent"
@@ -288,7 +291,9 @@ export function FeaturedProductsSection({
             const indexLabel = `0${idx + 2}`;
             const defaultVar =
               product.variations.find((v) => v.inStock) ?? product.variations[0] ?? null;
-            const hasMultiVar = product.variations.length > 1;
+            const hasMultiVar =
+              product.variations.length > 1 ||
+              product.attributes.some((attr) => attr.options.length > 1);
 
             return (
               <article
@@ -372,7 +377,8 @@ export function FeaturedProductsSection({
                       </Link>
                     ) : (
                       <AddToCartButton
-                        productId={product.id}
+                        productId={defaultVar?.id ?? product.id}
+                        medusaVariantId={defaultVar?.medusaVariantId}
                         inStock={product.inStock}
                         variation={defaultVar?.attributes}
                         variant="accent"

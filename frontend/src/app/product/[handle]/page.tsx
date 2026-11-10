@@ -9,7 +9,12 @@ import {
   pickCompanionProducts,
 } from '@/lib/wc-catalog';
 import type { StorefrontProduct } from '@/types/storefront';
-import { buildProductJsonLd } from '@/lib/structured-data';
+import { buildPageMetadata, cleanSeoText, toAbsoluteUrl } from '@/lib/seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildProductJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import { ProductDetailInteractive } from '@/components/shop/VariantSelector';
 import { ProductCard } from '@/components/shop/ProductCard';
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';
@@ -27,24 +32,44 @@ export async function generateMetadata({
   const product = await fetchProductBySlug(handle);
 
   if (!product) {
-    return {
+    return buildPageMetadata({
       title: 'Product Not Found',
-    };
+      description:
+        'This botanical henna formulation could not be found in the Mehandi by Sana studio catalog.',
+      canonicalPath: '/shop',
+      robots: {
+        index: false,
+        follow: true,
+      },
+    });
   }
 
-  const firstImage = product.images[0]?.src;
+  const primaryCategory = product.categories[0]?.name;
+  const rawDescription =
+    product.shortDescription ||
+    product.description ||
+    `Shop ${product.name} crafted in small batches by Mehandi by Sana across our Srinagar & Bangalore studios.`;
+  const description = cleanSeoText(rawDescription, 158);
+  const canonicalPath = `/product/${encodeURIComponent(product.slug)}`;
 
-  return {
+  return buildPageMetadata({
     title: product.name,
-    description:
-      product.shortDescription ||
-      `Explore ${product.name} crafted by Mehandi by Sana.`,
-    openGraph: {
-      title: `${product.name} | Mehandi by Sana`,
-      description: product.shortDescription || undefined,
-      images: firstImage ? [{ url: firstImage }] : undefined,
-    },
-  };
+    description,
+    canonicalPath,
+    keywords: [
+      product.name,
+      ...(primaryCategory ? [primaryCategory] : []),
+      'Mehandi by Sana',
+      'organic henna India',
+    ],
+    images:
+      product.images.length > 0
+        ? product.images.map((img) => ({
+            url: toAbsoluteUrl(img.src),
+            alt: img.alt || product.name,
+          }))
+        : undefined,
+  });
 }
 
 function formatCleanDescription(html: string): string[] {
@@ -102,16 +127,34 @@ export default async function ProductDetailPage({
     product.description || product.shortDescription
   );
 
-  const safeJsonLd = JSON.stringify(buildProductJsonLd(product)).replace(
-    /</g,
-    '\\u003c'
-  );
+  const primaryCategory = product.categories[0] ?? null;
+  const canonicalPath = `/product/${encodeURIComponent(product.slug)}`;
+  const breadcrumbItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Shop', path: '/shop' },
+    ...(primaryCategory
+      ? [
+          {
+            name: primaryCategory.name,
+            path: `/shop?category=${encodeURIComponent(primaryCategory.slug)}`,
+          },
+        ]
+      : []),
+    { name: product.name, path: canonicalPath },
+  ];
+
+  const productJson = serializeJsonLd(buildProductJsonLd(product));
+  const breadcrumbJson = serializeJsonLd(buildBreadcrumbJsonLd(breadcrumbItems));
 
   return (
     <div className="bg-canvas pb-20 md:pb-28">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd }}
+        dangerouslySetInnerHTML={{ __html: productJson }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
       />
 
       <div className="editorial-container pt-8 md:pt-12">
@@ -126,6 +169,17 @@ export default async function ProductDetailPage({
           <Link href="/shop" className="hover:text-terracotta">
             Shop
           </Link>
+          {primaryCategory ? (
+            <>
+              <span aria-hidden="true">/</span>
+              <Link
+                href={`/shop?category=${encodeURIComponent(primaryCategory.slug)}`}
+                className="hover:text-terracotta"
+              >
+                {primaryCategory.name}
+              </Link>
+            </>
+          ) : null}
           <span aria-hidden="true">/</span>
           <span className="text-ink font-medium truncate max-w-[260px]">
             {product.name}
@@ -136,14 +190,14 @@ export default async function ProductDetailPage({
           product={product}
           headerChildren={
             <div>
-              {product.categories[0] ? (
+              {primaryCategory ? (
                 <div className="flex items-center gap-2 mb-2.5">
                   <span
                     aria-hidden="true"
                     className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                   />
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
-                    {product.categories[0].name}
+                    {primaryCategory.name}
                   </p>
                 </div>
               ) : null}
@@ -164,12 +218,22 @@ export default async function ProductDetailPage({
               <BotanicalSprig />
 
               {paragraphs.length > 0 ? (
-                <div className="space-y-3 text-sm md:text-base text-ink/90 leading-relaxed pt-2">
-                  {paragraphs.map((text, idx) => (
-                    <p key={idx}>{text}</p>
-                  ))}
-                </div>
-              ) : null}
+                <section aria-labelledby="product-details-heading" className="space-y-3 pt-2">
+                  <h2
+                    id="product-details-heading"
+                    className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta"
+                  >
+                    Formulation &amp; Usage Details
+                  </h2>
+                  <div className="space-y-3 text-sm md:text-base text-ink/90 leading-relaxed">
+                    {paragraphs.map((text, idx) => (
+                      <p key={idx}>{text}</p>
+                    ))}
+                  </div>
+                </section>
+              ) : (
+                <h2 className="sr-only">Product Care &amp; Dispatch Details</h2>
+              )}
 
               <div className="border-t border-hairline pt-6 space-y-3">
                 <details className="group rounded-2xl border border-hairline bg-paper px-5 py-4">

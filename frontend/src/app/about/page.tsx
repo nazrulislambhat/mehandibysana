@@ -1,6 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+import {
+  buildAboutPageJsonLd,
+  buildBreadcrumbJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import { TextReveal } from '@/components/ui/TextReveal';
 import { LinkButton } from '@/components/ui/Button';
 import {
@@ -9,11 +15,19 @@ import {
 } from '@/components/graphics/BotanicalIllustrations';
 import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlates';
 
-export const metadata: Metadata = {
-  title: 'About the Studio',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'About Sumaiya Rashid Magray (Sana) & Studio',
   description:
-    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s first freelance organic henna artist and botanical apothecary founder.',
-};
+    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, operating from Srinagar & Bangalore.',
+  canonicalPath: '/about',
+  keywords: [
+    'Sumaiya Rashid Magray',
+    'Mehandi by Sana story',
+    'Kashmir organic henna pioneer',
+    'Srinagar Bangalore henna studio',
+    'Maenz 2019 Kashmir',
+  ],
+});
 
 interface AwardHonorItem {
   number: string;
@@ -135,14 +149,42 @@ const STUDIO_PILLARS = [
 ];
 
 export default function AboutPage() {
+  const aboutJson = serializeJsonLd(buildAboutPageJsonLd(AWARDS_AND_HONORS));
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'About', path: '/about' },
+    ])
+  );
+
   return (
     <div className="bg-canvas pb-20 md:pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: aboutJson }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+      />
+
       {/* Crisp White Split 5/7 Botanical Study & Story Intro */}
       <section
         aria-labelledby="about-page-heading"
         className="border-b border-hairline bg-canvas"
       >
-        <div className="editorial-container py-12 md:py-20">
+        <div className="editorial-container py-10 md:py-18">
+          <nav
+            aria-label="Breadcrumb"
+            className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber mb-8"
+          >
+            <Link href="/" className="hover:text-terracotta">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink font-medium">About</span>
+          </nav>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
               <figure className="space-y-3">
@@ -216,7 +258,7 @@ export default function AboutPage() {
       {/* Three-Column Pillars Strip */}
       <section
         aria-labelledby="pillars-heading"
-        className="editorial-container py-16 md:py-20"
+        className="editorial-container pt-16 md:pt-20 pb-14 md:pb-16"
       >
         <div className="max-w-xl mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta mb-2">
@@ -249,13 +291,14 @@ export default function AboutPage() {
             </TextReveal>
           ))}
         </div>
+      </section>
 
-        {/* All 7 Verified Awards & Honors */}
-        <section
-          id="awards-honors"
-          aria-labelledby="awards-honors-heading"
-          className="mt-16 pt-14 border-t border-hairline"
-        >
+      {/* All 7 Verified Awards & Honors */}
+      <section
+        id="awards-honors"
+        aria-labelledby="awards-honors-heading"
+        className="editorial-container pt-14 pb-16 md:pb-20 border-t border-hairline"
+      >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -380,35 +423,34 @@ export default function AboutPage() {
               </TextReveal>
             ))}
           </div>
-        </section>
 
-        <div className="mt-14 pt-10 border-t border-hairline flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-3">
-            <LinkButton
-              href="/shop"
-              variant="primary"
-              size="md"
-              className="rounded-full"
+          <div className="mt-14 pt-10 border-t border-hairline flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-3">
+              <LinkButton
+                href="/shop"
+                variant="primary"
+                size="md"
+                className="rounded-full"
+              >
+                Explore Products &rarr;
+              </LinkButton>
+              <LinkButton
+                href="/services"
+                variant="secondary"
+                size="md"
+                className="rounded-full"
+              >
+                View Services
+              </LinkButton>
+            </div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1.5"
             >
-              Explore Products &rarr;
-            </LinkButton>
-            <LinkButton
-              href="/services"
-              variant="secondary"
-              size="md"
-              className="rounded-full"
-            >
-              View Services
-            </LinkButton>
+              Connect with the studio &rarr;
+            </Link>
           </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1.5"
-          >
-            Connect with the studio &rarr;
-          </Link>
-        </div>
-      </section>
-    </div>
-  );
-}
+        </section>
+      </div>
+    );
+  }

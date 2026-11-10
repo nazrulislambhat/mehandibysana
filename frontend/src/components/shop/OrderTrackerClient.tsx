@@ -76,17 +76,23 @@ export interface OrderTrackerClientProps {
   initialOrder?: string;
   initialEmail?: string;
   initialTrackedOrder?: TrackedOrder | null;
+  initialLookupError?: string | null;
+  initialLookupAttempted?: boolean;
+  isCheckingInitial?: boolean;
 }
 
 export function OrderTrackerClient({
   initialOrder = '',
   initialEmail = '',
   initialTrackedOrder = null,
+  initialLookupError = null,
+  initialLookupAttempted = false,
+  isCheckingInitial = false,
 }: OrderTrackerClientProps) {
   const [orderNumber, setOrderNumber] = useState(initialOrder);
   const [email, setEmail] = useState(initialEmail);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(isCheckingInitial);
+  const [error, setError] = useState<string | null>(initialLookupError);
   const [order, setOrder] = useState<TrackedOrder | null>(initialTrackedOrder);
 
   const performLookup = useCallback(async (targetOrder: string, targetEmail: string) => {
@@ -130,7 +136,15 @@ export function OrderTrackerClient({
   }, []);
 
   useEffect(() => {
-    if (!initialOrder || !initialEmail || initialTrackedOrder) return;
+    if (
+      !initialOrder ||
+      !initialEmail ||
+      initialTrackedOrder ||
+      initialLookupAttempted ||
+      isCheckingInitial
+    ) {
+      return;
+    }
     let active = true;
 
     const loadInitial = async () => {
@@ -167,7 +181,13 @@ export function OrderTrackerClient({
     return () => {
       active = false;
     };
-  }, [initialOrder, initialEmail, initialTrackedOrder]);
+  }, [
+    initialOrder,
+    initialEmail,
+    initialTrackedOrder,
+    initialLookupAttempted,
+    isCheckingInitial,
+  ]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

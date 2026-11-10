@@ -54,11 +54,22 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: buildRemotePatterns(),
   },
-  async rewrites() {
+  async redirects() {
     return [
+      {
+        source: '/portfolio',
+        destination: '/gallery',
+        permanent: true,
+      },
       {
         source: '/products/:handle',
         destination: '/product/:handle',
+        permanent: true,
+      },
+      {
+        source: '/shop/:handle',
+        destination: '/product/:handle',
+        permanent: true,
       },
     ];
   },

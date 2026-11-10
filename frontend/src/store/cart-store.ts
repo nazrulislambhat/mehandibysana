@@ -5,6 +5,17 @@ import { persist } from 'zustand/middleware';
 import { wcStoreClient } from '@/lib/wc-store-api';
 import type { StorefrontCart } from '@/types/storefront';
 
+let cartMutationQueue: Promise<unknown> = Promise.resolve();
+
+function enqueueCartMutation<T>(task: () => Promise<T>): Promise<T> {
+  const run = cartMutationQueue.then(task, task);
+  cartMutationQueue = run.then(
+    () => undefined,
+    () => undefined
+  );
+  return run;
+}
+
 interface CartState {
   cart: StorefrontCart | null;
   cartToken: string | null;
@@ -26,6 +37,7 @@ interface CartState {
   fetchCart: (options?: { preserveError?: boolean }) => Promise<void>;
   addItem: (params: {
     id: number;
+    medusaVariantId?: string;
     quantity?: number;
     variation?: Array<{ attribute: string; value: string }>;
     openBag?: boolean;
@@ -84,51 +96,60 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      addItem: async ({ id, quantity = 1, variation, openBag = false }) => {
-        const { cartToken, nonce, cart: prevCart } = get();
-        const prevItems = prevCart?.items ?? [];
-        set({ isLoading: true, error: null });
-        try {
-          const res = await wcStoreClient.addItem({ id, quantity, variation }, cartToken, nonce);
-          const succeeded = res.error === null && res.cart !== null;
-          const resolvedError =
-            res.error ?? (res.cart === null ? 'Unable to confirm shopping bag update.' : null);
+      addItem: async ({ id, medusaVariantId, quantity = 1, variation, openBag = false }) => {
+        return enqueueCartMutation(async () => {
+          const { cartToken, nonce, cart: prevCart } = get();
+          const prevItems = prevCart?.items ?? [];
+          set({ isLoading: true, error: null });
+          try {
+            const res = await wcStoreClient.addItem(
+              { id, medusaVariantId, quantity, variation },
+              cartToken,
+              nonce
+            );
+            const succeeded = res.error === null && res.cart !== null;
+            const resolvedError =
+              res.error ?? (res.cart === null ? 'Unable to confirm shopping bag update.' : null);
 
-          let addedKey = get().lastAddedKey;
-          let addedAt = get().lastAddedAt;
-          if (succeeded && res.cart) {
-            const prevQtyByKey = new Map(prevItems.map((it) => [it.key, it.quantity]));
-            const changedItem =
-              res.cart.items.find((it) => {
-                const prevQty = prevQtyByKey.get(it.key);
-                return prevQty === undefined || it.quantity > prevQty;
-              }) ??
-              res.cart.items.find((it) => it.productId === id) ??
-              res.cart.items[0] ??
-              null;
-            addedKey = changedItem?.key ?? null;
-            addedAt = Date.now();
+            let addedKey = get().lastAddedKey;
+            let addedAt = get().lastAddedAt;
+            if (succeeded && res.cart) {
+              const prevQtyByKey = new Map(prevItems.map((it) => [it.key, it.quantity]));
+              const changedItem =
+                res.cart.items.find((it) => {
+                  const prevQty = prevQtyByKey.get(it.key);
+                  return prevQty === undefined || it.quantity > prevQty;
+                }) ??
+                (medusaVariantId
+                  ? res.cart.items.find((it) => it.medusaVariantId === medusaVariantId)
+                  : undefined) ??
+                res.cart.items.find((it) => it.productId === id) ??
+                res.cart.items[0] ??
+                null;
+              addedKey = changedItem?.key ?? null;
+              addedAt = Date.now();
+            }
+
+            set({
+              cart: res.cart ?? get().cart,
+              cartToken: res.cartToken,
+              nonce: res.nonce,
+              error: resolvedError,
+              isLoading: false,
+              lastAddedKey: addedKey,
+              lastAddedAt: addedAt,
+              isDrawerOpen: succeeded && openBag ? true : get().isDrawerOpen,
+            });
+            return { ok: succeeded, error: resolvedError };
+          } catch (err) {
+            const message = err instanceof Error ? err.message : 'Unable to add item to bag.';
+            set({
+              isLoading: false,
+              error: message,
+            });
+            return { ok: false, error: message };
           }
-
-          set({
-            cart: res.cart ?? get().cart,
-            cartToken: res.cartToken,
-            nonce: res.nonce,
-            error: resolvedError,
-            isLoading: false,
-            lastAddedKey: addedKey,
-            lastAddedAt: addedAt,
-            isDrawerOpen: succeeded && openBag ? true : get().isDrawerOpen,
-          });
-          return { ok: succeeded, error: resolvedError };
-        } catch (err) {
-          const message = err instanceof Error ? err.message : 'Unable to add item to bag.';
-          set({
-            isLoading: false,
-            error: message,
-          });
-          return { ok: false, error: message };
-        }
+        });
       },
 
       updateItemQuantity: async (key, quantity) => {
@@ -136,59 +157,63 @@ export const useCartStore = create<CartState>()(
           await get().removeItem(key);
           return;
         }
-        const { cartToken, nonce, pendingKeys } = get();
-        set({
-          pendingKeys: { ...pendingKeys, [key]: true },
-          error: null,
+        return enqueueCartMutation(async () => {
+          const { cartToken, nonce, pendingKeys } = get();
+          set({
+            pendingKeys: { ...pendingKeys, [key]: true },
+            error: null,
+          });
+          try {
+            const res = await wcStoreClient.updateItem({ key, quantity }, cartToken, nonce);
+            const nextPending = { ...get().pendingKeys };
+            delete nextPending[key];
+            set({
+              cart: res.cart ?? get().cart,
+              cartToken: res.cartToken,
+              nonce: res.nonce,
+              error: res.error,
+              pendingKeys: nextPending,
+              lastAddedKey: get().lastAddedKey === key ? null : get().lastAddedKey,
+            });
+          } catch (err) {
+            const nextPending = { ...get().pendingKeys };
+            delete nextPending[key];
+            set({
+              pendingKeys: nextPending,
+              error: err instanceof Error ? err.message : 'Unable to update item quantity.',
+            });
+          }
         });
-        try {
-          const res = await wcStoreClient.updateItem({ key, quantity }, cartToken, nonce);
-          const nextPending = { ...get().pendingKeys };
-          delete nextPending[key];
-          set({
-            cart: res.cart ?? get().cart,
-            cartToken: res.cartToken,
-            nonce: res.nonce,
-            error: res.error,
-            pendingKeys: nextPending,
-            lastAddedKey: get().lastAddedKey === key ? null : get().lastAddedKey,
-          });
-        } catch (err) {
-          const nextPending = { ...get().pendingKeys };
-          delete nextPending[key];
-          set({
-            pendingKeys: nextPending,
-            error: err instanceof Error ? err.message : 'Unable to update item quantity.',
-          });
-        }
       },
 
       removeItem: async (key) => {
-        const { cartToken, nonce, pendingKeys } = get();
-        set({
-          pendingKeys: { ...pendingKeys, [key]: true },
-          error: null,
+        return enqueueCartMutation(async () => {
+          const { cartToken, nonce, pendingKeys } = get();
+          set({
+            pendingKeys: { ...pendingKeys, [key]: true },
+            error: null,
+          });
+          try {
+            const res = await wcStoreClient.removeItem({ key }, cartToken, nonce);
+            const nextPending = { ...get().pendingKeys };
+            delete nextPending[key];
+            set({
+              cart: res.cart ?? get().cart,
+              cartToken: res.cartToken,
+              nonce: res.nonce,
+              error: res.error,
+              pendingKeys: nextPending,
+              lastAddedKey: get().lastAddedKey === key ? null : get().lastAddedKey,
+            });
+          } catch (err) {
+            const nextPending = { ...get().pendingKeys };
+            delete nextPending[key];
+            set({
+              pendingKeys: nextPending,
+              error: err instanceof Error ? err.message : 'Unable to remove item.',
+            });
+          }
         });
-        try {
-          const res = await wcStoreClient.removeItem({ key }, cartToken, nonce);
-          const nextPending = { ...get().pendingKeys };
-          delete nextPending[key];
-          set({
-            cart: res.cart ?? get().cart,
-            cartToken: res.cartToken,
-            nonce: res.nonce,
-            error: res.error,
-            pendingKeys: nextPending,
-            lastAddedKey: get().lastAddedKey === key ? null : get().lastAddedKey,
-          });
-        } catch (err) {
-          const nextPending = { ...get().pendingKeys };
-          delete nextPending[key];
-          set({
-            pendingKeys: nextPending,
-            error: err instanceof Error ? err.message : 'Unable to remove item.',
-          });
-        }
       },
     }),
     {

@@ -1,16 +1,23 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Refund, Return & Cancellation Policy',
   description:
     'Perishable fresh organic henna cone rules, 48-hour transit damage claim process, sealed tool returns, cancellations, and 5–7 day Razorpay refund timelines.',
-};
+  canonicalPath: '/refund-policy',
+  keywords: [
+    'Mehandi by Sana refund policy',
+    'organic henna return policy',
+    'order cancellation henna store',
+  ],
+});
 
 const TOC: PolicyTocItem[] = [
   { id: 'overview', number: '01', title: 'Overview & Perishable Standard' },

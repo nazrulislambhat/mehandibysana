@@ -52,7 +52,12 @@ export const wcStoreClient = {
   },
 
   addItem(
-    params: { id: number; quantity: number; variation?: Array<{ attribute: string; value: string }> },
+    params: {
+      id: number;
+      medusaVariantId?: string;
+      quantity: number;
+      variation?: Array<{ attribute: string; value: string }>;
+    },
     cartToken: string | null,
     nonce: string | null
   ): Promise<CartApiResponse> {

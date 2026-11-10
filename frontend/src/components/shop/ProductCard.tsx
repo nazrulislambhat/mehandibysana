@@ -28,10 +28,12 @@ export function ProductCard({
 }: ProductCardProps) {
   const primaryImage = product.images[0] ?? null;
   const primaryCategory = product.categories[0]?.name ?? null;
-  const isVariable =
-    product.type === 'variable' ||
+  const defaultVariation =
+    product.variations.find((v) => v.inStock) ?? product.variations[0] ?? null;
+  const hasSelectableOptions =
     product.variations.length > 1 ||
-    product.attributes.length > 0;
+    product.attributes.some((attr) => attr.options.length > 1);
+  const effectiveInStock = defaultVariation ? defaultVariation.inStock : product.inStock;
 
   if (variant === 'spotlight') {
     return (
@@ -109,7 +111,7 @@ export function ProductCard({
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-hairline">
-            {isVariable ? (
+            {hasSelectableOptions ? (
               <Link
                 href={`/product/${product.slug}`}
                 className={buttonClasses({
@@ -122,8 +124,10 @@ export function ProductCard({
               </Link>
             ) : (
               <AddToCartButton
-                productId={product.id}
-                inStock={product.inStock}
+                productId={defaultVariation?.id ?? product.id}
+                medusaVariantId={defaultVariation?.medusaVariantId}
+                variation={defaultVariation?.attributes}
+                inStock={effectiveInStock}
                 size="md"
                 variant="primary"
                 className="rounded-full"
@@ -200,7 +204,7 @@ export function ProductCard({
       </Link>
 
       <div className="mt-4 pt-3 px-1.5 border-t border-hairline/70">
-        {isVariable ? (
+        {hasSelectableOptions ? (
           <Link
             href={`/product/${product.slug}`}
             className={buttonClasses({
@@ -213,8 +217,10 @@ export function ProductCard({
           </Link>
         ) : (
           <AddToCartButton
-            productId={product.id}
-            inStock={product.inStock}
+            productId={defaultVariation?.id ?? product.id}
+            medusaVariantId={defaultVariation?.medusaVariantId}
+            variation={defaultVariation?.attributes}
+            inStock={effectiveInStock}
             variant="secondary"
             size="sm"
             className="w-full rounded-full"

@@ -155,9 +155,9 @@ export function GalleryPreviewSection() {
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
                     {item.plate} &middot; {item.tag}
                   </p>
-                  <p className="font-serif text-lg font-medium text-ink leading-snug">
+                  <h3 className="font-serif text-lg font-medium text-ink leading-snug">
                     {item.title}
-                  </p>
+                  </h3>
                   <p className="text-xs text-umber leading-relaxed">
                     {item.caption}
                   </p>

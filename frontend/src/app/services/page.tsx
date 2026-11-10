@@ -1,5 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildServicesJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import { LinkButton } from '@/components/ui/Button';
 import { TextReveal } from '@/components/ui/TextReveal';
 import {
@@ -7,11 +14,20 @@ import {
   ServiceMotifIcon,
 } from '@/components/graphics/BotanicalIllustrations';
 
-export const metadata: Metadata = {
-  title: 'Mehndi Services & Appointments',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Bridal Mehndi Services, Events & Masterclasses',
   description:
-    'Bespoke bridal mehndi appointments, celebration henna bookings, and small-batch botanical preparations by Mehandi by Sana.',
-};
+    'Book 100% PPD-free bridal mehndi, engagement celebration henna, custom bulk cones, and 15-day Mehandi Masterclasses across Srinagar & Bangalore with Sana.',
+  canonicalPath: '/services',
+  keywords: [
+    'bridal mehndi Srinagar',
+    'bridal mehndi Bangalore',
+    'organic henna artist booking',
+    'Kashmiri bridal mehndi',
+    'Mehandi Masterclass India',
+    'custom bulk organic henna cones',
+  ],
+});
 
 interface ServicePackage {
   id: string;
@@ -99,14 +115,42 @@ const CONSULTATION_STEPS = [
 ];
 
 export default function ServicesPage() {
+  const servicesJson = serializeJsonLd(buildServicesJsonLd());
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Services', path: '/services' },
+    ])
+  );
+
   return (
     <div className="bg-canvas pb-20 md:pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: servicesJson }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+      />
+
       {/* Crisp White Asymmetric Header */}
       <section
         aria-labelledby="services-page-heading"
         className="border-b border-hairline bg-canvas"
       >
-        <div className="editorial-container py-12 md:py-18">
+        <div className="editorial-container py-10 md:py-16">
+          <nav
+            aria-label="Breadcrumb"
+            className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber mb-6"
+          >
+            <Link href="/" className="hover:text-terracotta">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink font-medium">Services</span>
+          </nav>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-end">
             <div className="lg:col-span-7">
               <div className="flex items-center gap-2 mb-3">

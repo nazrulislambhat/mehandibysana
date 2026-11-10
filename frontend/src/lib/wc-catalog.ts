@@ -220,12 +220,21 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
   const firstRegular =
     normalizedVariations.find((v) => v.regularPrice !== null)?.regularPrice ?? null;
 
+  const cleanTitle = decodeHtmlEntities(raw.title);
+  const primaryCategoryLabel = raw.categories?.[0]?.name
+    ? decodeHtmlEntities(raw.categories[0].name)
+    : 'Botanical Apothecary';
+  const buildProductImageAlt = (viewIndex: number): string =>
+    viewIndex === 0
+      ? `${cleanTitle} — ${primaryCategoryLabel} by Mehandi by Sana`
+      : `${cleanTitle} (studio view ${viewIndex + 1}) by Mehandi by Sana`;
+
   const imageList: Array<{ id: number; src: string; alt: string }> = [];
   if (raw.thumbnail) {
     imageList.push({
       id: hashMedusaId(`${raw.id}-thumb`),
       src: resolveStorefrontAssetUrl(raw.thumbnail),
-      alt: decodeHtmlEntities(raw.title),
+      alt: buildProductImageAlt(0),
     });
   }
   for (const img of raw.images || []) {
@@ -234,7 +243,7 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
       imageList.push({
         id: hashMedusaId(img.id || resolvedUrl),
         src: resolvedUrl,
-        alt: decodeHtmlEntities(raw.title),
+        alt: buildProductImageAlt(imageList.length),
       });
     }
   }

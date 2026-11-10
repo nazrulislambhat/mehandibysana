@@ -1,5 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
+import {
+  buildBreadcrumbJsonLd,
+  serializeJsonLd,
+} from '@/lib/structured-data';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 
 export interface PolicyTocItem {
@@ -48,11 +52,37 @@ export function PolicyDocumentLayout({
   beforeContent,
   children,
 }: PolicyDocumentLayoutProps) {
+  const activeTab = POLICY_TABS.find((t) => t.slug === activeSlug);
+  const breadcrumbLabel = activeTab?.label ?? title;
+  const breadcrumbPath = activeTab?.href ?? '/';
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: breadcrumbLabel, path: breadcrumbPath },
+    ])
+  );
+
   return (
     <div className="bg-canvas pb-20 md:pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbJson }}
+      />
+
       {/* Crisp Editorial Masthead */}
       <section className="border-b border-hairline bg-canvas">
-        <div className="editorial-container py-12 md:py-16 space-y-8">
+        <div className="editorial-container py-10 md:py-16 space-y-7">
+          <nav
+            aria-label="Breadcrumb"
+            className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber"
+          >
+            <Link href="/" className="hover:text-terracotta">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink font-medium">{breadcrumbLabel}</span>
+          </nav>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8 space-y-3">
               <div className="flex items-center gap-2">

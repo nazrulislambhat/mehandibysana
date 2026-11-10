@@ -1,17 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+import { serializeJsonLd } from '@/lib/structured-data';
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Frequently Asked Questions (FAQ)',
   description:
-    'Answers on 100% PPD-free organic henna cones, -18°C freezing, 48-hour stain darkness, PIN-code shipping, Razorpay payments, refunds, and Srinagar & Bangalore bridal bookings.',
-};
+    'Answers on 100% PPD-free organic henna cones, -18°C freezer storage, 48-hour stain oxidation, Pan-India PIN delivery, Razorpay payments, and Srinagar & Bangalore bridal bookings.',
+  canonicalPath: '/faq',
+  keywords: [
+    'Mehandi by Sana FAQ',
+    'PPD free organic henna cones',
+    'how long fresh henna cones last',
+    'bridal mehndi booking FAQ',
+  ],
+});
 
 interface FaqItem {
   question: string;
@@ -168,7 +177,7 @@ export default function FaqPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c'),
+          __html: serializeJsonLd(faqSchema),
         }}
       />
 

@@ -1,17 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Shipping & Delivery Policy',
   description:
-    'Small-batch Srinagar & Bangalore dispatch schedule, Pan-India PIN-code delivery estimation, courier partners, parcel tracking, and fresh cone transit care for Mehandi by Sana.',
-};
+    'Small-batch Srinagar & Bangalore dispatch schedule, Pan-India PIN-code delivery estimation, air courier partners, parcel tracking, and fresh cone arrival care.',
+  canonicalPath: '/shipping-policy',
+  keywords: [
+    'Mehandi by Sana shipping policy',
+    'organic henna cones delivery India',
+    'PIN code henna delivery estimator',
+  ],
+});
 
 const TOC: PolicyTocItem[] = [
   { id: 'dispatch-schedule', number: '01', title: 'Small-Batch Dispatch Schedule' },

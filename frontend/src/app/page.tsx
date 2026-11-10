@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import { fetchHomepageCatalogSummary } from '@/lib/wc-catalog';
 import { Hero } from '@/components/sections/Hero';
 import { FeaturedProductsSection } from '@/components/sections/FeaturedProductsSection';
@@ -18,6 +20,23 @@ import {
 } from '@/components/graphics/BotanicalIllustrations';
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Organic Henna Cones & Bridal Mehndi Studio',
+  absoluteTitle: 'Mehandi by Sana — Organic Henna Cones & Bridal Mehndi Studio',
+  description:
+    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehndi with Sana across Srinagar & Bangalore.',
+  canonicalPath: '/',
+  keywords: [
+    'organic henna cones India',
+    'chemical free mehndi cones',
+    'bridal mehndi Srinagar',
+    'bridal mehndi Bangalore',
+    'Mehandi by Sana',
+    'organic Sojat henna powder',
+    'henna aftercare balm',
+  ],
+});
 
 export default async function HomePage() {
   const catalog = await fetchHomepageCatalogSummary();

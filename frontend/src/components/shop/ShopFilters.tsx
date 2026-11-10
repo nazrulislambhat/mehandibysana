@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useTransition } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { normalizeCategorySlug } from '@/lib/category-slugs';
 import type { StorefrontCategory } from '@/types/storefront';
@@ -22,7 +23,7 @@ export function ShopFilters({
   const [isPending, startTransition] = useTransition();
   const [searchValue, setSearchValue] = useState(activeQuery);
 
-  const navigateWithParams = (next: {
+  const buildFilterHref = (next: {
     category?: string;
     sort?: string;
     q?: string;
@@ -30,15 +31,27 @@ export function ShopFilters({
     const params = new URLSearchParams();
     const cat = next.category !== undefined ? next.category : activeCategory;
     const sort = next.sort !== undefined ? next.sort : activeSort;
-    const q = next.q !== undefined ? next.q : searchValue.trim();
+    const q = next.q !== undefined ? next.q : activeQuery;
 
     if (cat) params.set('category', cat);
     if (sort && sort !== 'default') params.set('sort', sort);
     if (q) params.set('q', q);
 
     const qs = params.toString();
+    return qs ? `/shop?${qs}` : '/shop';
+  };
+
+  const navigateWithParams = (next: {
+    category?: string;
+    sort?: string;
+    q?: string;
+  }) => {
+    const href = buildFilterHref({
+      ...next,
+      q: next.q !== undefined ? next.q : searchValue.trim(),
+    });
     startTransition(() => {
-      router.push(qs ? `/shop?${qs}` : '/shop', { scroll: false });
+      router.push(href, { scroll: false });
     });
   };
 
@@ -47,16 +60,11 @@ export function ShopFilters({
     navigateWithParams({ q: searchValue.trim() });
   };
 
-  const handleReset = () => {
-    setSearchValue('');
-    startTransition(() => {
-      router.push('/shop', { scroll: false });
-    });
-  };
-
   const hasFilters = Boolean(
     activeCategory || activeQuery || (activeSort && activeSort !== 'default')
   );
+
+  const normalizedActiveCategory = normalizeCategorySlug(activeCategory);
 
   return (
     <div
@@ -66,36 +74,36 @@ export function ShopFilters({
     >
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
         <nav aria-label="Product categories" className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            aria-pressed={activeCategory === ''}
-            onClick={() => navigateWithParams({ category: '' })}
-            className={`min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-medium border cursor-pointer transition-colors ${
+          <Link
+            href={buildFilterHref({ category: '' })}
+            scroll={false}
+            aria-current={activeCategory === '' ? 'page' : undefined}
+            className={`inline-flex items-center min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-medium border transition-colors ${
               activeCategory === ''
                 ? 'bg-ink text-inverse border-ink'
                 : 'bg-paper text-ink border-divider hover:border-ink hover:text-terracotta'
             }`}
           >
             All Products
-          </button>
+          </Link>
 
           {categories.map((cat) => {
             const isSelected =
-              normalizeCategorySlug(activeCategory) ===
-              normalizeCategorySlug(cat.slug);
+              normalizedActiveCategory !== '' &&
+              normalizedActiveCategory === normalizeCategorySlug(cat.slug);
             return (
-              <button
+              <Link
                 key={cat.id}
-                type="button"
-                aria-pressed={isSelected}
-                onClick={() => navigateWithParams({ category: cat.slug })}
-                className={`min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-medium border cursor-pointer transition-colors ${
+                href={buildFilterHref({ category: cat.slug })}
+                scroll={false}
+                aria-current={isSelected ? 'page' : undefined}
+                className={`inline-flex items-center gap-1 min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-medium border transition-colors ${
                   isSelected
                     ? 'bg-ink text-inverse border-ink'
                     : 'bg-paper text-ink border-divider hover:border-ink hover:text-terracotta'
                 }`}
               >
-                {cat.name}{' '}
+                <span>{cat.name}</span>
                 <span
                   className={`tabular-nums ${
                     isSelected ? 'text-terracotta' : 'text-umber'
@@ -103,7 +111,7 @@ export function ShopFilters({
                 >
                   ({cat.count})
                 </span>
-              </button>
+              </Link>
             );
           })}
         </nav>
@@ -148,13 +156,14 @@ export function ShopFilters({
           </div>
 
           {hasFilters ? (
-            <button
-              type="button"
-              onClick={handleReset}
-              className="min-h-[40px] px-2.5 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 cursor-pointer"
+            <Link
+              href="/shop"
+              scroll={false}
+              onClick={() => setSearchValue('')}
+              className="inline-flex items-center min-h-[40px] px-2.5 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
             >
               Clear filters
-            </button>
+            </Link>
           ) : null}
         </div>
       </div>
