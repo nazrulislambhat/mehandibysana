@@ -1,377 +1,215 @@
-'use client';
+import React from 'react';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import {
+  fetchCatalogCategories,
+  fetchCatalogProducts,
+  type ProductQueryOptions,
+} from '@/lib/wc-catalog';
+import { ProductCard } from '@/components/shop/ProductCard';
+import { ShopFilters } from '@/components/shop/ShopFilters';
+import { FeedbackState } from '@/components/ui/FeedbackState';
+import { TextReveal } from '@/components/ui/TextReveal';
 
-import React, { useState, useMemo } from 'react';
-import { CATEGORIES, INITIAL_PRODUCTS } from '@/lib/catalog';
-import ProductCard from '@/components/ProductCard';
-import { Product } from '@/types';
+export const revalidate = 1800;
 
-export default function ShopPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All Products');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('featured');
-  const [viewMode, setViewMode] = useState<'grouped' | 'all-variations'>('grouped');
+export const metadata: Metadata = {
+  title: 'Shop Botanical Henna & Care',
+  description:
+    'Explore small-batch organic henna cones, aftercare balms, essential oils, and studio kits crafted by Mehandi by Sana.',
+  openGraph: {
+    title: 'Shop | Mehandi by Sana',
+    description:
+      'Small-batch organic henna cones, botanical hair powder, essential oils, and aftercare.',
+  },
+};
 
-  // Deconstruct products into individual variation items for "All Variations" mode
-  const allVariationItems = useMemo(() => {
-    const items: Array<{ product: Product; variantId: string; variantTitle: string; price: number; originalPrice?: number }> = [];
-    INITIAL_PRODUCTS.forEach((prod) => {
-      if (prod.variants.length > 0) {
-        prod.variants.forEach((v) => {
-          items.push({
-            product: prod,
-            variantId: v.id,
-            variantTitle: v.title,
-            price: v.price,
-            originalPrice: v.originalPrice,
-          });
-        });
-      } else {
-        items.push({
-          product: prod,
-          variantId: 'default',
-          variantTitle: 'Standard',
-          price: prod.price,
-          originalPrice: prod.originalPrice,
-        });
-      }
-    });
-    return items;
-  }, []);
+interface ShopPageProps {
+  searchParams: Promise<{
+    category?: string;
+    sort?: string;
+    q?: string;
+    page?: string;
+  }>;
+}
 
-  // Filtered grouped products
-  const filteredProducts = useMemo(() => {
-    return INITIAL_PRODUCTS.filter((prod) => {
-      const matchesCategory =
-        selectedCategory === 'All Products' || prod.category === selectedCategory;
-      const matchesSearch =
-        prod.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        prod.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (prod.subtitle && prod.subtitle.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchesCategory && matchesSearch;
-    }).sort((a, b) => {
-      if (sortBy === 'price-low') return a.price - b.price;
-      if (sortBy === 'price-high') return b.price - a.price;
-      if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
-      return 0;
-    });
-  }, [selectedCategory, searchQuery, sortBy]);
+function mapSortToQuery(
+  sort: string
+): Pick<ProductQueryOptions, 'orderby' | 'order'> {
+  switch (sort) {
+    case 'price-asc':
+      return { orderby: 'price', order: 'asc' };
+    case 'price-desc':
+      return { orderby: 'price', order: 'desc' };
+    case 'date':
+      return { orderby: 'date', order: 'desc' };
+    case 'title':
+      return { orderby: 'title', order: 'asc' };
+    default:
+      return { orderby: 'menu_order', order: 'asc' };
+  }
+}
 
-  // Filtered individual variation items
-  const filteredVariations = useMemo(() => {
-    return allVariationItems.filter(({ product, variantTitle }) => {
-      const matchesCategory =
-        selectedCategory === 'All Products' || product.category === selectedCategory;
-      const matchesSearch =
-        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        variantTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    }).sort((a, b) => {
-      if (sortBy === 'price-low') return a.price - b.price;
-      if (sortBy === 'price-high') return b.price - a.price;
-      if (sortBy === 'rating') return (b.product.rating || 0) - (a.product.rating || 0);
-      return 0;
-    });
-  }, [allVariationItems, selectedCategory, searchQuery, sortBy]);
+export default async function ShopPage({ searchParams }: ShopPageProps) {
+  const params = await searchParams;
+  const activeCategory = typeof params.category === 'string' ? params.category.trim() : '';
+  const activeSort = typeof params.sort === 'string' ? params.sort.trim() : 'default';
+  const activeQuery = typeof params.q === 'string' ? params.q.trim() : '';
+  const parsedPage = Number(params.page);
+  const currentPage =
+    Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+
+  const sortOptions = mapSortToQuery(activeSort);
+
+  const [catalog, categories] = await Promise.all([
+    fetchCatalogProducts({
+      categorySlug: activeCategory || undefined,
+      search: activeQuery || undefined,
+      page: currentPage,
+      perPage: 24,
+      ...sortOptions,
+    }),
+    fetchCatalogCategories(),
+  ]);
+
+  const totalPages = catalog.totalPages ?? 1;
+
+  const buildPageHref = (pageNum: number) => {
+    const p = new URLSearchParams();
+    if (activeCategory) p.set('category', activeCategory);
+    if (activeSort && activeSort !== 'default') p.set('sort', activeSort);
+    if (activeQuery) p.set('q', activeQuery);
+    if (pageNum > 1) p.set('page', String(pageNum));
+    const qs = p.toString();
+    return qs ? `/shop?${qs}` : '/shop';
+  };
 
   return (
-    <div style={{ paddingBottom: '7rem' }}>
-      {/* Editorial Luxury Page Header */}
-      <div
-        style={{
-          background: 'var(--bg-secondary)',
-          borderBottom: '1px solid var(--border-subtle)',
-          padding: '4.5rem 0 3.5rem 0',
-          marginBottom: '3rem',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
+    <div className="bg-canvas pb-20 md:pb-28">
+      {/* Crisp White Asymmetric Apothecary Masthead */}
+      <section
+        aria-labelledby="shop-page-heading"
+        className="border-b border-hairline bg-canvas"
       >
-        <div className="container">
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.45rem',
-              fontSize: '0.75rem',
-              fontWeight: 800,
-              textTransform: 'uppercase',
-              letterSpacing: '0.12em',
-              color: 'var(--brand-gold)',
-              marginBottom: '0.75rem',
-            }}
-          >
-            <span>🌿</span>
-            <span>Handmade Kashmiri Apothecary</span>
-          </div>
-          <h1
-            className="font-serif"
-            style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: 700,
-              color: 'var(--text-primary)',
-              lineHeight: 1.1,
-              marginBottom: '0.75rem',
-            }}
-          >
-            Organic Collection & Supplies
-          </h1>
-          <p
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '1.08rem',
-              maxWidth: '680px',
-              lineHeight: 1.5,
-            }}
-          >
-            Pure Sojat henna cones, triple-sifted organic hair powder, Halal breathable nail stains, and cold-chain botanical kits handcrafted by Srinagar artist <strong>Sumaiya Rashid</strong>.
-          </p>
-        </div>
-      </div>
-
-      <div className="container">
-        {/* Cold-Chain Notice Banner */}
-        <div
-          style={{
-            background: 'rgba(192, 74, 38, 0.08)',
-            border: '1px solid rgba(192, 74, 38, 0.25)',
-            borderRadius: 'var(--radius-md)',
-            padding: '1rem 1.4rem',
-            marginBottom: '2.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ fontSize: '1.6rem' }}>❄️</span>
-            <div>
-              <strong style={{ fontSize: '0.92rem', color: 'var(--brand-primary)', display: 'block' }}>
-                Perishable Organic Cones Quality Advisory
-              </strong>
-              <span style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
-                Our henna cones are 100% natural without chemical preservatives. Please freeze immediately upon delivery to preserve the botanical dye release.
-              </span>
-            </div>
-          </div>
-          <div
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border-gold)',
-              padding: '0.35rem 0.85rem',
-              borderRadius: 'var(--radius-full)',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              color: 'var(--brand-gold)',
-            }}
-          >
-            Free Shipping &gt; ₹999
-          </div>
-        </div>
-
-        {/* View Mode Toggle & Filter Bar */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '1.5rem',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '2.5rem',
-            paddingBottom: '1.5rem',
-            borderBottom: '1px solid var(--border-subtle)',
-          }}
-        >
-          {/* Category Tabs */}
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.5rem',
-            }}
-          >
-            {CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  style={{
-                    padding: '0.55rem 1.15rem',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: '0.86rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.02em',
-                    transition: 'all var(--transition-fast)',
-                    background: isActive ? 'var(--brand-primary)' : 'var(--bg-card)',
-                    color: isActive ? '#ffffff' : 'var(--text-secondary)',
-                    border: isActive
-                      ? '1px solid var(--brand-primary)'
-                      : '1px solid var(--border-subtle)',
-                    boxShadow: isActive ? '0 4px 15px rgba(192, 74, 38, 0.25)' : undefined,
-                  }}
+        <div className="editorial-container py-12 md:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8">
+              <div className="flex items-center gap-2 mb-3">
+                <span
+                  aria-hidden="true"
+                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                  01 &middot; Apothecary &amp; Collection
+                </p>
+              </div>
+              <TextReveal variant="line">
+                <h1
+                  id="shop-page-heading"
+                  className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
                 >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Search, Sort & View Mode Switcher */}
-          <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            {/* View Mode Switcher (Grouped vs All Variations) */}
-            <div
-              style={{
-                display: 'inline-flex',
-                background: 'var(--bg-secondary)',
-                padding: '0.25rem',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--border-subtle)',
-              }}
-            >
-              <button
-                onClick={() => setViewMode('grouped')}
-                style={{
-                  padding: '0.4rem 0.85rem',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--radius-xs)',
-                  background: viewMode === 'grouped' ? 'var(--bg-card)' : 'transparent',
-                  color: viewMode === 'grouped' ? 'var(--text-primary)' : 'var(--text-muted)',
-                  boxShadow: viewMode === 'grouped' ? 'var(--shadow-sm)' : 'none',
-                }}
-              >
-                11 Products
-              </button>
-              <button
-                onClick={() => setViewMode('all-variations')}
-                style={{
-                  padding: '0.4rem 0.85rem',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--radius-xs)',
-                  background: viewMode === 'all-variations' ? 'var(--bg-card)' : 'transparent',
-                  color: viewMode === 'all-variations' ? 'var(--text-primary)' : 'var(--text-muted)',
-                  boxShadow: viewMode === 'all-variations' ? 'var(--shadow-sm)' : 'none',
-                }}
-              >
-                All 18 Variations
-              </button>
+                  Shop Botanical Products
+                </h1>
+              </TextReveal>
+              <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
+                Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared in Srinagar.
+              </p>
             </div>
 
-            {/* Search Input */}
-            <div style={{ position: 'relative' }}>
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={{
-                  padding: '0.55rem 1rem 0.55rem 2.2rem',
-                  borderRadius: 'var(--radius-sm)',
-                  border: '1px solid var(--border-subtle)',
-                  background: 'var(--bg-card)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.86rem',
-                  width: '200px',
-                }}
-              />
-              <span
-                style={{
-                  position: 'absolute',
-                  left: '0.75rem',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-muted)',
-                  fontSize: '0.85rem',
-                }}
-              >
-                🔍
-              </span>
+            <div className="lg:col-span-4 lg:flex lg:justify-end">
+              <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse px-6 py-5 min-w-[260px] shadow-sm">
+                <div
+                  aria-hidden="true"
+                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                  Live Studio Inventory
+                </p>
+                <p className="font-serif text-3xl font-medium text-inverse tabular-nums">
+                  {catalog.total !== null ? catalog.total : '—'}{' '}
+                  <span className="text-sm font-sans font-normal text-inverse/75">
+                    {catalog.total === 1 ? 'formulation' : 'formulations'}
+                  </span>
+                </p>
+                <p className="mt-2 pt-2 border-t border-inverse/15 text-[11px] text-inverse/70">
+                  Kashmir ₹60 &middot; Metro ₹120 &middot; Pan-India ₹150
+                </p>
+              </div>
             </div>
-
-            {/* Sort Dropdown */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              style={{
-                padding: '0.55rem 1rem',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-card)',
-                color: 'var(--text-primary)',
-                fontSize: '0.86rem',
-                cursor: 'pointer',
-              }}
-            >
-              <option value="featured">Featured Artisanal</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="rating">Highest Rated</option>
-            </select>
           </div>
         </div>
+      </section>
 
-        {/* Product Grid */}
-        {viewMode === 'grouped' ? (
-          filteredProducts.length === 0 ? (
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '5rem 1rem',
-                background: 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-lg)',
-              }}
-            >
-              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🌿</div>
-              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-                No products found
-              </h3>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-                Try adjusting your search terms or clearing category filters.
-              </p>
-              <button
-                onClick={() => {
-                  setSelectedCategory('All Products');
-                  setSearchQuery('');
-                }}
-                className="btn btn-primary"
-              >
-                Reset Filters
-              </button>
-            </div>
-          ) : (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
-                gap: '2rem',
-              }}
-            >
-              {filteredProducts.map((prod) => (
-                <ProductCard key={prod.id} product={prod} />
+      <div className="editorial-container pt-10 md:pt-14">
+        <ShopFilters
+          categories={categories}
+          activeCategory={activeCategory}
+          activeSort={activeSort}
+          activeQuery={activeQuery}
+        />
+
+        {!catalog.isConfigured ? (
+          <FeedbackState
+            title="Store backend URL not yet configured"
+            description="Configure NEXT_PUBLIC_MEDUSA_BACKEND_URL in your frontend environment to load live MedusaJS products, categories, and pricing."
+            action={{ label: 'Return Home', href: '/' }}
+          />
+        ) : catalog.error ? (
+          <FeedbackState
+            tone="error"
+            title="Unable to reach studio catalog"
+            description={`Catalog items could not be retrieved (${catalog.error}). Please verify that your commerce backend is online.`}
+            action={{ label: 'Reset Shop Filters', href: '/shop' }}
+          />
+        ) : catalog.products.length === 0 ? (
+          <FeedbackState
+            title="No matching products found"
+            description="Try clearing your search term or switching product categories to view the full catalog."
+            action={{ label: 'View All Products', href: '/shop' }}
+          />
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-10">
+              {catalog.products.map((product, index) => (
+                <TextReveal
+                  key={product.id}
+                  variant="fade"
+                  delayMs={index < 3 ? index * 50 : 0}
+                >
+                  <ProductCard product={product} priority={index < 3} />
+                </TextReveal>
               ))}
             </div>
-          )
-        ) : (
-          /* All Variations Mode: Renders each distinct variation individually */
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
-              gap: '2rem',
-            }}
-          >
-            {filteredVariations.map(({ product, variantId, variantTitle }) => (
-              <ProductCard
-                key={`${product.id}_${variantId}`}
-                product={product}
-                initialVariantId={variantId}
-              />
-            ))}
-          </div>
+
+            {totalPages > 1 ? (
+              <nav
+                aria-label="Catalog pagination"
+                className="mt-14 pt-8 border-t border-hairline flex items-center justify-between gap-4"
+              >
+                <div className="text-sm text-umber tabular-nums">
+                  Page {currentPage} of {totalPages}
+                </div>
+                <div className="flex items-center gap-2">
+                  {currentPage > 1 ? (
+                    <Link
+                      href={buildPageHref(currentPage - 1)}
+                      className="inline-flex items-center min-h-[40px] px-5 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
+                    >
+                      &larr; Previous
+                    </Link>
+                  ) : null}
+                  {currentPage < totalPages ? (
+                    <Link
+                      href={buildPageHref(currentPage + 1)}
+                      className="inline-flex items-center min-h-[40px] px-5 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
+                    >
+                      Next &rarr;
+                    </Link>
+                  ) : null}
+                </div>
+              </nav>
+            ) : null}
+          </>
         )}
       </div>
     </div>

@@ -1,8 +1,161 @@
 [
   {
+    "id": "224461",
+    "wooOrderId": 224461,
+    "createdAt": "2026-10-26T17:01:53.392Z",
+    "customer": {
+      "firstName": "Nazrul",
+      "lastName": "Islam",
+      "email": "nazrulislambhat@gmail.com",
+      "phone": "9469444007",
+      "address": "G1105 Godrej Nurture",
+      "apartment": "",
+      "city": "Bengaluru Karnataka",
+      "state": "Godrej Nurture",
+      "pincode": "110001",
+      "paymentMethod": "cod",
+      "orderNotes": ""
+    },
+    "items": [
+      {
+        "id": "prod_221087_var_hair_100g",
+        "productId": "prod_221087",
+        "variantId": "var_hair_100g",
+        "title": "Chemical Free Organic Hair Henna Powder",
+        "variantTitle": "100gm",
+        "price": 99,
+        "quantity": 1,
+        "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Powder-w-Packet.png",
+        "handle": "chemical-free-organic-hair-henna-powder",
+        "isPerishable": false
+      }
+    ],
+    "pricing": {
+      "subtotal": 99,
+      "shippingFee": 80,
+      "total": 179
+    },
+    "payment": {
+      "method": "cod",
+      "status": "pending_cod"
+    },
+    "deliveryDetails": {
+      "targetDate": "2026-11-02",
+      "pincode": "110001",
+      "city": "New Delhi",
+      "state": "Delhi",
+      "shippingFee": 80
+    }
+  },
+  {
+    "id": "224460",
+    "wooOrderId": 224460,
+    "createdAt": "2026-10-26T16:56:30.011Z",
+    "customer": {
+      "firstName": "Nazrul",
+      "lastName": "DecoupledTest",
+      "email": "nazrul@test-decoupled.com",
+      "phone": "9876543210",
+      "address": "Baghat Barzullah",
+      "city": "Srinagar",
+      "state": "Jammu & Kashmir",
+      "pincode": "190005"
+    },
+    "items": [
+      {
+        "id": "prod_7825",
+        "title": "Organic Henna Cones",
+        "price": 60,
+        "quantity": 2,
+        "handle": "organic-henna-cones"
+      }
+    ],
+    "pricing": {
+      "subtotal": 120,
+      "shippingFee": 0,
+      "total": 120
+    },
+    "payment": {
+      "method": "cod",
+      "status": "pending_cod"
+    },
+    "deliveryDetails": {
+      "specialInstructions": "Decoupled NextJS Test Order"
+    }
+  },
+  {
+    "id": "MBS-933393",
+    "createdAt": "2026-10-26T16:42:44.664Z",
+    "customer": {
+      "firstName": "Nazrul",
+      "lastName": "Islam",
+      "email": "nazrulislambhat@gmail.com",
+      "phone": "9469444007",
+      "address": "G1105 Godrej Nurture",
+      "apartment": "",
+      "city": "Bengaluru Karnataka",
+      "state": "Godrej Nurture",
+      "pincode": "110001",
+      "paymentMethod": "cod",
+      "orderNotes": ""
+    },
+    "items": [
+      {
+        "id": "prod_221087_var_hair_100g",
+        "productId": "prod_221087",
+        "variantId": "var_hair_100g",
+        "title": "Chemical Free Organic Hair Henna Powder",
+        "variantTitle": "100gm",
+        "price": 99,
+        "quantity": 1,
+        "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Powder-w-Packet.png",
+        "handle": "chemical-free-organic-hair-henna-powder",
+        "isPerishable": false
+      },
+      {
+        "id": "prod_219682_var_kit_standard",
+        "productId": "prod_219682",
+        "variantId": "var_kit_standard",
+        "title": "Beginner DIY Kit",
+        "variantTitle": "Standard Edition",
+        "price": 449,
+        "quantity": 2,
+        "thumbnail": "https://mehandibysana.com/wp-content/uploads/2023/02/MBS-Box-Cardboard-c-1.png",
+        "handle": "beginner-henna-kit",
+        "isPerishable": false
+      },
+      {
+        "id": "prod_8901_var_nail_single",
+        "productId": "prod_8901",
+        "variantId": "var_nail_single",
+        "title": "Nail Henna Cones",
+        "variantTitle": "Single Cone",
+        "price": 50,
+        "quantity": 1,
+        "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/nail-henna-batch-scaled.png",
+        "handle": "nail-henna",
+        "isPerishable": true
+      }
+    ],
+    "pricing": {
+      "subtotal": 1047,
+      "shippingFee": 0,
+      "total": 1047
+    },
+    "payment": {
+      "method": "cod",
+      "status": "pending_cod"
+    },
+    "deliveryDetails": {
+      "targetDate": "2026-11-02",
+      "pincode": "110001",
+      "city": "New Delhi",
+      "state": "Delhi",
+      "shippingFee": 80
+    }
+  },
+  {
     "id": "MBS-777888",
-    "medusaOrderId": "order_01M5WGV7HSY4ADHA05X9N8086G",
-    "medusaDisplayId": 3492,
     "createdAt": "2026-10-26T16:31:38.097Z",
     "customer": {
       "firstName": "Zubaida",

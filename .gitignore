@@ -8,7 +8,6 @@ node_modules/
 out/
 build/
 dist/
-.medusa/
 
 # Environment files
 .env
@@ -26,13 +25,16 @@ yarn-error.log*
 .eslintcache
 .turbo
 
+# Runtime local logs & PII exports (never commit exported customer emails, bookings, or DB dumps)
+studio-data/*.log
+studio-data/exports/
+studio-data/*.csv
+studio-data/*.txt
+studio-data/*.dump
+studio-data/bridal-bookings.json
+
 # OS metadata
 .DS_Store
 Thumbs.db
 
-# Migration artifacts & data dumps
-migration/data/
-migration/temp/
-migration/*.json
-!migration/package.json
-!migration/tsconfig.json
+

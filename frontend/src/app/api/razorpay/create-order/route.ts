@@ -1,70 +1,45 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-export const dynamic = 'force-dynamic';
+import { getServerEnv } from '@/lib/env';
 
 export async function POST(request: NextRequest) {
+  const { medusaBackendUrl, medusaPublishableKey } = getServerEnv();
+  if (!medusaBackendUrl) {
+    return NextResponse.json(
+      { success: false, message: 'MEDUSA_BACKEND_URL is not configured.' },
+      { status: 503 }
+    );
+  }
+
   try {
     const body = await request.json();
-    const { amount, currency = 'INR', receipt, notes } = body;
-
-    if (!amount || amount <= 0) {
-      return NextResponse.json(
-        { error: 'Valid amount in INR is required' },
-        { status: 400 }
-      );
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+    if (medusaPublishableKey) {
+      headers['x-publishable-api-key'] = medusaPublishableKey;
     }
 
-    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || process.env.RAZORPAY_KEY_ID;
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
-
-    if (!keyId || !keySecret) {
-      return NextResponse.json(
-        { error: 'Razorpay credentials not configured in environment' },
-        { status: 500 }
-      );
-    }
-
-    // Convert INR rupees to paise (e.g., ₹250 -> 25000 paise)
-    const amountInPaise = Math.round(Number(amount) * 100);
-
-    const authHeader = 'Basic ' + Buffer.from(`${keyId}:${keySecret}`).toString('base64');
-
-    const res = await fetch('https://api.razorpay.com/v1/orders', {
+    const res = await fetch(`${medusaBackendUrl}/store/razorpay/create-order`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: authHeader,
-      },
-      body: JSON.stringify({
-        amount: amountInPaise,
-        currency,
-        receipt: receipt || `mbs_rcpt_${Date.now()}`,
-        notes: notes || { store: 'Mehandi By Sana' },
-      }),
+      headers,
+      body: JSON.stringify(body),
+      cache: 'no-store',
     });
 
     const data = await res.json();
-
-    if (!res.ok) {
-      console.error('Razorpay Order Creation Error:', data);
-      return NextResponse.json(
-        { error: data.error?.description || 'Failed to create Razorpay order' },
-        { status: res.status }
-      );
-    }
-
-    return NextResponse.json({
-      success: true,
-      orderId: data.id,
-      amount: data.amount,
-      currency: data.currency,
-      keyId,
-    });
-  } catch (err: any) {
-    console.error('Server error creating Razorpay order:', err);
+    return NextResponse.json(data, { status: res.status });
+  } catch (err) {
     return NextResponse.json(
-      { error: err.message || 'Internal server error' },
-      { status: 500 }
+      {
+        success: false,
+        message:
+          err instanceof Error
+            ? err.message
+            : 'Unable to initialize Razorpay order via MedusaJS.',
+      },
+      { status: 502 }
     );
   }
 }
+

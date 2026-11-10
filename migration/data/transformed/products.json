@@ -1,0 +1,758 @@
+[
+  {
+    "title": "Chemical Free Organic Hair Henna Powder",
+    "handle": "chemical-free-organic-hair-henna-powder",
+    "description": "Chemical Free Organic Hair Henna Powder",
+    "subtitle": "",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Powder-w-Packet.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Powder-w-Packet.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Weight",
+        "values": [
+          "100gm",
+          "200gm",
+          "500gm"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "500gm",
+        "sku": "chemical-free-organic-hair-henna-powder-221096",
+        "prices": [
+          {
+            "amount": 410,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Weight": "500gm"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 221096,
+          "regular_price": "550",
+          "sale_price": "410",
+          "description": ""
+        }
+      },
+      {
+        "title": "200gm",
+        "sku": "chemical-free-organic-hair-henna-powder-221095",
+        "prices": [
+          {
+            "amount": 180,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Weight": "200gm"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 221095,
+          "regular_price": "240",
+          "sale_price": "180",
+          "description": ""
+        }
+      },
+      {
+        "title": "100gm",
+        "sku": "chemical-free-organic-hair-henna-powder-221094",
+        "prices": [
+          {
+            "amount": 99,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Weight": "100gm"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 221094,
+          "regular_price": "130",
+          "sale_price": "99",
+          "description": ""
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 221087,
+      "woo_permalink": "https://mehandibysana.com/product/chemical-free-organic-hair-henna-powder/",
+      "short_description": "",
+      "raw_description_html": "",
+      "raw_short_description_html": "",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Beginner DIY  Kit",
+    "handle": "beginner-henna-kit",
+    "description": "Beginner Henna Kit:\n\n• 100GM Henna Powder\n\n• 35ML Essential Oil\n\n• Set of Measuring Spoons\n\n• 3 Piping Bags\n\n• A Pair of Stockings\n\n• Pre Cut Cellophanes\n\n• 5 Pre Rolled Henna Cones\n\nPretty much everything you need to create your own Organic Henna Batch",
+    "subtitle": "Beginner Henna Kit:\n\n• 100GM Henna Powder\n\n• 35ML Essential Oil\n\n• Set of Measuring Spoons\n\n• 3 Piping Bags\n\n• A Pair of Stockings\n\n• Pre Cut Cellophanes\n\n• 5 Pre Rolled Henna Cones\n\nPretty much everything you need to create your own Organic Henna Batch",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2023/02/MBS-Box-Cardboard-c-1.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2023/02/MBS-Box-Cardboard-c-1.png"
+      },
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2023/02/MBS-Box-Cardboard-a-1.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "beginner-henna-kit",
+        "prices": [
+          {
+            "amount": 449,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 0,
+        "metadata": {
+          "woo_id": 219682,
+          "regular_price": "550",
+          "sale_price": "449"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 219682,
+      "woo_permalink": "https://mehandibysana.com/product/beginner-henna-kit/",
+      "short_description": "Beginner Henna Kit:\n\n• 100GM Henna Powder\n\n• 35ML Essential Oil\n\n• Set of Measuring Spoons\n\n• 3 Piping Bags\n\n• A Pair of Stockings\n\n• Pre Cut Cellophanes\n\n• 5 Pre Rolled Henna Cones\n\nPretty much everything you need to create your own Organic Henna Batch",
+      "raw_description_html": "",
+      "raw_short_description_html": "<p><strong>Beginner Henna Kit:</strong></p>\n<ul>\n<li>100GM Henna Powder</li>\n<li>35ML Essential Oil</li>\n<li>Set of Measuring Spoons</li>\n<li>3 Piping Bags</li>\n<li>A Pair of Stockings</li>\n<li>Pre Cut Cellophanes</li>\n<li>5 Pre Rolled Henna Cones</li>\n</ul>\n<p>Pretty much everything you need to create your own Organic Henna Batch</p>\n",
+      "stock_status": "outofstock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Self Care Henna Kit",
+    "handle": "mbs-self-care-kit",
+    "description": "MBS Self Care Kit:\n\n2 henna cones\n\n1 Nail  henna\n\nBalm\n\nSealant\n\nEnough for 2 hands.",
+    "subtitle": "MBS Self Care Kit:\n\n2 henna cones\n\n1 Nail  henna\n\nBalm\n\nSealant\n\nEnough for 2 hands.",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Box-Pink-S-a.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Box-Pink-S-a.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "mbs-self-care-kit",
+        "prices": [
+          {
+            "amount": 320,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 218896,
+          "regular_price": "350",
+          "sale_price": "320"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 218896,
+      "woo_permalink": "https://mehandibysana.com/product/mbs-self-care-kit/",
+      "short_description": "MBS Self Care Kit:\n\n2 henna cones\n\n1 Nail  henna\n\nBalm\n\nSealant\n\nEnough for 2 hands.",
+      "raw_description_html": "",
+      "raw_short_description_html": "<p>MBS Self Care Kit:</p>\n<p>2 henna cones<br />\n1 Nail  henna<br />\nBalm<br />\nSealant</p>\n<p>Enough for 2 hands.</p>\n",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Nail Henna Cones",
+    "handle": "nail-henna",
+    "description": "Pure homemade, chemical-free, HALAL & Wudhu friendly\n\n15-20gms each",
+    "subtitle": "Pure homemade, chemical-free, HALAL & Wudhu friendly\n\n15-20gms each",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/nail-henna-batch-scaled.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/nail-henna-batch-scaled.png"
+      },
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Nail-Henna.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "nail-henna",
+        "prices": [
+          {
+            "amount": 50,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 8901,
+          "regular_price": "75",
+          "sale_price": "50"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 8901,
+      "woo_permalink": "https://mehandibysana.com/product/nail-henna/",
+      "short_description": "Pure homemade, chemical-free, HALAL & Wudhu friendly\n\n15-20gms each",
+      "raw_description_html": "",
+      "raw_short_description_html": "<p>Pure homemade, chemical-free, HALAL &amp; Wudhu friendly</p>\n<p><strong>15-20gms each</strong></p>\n",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Eucalyptus Essential Oil",
+    "handle": "eucalyptus-blend-essential-oil",
+    "description": "Eucalyptus Essential Oil",
+    "subtitle": "",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Eucalyptus-Oil-S.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Eucalyptus-Oil-S.png"
+      },
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Eucalyptus-Oil-L.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Size",
+        "values": [
+          "Small 30ML",
+          "Medium 100ML"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Medium 100ML",
+        "sku": "eucalyptus-blend-essential-oil-218618",
+        "prices": [
+          {
+            "amount": 450,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Size": "Medium 100ML"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 218618,
+          "regular_price": "500",
+          "sale_price": "450",
+          "description": ""
+        }
+      },
+      {
+        "title": "Small 30ML",
+        "sku": "eucalyptus-blend-essential-oil-218617",
+        "prices": [
+          {
+            "amount": 150,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Size": "Small 30ML"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 218617,
+          "regular_price": "200",
+          "sale_price": "150",
+          "description": ""
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 8702,
+      "woo_permalink": "https://mehandibysana.com/product/eucalyptus-blend-essential-oil/",
+      "short_description": "",
+      "raw_description_html": "",
+      "raw_short_description_html": "",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Bridal Henna Kit",
+    "handle": "mbs-henna-kit",
+    "description": "Contains pretty much everything you need for a bridal henna application.",
+    "subtitle": "Bridal Henna Kit contains:\n\n10 x Regular Henna Cones(20gm each)\n\n1 x After Care Balm\n\n1 x Henna Sealant Spray(25ml)",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Box-Pink-L-b.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Box-Pink-L-b.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "mbs-henna-kit",
+        "prices": [
+          {
+            "amount": 729,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 8216,
+          "regular_price": "749",
+          "sale_price": "729"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 8216,
+      "woo_permalink": "https://mehandibysana.com/product/mbs-henna-kit/",
+      "short_description": "Bridal Henna Kit contains:\n\n10 x Regular Henna Cones(20gm each)\n\n1 x After Care Balm\n\n1 x Henna Sealant Spray(25ml)",
+      "raw_description_html": "<p>Contains pretty much everything you need for a bridal henna application.</p>\n",
+      "raw_short_description_html": "<p>Bridal Henna Kit contains:</p>\n<p>10 x Regular Henna Cones(20gm each)</p>\n<p>1 x After Care Balm</p>\n<p>1 x Henna Sealant Spray(25ml)</p>\n",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Aftercare Henna Balm",
+    "handle": "aftercare-henna-balm",
+    "description": "After removing the henna, the application of a henna aftercare balm helps maintain skin moisture, thereby contributing to an improved stain outcome.",
+    "subtitle": "",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Balm-Red.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Balm-Red.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Types",
+        "values": [
+          "Rose",
+          "Lemongrass",
+          "Orange"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Orange",
+        "sku": "aftercare-henna-balm-218613",
+        "prices": [
+          {
+            "amount": 105,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Types": "Orange"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 218613,
+          "regular_price": "120",
+          "sale_price": "105",
+          "description": ""
+        }
+      },
+      {
+        "title": "Lemongrass",
+        "sku": "aftercare-henna-balm-218612",
+        "prices": [
+          {
+            "amount": 95,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Types": "Lemongrass"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 218612,
+          "regular_price": "120",
+          "sale_price": "95",
+          "description": ""
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 8181,
+      "woo_permalink": "https://mehandibysana.com/product/aftercare-henna-balm/",
+      "short_description": "",
+      "raw_description_html": "<p>After removing the henna, the application of a henna aftercare balm helps maintain skin moisture, thereby contributing to an improved stain outcome.</p>\n",
+      "raw_short_description_html": "",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Pre Rolled Henna Cones [10 No.]",
+    "handle": "pre-rolled-henna-cones",
+    "description": "Pre Rolled Henna Cones [10 No.]",
+    "subtitle": "",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Transparent-b.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Transparent-b.png"
+      },
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Transparent.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "pre-rolled-henna-cones",
+        "prices": [
+          {
+            "amount": 29,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 7976,
+          "regular_price": "50",
+          "sale_price": "29"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 7976,
+      "woo_permalink": "https://mehandibysana.com/product/pre-rolled-henna-cones/",
+      "short_description": "",
+      "raw_description_html": "",
+      "raw_short_description_html": "",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Henna Sealant Spray",
+    "handle": "henna-sealant-spray",
+    "description": "Henna sealant spray is applied during the henna application process to prolong its adherence, thereby intensifying the resulting stain. It's important to spray the sealant once the henna starts drying.",
+    "subtitle": "Lemongrass Fragrance",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Pinkred-Oil-L.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Pinkred-Oil-L.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "henna-sealant-spray",
+        "prices": [
+          {
+            "amount": 49,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 7973,
+          "regular_price": "80",
+          "sale_price": "49"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 7973,
+      "woo_permalink": "https://mehandibysana.com/product/henna-sealant-spray/",
+      "short_description": "Lemongrass Fragrance",
+      "raw_description_html": "<p>Henna sealant spray is applied during the henna application process to prolong its adherence, thereby intensifying the resulting stain. It's important to spray the sealant once the henna starts drying.</p>\n",
+      "raw_short_description_html": "<p><strong>Lemongrass Fragrance</strong></p>\n",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Bulk Henna [400gm]",
+    "handle": "bulk-henna",
+    "description": "Bulk Henna [400gm]",
+    "subtitle": "",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Filler.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Filler.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "bulk-henna",
+        "prices": [
+          {
+            "amount": 1099,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 7971,
+          "regular_price": "1300",
+          "sale_price": "1099"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 7971,
+      "woo_permalink": "https://mehandibysana.com/product/bulk-henna/",
+      "short_description": "",
+      "raw_description_html": "",
+      "raw_short_description_html": "",
+      "stock_status": "instock",
+      "tags": []
+    }
+  },
+  {
+    "title": "Organic Henna Cones",
+    "handle": "organic-henna-cones",
+    "description": "Crafted using premium ingredients, our homemade , Halal henna cones do not contain any chemicals. They are meticulously prepared to guarantee darkest color and long-lasting results. Moreover, our henna doesn't peel off in layers; instead, it gracefully fades over time.",
+    "subtitle": "• Contains high-grade Eucalyptus oil\n\n• Made from the Best quality organic henna powder\n\n– No peeling\n\n– No allergies\n\n20gms each",
+    "status": "published",
+    "thumbnail": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Hand-Henna-b.png",
+    "images": [
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Hand-Henna-b.png"
+      },
+      {
+        "url": "https://mehandibysana.com/wp-content/uploads/2021/03/MBS-Cone-Hand-Henna.png"
+      }
+    ],
+    "options": [
+      {
+        "title": "Option",
+        "values": [
+          "Standard"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Standard",
+        "sku": "organic-henna-cones",
+        "prices": [
+          {
+            "amount": 60,
+            "currency_code": "inr"
+          }
+        ],
+        "options": {
+          "Option": "Standard"
+        },
+        "manage_inventory": false,
+        "inventory_quantity": 100,
+        "metadata": {
+          "woo_id": 7825,
+          "regular_price": "70",
+          "sale_price": "60"
+        }
+      }
+    ],
+    "categories": [
+      {
+        "name": "Mehandi Products",
+        "handle": "mehandi-products"
+      }
+    ],
+    "tags": [],
+    "metadata": {
+      "woo_id": 7825,
+      "woo_permalink": "https://mehandibysana.com/product/organic-henna-cones/",
+      "short_description": "• Contains high-grade Eucalyptus oil\n\n• Made from the Best quality organic henna powder\n\n– No peeling\n\n– No allergies\n\n20gms each",
+      "raw_description_html": "<p>Crafted using premium ingredients, our homemade , Halal henna cones do not contain any chemicals. They are meticulously prepared to guarantee darkest color and long-lasting results. Moreover, our henna doesn't peel off in layers; instead, it gracefully fades over time.</p>\n",
+      "raw_short_description_html": "<ul>\n<li><strong>Contains high-grade Eucalyptus oil</strong></li>\n<li><strong>Made from the Best quality organic henna powder</strong></li>\n</ul>\n<p>– No peeling</p>\n<p>– No allergies</p>\n<p><strong>20gms each</strong></p>\n",
+      "stock_status": "instock",
+      "tags": []
+    }
+  }
+]

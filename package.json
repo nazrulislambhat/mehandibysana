@@ -2,21 +2,19 @@
   "name": "mehandibysana",
   "version": "1.0.0",
   "private": true,
-  "description": "Mehandi By Sana - MedusaJS v2 Backend & Next.js Custom Storefront",
-  "workspaces": [
-    "frontend",
-    "migration"
-  ],
+  "description": "Mehandi By Sana - Standalone Headless Next.js Storefront, MedusaJS v2 Backend & Migration Pipeline",
   "scripts": {
-    "dev": "npm run dev --workspace=frontend",
-    "dev:frontend": "npm run dev --workspace=frontend",
-    "dev:backend": "npm run dev --prefix backend/apps/backend",
-    "build:frontend": "npm run build --workspace=frontend",
-    "build:backend": "npm run build --prefix backend/apps/backend",
-    "migrate:extract": "npm run extract --workspace=migration",
-    "migrate:sql": "npm run extract:sql --workspace=migration",
-    "migrate:transform": "npm run transform --workspace=migration",
-    "migrate:validate": "npm run validate --workspace=migration"
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "migrate:sql": "node -e \"const p=require('path'),{execSync}=require('child_process'); const a=process.argv[1]; const target=a?JSON.stringify(p.resolve(process.cwd(),a)):''; execSync('npm --prefix migration run extract:sql'+(target?' -- '+target:''),{stdio:'inherit'});\"",
+    "migrate:wp": "npm --prefix migration run extract && npm --prefix migration run transform && npm --prefix migration run validate",
+    "migrate:sync": "cd backend && npx medusa exec ./src/scripts/sync-migrated-data.ts && npx medusa exec ./src/scripts/import-all-orders.ts",
+    "migrate:tools": "cd backend && npx medusa exec ./src/scripts/seed-related-henna-products.ts",
+    "export:emails": "cd backend && npx medusa exec ./src/scripts/export-customer-emails.ts",
+    "import:prod-sql": "node -e \"const p=require('path'),{execSync}=require('child_process'); const raw=process.argv[1]; if(!raw){console.error('Usage: npm run import:prod-sql -- /path/to/prod-dump.sql'); process.exit(1);} const sql=p.resolve(process.cwd(),raw); execSync('npm --prefix migration run extract:sql -- '+JSON.stringify(sql), {stdio:'inherit'}); execSync('cd backend && npx medusa exec ./src/scripts/sync-migrated-data.ts && npx medusa exec ./src/scripts/import-all-orders.ts', {stdio:'inherit'});\""
   },
   "keywords": [
     "mehandibysana",

@@ -1,0 +1,117 @@
+[
+  {
+    "id": 222429,
+    "code": "onezero",
+    "amount": "10.00",
+    "status": "publish",
+    "date_created": "2025-03-16T11:30:43",
+    "date_created_gmt": "2025-03-16T06:00:43",
+    "date_modified": "2026-07-21T10:12:47",
+    "date_modified_gmt": "2026-07-21T04:42:47",
+    "discount_type": "percent",
+    "description": "10% off on all orders above 300",
+    "date_expires": null,
+    "date_expires_gmt": null,
+    "usage_count": 42,
+    "individual_use": false,
+    "product_ids": [],
+    "excluded_product_ids": [],
+    "usage_limit": null,
+    "usage_limit_per_user": null,
+    "limit_usage_to_x_items": null,
+    "free_shipping": false,
+    "product_categories": [],
+    "excluded_product_categories": [],
+    "exclude_sale_items": false,
+    "minimum_amount": "300.00",
+    "maximum_amount": "0.00",
+    "email_restrictions": [],
+    "used_by": [
+      "toybashah7890@gmail.com",
+      "mehwi.suhaf@gmail.com",
+      "diyamalik1926@gmail.com",
+      "ambrindr@gmail.com",
+      "aasmabandey0@gmail.com",
+      "sehrishsami@gmail.com",
+      "kuratnazir@gmail.com",
+      "aneesamanzoor22@gmail.com",
+      "beighsaima45@gmail.com",
+      "inshaafida1@gmail.com",
+      "sabhageelani4@gmail.com",
+      "farhatsophie@gmail.com",
+      "asimanazir993@gmail.com",
+      "afreeneksambi26@gmail.com",
+      "maryamqureshi225@gmail.com",
+      "muskan3337860@gmail.com",
+      "showkatshahana14@gmail.com",
+      "muntahatahir102@gmail.com",
+      "muminamattoo@gmail.com",
+      "iqragowher85@gmail.com",
+      "heenareshi18@gmail.com",
+      "maslp2000@gmail.com",
+      "zeenazahad16@gmail.com",
+      "romanissa876@gmail.com",
+      "offlibrahim@gmail.com",
+      "afshanasufii01@gmail.com",
+      "aqsashowket33@gmail.com",
+      "asimanazir993@gmail.com",
+      "hadiya7144@gmail.com",
+      "shahirtiza206@gmail.com",
+      "kotrooasifa@gmail.com",
+      "taniyaharoon34@gmail.com",
+      "shazia.shazz@gmail.com",
+      "meermisbah333@gmail.com",
+      "bazillahm2610@gmail.com",
+      "inshaaltaf23@gmail.com",
+      "malikhadiya53@gmail.com",
+      "zehrafayaz@gmail.com",
+      "irtizabatool@gmail.com",
+      "malikrashidamushtaq@gmail.com",
+      "damistaazin@gmail.com",
+      "ecra.tariq1989@gmail.com"
+    ],
+    "meta_data": [
+      {
+        "id": 417655,
+        "key": "_wc_gla_visibility",
+        "value": "dont-sync-and-show"
+      },
+      {
+        "id": 417656,
+        "key": "_wc_gla_sync_status",
+        "value": "not-synced"
+      },
+      {
+        "id": 417657,
+        "key": "product_brands",
+        "value": []
+      },
+      {
+        "id": 417658,
+        "key": "exclude_product_brands",
+        "value": []
+      }
+    ],
+    "_links": {
+      "self": [
+        {
+          "href": "https://mehandibysana.com/wp-json/wc/v3/coupons/222429",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://mehandibysana.com/wp-json/wc/v3/coupons"
+        }
+      ]
+    }
+  }
+]

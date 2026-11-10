@@ -1,0 +1,43 @@
+[
+  {
+    "id": 70,
+    "name": "Mehandi Products",
+    "slug": "mehandi-products",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": {
+      "id": 8530,
+      "date_created": "2020-11-28T15:09:26",
+      "date_created_gmt": "2020-11-28T09:39:26",
+      "date_modified": "2020-11-28T15:09:26",
+      "date_modified_gmt": "2020-11-28T09:39:26",
+      "src": "https://mehandibysana.com/wp-content/uploads/2020/11/mehandibysana-58.jpg",
+      "name": "mehandibysana (58)",
+      "alt": ""
+    },
+    "menu_order": 0,
+    "count": 11,
+    "_links": {
+      "self": [
+        {
+          "href": "https://mehandibysana.com/wp-json/wc/v3/products/categories/70",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://mehandibysana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  }
+]

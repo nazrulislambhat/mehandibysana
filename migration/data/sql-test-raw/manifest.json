@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-11-10T07:45:07.285Z",
+  "completedAt": "2026-11-10T07:45:07.285Z",
+  "source": "mysql_dump",
+  "sourceFile": "/Users/nazrul/code/mehandibysana/migration/data/sample-wc-dump.sql",
+  "counts": {
+    "categories": 0,
+    "products": 0,
+    "productVariations": 0,
+    "resolvedImages": 0,
+    "customers": 0,
+    "orders": 0,
+    "coupons": 0,
+    "reviews": 0
+  },
+  "totalRevenue": "0.00",
+  "currency": "INR"
+}

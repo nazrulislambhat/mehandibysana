@@ -1,36 +1,43 @@
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { CartProvider } from '@/context/CartContext';
-import Navbar from '@/components/Navbar';
-import CartDrawer from '@/components/CartDrawer';
-import Footer from '@/components/Footer';
+import { getSiteUrl } from '@/lib/env';
+import { SkipLink } from '@/components/layout/SkipLink';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { CartDrawer } from '@/components/cart/CartDrawer';
+import { RouteProgressBar } from '@/components/layout/RouteProgressBar';
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-heading',
+  display: 'swap',
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-body',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Mehandi By Sana – 100% Organic Henna Artist & Store',
-  description:
-    'Authentic homemade organic henna cones, DIY mehandi kits, and luxury bridal henna artistry by Kashmir’s first freelance organic mehandi artist, Sumaiya Rashid.',
-  keywords: [
-    'Organic henna cones',
-    'chemical free mehandi',
-    'bridal henna artist kashmir',
-    'mehandi by sana',
-    'halal henna',
-    'eucalyptus henna cones',
-    'nail henna',
-  ],
-  authors: [{ name: 'Sumaiya Rashid Magray (Sana)' }],
-  openGraph: {
-    title: 'Mehandi By Sana – Organic Henna Artist & Pure Botanical Shop',
-    description:
-      'Shop 100% natural, chemical-free henna cones, DIY kits, and explore bridal mehandi designs.',
-    url: 'https://mehandibysana.com',
-    siteName: 'Mehandi By Sana',
-    locale: 'en_US',
-    type: 'website',
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: 'Mehandi by Sana — Henna Artistry & Botanical Products',
+    template: '%s | Mehandi by Sana',
   },
-  icons: {
-    icon: 'https://mehandibysana.com/wp-content/uploads/2020/02/Copy-of-m-100x100.png',
+  description:
+    'Kashmir’s organic mehndi atelier by Sumaiya Rashid Magray (Sana) — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehndi services.',
+  openGraph: {
+    title: 'Mehandi by Sana — Henna Artistry & Botanical Products',
+    description:
+      'Handcrafted 100% chemical-free organic henna cones, aftercare balms, botanical hair henna, and bridal mehndi artistry in Srinagar, Kashmir.',
+    siteName: 'Mehandi by Sana',
+    locale: 'en_IN',
+    type: 'website',
   },
 };
 
@@ -40,34 +47,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var saved = localStorage.getItem('mbs_theme');
-                  var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
-                  document.documentElement.setAttribute('data-theme', theme);
-                  document.documentElement.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body>
-        <ThemeProvider>
-          <CartProvider>
-            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-              <Navbar />
-              <CartDrawer />
-              <main style={{ flex: 1 }}>{children}</main>
-              <Footer />
-            </div>
-          </CartProvider>
-        </ThemeProvider>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${cormorantGaramond.variable} ${plusJakartaSans.variable}`}
+    >
+      <body className="min-h-screen flex flex-col bg-canvas text-ink antialiased">
+        <Suspense fallback={null}>
+          <RouteProgressBar />
+        </Suspense>
+        <SkipLink />
+        <Header />
+        <CartDrawer />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

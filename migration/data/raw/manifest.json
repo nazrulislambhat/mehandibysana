@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-11-10T07:43:27.057Z",
+  "completedAt": "2026-11-10T07:44:33.762Z",
+  "counts": {
+    "categories": 1,
+    "products": 11,
+    "productVariations": 7,
+    "customers": 0,
+    "orders": 3499,
+    "coupons": 1,
+    "reviews": 0
+  },
+  "totalRevenue": "1124605.67",
+  "currency": "INR"
+}

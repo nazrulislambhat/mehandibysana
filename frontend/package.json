@@ -9,10 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
     "next": "16.4.3",
     "nodemailer": "^10.2.1",
+    "postcss": "^8.5.32",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "tailwindcss": "^4.3.5",
+    "zustand": "^5.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,0 +1,57 @@
+{
+  "auditedAt": "2026-11-10T07:44:34.427Z",
+  "source": "woocommerce_api",
+  "allPassed": true,
+  "totalSourceRevenue": "1124605.67",
+  "metrics": [
+    {
+      "entity": "Product Categories",
+      "sourceCount": 1,
+      "transformedCount": 1,
+      "parityPercent": "100.0%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Products",
+      "sourceCount": 11,
+      "transformedCount": 11,
+      "parityPercent": "100.0%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Customers",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Orders & Transactions",
+      "sourceCount": 3499,
+      "transformedCount": 3499,
+      "parityPercent": "100.0%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Product Variants",
+      "sourceCount": 15,
+      "transformedCount": 15,
+      "parityPercent": "100.0%",
+      "status": "PASSED",
+      "notes": "Every simple & variable option preserved"
+    },
+    {
+      "entity": "Product Images",
+      "sourceCount": 16,
+      "transformedCount": 16,
+      "parityPercent": "100.0%",
+      "status": "PASSED",
+      "notes": "Thumbnails & galleries preserved in order"
+    }
+  ],
+  "fieldIssues": []
+}

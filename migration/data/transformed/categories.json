@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Mehandi Products",
+    "handle": "mehandi-products",
+    "description": "",
+    "is_active": true,
+    "is_internal": false,
+    "metadata": {
+      "woo_id": 70,
+      "woo_parent_id": 0
+    }
+  }
+]

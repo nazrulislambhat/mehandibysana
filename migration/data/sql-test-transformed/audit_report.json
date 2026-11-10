@@ -1,0 +1,57 @@
+{
+  "auditedAt": "2026-11-10T07:45:07.288Z",
+  "source": "mysql_dump",
+  "allPassed": true,
+  "totalSourceRevenue": "0.00",
+  "metrics": [
+    {
+      "entity": "Product Categories",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Products",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Customers",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Orders & Transactions",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "100% matched, zero loss"
+    },
+    {
+      "entity": "Product Variants",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "Every simple & variable option preserved"
+    },
+    {
+      "entity": "Product Images",
+      "sourceCount": 0,
+      "transformedCount": 0,
+      "parityPercent": "100%",
+      "status": "PASSED",
+      "notes": "Thumbnails & galleries preserved in order"
+    }
+  ],
+  "fieldIssues": []
+}

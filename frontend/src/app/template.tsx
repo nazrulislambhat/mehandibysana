@@ -1,11 +1,5 @@
-'use client';
-
 import React from 'react';
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="apple-page-transition">
-      {children}
-    </div>
-  );
+  return <div className="page-transition-shell">{children}</div>;
 }
