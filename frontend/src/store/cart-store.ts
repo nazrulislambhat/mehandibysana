@@ -14,12 +14,15 @@ interface CartState {
   isHydrated: boolean;
   pendingKeys: Record<string, boolean>;
   error: string | null;
+  lastAddedKey: string | null;
+  lastAddedAt: number | null;
 
   setHydrated: (value: boolean) => void;
   openDrawer: () => void;
   closeDrawer: () => void;
   toggleDrawer: () => void;
   clearError: () => void;
+  clearLastAdded: () => void;
   fetchCart: (options?: { preserveError?: boolean }) => Promise<void>;
   addItem: (params: {
     id: number;
@@ -42,6 +45,8 @@ export const useCartStore = create<CartState>()(
       isHydrated: false,
       pendingKeys: {},
       error: null,
+      lastAddedKey: null,
+      lastAddedAt: null,
 
       setHydrated: (value) => set({ isHydrated: value }),
 
@@ -52,6 +57,8 @@ export const useCartStore = create<CartState>()(
       toggleDrawer: () => set((state) => ({ isDrawerOpen: !state.isDrawerOpen })),
 
       clearError: () => set({ error: null }),
+
+      clearLastAdded: () => set({ lastAddedKey: null, lastAddedAt: null }),
 
       fetchCart: async (options) => {
         const { cartToken, nonce, error: previousError } = get();
@@ -78,7 +85,8 @@ export const useCartStore = create<CartState>()(
       },
 
       addItem: async ({ id, quantity = 1, variation, openBag = true }) => {
-        const { cartToken, nonce } = get();
+        const { cartToken, nonce, cart: prevCart } = get();
+        const prevItems = prevCart?.items ?? [];
         set({ isLoading: true, error: null });
         try {
           const res = await wcStoreClient.addItem({ id, quantity, variation }, cartToken, nonce);
@@ -86,12 +94,30 @@ export const useCartStore = create<CartState>()(
           const resolvedError =
             res.error ?? (res.cart === null ? 'Unable to confirm shopping bag update.' : null);
 
+          let addedKey = get().lastAddedKey;
+          let addedAt = get().lastAddedAt;
+          if (succeeded && res.cart) {
+            const prevQtyByKey = new Map(prevItems.map((it) => [it.key, it.quantity]));
+            const changedItem =
+              res.cart.items.find((it) => {
+                const prevQty = prevQtyByKey.get(it.key);
+                return prevQty === undefined || it.quantity > prevQty;
+              }) ??
+              res.cart.items.find((it) => it.productId === id) ??
+              res.cart.items[0] ??
+              null;
+            addedKey = changedItem?.key ?? null;
+            addedAt = Date.now();
+          }
+
           set({
             cart: res.cart ?? get().cart,
             cartToken: res.cartToken,
             nonce: res.nonce,
             error: resolvedError,
             isLoading: false,
+            lastAddedKey: addedKey,
+            lastAddedAt: addedAt,
             isDrawerOpen: succeeded && openBag ? true : get().isDrawerOpen,
           });
           return { ok: succeeded, error: resolvedError };
@@ -125,6 +151,7 @@ export const useCartStore = create<CartState>()(
             nonce: res.nonce,
             error: res.error,
             pendingKeys: nextPending,
+            lastAddedKey: get().lastAddedKey === key ? null : get().lastAddedKey,
           });
         } catch (err) {
           const nextPending = { ...get().pendingKeys };
@@ -152,6 +179,7 @@ export const useCartStore = create<CartState>()(
             nonce: res.nonce,
             error: res.error,
             pendingKeys: nextPending,
+            lastAddedKey: get().lastAddedKey === key ? null : get().lastAddedKey,
           });
         } catch (err) {
           const nextPending = { ...get().pendingKeys };

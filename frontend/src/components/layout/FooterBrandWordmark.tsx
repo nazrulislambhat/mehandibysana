@@ -66,7 +66,7 @@ export function FooterBrandWordmark() {
         aria-label="Mehandi by Sana"
         className="m-0 font-sans font-semibold uppercase tracking-[-0.015em] leading-[0.84] text-[clamp(2rem,10.2cqi,9.75rem)] text-inverse/[0.07] flex items-baseline justify-center whitespace-nowrap w-full"
       >
-        <span className="sr-only">MEHANDIBYSANA</span>
+        <span className="sr-only">MEHANDI BY SANA</span>
         <span aria-hidden="true" className="inline-flex items-baseline whitespace-nowrap">
           {BRAND_LETTERS.map((char, charIndex) => (
             <span

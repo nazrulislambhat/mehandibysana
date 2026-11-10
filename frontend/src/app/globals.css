@@ -253,10 +253,10 @@
   transition-delay: 0ms;
 }
 
-/* Shopping Bag Drawer Choreography */
+/* Shopping Bag Centered Editorial Folio Choreography */
 .bag-backdrop {
   opacity: 0;
-  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .bag-backdrop[data-state="open"] {
@@ -265,28 +265,125 @@
 
 .bag-backdrop[data-state="closing"] {
   opacity: 0;
-  transition-duration: 240ms;
+  transition-duration: 230ms;
 }
 
-.bag-drawer-panel {
+.bag-folio-panel {
   opacity: 0;
-  transform: translate3d(100%, 0, 0);
+  transform: translate3d(0, 100%, 0);
   transition:
-    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 220ms ease-out;
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease-out;
   will-change: transform, opacity;
 }
 
-.bag-drawer-panel[data-state="open"] {
+.bag-folio-panel[data-state="open"] {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
 
-.bag-drawer-panel[data-state="closing"] {
+.bag-folio-panel[data-state="closing"] {
   opacity: 0;
-  transform: translate3d(100%, 0, 0);
+  transform: translate3d(0, 90%, 0);
   transition-duration: 240ms;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@media (min-width: 640px) {
+  .bag-folio-panel {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) scale(0.962);
+    transform-origin: center 45%;
+  }
+
+  .bag-folio-panel[data-state="open"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .bag-folio-panel[data-state="closing"] {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.975);
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+}
+
+.bag-folio-item {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 320ms ease-out,
+    border-color 200ms ease,
+    box-shadow 260ms ease;
+  transition-delay: var(--bag-item-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+.bag-folio-panel[data-state="open"] .bag-folio-item {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.bag-folio-panel[data-state="closing"] .bag-folio-item {
+  opacity: 0;
+  transform: translate3d(0, 6px, 0);
+  transition-duration: 150ms;
+  transition-delay: 0ms;
+}
+
+.bag-folio-summary {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    transform 440ms cubic-bezier(0.22, 1, 0.36, 1) 110ms,
+    opacity 340ms ease-out 110ms;
+  will-change: transform, opacity;
+}
+
+.bag-folio-panel[data-state="open"] .bag-folio-summary {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.bag-folio-panel[data-state="closing"] .bag-folio-summary {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  transition-duration: 160ms;
+  transition-delay: 0ms;
+}
+
+@keyframes bagBadgePop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.28);
+  }
+  70% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bag-badge-pulse {
+  animation: bagBadgePop 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes bagAddedHighlight {
+  0% {
+    box-shadow: 0 0 0 3px rgba(217, 84, 30, 0.28);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(217, 84, 30, 0);
+  }
+}
+
+.bag-item-just-added {
+  animation: bagAddedHighlight 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Page Route Transition & Top Progress Hairline */
@@ -373,7 +470,11 @@
   .mega-menu-surface,
   .mega-menu-item,
   .bag-backdrop,
-  .bag-drawer-panel,
+  .bag-folio-panel,
+  .bag-folio-item,
+  .bag-folio-summary,
+  .bag-badge-pulse,
+  .bag-item-just-added,
   .page-transition-shell,
   .route-progress-bar,
   .footer-brand-letter {
