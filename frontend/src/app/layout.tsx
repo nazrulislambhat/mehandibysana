@@ -5,7 +5,6 @@ import './globals.css';
 import { getSiteUrl } from '@/lib/env';
 import { DEFAULT_OG_IMAGE_PATH, SITE_NAME } from '@/lib/seo';
 import { buildSiteGraphJsonLd, serializeJsonLd } from '@/lib/structured-data';
-import { THEME_INIT_SCRIPT } from '@/lib/theme';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -68,7 +67,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
   },
   other: {
-    'msapplication-TileColor': '#052225',
+    'msapplication-TileColor': '#ea6b36',
     'msapplication-TileImage': '/icons/mstile-150x150.png',
   },
   robots: {

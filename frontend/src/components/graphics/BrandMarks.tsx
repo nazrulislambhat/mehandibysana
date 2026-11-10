@@ -3,6 +3,7 @@ import React, { useId } from 'react';
 export type BrandCrestTone =
   | 'light'
   | 'dark'
+  | 'auto-badge'
   | 'ink-badge'
   | 'cream-badge'
   | 'transparent-ink'
@@ -58,6 +59,17 @@ const TONE_PALETTES: Record<
     gradTop: '#ebb073',
     gradMid: '#c67d48',
     gradBot: '#9e5427',
+  },
+  'auto-badge': {
+    plateFill: 'var(--color-crest-plate)',
+    plateStroke: 'var(--color-crest-rim)',
+    ringColor: 'var(--color-crest-ring)',
+    ringOpacity: '0.24',
+    dotHalo: 'var(--color-crest-dot)',
+    dotHaloOpacity: '0.5',
+    gradTop: 'var(--color-crest-top)',
+    gradMid: 'var(--color-crest-mid)',
+    gradBot: 'var(--color-crest-bot)',
   },
   'ink-badge': {
     plateFill: '#052225',
@@ -230,7 +242,7 @@ export function BrandLockup({
         <span
           className={`font-serif text-[1.35rem] sm:text-[1.52rem] font-medium tracking-tight transition-colors ${
             isDark
-              ? 'text-inverse group-hover:text-terracotta'
+              ? 'text-plaque-ink group-hover:text-terracotta'
               : 'text-ink group-hover:text-terracotta'
           }`}
         >
@@ -239,7 +251,7 @@ export function BrandLockup({
         {subtitle ? (
           <span
             className={`mt-1 inline-flex items-center gap-1.5 text-[9.5px] font-semibold uppercase tracking-[0.2em] ${
-              isDark ? 'text-inverse/65' : 'text-umber'
+              isDark ? 'text-plaque-ink/70' : 'text-umber'
             }`}
           >
             <span

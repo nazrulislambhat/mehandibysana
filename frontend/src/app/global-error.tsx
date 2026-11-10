@@ -19,18 +19,36 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const activeTheme = useSyncExternalStore(
+    subscribeTheme,
+    () => {
+      const domTheme = getThemeSnapshot();
+      if (typeof document !== 'undefined' && document.documentElement.dataset.theme) {
+        return domTheme;
+      }
+      return resolvePreferredTheme();
+    },
+    getServerThemeSnapshot,
+  );
+  const isDark = activeTheme === 'dark';
+
   useEffect(() => {
     console.error('[Mehandi by Sana Global Error]:', error);
   }, [error]);
 
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      data-theme={activeTheme}
+      style={{ colorScheme: activeTheme }}
+      suppressHydrationWarning
+    >
       <body
         style={{
           margin: 0,
           minHeight: '100vh',
-          backgroundColor: '#ffffff',
-          color: '#111111',
+          backgroundColor: isDark ? '#071618' : '#ffffff',
+          color: isDark ? '#fffee9' : '#111111',
           fontFamily:
             '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
           display: 'flex',
@@ -43,11 +61,13 @@ export default function GlobalError({
           style={{
             maxWidth: '580px',
             width: '100%',
-            border: '1px solid #e5e5e5',
+            border: `1px solid ${isDark ? '#254a4f' : '#e5e5e5'}`,
             borderRadius: '16px',
             overflow: 'hidden',
-            backgroundColor: '#ffffff',
-            boxShadow: '0 24px 60px -20px rgba(17, 17, 17, 0.16)',
+            backgroundColor: isDark ? '#10282c' : '#ffffff',
+            boxShadow: isDark
+              ? '0 24px 60px -20px rgba(0, 0, 0, 0.55)'
+              : '0 24px 60px -20px rgba(17, 17, 17, 0.16)',
           }}
         >
           <div
@@ -120,7 +140,7 @@ export default function GlobalError({
                 margin: '0 0 20px',
                 fontSize: '15px',
                 lineHeight: 1.65,
-                color: '#525252',
+                color: isDark ? '#b8c6c2' : '#525252',
               }}
             >
               Please retry refreshing the application shell. If you were completing an order or checking tracking details, your bag state stays preserved in browser storage.
@@ -132,11 +152,11 @@ export default function GlobalError({
                   margin: '0 0 20px',
                   padding: '10px 14px',
                   borderRadius: '8px',
-                  backgroundColor: '#f7f7f7',
-                  border: '1px solid #e5e5e5',
+                  backgroundColor: isDark ? '#0c2023' : '#f7f7f7',
+                  border: `1px solid ${isDark ? '#1f3e42' : '#e5e5e5'}`,
                   fontFamily: 'monospace',
                   fontSize: '12px',
-                  color: '#525252',
+                  color: isDark ? '#b8c6c2' : '#525252',
                 }}
               >
                 Diagnostic Digest: {error.digest}
@@ -148,9 +168,9 @@ export default function GlobalError({
                 type="button"
                 onClick={() => reset()}
                 style={{
-                  backgroundColor: '#d9541e',
-                  color: '#fceee3',
-                  border: '1px solid #d9541e',
+                  backgroundColor: isDark ? '#c44916' : '#d9541e',
+                  color: '#fffaf5',
+                  border: `1px solid ${isDark ? '#c44916' : '#d9541e'}`,
                   borderRadius: '9999px',
                   padding: '11px 22px',
                   fontSize: '14px',
@@ -164,9 +184,9 @@ export default function GlobalError({
                 href="/"
                 style={{
                   display: 'inline-block',
-                  backgroundColor: '#ffffff',
-                  color: '#111111',
-                  border: '1px solid #a3a3a3',
+                  backgroundColor: isDark ? '#0c2023' : '#ffffff',
+                  color: isDark ? '#fffee9' : '#111111',
+                  border: `1px solid ${isDark ? '#3d6368' : '#a3a3a3'}`,
                   borderRadius: '9999px',
                   padding: '11px 22px',
                   fontSize: '14px',

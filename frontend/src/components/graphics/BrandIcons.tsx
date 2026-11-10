@@ -50,7 +50,7 @@ export function ApothecaryBagIcon({
       />
       <path
         d="M12 12.25C10.8 13.75 10.4 14.85 10.4 15.7C10.4 16.75 11.12 17.5 12 17.5C12.88 17.5 13.6 16.75 13.6 15.7C13.6 14.85 13.2 13.75 12 12.25Z"
-        fill="#d9541e"
+        fill="var(--color-accent)"
       />
     </svg>
   );
@@ -83,7 +83,7 @@ export function HennaConeIcon({
       />
       <path
         d="M12.9 7.3L16.3 10.7"
-        stroke="#d9541e"
+        stroke="var(--color-accent)"
         strokeWidth="1.5"
         strokeLinecap="round"
       />
@@ -93,7 +93,7 @@ export function HennaConeIcon({
         strokeWidth="1.6"
         strokeLinecap="round"
       />
-      <circle cx="4" cy="19.5" r="1.4" fill="#d9541e" />
+      <circle cx="4" cy="19.5" r="1.4" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -130,7 +130,7 @@ export function FreezerStorageIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="12" r="2.2" fill="#d9541e" />
+      <circle cx="12" cy="12" r="2.2" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -169,11 +169,11 @@ export function CourierDispatchIcon({
       />
       <path
         d="M8 5.4L16.2 9.9"
-        stroke="#d9541e"
+        stroke="var(--color-accent)"
         strokeWidth="1.5"
         strokeLinecap="round"
       />
-      <circle cx="16.2" cy="14.6" r="1.4" fill="#d9541e" />
+      <circle cx="16.2" cy="14.6" r="1.4" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -203,7 +203,7 @@ export function LocationPinIcon({
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="9.75" r="2.25" fill="#d9541e" />
+      <circle cx="12" cy="9.75" r="2.25" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -243,7 +243,7 @@ export function MailEnvelopeIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="13" r="1.4" fill="#d9541e" />
+      <circle cx="12" cy="13" r="1.4" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -275,7 +275,7 @@ export function PhoneHandsetIcon({
       />
       <path
         d="M15.2 5.2C17.1 5.6 18.4 6.9 18.8 8.8"
-        stroke="#d9541e"
+        stroke="var(--color-accent)"
         strokeWidth="1.6"
         strokeLinecap="round"
       />
@@ -310,12 +310,12 @@ export function WhatsAppChatIcon({
       />
       <path
         d="M9.6 9.3C9.6 9.3 10 11.4 11.5 12.8C13 14.2 14.8 14.6 14.8 14.6"
-        stroke="#d9541e"
+        stroke="var(--color-accent)"
         strokeWidth="1.7"
         strokeLinecap="round"
       />
-      <circle cx="9.6" cy="9.3" r="1.1" fill="#d9541e" />
-      <circle cx="14.8" cy="14.6" r="1.1" fill="#d9541e" />
+      <circle cx="9.6" cy="9.3" r="1.1" fill="var(--color-accent)" />
+      <circle cx="14.8" cy="14.6" r="1.1" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -347,7 +347,7 @@ export function VerifiedHonorSealIcon({
       />
       <path
         d="M8.7 12.6L11 14.9L15.6 9.9"
-        stroke="#d9541e"
+        stroke="var(--color-accent)"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -383,7 +383,7 @@ export function ShieldProtectIcon({
       />
       <path
         d="M12 8.5L14.6 11.1L12 13.7L9.4 11.1L12 8.5Z"
-        fill="#d9541e"
+        fill="var(--color-accent)"
       />
     </svg>
   );
@@ -420,7 +420,7 @@ export function PureBotanicalIcon({
         strokeWidth="1.35"
         strokeLinecap="round"
       />
-      <circle cx="12" cy="11.5" r="1.5" fill="#d9541e" />
+      <circle cx="12" cy="11.5" r="1.5" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -452,9 +452,9 @@ export function BridalArchIcon({
       />
       <path
         d="M12 10.5C10.5 12.2 10.1 13.7 10.1 14.8C10.1 16.2 11 17.2 12 17.2C13 17.2 13.9 16.2 13.9 14.8C13.9 13.7 13.5 12.2 12 10.5Z"
-        fill="#d9541e"
+        fill="var(--color-accent)"
       />
-      <circle cx="12" cy="2.5" r="1.2" fill="#d9541e" />
+      <circle cx="12" cy="2.5" r="1.2" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -486,7 +486,7 @@ export function ClockWindowIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="12" r="1.35" fill="#d9541e" />
+      <circle cx="12" cy="12" r="1.35" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -513,10 +513,72 @@ export function SearchLensIcon({
       <circle cx="10.75" cy="10.75" r="6.25" stroke="currentColor" strokeWidth="1.7" />
       <path
         d="M15.4 15.4L19.8 19.8"
-        stroke="#d9541e"
+        stroke="var(--color-accent)"
         strokeWidth="1.9"
         strokeLinecap="round"
       />
+    </svg>
+  );
+}
+
+/**
+ * Sunburst Atelier icon for Light Mode toggle state.
+ */
+export function SunBurstIcon({
+  size = 16,
+  className = '',
+  decorative = true,
+  label = 'Light mode',
+}: BrandIconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...getA11yProps(decorative, label)}
+    >
+      <circle cx="12" cy="12" r="4.1" stroke="currentColor" strokeWidth="1.65" />
+      <circle cx="12" cy="12" r="1.3" fill="var(--color-accent)" />
+      <path
+        d="M12 2.75V5M12 19V21.25M2.75 12H5M19 12H21.25M5.46 5.46L7.05 7.05M16.95 16.95L18.54 18.54M18.54 5.46L16.95 7.05M7.05 16.95L5.46 18.54"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Crescent & Starlet icon for Deep Pine Obsidian Dark Mode toggle state.
+ */
+export function CrescentMoonIcon({
+  size = 16,
+  className = '',
+  decorative = true,
+  label = 'Dark mode',
+}: BrandIconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...getA11yProps(decorative, label)}
+    >
+      <path
+        d="M19.4 14.3A7.8 7.8 0 0 1 9.7 4.6a8.2 8.2 0 1 0 9.7 9.7Z"
+        stroke="currentColor"
+        strokeWidth="1.65"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <polygon points="17.2,4.4 18.1,6.2 19.9,7.1 18.1,8 17.2,9.8 16.3,8 14.5,7.1 16.3,6.2" fill="var(--color-accent)" />
     </svg>
   );
 }
@@ -572,4 +634,3 @@ export function CloseCrossIcon({
     </svg>
   );
 }
-
