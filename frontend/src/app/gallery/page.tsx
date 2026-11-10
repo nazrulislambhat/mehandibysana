@@ -178,7 +178,7 @@ export default function GalleryPage() {
                   03 &middot; Archive &amp; Portfolio
                 </p>
               </div>
-              <TextReveal variant="line">
+              <TextReveal variant="line" immediate>
                 <h1
                   id="gallery-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"

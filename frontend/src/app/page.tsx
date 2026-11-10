@@ -82,13 +82,15 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <Link
+            <LinkButton
               href="/shop"
-              className="inline-flex items-center gap-1.5 rounded-full border border-divider bg-canvas px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink hover:border-terracotta hover:text-terracotta self-start md:self-auto transition-colors"
+              variant="secondary"
+              size="sm"
+              className="rounded-full self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em]"
             >
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
-              <span aria-hidden="true" className="text-terracotta">&rarr;</span>
-            </Link>
+              <span aria-hidden="true" className="text-terracotta group-hover/btn:text-inverse transition-colors">&rarr;</span>
+            </LinkButton>
           </div>
 
           {spotlightProduct ? (
@@ -235,7 +237,7 @@ export default async function HomePage() {
                 <div className="pt-2">
                   <Link
                     href="/about"
-                    className="inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1.5"
+                    className="link-kinetic min-h-[32px] text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
                   >
                     Read the full story &rarr;
                   </Link>
@@ -286,12 +288,14 @@ export default async function HomePage() {
                 >
                   Request a Booking &rarr;
                 </LinkButton>
-                <Link
+                <LinkButton
                   href="/shop"
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-full border border-inverse/30 bg-transparent px-7 py-3 text-base font-medium text-inverse hover:border-inverse hover:bg-inverse/10 transition-colors"
+                  variant="inverse"
+                  size="lg"
+                  className="rounded-full"
                 >
                   Shop Products
-                </Link>
+                </LinkButton>
               </div>
             </div>
           </TextReveal>

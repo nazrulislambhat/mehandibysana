@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SHOP_COLLECTIONS, STUDIO_NAV_ITEMS } from '@/components/layout/nav-data';
+import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 
 type PanelPhase = 'closed' | 'opening' | 'open' | 'closing';
@@ -419,13 +420,15 @@ export function DesktopNav() {
                   >
                     Book Bridal Session
                   </Link>
-                  <Link
+                  <LinkButton
                     href="/shop"
+                    variant="primary"
+                    size="sm"
                     onClick={() => closeMegaMenu(false)}
-                    className="inline-flex items-center justify-center rounded-lg bg-terracotta px-4 py-2 text-xs font-medium text-inverse hover:bg-terracotta-dark transition-colors"
+                    className="rounded-lg text-xs min-h-[36px] py-2"
                   >
                     Shop All 19 Items
-                  </Link>
+                  </LinkButton>
                 </div>
               </div>
             </div>

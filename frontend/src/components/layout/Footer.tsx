@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
@@ -80,7 +81,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-terracotta hover:text-inverse font-medium transition-colors"
               >
-                <span>WhatsApp Desk</span>
+                <span>WhatsApp</span>
                 <span aria-hidden="true">&#8599;</span>
               </a>
             </div>
@@ -170,19 +171,23 @@ export function Footer() {
               </div>
 
               <div className="space-y-2.5 pt-2">
-                <Link
+                <LinkButton
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 min-h-[44px] w-full rounded-full bg-terracotta px-5 py-2.5 text-xs font-medium text-inverse hover:bg-terracotta-dark transition-colors"
+                  variant="accent"
+                  size="md"
+                  className="w-full rounded-full text-xs"
                 >
                   <span>Request Bridal Date</span>
                   <span aria-hidden="true">&rarr;</span>
-                </Link>
-                <Link
+                </LinkButton>
+                <LinkButton
                   href="/track-order"
-                  className="inline-flex items-center justify-center gap-2 min-h-[42px] w-full rounded-full border border-inverse/20 bg-transparent px-5 py-2 text-xs font-medium text-inverse/90 hover:border-terracotta hover:text-terracotta transition-colors"
+                  variant="inverse"
+                  size="sm"
+                  className="w-full rounded-full text-xs border-inverse/20"
                 >
-                  <span>Track Your Order</span>
-                </Link>
+                  Track Your Order
+                </LinkButton>
               </div>
             </div>
           </div>
@@ -198,7 +203,7 @@ export function Footer() {
         {/* Bottom Copyright & Trust Strip */}
         <div className="relative z-10 w-full max-w-[96rem] mx-auto px-4 sm:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-inverse/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-inverse/65">
           <p>
-            &copy; {currentYear} Mehandi by Sana &middot; Founder: Sumaiya Rashid Magray. All rights reserved.
+            &copy; {currentYear} MEHANDI BY SANA . All rights reserved.
           </p>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium text-inverse/75">

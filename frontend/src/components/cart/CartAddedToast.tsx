@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store/cart-store';
 
 function formatMoney(amount: number, symbol: string): string {
@@ -128,13 +129,15 @@ export function CartAddedToast() {
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <button
+            <Button
               type="button"
+              variant="accent"
+              size="xs"
               onClick={handleOpenBag}
-              className="inline-flex min-h-[34px] items-center rounded-full bg-terracotta px-3.5 text-xs font-medium text-inverse hover:bg-terracotta-dark transition-colors cursor-pointer"
+              className="rounded-full"
             >
               View Bag
-            </button>
+            </Button>
             <button
               type="button"
               onClick={handleDismiss}

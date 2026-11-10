@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
-import { LinkButton } from '@/components/ui/Button';
+import { Button, LinkButton } from '@/components/ui/Button';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { SHOP_COLLECTIONS } from '@/components/layout/nav-data';
 import {
@@ -322,7 +322,7 @@ export function CartDrawer() {
                 onClick={() => handleClose(false)}
                 className="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-umber hover:text-terracotta underline underline-offset-4 py-1.5"
               >
-                <span>Open Full Ledger</span>
+                <span>Open Full Cart</span>
                 <span aria-hidden="true">&rarr;</span>
               </Link>
             ) : null}
@@ -583,7 +583,7 @@ export function CartDrawer() {
                 <Link
                   href="/henna-care"
                   onClick={() => handleClose(false)}
-                  className="font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
+                  className="link-kinetic font-medium text-terracotta hover:text-terracotta-dark"
                 >
                   Henna Care Guide &rarr;
                 </Link>
@@ -758,30 +758,36 @@ export function CartDrawer() {
 
               {/* Dossier CTA Actions */}
               <div className="space-y-2.5 pt-2">
-                <Link
+                <LinkButton
                   href="/checkout"
+                  variant="accent"
+                  size="lg"
                   onClick={() => handleClose(false)}
-                  className="inline-flex w-full items-center justify-center gap-2 min-h-[48px] rounded-full bg-terracotta px-5 text-sm font-medium text-inverse hover:bg-terracotta-dark transition-colors"
+                  className="w-full min-h-[48px] rounded-full text-sm"
                 >
                   <span>Proceed to Checkout</span>
                   <span aria-hidden="true">&rarr;</span>
-                </Link>
+                </LinkButton>
 
                 <div className="grid grid-cols-2 gap-2">
-                  <Link
+                  <LinkButton
                     href="/cart"
+                    variant="inverse"
+                    size="sm"
                     onClick={() => handleClose(false)}
-                    className="inline-flex items-center justify-center min-h-[42px] rounded-full border border-inverse/25 bg-transparent px-3 text-xs font-medium text-inverse hover:border-inverse hover:bg-inverse/10 transition-colors"
+                    className="min-h-[42px] rounded-full text-xs border-inverse/25"
                   >
                     View Bag Ledger
-                  </Link>
-                  <button
+                  </LinkButton>
+                  <Button
                     type="button"
+                    variant="inverse"
+                    size="sm"
                     onClick={() => handleClose(true)}
-                    className="inline-flex items-center justify-center min-h-[42px] rounded-full border border-inverse/25 bg-transparent px-3 text-xs font-medium text-inverse/85 hover:border-terracotta hover:text-terracotta transition-colors cursor-pointer"
+                    className="min-h-[42px] rounded-full text-xs border-inverse/25"
                   >
                     Keep Browsing
-                  </button>
+                  </Button>
                 </div>
 
                 <p className="text-[11px] text-inverse/65 text-center leading-relaxed pt-0.5">

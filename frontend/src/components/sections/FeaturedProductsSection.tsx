@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { StorefrontProduct } from '@/types/storefront';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
+import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig, ServiceMotifIcon } from '@/components/graphics/BotanicalIllustrations';
 
 export interface FeaturedProductsSectionProps {
@@ -273,12 +274,14 @@ export function FeaturedProductsSection({
                 className="rounded-full"
               />
             ) : (
-              <Link
+              <LinkButton
                 href={`/product/${leadProduct.slug}`}
-                className="inline-flex items-center justify-center gap-2 min-h-[44px] rounded-full bg-terracotta px-5 py-2.5 text-sm font-medium text-inverse hover:bg-terracotta-dark transition-colors"
+                variant="accent"
+                size="md"
+                className="rounded-full"
               >
-                <span>{leadProduct.inStock ? 'Choose Pack →' : 'View Formulation →'}</span>
-              </Link>
+                {leadProduct.inStock ? 'Choose Pack →' : 'View Formulation →'}
+              </LinkButton>
             )}
           </div>
         </article>
@@ -369,12 +372,14 @@ export function FeaturedProductsSection({
 
                   {product.inStock ? (
                     hasMultiVar && defaultVar ? (
-                      <Link
+                      <LinkButton
                         href={`/product/${product.slug}`}
-                        className="inline-flex items-center justify-center rounded-full border border-ink bg-ink px-3.5 py-1.5 text-xs font-medium text-inverse hover:bg-terracotta hover:border-terracotta transition-colors"
+                        variant="ink"
+                        size="xs"
+                        className="rounded-full"
                       >
                         Select Pack &rarr;
-                      </Link>
+                      </LinkButton>
                     ) : (
                       <AddToCartButton
                         productId={defaultVar?.id ?? product.id}
@@ -387,12 +392,14 @@ export function FeaturedProductsSection({
                       />
                     )
                   ) : (
-                    <Link
+                    <LinkButton
                       href={`/product/${product.slug}`}
-                      className="inline-flex items-center justify-center rounded-full border border-divider bg-canvas px-3.5 py-1.5 text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+                      variant="secondary"
+                      size="xs"
+                      className="rounded-full"
                     >
                       Inspect &rarr;
-                    </Link>
+                    </LinkButton>
                   )}
                 </div>
               </article>

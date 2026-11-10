@@ -202,9 +202,11 @@ export default async function ProductDetailPage({
                 </div>
               ) : null}
 
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.85rem] font-medium text-ink leading-[1.12] mb-3">
-                {product.name}
-              </h1>
+              <TextReveal variant="line" immediate>
+                <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.85rem] font-medium text-ink leading-[1.12] mb-3">
+                  {product.name}
+                </h1>
+              </TextReveal>
 
               {product.shortDescription ? (
                 <p className="text-sm md:text-base text-umber leading-relaxed">
@@ -297,7 +299,7 @@ export default async function ProductDetailPage({
               </div>
               <Link
                 href="/shop"
-                className="text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1.5"
+                className="link-kinetic text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
               >
                 View all products &rarr;
               </Link>

@@ -10,7 +10,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartAddedToast } from '@/components/cart/CartAddedToast';
 import { CartDrawer } from '@/components/cart/CartDrawer';
-import { RouteProgressBar } from '@/components/layout/RouteProgressBar';
+import { RouteTransitionCurtain } from '@/components/layout/RouteTransitionCurtain';
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
@@ -95,7 +95,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: siteGraphJson }}
         />
         <Suspense fallback={null}>
-          <RouteProgressBar />
+          <RouteTransitionCurtain />
         </Suspense>
         <SkipLink />
         <Header />

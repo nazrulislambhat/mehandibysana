@@ -9,6 +9,7 @@ import {
   STUDIO_NAV_ITEMS,
   type StudioNavItem,
 } from '@/components/layout/nav-data';
+import { LinkButton } from '@/components/ui/Button';
 import {
   BotanicalHeroStudy,
   BotanicalSprig,
@@ -332,20 +333,24 @@ export function StudioMenu() {
 
                     {/* Primary Studio Actions */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                      <Link
+                      <LinkButton
                         href="/shop"
+                        variant="primary"
+                        size="md"
                         onClick={() => closeMenu(false)}
-                        className="inline-flex items-center justify-center min-h-[46px] rounded-xl bg-terracotta px-5 py-2.5 text-sm font-medium text-inverse hover:bg-terracotta-dark transition-colors"
+                        className="min-h-[46px] rounded-xl"
                       >
                         Shop All Products
-                      </Link>
-                      <Link
+                      </LinkButton>
+                      <LinkButton
                         href="/contact"
+                        variant="secondary"
+                        size="md"
                         onClick={() => closeMenu(false)}
-                        className="inline-flex items-center justify-center min-h-[46px] rounded-xl border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:bg-linen hover:border-ink transition-colors"
+                        className="min-h-[46px] rounded-xl"
                       >
                         Book Bridal Mehndi
-                      </Link>
+                      </LinkButton>
                     </div>
                   </div>
                 </div>

@@ -3,6 +3,7 @@
 import React, { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Button, LinkButton } from '@/components/ui/Button';
 import { normalizeCategorySlug } from '@/lib/category-slugs';
 import type { StorefrontCategory } from '@/types/storefront';
 
@@ -74,44 +75,42 @@ export function ShopFilters({
     >
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
         <nav aria-label="Product categories" className="flex flex-wrap items-center gap-2">
-          <Link
+          <LinkButton
             href={buildFilterHref({ category: '' })}
             scroll={false}
-            aria-current={activeCategory === '' ? 'page' : undefined}
-            className={`inline-flex items-center min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-medium border transition-colors ${
-              activeCategory === ''
-                ? 'bg-ink text-inverse border-ink'
-                : 'bg-paper text-ink border-divider hover:border-ink hover:text-terracotta'
-            }`}
+            ariaCurrent={activeCategory === '' ? 'page' : undefined}
+            variant={activeCategory === '' ? 'ink' : 'secondary'}
+            size="sm"
+            className="rounded-full text-xs sm:text-sm"
           >
             All Products
-          </Link>
+          </LinkButton>
 
           {categories.map((cat) => {
             const isSelected =
               normalizedActiveCategory !== '' &&
               normalizedActiveCategory === normalizeCategorySlug(cat.slug);
             return (
-              <Link
+              <LinkButton
                 key={cat.id}
                 href={buildFilterHref({ category: cat.slug })}
                 scroll={false}
-                aria-current={isSelected ? 'page' : undefined}
-                className={`inline-flex items-center gap-1 min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-medium border transition-colors ${
-                  isSelected
-                    ? 'bg-ink text-inverse border-ink'
-                    : 'bg-paper text-ink border-divider hover:border-ink hover:text-terracotta'
-                }`}
+                ariaCurrent={isSelected ? 'page' : undefined}
+                variant={isSelected ? 'ink' : 'secondary'}
+                size="sm"
+                className="rounded-full text-xs sm:text-sm"
               >
                 <span>{cat.name}</span>
                 <span
-                  className={`tabular-nums ${
-                    isSelected ? 'text-terracotta' : 'text-umber'
+                  className={`tabular-nums transition-colors ${
+                    isSelected
+                      ? 'text-terracotta group-hover/btn:text-inverse'
+                      : 'text-umber group-hover/btn:text-inverse/80'
                   }`}
                 >
                   ({cat.count})
                 </span>
-              </Link>
+              </LinkButton>
             );
           })}
         </nav>
@@ -129,12 +128,14 @@ export function ShopFilters({
               placeholder="Search catalog…"
               className="min-h-[40px] w-44 sm:w-56 rounded-full border border-divider bg-paper px-4 py-2 text-sm text-ink placeholder:text-umber/70"
             />
-            <button
+            <Button
               type="submit"
-              className="min-h-[40px] px-4 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse cursor-pointer transition-colors"
+              variant="secondary"
+              size="sm"
+              className="rounded-full"
             >
               Search
-            </button>
+            </Button>
           </form>
 
           <div>

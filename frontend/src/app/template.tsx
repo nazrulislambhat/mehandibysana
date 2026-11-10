@@ -1,5 +1,14 @@
+'use client';
+
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div className="page-transition-shell">{children}</div>;
+  const pathname = usePathname() ?? '/';
+
+  return (
+    <div key={pathname} className="page-transition-shell">
+      {children}
+    </div>
+  );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { Button } from '@/components/ui/Button';
 import { usePincodeStore } from '@/store/pincode-store';
 
 export interface PincodeCheckerProps {
@@ -74,13 +75,15 @@ export function PincodeChecker({
           onChange={(e) => setPincode(e.target.value)}
           className="flex-1 min-w-0 min-h-[42px] rounded-full border border-divider bg-canvas px-4 text-sm text-ink placeholder:text-umber/70 focus:outline-none focus:border-ink"
         />
-        <button
+        <Button
           type="submit"
+          variant="ink"
+          size="sm"
           disabled={isChecking || pincode.length < 6}
-          className="inline-flex items-center justify-center min-h-[42px] rounded-full bg-ink px-5 text-xs sm:text-sm font-medium text-inverse hover:bg-terracotta disabled:bg-linen disabled:text-umber disabled:border disabled:border-divider cursor-pointer transition-colors"
+          className="min-h-[42px] rounded-full px-5 text-xs sm:text-sm"
         >
           {isChecking ? 'Checking…' : 'Check'}
-        </button>
+        </Button>
       </form>
 
       <div className="mt-3 flex flex-wrap items-center gap-1.5 text-[11px]">

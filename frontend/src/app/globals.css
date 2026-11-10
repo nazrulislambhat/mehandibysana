@@ -87,18 +87,92 @@
   animation: heroGentleRise 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* CargoKite-inspired masked typography, staggered lifts & arch veil reveals */
+@keyframes ckMaskLineIn {
+  0% {
+    transform: translate3d(0, 108%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ck-mask-line {
+  display: block;
+  animation: ckMaskLineIn 760ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--ck-nav-delay, 0ms) + var(--ck-delay, 0ms)) both;
+  will-change: transform;
+}
+
+@keyframes ckStaggerUp {
+  0% {
+    transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ck-stagger-up {
+  animation: ckStaggerUp 680ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--ck-nav-delay, 0ms) + var(--ck-delay, 0ms)) both;
+  will-change: transform;
+}
+
+@keyframes ckArchArtworkSettle {
+  0% {
+    transform: scale(1.055);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ck-arch-artwork {
+  animation: ckArchArtworkSettle 900ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--ck-nav-delay, 0ms) + 80ms) both;
+  will-change: transform;
+}
+
+@keyframes ckArchVeilUnseal {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+}
+
+.ck-arch-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background-color: var(--color-surface);
+  border-top: 2px solid var(--color-accent);
+  transform-origin: bottom center;
+  animation: ckArchVeilUnseal 760ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--ck-nav-delay, 0ms) + 80ms) both;
+  will-change: transform, opacity;
+}
+
 .reveal-line-inner {
   display: block;
   transform: translate3d(0, 0, 0);
   opacity: 1;
   transition:
-    transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 500ms ease-out;
   will-change: transform, opacity;
 }
 
 .reveal-line-inner[data-reveal-pending="true"] {
-  transform: translate3d(0, 28%, 0);
+  transform: translate3d(0, 104%, 0);
   opacity: 0;
 }
 
@@ -111,13 +185,13 @@
   transform: translate3d(0, 0, 0);
   opacity: 1;
   transition:
-    transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 560ms ease-out;
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 540ms ease-out;
   will-change: transform, opacity;
 }
 
 .reveal-fade-block[data-reveal-pending="true"] {
-  transform: translate3d(0, 14px, 0);
+  transform: translate3d(0, 22px, 0);
   opacity: 0;
 }
 
@@ -386,21 +460,20 @@
   animation: bagAddedHighlight 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Page Route Transition & Top Progress Hairline */
+/* Page Route Transition, 6-Column CargoKite Curtain & Top Hairline */
 @keyframes pageTransitionEnter {
   0% {
-    opacity: 0;
-    transform: translate3d(0, 12px, 0);
+    transform: translate3d(0, 16px, 0);
   }
   100% {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
 
 .page-transition-shell {
-  animation: pageTransitionEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: transform, opacity;
+  animation: pageTransitionEnter 560ms cubic-bezier(0.16, 1, 0.3, 1)
+    var(--ck-nav-delay, 0ms) both;
+  will-change: transform;
 }
 
 @keyframes routeSweepBar {
@@ -421,6 +494,280 @@
 .route-progress-bar {
   transform-origin: left center;
   animation: routeSweepBar 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes ckCurtainCover {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes ckCurtainReveal {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes ckEmblemIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) rotate(7deg) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes ckEmblemOut {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -24px, 0) rotate(-7deg) scale(0.94);
+  }
+}
+
+.ck-curtain-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ck-curtain-columns {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.ck-curtain-col {
+  position: relative;
+  flex: 1 1 0%;
+  width: calc(100% / 6 + 2px);
+  margin-inline: -1px;
+  height: 100%;
+  background-color: var(--color-text);
+  box-shadow: inset -1px 0 0 rgba(252, 238, 227, 0.06);
+  will-change: transform;
+}
+
+.ck-curtain-col::before,
+.ck-curtain-col::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--color-accent);
+}
+
+.ck-curtain-col::before {
+  top: 0;
+}
+
+.ck-curtain-col::after {
+  bottom: 0;
+}
+
+.ck-curtain-wrapper[data-phase="covering"] .ck-curtain-col {
+  transform-origin: top center;
+  animation: ckCurtainCover 220ms cubic-bezier(0.76, 0, 0.24, 1)
+    var(--col-cover-delay, 0ms) both;
+}
+
+.ck-curtain-wrapper[data-phase="revealing"] .ck-curtain-col {
+  transform-origin: bottom center;
+  animation: ckCurtainReveal 390ms cubic-bezier(0.76, 0, 0.24, 1)
+    var(--col-reveal-delay, 0ms) both;
+}
+
+.ck-curtain-emblem {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+.ck-curtain-wrapper[data-phase="covering"] .ck-curtain-emblem {
+  animation: ckEmblemIn 260ms cubic-bezier(0.16, 1, 0.3, 1) 70ms both;
+}
+
+.ck-curtain-wrapper[data-phase="revealing"] .ck-curtain-emblem {
+  animation: ckEmblemOut 260ms cubic-bezier(0.4, 0, 1, 1) 0ms both;
+}
+
+/* Pointer-Aware Directional Button Hover (2-layer CargoKite + Radial Sweep) */
+.btn-dir {
+  transition:
+    color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease;
+}
+
+.btn-dir:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.btn-dir-layers {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.btn-dir:disabled .btn-dir-layers {
+  display: none;
+}
+
+.btn-dir-lead,
+.btn-dir-fill {
+  position: absolute;
+  left: var(--btn-x, 50%);
+  top: var(--btn-y, 50%);
+  width: var(--btn-r, 220%);
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0) scale(0);
+  will-change: transform;
+}
+
+.btn-dir-lead {
+  transition: transform 310ms cubic-bezier(0.22, 1, 0.36, 1) 45ms;
+}
+
+.btn-dir-fill {
+  transition: transform 270ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
+}
+
+.btn-dir:hover:not(:disabled) .btn-dir-lead,
+.btn-dir:focus-visible:not(:disabled) .btn-dir-lead {
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1) 0ms;
+}
+
+.btn-dir:hover:not(:disabled) .btn-dir-fill,
+.btn-dir:focus-visible:not(:disabled) .btn-dir-fill {
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1) 45ms;
+}
+
+.btn-dir-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-dir--primary .btn-dir-lead {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-dir--primary .btn-dir-fill {
+  background-color: var(--color-text);
+}
+
+.btn-dir--accent .btn-dir-lead {
+  background-color: #ea6b36;
+}
+
+.btn-dir--accent .btn-dir-fill {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-dir--secondary .btn-dir-lead {
+  background-color: #f3d7cb;
+}
+
+.btn-dir--secondary .btn-dir-fill {
+  background-color: var(--color-accent);
+}
+
+.btn-dir--ink .btn-dir-lead {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-dir--ink .btn-dir-fill {
+  background-color: var(--color-accent);
+}
+
+.btn-dir--inverse .btn-dir-lead {
+  background-color: rgba(252, 238, 227, 0.16);
+}
+
+.btn-dir--inverse .btn-dir-fill {
+  background-color: var(--color-accent);
+}
+
+.btn-dir--ghost .btn-dir-lead {
+  background-color: rgba(217, 84, 30, 0.08);
+}
+
+.btn-dir--ghost .btn-dir-fill {
+  background-color: var(--color-surface);
+}
+
+/* CargoKite kinetic two-segment editorial underline */
+.link-kinetic {
+  --line-spacing: 2.25rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.link-kinetic::before,
+.link-kinetic::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  transition: transform 520ms cubic-bezier(0.66, 0, 0.15, 1);
+}
+
+.link-kinetic::before {
+  left: 0;
+}
+
+.link-kinetic::after {
+  left: calc(-1 * var(--line-spacing));
+  transform: translateX(-100%);
+}
+
+.link-kinetic:hover::before,
+.link-kinetic:focus-visible::before {
+  transform: translateX(calc(100% + var(--line-spacing)));
+}
+
+.link-kinetic:hover::after,
+.link-kinetic:focus-visible::after {
+  transform: translateX(var(--line-spacing));
 }
 
 /* Footer Subtle Watermark Branding */
@@ -462,6 +809,9 @@
   }
 
   .hero-rise,
+  .ck-mask-line,
+  .ck-stagger-up,
+  .ck-arch-artwork,
   .reveal-line-inner,
   .reveal-fade-block,
   .studio-menu-panel,
@@ -481,6 +831,11 @@
     transform: none !important;
     opacity: 1 !important;
     animation: none !important;
+  }
+
+  .ck-arch-veil,
+  .ck-curtain-wrapper {
+    display: none !important;
   }
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Button } from '@/components/ui/Button';
 
 export function FooterNewsletterForm() {
   const [email, setEmail] = useState('');
@@ -101,14 +102,16 @@ export function FooterNewsletterForm() {
             placeholder="you@example.com"
             className="min-h-[42px] flex-1 rounded-full border border-inverse/20 bg-ink/80 px-4 py-2 text-xs text-inverse placeholder:text-inverse/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta"
           />
-          <button
+          <Button
             type="submit"
+            variant="accent"
+            size="sm"
             disabled={status === 'submitting'}
-            className="inline-flex items-center justify-center gap-1.5 min-h-[42px] shrink-0 rounded-full bg-terracotta px-5 py-2 text-xs font-medium text-inverse hover:bg-terracotta-dark disabled:opacity-60 transition-colors cursor-pointer"
+            className="min-h-[42px] shrink-0 rounded-full text-xs"
           >
             <span>{status === 'submitting' ? 'Joining…' : 'Join Batch List'}</span>
             {status !== 'submitting' ? <span aria-hidden="true">&rarr;</span> : null}
-          </button>
+          </Button>
         </div>
       </form>
 

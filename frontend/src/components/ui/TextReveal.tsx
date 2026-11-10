@@ -6,6 +6,7 @@ export interface TextRevealProps {
   children: React.ReactNode;
   variant?: 'line' | 'fade';
   delayMs?: number;
+  immediate?: boolean;
   as?: 'div' | 'h2' | 'h3' | 'p' | 'span';
   className?: string;
 }
@@ -14,6 +15,7 @@ export function TextReveal({
   children,
   variant = 'fade',
   delayMs = 0,
+  immediate = false,
   as = 'div',
   className = '',
 }: TextRevealProps) {
@@ -21,6 +23,8 @@ export function TextReveal({
   const [revealState, setRevealState] = useState<'idle' | 'pending' | 'revealed'>('idle');
 
   useEffect(() => {
+    if (immediate) return;
+
     const node = ref.current;
     if (!node) return;
 
@@ -33,7 +37,6 @@ export function TextReveal({
     }
 
     const rect = node.getBoundingClientRect();
-    // Above-the-fold and currently visible elements stay immediately visible to protect LCP & SSR legibility.
     if (rect.top < window.innerHeight * 0.92) {
       const id = requestAnimationFrame(() => setRevealState('revealed'));
       return () => cancelAnimationFrame(id);
@@ -56,7 +59,7 @@ export function TextReveal({
       {
         rootMargin: '0px 0px -24px 0px',
         threshold: 0.04,
-      }
+      },
     );
 
     observer.observe(node);
@@ -73,7 +76,7 @@ export function TextReveal({
     const safetyTimer = setTimeout(() => {
       setRevealState('revealed');
       observer.disconnect();
-    }, 2600);
+    }, 1800);
 
     return () => {
       cancelAnimationFrame(startId);
@@ -81,13 +84,27 @@ export function TextReveal({
       window.removeEventListener('scroll', handleScrollFallback);
       observer.disconnect();
     };
-  }, []);
+  }, [immediate]);
 
   const Tag = as;
-  const isPending = revealState === 'pending';
-  const isRevealed = revealState === 'revealed';
 
   if (variant === 'line') {
+    if (immediate) {
+      return (
+        <div className="overflow-hidden">
+          <Tag
+            style={{ '--ck-delay': `${delayMs}ms` } as React.CSSProperties}
+            className={`ck-mask-line ${className}`.trim()}
+          >
+            {children}
+          </Tag>
+        </div>
+      );
+    }
+
+    const isPending = revealState === 'pending';
+    const isRevealed = revealState === 'revealed';
+
     return (
       <div ref={ref} className="overflow-hidden">
         <Tag
@@ -102,13 +119,16 @@ export function TextReveal({
     );
   }
 
+  const isPending = !immediate && revealState === 'pending';
+  const isRevealed = immediate || revealState === 'revealed';
+
   return (
     <div
       ref={ref}
       data-reveal-pending={isPending ? 'true' : 'false'}
       data-revealed={isRevealed ? 'true' : 'false'}
       style={{ transitionDelay: isRevealed ? `${delayMs}ms` : '0ms' }}
-      className={`reveal-fade-block ${className}`.trim()}
+      className={`reveal-fade-block ${immediate ? 'ck-stagger-up' : ''} ${className}`.trim()}
     >
       {as === 'div' ? children : <Tag className="contents">{children}</Tag>}
     </div>

@@ -162,7 +162,7 @@ export default function ServicesPage() {
                   02 &middot; Services &amp; Bookings
                 </p>
               </div>
-              <TextReveal variant="line">
+              <TextReveal variant="line" immediate>
                 <h1
                   id="services-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]"

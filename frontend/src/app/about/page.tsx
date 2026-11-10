@@ -189,7 +189,8 @@ export default function AboutPage() {
             <div className="lg:col-span-5 order-2 lg:order-1">
               <figure className="space-y-3">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[13rem] rounded-b-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.14)]">
-                  <SanaBurqaAtelierPortrait className="w-full h-full" />
+                  <SanaBurqaAtelierPortrait className="ck-arch-artwork w-full h-full" />
+                  <div aria-hidden="true" className="ck-arch-veil" />
                   <div className="pointer-events-none absolute inset-3 rounded-t-[12rem] rounded-b-xl border border-ink/10" />
                 </div>
                 <figcaption className="text-xs font-semibold uppercase tracking-[0.14em] text-umber text-center">
@@ -208,7 +209,7 @@ export default function AboutPage() {
                   04 &middot; About Mehandi by Sana
                 </p>
               </div>
-              <TextReveal variant="line">
+              <TextReveal variant="line" immediate>
                 <h1
                   id="about-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]"

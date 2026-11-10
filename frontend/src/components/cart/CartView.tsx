@@ -384,13 +384,15 @@ export function CartView() {
                   </span>
                 </div>
 
-                <Link
+                <LinkButton
                   href="/checkout"
-                  className="inline-flex w-full items-center justify-center gap-2 min-h-[50px] rounded-full bg-terracotta px-6 py-3 text-sm sm:text-base font-medium text-inverse hover:bg-terracotta-dark transition-colors mb-3.5"
+                  variant="accent"
+                  size="lg"
+                  className="w-full min-h-[50px] rounded-full mb-3.5"
                 >
                   <span>Proceed to Checkout</span>
                   <span aria-hidden="true">&rarr;</span>
-                </Link>
+                </LinkButton>
 
                 <p className="text-xs text-inverse/65 text-center leading-relaxed">
                   Supports Razorpay UPI / Cards &amp; Cash on Delivery across serviceable PIN codes.

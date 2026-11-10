@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { StorefrontProduct } from '@/types/storefront';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
-import { buttonClasses } from '@/components/ui/Button';
+import { LinkButton } from '@/components/ui/Button';
 
 export interface ProductCardProps {
   product: StorefrontProduct;
@@ -112,16 +112,14 @@ export function ProductCard({
 
           <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-hairline">
             {hasSelectableOptions ? (
-              <Link
+              <LinkButton
                 href={`/product/${product.slug}`}
-                className={buttonClasses({
-                  variant: 'primary',
-                  size: 'md',
-                  className: 'rounded-full',
-                })}
+                variant="primary"
+                size="md"
+                className="rounded-full"
               >
                 Select Options &rarr;
-              </Link>
+              </LinkButton>
             ) : (
               <AddToCartButton
                 productId={defaultVariation?.id ?? product.id}
@@ -135,7 +133,7 @@ export function ProductCard({
             )}
             <Link
               href={`/product/${product.slug}`}
-              className="text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-2 px-2"
+              className="link-kinetic text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
             >
               View Details
             </Link>
@@ -205,16 +203,14 @@ export function ProductCard({
 
       <div className="mt-4 pt-3 px-1.5 border-t border-hairline/70">
         {hasSelectableOptions ? (
-          <Link
+          <LinkButton
             href={`/product/${product.slug}`}
-            className={buttonClasses({
-              variant: 'secondary',
-              size: 'sm',
-              className: 'w-full rounded-full',
-            })}
+            variant="secondary"
+            size="sm"
+            className="w-full rounded-full"
           >
             Select Options
-          </Link>
+          </LinkButton>
         ) : (
           <AddToCartButton
             productId={defaultVariation?.id ?? product.id}

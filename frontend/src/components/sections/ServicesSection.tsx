@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig, ServiceMotifIcon } from '@/components/graphics/BotanicalIllustrations';
 
 interface ServiceItem {
@@ -79,12 +79,14 @@ export function ServicesSection() {
               <p className="text-sm md:text-base text-umber leading-relaxed mb-6">
                 Every appointment begins with a personalized motif consultation and freshly mixed organic henna paste—completely free from PPD, synthetic dyes, or chemical solvents.
               </p>
-              <Link
+              <LinkButton
                 href="/services"
-                className="inline-flex items-center justify-center rounded-full border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-inverse hover:bg-terracotta hover:border-terracotta transition-colors"
+                variant="ink"
+                size="md"
+                className="rounded-full"
               >
                 Explore all services &rarr;
-              </Link>
+              </LinkButton>
             </TextReveal>
           </div>
 
