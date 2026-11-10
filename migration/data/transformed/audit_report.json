@@ -1,8 +1,8 @@
 {
-  "auditedAt": "2026-11-10T07:44:34.427Z",
-  "source": "woocommerce_api",
+  "auditedAt": "2026-11-10T10:30:27.271Z",
+  "source": "mysql_dump",
   "allPassed": true,
-  "totalSourceRevenue": "1124605.67",
+  "totalSourceRevenue": "1126908.67",
   "metrics": [
     {
       "entity": "Product Categories",
@@ -22,16 +22,16 @@
     },
     {
       "entity": "Customers",
-      "sourceCount": 0,
-      "transformedCount": 0,
-      "parityPercent": "100%",
+      "sourceCount": 3,
+      "transformedCount": 3,
+      "parityPercent": "100.0%",
       "status": "PASSED",
       "notes": "100% matched, zero loss"
     },
     {
       "entity": "Orders & Transactions",
-      "sourceCount": 3499,
-      "transformedCount": 3499,
+      "sourceCount": 3506,
+      "transformedCount": 3506,
       "parityPercent": "100.0%",
       "status": "PASSED",
       "notes": "100% matched, zero loss"

@@ -1,15 +1,18 @@
 {
-  "startedAt": "2026-11-10T07:43:27.057Z",
-  "completedAt": "2026-11-10T07:44:33.762Z",
+  "startedAt": "2026-11-10T10:30:27.171Z",
+  "completedAt": "2026-11-10T10:30:27.172Z",
+  "source": "mysql_dump",
+  "sourceFile": "/Users/nazrul/code/mehandibysana/prod.sql",
   "counts": {
     "categories": 1,
     "products": 11,
-    "productVariations": 7,
-    "customers": 0,
-    "orders": 3499,
+    "productVariations": 11,
+    "resolvedImages": 16,
+    "customers": 3,
+    "orders": 3506,
     "coupons": 1,
     "reviews": 0
   },
-  "totalRevenue": "1124605.67",
+  "totalRevenue": "1126908.67",
   "currency": "INR"
 }

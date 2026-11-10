@@ -8,7 +8,8 @@ node_modules/
 out/
 build/
 dist/
-
+prod.sql
+studio-data/local-medusa-backup.dum
 # Environment files
 .env
 .env.local

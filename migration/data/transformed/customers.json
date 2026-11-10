@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "email": "mehandibysana@gmail.com",
+    "first_name": "Sana",
+    "last_name": "",
+    "phone": "9469444007",
+    "has_account": true,
+    "addresses": [
+      {
+        "first_name": "Nazrul",
+        "last_name": "Islam",
+        "address_1": "127 Budshah Nagar Lane C",
+        "city": "Srinagar",
+        "province": "JK",
+        "postal_code": "190001",
+        "country_code": "in",
+        "phone": "9469444007"
+      }
+    ],
+    "metadata": {
+      "woo_id": 1,
+      "username": "sana",
+      "is_paying_customer": false,
+      "legacy_auth": true,
+      "date_created": "2018-06-18 05:44:57"
+    }
+  },
+  {
+    "email": "nazrulislambhat@gmail.com",
+    "first_name": "Nazrul",
+    "last_name": "Islam",
+    "has_account": true,
+    "addresses": [],
+    "metadata": {
+      "woo_id": 5,
+      "username": "nazrulislam",
+      "is_paying_customer": false,
+      "legacy_auth": true,
+      "date_created": "2019-07-19 18:36:38"
+    }
+  },
+  {
+    "email": "nonexistingadmin@hostinger.com",
+    "first_name": "admin",
+    "last_name": "",
+    "phone": "9469444007",
+    "has_account": true,
+    "addresses": [
+      {
+        "first_name": "Nazrul",
+        "last_name": "Islam",
+        "address_1": "127 Budshah Nagar Lane C",
+        "city": "Srinagar",
+        "province": "JK",
+        "postal_code": "190001",
+        "country_code": "in",
+        "phone": "9469444007"
+      }
+    ],
+    "metadata": {
+      "woo_id": 1,
+      "username": "admin",
+      "is_paying_customer": false,
+      "legacy_auth": true,
+      "date_created": "2025-07-24 18:13:08"
+    }
+  }
+]
