@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
   },
   other: {
-    'msapplication-TileColor': '#ea6b36',
+    'msapplication-TileColor': '#181818',
     'msapplication-TileImage': '/icons/mstile-150x150.png',
   },
   robots: {
