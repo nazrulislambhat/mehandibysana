@@ -90,105 +90,18 @@
   }
 }
 
-@keyframes heroGentleRise {
-  0% {
-    transform: translate3d(0, 12px, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.hero-rise {
-  animation: heroGentleRise 1050ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* CargoKite-inspired masked typography, staggered lifts & arch veil reveals */
-@keyframes ckMaskLineIn {
-  0% {
-    transform: translate3d(0, 108%, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.ck-mask-line {
-  display: block;
-  animation: ckMaskLineIn 1150ms cubic-bezier(0.16, 1, 0.3, 1)
-    calc(var(--ck-nav-delay, 0ms) + var(--ck-delay, 0ms)) both;
-  will-change: transform;
-}
-
-@keyframes ckStaggerUp {
-  0% {
-    transform: translate3d(0, 20px, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.ck-stagger-up {
-  animation: ckStaggerUp 1050ms cubic-bezier(0.16, 1, 0.3, 1)
-    calc(var(--ck-nav-delay, 0ms) + var(--ck-delay, 0ms)) both;
-  will-change: transform;
-}
-
-@keyframes ckArchArtworkSettle {
-  0% {
-    transform: scale(1.055);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.ck-arch-artwork {
-  animation: ckArchArtworkSettle 1450ms cubic-bezier(0.16, 1, 0.3, 1)
-    calc(var(--ck-nav-delay, 0ms) + 180ms) both;
-  will-change: transform;
-}
-
-@keyframes ckArchVeilUnseal {
-  0% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-}
-
-.ck-arch-veil {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  background-color: var(--color-surface);
-  border-top: 2px solid var(--color-accent);
-  transform-origin: bottom center;
-  animation: ckArchVeilUnseal 1250ms cubic-bezier(0.16, 1, 0.3, 1)
-    calc(var(--ck-nav-delay, 0ms) + 180ms) both;
-  will-change: transform, opacity;
-}
-
 .reveal-line-inner {
   display: block;
   transform: translate3d(0, 0, 0);
   opacity: 1;
   transition:
-    transform 1150ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 820ms ease-out;
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 540ms ease-out;
   will-change: transform, opacity;
 }
 
 .reveal-line-inner[data-reveal-pending="true"] {
-  transform: translate3d(0, 104%, 0);
+  transform: translate3d(0, 14px, 0);
   opacity: 0;
 }
 
@@ -201,13 +114,13 @@
   transform: translate3d(0, 0, 0);
   opacity: 1;
   transition:
-    transform 1050ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 800ms ease-out;
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 540ms ease-out;
   will-change: transform, opacity;
 }
 
 .reveal-fade-block[data-reveal-pending="true"] {
-  transform: translate3d(0, 22px, 0);
+  transform: translate3d(0, 14px, 0);
   opacity: 0;
 }
 
@@ -476,156 +389,21 @@
   animation: bagAddedHighlight 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Page Route Transition, 6-Column CargoKite Curtain & Top Hairline */
-@keyframes pageTransitionEnter {
+/* Minimal Subtle Page Change Reveal (zero overlay/curtain between pages) */
+@keyframes pageSubtleReveal {
   0% {
-    transform: translate3d(0, 16px, 0);
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
   }
   100% {
+    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
 
-.page-transition-shell {
-  animation: pageTransitionEnter 950ms cubic-bezier(0.16, 1, 0.3, 1)
-    var(--ck-nav-delay, 0ms) both;
-  will-change: transform;
-}
-
-@keyframes routeSweepBar {
-  0% {
-    transform: scaleX(0);
-    opacity: 1;
-  }
-  65% {
-    transform: scaleX(0.88);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(1);
-    opacity: 0;
-  }
-}
-
-.route-progress-bar {
-  transform-origin: left center;
-  animation: routeSweepBar 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes ckCurtainCover {
-  0% {
-    transform: scaleY(0);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes ckCurtainReveal {
-  0% {
-    transform: scaleY(1);
-  }
-  100% {
-    transform: scaleY(0);
-  }
-}
-
-@keyframes ckEmblemIn {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 26px, 0) rotate(7deg) scale(0.92);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-  }
-}
-
-@keyframes ckEmblemOut {
-  0% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(0, -24px, 0) rotate(-7deg) scale(0.94);
-  }
-}
-
-.ck-curtain-wrapper {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.ck-curtain-columns {
-  position: absolute;
-  inset: 0;
-  display: flex;
-}
-
-.ck-curtain-col {
-  position: relative;
-  flex: 1 1 0%;
-  width: calc(100% / 6 + 2px);
-  margin-inline: -1px;
-  height: 100%;
-  background-color: var(--color-plaque-surface);
-  box-shadow: inset -1px 0 0 var(--color-plaque-outline);
-  will-change: transform;
-}
-
-.ck-curtain-col::before,
-.ck-curtain-col::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background-color: var(--color-accent);
-}
-
-.ck-curtain-col::before {
-  top: 0;
-}
-
-.ck-curtain-col::after {
-  bottom: 0;
-}
-
-.ck-curtain-wrapper[data-phase="covering"] .ck-curtain-col {
-  transform-origin: top center;
-  animation: ckCurtainCover 480ms cubic-bezier(0.76, 0, 0.24, 1)
-    var(--col-cover-delay, 0ms) both;
-}
-
-.ck-curtain-wrapper[data-phase="revealing"] .ck-curtain-col {
-  transform-origin: bottom center;
-  animation: ckCurtainReveal 760ms cubic-bezier(0.76, 0, 0.24, 1)
-    var(--col-reveal-delay, 0ms) both;
-}
-
-.ck-curtain-emblem {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  will-change: transform, opacity;
-}
-
-.ck-curtain-wrapper[data-phase="covering"] .ck-curtain-emblem {
-  animation: ckEmblemIn 460ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
-}
-
-.ck-curtain-wrapper[data-phase="revealing"] .ck-curtain-emblem {
-  animation: ckEmblemOut 400ms cubic-bezier(0.4, 0, 1, 1) 0ms both;
+.page-reveal-enter {
+  animation: pageSubtleReveal 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
 }
 
 /* Pointer-Aware Directional Button Hover (2-layer CargoKite + Radial Sweep) */
@@ -843,10 +621,6 @@
     animation-iteration-count: 1 !important;
   }
 
-  .hero-rise,
-  .ck-mask-line,
-  .ck-stagger-up,
-  .ck-arch-artwork,
   .reveal-line-inner,
   .reveal-fade-block,
   .studio-menu-panel,
@@ -860,17 +634,11 @@
   .bag-folio-summary,
   .bag-badge-pulse,
   .bag-item-just-added,
-  .page-transition-shell,
-  .route-progress-bar,
+  .page-reveal-enter,
   .footer-brand-letter {
     transform: none !important;
     opacity: 1 !important;
     animation: none !important;
-  }
-
-  .ck-arch-veil,
-  .ck-curtain-wrapper {
-    display: none !important;
   }
 }
 

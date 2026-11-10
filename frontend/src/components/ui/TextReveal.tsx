@@ -88,20 +88,14 @@ export function TextReveal({
 
   const Tag = as;
 
-  if (variant === 'line') {
-    if (immediate) {
-      return (
-        <div className="overflow-hidden">
-          <Tag
-            style={{ '--ck-delay': `${delayMs}ms` } as React.CSSProperties}
-            className={`ck-mask-line ${className}`.trim()}
-          >
-            {children}
-          </Tag>
-        </div>
-      );
+  if (immediate) {
+    if (as === 'div' && !className) {
+      return <>{children}</>;
     }
+    return <Tag className={className || undefined}>{children}</Tag>;
+  }
 
+  if (variant === 'line') {
     const isPending = revealState === 'pending';
     const isRevealed = revealState === 'revealed';
 
@@ -119,8 +113,8 @@ export function TextReveal({
     );
   }
 
-  const isPending = !immediate && revealState === 'pending';
-  const isRevealed = immediate || revealState === 'revealed';
+  const isPending = revealState === 'pending';
+  const isRevealed = revealState === 'revealed';
 
   return (
     <div
@@ -128,7 +122,7 @@ export function TextReveal({
       data-reveal-pending={isPending ? 'true' : 'false'}
       data-revealed={isRevealed ? 'true' : 'false'}
       style={{ transitionDelay: isRevealed ? `${delayMs}ms` : '0ms' }}
-      className={`reveal-fade-block ${immediate ? 'ck-stagger-up' : ''} ${className}`.trim()}
+      className={`reveal-fade-block ${className}`.trim()}
     >
       {as === 'div' ? children : <Tag className="contents">{children}</Tag>}
     </div>

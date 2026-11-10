@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
@@ -11,7 +11,6 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartAddedToast } from '@/components/cart/CartAddedToast';
 import { CartDrawer } from '@/components/cart/CartDrawer';
-import { RouteTransitionCurtain } from '@/components/layout/RouteTransitionCurtain';
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
@@ -134,9 +133,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: siteGraphJson }}
         />
-        <Suspense fallback={null}>
-          <RouteTransitionCurtain />
-        </Suspense>
         <SkipLink />
         <Header />
         <CartDrawer />
