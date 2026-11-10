@@ -96,25 +96,25 @@ export function TestimonialsSection({ reviews = [] }: TestimonialsSectionProps) 
           </TextReveal>
         </div>
 
-        {/* Ink Black Feature Pull Quote + Crisp White Compact Cards Split */}
+        {/* Studio Feature Pull Quote Plaque + Compact Cards Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <TextReveal variant="fade" className="lg:col-span-6 flex">
-            <figure className="relative overflow-hidden w-full rounded-2xl bg-ink text-inverse p-8 md:p-10 flex flex-col justify-between gap-8 shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)]">
+            <figure className="relative overflow-hidden w-full rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-8 md:p-10 flex flex-col justify-between gap-8 shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)]">
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
               <div>
                 <BotanicalSprig className="mb-6 text-terracotta" />
-                <blockquote className="font-serif text-2xl md:text-[1.8rem] font-normal text-inverse leading-[1.38]">
+                <blockquote className="font-serif text-2xl md:text-[1.8rem] font-normal text-plaque-ink leading-[1.38]">
                   &ldquo;{primaryFeature.quote}&rdquo;
                 </blockquote>
               </div>
-              <figcaption className="border-t border-inverse/15 pt-5">
-                <p className="font-semibold text-sm text-inverse">
+              <figcaption className="border-t border-plaque-ink/15 pt-5">
+                <p className="font-semibold text-sm text-plaque-ink">
                   {primaryFeature.author}
                 </p>
-                <p className="text-xs text-inverse/70 mt-0.5">
+                <p className="text-xs text-plaque-ink/70 mt-0.5">
                   {primaryFeature.context}
                 </p>
               </figcaption>
@@ -138,7 +138,7 @@ export function TestimonialsSection({ reviews = [] }: TestimonialsSectionProps) 
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-full border border-terracotta/45 px-3 py-1 text-xs font-medium text-terracotta hover:bg-terracotta hover:text-inverse transition-colors"
+                        className="inline-flex items-center rounded-full border border-terracotta/45 px-3 py-1 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
                       >
                         {item.linkLabel || 'Read article'} &#8599;
                       </a>

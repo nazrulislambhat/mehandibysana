@@ -105,8 +105,8 @@ export function ShopFilters({
                 <span
                   className={`tabular-nums transition-colors ${
                     isSelected
-                      ? 'text-terracotta group-hover/btn:text-inverse'
-                      : 'text-umber group-hover/btn:text-inverse/80'
+                      ? 'text-terracotta-on-ink group-hover/btn:text-on-accent'
+                      : 'text-umber group-hover/btn:text-on-accent/80'
                   }`}
                 >
                   ({cat.count})

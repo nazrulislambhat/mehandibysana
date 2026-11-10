@@ -20,10 +20,10 @@ export default function RouteError({
     <div className="bg-canvas py-16 md:py-24">
       <section className="editorial-container">
         <div className="max-w-2xl mx-auto overflow-hidden rounded-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.16)]">
-          <div className="relative bg-ink text-inverse px-7 py-7 sm:px-10 sm:py-8">
+          <div className="relative border-b border-plaque-border bg-plaque text-plaque-ink px-7 py-7 sm:px-10 sm:py-8">
             <div
               aria-hidden="true"
-              className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+              className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
             />
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -36,7 +36,7 @@ export default function RouteError({
                     Temporary Hiccup
                   </p>
                 </div>
-                <h1 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
+                <h1 className="font-serif text-3xl sm:text-4xl font-medium text-plaque-ink">
                   Something went wrong loading this view.
                 </h1>
               </div>

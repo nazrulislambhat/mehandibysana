@@ -257,7 +257,7 @@ export function RouteTransitionCurtain() {
               decorative
               className="w-14 h-14 sm:w-[68px] sm:h-[68px]"
             />
-            <span className="font-serif text-xs sm:text-sm tracking-[0.26em] uppercase text-inverse/90 mt-3">
+            <span className="font-serif text-xs sm:text-sm tracking-[0.26em] uppercase text-plaque-ink/90 mt-3">
               Mehandi by Sana
             </span>
           </div>

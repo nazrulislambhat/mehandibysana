@@ -12,6 +12,7 @@ import {
 } from '@/components/graphics/BrandIcons';
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
+import { ThemeToggle } from './ThemeToggle';
 
 const APOTHECARY_LINKS = [
   { label: 'Shop All', href: '/shop' },
@@ -38,9 +39,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-ink text-inverse overflow-hidden">
+    <footer className="relative bg-plaque text-plaque-ink border-t border-plaque-border overflow-hidden">
       {/* Top burnt-terracotta architectural hairline */}
-      <div aria-hidden="true" className="h-[3px] w-full bg-terracotta" />
+      <div aria-hidden="true" className="h-[3px] w-full bg-terracotta-solid" />
 
       {/* Main Editorial Studio Matrix */}
       <div className="editorial-container pt-14 md:pt-20 pb-8 md:pb-10">
@@ -51,7 +52,8 @@ export function Footer() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/"
-                  className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-[2.1rem] font-medium tracking-tight text-inverse hover:text-terracotta transition-colors"
+                  aria-label="Mehandi by Sana Home"
+                  className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-[2.1rem] font-medium tracking-tight text-plaque-ink hover:text-terracotta transition-colors"
                 >
                   <BrandCrest
                     tone="ink-badge"
@@ -60,23 +62,23 @@ export function Footer() {
                     className="shrink-0 transition-transform duration-500 group-hover:scale-105"
                   />
                 </Link>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-inverse/20 bg-inverse/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-inverse/80">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-plaque-ink/80">
                   <span aria-hidden="true" className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
                   Est. 2019 &middot; Srinagar &amp; Bangalore
                 </span>
               </div>
 
-              <p className="text-sm text-inverse/75 leading-relaxed max-w-md">
+              <p className="text-sm text-plaque-ink/75 leading-relaxed max-w-md">
                 Organic mehndi studio &amp; botanical apothecary founded by Sumaiya Rashid Magray (Sana), operating from Srinagar &amp; Bangalore — fresh small-batch Sojat henna cones, therapeutic essential oils, aftercare balms, and heirloom bridal artistry.
               </p>
             </div>
 
             <FooterNewsletterForm />
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-xs text-inverse/80">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-xs text-plaque-ink/80">
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 hover:text-terracotta underline underline-offset-4 decoration-inverse/30 hover:decoration-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 hover:text-terracotta underline underline-offset-4 decoration-plaque-ink/30 hover:decoration-terracotta transition-colors"
               >
                 <MailEnvelopeIcon size={14} className="shrink-0 text-terracotta" />
                 <span>sana@mehandibysana.com</span>
@@ -94,7 +96,7 @@ export function Footer() {
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-terracotta hover:text-inverse font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-terracotta hover:text-plaque-ink font-medium transition-colors"
               >
                 <WhatsAppChatIcon size={14} className="shrink-0" />
                 <span>WhatsApp</span>
@@ -113,7 +115,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="group inline-flex items-center gap-2 py-0.5 text-inverse/80 hover:text-inverse transition-colors"
+                    className="group inline-flex items-center gap-2 py-0.5 text-plaque-ink/80 hover:text-plaque-ink transition-colors"
                   >
                     <span
                       aria-hidden="true"
@@ -138,11 +140,11 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="group inline-flex items-center gap-2 py-0.5 text-inverse/80 hover:text-inverse transition-colors"
+                    className="group inline-flex items-center gap-2 py-0.5 text-plaque-ink/80 hover:text-plaque-ink transition-colors"
                   >
                     <span
                       aria-hidden="true"
-                      className="h-1 w-1 rounded-full bg-inverse/30 group-hover:bg-terracotta transition-colors"
+                      className="h-1 w-1 rounded-full bg-plaque-ink/30 group-hover:bg-terracotta transition-colors"
                     />
                     <span className="group-hover:translate-x-0.5 transition-transform">
                       {item.label}
@@ -155,7 +157,7 @@ export function Footer() {
 
           {/* Studio Locations Arch Plaque */}
           <div className="lg:col-span-3">
-            <div className="relative h-full rounded-2xl border border-inverse/15 bg-gradient-to-b from-inverse/[0.05] to-transparent p-6 flex flex-col justify-between gap-5">
+            <div className="relative h-full rounded-2xl border border-plaque-ink/15 bg-gradient-to-b from-plaque-ink/[0.05] to-transparent p-6 flex flex-col justify-between gap-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between gap-2">
                   <h2 className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
@@ -165,23 +167,23 @@ export function Footer() {
                   <BotanicalSprig className="w-10 opacity-75 shrink-0" />
                 </div>
 
-                <div className="space-y-2.5 text-xs text-inverse/80 leading-relaxed">
+                <div className="space-y-2.5 text-xs text-plaque-ink/80 leading-relaxed">
                   <p>
-                    <span className="font-medium text-inverse block">Srinagar Atelier</span>
-                    <span className="text-inverse/70">
+                    <span className="font-medium text-plaque-ink block">Srinagar Atelier</span>
+                    <span className="text-plaque-ink/70">
                       Baghat Barzullah, Srinagar, J&amp;K 190005
                     </span>
                   </p>
                   <p>
-                    <span className="font-medium text-inverse block">Bangalore Studio</span>
-                    <span className="text-inverse/70">
+                    <span className="font-medium text-plaque-ink block">Bangalore Studio</span>
+                    <span className="text-plaque-ink/70">
                       Bengaluru, Karnataka &middot; Dispatch &amp; Bookings
                     </span>
                   </p>
-                  <p className="text-inverse/70 pt-0.5">
+                  <p className="text-plaque-ink/70 pt-0.5">
                     Desk: Mon &ndash; Sun, 10:00 AM &ndash; 6:30 PM IST
                   </p>
-                  <p className="text-inverse/70">
+                  <p className="text-plaque-ink/70">
                     Dispatch: Small-batch courier Mon &ndash; Sat within 1&ndash;2 business days across India.
                   </p>
                 </div>
@@ -201,7 +203,7 @@ export function Footer() {
                   href="/track-order"
                   variant="inverse"
                   size="sm"
-                  className="w-full rounded-full text-xs border-inverse/20"
+                  className="w-full rounded-full text-xs border-plaque-ink/20"
                 >
                   Track Your Order
                 </LinkButton>
@@ -218,12 +220,12 @@ export function Footer() {
         </div>
 
         {/* Bottom Copyright & Trust Strip */}
-        <div className="relative z-10 w-full max-w-[96rem] mx-auto px-4 sm:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-inverse/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-inverse/65">
+        <div className="relative z-10 w-full max-w-[96rem] mx-auto px-4 sm:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-plaque-ink/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-plaque-ink/70">
           <p>
             &copy; {currentYear} MEHANDI BY SANA . All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium text-inverse/75">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-medium text-plaque-ink/75">
             <span className="inline-flex items-center gap-1.5">
               <ShieldProtectIcon size={14} className="text-terracotta shrink-0" />
               <span>Razorpay PCI-DSS</span>
@@ -240,6 +242,8 @@ export function Footer() {
             <Link href="/terms-conditions" className="hover:text-terracotta transition-colors">
               Terms
             </Link>
+            <span aria-hidden="true" className="text-terracotta hidden sm:inline">&middot;</span>
+            <ThemeToggle variant="segmented" surface="plaque" />
           </div>
         </div>
       </div>

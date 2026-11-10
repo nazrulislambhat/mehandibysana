@@ -119,11 +119,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       <section className="editorial-container pt-12 md:pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           <aside className="lg:col-span-5 lg:sticky lg:top-28 space-y-5">
-            {/* Ink Black Srinagar Concierge Dossier Card */}
-            <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-7 sm:p-8 shadow-[0_20px_50px_-18px_rgba(17,17,17,0.3)]">
+            {/* Srinagar Concierge Dossier Plaque */}
+            <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-7 sm:p-8 shadow-[0_20px_50px_-18px_rgba(17,17,17,0.3)]">
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
               <BrandCrest
                 tone="ink-badge"
@@ -134,65 +134,65 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2 sm:pr-14">
                 Srinagar &amp; Bangalore Concierge Desk
               </p>
-              <h2 className="font-serif text-3xl font-medium text-inverse mb-5 sm:pr-14">
+              <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-5 sm:pr-14">
                 Locations &amp; Direct Contact
               </h2>
               <dl className="space-y-4 text-sm">
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <LocationPinIcon size={13} className="text-terracotta shrink-0" />
                     <span>Studio Operations</span>
                   </dt>
-                  <dd className="text-inverse leading-relaxed space-y-1">
+                  <dd className="text-plaque-ink leading-relaxed space-y-1">
                     <span className="block">
                       <strong>Srinagar:</strong> Baghat Barzullah, Srinagar, Jammu &amp; Kashmir 190005
                     </span>
-                    <span className="block text-inverse/80">
+                    <span className="block text-plaque-ink/80">
                       <strong>Bangalore:</strong> Bengaluru Studio Operations &amp; Bridal Bookings, Karnataka
                     </span>
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <MailEnvelopeIcon size={13} className="text-terracotta shrink-0" />
                     <span>Direct Email</span>
                   </dt>
-                  <dd className="text-inverse">
+                  <dd className="text-plaque-ink">
                     <a
                       href="mailto:sana@mehandibysana.com"
-                      className="text-terracotta hover:text-inverse underline underline-offset-4 transition-colors"
+                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
                     >
                       sana@mehandibysana.com
                     </a>{' '}
                     &middot;{' '}
                     <a
                       href="mailto:mehandibysana@gmail.com"
-                      className="text-terracotta hover:text-inverse underline underline-offset-4 transition-colors"
+                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
                     >
                       mehandibysana@gmail.com
                     </a>
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <PhoneHandsetIcon size={13} className="text-terracotta shrink-0" />
                     <span>Phone / WhatsApp</span>
                   </dt>
-                  <dd className="text-inverse">
+                  <dd className="text-plaque-ink">
                     <a
                       href="tel:+919149648717"
-                      className="text-terracotta hover:text-inverse underline underline-offset-4 transition-colors"
+                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
                     >
                       +91-9149648717
                     </a>
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <ClockWindowIcon size={13} className="text-terracotta shrink-0" />
                     <span>Hours</span>
                   </dt>
-                  <dd className="text-inverse/80">
+                  <dd className="text-plaque-ink/80">
                     Monday – Sunday, 10:00 AM – 6:30 PM IST
                   </dd>
                 </div>

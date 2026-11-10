@@ -180,31 +180,31 @@ export function PolicyDocumentLayout({
               </nav>
             ) : null}
 
-            {/* Ink-Black Grievance / Studio Contact Card */}
-            <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-6 space-y-3.5 shadow-[0_18px_45px_-18px_rgba(17,17,17,0.3)]">
+            {/* Studio Grievance Contact Plaque */}
+            <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 space-y-3.5 shadow-[0_18px_45px_-18px_rgba(17,17,17,0.3)]">
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
                 Studio Desk &amp; Grievance Contact
               </p>
-              <h2 className="font-serif text-xl font-medium text-inverse">
+              <h2 className="font-serif text-xl font-medium text-plaque-ink">
                 Mehandi by Sana Atelier
               </h2>
-              <p className="text-xs text-inverse/75 leading-relaxed">
+              <p className="text-xs text-plaque-ink/75 leading-relaxed">
                 Sumaiya Rashid Magray (Sana) &middot; Operating from Baghat Barzullah, Srinagar (J&amp;K 190005) &amp; Bangalore (Karnataka)
               </p>
-              <div className="pt-2 border-t border-inverse/15 space-y-1.5 text-xs">
+              <div className="pt-2 border-t border-plaque-ink/15 space-y-1.5 text-xs">
                 <a
                   href="mailto:sana@mehandibysana.com"
-                  className="block text-terracotta hover:text-inverse underline underline-offset-4"
+                  className="block text-terracotta hover:text-plaque-ink underline underline-offset-4"
                 >
                   sana@mehandibysana.com
                 </a>
                 <a
                   href="tel:+919149648717"
-                  className="block text-inverse/85 hover:text-terracotta tabular-nums"
+                  className="block text-plaque-ink/85 hover:text-terracotta tabular-nums"
                 >
                   +91-9149648717 (Mon–Sun, 10 AM – 6:30 PM IST)
                 </a>

@@ -94,12 +94,12 @@ export default function NotFound() {
             </div>
           </div>
 
-          {/* Right 5 Columns — Ink Black Studio Wayfinding Plaque */}
+          {/* Right 5 Columns — Studio Wayfinding Plaque */}
           <aside className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-7 sm:p-8 shadow-[0_24px_60px_-20px_rgba(17,17,17,0.3)]">
+            <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-7 sm:p-8 shadow-[0_24px_60px_-20px_rgba(17,17,17,0.3)]">
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
               <div
                 aria-hidden="true"
@@ -114,14 +114,14 @@ export default function NotFound() {
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
                       Studio Directory &middot; Srinagar &amp; Bangalore
                     </p>
-                    <h2 className="font-serif text-2xl sm:text-3xl font-medium text-inverse">
+                    <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
                       Helpful Destinations
                     </h2>
                   </div>
                   <BrandCrest tone="ink-badge" size={40} decorative className="shrink-0" />
                 </div>
 
-                <ul className="divide-y divide-inverse/12">
+                <ul className="divide-y divide-plaque-ink/12">
                   {WAYFINDING_LINKS.map((link) => (
                     <li key={link.href}>
                       <Link
@@ -129,10 +129,10 @@ export default function NotFound() {
                         className="group flex items-center justify-between gap-4 py-3 text-sm hover:text-terracotta transition-colors"
                       >
                         <div>
-                          <span className="block font-medium text-inverse group-hover:text-terracotta transition-colors">
+                          <span className="block font-medium text-plaque-ink group-hover:text-terracotta transition-colors">
                             {link.label}
                           </span>
-                          <span className="block text-xs text-inverse/60">
+                          <span className="block text-xs text-plaque-ink/60">
                             {link.meta}
                           </span>
                         </div>
@@ -147,11 +147,11 @@ export default function NotFound() {
                   ))}
                 </ul>
 
-                <div className="pt-2 border-t border-inverse/15 flex flex-wrap items-center justify-between gap-2 text-xs text-inverse/70">
+                <div className="pt-2 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-2 text-xs text-plaque-ink/70">
                   <span>Need help? sana@mehandibysana.com</span>
                   <a
                     href="tel:+919149648717"
-                    className="text-terracotta hover:text-inverse underline underline-offset-4 tabular-nums"
+                    className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
                   >
                     +91-9149648717
                   </a>

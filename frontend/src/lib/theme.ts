@@ -4,14 +4,14 @@ export const THEME_STORAGE_KEY = 'mbs-theme';
 
 export const THEME_COLOR_BY_MODE: Record<Theme, string> = {
   light: '#ffffff',
-  dark: '#071618',
+  dark: '#181818',
 };
 
 /**
  * Blocking pre-paint bootstrap injected in <head> to eliminate any light/dark FOUC.
  * Reads explicit localStorage preference ('mbs-theme'), falling back to OS prefers-color-scheme.
  */
-export const THEME_INIT_SCRIPT = `(function(){try{var k='${THEME_STORAGE_KEY}';var s=localStorage.getItem(k);var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||s==='light'?s:(m?'dark':'light');var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t;var c=t==='dark'?'#071618':'#ffffff';var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){metas[i].setAttribute('content',c);metas[i].removeAttribute('media');}}catch(e){}})();`;
+export const THEME_INIT_SCRIPT = `(function(){try{var k='${THEME_STORAGE_KEY}';var s=localStorage.getItem(k);var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||s==='light'?s:(m?'dark':'light');var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t;var c=t==='dark'?'#181818':'#ffffff';var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){metas[i].setAttribute('content',c);metas[i].removeAttribute('media');}}catch(e){}})();`;
 
 const listeners = new Set<() => void>();
 let globalListenersAttached = false;
@@ -76,6 +76,10 @@ function notifyListeners(): void {
 function ensureGlobalListeners(): void {
   if (globalListenersAttached || typeof window === 'undefined') return;
   globalListenersAttached = true;
+
+  // Ensure <meta name="theme-color"> & attributes reflect the resolved theme
+  // even if framework-managed <meta> tags mounted after <head> bootstrap.
+  applyThemeToDocument(resolvePreferredTheme(), false);
 
   window.addEventListener('storage', (event) => {
     if (event.key !== THEME_STORAGE_KEY) return;

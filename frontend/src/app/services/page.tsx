@@ -220,14 +220,14 @@ export default function ServicesPage() {
                 <article
                   className={`relative overflow-hidden w-full rounded-2xl p-7 md:p-8 flex flex-col justify-between gap-7 transition-colors ${
                     isFeatured
-                      ? 'bg-ink text-inverse shadow-[0_22px_50px_-18px_rgba(17,17,17,0.34)]'
+                      ? 'border border-plaque-border bg-plaque text-plaque-ink shadow-[0_22px_50px_-18px_rgba(17,17,17,0.34)]'
                       : 'border border-hairline bg-paper hover:border-ink/40'
                   }`}
                 >
                   {isFeatured ? (
                     <div
                       aria-hidden="true"
-                      className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                      className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                     />
                   ) : null}
 
@@ -245,7 +245,7 @@ export default function ServicesPage() {
 
                     <h3
                       className={`font-serif text-2xl sm:text-[1.75rem] font-medium mb-2 ${
-                        isFeatured ? 'text-inverse' : 'text-ink'
+                        isFeatured ? 'text-plaque-ink' : 'text-ink'
                       }`}
                     >
                       {tier.title}
@@ -255,7 +255,7 @@ export default function ServicesPage() {
                     </p>
                     <p
                       className={`text-sm leading-relaxed mb-6 ${
-                        isFeatured ? 'text-inverse/80' : 'text-umber'
+                        isFeatured ? 'text-plaque-ink/80' : 'text-umber'
                       }`}
                     >
                       {tier.summary}
@@ -264,7 +264,7 @@ export default function ServicesPage() {
                     <ul
                       className={`space-y-2.5 border-t pt-5 text-sm ${
                         isFeatured
-                          ? 'border-inverse/15 text-inverse/90'
+                          ? 'border-plaque-ink/15 text-plaque-ink/90'
                           : 'border-hairline text-ink/90'
                       }`}
                     >

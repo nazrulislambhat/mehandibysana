@@ -47,7 +47,7 @@ export default function GlobalError({
         style={{
           margin: 0,
           minHeight: '100vh',
-          backgroundColor: isDark ? '#071618' : '#ffffff',
+          backgroundColor: isDark ? '#181818' : '#ffffff',
           color: isDark ? '#fffee9' : '#111111',
           fontFamily:
             '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -61,10 +61,10 @@ export default function GlobalError({
           style={{
             maxWidth: '580px',
             width: '100%',
-            border: `1px solid ${isDark ? '#254a4f' : '#e5e5e5'}`,
+            border: `1px solid ${isDark ? '#333333' : '#e5e5e5'}`,
             borderRadius: '16px',
             overflow: 'hidden',
-            backgroundColor: isDark ? '#10282c' : '#ffffff',
+            backgroundColor: isDark ? '#242424' : '#ffffff',
             boxShadow: isDark
               ? '0 24px 60px -20px rgba(0, 0, 0, 0.55)'
               : '0 24px 60px -20px rgba(17, 17, 17, 0.16)',
@@ -72,8 +72,8 @@ export default function GlobalError({
         >
           <div
             style={{
-              backgroundColor: '#052225',
-              color: '#fffee9',
+              backgroundColor: '#111111',
+              color: '#fceee3',
               padding: '28px 32px',
               borderTop: '3px solid #c67d48',
               display: 'flex',
@@ -140,7 +140,7 @@ export default function GlobalError({
                 margin: '0 0 20px',
                 fontSize: '15px',
                 lineHeight: 1.65,
-                color: isDark ? '#b8c6c2' : '#525252',
+                color: isDark ? '#b5b0aa' : '#525252',
               }}
             >
               Please retry refreshing the application shell. If you were completing an order or checking tracking details, your bag state stays preserved in browser storage.
@@ -152,11 +152,11 @@ export default function GlobalError({
                   margin: '0 0 20px',
                   padding: '10px 14px',
                   borderRadius: '8px',
-                  backgroundColor: isDark ? '#0c2023' : '#f7f7f7',
-                  border: `1px solid ${isDark ? '#1f3e42' : '#e5e5e5'}`,
+                  backgroundColor: isDark ? '#202020' : '#f7f7f7',
+                  border: `1px solid ${isDark ? '#2d2d2d' : '#e5e5e5'}`,
                   fontFamily: 'monospace',
                   fontSize: '12px',
-                  color: isDark ? '#b8c6c2' : '#525252',
+                  color: isDark ? '#b5b0aa' : '#525252',
                 }}
               >
                 Diagnostic Digest: {error.digest}
@@ -184,9 +184,9 @@ export default function GlobalError({
                 href="/"
                 style={{
                   display: 'inline-block',
-                  backgroundColor: isDark ? '#0c2023' : '#ffffff',
+                  backgroundColor: isDark ? '#202020' : '#ffffff',
                   color: isDark ? '#fffee9' : '#111111',
-                  border: `1px solid ${isDark ? '#3d6368' : '#a3a3a3'}`,
+                  border: `1px solid ${isDark ? '#424242' : '#a3a3a3'}`,
                   borderRadius: '9999px',
                   padding: '11px 22px',
                   fontSize: '14px',

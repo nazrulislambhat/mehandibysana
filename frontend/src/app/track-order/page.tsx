@@ -179,14 +179,14 @@ export default async function TrackOrderPage({ searchParams }: TrackOrderPagePro
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
-              <div className="rounded-2xl bg-ink text-inverse p-5 sm:px-6 min-w-[260px] space-y-1.5">
+              <div className="rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-5 sm:px-6 min-w-[260px] space-y-1.5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
                   Dispatch Window
                 </p>
-                <p className="font-serif text-xl font-medium text-inverse">
+                <p className="font-serif text-xl font-medium text-plaque-ink">
                   Within 2 Business Days
                 </p>
-                <p className="text-xs text-inverse/70">
+                <p className="text-xs text-plaque-ink/70">
                   Fresh cones rolled &amp; sealed after checkout
                 </p>
               </div>

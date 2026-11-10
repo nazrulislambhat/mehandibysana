@@ -208,7 +208,7 @@ export function DesktopNav() {
                 >
                   <span
                     className={`font-serif text-[11px] italic transition-colors ${
-                      isActivePill ? 'text-terracotta' : 'text-umber'
+                      isActivePill ? 'text-terracotta-on-ink' : 'text-umber'
                     }`}
                   >
                     {item.index}
@@ -234,14 +234,14 @@ export function DesktopNav() {
                   }}
                   className={`inline-flex items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-colors ${
                     isActivePill
-                      ? 'text-inverse/80 hover:text-terracotta hover:bg-inverse/10'
+                      ? 'text-inverse/80 hover:text-terracotta-on-ink hover:bg-inverse/10'
                       : 'text-umber hover:text-terracotta hover:bg-linen'
                   }`}
                 >
                   <ChevronDownIcon
                     size={12}
                     className={`transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      isMegaExpanded ? 'rotate-180 text-terracotta' : ''
+                      isMegaExpanded ? 'rotate-180 text-terracotta-on-ink' : ''
                     }`}
                   />
                 </button>
@@ -276,7 +276,7 @@ export function DesktopNav() {
                 <span
                   className={`font-serif text-[11px] italic transition-colors ${
                     isCurrent
-                      ? 'text-terracotta'
+                      ? 'text-terracotta-on-ink'
                       : 'text-umber group-hover:text-terracotta'
                   }`}
                 >

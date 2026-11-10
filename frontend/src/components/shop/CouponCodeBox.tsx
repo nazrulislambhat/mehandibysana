@@ -56,20 +56,20 @@ export function CouponCodeBox({
   if (variant === 'drawer') {
     if (isApplied && validation) {
       return (
-        <div className="rounded-xl border border-terracotta/45 bg-inverse/10 px-3 py-2 text-xs text-inverse">
+        <div className="rounded-xl border border-terracotta/45 bg-plaque-ink/10 px-3 py-2 text-xs text-plaque-ink">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0 truncate">
               <span className="font-mono font-semibold text-terracotta">
                 {validation.code}
               </span>{' '}
-              <span className="text-inverse/80">
+              <span className="text-plaque-ink/80">
                 applied (-₹{validation.discountAmount.toLocaleString('en-IN')})
               </span>
             </div>
             <button
               type="button"
               onClick={handleRemove}
-              className="shrink-0 text-[11px] font-medium text-inverse/75 hover:text-terracotta underline underline-offset-4 cursor-pointer"
+              className="shrink-0 text-[11px] font-medium text-plaque-ink/75 hover:text-terracotta underline underline-offset-4 cursor-pointer"
             >
               Remove
             </button>
@@ -84,7 +84,7 @@ export function CouponCodeBox({
           <button
             type="button"
             onClick={() => setDrawerOpen((prev) => !prev)}
-            className="font-medium text-terracotta hover:text-inverse underline underline-offset-4 cursor-pointer"
+            className="font-medium text-terracotta hover:text-plaque-ink underline underline-offset-4 cursor-pointer"
           >
             {drawerOpen ? 'Hide coupon box' : 'Have a coupon code?'}
           </button>
@@ -110,13 +110,13 @@ export function CouponCodeBox({
                     void handleApply();
                   }
                 }}
-                className="flex-1 min-w-0 min-h-[36px] rounded-full border border-inverse/25 bg-inverse/10 px-3.5 text-xs font-mono uppercase text-inverse placeholder:text-inverse/50 focus:outline-none focus:border-terracotta"
+                className="flex-1 min-w-0 min-h-[36px] rounded-full border border-plaque-ink/25 bg-plaque-ink/10 px-3.5 text-xs font-mono uppercase text-plaque-ink placeholder:text-plaque-ink/50 focus:outline-none focus:border-terracotta"
               />
               <button
                 type="button"
                 disabled={isApplying || !codeInput.trim()}
                 onClick={() => void handleApply()}
-                className="min-h-[36px] rounded-full bg-terracotta px-4 text-xs font-medium text-inverse hover:bg-terracotta-dark disabled:opacity-50 cursor-pointer"
+                className="min-h-[36px] rounded-full bg-terracotta-solid px-4 text-xs font-medium text-on-accent hover:bg-terracotta-dark disabled:opacity-50 cursor-pointer"
               >
                 {isApplying ? '…' : 'Apply'}
               </button>
@@ -203,7 +203,7 @@ export function CouponCodeBox({
               type="button"
               disabled={isApplying || !codeInput.trim()}
               onClick={() => void handleApply()}
-              className="inline-flex items-center justify-center min-h-[42px] rounded-full bg-ink px-5 text-xs sm:text-sm font-medium text-inverse hover:bg-terracotta disabled:bg-linen disabled:text-umber disabled:border disabled:border-divider cursor-pointer transition-colors"
+              className="inline-flex items-center justify-center min-h-[42px] rounded-full bg-ink px-5 text-xs sm:text-sm font-medium text-inverse hover:bg-terracotta-solid hover:text-on-accent disabled:bg-linen disabled:text-umber disabled:border disabled:border-divider cursor-pointer transition-colors"
             >
               {isApplying ? 'Applying…' : 'Apply'}
             </button>

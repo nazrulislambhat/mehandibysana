@@ -387,7 +387,12 @@ export function CheckoutHandoffClient() {
             ...(resolvedCouponCode ? { coupon_code: resolvedCouponCode } : {}),
           },
           theme: {
-            color: '#d9541e',
+            color:
+              (typeof document !== 'undefined'
+                ? getComputedStyle(document.documentElement)
+                    .getPropertyValue('--color-accent-solid')
+                    .trim()
+                : '') || '#d9541e',
           },
           modal: {
             ondismiss: () => {
@@ -530,24 +535,24 @@ export function CheckoutHandoffClient() {
       <div className="bg-canvas pb-20 md:pb-28">
         <div className="editorial-container py-12 md:py-20">
           <div className="max-w-2xl mx-auto overflow-hidden rounded-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.18)]">
-            <div className="bg-ink text-inverse px-7 py-7 sm:px-10 sm:py-8 relative">
+            <div className="bg-plaque text-plaque-ink border-b border-plaque-border px-7 py-7 sm:px-10 sm:py-8 relative">
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-1.5">
                     03 &middot; Dispatch Receipt Logged
                   </p>
-                  <h1 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
+                  <h1 className="font-serif text-3xl sm:text-4xl font-medium text-plaque-ink">
                     Thank you, {firstName || 'Guest'}
                   </h1>
                 </div>
                 <BrandCrest tone="ink-badge" size={44} decorative className="shrink-0" />
               </div>
-              <p className="text-sm text-inverse/75 leading-relaxed mt-2">
-                Your order <strong className="text-inverse">{confirmedOrder.orderNumber}</strong> is queued at our studio desk. Fresh cones are rolled to order before dispatch.
+              <p className="text-sm text-plaque-ink/75 leading-relaxed mt-2">
+                Your order <strong className="text-plaque-ink">{confirmedOrder.orderNumber}</strong> is queued at our studio desk. Fresh cones are rolled to order before dispatch.
               </p>
             </div>
 
@@ -668,7 +673,7 @@ export function CheckoutHandoffClient() {
                 >
                   <span
                     className={`font-serif italic ${
-                      st.active ? 'text-terracotta' : 'text-umber'
+                      st.active ? 'text-terracotta-on-ink' : 'text-umber'
                     }`}
                   >
                     {st.num}
@@ -868,7 +873,7 @@ export function CheckoutHandoffClient() {
                         name="paymentMethod"
                         checked={paymentMethod === 'razorpay'}
                         onChange={() => setPaymentMethod('razorpay')}
-                        className="mt-1 accent-[#d9541e]"
+                        className="mt-1 accent-terracotta"
                       />
                       <div>
                         <span className="block font-semibold">Razorpay</span>
@@ -896,7 +901,7 @@ export function CheckoutHandoffClient() {
                         name="paymentMethod"
                         checked={paymentMethod === 'cod'}
                         onChange={() => setPaymentMethod('cod')}
-                        className="mt-1 accent-[#d9541e]"
+                        className="mt-1 accent-terracotta"
                       />
                       <div>
                         <span className="block font-semibold">Cash on Delivery</span>
@@ -954,10 +959,10 @@ export function CheckoutHandoffClient() {
               <PincodeChecker subtotal={subtotal} compact />
               <CouponCodeBox subtotal={subtotal} shippingFee={deliveryFee} />
 
-              <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
+              <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
                 <div
                   aria-hidden="true"
-                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                 />
 
                 <div className="flex items-center justify-between gap-2 mb-2">
@@ -965,7 +970,7 @@ export function CheckoutHandoffClient() {
                     <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
                       Bag Dossier ({itemCount})
                     </span>
-                    <span className="inline-flex items-center gap-1 font-serif text-xs italic text-inverse/70 mt-0.5">
+                    <span className="inline-flex items-center gap-1 font-serif text-xs italic text-plaque-ink/70 mt-0.5">
                       <ShieldProtectIcon size={13} className="text-terracotta shrink-0" />
                       <span>Razorpay Protected &middot; MedusaJS Sync</span>
                     </span>
@@ -973,37 +978,37 @@ export function CheckoutHandoffClient() {
                   <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />
                 </div>
 
-                <h2 className="font-serif text-3xl font-medium text-inverse mb-5">
+                <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-5">
                   Order Summary
                 </h2>
 
-                <ul className="divide-y divide-inverse/15 border-b border-inverse/15 pb-4 mb-4 space-y-3">
+                <ul className="divide-y divide-plaque-ink/15 border-b border-plaque-ink/15 pb-4 mb-4 space-y-3">
                   {items.map((item) => (
                     <li
                       key={item.key}
                       className="pt-3 first:pt-0 flex justify-between gap-3 text-sm"
                     >
                       <div className="min-w-0">
-                        <p className="font-medium text-inverse truncate">
+                        <p className="font-medium text-plaque-ink truncate">
                           {item.name} &times; {item.quantity}
                         </p>
                         {item.variationLabel ? (
-                          <p className="text-xs text-inverse/65">
+                          <p className="text-xs text-plaque-ink/65">
                             {item.variationLabel}
                           </p>
                         ) : null}
                       </div>
-                      <span className="font-medium text-inverse tabular-nums shrink-0">
+                      <span className="font-medium text-plaque-ink tabular-nums shrink-0">
                         {formatMoney(item.lineTotal, item.currencySymbol)}
                       </span>
                     </li>
                   ))}
                 </ul>
 
-                <dl className="space-y-2.5 text-sm border-b border-inverse/15 pb-4 mb-4">
+                <dl className="space-y-2.5 text-sm border-b border-plaque-ink/15 pb-4 mb-4">
                   <div className="flex justify-between">
-                    <dt className="text-inverse/75">Items Subtotal</dt>
-                    <dd className="font-medium text-inverse tabular-nums">
+                    <dt className="text-plaque-ink/75">Items Subtotal</dt>
+                    <dd className="font-medium text-plaque-ink tabular-nums">
                       {formatMoney(subtotal, currency)}
                     </dd>
                   </div>
@@ -1018,7 +1023,7 @@ export function CheckoutHandoffClient() {
                     </div>
                   ) : null}
                   <div className="flex justify-between">
-                    <dt className="text-inverse/75">
+                    <dt className="text-plaque-ink/75">
                       Delivery
                       {activePinCheck?.matchedRule
                         ? ` (${activePinCheck.pincode} · ${activePinCheck.matchedRule.pattern})`
@@ -1037,10 +1042,10 @@ export function CheckoutHandoffClient() {
                 </dl>
 
                 <div className="flex items-baseline justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-inverse/80">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink/80">
                     Total Payable
                   </span>
-                  <span className="font-serif text-4xl font-medium text-inverse tabular-nums">
+                  <span className="font-serif text-4xl font-medium text-plaque-ink tabular-nums">
                     {formatMoney(grandTotal, currency)}
                   </span>
                 </div>

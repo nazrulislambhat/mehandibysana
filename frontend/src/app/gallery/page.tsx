@@ -192,18 +192,18 @@ export default function GalleryPage() {
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
-              <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse px-6 py-5 min-w-[250px]">
+              <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink px-6 py-5 min-w-[250px]">
                 <div
                   aria-hidden="true"
-                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                 />
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
                   Exhibition Folio
                 </p>
-                <p className="font-serif text-2xl font-medium text-inverse">
+                <p className="font-serif text-2xl font-medium text-plaque-ink">
                   6 Studio Plates
                 </p>
-                <p className="text-xs text-inverse/70 mt-1">
+                <p className="text-xs text-plaque-ink/70 mt-1">
                   Srinagar &middot; 0% PPD Organic Stain
                 </p>
               </div>
@@ -231,7 +231,7 @@ export default function GalleryPage() {
                 <div
                   className={`relative ${plate.aspectClass} w-full overflow-hidden rounded-2xl border border-hairline bg-linen`}
                 >
-                  <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink/90 backdrop-blur-sm border border-inverse/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-inverse">
+                  <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full bg-plaque/90 backdrop-blur-sm border border-plaque-border/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-plaque-ink">
                     <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
                     {plate.number}
                   </span>
@@ -261,20 +261,20 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Ink Black Bespoke Commission Banner */}
-        <div className="relative overflow-hidden mt-20 rounded-2xl bg-ink text-inverse px-6 py-12 md:px-12 md:py-16 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-[0_24px_60px_-20px_rgba(17,17,17,0.32)]">
+        {/* Bespoke Commission Plaque Banner */}
+        <div className="relative overflow-hidden mt-20 rounded-2xl border border-plaque-border bg-plaque text-plaque-ink px-6 py-12 md:px-12 md:py-16 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-[0_24px_60px_-20px_rgba(17,17,17,0.32)]">
           <div
             aria-hidden="true"
-            className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+            className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
           />
           <div className="max-w-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta mb-2">
               Commissions
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl font-medium text-inverse mb-2.5">
+            <h2 className="font-serif text-3xl sm:text-4xl font-medium text-plaque-ink mb-2.5">
               Inquire about a bespoke design
             </h2>
-            <p className="text-sm text-inverse/75 leading-relaxed">
+            <p className="text-sm text-plaque-ink/75 leading-relaxed">
               Share your celebration date, venue location, and motif inspirations—Sana tailors each bridal or festive layout to your preferences and prepares fresh cones specifically for your session.
             </p>
           </div>
@@ -289,7 +289,7 @@ export default function GalleryPage() {
             </LinkButton>
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-inverse/30 bg-transparent px-6 py-2.5 text-sm font-medium text-inverse hover:border-inverse hover:bg-inverse/10 transition-colors"
+              className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-plaque-ink/30 bg-transparent px-6 py-2.5 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
             >
               Shop Products
             </Link>

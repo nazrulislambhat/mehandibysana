@@ -10,14 +10,14 @@
   --color-umber: var(--color-text-muted);
   --color-inverse: var(--color-text-inverse);
 
-  --color-plaque: var(--color-plaque);
-  --color-plaque-ink: var(--color-plaque-ink);
-  --color-plaque-border: var(--color-plaque-border);
+  --color-plaque: var(--color-plaque-surface);
+  --color-plaque-ink: var(--color-plaque-text);
+  --color-plaque-border: var(--color-plaque-outline);
 
   --color-terracotta: var(--color-accent);
   --color-terracotta-dark: var(--color-accent-hover);
   --color-terracotta-solid: var(--color-accent-solid);
-  --color-on-accent: var(--color-on-accent);
+  --color-on-accent: var(--color-accent-ink);
   --color-terracotta-on-ink: var(--color-accent-on-ink);
   --color-terracotta-soft: var(--color-accent-soft);
 
@@ -575,8 +575,8 @@
   width: calc(100% / 6 + 2px);
   margin-inline: -1px;
   height: 100%;
-  background-color: var(--color-plaque);
-  box-shadow: inset -1px 0 0 var(--color-plaque-border);
+  background-color: var(--color-plaque-surface);
+  box-shadow: inset -1px 0 0 var(--color-plaque-outline);
   will-change: transform;
 }
 
@@ -702,7 +702,7 @@
 }
 
 .btn-dir--primary .btn-dir-fill {
-  background-color: var(--color-plaque);
+  background-color: var(--color-plaque-surface);
 }
 
 .btn-dir--accent .btn-dir-lead {

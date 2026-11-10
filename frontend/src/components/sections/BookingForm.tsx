@@ -98,15 +98,15 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         role="status"
         className="overflow-hidden rounded-2xl border border-hairline bg-paper shadow-sm"
       >
-        <div className="bg-ink text-inverse p-7 sm:p-9 relative">
+        <div className="bg-plaque text-plaque-ink border-b border-plaque-border p-7 sm:p-9 relative">
           <div
             aria-hidden="true"
-            className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+            className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
           />
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
             Inquiry Received &middot; {submittedRef}
           </p>
-          <h2 className="font-serif text-3xl font-medium text-inverse">
+          <h2 className="font-serif text-3xl font-medium text-plaque-ink">
             Thank you, {values.name}.
           </h2>
         </div>

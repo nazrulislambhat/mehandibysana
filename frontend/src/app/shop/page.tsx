@@ -304,21 +304,21 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
-              <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse px-6 py-5 min-w-[260px] shadow-sm">
+              <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink px-6 py-5 min-w-[260px] shadow-sm">
                 <div
                   aria-hidden="true"
-                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                 />
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
                   Live Studio Inventory
                 </p>
-                <p className="font-serif text-3xl font-medium text-inverse tabular-nums">
+                <p className="font-serif text-3xl font-medium text-plaque-ink tabular-nums">
                   {catalog.total !== null ? catalog.total : '—'}{' '}
-                  <span className="text-sm font-sans font-normal text-inverse/75">
+                  <span className="text-sm font-sans font-normal text-plaque-ink/75">
                     {catalog.total === 1 ? 'formulation' : 'formulations'}
                   </span>
                 </p>
-                <p className="mt-2 pt-2 border-t border-inverse/15 text-[11px] text-inverse/70">
+                <p className="mt-2 pt-2 border-t border-plaque-ink/15 text-[11px] text-plaque-ink/70">
                   Small-batch dispatch &middot; Check PIN on product or bag
                 </p>
               </div>

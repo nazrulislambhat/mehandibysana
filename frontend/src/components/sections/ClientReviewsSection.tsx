@@ -101,23 +101,23 @@ export function ClientReviewsSection() {
               <figure
                 className={`relative overflow-hidden w-full rounded-2xl p-7 md:p-8 flex flex-col justify-between gap-6 transition-colors ${
                   review.featured
-                    ? 'bg-ink text-inverse border border-ink shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)]'
+                    ? 'bg-plaque text-plaque-ink border border-plaque-border shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)]'
                     : 'bg-paper text-ink border border-hairline hover:border-ink/40'
                 }`}
               >
                 {review.featured ? (
                   <div
                     aria-hidden="true"
-                    className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                    className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                   />
                 ) : null}
 
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-5">
                     <span
-                      className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-serif text-xs italic shrink-0 ${
+                      className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-serif text-sm font-semibold italic shrink-0 ${
                         review.featured
-                          ? 'bg-terracotta text-inverse'
+                          ? 'bg-terracotta-solid text-on-accent'
                           : 'bg-ink text-inverse'
                       }`}
                     >
@@ -142,7 +142,7 @@ export function ClientReviewsSection() {
                   <blockquote
                     className={`leading-relaxed ${
                       review.featured
-                        ? 'text-sm md:text-[15px] text-inverse/90'
+                        ? 'text-sm md:text-[15px] text-plaque-ink/90'
                         : 'text-sm text-ink/90'
                     }`}
                   >
@@ -153,7 +153,7 @@ export function ClientReviewsSection() {
                 <figcaption
                   className={`pt-4 border-t flex items-center justify-between gap-2 text-xs ${
                     review.featured
-                      ? 'border-inverse/15 text-inverse/75'
+                      ? 'border-plaque-ink/15 text-plaque-ink/75'
                       : 'border-hairline text-umber'
                   }`}
                 >

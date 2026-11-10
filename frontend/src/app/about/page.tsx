@@ -235,13 +235,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Ink Black Editorial Pull Quote Plaque */}
+      {/* Editorial Pull Quote Plaque */}
       <section className="editorial-container py-16 md:py-20">
         <TextReveal variant="fade">
-          <figure className="relative overflow-hidden max-w-4xl mx-auto rounded-2xl bg-ink text-inverse p-8 sm:p-12 md:p-14 shadow-[0_24px_60px_-20px_rgba(17,17,17,0.3)]">
+          <figure className="relative overflow-hidden max-w-4xl mx-auto rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-8 sm:p-12 md:p-14 shadow-[0_24px_60px_-20px_rgba(17,17,17,0.3)]">
             <div
               aria-hidden="true"
-              className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+              className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
             />
             <span
               aria-hidden="true"
@@ -249,12 +249,12 @@ export default function AboutPage() {
             >
               &ldquo;
             </span>
-            <blockquote className="font-serif text-2xl sm:text-3xl font-normal text-inverse leading-[1.4]">
+            <blockquote className="font-serif text-2xl sm:text-3xl font-normal text-plaque-ink leading-[1.4]">
               Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient botanical ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.
             </blockquote>
-            <figcaption className="mt-6 pt-5 border-t border-inverse/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
+            <figcaption className="mt-6 pt-5 border-t border-plaque-ink/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               &mdash; Sumaiya Rashid Magray (Sana) &middot;{' '}
-              <span className="text-inverse/75 font-normal">Srinagar &amp; Bangalore</span>
+              <span className="text-plaque-ink/75 font-normal">Srinagar &amp; Bangalore</span>
             </figcaption>
           </figure>
         </TextReveal>
@@ -354,14 +354,14 @@ export default function AboutPage() {
                 <article
                   className={`relative overflow-hidden w-full rounded-2xl p-7 flex flex-col justify-between gap-5 transition-colors ${
                     item.number === '07'
-                      ? 'bg-ink text-inverse border border-ink shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)] md:flex-row md:items-stretch'
+                      ? 'bg-plaque text-plaque-ink border border-plaque-border shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)] md:flex-row md:items-stretch'
                       : 'bg-paper text-ink border border-hairline hover:border-ink/40'
                   }`}
                 >
                   {item.number === '07' ? (
                     <div
                       aria-hidden="true"
-                      className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                      className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                     />
                   ) : null}
 
@@ -377,9 +377,9 @@ export default function AboutPage() {
                         {item.category}
                       </span>
                       <span
-                        className={`inline-flex items-center justify-center w-7 h-7 rounded-full font-serif text-xs italic shrink-0 ${
+                        className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-serif text-sm font-semibold italic shrink-0 ${
                           item.number === '07'
-                            ? 'md:hidden bg-terracotta text-inverse'
+                            ? 'md:hidden bg-terracotta-solid text-on-accent'
                             : 'bg-ink text-inverse'
                         }`}
                       >
@@ -389,7 +389,7 @@ export default function AboutPage() {
 
                     <h3
                       className={`font-serif text-xl sm:text-2xl font-medium leading-snug ${
-                        item.number === '07' ? 'text-inverse' : 'text-ink'
+                        item.number === '07' ? 'text-plaque-ink' : 'text-ink'
                       }`}
                     >
                       {item.title}
@@ -398,7 +398,7 @@ export default function AboutPage() {
                     <p
                       className={`text-sm leading-relaxed ${
                         item.number === '07'
-                          ? 'text-inverse/80 max-w-3xl'
+                          ? 'text-plaque-ink/80 max-w-3xl'
                           : 'text-umber'
                       }`}
                     >
@@ -414,7 +414,7 @@ export default function AboutPage() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center rounded-full border border-terracotta/45 px-3.5 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta hover:text-inverse transition-colors"
+                          className="inline-flex items-center rounded-full border border-terracotta/45 px-3.5 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
                         >
                           {link.label} &#8599;
                         </a>
@@ -422,7 +422,7 @@ export default function AboutPage() {
                     </div>
                   ) : item.number === '07' ? (
                     <div className="flex items-center justify-between md:flex-col md:items-end md:justify-between md:shrink-0 pt-2 md:pt-0">
-                      <span className="hidden md:inline-flex items-center justify-center w-7 h-7 rounded-full bg-terracotta text-inverse font-serif text-xs italic shrink-0">
+                      <span className="hidden md:inline-flex items-center justify-center w-8 h-8 rounded-full bg-terracotta-solid text-on-accent font-serif text-sm font-semibold italic shrink-0">
                         {item.number}
                       </span>
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">

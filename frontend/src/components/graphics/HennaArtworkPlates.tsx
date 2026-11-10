@@ -147,8 +147,8 @@ export function HeroHennaComposition({ className = '' }: { className?: string })
           strokeWidth="1.35"
         />
         <path d="M0 -42V-52" stroke="var(--color-text)" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M-8 4H8" stroke="var(--color-on-accent)" strokeWidth="1.1" strokeLinecap="round" />
-        <path d="M-5 -12H5" stroke="var(--color-on-accent)" strokeWidth="1.1" strokeLinecap="round" />
+        <path d="M-8 4H8" stroke="var(--color-accent-ink)" strokeWidth="1.1" strokeLinecap="round" />
+        <path d="M-5 -12H5" stroke="var(--color-accent-ink)" strokeWidth="1.1" strokeLinecap="round" />
         <path d="M-12 12C-4 15 4 15 12 12" stroke="var(--color-text)" strokeWidth="1.1" />
       </g>
       <circle cx="226" cy="346" r="2.2" fill="var(--color-accent)" />
@@ -399,12 +399,12 @@ export function SanaBurqaAtelierPortrait({ className = '' }: { className?: strin
           strokeLinecap="round"
         />
         {/* Organic Mahogany Henna Tips & Wrist Vine Motif on Artist Hand */}
-        <path d="M229 371L235 375" stroke="#d9541e" strokeWidth="2.6" strokeLinecap="round" />
-        <path d="M231 382L237 385" stroke="#d9541e" strokeWidth="2.4" strokeLinecap="round" />
-        <circle cx="196" cy="380" r="2.2" fill="#d9541e" />
+        <path d="M229 371L235 375" stroke="var(--color-accent)" strokeWidth="2.6" strokeLinecap="round" />
+        <path d="M231 382L237 385" stroke="var(--color-accent)" strokeWidth="2.4" strokeLinecap="round" />
+        <circle cx="196" cy="380" r="2.2" fill="var(--color-accent)" />
         <path
           d="M184 384C190 379 198 381 206 385"
-          stroke="#d9541e"
+          stroke="var(--color-accent)"
           strokeWidth="1.1"
           strokeLinecap="round"
         />
@@ -418,8 +418,8 @@ export function SanaBurqaAtelierPortrait({ className = '' }: { className?: strin
             strokeWidth="1.3"
           />
           <path d="M0 -34V-42" stroke="var(--color-burqa-vein)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M-7 6H7" stroke="var(--color-on-accent)" strokeWidth="1.1" />
-          <path d="M-4 -9H4" stroke="var(--color-on-accent)" strokeWidth="1.1" />
+          <path d="M-7 6H7" stroke="var(--color-accent-ink)" strokeWidth="1.1" />
+          <path d="M-4 -9H4" stroke="var(--color-accent-ink)" strokeWidth="1.1" />
         </g>
 
         {/* Freshly Piped Spiral Henna Paisleys Flowering Beneath Cone */}
@@ -509,14 +509,14 @@ export function HennaPlateArtwork({
           className={className}
         >
           {/* Persistent Dark Archival Plaque Plate */}
-          <rect width="400" height="400" fill="var(--color-plaque)" />
-          <rect x="20" y="20" width="360" height="360" rx="14" stroke="var(--color-plaque-ink)" strokeOpacity="0.2" strokeWidth="1" />
-          <circle cx="200" cy="200" r="128" stroke="var(--color-plaque-ink)" strokeOpacity="0.16" strokeWidth="1" strokeDasharray="4 6" />
+          <rect width="400" height="400" fill="var(--color-plaque-surface)" />
+          <rect x="20" y="20" width="360" height="360" rx="14" stroke="var(--color-plaque-text)" strokeOpacity="0.2" strokeWidth="1" />
+          <circle cx="200" cy="200" r="128" stroke="var(--color-plaque-text)" strokeOpacity="0.16" strokeWidth="1" strokeDasharray="4 6" />
           {/* Grand Kashmiri 5-Lobe Chinar Leaf in Warm Ivory + Copper veins */}
           <g transform="translate(200 206)">
             <path
               d="M0 104V62M0 62C-18 68 -56 76 -84 56C-62 42 -42 32 -28 24C-62 12 -98 -8 -110 -34C-80 -34 -56 -26 -38 -16C-44 -58 -24 -102 0 -132C24 -102 44 -58 38 -16C56 -26 80 -34 110 -34C98 -8 62 12 28 24C42 32 62 42 84 56C56 76 18 68 0 62Z"
-              stroke="var(--color-plaque-ink)"
+              stroke="var(--color-plaque-text)"
               strokeWidth="1.6"
               strokeLinejoin="round"
             />
@@ -525,8 +525,8 @@ export function HennaPlateArtwork({
             <circle cx="0" cy="-138" r="3.5" fill="var(--color-accent)" />
             <circle cx="-116" cy="-38" r="2.8" fill="var(--color-accent)" />
             <circle cx="116" cy="-38" r="2.8" fill="var(--color-accent)" />
-            <circle cx="-88" cy="60" r="2.5" fill="var(--color-plaque-ink)" />
-            <circle cx="88" cy="60" r="2.5" fill="var(--color-plaque-ink)" />
+            <circle cx="-88" cy="60" r="2.5" fill="var(--color-plaque-text)" />
+            <circle cx="88" cy="60" r="2.5" fill="var(--color-plaque-text)" />
           </g>
         </svg>
       );
@@ -547,7 +547,7 @@ export function HennaPlateArtwork({
             <circle r="136" stroke="var(--color-text)" strokeWidth="1.2" />
             <circle r="62" stroke="var(--color-accent)" strokeWidth="1.5" />
             <circle r="22" fill="var(--color-accent-solid)" />
-            <circle r="8" fill="var(--color-on-accent)" />
+            <circle r="8" fill="var(--color-accent-ink)" />
             {Array.from({ length: 24 }).map((_, i) => (
               <g key={i} transform={`rotate(${i * 15})`}>
                 <line
@@ -620,11 +620,11 @@ export function HennaPlateArtwork({
           className={className}
         >
           {/* Persistent Dark Archival Plaque Royal Archway Plate */}
-          <rect width="400" height="500" fill="var(--color-plaque)" />
+          <rect width="400" height="500" fill="var(--color-plaque-surface)" />
           {/* Triple Mughal Scalloped Archways in Warm Ivory & Copper */}
           <path
             d="M44 452V210C44 172 64 146 92 126C124 104 166 86 200 52C234 86 276 104 308 126C336 146 356 172 356 210V452H44Z"
-            stroke="var(--color-plaque-ink)"
+            stroke="var(--color-plaque-text)"
             strokeWidth="1.5"
           />
           <path
@@ -633,15 +633,15 @@ export function HennaPlateArtwork({
             strokeWidth="1.4"
           />
           {/* Chandelier Florals Hanging Down Arch */}
-          <path d="M200 84V360" stroke="var(--color-plaque-ink)" strokeOpacity="0.6" strokeWidth="1.2" />
+          <path d="M200 84V360" stroke="var(--color-plaque-text)" strokeOpacity="0.6" strokeWidth="1.2" />
           {[140, 210, 280, 350].map((y, idx) => (
             <g key={y} transform={`translate(200 ${y})`}>
-              <circle r={24 - idx * 3} stroke="var(--color-accent)" strokeWidth="1.3" fill="var(--color-plaque)" />
-              <circle r={10 - idx} fill="var(--color-plaque-ink)" />
+              <circle r={24 - idx * 3} stroke="var(--color-accent)" strokeWidth="1.3" fill="var(--color-plaque-surface)" />
+              <circle r={10 - idx} fill="var(--color-plaque-text)" />
               <circle r="3" fill="var(--color-accent)" />
             </g>
           ))}
-          <path d="M84 416H316" stroke="var(--color-plaque-ink)" strokeOpacity="0.35" strokeWidth="1.1" />
+          <path d="M84 416H316" stroke="var(--color-plaque-text)" strokeOpacity="0.35" strokeWidth="1.1" />
         </svg>
       );
 
@@ -688,11 +688,11 @@ export function HennaPlateArtwork({
               width="48"
               height="48"
               transform="rotate(45)"
-              fill="var(--color-plaque)"
+              fill="var(--color-plaque-surface)"
               stroke="var(--color-accent)"
               strokeWidth="1.6"
             />
-            <circle r="10" fill="var(--color-plaque-ink)" />
+            <circle r="10" fill="var(--color-plaque-text)" />
             <circle r="4" fill="var(--color-accent)" />
           </g>
           {/* Three Finger Rings at Top */}

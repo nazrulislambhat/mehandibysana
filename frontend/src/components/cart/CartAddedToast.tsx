@@ -90,16 +90,16 @@ export function CartAddedToast() {
         onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
-        className="pointer-events-auto relative w-full overflow-hidden rounded-2xl border border-ink/20 bg-ink text-inverse p-3.5 shadow-[0_20px_50px_-14px_rgba(17,17,17,0.45)]"
+        className="pointer-events-auto relative w-full overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-3.5 shadow-[0_20px_50px_-14px_rgba(17,17,17,0.45)]"
       >
         <div
           aria-hidden="true"
-          className="absolute top-0 left-0 right-0 h-[2.5px] bg-terracotta"
+          className="absolute top-0 left-0 right-0 h-[2.5px] bg-terracotta-solid"
         />
 
         <div className="flex items-center gap-3">
           {addedItem.image ? (
-            <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded-lg border border-inverse/15 bg-linen">
+            <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded-lg border border-plaque-ink/15 bg-linen">
               <Image
                 src={addedItem.image.src}
                 alt={addedItem.image.alt || addedItem.name}
@@ -120,10 +120,10 @@ export function CartAddedToast() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-terracotta">
               Added &middot; Keep Shopping
             </p>
-            <p className="text-xs font-medium text-inverse truncate mt-0.5">
+            <p className="text-xs font-medium text-plaque-ink truncate mt-0.5">
               {addedItem.name}
             </p>
-            <p className="text-[11px] text-inverse/75 tabular-nums mt-0.5">
+            <p className="text-[11px] text-plaque-ink/75 tabular-nums mt-0.5">
               {cart.itemsCount} {cart.itemsCount === 1 ? 'item' : 'items'} in bag &middot;{' '}
               {formatMoney(cart.subtotal, cart.currencySymbol)}
             </p>
@@ -143,7 +143,7 @@ export function CartAddedToast() {
               type="button"
               onClick={handleDismiss}
               aria-label="Dismiss bag notification"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-inverse/20 text-inverse/80 hover:border-inverse/50 hover:text-inverse transition-colors cursor-pointer"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-plaque-ink/20 text-plaque-ink/80 hover:border-plaque-ink/50 hover:text-plaque-ink transition-colors cursor-pointer"
             >
               <CloseCrossIcon size={13} />
             </button>

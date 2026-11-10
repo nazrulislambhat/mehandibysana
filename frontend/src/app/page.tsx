@@ -89,7 +89,7 @@ export default async function HomePage() {
               className="rounded-full self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em]"
             >
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
-              <span aria-hidden="true" className="text-terracotta group-hover/btn:text-inverse transition-colors">&rarr;</span>
+              <span aria-hidden="true" className="text-terracotta group-hover/btn:text-on-accent transition-colors">&rarr;</span>
             </LinkButton>
           </div>
 
@@ -258,25 +258,25 @@ export default async function HomePage() {
         <BotanicalDivider />
       </div>
 
-      {/* Contact / Booking Signature Ink Black Framed Invitation */}
+      {/* Contact / Booking Signature Framed Invitation Plaque */}
       <section aria-labelledby="booking-cta-heading" className="bg-canvas">
         <div className="editorial-container py-16 md:py-24">
           <TextReveal variant="fade">
-            <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse px-6 py-14 md:px-14 md:py-20 text-center max-w-4xl mx-auto shadow-[0_24px_60px_-20px_rgba(17,17,17,0.32)]">
+            <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink px-6 py-14 md:px-14 md:py-20 text-center max-w-4xl mx-auto shadow-[0_24px_60px_-20px_rgba(17,17,17,0.32)]">
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta mb-3">
                 Bookings &amp; Orders
               </p>
               <h2
                 id="booking-cta-heading"
-                className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-inverse leading-tight mb-5"
+                className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-plaque-ink leading-tight mb-5"
               >
                 Planning a celebration or bespoke order?
               </h2>
-              <p className="text-base text-inverse/75 leading-relaxed max-w-xl mx-auto mb-8">
+              <p className="text-base text-plaque-ink/75 leading-relaxed max-w-xl mx-auto mb-8">
                 Bridal and celebration dates are reserved in advance across Srinagar, Bangalore, Jammu &amp; Kashmir, and destination venues. Custom bulk cone orders are freshly mixed and dispatched within 2 business days.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3.5">

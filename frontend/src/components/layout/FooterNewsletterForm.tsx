@@ -58,17 +58,17 @@ export function FooterNewsletterForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-inverse/15 bg-inverse/[0.04] p-4 sm:p-5 space-y-3">
+    <div className="rounded-2xl border border-plaque-ink/15 bg-plaque-ink/[0.04] p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
           Fresh Batch Dispatch List
         </p>
-        <span className="text-[10px] uppercase tracking-[0.16em] text-inverse/55">
+        <span className="text-[10px] uppercase tracking-[0.16em] text-plaque-ink/60">
           Small-Batch Alerts
         </span>
       </div>
 
-      <p className="text-xs text-inverse/75 leading-relaxed">
+      <p className="text-xs text-plaque-ink/75 leading-relaxed">
         Receive quiet studio notes when new 0.38mm cone harvests are rolled or Eid &amp; bridal slots open.
       </p>
 
@@ -100,7 +100,7 @@ export function FooterNewsletterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="min-h-[42px] flex-1 rounded-full border border-inverse/20 bg-ink/80 px-4 py-2 text-xs text-inverse placeholder:text-inverse/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta"
+            className="min-h-[42px] flex-1 rounded-full border border-plaque-ink/20 bg-plaque px-4 py-2 text-xs text-plaque-ink placeholder:text-plaque-ink/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta"
           />
           <Button
             type="submit"
@@ -119,7 +119,7 @@ export function FooterNewsletterForm() {
         <p
           role={status === 'error' ? 'alert' : 'status'}
           className={`text-xs leading-relaxed ${
-            status === 'error' ? 'text-[#fca5a5]' : 'text-inverse/90'
+            status === 'error' ? 'text-[#fca5a5]' : 'text-plaque-ink/90'
           }`}
         >
           {feedback}

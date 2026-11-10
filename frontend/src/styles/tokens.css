@@ -20,14 +20,14 @@
   --color-text-inverse: #fceee3;   /* Cream ink on Ink Black elements */
 
   /* Persistent dark editorial plaques (footer, dark dossier panels, spotlight cards) */
-  --color-plaque: #111111;
-  --color-plaque-ink: #fceee3;
-  --color-plaque-border: rgba(252, 238, 227, 0.16);
+  --color-plaque-surface: #111111;
+  --color-plaque-text: #fceee3;
+  --color-plaque-outline: rgba(252, 238, 227, 0.16);
 
   --color-accent: #d9541e;         /* Burnt Orange for links, labels & highlights */
   --color-accent-hover: #b84214;   /* Deepened Burnt Orange hover/active state */
   --color-accent-solid: #d9541e;   /* Solid button & active badge fill */
-  --color-on-accent: #fceee3;      /* High-contrast cream/ivory ink over solid accent */
+  --color-accent-ink: #fceee3;     /* High-contrast cream/ivory ink over solid accent */
   --color-accent-on-ink: #e86c36;  /* Terracotta accent index over dark selected pill */
   --color-accent-soft: #f5f5f5;    /* Neutral soft surface (never orange-tinted bg) */
 
@@ -116,41 +116,41 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* Deep Pine Obsidian Atelier — Anchored to production Deep Pine (#052225) & Warm Ivory (#fffee9) */
-  --color-bg: #071618;
-  --color-surface: #0c2023;
-  --color-card: #10282c;
+  /* Neutral Obsidian Atelier (#181818) — Anchored to crisp #181818 dark ground, #111111 plaques & Warm Ivory (#fffee9) */
+  --color-bg: #181818;
+  --color-surface: #202020;
+  --color-card: #242424;
 
   --color-text: #fffee9;
-  --color-text-muted: #b8c6c2;
-  --color-text-inverse: #052225;
+  --color-text-muted: #b5b0aa;
+  --color-text-inverse: #181818;
 
-  --color-plaque: #052225;
-  --color-plaque-ink: #fffee9;
-  --color-plaque-border: #254a4f;
+  --color-plaque-surface: #111111;
+  --color-plaque-text: #fceee3;
+  --color-plaque-outline: #333333;
 
   --color-accent: #e86c36;
   --color-accent-hover: #9f3910;
   --color-accent-solid: #c44916;
-  --color-on-accent: #fffaf5;
+  --color-accent-ink: #fffaf5;
   --color-accent-on-ink: #b84214;
-  --color-accent-soft: #0f272b;
+  --color-accent-soft: #222222;
 
-  --color-border: #1f3e42;
-  --color-border-strong: #3d6368;
+  --color-border: #2d2d2d;
+  --color-border-strong: #424242;
   --color-focus: #e86c36;
 
   --color-success: #e86c36;
   --color-warning: #e86c36;
   --color-error: #f87171;
 
-  --color-plate-ground: #0c2023;
-  --color-plate-veil: #10282c;
-  --color-burqa-fill: #031113;
-  --color-burqa-khimar: #061c1f;
-  --color-burqa-vein: #fffee9;
+  --color-plate-ground: #202020;
+  --color-plate-veil: #242424;
+  --color-burqa-fill: #111111;
+  --color-burqa-khimar: #181818;
+  --color-burqa-vein: #fceee3;
 
-  --color-crest-plate: #052225;
+  --color-crest-plate: #181818;
   --color-crest-rim: #c67d48;
   --color-crest-ring: #e5a365;
   --color-crest-dot: #e5a365;
@@ -158,6 +158,6 @@
   --color-crest-mid: #c67d48;
   --color-crest-bot: #9e5427;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.42);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
 }

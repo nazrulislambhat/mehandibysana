@@ -175,7 +175,7 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
                     <span
                       aria-hidden="true"
                       style={{ backgroundColor: tone.baseFill }}
-                      className="w-3.5 h-3.5 rounded-full border border-black/20 shrink-0"
+                      className="w-3.5 h-3.5 rounded-full border border-ink/20 shrink-0"
                     />
                     <span>{tone.label}</span>
                   </button>
@@ -476,7 +476,7 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
                       <span
                         aria-hidden="true"
                         style={{ backgroundColor: stage.swatchHex }}
-                        className="w-4 h-4 rounded-full border border-black/15"
+                        className="w-4 h-4 rounded-full border border-ink/20"
                       />
                     </div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-ink">
@@ -519,7 +519,7 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
                 step={1}
                 value={activeIndex}
                 onChange={(e) => setActiveIndex(Number(e.target.value))}
-                className="w-full accent-[#d9541e] cursor-pointer"
+                className="w-full accent-terracotta cursor-pointer"
               />
               <div className="flex items-center justify-between text-[11px] text-umber mt-1">
                 <span>0 hrs (Apply)</span>

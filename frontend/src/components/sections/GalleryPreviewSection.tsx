@@ -135,7 +135,7 @@ export function GalleryPreviewSection() {
                 <div
                   className={`relative ${item.aspectClass} w-full overflow-hidden rounded-xl border border-hairline bg-linen`}
                 >
-                  <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink/90 backdrop-blur-sm border border-inverse/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-inverse">
+                  <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-plaque/90 backdrop-blur-sm border border-plaque-border/80 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-plaque-ink">
                     <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
                     {item.plate}
                   </span>

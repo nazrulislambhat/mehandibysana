@@ -250,7 +250,7 @@ export function CartDrawer() {
         data-state={renderState}
         aria-label="Close shopping bag overlay"
         onClick={() => handleClose(true)}
-        className="bag-backdrop fixed inset-0 bg-ink/50 backdrop-blur-[6px] cursor-default"
+        className="bag-backdrop fixed inset-0 bg-black/60 backdrop-blur-[6px] cursor-default"
       />
 
       {/* Centered Editorial Folio Modal (Bottom Sheet on Small Screens) */}
@@ -272,8 +272,8 @@ export function CartDrawer() {
         </div>
 
         {/* Architectural Dual-Tone Top Edge */}
-        <div aria-hidden="true" className="hidden sm:block h-[3px] w-full bg-ink relative shrink-0">
-          <span className="absolute left-0 top-0 h-full w-36 bg-terracotta" />
+        <div aria-hidden="true" className="hidden sm:block h-[3px] w-full bg-plaque relative shrink-0">
+          <span className="absolute left-0 top-0 h-full w-36 bg-terracotta-solid" />
         </div>
 
         {/* Crisp Folio Masthead */}
@@ -312,8 +312,8 @@ export function CartDrawer() {
                 aria-live="polite"
                 className={`inline-flex items-center justify-center min-w-[26px] h-[26px] px-2 rounded-full text-xs font-semibold tabular-nums ${
                   itemCount > 0
-                    ? 'bg-terracotta text-inverse'
-                    : 'bg-ink text-inverse'
+                    ? 'bg-terracotta-solid text-on-accent'
+                    : 'bg-plaque text-plaque-ink border border-plaque-border'
                 }`}
               >
                 {itemCount}
@@ -472,7 +472,7 @@ export function CartDrawer() {
                         <div className="relative h-24 w-20 sm:h-28 sm:w-[88px] shrink-0 overflow-hidden rounded-xl border border-hairline bg-linen">
                           <span
                             aria-hidden="true"
-                            className="absolute top-1.5 left-1.5 z-10 rounded-full bg-ink px-1.5 py-0.5 font-serif text-[10px] italic text-inverse leading-none"
+                            className="absolute top-1.5 left-1.5 z-10 rounded-full bg-plaque px-1.5 py-0.5 font-serif text-[10px] italic text-plaque-ink border border-plaque-border leading-none"
                           >
                             {dossierIndex}
                           </span>
@@ -585,11 +585,11 @@ export function CartDrawer() {
               </div>
             </div>
 
-            {/* Right 5 Columns: Ink Black Order Dossier */}
-            <div className="lg:col-span-5 shrink-0 bag-folio-summary relative flex flex-col lg:min-h-0 justify-between gap-5 bg-ink text-inverse px-5 sm:px-7 py-5 sm:py-6 border-t lg:border-t-0 lg:border-l border-ink lg:overflow-y-auto">
+            {/* Right 5 Columns: Deep Atelier Order Dossier */}
+            <div className="lg:col-span-5 shrink-0 bag-folio-summary relative flex flex-col lg:min-h-0 justify-between gap-5 bg-plaque text-plaque-ink px-5 sm:px-7 py-5 sm:py-6 border-t lg:border-t-0 lg:border-l border-plaque-border lg:overflow-y-auto">
               <div
                 aria-hidden="true"
-                className="hidden lg:block absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                className="hidden lg:block absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
 
               <div className="space-y-4">
@@ -599,7 +599,7 @@ export function CartDrawer() {
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-terracotta">
                       Order Dossier
                     </p>
-                    <h3 className="font-serif text-2xl font-medium text-inverse leading-tight mt-0.5">
+                    <h3 className="font-serif text-2xl font-medium text-plaque-ink leading-tight mt-0.5">
                       Summary &amp; Dispatch
                     </h3>
                   </div>
@@ -610,18 +610,18 @@ export function CartDrawer() {
                 </div>
 
                 {/* Inline PIN Delivery Estimator */}
-                <div className="rounded-xl border border-inverse/15 bg-inverse/5 p-3.5 space-y-2.5">
+                <div className="rounded-xl border border-plaque-ink/15 bg-plaque-ink/5 p-3.5 space-y-2.5">
                   <div className="flex items-center justify-between gap-2 text-xs">
                     <div className="min-w-0">
-                      <span className="text-inverse/70 uppercase tracking-[0.12em] text-[10px] font-semibold block">
+                      <span className="text-plaque-ink/70 uppercase tracking-[0.12em] text-[10px] font-semibold block">
                         Delivery PIN
                       </span>
                       {activeDelivery ? (
-                        <span className="text-inverse font-medium truncate block mt-0.5">
+                        <span className="text-plaque-ink font-medium truncate block mt-0.5">
                           {activeDelivery.pincode} · {activeDelivery.matchedRule?.pattern}
                         </span>
                       ) : (
-                        <span className="text-inverse/75 block mt-0.5">
+                        <span className="text-plaque-ink/75 block mt-0.5">
                           Enter PIN for exact charge
                         </span>
                       )}
@@ -630,7 +630,7 @@ export function CartDrawer() {
                       type="button"
                       onClick={() => setShowPinChecker((prev) => !prev)}
                       aria-expanded={showPinChecker}
-                      className="shrink-0 rounded-full border border-inverse/25 px-3 py-1 text-[11px] font-medium text-terracotta hover:border-terracotta hover:text-inverse transition-colors cursor-pointer"
+                      className="shrink-0 rounded-full border border-plaque-ink/25 px-3 py-1 text-[11px] font-medium text-terracotta hover:border-terracotta hover:text-plaque-ink transition-colors cursor-pointer"
                     >
                       {showPinChecker
                         ? 'Hide'
@@ -641,7 +641,7 @@ export function CartDrawer() {
                   </div>
 
                   {showPinChecker ? (
-                    <div className="pt-2 border-t border-inverse/12 space-y-2">
+                    <div className="pt-2 border-t border-plaque-ink/12 space-y-2">
                       <form onSubmit={handleQuickPinSubmit} className="flex items-center gap-2">
                         <label htmlFor="drawer-pin-input" className="sr-only">
                           6-digit PIN code
@@ -654,12 +654,12 @@ export function CartDrawer() {
                           placeholder="6-digit PIN"
                           value={pincode}
                           onChange={(e) => setPincode(e.target.value)}
-                          className="flex-1 min-w-0 min-h-[36px] rounded-full border border-inverse/25 bg-inverse/10 px-3.5 text-xs text-inverse placeholder:text-inverse/50 focus:outline-none focus:border-terracotta"
+                          className="flex-1 min-w-0 min-h-[36px] rounded-full border border-plaque-ink/25 bg-plaque-ink/10 px-3.5 text-xs text-plaque-ink placeholder:text-plaque-ink/50 focus:outline-none focus:border-terracotta"
                         />
                         <button
                           type="submit"
                           disabled={isCheckingPin || pincode.length < 6}
-                          className="min-h-[36px] rounded-full bg-terracotta px-4 text-xs font-medium text-inverse hover:bg-terracotta-dark disabled:opacity-50 cursor-pointer"
+                          className="min-h-[36px] rounded-full bg-terracotta-solid px-4 text-xs font-medium text-on-accent hover:bg-terracotta-dark disabled:opacity-50 cursor-pointer"
                         >
                           {isCheckingPin ? '…' : 'Check'}
                         </button>
@@ -677,8 +677,8 @@ export function CartDrawer() {
                             onClick={() => handleSamplePin(sample.pin)}
                             className={`rounded-full border px-2.5 py-0.5 transition-colors cursor-pointer ${
                               activeDelivery?.pincode === sample.pin
-                                ? 'border-terracotta bg-terracotta text-inverse'
-                                : 'border-inverse/25 bg-inverse/5 text-inverse/85 hover:border-terracotta hover:text-terracotta'
+                                ? 'border-terracotta-solid bg-terracotta-solid text-on-accent'
+                                : 'border-plaque-ink/25 bg-plaque-ink/5 text-plaque-ink/85 hover:border-terracotta hover:text-terracotta'
                             }`}
                           >
                             {sample.tag}
@@ -705,12 +705,12 @@ export function CartDrawer() {
                 />
 
                 {/* Pricing Breakdown */}
-                <div className="border-t border-inverse/15 pt-4 space-y-2">
+                <div className="border-t border-plaque-ink/15 pt-4 space-y-2">
                   <div className="flex items-baseline justify-between text-xs">
-                    <span className="uppercase tracking-[0.14em] text-inverse/75">
+                    <span className="uppercase tracking-[0.14em] text-plaque-ink/75">
                       Items ({itemCount})
                     </span>
-                    <span className="font-serif text-lg font-medium text-inverse tabular-nums">
+                    <span className="font-serif text-lg font-medium text-plaque-ink tabular-nums">
                       {formatMoney(subtotal, currency)}
                     </span>
                   </div>
@@ -724,7 +724,7 @@ export function CartDrawer() {
                     </div>
                   ) : null}
 
-                  <div className="flex items-center justify-between text-xs text-inverse/80">
+                  <div className="flex items-center justify-between text-xs text-plaque-ink/80">
                     <span>
                       {activeDelivery
                         ? `Shipping (PIN ${activeDelivery.pincode})`
@@ -732,7 +732,7 @@ export function CartDrawer() {
                     </span>
                     <span
                       className={`font-semibold tabular-nums ${
-                        activeDelivery ? 'text-terracotta' : 'text-inverse/70'
+                        activeDelivery ? 'text-terracotta' : 'text-plaque-ink/70'
                       }`}
                     >
                       {activeDelivery
@@ -743,11 +743,11 @@ export function CartDrawer() {
                     </span>
                   </div>
 
-                  <div className="pt-2.5 border-t border-inverse/15 flex items-baseline justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-inverse">
+                  <div className="pt-2.5 border-t border-plaque-ink/15 flex items-baseline justify-between">
+                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink">
                       {activeDelivery ? 'Estimated Total' : 'Order Total'}
                     </span>
-                    <span className="font-serif text-3xl font-medium text-inverse tabular-nums">
+                    <span className="font-serif text-3xl font-medium text-plaque-ink tabular-nums">
                       {formatMoney(estimatedTotal, currency)}
                     </span>
                   </div>
@@ -773,7 +773,7 @@ export function CartDrawer() {
                     variant="inverse"
                     size="sm"
                     onClick={() => handleClose(false)}
-                    className="min-h-[42px] rounded-full text-xs border-inverse/25"
+                    className="min-h-[42px] rounded-full text-xs border-plaque-ink/25"
                   >
                     View Bag Ledger
                   </LinkButton>
@@ -782,13 +782,13 @@ export function CartDrawer() {
                     variant="inverse"
                     size="sm"
                     onClick={() => handleClose(true)}
-                    className="min-h-[42px] rounded-full text-xs border-inverse/25"
+                    className="min-h-[42px] rounded-full text-xs border-plaque-ink/25"
                   >
                     Keep Browsing
                   </Button>
                 </div>
 
-                <p className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] text-inverse/65 text-center leading-relaxed pt-0.5">
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] text-plaque-ink/65 text-center leading-relaxed pt-0.5">
                   <ShieldProtectIcon size={13} className="text-terracotta shrink-0" />
                   <span>Razorpay UPI / Cards &middot; Cash on Delivery across serviceable PINs</span>
                 </p>

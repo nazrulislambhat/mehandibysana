@@ -115,7 +115,7 @@ export function CartView() {
                   >
                     <span
                       className={`font-serif italic ${
-                        st.active ? 'text-terracotta' : 'text-umber'
+                        st.active ? 'text-terracotta-on-ink' : 'text-umber'
                       }`}
                     >
                       {st.num}
@@ -205,7 +205,7 @@ export function CartView() {
                       <div className="relative h-32 w-28 shrink-0 overflow-hidden rounded-xl border border-hairline bg-linen">
                         <span
                           aria-hidden="true"
-                          className="absolute top-2 left-2 z-10 rounded-full bg-ink px-2 py-0.5 font-serif text-[11px] italic text-inverse leading-none"
+                          className="absolute top-2 left-2 z-10 rounded-full bg-plaque px-2 py-0.5 font-serif text-[11px] italic text-plaque-ink border border-plaque-border leading-none"
                         >
                           {lineIndex}
                         </span>
@@ -319,11 +319,11 @@ export function CartView() {
               <PincodeChecker subtotal={subtotal} compact />
               <CouponCodeBox subtotal={subtotal} shippingFee={deliveryFee ?? 0} />
 
-              <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
+              <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
                 {/* Burnt Orange signature trim */}
                 <div
                   aria-hidden="true"
-                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                 />
 
                 <div className="flex items-center justify-between gap-2 mb-2">
@@ -331,21 +331,21 @@ export function CartView() {
                     <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
                       Order Dossier
                     </span>
-                    <span className="font-serif text-xs italic text-inverse/70 block mt-0.5">
+                    <span className="font-serif text-xs italic text-plaque-ink/70 block mt-0.5">
                       Srinagar &amp; Bangalore
                     </span>
                   </div>
                   <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />
                 </div>
 
-                <h2 className="font-serif text-3xl font-medium text-inverse mb-6">
+                <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-6">
                   Summary
                 </h2>
 
-                <dl className="space-y-3 text-sm border-b border-inverse/15 pb-5 mb-5">
+                <dl className="space-y-3 text-sm border-b border-plaque-ink/15 pb-5 mb-5">
                   <div className="flex justify-between gap-3">
-                    <dt className="text-inverse/75">Items ({itemCount})</dt>
-                    <dd className="font-medium text-inverse tabular-nums">
+                    <dt className="text-plaque-ink/75">Items ({itemCount})</dt>
+                    <dd className="font-medium text-plaque-ink tabular-nums">
                       {formatMoney(subtotal, currency)}
                     </dd>
                   </div>
@@ -360,7 +360,7 @@ export function CartView() {
                     </div>
                   ) : null}
                   <div className="flex justify-between gap-3">
-                    <dt className="text-inverse/75">
+                    <dt className="text-plaque-ink/75">
                       Delivery
                       {pincodeResult?.serviceable && pincodeResult.matchedRule
                         ? ` (PIN ${pincodeResult.pincode} · ${pincodeResult.matchedRule.pattern})`
@@ -368,7 +368,7 @@ export function CartView() {
                     </dt>
                     <dd
                       className={`font-medium tabular-nums ${
-                        deliveryFee !== null ? 'text-terracotta' : 'text-inverse/70'
+                        deliveryFee !== null ? 'text-terracotta' : 'text-plaque-ink/70'
                       }`}
                     >
                       {deliveryFee !== null
@@ -381,10 +381,10 @@ export function CartView() {
                 </dl>
 
                 <div className="flex items-baseline justify-between mb-6">
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-inverse/80">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink/80">
                     Estimated Total
                   </span>
-                  <span className="font-serif text-4xl font-medium text-inverse tabular-nums">
+                  <span className="font-serif text-4xl font-medium text-plaque-ink tabular-nums">
                     {formatMoney(estimatedTotal, currency)}
                   </span>
                 </div>
@@ -399,7 +399,7 @@ export function CartView() {
                   <span aria-hidden="true">&rarr;</span>
                 </LinkButton>
 
-                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-inverse/65 text-center leading-relaxed">
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">
                   <ShieldProtectIcon size={14} className="text-terracotta shrink-0" />
                   <span>Supports Razorpay UPI / Cards &amp; Cash on Delivery across serviceable PIN codes.</span>
                 </p>

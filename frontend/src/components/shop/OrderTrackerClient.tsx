@@ -268,20 +268,20 @@ export function OrderTrackerClient({
 
       {order ? (
         <div className="overflow-hidden rounded-2xl border border-hairline bg-paper shadow-[0_20px_50px_-20px_rgba(17,17,17,0.16)]">
-          {/* Ink Black Header Strip */}
-          <div className="bg-ink text-inverse p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative">
+          {/* Deep Pine Atelier / Ink Black Header Strip */}
+          <div className="bg-plaque text-plaque-ink border-b border-plaque-border p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative">
             <div
               aria-hidden="true"
-              className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+              className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
             />
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1">
                 Live Studio Dispatch Status
               </p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
+              <h2 className="font-serif text-3xl sm:text-4xl font-medium text-plaque-ink">
                 Order {order.orderNumber}
               </h2>
-              <p className="text-xs text-inverse/75 mt-1">
+              <p className="text-xs text-plaque-ink/75 mt-1">
                 Placed on{' '}
                 {new Date(order.createdAt).toLocaleDateString('en-IN', {
                   day: 'numeric',
@@ -293,13 +293,13 @@ export function OrderTrackerClient({
             </div>
 
             <div className="flex flex-col sm:items-end gap-2">
-              <BotanicalSprig className="w-12 h-4 text-inverse/70" />
+              <BotanicalSprig className="w-12 h-4 text-plaque-ink/70" />
               <div className="flex flex-wrap sm:justify-end items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-terracotta px-3.5 py-1 text-xs font-medium text-inverse">
+                <span className="inline-flex items-center rounded-full bg-terracotta-solid px-3.5 py-1 text-xs font-medium text-on-accent">
                   {order.courierName}
                 </span>
                 {order.trackingNumber ? (
-                  <span className="inline-flex items-center rounded-full border border-inverse/25 px-3.5 py-1 font-mono text-xs text-inverse">
+                  <span className="inline-flex items-center rounded-full border border-plaque-ink/25 px-3.5 py-1 font-mono text-xs text-plaque-ink">
                     Ref / AWB: {order.trackingNumber}
                   </span>
                 ) : null}
@@ -309,7 +309,7 @@ export function OrderTrackerClient({
                   href={order.trackingUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-inverse transition-colors"
+                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-plaque-ink transition-colors"
                 >
                   Open Courier Tracking &rarr;
                 </a>
@@ -350,7 +350,7 @@ export function OrderTrackerClient({
                       <div className="flex items-center justify-between gap-2 mb-2">
                         <span
                           className={`font-serif text-xs italic ${
-                            isCurrent ? 'text-terracotta' : 'text-terracotta'
+                            isCurrent ? 'text-terracotta-on-ink' : 'text-terracotta'
                           }`}
                         >
                           {st.step}
@@ -358,7 +358,7 @@ export function OrderTrackerClient({
                         <span
                           className={`w-2.5 h-2.5 rounded-full ${
                             isCurrent
-                              ? 'bg-terracotta'
+                              ? 'bg-terracotta-solid'
                               : isDone
                                 ? 'bg-ink'
                                 : 'bg-divider'

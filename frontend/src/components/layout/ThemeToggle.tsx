@@ -58,7 +58,13 @@ export function ThemeToggle({
         >
           <SunBurstIcon
             size={14}
-            className={!isDark ? 'text-terracotta-on-ink shrink-0' : 'shrink-0'}
+            className={
+              !isDark
+                ? isPlaque
+                  ? 'text-terracotta-dark shrink-0'
+                  : 'text-terracotta-on-ink shrink-0'
+                : 'shrink-0'
+            }
           />
           <span>Light</span>
         </button>
@@ -80,7 +86,13 @@ export function ThemeToggle({
         >
           <CrescentMoonIcon
             size={14}
-            className={isDark ? 'text-terracotta-on-ink shrink-0' : 'shrink-0'}
+            className={
+              isDark
+                ? isPlaque
+                  ? 'text-terracotta-dark shrink-0'
+                  : 'text-terracotta-on-ink shrink-0'
+                : 'shrink-0'
+            }
           />
           <span>Dark</span>
         </button>

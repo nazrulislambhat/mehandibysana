@@ -220,14 +220,14 @@ export default function FaqPage() {
         </section>
       ))}
 
-      <section className="rounded-2xl border border-hairline bg-ink text-inverse p-7 sm:p-8 space-y-4">
+      <section className="rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-7 sm:p-8 space-y-4">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
           Still Have Questions?
         </p>
-        <h2 className="font-serif text-2xl sm:text-3xl font-medium text-inverse">
+        <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
           Speak directly with our studio coordinators
         </h2>
-        <p className="text-sm text-inverse/75 leading-relaxed">
+        <p className="text-sm text-plaque-ink/75 leading-relaxed">
           Need guidance picking cone counts for a bridal event, verifying an order reference, or planning an urgent delivery? Reach out anytime.
         </p>
         <div className="flex flex-wrap gap-3 pt-1">
@@ -236,7 +236,7 @@ export default function FaqPage() {
           </LinkButton>
           <Link
             href="/henna-care"
-            className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-inverse/30 px-5 py-2 text-sm font-medium text-inverse hover:border-inverse hover:bg-inverse/10 transition-colors"
+            className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-plaque-ink/30 px-5 py-2 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
           >
             Read Stain Care Guide
           </Link>

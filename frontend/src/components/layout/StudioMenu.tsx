@@ -17,6 +17,7 @@ import {
 } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
 type MenuPhase = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -143,7 +144,7 @@ export function StudioMenu() {
               data-state={phase}
               onClick={() => closeMenu(true)}
               aria-hidden="true"
-              className="menu-backdrop fixed inset-0 bg-ink/40 backdrop-blur-[3px]"
+              className="menu-backdrop fixed inset-0 bg-black/60 backdrop-blur-[3px]"
             />
 
             {/* Sliding & fading editorial parchment drawer */}
@@ -168,7 +169,7 @@ export function StudioMenu() {
                       onClick={() => closeMenu(false)}
                       className="inline-flex items-center gap-2.5 font-serif text-xl sm:text-2xl font-medium tracking-tight text-ink hover:text-terracotta py-1.5"
                     >
-                      <BrandCrest tone="cream-badge" size={32} decorative className="shrink-0" />
+                      <BrandCrest tone="auto-badge" size={32} decorative className="shrink-0" />
                       <span>Mehandi by Sana</span>
                     </Link>
                     <span className="hidden sm:inline-flex items-center gap-2 rounded-full border border-hairline bg-linen/80 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-umber">
@@ -191,8 +192,8 @@ export function StudioMenu() {
               </div>
 
               {/* Main Split Editorial Menu Body */}
-              <div className="editorial-container relative py-5 sm:py-10 lg:py-12 flex-1">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-start">
+              <div className="editorial-container relative py-3.5 sm:py-10 lg:py-12 flex-1">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-8 lg:gap-12 items-start">
                   {/* Left Column: Staggered Masked Serif Navigation */}
                   <nav
                     aria-label="Studio chapters"
@@ -209,7 +210,7 @@ export function StudioMenu() {
                       const closeDelay = `${(STUDIO_NAV_ITEMS.length - 1 - idx) * 28}ms`;
 
                       return (
-                        <div key={item.href} className="overflow-hidden py-1.5 sm:py-3">
+                        <div key={item.href} className="overflow-hidden py-1 sm:py-3">
                           <Link
                             href={item.href}
                             prefetch={item.prefetch}
@@ -304,8 +305,8 @@ export function StudioMenu() {
                     </div>
 
                     {/* Quick Apothecary Collections */}
-                    <div className="rounded-2xl border border-hairline bg-linen/75 p-4 sm:p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-umber mb-2.5">
+                    <div className="rounded-2xl border border-hairline bg-linen/75 p-3.5 sm:p-5">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-umber mb-2">
                         Apothecary Collections
                       </p>
                       <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -314,7 +315,7 @@ export function StudioMenu() {
                             key={collection.href}
                             href={collection.href}
                             onClick={() => closeMenu(false)}
-                            className="inline-flex items-center gap-1.5 min-h-[34px] sm:min-h-[36px] rounded-full border border-divider bg-paper px-3 sm:px-3.5 py-1 sm:py-1.5 text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+                            className="inline-flex items-center gap-1.5 min-h-[30px] sm:min-h-[36px] rounded-full border border-divider bg-paper px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
                           >
                             <span>{collection.title}</span>
                           </Link>
@@ -323,24 +324,24 @@ export function StudioMenu() {
                     </div>
 
                     {/* Primary Studio Actions */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                    <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                       <LinkButton
                         href="/shop"
                         variant="primary"
                         size="md"
                         onClick={() => closeMenu(false)}
-                        className="min-h-[46px] rounded-xl"
+                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6"
                       >
-                        Shop All Products
+                        Shop Products
                       </LinkButton>
                       <LinkButton
                         href="/contact"
                         variant="secondary"
                         size="md"
                         onClick={() => closeMenu(false)}
-                        className="min-h-[46px] rounded-xl"
+                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6"
                       >
-                        Book Bridal Mehndi
+                        Book Mehndi
                       </LinkButton>
                     </div>
                   </div>
@@ -348,12 +349,20 @@ export function StudioMenu() {
               </div>
 
               {/* Drawer Editorial Footer */}
-              <div className="border-t border-hairline bg-linen/50 py-3.5">
-                <div className="editorial-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-umber">
-                  <span>Srinagar &amp; Bangalore &middot; 100% Chemical-Free Botanical Henna</span>
-                  <span className="font-medium text-ink">
-                    Pan-India Courier &amp; Speed Post Dispatch
-                  </span>
+              <div className="border-t border-hairline bg-linen/50 py-3 pb-4 sm:py-3.5">
+                <div className="editorial-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-umber">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <span>Srinagar &amp; Bangalore &middot; 100% Chemical-Free Botanical Henna</span>
+                    <span className="font-medium text-ink hidden md:inline">
+                      Pan-India Courier &amp; Speed Post Dispatch
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-umber">
+                      Appearance
+                    </span>
+                    <ThemeToggle variant="segmented" surface="canvas" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -379,8 +388,8 @@ export function StudioMenu() {
         }}
         className={`group inline-flex md:hidden items-center gap-2 min-h-[42px] px-3.5 rounded-full border text-[13px] font-medium transition-all cursor-pointer ${
           isExpanded
-            ? 'border-terracotta bg-terracotta text-inverse'
-            : 'border-ink bg-ink text-inverse hover:bg-terracotta hover:border-terracotta'
+            ? 'border-terracotta-solid bg-terracotta-solid text-on-accent'
+            : 'border-plaque-border bg-plaque text-plaque-ink hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent'
         }`}
       >
         <span className="hidden sm:inline tracking-tight">

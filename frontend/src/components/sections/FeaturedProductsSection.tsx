@@ -160,7 +160,7 @@ export function FeaturedProductsSection({
               >
                 <span
                   className={`font-serif text-[11px] italic ${
-                    isSelected ? 'text-terracotta' : 'text-umber'
+                    isSelected ? 'text-terracotta-on-ink' : 'text-umber'
                   }`}
                 >
                   {tab.index}
@@ -178,11 +178,11 @@ export function FeaturedProductsSection({
 
       {/* 12-Column Asymmetric Bento Showcase */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        {/* Column 1 (lg:5): Ink Black Flagship Dossier Card */}
-        <article className="lg:col-span-5 group relative overflow-hidden rounded-2xl bg-ink text-inverse p-6 sm:p-7 flex flex-col justify-between shadow-[0_24px_55px_-22px_rgba(17,17,17,0.34)]">
+        {/* Column 1 (lg:5): Flagship Atelier Spotlight Plaque */}
+        <article className="lg:col-span-5 group relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 sm:p-7 flex flex-col justify-between shadow-[0_24px_55px_-22px_rgba(17,17,17,0.34)]">
           <div
             aria-hidden="true"
-            className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+            className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
           />
 
           <div>
@@ -195,11 +195,11 @@ export function FeaturedProductsSection({
                 </span>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-inverse/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-inverse/90">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/90">
                 <span
                   aria-hidden="true"
                   className={`w-1.5 h-1.5 rounded-full ${
-                    leadProduct.inStock ? 'bg-terracotta' : 'bg-inverse/45'
+                    leadProduct.inStock ? 'bg-terracotta' : 'bg-plaque-ink/45'
                   }`}
                 />
                 {leadProduct.inStock ? 'Ready to Ship' : 'Batch Restocking'}
@@ -209,7 +209,7 @@ export function FeaturedProductsSection({
             {/* Edge-to-edge Square Studio Image Frame */}
             <Link
               href={`/product/${leadProduct.slug}`}
-              className="block relative aspect-square w-full overflow-hidden rounded-xl bg-canvas border border-inverse/15 mb-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
+              className="block relative aspect-square w-full overflow-hidden rounded-xl bg-canvas border border-plaque-ink/15 mb-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
             >
               {leadImage ? (
                 <Image
@@ -243,22 +243,22 @@ export function FeaturedProductsSection({
               href={`/product/${leadProduct.slug}`}
               className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus rounded-sm"
             >
-              <h3 className="font-serif text-2xl sm:text-3xl font-medium text-inverse group-hover:text-terracotta leading-tight transition-colors">
+              <h3 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink group-hover:text-terracotta leading-tight transition-colors">
                 {leadProduct.name}
               </h3>
             </Link>
 
-            <p className="text-sm text-inverse/75 leading-relaxed mt-3 line-clamp-3">
+            <p className="text-sm text-plaque-ink/75 leading-relaxed mt-3 line-clamp-3">
               {getCleanNote(leadProduct)}
             </p>
           </div>
 
-          <div className="pt-5 mt-6 border-t border-inverse/15 flex flex-wrap items-center justify-between gap-4">
+          <div className="pt-5 mt-6 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-inverse/55">
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-plaque-ink/55">
                 Studio Price
               </span>
-              <span className="font-serif text-2xl sm:text-3xl font-medium text-inverse tabular-nums">
+              <span className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink tabular-nums">
                 {formatPriceRange(leadProduct)}
               </span>
             </div>
@@ -286,7 +286,7 @@ export function FeaturedProductsSection({
           </div>
         </article>
 
-        {/* Column 2 (lg:7): Tight 2x2 White Atelier Product Grid */}
+        {/* Column 2 (lg:7): Tight 2x2 Atelier Product Grid */}
         <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {secondaryProducts.map((product, idx) => {
             const img = product.images[0] ?? null;
@@ -309,7 +309,7 @@ export function FeaturedProductsSection({
                     className="block relative aspect-square sm:aspect-[5/4] w-full overflow-hidden rounded-xl border border-hairline bg-canvas mb-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus"
                   >
                     {/* Index Number & Availability */}
-                    <span className="absolute top-2.5 left-2.5 z-10 inline-flex items-center rounded-full bg-ink px-2.5 py-0.5 font-serif text-[11px] italic text-inverse">
+                    <span className="absolute top-2.5 left-2.5 z-10 inline-flex items-center rounded-full border border-plaque-border bg-plaque px-2.5 py-0.5 font-serif text-[11px] italic text-plaque-ink">
                       {indexLabel}
                     </span>
 

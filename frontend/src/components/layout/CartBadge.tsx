@@ -71,8 +71,8 @@ export function CartBadge() {
           isPulsing ? 'bag-badge-pulse' : ''
         } ${
           itemCount > 0
-            ? 'bg-terracotta text-inverse'
-            : 'bg-ink text-inverse'
+            ? 'bg-terracotta-solid text-on-accent'
+            : 'bg-plaque text-plaque-ink border border-plaque-border'
         }`}
       >
         {isPulsing ? (
