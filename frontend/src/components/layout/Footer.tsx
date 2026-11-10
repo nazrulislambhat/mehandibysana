@@ -6,7 +6,7 @@ import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 
 const APOTHECARY_LINKS = [
-  { label: 'Shop All Botanicals', href: '/shop' },
+  { label: 'Shop All', href: '/shop' },
   { label: 'Organic Henna', href: '/shop?category=organic-henna' },
   { label: 'Bridal & Care Kits', href: '/shop?category=henna-kits-combos' },
   { label: 'Essential Oils', href: '/shop?category=henna-care-essential-oils' },

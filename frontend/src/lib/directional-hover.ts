@@ -25,8 +25,11 @@ function computePointerGeometry(
     dir = dy < 0 ? 'top' : 'bottom';
   }
 
-  // Full bounding-box diagonal scaled comfortably so radial fill reaches opposite corners
-  const diameter = Math.ceil(Math.hypot(rect.width, rect.height) * 2.2);
+  // Exact farthest-corner distance from the cursor ensures minimal excess diameter
+  // so radial sweeps travel visibly across the full button from any entry/exit edge.
+  const farX = Math.max(x, rect.width - x);
+  const farY = Math.max(y, rect.height - y);
+  const diameter = Math.ceil(Math.hypot(farX, farY) * 2.08);
 
   return { x, y, diameter, dir };
 }
@@ -57,14 +60,6 @@ export function createDirectionalPointerHandlers<T extends HTMLElement>() {
         event.clientY,
         true,
       );
-    },
-    onPointerMove(event: React.PointerEvent<T>) {
-      if (event.pointerType === 'touch') return;
-      const el = event.currentTarget;
-      const rect = el.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      el.style.setProperty('--btn-x', `${(event.clientX - rect.left).toFixed(1)}px`);
-      el.style.setProperty('--btn-y', `${(event.clientY - rect.top).toFixed(1)}px`);
     },
     onPointerLeave(event: React.PointerEvent<T>) {
       if (event.pointerType === 'touch') return;

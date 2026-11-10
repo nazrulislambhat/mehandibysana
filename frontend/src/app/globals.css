@@ -653,23 +653,23 @@
 }
 
 .btn-dir-lead {
-  transition: transform 310ms cubic-bezier(0.22, 1, 0.36, 1) 45ms;
+  transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1) 50ms;
 }
 
 .btn-dir-fill {
-  transition: transform 270ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
 }
 
 .btn-dir:hover:not(:disabled) .btn-dir-lead,
 .btn-dir:focus-visible:not(:disabled) .btn-dir-lead {
   transform: translate3d(-50%, -50%, 0) scale(1);
-  transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1) 0ms;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
 }
 
 .btn-dir:hover:not(:disabled) .btn-dir-fill,
 .btn-dir:focus-visible:not(:disabled) .btn-dir-fill {
   transform: translate3d(-50%, -50%, 0) scale(1);
-  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1) 45ms;
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1) 50ms;
 }
 
 .btn-dir-content {
@@ -698,7 +698,7 @@
 }
 
 .btn-dir--secondary .btn-dir-lead {
-  background-color: #f3d7cb;
+  background-color: #f08a62;
 }
 
 .btn-dir--secondary .btn-dir-fill {

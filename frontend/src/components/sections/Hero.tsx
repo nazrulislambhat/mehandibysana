@@ -28,7 +28,7 @@ export function Hero({
           <div className="lg:col-span-7">
             <div
               className="ck-stagger-up inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 py-1.5 mb-5"
-              style={{ '--ck-delay': '30ms' } as React.CSSProperties}
+              style={{ '--ck-delay': '60ms' } as React.CSSProperties}
             >
               <span
                 aria-hidden="true"
@@ -42,7 +42,7 @@ export function Hero({
             <div className="overflow-hidden mb-6">
               <h1
                 id="hero-heading"
-                style={{ '--ck-delay': '80ms' } as React.CSSProperties}
+                style={{ '--ck-delay': '150ms' } as React.CSSProperties}
                 className="ck-mask-line font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-ink leading-[1.09] tracking-tight"
               >
                 Henna artistry &amp; natural botanical products.
@@ -50,7 +50,7 @@ export function Hero({
             </div>
 
             <div
-              style={{ '--ck-delay': '140ms' } as React.CSSProperties}
+              style={{ '--ck-delay': '260ms' } as React.CSSProperties}
               className="ck-stagger-up space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8"
             >
               <p>
@@ -62,7 +62,7 @@ export function Hero({
             </div>
 
             <div
-              style={{ '--ck-delay': '210ms' } as React.CSSProperties}
+              style={{ '--ck-delay': '360ms' } as React.CSSProperties}
               className="ck-stagger-up flex flex-wrap items-center gap-3.5 mb-10"
             >
               <LinkButton
@@ -84,7 +84,7 @@ export function Hero({
             </div>
 
             <dl
-              style={{ '--ck-delay': '260ms' } as React.CSSProperties}
+              style={{ '--ck-delay': '460ms' } as React.CSSProperties}
               className="ck-stagger-up border-t border-hairline pt-6 grid grid-cols-3 gap-6 max-w-xl"
             >
               <div className="flex flex-col">

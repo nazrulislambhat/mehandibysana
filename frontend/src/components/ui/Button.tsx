@@ -47,10 +47,7 @@ export function Button({
         if (!props.disabled) dirHandlers.onPointerEnter(e);
         onPointerEnter?.(e);
       }}
-      onPointerMove={(e) => {
-        if (!props.disabled) dirHandlers.onPointerMove(e);
-        onPointerMove?.(e);
-      }}
+      onPointerMove={onPointerMove}
       onPointerLeave={(e) => {
         dirHandlers.onPointerLeave(e);
         onPointerLeave?.(e);
@@ -99,7 +96,6 @@ export function LinkButton({
       scroll={scroll}
       onClick={onClick}
       onPointerEnter={dirHandlers.onPointerEnter}
-      onPointerMove={dirHandlers.onPointerMove}
       onPointerLeave={dirHandlers.onPointerLeave}
       className={buttonClasses({ variant, size, className })}
     >

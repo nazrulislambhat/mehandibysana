@@ -6,10 +6,10 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 type CurtainPhase = 'idle' | 'covering' | 'revealing';
 
 const COLUMN_INDICES = [0, 1, 2, 3, 4, 5] as const;
-const COVER_NAVIGATE_DELAY_MS = 235;
-const COVER_MIN_DURATION_MS = 335;
-const REVEAL_DURATION_MS = 580;
-const STALL_FAILSAFE_MS = 1200;
+const COVER_NAVIGATE_DELAY_MS = 520;
+const COVER_MIN_DURATION_MS = 820;
+const REVEAL_DURATION_MS = 1120;
+const STALL_FAILSAFE_MS = 2400;
 
 export function RouteTransitionCurtain() {
   const router = useRouter();
@@ -53,7 +53,7 @@ export function RouteTransitionCurtain() {
     }, 0);
     pushTimer(() => {
       setHairline((prev) => ({ ...prev, active: false }));
-    }, 560);
+    }, 980);
   }, [pushTimer]);
 
   const startReveal = useCallback(() => {
@@ -61,7 +61,7 @@ export function RouteTransitionCurtain() {
     const seq = seqRef.current;
     phaseRef.current = 'revealing';
     pendingPathnameRef.current = null;
-    document.documentElement.style.setProperty('--ck-nav-delay', '120ms');
+    document.documentElement.style.setProperty('--ck-nav-delay', '240ms');
     setCurtain({ phase: 'revealing', seq });
 
     pushTimer(() => {
@@ -145,7 +145,7 @@ export function RouteTransitionCurtain() {
       pendingPathnameRef.current = dest.pathname;
       coverStartedAtRef.current = performance.now();
 
-      document.documentElement.style.setProperty('--ck-nav-delay', '120ms');
+      document.documentElement.style.setProperty('--ck-nav-delay', '240ms');
       setCurtain({ phase: 'covering', seq: nextSeq });
 
       // Prefetch destination immediately while blinds descend
