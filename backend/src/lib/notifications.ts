@@ -269,18 +269,35 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
 }
 
 export interface NotificationEvent {
-  type: "order_confirmed" | "bridal_booking_received" | "bridal_booking_confirmed";
+  type:
+    | "order_confirmed"
+    | "order_dispatched"
+    | "order_delivered"
+    | "order_completed"
+    | "order_payment_offline"
+    | "bridal_booking_received"
+    | "bridal_booking_confirmed";
   recipientEmail: string;
   recipientName: string;
   recipientPhone?: string;
   referenceId: string;
   summary: string;
   details?: Record<string, unknown>;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  skipAdminAlert?: boolean;
+}
+
+export interface DispatchNotificationResult {
+  customerEmailSent: boolean;
+  provider: EmailProviderType;
+  messageId?: string;
+  error?: string;
 }
 
 export async function dispatchStudioNotification(
   event: NotificationEvent
-): Promise<void> {
+): Promise<DispatchNotificationResult> {
   const timestamp = new Date().toISOString();
   appendAudit({ kind: "event", ...event });
 
@@ -290,28 +307,39 @@ export async function dispatchStudioNotification(
 
   const subjectMap: Record<NotificationEvent["type"], string> = {
     order_confirmed: `Order Confirmed (${event.referenceId}) — Mehandi by Sana`,
+    order_dispatched: `Order Shipped (${event.referenceId}) — Mehandi by Sana`,
+    order_delivered: `Order Delivered (${event.referenceId}) — Mehandi by Sana`,
+    order_completed: `Order Completed (${event.referenceId}) — Mehandi by Sana`,
+    order_payment_offline: `Payment Received (${event.referenceId}) — Mehandi by Sana`,
     bridal_booking_received: `Booking Inquiry Received (${event.referenceId}) — Mehandi by Sana`,
     bridal_booking_confirmed: `Bridal Session Confirmed (${event.referenceId}) — Mehandi by Sana`,
   };
 
   const eyebrowMap: Record<NotificationEvent["type"], string> = {
     order_confirmed: "Order Confirmation",
+    order_dispatched: "Parcel Dispatched",
+    order_delivered: "Order Delivered",
+    order_completed: "Order Completed",
+    order_payment_offline: "Offline Payment Confirmed",
     bridal_booking_received: "Booking Inquiry Received",
     bridal_booking_confirmed: "Appointment Confirmed",
   };
 
+  const isOrderEvent = event.type.startsWith("order_");
   const trackUrl =
-    event.type === "order_confirmed"
+    event.ctaUrl?.trim() ||
+    (isOrderEvent
       ? `${siteUrl}/track-order?order=${encodeURIComponent(
           event.referenceId
         )}&email=${encodeURIComponent(event.recipientEmail)}`
-      : `${siteUrl}/contact`;
+      : `${siteUrl}/contact`);
 
   const ctaLabel =
-    event.type === "order_confirmed" ? "Track Your Order" : "Visit Studio Contact";
+    event.ctaLabel?.trim() ||
+    (isOrderEvent ? "Track Your Order" : "Visit Studio Contact");
 
   const plainText = `Assalamu Alaikum / Hello ${event.recipientName},\n\n${event.summary}\n\nReference: ${event.referenceId}\n${
-    event.type === "order_confirmed" ? `Track your order anytime: ${trackUrl}\n` : ""
+    isOrderEvent ? `Track your order anytime: ${trackUrl}\n` : ""
   }\nWarm regards,\nMehandi by Sana Studio · Baghat Barzullah, Srinagar\nhttps://mehandibysana.com`;
 
   const html = renderBrandedStudioEmailHtml({
@@ -319,15 +347,21 @@ export async function dispatchStudioNotification(
     heading: subjectMap[event.type].replace(" — Mehandi by Sana", ""),
     bodyParagraphs: [
       `Assalamu Alaikum / Hello ${event.recipientName},`,
-      event.summary,
+      ...event.summary.split(/\n{2,}/),
     ],
     referenceId: event.referenceId,
     ctaLabel,
     ctaUrl: trackUrl,
   });
 
+  let custRes: SendEmailResult = {
+    sent: false,
+    provider: getEmailProviderStatus().provider,
+    error: "No recipient email.",
+  };
+
   if (event.recipientEmail) {
-    const custRes = await sendStudioEmail({
+    custRes = await sendStudioEmail({
       to: event.recipientEmail,
       subject: subjectMap[event.type],
       text: plainText,
@@ -343,7 +377,11 @@ export async function dispatchStudioNotification(
 
   // Optional Studio Admin Copy (set STUDIO_ADMIN_EMAIL in backend/.env)
   const adminEmail = process.env.STUDIO_ADMIN_EMAIL?.trim();
-  if (adminEmail && adminEmail.toLowerCase() !== event.recipientEmail.toLowerCase()) {
+  if (
+    !event.skipAdminAlert &&
+    adminEmail &&
+    adminEmail.toLowerCase() !== event.recipientEmail.toLowerCase()
+  ) {
     const adminSubject = `[Studio Alert] ${subjectMap[event.type]}`;
     const adminSummary = `Customer: ${event.recipientName} (${event.recipientEmail}${
       event.recipientPhone ? ` · ${event.recipientPhone}` : ""
@@ -388,6 +426,13 @@ export async function dispatchStudioNotification(
       console.warn("[Notifications] WhatsApp webhook dispatch failed:", waErr);
     }
   }
+
+  return {
+    customerEmailSent: custRes.sent,
+    provider: custRes.provider,
+    messageId: custRes.messageId,
+    error: custRes.error,
+  };
 }
 
 export async function sendBulkCampaignBatch(params: {

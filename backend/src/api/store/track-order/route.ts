@@ -1,5 +1,11 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
+import {
+  deriveOrderNumber,
+  formatOrderPaymentMethodLabel,
+  normalizeFulfillmentStage,
+  sanitizeHttpUrl,
+} from "../../../lib/studio-order-meta";
 
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const rawOrder = String(req.query.orderNumber || req.query.order || "")
@@ -41,11 +47,17 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
       const metaOrderNum = String(o.metadata?.order_number || "").toLowerCase();
       const wcOrderNum = String(o.metadata?.wc_order_number || "").toLowerCase();
+      const wooOrderId =
+        o.metadata?.woo_order_id !== undefined && o.metadata?.woo_order_id !== null
+          ? String(o.metadata.woo_order_id).toLowerCase()
+          : "";
       const displayIdStr = o.display_id !== undefined ? String(o.display_id) : "";
 
       return (
         metaOrderNum === normalizedTarget ||
         wcOrderNum === normalizedTarget ||
+        (wooOrderId !== "" &&
+          (wooOrderId === normalizedTarget || `wc-${wooOrderId}` === normalizedTarget)) ||
         displayIdStr === normalizedTarget ||
         `mbs-${displayIdStr}` === normalizedTarget
       );
@@ -61,14 +73,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
     const meta = (matched.metadata || {}) as Record<string, any>;
     const status = String(matched.status || "pending").toLowerCase();
-    const fulfillmentStage =
-      status === "canceled" || status === "cancelled"
-        ? "cancelled"
-        : meta.fulfillment_stage
-          ? String(meta.fulfillment_stage)
-          : status === "completed"
-            ? "preparing"
-            : "received";
+    const fulfillmentStage = normalizeFulfillmentStage(meta.fulfillment_stage, status);
 
     const items = Array.isArray(matched.items)
       ? matched.items.map((item: any) => ({
@@ -90,21 +95,19 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       found: true,
       order: {
         id: matched.id,
-        orderNumber:
-          meta.order_number ||
-          meta.wc_order_number ||
-          `MBS-${matched.display_id || matched.id.slice(-6).toUpperCase()}`,
+        orderNumber: deriveOrderNumber(matched),
         createdAt: matched.created_at,
         status,
         fulfillmentStage,
-        paymentMethod:
-          meta.payment_method === "razorpay"
-            ? "Razorpay Online"
-            : String(meta.payment_method || "Cash on Delivery").toUpperCase(),
+        paymentMethod: formatOrderPaymentMethodLabel(
+          meta.payment_method || meta.payment_method_title
+        ),
         paymentStatus: meta.payment_status || (status === "completed" ? "paid" : "pending"),
         paymentId: meta.payment_id || "",
         trackingNumber: meta.tracking_number || "",
+        trackingUrl: sanitizeHttpUrl(meta.tracking_url),
         courierName: meta.courier_name || "Srinagar Studio Express",
+        dispatchNote: meta.dispatch_note ? String(meta.dispatch_note) : "",
         pincodeRule: meta.pincode_rule || "*",
         subtotal,
         shippingFee,
