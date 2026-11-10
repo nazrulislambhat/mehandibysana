@@ -133,9 +133,12 @@ const PincodeShippingPage = () => {
   };
 
   const handleTestPincode = async () => {
-    const res = await fetch(`/store/pincode-check?pincode=${encodeURIComponent(testPin)}`);
+    const res = await fetch(
+      `/admin/pincode-rules?pincode=${encodeURIComponent(testPin)}`,
+      { credentials: "include" }
+    );
     const data = await res.json();
-    setTestResult(data);
+    setTestResult(data.checkResult || data);
   };
 
   return (
@@ -145,8 +148,8 @@ const PincodeShippingPage = () => {
           <div>
             <Heading level="h1">Wildcard Pincode Delivery Rates</Heading>
             <Text className="text-ui-fg-subtle mt-1">
-              Configure prefix wildcards (e.g. <code>19*</code> for all PINs starting with 19 at ₹60,{" "}
-              <code>11*</code> at ₹120, or <code>*</code> for Pan-India at ₹150). Most specific prefix wins.
+              Configure prefix wildcards (e.g. <code>190*</code> for Srinagar PINs at ₹60,{" "}
+              <code>560*</code> for Bangalore PINs at ₹60, or <code>*</code> for Pan-India at ₹150). Most specific prefix wins.
             </Text>
           </div>
           <div className="flex items-center gap-2">
@@ -177,7 +180,7 @@ const PincodeShippingPage = () => {
           <div>
             <Label>Wildcard Pattern *</Label>
             <Input
-              placeholder="e.g. 19* or 190001 or *"
+              placeholder="e.g. 190* or 560* or *"
               value={pattern}
               onChange={(e) => setPattern(e.target.value)}
               required
@@ -197,7 +200,7 @@ const PincodeShippingPage = () => {
           <div>
             <Label>Region / Label</Label>
             <Input
-              placeholder="Kashmir Valley (19*)"
+              placeholder="Srinagar Metro Zone (190*)"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
             />
@@ -213,7 +216,7 @@ const PincodeShippingPage = () => {
           <div>
             <Label>Zone Name</Label>
             <Input
-              placeholder="Zone A — Local Dispatch"
+              placeholder="Zone 1 — Srinagar Studio Dispatch"
               value={zone}
               onChange={(e) => setZone(e.target.value)}
             />

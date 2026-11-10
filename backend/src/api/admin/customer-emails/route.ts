@@ -6,6 +6,7 @@ import {
   toCustomerEmailsTxt,
   writeCustomerEmailExports,
 } from "../../../lib/customer-emails";
+import { ensureStudioEmailSettingsLoaded } from "../../../lib/email-settings";
 import {
   getEmailProviderStatus,
   sendBulkCampaignBatch,
@@ -17,6 +18,7 @@ const VALID_SEGMENTS: CampaignSegment[] = [
   "kashmir_local",
   "bridal_inquiries",
   "one_time_buyers",
+  "newsletter",
 ];
 
 function parseSegment(raw: unknown): CampaignSegment {
@@ -26,6 +28,7 @@ function parseSegment(raw: unknown): CampaignSegment {
 
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   try {
+    await ensureStudioEmailSettingsLoaded(req.scope);
     const query = (req.query || {}) as Record<string, string | undefined>;
     const segment = parseSegment(query.segment);
     const format = String(query.format || "json").toLowerCase();
@@ -146,6 +149,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         bodyText,
         ctaLabel: body.ctaLabel?.trim() || undefined,
         ctaUrl: body.ctaUrl?.trim() || undefined,
+        scope: req.scope,
       });
 
       return res.status(result.sent > 0 ? 200 : 503).json({
@@ -188,6 +192,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         bodyText,
         ctaLabel: body.ctaLabel?.trim() || undefined,
         ctaUrl: body.ctaUrl?.trim() || undefined,
+        scope: req.scope,
       });
 
       return res.status(200).json({

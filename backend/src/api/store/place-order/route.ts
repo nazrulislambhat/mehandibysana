@@ -1,4 +1,5 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
+import { CouponValidationError } from "../../../lib/coupons";
 import {
   createMedusaStoreOrder,
   type StoreOrderPayload,
@@ -15,14 +16,26 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       });
     }
 
-    const { order, orderNumber } = await createMedusaStoreOrder(req.scope, body);
+    const { order, orderNumber, pricing } = await createMedusaStoreOrder(
+      req.scope,
+      body
+    );
 
     return res.status(201).json({
       success: true,
       order,
       orderNumber,
+      pricing,
     });
   } catch (error: any) {
+    if (error instanceof CouponValidationError) {
+      return res.status(error.httpStatus).json({
+        success: false,
+        code: error.code,
+        message: error.message,
+      });
+    }
+
     console.error("[Medusa Order Create Error]:", error);
     return res.status(500).json({
       success: false,

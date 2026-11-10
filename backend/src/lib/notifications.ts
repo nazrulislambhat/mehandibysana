@@ -1,6 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import nodemailer from "nodemailer";
+import {
+  ensureStudioEmailSettingsLoaded,
+  getEffectiveEmailSettings,
+  type StudioEmailSettingsRecord,
+} from "./email-settings";
 
 const DATA_DIR =
   process.env.STUDIO_DATA_DIR?.trim() || path.resolve(process.cwd(), "../studio-data");
@@ -32,27 +37,44 @@ export interface EmailProviderStatus {
   provider: EmailProviderType;
   fromEmail: string;
   adminEmail: string;
+  storefrontUrl: string;
+  autoSendOrderConfirmation: boolean;
+  autoSendShippingEmail: boolean;
+}
+
+function resolveProviderFromSettings(
+  settings: StudioEmailSettingsRecord
+): EmailProviderType {
+  const hasResend = Boolean(settings.resendApiKey?.trim());
+  const hasBrevo = Boolean(settings.brevoApiKey?.trim());
+  const hasSmtp = Boolean(
+    settings.smtpHost?.trim() &&
+      settings.smtpUser?.trim() &&
+      settings.smtpPass?.trim()
+  );
+
+  if (settings.preferredProvider === "resend" && hasResend) return "resend";
+  if (settings.preferredProvider === "brevo" && hasBrevo) return "brevo";
+  if (settings.preferredProvider === "smtp" && hasSmtp) return "smtp";
+
+  if (hasResend) return "resend";
+  if (hasBrevo) return "brevo";
+  if (hasSmtp) return "smtp";
+  return "log-only";
 }
 
 export function getEmailProviderStatus(): EmailProviderStatus {
-  const fromEmail =
-    process.env.STUDIO_FROM_EMAIL?.trim() || "Mehandi by Sana <orders@mehandibysana.com>";
-  const adminEmail = process.env.STUDIO_ADMIN_EMAIL?.trim() || "";
-
-  if (process.env.RESEND_API_KEY?.trim()) {
-    return { configured: true, provider: "resend", fromEmail, adminEmail };
-  }
-  if (process.env.BREVO_API_KEY?.trim()) {
-    return { configured: true, provider: "brevo", fromEmail, adminEmail };
-  }
-  if (
-    process.env.SMTP_HOST?.trim() &&
-    process.env.SMTP_USER?.trim() &&
-    process.env.SMTP_PASS?.trim()
-  ) {
-    return { configured: true, provider: "smtp", fromEmail, adminEmail };
-  }
-  return { configured: false, provider: "log-only", fromEmail, adminEmail };
+  const settings = getEffectiveEmailSettings();
+  const provider = resolveProviderFromSettings(settings);
+  return {
+    configured: provider !== "log-only",
+    provider,
+    fromEmail: settings.fromEmail,
+    adminEmail: settings.adminEmail,
+    storefrontUrl: settings.storefrontUrl,
+    autoSendOrderConfirmation: settings.autoSendOrderConfirmation,
+    autoSendShippingEmail: settings.autoSendShippingEmail,
+  };
 }
 
 function escapeHtml(text: string): string {
@@ -75,10 +97,12 @@ export function renderBrandedStudioEmailHtml(params: {
   eyebrow: string;
   heading: string;
   bodyParagraphs: string[];
+  detailsHtml?: string;
   referenceId?: string;
   ctaLabel?: string;
   ctaUrl?: string;
   footerNote?: string;
+  storefrontUrl?: string;
 }): string {
   const paragraphsHtml = params.bodyParagraphs
     .filter((p) => p.trim().length > 0)
@@ -89,6 +113,8 @@ export function renderBrandedStudioEmailHtml(params: {
         ).replace(/\n/g, "<br/>")}</p>`
     )
     .join("");
+
+  const detailsBlockHtml = params.detailsHtml ? `<div style="margin:20px 0;">${params.detailsHtml}</div>` : "";
 
   const ctaHtml =
     params.ctaLabel && params.ctaUrl
@@ -105,23 +131,29 @@ export function renderBrandedStudioEmailHtml(params: {
       )}</p>`
     : "";
 
+  const displaySiteUrl = (params.storefrontUrl || "https://mehandibysana.com").replace(/\/+$/, "");
+
   return `<!doctype html>
 <html lang="en">
-  <body style="margin:0;padding:24px 12px;background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#111111;">
-    <div style="max-width:600px;margin:0 auto;border:1px solid #e5e5e5;border-radius:10px;background-color:#ffffff;padding:32px;">
+  <body style="margin:0;padding:24px 12px;background-color:#f9f8f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#111111;">
+    <div style="max-width:620px;margin:0 auto;border:1px solid #e5e5e5;border-radius:10px;background-color:#ffffff;padding:32px;">
       <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;">
         ${escapeHtml(params.eyebrow)}
       </p>
-      <h1 style="margin:0 0 20px;font-family:Georgia,serif;font-size:28px;font-weight:500;line-height:1.2;color:#111111;">
+      <h1 style="margin:0 0 20px;font-family:Georgia,serif;font-size:26px;font-weight:500;line-height:1.25;color:#111111;">
         ${escapeHtml(params.heading)}
       </h1>
       ${paragraphsHtml}
+      ${detailsBlockHtml}
       ${ctaHtml}
       ${refHtml}
-      <p style="margin:22px 0 0;font-size:12px;line-height:1.6;color:#525252;">
-        Mehandi by Sana Studio &middot; Baghat Barzullah, Srinagar, Jammu &amp; Kashmir<br/>
-        <a href="https://mehandibysana.com" style="color:#d9541e;text-decoration:underline;">mehandibysana.com</a>
-        &middot; sana@mehandibysana.com
+      <p style="margin:22px 0 0;font-size:12px;line-height:1.65;color:#525252;">
+        Mehandi by Sana Studios &middot; Srinagar (Baghat Barzullah, J&amp;K 190005) &amp; Bangalore (Karnataka)<br/>
+        <a href="${escapeHtml(displaySiteUrl)}" style="color:#d9541e;text-decoration:underline;">${escapeHtml(displaySiteUrl.replace(/^https?:\/\//, ""))}</a>
+        &middot; sana@mehandibysana.com &middot; +91-9149648717<br/>
+        <a href="${escapeHtml(displaySiteUrl)}/track-order" style="color:#525252;text-decoration:underline;">Track Order</a>
+        &middot; <a href="${escapeHtml(displaySiteUrl)}/henna-care" style="color:#525252;text-decoration:underline;">Henna Storage &amp; Stain Care</a>
+        &middot; <a href="${escapeHtml(displaySiteUrl)}/refund-policy" style="color:#525252;text-decoration:underline;">Refund Policy</a>
         ${params.footerNote ? `<br/>${escapeHtml(params.footerNote)}` : ""}
       </p>
     </div>
@@ -135,6 +167,7 @@ export interface SendEmailInput {
   text: string;
   html?: string;
   replyTo?: string;
+  scope?: { resolve: (key: string) => any };
 }
 
 export interface SendEmailResult {
@@ -145,27 +178,28 @@ export interface SendEmailResult {
 }
 
 export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailResult> {
-  const status = getEmailProviderStatus();
+  const settings = await ensureStudioEmailSettingsLoaded(input.scope);
+  const provider = resolveProviderFromSettings(settings);
   const recipients = (Array.isArray(input.to) ? input.to : [input.to])
     .map((e) => e.trim())
     .filter(Boolean);
 
   if (recipients.length === 0) {
-    return { sent: false, provider: status.provider, error: "No valid recipient email." };
+    return { sent: false, provider, error: "No valid recipient email." };
   }
 
-  const replyTo = input.replyTo || status.adminEmail || "sana@mehandibysana.com";
+  const replyTo = input.replyTo || settings.adminEmail || "sana@mehandibysana.com";
 
-  if (status.provider === "resend") {
+  if (provider === "resend") {
     try {
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY!.trim()}`,
+          Authorization: `Bearer ${settings.resendApiKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: status.fromEmail,
+          from: settings.fromEmail,
           to: recipients,
           reply_to: replyTo,
           subject: input.subject,
@@ -191,13 +225,13 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
     }
   }
 
-  if (status.provider === "brevo") {
+  if (provider === "brevo") {
     try {
-      const parsedFrom = parseFromHeader(status.fromEmail);
+      const parsedFrom = parseFromHeader(settings.fromEmail);
       const res = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          "api-key": process.env.BREVO_API_KEY!.trim(),
+          "api-key": settings.brevoApiKey,
           "Content-Type": "application/json",
           Accept: "application/json",
         },
@@ -228,26 +262,28 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
     }
   }
 
-  if (status.provider === "smtp") {
+  if (provider === "smtp") {
     try {
-      const port = Number(process.env.SMTP_PORT || 465);
+      const port = Number(settings.smtpPort || 465);
       const secure =
-        process.env.SMTP_SECURE !== undefined
-          ? process.env.SMTP_SECURE === "true"
-          : port === 465;
+        settings.smtpSecure !== undefined ? Boolean(settings.smtpSecure) : port === 465;
 
       const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST!.trim(),
+        host: settings.smtpHost,
         port,
         secure,
+        requireTLS: !secure && port === 587,
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 15000,
         auth: {
-          user: process.env.SMTP_USER!.trim(),
-          pass: process.env.SMTP_PASS!.trim(),
+          user: settings.smtpUser,
+          pass: settings.smtpPass,
         },
       });
 
       const info = await transporter.sendMail({
-        from: status.fromEmail,
+        from: settings.fromEmail,
         to: recipients.join(", "),
         replyTo,
         subject: input.subject,
@@ -265,27 +301,36 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
     }
   }
 
-  return { sent: false, provider: "log-only" };
+  return {
+    sent: false,
+    provider: "log-only",
+    error:
+      "No email provider configured. Configure SMTP, Resend, or Brevo in Medusa Admin -> Email Campaigns or backend env.",
+  };
 }
 
 export interface NotificationEvent {
   type:
     | "order_confirmed"
+    | "order_preparing"
     | "order_dispatched"
     | "order_delivered"
     | "order_completed"
     | "order_payment_offline"
     | "bridal_booking_received"
-    | "bridal_booking_confirmed";
+    | "bridal_booking_confirmed"
+    | "newsletter_subscribed";
   recipientEmail: string;
   recipientName: string;
   recipientPhone?: string;
   referenceId: string;
   summary: string;
+  detailsHtml?: string;
   details?: Record<string, unknown>;
   ctaLabel?: string;
   ctaUrl?: string;
   skipAdminAlert?: boolean;
+  scope?: { resolve: (key: string) => any };
 }
 
 export interface DispatchNotificationResult {
@@ -298,31 +343,35 @@ export interface DispatchNotificationResult {
 export async function dispatchStudioNotification(
   event: NotificationEvent
 ): Promise<DispatchNotificationResult> {
+  const settings = await ensureStudioEmailSettingsLoaded(event.scope);
   const timestamp = new Date().toISOString();
-  appendAudit({ kind: "event", ...event });
+  const { scope: _scope, detailsHtml: _detailsHtml, ...auditEvent } = event;
+  appendAudit({ kind: "event", ...auditEvent });
 
-  const siteUrl = (
-    process.env.STORE_SITE_URL?.trim() || "https://mehandibysana.com"
-  ).replace(/\/+$/, "");
+  const siteUrl = settings.storefrontUrl || "https://mehandibysana.com";
 
   const subjectMap: Record<NotificationEvent["type"], string> = {
     order_confirmed: `Order Confirmed (${event.referenceId}) — Mehandi by Sana`,
+    order_preparing: `Order Preparing (${event.referenceId}) — Mehandi by Sana`,
     order_dispatched: `Order Shipped (${event.referenceId}) — Mehandi by Sana`,
     order_delivered: `Order Delivered (${event.referenceId}) — Mehandi by Sana`,
     order_completed: `Order Completed (${event.referenceId}) — Mehandi by Sana`,
     order_payment_offline: `Payment Received (${event.referenceId}) — Mehandi by Sana`,
     bridal_booking_received: `Booking Inquiry Received (${event.referenceId}) — Mehandi by Sana`,
     bridal_booking_confirmed: `Bridal Session Confirmed (${event.referenceId}) — Mehandi by Sana`,
+    newsletter_subscribed: `Welcome to the Mehandi by Sana Dispatch List`,
   };
 
   const eyebrowMap: Record<NotificationEvent["type"], string> = {
     order_confirmed: "Order Confirmation",
+    order_preparing: "Small-Batch Preparation",
     order_dispatched: "Parcel Dispatched",
     order_delivered: "Order Delivered",
     order_completed: "Order Completed",
-    order_payment_offline: "Offline Payment Confirmed",
+    order_payment_offline: "Payment Confirmed",
     bridal_booking_received: "Booking Inquiry Received",
     bridal_booking_confirmed: "Appointment Confirmed",
+    newsletter_subscribed: "Fresh Batch Dispatch List",
   };
 
   const isOrderEvent = event.type.startsWith("order_");
@@ -332,15 +381,21 @@ export async function dispatchStudioNotification(
       ? `${siteUrl}/track-order?order=${encodeURIComponent(
           event.referenceId
         )}&email=${encodeURIComponent(event.recipientEmail)}`
-      : `${siteUrl}/contact`);
+      : event.type === "newsletter_subscribed"
+        ? `${siteUrl}/shop`
+        : `${siteUrl}/contact`);
 
   const ctaLabel =
     event.ctaLabel?.trim() ||
-    (isOrderEvent ? "Track Your Order" : "Visit Studio Contact");
+    (isOrderEvent
+      ? "Track Your Order"
+      : event.type === "newsletter_subscribed"
+        ? "Browse Fresh Cones"
+        : "Visit Studio Contact");
 
   const plainText = `Assalamu Alaikum / Hello ${event.recipientName},\n\n${event.summary}\n\nReference: ${event.referenceId}\n${
     isOrderEvent ? `Track your order anytime: ${trackUrl}\n` : ""
-  }\nWarm regards,\nMehandi by Sana Studio · Baghat Barzullah, Srinagar\nhttps://mehandibysana.com`;
+  }\nWarm regards,\nMehandi by Sana Studios · Srinagar & Bangalore\n${siteUrl}`;
 
   const html = renderBrandedStudioEmailHtml({
     eyebrow: eyebrowMap[event.type],
@@ -349,14 +404,16 @@ export async function dispatchStudioNotification(
       `Assalamu Alaikum / Hello ${event.recipientName},`,
       ...event.summary.split(/\n{2,}/),
     ],
+    detailsHtml: event.detailsHtml,
     referenceId: event.referenceId,
     ctaLabel,
     ctaUrl: trackUrl,
+    storefrontUrl: siteUrl,
   });
 
   let custRes: SendEmailResult = {
     sent: false,
-    provider: getEmailProviderStatus().provider,
+    provider: resolveProviderFromSettings(settings),
     error: "No recipient email.",
   };
 
@@ -366,17 +423,19 @@ export async function dispatchStudioNotification(
       subject: subjectMap[event.type],
       text: plainText,
       html,
+      scope: event.scope,
     });
     appendAudit({
       kind: "customer_email",
+      type: event.type,
       referenceId: event.referenceId,
       to: event.recipientEmail,
       ...custRes,
     });
   }
 
-  // Optional Studio Admin Copy (set STUDIO_ADMIN_EMAIL in backend/.env)
-  const adminEmail = process.env.STUDIO_ADMIN_EMAIL?.trim();
+  // Optional Studio Admin Copy (configured in Email Settings or STUDIO_ADMIN_EMAIL env)
+  const adminEmail = settings.adminEmail?.trim();
   if (
     !event.skipAdminAlert &&
     adminEmail &&
@@ -399,11 +458,15 @@ export async function dispatchStudioNotification(
           })`,
           event.summary,
         ],
+        detailsHtml: event.detailsHtml,
         referenceId: event.referenceId,
+        storefrontUrl: siteUrl,
       }),
+      scope: event.scope,
     });
     appendAudit({
       kind: "admin_alert_email",
+      type: event.type,
       referenceId: event.referenceId,
       to: adminEmail,
       ...adminRes,
@@ -419,7 +482,7 @@ export async function dispatchStudioNotification(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           timestamp,
-          ...event,
+          ...auditEvent,
         }),
       });
     } catch (waErr) {
@@ -442,6 +505,7 @@ export async function sendBulkCampaignBatch(params: {
   eyebrow?: string;
   ctaLabel?: string;
   ctaUrl?: string;
+  scope?: { resolve: (key: string) => any };
 }): Promise<{
   provider: EmailProviderType;
   attempted: number;
@@ -449,6 +513,7 @@ export async function sendBulkCampaignBatch(params: {
   failed: number;
   errors: Array<{ email: string; error: string }>;
 }> {
+  await ensureStudioEmailSettingsLoaded(params.scope);
   const status = getEmailProviderStatus();
   if (!status.configured) {
     return {
@@ -460,7 +525,7 @@ export async function sendBulkCampaignBatch(params: {
         {
           email: "provider",
           error:
-            "No email provider configured. Add RESEND_API_KEY, BREVO_API_KEY, or SMTP_* credentials in backend env.",
+            "No email provider configured. Add RESEND_API_KEY, BREVO_API_KEY, or SMTP credentials in backend env or Medusa Admin -> Email Campaigns.",
         },
       ],
     };
@@ -478,7 +543,7 @@ export async function sendBulkCampaignBatch(params: {
 
     const text = `${greeting}\n\n${params.bodyText}\n\n${
       params.ctaLabel && params.ctaUrl ? `${params.ctaLabel}: ${params.ctaUrl}\n\n` : ""
-    }Warm regards,\nMehandi by Sana Studio · Baghat Barzullah, Srinagar\nhttps://mehandibysana.com\n\nTo opt out of studio updates, simply reply "Unsubscribe" to sana@mehandibysana.com.`;
+    }Warm regards,\nMehandi by Sana Studios · Srinagar & Bangalore\n${status.storefrontUrl}\n\nTo opt out of studio updates, simply reply "Unsubscribe" to sana@mehandibysana.com.`;
 
     const html = renderBrandedStudioEmailHtml({
       eyebrow: params.eyebrow || "Mehandi by Sana · Studio Update",
@@ -486,6 +551,7 @@ export async function sendBulkCampaignBatch(params: {
       bodyParagraphs: [greeting, ...params.bodyText.split(/\n{2,}/)],
       ctaLabel: params.ctaLabel,
       ctaUrl: params.ctaUrl,
+      storefrontUrl: status.storefrontUrl,
       footerNote:
         'You received this because you shopped or booked with Mehandi by Sana. Reply "Unsubscribe" to opt out.',
     });
@@ -495,6 +561,7 @@ export async function sendBulkCampaignBatch(params: {
       subject: params.subject,
       text,
       html,
+      scope: params.scope,
     });
 
     if (result.sent) {

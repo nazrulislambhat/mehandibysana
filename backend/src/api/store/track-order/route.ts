@@ -35,7 +35,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         "created_at",
         "metadata",
         "items.*",
+        "items.adjustments.*",
+        "shipping_methods.*",
+        "shipping_methods.adjustments.*",
         "shipping_address.*",
+        "payment_collections.*",
       ],
     });
 
@@ -85,11 +89,96 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         }))
       : [];
 
-    const subtotal =
-      Number(meta.subtotal) ||
-      items.reduce((acc: number, it: any) => acc + it.unitPrice * it.quantity, 0);
-    const shippingFee = Number(meta.shipping_fee) || 0;
-    const total = Number(meta.total) || subtotal + shippingFee;
+    const itemsSubtotal = items.reduce(
+      (acc: number, it: any) => acc + it.unitPrice * it.quantity,
+      0
+    );
+    const hasMetaSubtotal =
+      meta.subtotal !== undefined &&
+      meta.subtotal !== null &&
+      String(meta.subtotal).trim() !== "" &&
+      Number.isFinite(Number(meta.subtotal));
+    const subtotal = hasMetaSubtotal ? Number(meta.subtotal) : itemsSubtotal;
+
+    const methodsShipping = Array.isArray(matched.shipping_methods)
+      ? matched.shipping_methods.reduce(
+          (acc: number, sm: any) => acc + (Number(sm.amount) || 0),
+          0
+        )
+      : 0;
+    const hasMetaShipping =
+      meta.shipping_fee !== undefined &&
+      meta.shipping_fee !== null &&
+      String(meta.shipping_fee).trim() !== "" &&
+      Number.isFinite(Number(meta.shipping_fee));
+    const shippingFee =
+      Array.isArray(matched.shipping_methods) &&
+      matched.shipping_methods.length > 0
+        ? methodsShipping
+        : hasMetaShipping
+          ? Number(meta.shipping_fee)
+          : 0;
+
+    let adjustmentsTotal = 0;
+    let firstAdjustmentCode = "";
+    for (const item of matched.items || []) {
+      for (const adj of item?.adjustments || []) {
+        adjustmentsTotal += Number(adj?.amount) || 0;
+        if (!firstAdjustmentCode && adj?.code) {
+          firstAdjustmentCode = String(adj.code);
+        }
+      }
+    }
+    for (const sm of matched.shipping_methods || []) {
+      for (const adj of sm?.adjustments || []) {
+        adjustmentsTotal += Number(adj?.amount) || 0;
+        if (!firstAdjustmentCode && adj?.code) {
+          firstAdjustmentCode = String(adj.code);
+        }
+      }
+    }
+
+    const hasMetaDiscount =
+      meta.discount_amount !== undefined &&
+      meta.discount_amount !== null &&
+      String(meta.discount_amount).trim() !== "" &&
+      Number.isFinite(Number(meta.discount_amount));
+    const discountAmount = Math.round(
+      (hasMetaDiscount ? Number(meta.discount_amount) : adjustmentsTotal) * 100
+    ) / 100;
+    const couponCode = String(meta.coupon_code || firstAdjustmentCode || "")
+      .trim()
+      .toUpperCase();
+
+    const hasMetaTotal =
+      meta.total !== undefined &&
+      meta.total !== null &&
+      String(meta.total).trim() !== "" &&
+      Number.isFinite(Number(meta.total));
+    const total = hasMetaTotal
+      ? Math.max(0, Number(meta.total))
+      : Math.max(
+          0,
+          Math.round((subtotal + shippingFee - discountAmount) * 100) / 100
+        );
+
+    const paymentCollections = Array.isArray((matched as any).payment_collections)
+      ? (matched as any).payment_collections.filter(
+          (pc: any) => pc && pc.status !== "canceled"
+        )
+      : [];
+    const nativeRefunded = paymentCollections.some(
+      (pc: any) => Number(pc.refunded_amount || 0) > 0
+    );
+    const nativeCaptured = paymentCollections.some(
+      (pc: any) =>
+        pc.status === "completed" || Number(pc.captured_amount || 0) > 0
+    );
+    const resolvedTrackPaymentStatus = nativeRefunded
+      ? "refunded"
+      : nativeCaptured
+        ? "paid"
+        : meta.payment_status || (status === "completed" ? "paid" : "pending");
 
     return res.status(200).json({
       found: true,
@@ -102,13 +191,15 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         paymentMethod: formatOrderPaymentMethodLabel(
           meta.payment_method || meta.payment_method_title
         ),
-        paymentStatus: meta.payment_status || (status === "completed" ? "paid" : "pending"),
+        paymentStatus: resolvedTrackPaymentStatus,
         paymentId: meta.payment_id || "",
         trackingNumber: meta.tracking_number || "",
         trackingUrl: sanitizeHttpUrl(meta.tracking_url),
-        courierName: meta.courier_name || "Srinagar Studio Express",
+        courierName: meta.courier_name || "Mehandi by Sana Dispatch",
         dispatchNote: meta.dispatch_note ? String(meta.dispatch_note) : "",
         pincodeRule: meta.pincode_rule || "*",
+        couponCode,
+        discountAmount,
         subtotal,
         shippingFee,
         total,

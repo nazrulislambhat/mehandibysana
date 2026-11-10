@@ -3,32 +3,44 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 import {
   cancelOrderWorkflow,
   completeOrderWorkflow,
+  getOrderDetailWorkflow,
   updateOrderWorkflow,
 } from "@medusajs/medusa/core-flows";
+import { ensureStudioEmailSettingsLoaded } from "../../../../../lib/email-settings";
 import {
-  dispatchStudioNotification,
+  getEmailProviderStatus,
   type DispatchNotificationResult,
-  type NotificationEvent,
 } from "../../../../../lib/notifications";
 import {
-  deriveOrderNumber,
-  formatOrderPaymentMethodLabel,
-  normalizeFulfillmentStage,
+  sendOrderConfirmationEmail,
+  sendOrderShippingEmail,
+} from "../../../../../lib/order-emails";
+import {
   sanitizeHttpUrl,
   VALID_FULFILLMENT_STAGES,
   type StudioFulfillmentStage,
+  normalizeFulfillmentStage,
 } from "../../../../../lib/studio-order-meta";
+import {
+  syncOrderNativePayment,
+  type StudioPaymentStatus,
+} from "../../../../../lib/sync-order-payment";
 
 interface StudioDispatchBody {
   action?:
     | "update_dispatch"
+    | "update_payment"
     | "mark_offline_paid"
     | "complete_order"
-    | "cancel_order";
+    | "cancel_order"
+    | "resend_confirmation_email"
+    | "resend_shipping_email";
   completeOrder?: boolean;
   paymentStatus?: "pending" | "paid" | "refunded";
   paymentMethod?: string;
   paymentReference?: string;
+  paymentAmount?: number | string | null;
+  paidAt?: string | null;
   offlinePaymentNote?: string;
   fulfillmentStage?: StudioFulfillmentStage;
   courierName?: string;
@@ -36,9 +48,71 @@ interface StudioDispatchBody {
   trackingUrl?: string;
   dispatchNote?: string;
   sendEmail?: boolean;
+  emailKind?: "dispatched" | "delivered" | "preparing" | "completed" | "payment_receipt";
 }
 
-const VALID_PAYMENT_STATUSES = new Set(["pending", "paid", "refunded"]);
+const VALID_PAYMENT_STATUSES = new Set<StudioPaymentStatus>([
+  "pending",
+  "paid",
+  "refunded",
+]);
+
+const DETAIL_FIELDS = [
+  "id",
+  "display_id",
+  "email",
+  "status",
+  "currency_code",
+  "metadata",
+  "summary.*",
+  "items.*",
+  "items.adjustments.*",
+  "shipping_methods.*",
+  "shipping_methods.adjustments.*",
+  "shipping_address.*",
+  "payment_collections.*",
+  "payment_collections.payments.*",
+  "fulfillments.*",
+  "fulfillments.labels.*",
+];
+
+async function fetchRefreshedOrderDetail(
+  scope: { resolve: (key: string) => any },
+  orderId: string
+) {
+  try {
+    const { result } = await getOrderDetailWorkflow(scope as any).run({
+      input: {
+        order_id: orderId,
+        fields: DETAIL_FIELDS,
+      },
+    });
+    return result;
+  } catch {
+    const query = scope.resolve(ContainerRegistrationKeys.QUERY);
+    const { data } = await query.graph({
+      entity: "order",
+      filters: { id: orderId },
+      fields: DETAIL_FIELDS,
+    });
+    return (data || [])[0] || null;
+  }
+}
+
+export async function GET(req: MedusaRequest, res: MedusaResponse) {
+  try {
+    await ensureStudioEmailSettingsLoaded(req.scope);
+    return res.status(200).json({
+      success: true,
+      emailProviderStatus: getEmailProviderStatus(),
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      success: false,
+      message: err?.message || "Failed to load studio order email status.",
+    });
+  }
+}
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const { id } = req.params;
@@ -52,19 +126,12 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY);
 
   try {
+    await ensureStudioEmailSettingsLoaded(req.scope);
+
     const { data: orders } = await query.graph({
       entity: "order",
       filters: { id },
-      fields: [
-        "id",
-        "display_id",
-        "email",
-        "status",
-        "currency_code",
-        "metadata",
-        "items.*",
-        "shipping_address.*",
-      ],
+      fields: DETAIL_FIELDS,
     });
 
     const existingOrder = (orders || [])[0] as any;
@@ -108,57 +175,137 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         },
       });
 
-      const { data: refreshed } = await query.graph({
-        entity: "order",
-        filters: { id },
-        fields: ["id", "display_id", "status", "metadata"],
-      });
+      const cancelledOrder = await fetchRefreshedOrderDetail(req.scope, id);
 
       return res.status(200).json({
         success: true,
-        order: refreshed[0] || existingOrder,
+        order: cancelledOrder || existingOrder,
+        emailProviderStatus: getEmailProviderStatus(),
         message: "Order cancelled.",
       });
     }
 
-    if (body.paymentStatus !== undefined) {
-      const normalizedPayStatus = String(body.paymentStatus)
-        .trim()
-        .toLowerCase();
-      if (VALID_PAYMENT_STATUSES.has(normalizedPayStatus)) {
-        nextMeta.payment_status = normalizedPayStatus;
-        if (normalizedPayStatus === "paid") {
-          nextMeta.offline_payment_recorded_at =
-            existingMeta.offline_payment_recorded_at || nowIso;
-        }
-      }
+    if (body.action === "resend_confirmation_email") {
+      const outcome = await sendOrderConfirmationEmail(req.scope, id, {
+        force: true,
+        actorId,
+      });
+      const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
+      return res.status(200).json({
+        success: true,
+        order: updatedOrder || existingOrder,
+        emailResult: outcome.result || null,
+        emailSkippedReason: outcome.skippedReason || null,
+        emailProviderStatus: getEmailProviderStatus(),
+      });
     }
 
-    if (body.action === "mark_offline_paid") {
-      nextMeta.payment_status = "paid";
-      nextMeta.offline_payment_recorded_at = nowIso;
+    if (body.action === "resend_shipping_email") {
+      const stage = normalizeFulfillmentStage(
+        existingMeta.fulfillment_stage,
+        existingOrder.status
+      );
+      const kind =
+        body.emailKind ||
+        (stage === "delivered"
+          ? "delivered"
+          : stage === "preparing" || stage === "received"
+            ? "preparing"
+            : "dispatched");
+
+      const outcome = await sendOrderShippingEmail(req.scope, id, {
+        kind,
+        force: true,
+        courierName: body.courierName,
+        trackingNumber: body.trackingNumber,
+        trackingUrl: body.trackingUrl,
+        dispatchNote: body.dispatchNote,
+        skipAdminAlert: true,
+        actorId,
+      });
+      const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
+      return res.status(200).json({
+        success: true,
+        order: updatedOrder || existingOrder,
+        emailResult: outcome.result || null,
+        emailSkippedReason: outcome.skippedReason || null,
+        emailProviderStatus: getEmailProviderStatus(),
+      });
     }
 
-    if (body.paymentMethod !== undefined) {
-      const cleanedMethod = String(body.paymentMethod).trim();
-      if (cleanedMethod) {
-        nextMeta.payment_method = cleanedMethod;
-      }
-    } else if (
-      body.action === "mark_offline_paid" &&
-      !nextMeta.payment_method
+    if (
+      body.action === "update_payment" ||
+      body.action === "mark_offline_paid"
     ) {
-      nextMeta.payment_method = "offline_cash";
+      const requestedStatusRaw = String(body.paymentStatus || "")
+        .trim()
+        .toLowerCase() as StudioPaymentStatus;
+      const existingPayRaw = String(existingMeta.payment_status || "")
+        .trim()
+        .toLowerCase() as StudioPaymentStatus;
+
+      const resolvedPaymentStatus: StudioPaymentStatus =
+        VALID_PAYMENT_STATUSES.has(requestedStatusRaw)
+          ? requestedStatusRaw
+          : body.action === "mark_offline_paid"
+            ? "paid"
+            : VALID_PAYMENT_STATUSES.has(existingPayRaw)
+              ? existingPayRaw
+              : currentStatus === "completed"
+                ? "paid"
+                : "pending";
+
+      const resolvedMethod =
+        body.paymentMethod !== undefined && String(body.paymentMethod).trim()
+          ? String(body.paymentMethod).trim()
+          : String(existingMeta.payment_method || "").trim() ||
+            (body.action === "mark_offline_paid" ? "offline_cash" : "cod");
+
+      let paymentSyncResult;
+      try {
+        paymentSyncResult = await syncOrderNativePayment(req.scope, {
+          orderId: id,
+          paymentStatus: resolvedPaymentStatus,
+          paymentMethod: resolvedMethod,
+          paymentReference: body.paymentReference,
+          paymentAmount: body.paymentAmount,
+          paidAt: body.paidAt,
+          note: body.offlinePaymentNote,
+          actorId,
+        });
+      } catch (payErr: any) {
+        return res.status(400).json({
+          success: false,
+          message: payErr?.message || "Could not update payment ledger.",
+        });
+      }
+
+      let emailResult: DispatchNotificationResult | null = null;
+      let emailSkippedReason: string | null = null;
+
+      if (body.sendEmail) {
+        const outcome = await sendOrderShippingEmail(req.scope, id, {
+          kind: "payment_receipt",
+          force: true,
+          skipAdminAlert: true,
+          actorId,
+        });
+        emailResult = outcome.result || null;
+        emailSkippedReason = outcome.skippedReason || null;
+      }
+
+      const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
+      return res.status(200).json({
+        success: true,
+        order: updatedOrder || existingOrder,
+        paymentSync: paymentSyncResult,
+        emailResult,
+        emailSkippedReason,
+        emailProviderStatus: getEmailProviderStatus(),
+      });
     }
 
-    if (body.paymentReference !== undefined) {
-      nextMeta.payment_id = String(body.paymentReference).trim();
-    }
-
-    if (body.offlinePaymentNote !== undefined) {
-      nextMeta.offline_payment_note = String(body.offlinePaymentNote).trim();
-    }
-
+    // Dispatch / stage / order completion update
     if (body.fulfillmentStage !== undefined) {
       const stage = String(body.fulfillmentStage)
         .trim()
@@ -166,19 +313,18 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       if (VALID_FULFILLMENT_STAGES.includes(stage)) {
         nextMeta.fulfillment_stage = stage;
         if (stage === "dispatched") {
-          nextMeta.dispatched_at = nowIso;
+          nextMeta.dispatched_at = existingMeta.dispatched_at || nowIso;
         } else if (stage === "delivered") {
           if (!nextMeta.dispatched_at) {
             nextMeta.dispatched_at = nowIso;
           }
-          nextMeta.delivered_at = nowIso;
+          nextMeta.delivered_at = existingMeta.delivered_at || nowIso;
         }
       }
     }
 
     if (body.courierName !== undefined) {
-      const trimmedCourier = String(body.courierName).trim();
-      nextMeta.courier_name = trimmedCourier;
+      nextMeta.courier_name = String(body.courierName).trim();
     }
 
     if (
@@ -199,8 +345,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         if (!safeUrl) {
           return res.status(400).json({
             success: false,
-            message:
-              "Tracking URL must start with http:// or https://.",
+            message: "Tracking URL must start with http:// or https://.",
           });
         }
         nextMeta.tracking_url = safeUrl;
@@ -238,23 +383,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       });
     }
 
-    const { data: refreshed } = await query.graph({
-      entity: "order",
-      filters: { id },
-      fields: [
-        "id",
-        "display_id",
-        "email",
-        "status",
-        "currency_code",
-        "metadata",
-        "items.*",
-        "shipping_address.*",
-      ],
-    });
-
-    const updatedOrder = (refreshed[0] || existingOrder) as any;
-    const updatedMeta = ((updatedOrder.metadata || nextMeta) as Record<
+    const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
+    const updatedMeta = ((updatedOrder?.metadata || nextMeta) as Record<
       string,
       unknown
     >);
@@ -263,131 +393,45 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     let emailSkippedReason: string | null = null;
 
     if (body.sendEmail) {
-      const recipientEmail = String(updatedOrder.email || "")
-        .trim()
-        .toLowerCase();
-      if (!recipientEmail || recipientEmail === "guest@mehandibysana.com") {
-        emailSkippedReason =
-          "Order has no real customer email address on file.";
-      } else {
-        const orderNumber = deriveOrderNumber(updatedOrder);
-        const firstName =
-          updatedOrder.shipping_address?.first_name || "Customer";
-        const lastName = updatedOrder.shipping_address?.last_name || "";
-        const customerName = `${firstName} ${lastName}`.trim();
-        const phone = updatedOrder.shipping_address?.phone || "";
+      const resolvedStage = normalizeFulfillmentStage(
+        updatedMeta.fulfillment_stage,
+        updatedOrder?.status || existingOrder.status
+      );
 
-        const resolvedStage = normalizeFulfillmentStage(
-          updatedMeta.fulfillment_stage,
-          updatedOrder.status
-        );
-        const courierName = String(
-          updatedMeta.courier_name || "Local Courier"
-        ).trim();
-        const trackingNumber = String(
-          updatedMeta.tracking_number || ""
-        ).trim();
-        const trackingUrl = String(updatedMeta.tracking_url || "").trim();
-        const dispatchNote = String(updatedMeta.dispatch_note || "").trim();
-        const paymentMethodLabel = formatOrderPaymentMethodLabel(
-          updatedMeta.payment_method
-        );
-        const paymentRef = String(updatedMeta.payment_id || "").trim();
+      const emailKind: "dispatched" | "delivered" | "preparing" | "completed" =
+        resolvedStage === "delivered"
+          ? "delivered"
+          : resolvedStage === "dispatched"
+            ? "dispatched"
+            : body.action === "complete_order"
+              ? "completed"
+              : "preparing";
 
-        const itemsList = Array.isArray(updatedOrder.items)
-          ? updatedOrder.items
-          : [];
-        const fallbackSubtotal = itemsList.reduce(
-          (sum: number, item: any) =>
-            sum + (Number(item.unit_price) || 0) * (Number(item.quantity) || 1),
-          0
-        );
-        const totalInr =
-          Number(updatedMeta.total) ||
-          fallbackSubtotal + (Number(updatedMeta.shipping_fee) || 0);
+      const outcome = await sendOrderShippingEmail(req.scope, id, {
+        kind: emailKind,
+        force: true,
+        courierName: String(updatedMeta.courier_name || "").trim(),
+        trackingNumber: String(updatedMeta.tracking_number || "").trim(),
+        trackingUrl: String(updatedMeta.tracking_url || "").trim(),
+        dispatchNote: String(updatedMeta.dispatch_note || "").trim(),
+        skipAdminAlert: true,
+        actorId,
+      });
 
-        let notifType: NotificationEvent["type"] = "order_dispatched";
-        let summaryLines: string[] = [];
-
-        if (body.action === "mark_offline_paid") {
-          notifType = "order_payment_offline";
-          summaryLines.push(
-            `We have received your offline payment${
-              totalInr > 0 ? ` of ₹${totalInr.toLocaleString("en-IN")}` : ""
-            } via ${paymentMethodLabel}${
-              paymentRef ? ` (Ref: ${paymentRef})` : ""
-            } for order ${orderNumber}.`
-          );
-          if (resolvedStage === "dispatched" && courierName) {
-            summaryLines.push(
-              `Dispatch status: Shipped via ${courierName}${
-                trackingNumber ? ` (${trackingNumber})` : ""
-              }.`
-            );
-          }
-        } else if (resolvedStage === "delivered") {
-          notifType = "order_delivered";
-          summaryLines.push(
-            `Your Mehandi by Sana order (${orderNumber}) has been delivered${
-              courierName ? ` via ${courierName}` : ""
-            }. We hope your cones stain rich and deep!`
-          );
-        } else if (
-          body.action === "complete_order" &&
-          resolvedStage !== "dispatched"
-        ) {
-          notifType = "order_completed";
-          summaryLines.push(
-            `Your Mehandi by Sana order (${orderNumber}) has been marked completed.`
-          );
-          if (String(updatedMeta.payment_status || "") === "paid") {
-            summaryLines.push(
-              `Payment status: Paid (${paymentMethodLabel}${
-                paymentRef ? ` · Ref: ${paymentRef}` : ""
-              }).`
-            );
-          }
-        } else {
-          notifType = "order_dispatched";
-          summaryLines.push(
-            `Your Mehandi by Sana order (${orderNumber}) has been shipped via ${courierName}.`
-          );
-          if (trackingNumber) {
-            summaryLines.push(`Tracking / Courier Details: ${trackingNumber}`);
-          }
-          if (trackingUrl) {
-            summaryLines.push(`Courier Tracking Link: ${trackingUrl}`);
-          }
-          if (String(updatedMeta.payment_status || "") === "paid") {
-            summaryLines.push(
-              `Payment: Paid (${paymentMethodLabel}${
-                paymentRef ? ` · Ref: ${paymentRef}` : ""
-              })`
-            );
-          }
-        }
-
-        if (dispatchNote) {
-          summaryLines.push(`Studio Note: ${dispatchNote}`);
-        }
-
-        emailResult = await dispatchStudioNotification({
-          type: notifType,
-          recipientEmail,
-          recipientName: customerName || "Customer",
-          recipientPhone: phone,
-          referenceId: orderNumber,
-          summary: summaryLines.join("\n\n"),
-          skipAdminAlert: true,
-        });
-      }
+      emailResult = outcome.result || null;
+      emailSkippedReason = outcome.skippedReason || null;
     }
+
+    const finalOrder = body.sendEmail
+      ? await fetchRefreshedOrderDetail(req.scope, id)
+      : updatedOrder;
 
     return res.status(200).json({
       success: true,
-      order: updatedOrder,
+      order: finalOrder || existingOrder,
       emailResult,
       emailSkippedReason,
+      emailProviderStatus: getEmailProviderStatus(),
     });
   } catch (error: any) {
     console.error("[Admin Studio Dispatch Error]:", error);
@@ -397,4 +441,3 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     });
   }
 }
-

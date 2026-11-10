@@ -64,6 +64,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   if (body.status === "confirmed" && target.status !== "confirmed") {
     await dispatchStudioNotification({
+      scope: req.scope,
       type: "bridal_booking_confirmed",
       recipientEmail: current[idx].email,
       recipientName: current[idx].name,
@@ -75,7 +76,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         current[idx].advancePaidInr > 0
           ? ` (advance recorded: ₹${current[idx].advancePaidInr})`
           : ""
-      }. Our Srinagar studio coordinator will connect with you ahead of the event.`,
+      }. Our studio coordinator will connect with you ahead of the event.`,
     });
   }
 

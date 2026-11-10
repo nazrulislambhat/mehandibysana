@@ -38,6 +38,7 @@ export function formatOrderPaymentMethodLabel(raw?: unknown): string {
   const key = val.toLowerCase();
   if (!key || key === "cod") return "Cash on Delivery";
   if (key === "razorpay") return "Razorpay Online";
+  if (key === "free_coupon") return "100% Coupon Discount";
   if (key === "offline_cash") return "Offline Cash Payment";
   if (key === "offline_upi") return "Offline UPI Payment";
   if (key === "offline_bank") return "Offline Bank Transfer";

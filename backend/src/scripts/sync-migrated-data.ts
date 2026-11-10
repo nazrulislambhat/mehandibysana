@@ -115,7 +115,7 @@ export default async function syncMigratedData({ container }: ExecArgs) {
 
     const { data: existingProds } = await query.graph({
       entity: "product",
-      fields: ["id", "handle", "title", "variants.id", "variants.sku"],
+      fields: ["id", "handle", "title", "categories.id", "variants.id", "variants.sku"],
       filters: { handle: mp.handle },
     });
 
@@ -125,6 +125,12 @@ export default async function syncMigratedData({ container }: ExecArgs) {
 
     if (existingProds && existingProds.length > 0) {
       const existing = existingProds[0];
+      const existingCategoryIds: string[] = Array.isArray(existing.categories)
+        ? existing.categories.map((c: any) => String(c.id)).filter(Boolean)
+        : [];
+      const mergedCategoryIds = Array.from(
+        new Set<string>([...existingCategoryIds, ...resolvedCategoryIds])
+      );
       try {
         await updateProductsWorkflow(container).run({
           input: {
@@ -142,7 +148,7 @@ export default async function syncMigratedData({ container }: ExecArgs) {
                 thumbnail: imageList[0]?.url || undefined,
                 images: imageList,
                 category_ids:
-                  resolvedCategoryIds.length > 0 ? resolvedCategoryIds : undefined,
+                  mergedCategoryIds.length > 0 ? mergedCategoryIds : undefined,
                 metadata: {
                   ...(mp.metadata || {}),
                   zero_loss_synced_at: new Date().toISOString(),

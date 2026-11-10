@@ -1,5 +1,6 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import {
+  evaluatePincode,
   loadPincodeRules,
   normalizePattern,
   PincodeRule,
@@ -7,8 +8,16 @@ import {
   savePincodeRules,
 } from "../../../lib/pincode-rules";
 
-export async function GET(_req: MedusaRequest, res: MedusaResponse) {
+export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const rules = loadPincodeRules();
+  const rawPin = String(req.query.pincode || "").trim();
+  if (rawPin) {
+    const subtotal = Number(req.query.subtotal || 0) || 0;
+    return res.status(200).json({
+      rules,
+      checkResult: evaluatePincode(rawPin, subtotal),
+    });
+  }
   return res.status(200).json({ rules });
 }
 

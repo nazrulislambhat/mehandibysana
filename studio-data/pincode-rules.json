@@ -1,86 +1,38 @@
 [
   {
-    "id": "rule-jk-19",
-    "pattern": "19*",
-    "label": "Kashmir Valley & Ladakh (19*)",
-    "zone": "Zone A — Local Dispatch",
+    "id": "rule-srinagar-190",
+    "pattern": "190*",
+    "label": "Srinagar Metro Zone (190*)",
+    "zone": "Zone 1 — Srinagar Studio Dispatch",
     "charge": 60,
     "estimatedDays": "1–2 business days",
     "codAvailable": true,
     "freeShippingAbove": null,
     "active": true,
-    "updatedAt": "2026-11-10T08:55:08.104Z"
+    "updatedAt": "2026-11-10T15:00:00.000Z"
   },
   {
-    "id": "rule-jk-18",
-    "pattern": "18*",
-    "label": "Jammu Region (18*)",
-    "zone": "Zone A — Regional Dispatch",
+    "id": "rule-bangalore-560",
+    "pattern": "560*",
+    "label": "Bangalore Metro Zone (560*)",
+    "zone": "Zone 2 — Bangalore Studio Dispatch",
     "charge": 60,
-    "estimatedDays": "2–3 business days",
+    "estimatedDays": "1–2 business days",
     "codAvailable": true,
     "freeShippingAbove": null,
     "active": true,
-    "updatedAt": "2026-11-10T07:51:19.748Z"
-  },
-  {
-    "id": "rule-delhi-11",
-    "pattern": "11*",
-    "label": "New Delhi NCR (11*)",
-    "zone": "Zone B — North India Metro",
-    "charge": 120,
-    "estimatedDays": "3–4 business days",
-    "codAvailable": true,
-    "freeShippingAbove": null,
-    "active": true,
-    "updatedAt": "2026-11-10T07:51:19.748Z"
-  },
-  {
-    "id": "rule-haryana-12",
-    "pattern": "12*",
-    "label": "Haryana & Gurugram NCR (12*)",
-    "zone": "Zone B — North India Metro",
-    "charge": 120,
-    "estimatedDays": "3–4 business days",
-    "codAvailable": true,
-    "freeShippingAbove": null,
-    "active": true,
-    "updatedAt": "2026-11-10T07:51:19.748Z"
-  },
-  {
-    "id": "rule-punjab-14",
-    "pattern": "14*",
-    "label": "Punjab & Chandigarh (14*)",
-    "zone": "Zone B — North India Metro",
-    "charge": 120,
-    "estimatedDays": "3–4 business days",
-    "codAvailable": true,
-    "freeShippingAbove": null,
-    "active": true,
-    "updatedAt": "2026-11-10T07:51:19.748Z"
-  },
-  {
-    "id": "rule-up-20",
-    "pattern": "20*",
-    "label": "Noida & Western UP (20*)",
-    "zone": "Zone B — North India Metro",
-    "charge": 120,
-    "estimatedDays": "3–4 business days",
-    "codAvailable": true,
-    "freeShippingAbove": null,
-    "active": true,
-    "updatedAt": "2026-11-10T07:51:19.748Z"
+    "updatedAt": "2026-11-10T15:00:00.000Z"
   },
   {
     "id": "rule-all-india",
     "pattern": "*",
     "label": "Rest of India (All Other Pincodes)",
-    "zone": "Zone C — Pan-India Express",
+    "zone": "Zone 3 — Pan-India Express",
     "charge": 150,
-    "estimatedDays": "4–6 business days",
+    "estimatedDays": "3–6 business days",
     "codAvailable": true,
     "freeShippingAbove": null,
     "active": true,
-    "updatedAt": "2026-11-10T07:51:19.748Z"
+    "updatedAt": "2026-11-10T15:00:00.000Z"
   }
 ]

@@ -2,6 +2,24 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import { createBridalBooking } from "../../../lib/bridal-bookings";
 import { dispatchStudioNotification } from "../../../lib/notifications";
 
+function escapeHtml(text: string): string {
+  return String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function formatServiceLabel(raw: string): string {
+  const map: Record<string, string> = {
+    bridal: "Bridal Mehndi Booking",
+    events: "Events & Celebrations",
+    botanical: "Custom Bulk Orders / Workshops",
+    "order-support": "Existing Store Order Question",
+  };
+  return map[raw] || raw || "Bridal Mehndi Booking";
+}
+
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   try {
     const body = (req.body || {}) as {
@@ -37,13 +55,57 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       message,
     });
 
-    await dispatchStudioNotification({
+    const serviceLabel = formatServiceLabel(booking.service);
+    const detailsHtml = `
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden;">
+        <tbody>
+          <tr>
+            <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#525252;width:36%;">Inquiry Type</td>
+            <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;font-weight:600;color:#111111;">${escapeHtml(serviceLabel)}</td>
+          </tr>
+          ${
+            booking.eventDate
+              ? `<tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#525252;">Preferred Date</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#111111;">${escapeHtml(booking.eventDate)}</td>
+                </tr>`
+              : ""
+          }
+          ${
+            booking.location
+              ? `<tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#525252;">City / Venue</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#111111;">${escapeHtml(booking.location)}</td>
+                </tr>`
+              : ""
+          }
+          ${
+            booking.phone
+              ? `<tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#525252;">Phone / WhatsApp</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid #eeeeee;font-size:13px;color:#111111;">${escapeHtml(booking.phone)}</td>
+                </tr>`
+              : ""
+          }
+          <tr>
+            <td style="padding:9px 12px;font-size:13px;color:#525252;vertical-align:top;">Notes</td>
+            <td style="padding:9px 12px;font-size:13px;line-height:1.55;color:#111111;">${escapeHtml(booking.message)}</td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+
+    const notificationResult = await dispatchStudioNotification({
+      scope: req.scope,
       type: "bridal_booking_received",
       recipientEmail: booking.email,
       recipientName: booking.name,
       recipientPhone: booking.phone,
       referenceId: booking.referenceId,
-      summary: `We have received your ${booking.service} inquiry${booking.eventDate ? ` for ${booking.eventDate}` : ""}. Sana and our Srinagar coordinator will review availability within 24 hours.`,
+      summary: `We have received your ${serviceLabel} inquiry${
+        booking.eventDate ? ` for ${booking.eventDate}` : ""
+      }. Sana and our Srinagar & Bangalore coordinator will review availability within 24 hours.`,
+      detailsHtml,
       details: {
         service: booking.service,
         eventDate: booking.eventDate,
@@ -55,6 +117,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       success: true,
       booking,
       referenceId: booking.referenceId,
+      emailDispatched: notificationResult.customerEmailSent,
+      emailProvider: notificationResult.provider,
     });
   } catch (error: any) {
     console.error("[Bridal Booking Create Error]:", error);
@@ -64,4 +128,3 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     });
   }
 }
-

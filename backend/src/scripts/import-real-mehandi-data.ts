@@ -111,15 +111,24 @@ export default async function importRealMehandiData({ container }: ExecArgs) {
     fields: ["id", "name"],
   });
 
-  const categoryNames = [
-    "Organic Henna",
-    "Henna Kits & Combos",
-    "Henna Care & Essential Oils",
-    "Cones & Accessories",
+  const categorySpecs = [
+    { name: "Organic Henna", handle: "organic-henna", rank: 1 },
+    { name: "Henna Kits & Combos", handle: "henna-kits-combos", rank: 2 },
+    {
+      name: "Henna Care & Essential Oils",
+      handle: "henna-care-essential-oils",
+      rank: 3,
+    },
+    { name: "Cones & Accessories", handle: "cones-accessories", rank: 6 },
   ];
 
-  const categoriesToCreate = categoryNames.filter(
-    (catName) => !existingCategories.some((c: any) => c.name === catName)
+  const categoriesToCreate = categorySpecs.filter(
+    (spec) =>
+      !existingCategories.some(
+        (c: any) =>
+          c.name === spec.name ||
+          c.handle === spec.handle
+      )
   );
 
   const allCategories: any[] = [...existingCategories];
@@ -129,8 +138,10 @@ export default async function importRealMehandiData({ container }: ExecArgs) {
       container
     ).run({
       input: {
-        product_categories: categoriesToCreate.map((name) => ({
-          name,
+        product_categories: categoriesToCreate.map((spec) => ({
+          name: spec.name,
+          handle: spec.handle,
+          rank: spec.rank,
           is_active: true,
         })),
       },
@@ -438,7 +449,7 @@ export default async function importRealMehandiData({ container }: ExecArgs) {
     {
       title: "Pre Rolled Henna Cones [10 No.]",
       handle: "pre-rolled-henna-cones",
-      category_ids: getCategoryId("Cones & Accessories"),
+      category_ids: getCategoryId("Organic Henna"),
       description:
         "Empty artisan-rolled cellophane cones with ultra-fine precision pin tips (0.38mm), ready to be filled with your custom henna paste.",
       weight: 50,

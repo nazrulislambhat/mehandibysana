@@ -3,10 +3,10 @@ import * as path from "path";
 
 export interface PincodeRule {
   id: string;
-  pattern: string; // e.g. "19*", "18*", "11*", "190001", "*"
-  label: string; // e.g. "Kashmir Valley (19*)"
-  zone: string; // e.g. "Zone A — Local & Valley"
-  charge: number; // INR delivery fee, e.g. 60, 120, 150
+  pattern: string; // e.g. "190*", "560*", "*"
+  label: string; // e.g. "Srinagar Metro Zone (190*)"
+  zone: string; // e.g. "Zone 1 — Srinagar Studio Dispatch"
+  charge: number; // INR delivery fee, e.g. 60, 150
   estimatedDays: string; // e.g. "1–2 business days"
   codAvailable: boolean;
   freeShippingAbove: number | null; // Optional subtotal threshold for free shipping (null = never free)
@@ -31,10 +31,10 @@ export interface PincodeCheckResult {
 
 const DEFAULT_PINCODE_RULES: PincodeRule[] = [
   {
-    id: "rule-jk-19",
-    pattern: "19*",
-    label: "Kashmir Valley & Ladakh (19*)",
-    zone: "Zone A — Local Dispatch",
+    id: "rule-srinagar-190",
+    pattern: "190*",
+    label: "Srinagar Metro Zone (190*)",
+    zone: "Zone 1 — Srinagar Studio Dispatch",
     charge: 60,
     estimatedDays: "1–2 business days",
     codAvailable: true,
@@ -43,60 +43,12 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "rule-jk-18",
-    pattern: "18*",
-    label: "Jammu Region (18*)",
-    zone: "Zone A — Regional Dispatch",
+    id: "rule-bangalore-560",
+    pattern: "560*",
+    label: "Bangalore Metro Zone (560*)",
+    zone: "Zone 2 — Bangalore Studio Dispatch",
     charge: 60,
-    estimatedDays: "2–3 business days",
-    codAvailable: true,
-    freeShippingAbove: null,
-    active: true,
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "rule-delhi-11",
-    pattern: "11*",
-    label: "New Delhi NCR (11*)",
-    zone: "Zone B — North India Metro",
-    charge: 120,
-    estimatedDays: "3–4 business days",
-    codAvailable: true,
-    freeShippingAbove: null,
-    active: true,
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "rule-haryana-12",
-    pattern: "12*",
-    label: "Haryana & Gurugram NCR (12*)",
-    zone: "Zone B — North India Metro",
-    charge: 120,
-    estimatedDays: "3–4 business days",
-    codAvailable: true,
-    freeShippingAbove: null,
-    active: true,
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "rule-punjab-14",
-    pattern: "14*",
-    label: "Punjab & Chandigarh (14*)",
-    zone: "Zone B — North India Metro",
-    charge: 120,
-    estimatedDays: "3–4 business days",
-    codAvailable: true,
-    freeShippingAbove: null,
-    active: true,
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "rule-up-20",
-    pattern: "20*",
-    label: "Noida & Western UP (20*)",
-    zone: "Zone B — North India Metro",
-    charge: 120,
-    estimatedDays: "3–4 business days",
+    estimatedDays: "1–2 business days",
     codAvailable: true,
     freeShippingAbove: null,
     active: true,
@@ -106,9 +58,9 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     id: "rule-all-india",
     pattern: "*",
     label: "Rest of India (All Other Pincodes)",
-    zone: "Zone C — Pan-India Express",
+    zone: "Zone 3 — Pan-India Express",
     charge: 150,
-    estimatedDays: "4–6 business days",
+    estimatedDays: "3–6 business days",
     codAvailable: true,
     freeShippingAbove: null,
     active: true,

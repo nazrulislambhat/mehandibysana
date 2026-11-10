@@ -9,10 +9,11 @@ import {
 import type { ExecArgs } from "@medusajs/framework/types";
 
 /**
- * Seeds related henna preparation & artist tools into MedusaJS v2.
- * Uses empty images ([]) so the storefront renders its clean "No image available"
- * placeholder frame until real photography is uploaded in Medusa Admin.
+ * Seeds related henna preparation & artist tools into MedusaJS v2
+ * using curated studio imagery hosted in frontend/public/images/tools/.
  */
+const TOOL_IMAGE_BASE_URL = "https://mehandibysana.vercel.app/images/tools";
+
 export default async function seedRelatedHennaProducts({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER);
   const query = container.resolve(ContainerRegistrationKeys.QUERY);
@@ -97,7 +98,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "Crystal-clear 30-micron BOPP square sheets for effortless cone rolling.",
         tool_group: "Cone Rolling",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -122,7 +123,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "6-piece heavy-gauge steel spoons for exact essential oil & sugar ratios.",
         tool_group: "Mixing & Measurement",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -156,7 +157,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "0.01g high-accuracy backlit digital scale for henna powder & essential oils.",
         tool_group: "Mixing & Measurement",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -190,7 +191,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "Burst-resistant 12-inch seamless piping bags for mess-free cone filling.",
         tool_group: "Cone Rolling",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -215,7 +216,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "2 rolls of high-tack matte tape + 20 rust-proof 0.38mm pearl-head pins.",
         tool_group: "Cone Rolling",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -240,7 +241,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "Ultra-fine 120-mesh straining cloth for silky, clog-free bridal paste.",
         tool_group: "Paste Preparation",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -274,7 +275,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "Life-size matte-finish washable acrylic hand template for motif practice.",
         tool_group: "Practice & Studio",
-        image_pending: true,
+        image_pending: false,
       },
     },
     {
@@ -299,13 +300,14 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       metadata: {
         short_description: "Non-reactive borosilicate mixing bowl with airtight lid & flexible spatula.",
         tool_group: "Paste Preparation",
-        image_pending: true,
+        image_pending: false,
       },
     },
   ];
 
   let createdCount = 0;
   for (const item of relatedProducts) {
+    const productImageUrl = `${TOOL_IMAGE_BASE_URL}/${item.handle}.jpg`;
     const { data: existing } = await query.graph({
       entity: "product",
       fields: ["id", "handle"],
@@ -331,7 +333,8 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
               shipping_profile_id: shippingProfile.id,
               sales_channels: [{ id: salesChannel.id }],
               category_ids: [toolsCategory.id],
-              images: [],
+              thumbnail: productImageUrl,
+              images: [{ url: productImageUrl }],
               options: item.options,
               variants: item.variants.map((v) => ({
                 ...v,

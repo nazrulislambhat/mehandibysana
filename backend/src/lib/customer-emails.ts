@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 import { loadBridalBookings } from "./bridal-bookings";
+import { listNewsletterSubscribers } from "./newsletter-subscribers";
 
 const DATA_DIR =
   process.env.STUDIO_DATA_DIR?.trim() || path.resolve(process.cwd(), "../studio-data");
@@ -12,7 +13,8 @@ export type CampaignSegment =
   | "repeat_buyers"
   | "kashmir_local"
   | "bridal_inquiries"
-  | "one_time_buyers";
+  | "one_time_buyers"
+  | "newsletter";
 
 export interface CustomerEmailRecord {
   email: string;
@@ -136,7 +138,10 @@ export async function aggregateCustomerEmails(
     ]),
   ]);
 
-  const bookings = loadBridalBookings();
+  const [bookings, newsletterSubscribers] = await Promise.all([
+    Promise.resolve(loadBridalBookings()),
+    listNewsletterSubscribers(scope),
+  ]);
 
   const byEmail = new Map<string, CustomerEmailRecord>();
   const rawSeen = new Set<string>();
@@ -245,6 +250,15 @@ export async function aggregateCustomerEmails(
     if (!entry.city && b.location) entry.city = cleanStr(b.location);
   }
 
+  for (const sub of newsletterSubscribers) {
+    const entry = ensureEntry(sub.email);
+    if (!entry) continue;
+    addSource(entry, "newsletter");
+    if (!entry.firstName && sub.firstName) {
+      entry.firstName = cleanStr(sub.firstName);
+    }
+  }
+
   const allContacts = Array.from(byEmail.values());
   const domainMap = new Map<string, number>();
 
@@ -260,6 +274,9 @@ export async function aggregateCustomerEmails(
     }
     if (contact.sources.includes("bridal_inquiry")) {
       segs.push("bridal_inquiries");
+    }
+    if (contact.sources.includes("newsletter")) {
+      segs.push("newsletter");
     }
     contact.segments = segs;
 
@@ -279,6 +296,7 @@ export async function aggregateCustomerEmails(
     kashmir_local: allContacts.filter((c) => c.segments.includes("kashmir_local")).length,
     bridal_inquiries: allContacts.filter((c) => c.segments.includes("bridal_inquiries")).length,
     one_time_buyers: allContacts.filter((c) => c.segments.includes("one_time_buyers")).length,
+    newsletter: allContacts.filter((c) => c.segments.includes("newsletter")).length,
   };
 
   const selectedSegment = options.segment || "all";
