@@ -16,15 +16,15 @@ export interface ButtonStyleOptions {
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    'btn-dir--primary bg-terracotta text-inverse border border-terracotta hover:border-ink active:border-ink',
+    'btn-dir--primary bg-terracotta-solid text-on-accent border border-terracotta-solid hover:text-plaque-ink hover:border-plaque-border active:border-plaque-border',
   accent:
-    'btn-dir--accent bg-terracotta text-inverse border border-terracotta hover:border-terracotta-dark active:border-inverse/40',
+    'btn-dir--accent bg-terracotta-solid text-on-accent border border-terracotta-solid hover:border-terracotta-dark active:border-on-accent/40',
   secondary:
-    'btn-dir--secondary bg-paper text-ink border border-ink/30 hover:text-inverse hover:border-terracotta focus-visible:text-inverse focus-visible:border-terracotta',
+    'btn-dir--secondary bg-paper text-ink border border-ink/30 hover:text-on-accent hover:border-terracotta-solid focus-visible:text-on-accent focus-visible:border-terracotta-solid',
   ink:
-    'btn-dir--ink bg-ink text-inverse border border-ink hover:border-terracotta active:border-terracotta-dark',
+    'btn-dir--ink bg-ink text-inverse border border-ink hover:text-on-accent hover:border-terracotta-solid focus-visible:text-on-accent active:border-terracotta-dark',
   inverse:
-    'btn-dir--inverse bg-transparent text-inverse border border-inverse/30 hover:border-terracotta hover:text-inverse focus-visible:border-terracotta',
+    'btn-dir--inverse bg-transparent text-plaque-ink border border-plaque-ink/30 hover:border-terracotta-solid hover:text-on-accent focus-visible:border-terracotta-solid focus-visible:text-on-accent',
   ghost:
     'btn-dir--ghost bg-transparent text-terracotta border border-transparent hover:text-terracotta-dark',
 };

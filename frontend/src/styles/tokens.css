@@ -4,21 +4,31 @@
  * and reusable verbatim inside the WordPress WooCommerce checkout theme.
  */
 
-:root {
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
   /* ==========================================================================
-     COLORS — White (#ffffff) mode canvas, Ink Black (#111111), Cream (#fceee3) inverse,
-     Burnt Orange (#d9541e) for links, buttons & highlights (no orange bg washes)
+     COLORS — Crisp White (#ffffff) Light Canvas + Ink (#111111) + Cream (#fceee3)
      ========================================================================== */
-  --color-bg: #ffffff;             /* Crisp White editorial canvas in light/white mode */
+  --color-bg: #ffffff;             /* Crisp White editorial canvas in light mode */
   --color-surface: #f7f7f7;        /* Neutral light surface for alternating sections */
   --color-card: #ffffff;           /* Crisp White card/input surface */
 
   --color-text: #111111;           /* Ink Black primary text */
   --color-text-muted: #525252;     /* Neutral charcoal secondary copy */
-  --color-text-inverse: #fceee3;   /* Cream ink on Ink Black & Burnt Orange elements */
+  --color-text-inverse: #fceee3;   /* Cream ink on Ink Black elements */
 
-  --color-accent: #d9541e;         /* Burnt Orange for links, buttons & highlights */
+  /* Persistent dark editorial plaques (footer, dark dossier panels, spotlight cards) */
+  --color-plaque: #111111;
+  --color-plaque-ink: #fceee3;
+  --color-plaque-border: rgba(252, 238, 227, 0.16);
+
+  --color-accent: #d9541e;         /* Burnt Orange for links, labels & highlights */
   --color-accent-hover: #b84214;   /* Deepened Burnt Orange hover/active state */
+  --color-accent-solid: #d9541e;   /* Solid button & active badge fill */
+  --color-on-accent: #fceee3;      /* High-contrast cream/ivory ink over solid accent */
+  --color-accent-on-ink: #e86c36;  /* Terracotta accent index over dark selected pill */
   --color-accent-soft: #f5f5f5;    /* Neutral soft surface (never orange-tinted bg) */
 
   --color-border: #e5e5e5;         /* Crisp neutral hairline border */
@@ -28,6 +38,21 @@
   --color-success: #d9541e;        /* Burnt Orange highlight state */
   --color-warning: #d9541e;        /* Burnt Orange notice state */
   --color-error: #b91c1c;          /* High-contrast error red */
+
+  /* Artwork & Crest Adaptive SVG Variables */
+  --color-plate-ground: #ffffff;
+  --color-plate-veil: #ffffff;
+  --color-burqa-fill: #111111;
+  --color-burqa-khimar: #151515;
+  --color-burqa-vein: #fceee3;
+
+  --color-crest-plate: #fffee9;
+  --color-crest-rim: #b97242;
+  --color-crest-ring: #9d5428;
+  --color-crest-dot: #b97242;
+  --color-crest-top: #c97f45;
+  --color-crest-mid: #a85c30;
+  --color-crest-bot: #843d1b;
 
   /* ==========================================================================
      TYPOGRAPHY
@@ -86,4 +111,53 @@
 
   --transition-fast: 150ms ease;
   --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Deep Pine Obsidian Atelier — Anchored to production Deep Pine (#052225) & Warm Ivory (#fffee9) */
+  --color-bg: #071618;
+  --color-surface: #0c2023;
+  --color-card: #10282c;
+
+  --color-text: #fffee9;
+  --color-text-muted: #b8c6c2;
+  --color-text-inverse: #052225;
+
+  --color-plaque: #052225;
+  --color-plaque-ink: #fffee9;
+  --color-plaque-border: #254a4f;
+
+  --color-accent: #e86c36;
+  --color-accent-hover: #9f3910;
+  --color-accent-solid: #c44916;
+  --color-on-accent: #fffaf5;
+  --color-accent-on-ink: #b84214;
+  --color-accent-soft: #0f272b;
+
+  --color-border: #1f3e42;
+  --color-border-strong: #3d6368;
+  --color-focus: #e86c36;
+
+  --color-success: #e86c36;
+  --color-warning: #e86c36;
+  --color-error: #f87171;
+
+  --color-plate-ground: #0c2023;
+  --color-plate-veil: #10282c;
+  --color-burqa-fill: #031113;
+  --color-burqa-khimar: #061c1f;
+  --color-burqa-vein: #fffee9;
+
+  --color-crest-plate: #052225;
+  --color-crest-rim: #c67d48;
+  --color-crest-ring: #e5a365;
+  --color-crest-dot: #e5a365;
+  --color-crest-top: #ebb073;
+  --color-crest-mid: #c67d48;
+  --color-crest-bot: #9e5427;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.42);
 }
