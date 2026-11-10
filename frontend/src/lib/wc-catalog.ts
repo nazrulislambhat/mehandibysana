@@ -9,6 +9,15 @@ import type {
 
 const REVALIDATE_SECONDS = 60;
 
+export function resolveStorefrontAssetUrl(url: string): string {
+  const trimmed = url.trim();
+  const studioPrefix = 'https://mehandibysana.vercel.app/images/tools/';
+  if (trimmed.startsWith(studioPrefix)) {
+    return `/images/tools/${trimmed.slice(studioPrefix.length)}`;
+  }
+  return trimmed;
+}
+
 export function decodeHtmlEntities(input: string): string {
   return input
     .replace(/&nbsp;/gi, ' ')
@@ -117,7 +126,7 @@ async function resolveIndiaRegionId(
   try {
     const res = await fetch(`${baseUrl}/store/regions`, {
       headers: medusaHeaders(publishableKey),
-      next: { revalidate: 3600, tags: ['regions'] },
+      next: { revalidate: 300, tags: ['regions'] },
     });
     if (!res.ok) return null;
     const data = (await res.json()) as { regions?: MedusaRegion[] };
@@ -211,15 +220,16 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
   if (raw.thumbnail) {
     imageList.push({
       id: hashMedusaId(`${raw.id}-thumb`),
-      src: raw.thumbnail,
+      src: resolveStorefrontAssetUrl(raw.thumbnail),
       alt: decodeHtmlEntities(raw.title),
     });
   }
   for (const img of raw.images || []) {
-    if (img.url && !imageList.some((existing) => existing.src === img.url)) {
+    const resolvedUrl = img.url ? resolveStorefrontAssetUrl(img.url) : '';
+    if (resolvedUrl && !imageList.some((existing) => existing.src === resolvedUrl)) {
       imageList.push({
-        id: hashMedusaId(img.id || img.url),
-        src: img.url,
+        id: hashMedusaId(img.id || resolvedUrl),
+        src: resolvedUrl,
         alt: decodeHtmlEntities(raw.title),
       });
     }
@@ -288,6 +298,18 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
   };
 }
 
+async function readMedusaError(res: Response): Promise<string> {
+  try {
+    const errData = (await res.json()) as { message?: string };
+    if (errData?.message) {
+      return `Medusa Store API returned ${res.status}: ${errData.message}`;
+    }
+  } catch {
+    // Ignore non-JSON error bodies
+  }
+  return `Medusa Store API returned ${res.status}`;
+}
+
 async function fetchAllMedusaProducts(): Promise<{
   products: StorefrontProduct[];
   isConfigured: boolean;
@@ -299,6 +321,13 @@ async function fetchAllMedusaProducts(): Promise<{
       products: [],
       isConfigured: false,
       error: 'MEDUSA_BACKEND_URL is not configured.',
+    };
+  }
+  if (!medusaPublishableKey) {
+    return {
+      products: [],
+      isConfigured: true,
+      error: 'MEDUSA_PUBLISHABLE_KEY is not configured.',
     };
   }
 
@@ -317,27 +346,45 @@ async function fetchAllMedusaProducts(): Promise<{
       params.set('region_id', regionId);
     }
 
-    const res = await fetch(
-      `${medusaBackendUrl}/store/products?${params.toString()}`,
-      {
-        headers: medusaHeaders(medusaPublishableKey),
-        next: {
-          revalidate: REVALIDATE_SECONDS,
-          tags: ['products'],
-        },
-      }
-    );
+    const url = `${medusaBackendUrl}/store/products?${params.toString()}`;
+    const res = await fetch(url, {
+      headers: medusaHeaders(medusaPublishableKey),
+      next: {
+        revalidate: REVALIDATE_SECONDS,
+        tags: ['products'],
+      },
+    });
 
     if (!res.ok) {
       return {
         products: [],
         isConfigured: true,
-        error: `Medusa Store API returned ${res.status}`,
+        error: await readMedusaError(res),
       };
     }
 
     const data = (await res.json()) as { products?: MedusaProduct[] };
-    const normalized = (data.products || []).map(normalizeMedusaProduct);
+    let rawProducts = data.products || [];
+
+    // Avoid serving a stale cached empty catalog indefinitely if Next.js Data Cache
+    // previously cached [] and later revalidations fail (e.g. 400 invalid publishable key).
+    if (rawProducts.length === 0) {
+      const liveRes = await fetch(url, {
+        headers: medusaHeaders(medusaPublishableKey),
+        cache: 'no-store',
+      });
+      if (!liveRes.ok) {
+        return {
+          products: [],
+          isConfigured: true,
+          error: await readMedusaError(liveRes),
+        };
+      }
+      const liveData = (await liveRes.json()) as { products?: MedusaProduct[] };
+      rawProducts = liveData.products || [];
+    }
+
+    const normalized = rawProducts.map(normalizeMedusaProduct);
 
     return {
       products: normalized,

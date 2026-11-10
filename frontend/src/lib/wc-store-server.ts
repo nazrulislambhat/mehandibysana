@@ -1,5 +1,9 @@
 import { getServerEnv } from '@/lib/env';
-import { fetchCatalogProducts, hashMedusaId } from '@/lib/wc-catalog';
+import {
+  fetchCatalogProducts,
+  hashMedusaId,
+  resolveStorefrontAssetUrl,
+} from '@/lib/wc-catalog';
 import type { StorefrontCart, StorefrontCartItem } from '@/types/storefront';
 
 export interface StoreProxyResult {
@@ -75,7 +79,7 @@ function normalizeMedusaCart(raw: MedusaCart): StorefrontCart {
       image: item.thumbnail
         ? {
             id: hashMedusaId(`${item.id}-img`),
-            src: item.thumbnail,
+            src: resolveStorefrontAssetUrl(item.thumbnail),
             alt: item.title || 'Product',
           }
         : null,

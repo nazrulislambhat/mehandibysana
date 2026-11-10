@@ -151,7 +151,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         {!catalog.isConfigured ? (
           <FeedbackState
             title="Store backend URL not yet configured"
-            description="Configure NEXT_PUBLIC_MEDUSA_BACKEND_URL in your frontend environment to load live MedusaJS products, categories, and pricing."
+            description="Configure MEDUSA_BACKEND_URL and MEDUSA_PUBLISHABLE_KEY in your frontend environment to load live MedusaJS products, categories, and pricing."
             action={{ label: 'Return Home', href: '/' }}
           />
         ) : catalog.error ? (
