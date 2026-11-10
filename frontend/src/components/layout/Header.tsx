@@ -24,16 +24,7 @@ export function Header() {
             decorative
             className="w-8 h-8 sm:w-[38px] sm:h-[38px] shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
           />
-          <span className="flex items-center gap-2 font-serif text-[1.4rem] sm:text-[1.6rem] font-medium tracking-tight text-ink group-hover:text-terracotta transition-colors">
-            <span>Mehandi by Sana</span>
-          </span>
-          <span className="hidden xl:inline-flex items-center gap-2 pl-3 border-l border-divider text-[10px] font-semibold uppercase tracking-[0.2em] text-umber">
-            <span
-              aria-hidden="true"
-              className="w-1.5 h-1.5 rotate-45 bg-terracotta transition-transform duration-300 group-hover:rotate-90"
-            />
-            <span>Srinagar &amp; Bangalore</span>
-          </span>
+        
         </Link>
 
         <DesktopNav />

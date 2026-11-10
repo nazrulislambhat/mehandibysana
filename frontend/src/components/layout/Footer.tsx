@@ -59,11 +59,10 @@ export function Footer() {
                     decorative
                     className="shrink-0 transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span>Mehandi by Sana</span>
                 </Link>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-inverse/20 bg-inverse/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-inverse/80">
                   <span aria-hidden="true" className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
-                  Est. 2020 &middot; Srinagar &amp; Bangalore
+                  Est. 2019 &middot; Srinagar &amp; Bangalore
                 </span>
               </div>
 
