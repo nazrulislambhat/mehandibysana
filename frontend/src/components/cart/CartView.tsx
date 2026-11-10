@@ -10,6 +10,8 @@ import { Button, LinkButton } from '@/components/ui/Button';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
+import { ShieldProtectIcon } from '@/components/graphics/BrandIcons';
 
 function formatMoney(amount: number, symbol: string): string {
   const formatted = Number.isInteger(amount)
@@ -325,12 +327,15 @@ export function CartView() {
                 />
 
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
-                    Order Dossier
-                  </span>
-                  <span className="font-serif text-xs italic text-inverse/70">
-                    Srinagar &amp; Bangalore
-                  </span>
+                  <div>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
+                      Order Dossier
+                    </span>
+                    <span className="font-serif text-xs italic text-inverse/70 block mt-0.5">
+                      Srinagar &amp; Bangalore
+                    </span>
+                  </div>
+                  <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />
                 </div>
 
                 <h2 className="font-serif text-3xl font-medium text-inverse mb-6">
@@ -394,8 +399,9 @@ export function CartView() {
                   <span aria-hidden="true">&rarr;</span>
                 </LinkButton>
 
-                <p className="text-xs text-inverse/65 text-center leading-relaxed">
-                  Supports Razorpay UPI / Cards &amp; Cash on Delivery across serviceable PIN codes.
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-inverse/65 text-center leading-relaxed">
+                  <ShieldProtectIcon size={14} className="text-terracotta shrink-0" />
+                  <span>Supports Razorpay UPI / Cards &amp; Cash on Delivery across serviceable PIN codes.</span>
                 </p>
               </div>
             </aside>

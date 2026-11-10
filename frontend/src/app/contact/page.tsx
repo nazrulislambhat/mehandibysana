@@ -9,6 +9,13 @@ import {
 } from '@/lib/structured-data';
 import { BookingForm } from '@/components/sections/BookingForm';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
+import {
+  ClockWindowIcon,
+  LocationPinIcon,
+  MailEnvelopeIcon,
+  PhoneHandsetIcon,
+} from '@/components/graphics/BrandIcons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact & Bridal Mehndi Bookings',
@@ -96,10 +103,13 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
               <div className="rounded-2xl border border-hairline bg-paper px-5 py-4 text-xs text-umber">
-                <span className="block font-semibold uppercase tracking-[0.14em] text-ink mb-1">
-                  Response Window
+                <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-[0.14em] text-ink mb-1">
+                  <ClockWindowIcon size={14} className="text-terracotta shrink-0" />
+                  <span>Response Window</span>
                 </span>
-                Within 24 Hours &middot; Mon–Sun (10 AM – 6:30 PM IST)
+                <span className="block">
+                  Within 24 Hours &middot; Mon–Sun (10 AM – 6:30 PM IST)
+                </span>
               </div>
             </div>
           </div>
@@ -115,16 +125,23 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 aria-hidden="true"
                 className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
               />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2">
+              <BrandCrest
+                tone="ink-badge"
+                size={44}
+                decorative
+                className="pointer-events-none hidden sm:block absolute top-6 right-6"
+              />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2 sm:pr-14">
                 Srinagar &amp; Bangalore Concierge Desk
               </p>
-              <h2 className="font-serif text-3xl font-medium text-inverse mb-5">
+              <h2 className="font-serif text-3xl font-medium text-inverse mb-5 sm:pr-14">
                 Locations &amp; Direct Contact
               </h2>
               <dl className="space-y-4 text-sm">
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
-                    Studio Operations
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                    <LocationPinIcon size={13} className="text-terracotta shrink-0" />
+                    <span>Studio Operations</span>
                   </dt>
                   <dd className="text-inverse leading-relaxed space-y-1">
                     <span className="block">
@@ -136,8 +153,9 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
-                    Direct Email
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                    <MailEnvelopeIcon size={13} className="text-terracotta shrink-0" />
+                    <span>Direct Email</span>
                   </dt>
                   <dd className="text-inverse">
                     <a
@@ -156,8 +174,9 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
-                    Phone / WhatsApp
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                    <PhoneHandsetIcon size={13} className="text-terracotta shrink-0" />
+                    <span>Phone / WhatsApp</span>
                   </dt>
                   <dd className="text-inverse">
                     <a
@@ -169,8 +188,9 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
-                    Hours
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
+                    <ClockWindowIcon size={13} className="text-terracotta shrink-0" />
+                    <span>Hours</span>
                   </dt>
                   <dd className="text-inverse/80">
                     Monday – Sunday, 10:00 AM – 6:30 PM IST

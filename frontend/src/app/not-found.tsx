@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalHeroStudy } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
 
 export const metadata: Metadata = {
   title: 'Page Not Found (404)',
@@ -108,13 +109,16 @@ export default function NotFound() {
               </div>
 
               <div className="relative z-10 space-y-5">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
-                    Studio Directory &middot; Srinagar &amp; Bangalore
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-medium text-inverse">
-                    Helpful Destinations
-                  </h2>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
+                      Studio Directory &middot; Srinagar &amp; Bangalore
+                    </p>
+                    <h2 className="font-serif text-2xl sm:text-3xl font-medium text-inverse">
+                      Helpful Destinations
+                    </h2>
+                  </div>
+                  <BrandCrest tone="ink-badge" size={40} decorative className="shrink-0" />
                 </div>
 
                 <ul className="divide-y divide-inverse/12">

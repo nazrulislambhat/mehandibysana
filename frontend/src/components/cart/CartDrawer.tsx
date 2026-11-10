@@ -20,6 +20,12 @@ import {
   BotanicalEmptyCartGraphic,
   BotanicalSprig,
 } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
+import {
+  CloseCrossIcon,
+  CourierDispatchIcon,
+  ShieldProtectIcon,
+} from '@/components/graphics/BrandIcons';
 
 type FolioPhase = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -335,19 +341,7 @@ export function CartDrawer() {
               className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-divider bg-canvas px-3.5 text-xs font-medium text-ink hover:border-ink hover:bg-linen cursor-pointer"
             >
               <span>Close</span>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              <CloseCrossIcon size={14} />
             </button>
           </div>
         </div>
@@ -426,8 +420,9 @@ export function CartDrawer() {
             <div className="lg:col-span-7 shrink-0 flex flex-col lg:min-h-0 bg-canvas lg:overflow-y-auto">
               {/* Studio Dispatch Status Strip */}
               <div className="border-b border-hairline bg-linen px-5 sm:px-7 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs shrink-0">
-                <span className="text-umber font-medium">
-                  Fresh small-batch dispatch within 48h
+                <span className="inline-flex items-center gap-1.5 text-umber font-medium">
+                  <CourierDispatchIcon size={14} className="text-terracotta shrink-0" />
+                  <span>Fresh small-batch dispatch within 48h</span>
                 </span>
                 <span className="font-medium text-ink tabular-nums">
                   {activeDelivery
@@ -608,7 +603,10 @@ export function CartDrawer() {
                       Summary &amp; Dispatch
                     </h3>
                   </div>
-                  <BotanicalSprig className="w-11 h-4 shrink-0 opacity-85" />
+                  <div className="flex items-center gap-2 shrink-0">
+                    <BotanicalSprig className="hidden sm:block w-10 h-4 opacity-80" />
+                    <BrandCrest tone="transparent-cream" size={32} decorative />
+                  </div>
                 </div>
 
                 {/* Inline PIN Delivery Estimator */}
@@ -790,8 +788,9 @@ export function CartDrawer() {
                   </Button>
                 </div>
 
-                <p className="text-[11px] text-inverse/65 text-center leading-relaxed pt-0.5">
-                  Razorpay UPI / Cards &middot; Cash on Delivery across serviceable PINs
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] text-inverse/65 text-center leading-relaxed pt-0.5">
+                  <ShieldProtectIcon size={13} className="text-terracotta shrink-0" />
+                  <span>Razorpay UPI / Cards &middot; Cash on Delivery across serviceable PINs</span>
                 </p>
               </div>
             </div>

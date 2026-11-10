@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
 
 type CurtainPhase = 'idle' | 'covering' | 'revealing';
 
@@ -250,36 +251,12 @@ export function RouteTransitionCurtain() {
           </div>
 
           <div className="ck-curtain-emblem">
-            <svg
-              width="58"
-              height="58"
-              viewBox="0 0 64 64"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              className="w-12 h-12 sm:w-14 sm:h-14"
-            >
-              <circle
-                cx="32"
-                cy="32"
-                r="29"
-                stroke="#d9541e"
-                strokeWidth="1"
-                strokeDasharray="3 4"
-              />
-              <path
-                d="M32 13C25 21 20 28 20 35C20 42 25 48 32 52C39 48 44 42 44 35C44 28 39 21 32 13Z"
-                stroke="#fceee3"
-                strokeWidth="1.4"
-              />
-              <path
-                d="M32 21C27.5 26.5 25 31 25 35.5C25 39.5 28 43 32 45.5C36 43 39 39.5 39 35.5C39 31 36.5 26.5 32 21Z"
-                stroke="#d9541e"
-                strokeWidth="1.25"
-              />
-              <circle cx="32" cy="10" r="1.8" fill="#d9541e" />
-              <circle cx="32" cy="34" r="2.2" fill="#fceee3" />
-            </svg>
+            <BrandCrest
+              tone="transparent-cream"
+              size={68}
+              decorative
+              className="w-14 h-14 sm:w-[68px] sm:h-[68px]"
+            />
             <span className="font-serif text-xs sm:text-sm tracking-[0.26em] uppercase text-inverse/90 mt-3">
               Mehandi by Sana
             </span>

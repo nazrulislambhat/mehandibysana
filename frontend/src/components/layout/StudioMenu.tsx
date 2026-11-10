@@ -15,6 +15,8 @@ import {
   BotanicalSprig,
   ServiceMotifIcon,
 } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
+import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
 
 type MenuPhase = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -164,9 +166,10 @@ export function StudioMenu() {
                     <Link
                       href="/"
                       onClick={() => closeMenu(false)}
-                      className="font-serif text-xl sm:text-2xl font-medium tracking-tight text-ink hover:text-terracotta py-2"
+                      className="inline-flex items-center gap-2.5 font-serif text-xl sm:text-2xl font-medium tracking-tight text-ink hover:text-terracotta py-1.5"
                     >
-                      Mehandi by Sana
+                      <BrandCrest tone="cream-badge" size={32} decorative className="shrink-0" />
+                      <span>Mehandi by Sana</span>
                     </Link>
                     <span className="hidden sm:inline-flex items-center gap-2 rounded-full border border-hairline bg-linen/80 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-umber">
                       <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
@@ -182,19 +185,7 @@ export function StudioMenu() {
                     className="inline-flex items-center gap-2.5 min-h-[44px] px-4 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:bg-linen hover:border-ink cursor-pointer"
                   >
                     <span>Close</span>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      aria-hidden="true"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
+                    <CloseCrossIcon size={16} />
                   </button>
                 </div>
               </div>

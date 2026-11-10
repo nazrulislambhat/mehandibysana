@@ -1,5 +1,6 @@
 import React from 'react';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
 
 export default function AppLoading() {
   return (
@@ -10,6 +11,7 @@ export default function AppLoading() {
     >
       <div className="max-w-3xl mx-auto space-y-8 animate-pulse motion-reduce:animate-none">
         <div className="flex flex-col items-center text-center gap-4">
+          <BrandCrest tone="cream-badge" size={44} decorative />
           <BotanicalSprig />
           <div className="h-3 w-36 rounded-full bg-hairline" />
           <div className="h-10 w-72 sm:w-96 rounded-xl bg-linen" />

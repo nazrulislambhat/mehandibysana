@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { SHOP_COLLECTIONS, STUDIO_NAV_ITEMS } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { ChevronDownIcon, HennaConeIcon } from '@/components/graphics/BrandIcons';
 
 type PanelPhase = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -237,22 +238,12 @@ export function DesktopNav() {
                       : 'text-umber hover:text-terracotta hover:bg-linen'
                   }`}
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
+                  <ChevronDownIcon
+                    size={12}
                     className={`transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       isMegaExpanded ? 'rotate-180 text-terracotta' : ''
                     }`}
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
+                  />
                 </button>
               </div>
             );
@@ -380,8 +371,9 @@ export function DesktopNav() {
               <div className="col-span-5 bg-linen/75 p-6 lg:p-7 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
-                      Srinagar &amp; Bangalore Batch
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
+                      <HennaConeIcon size={14} className="shrink-0" />
+                      <span>Srinagar &amp; Bangalore Batch</span>
                     </span>
                     <BotanicalSprig className="w-12 h-4" />
                   </div>

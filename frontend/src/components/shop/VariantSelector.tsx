@@ -10,6 +10,7 @@ import type {
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { ProductGallery as ProductGalleryLazy } from '@/components/shop/ProductGallery';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
+import { HennaConeIcon } from '@/components/graphics/BrandIcons';
 
 export interface VariantSelectorProps {
   product: StorefrontProduct;
@@ -333,10 +334,13 @@ export function VariantSelector({
       </div>
 
       <div className="rounded-full border border-hairline bg-paper px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs text-umber">
-        <span className="font-mono">
-          {activeVariation?.sku
-            ? `SKU: ${activeVariation.sku}`
-            : 'Direct Studio Inventory · Batch-Synced'}
+        <span className="inline-flex items-center gap-2 font-mono">
+          <HennaConeIcon size={14} className="text-terracotta shrink-0" />
+          <span>
+            {activeVariation?.sku
+              ? `SKU: ${activeVariation.sku}`
+              : 'Direct Studio Inventory · Batch-Synced'}
+          </span>
         </span>
         <Link
           href="/cart"

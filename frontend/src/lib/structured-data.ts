@@ -17,7 +17,8 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
   const siteUrl = getSiteUrl();
   const orgId = `${siteUrl}/#organization`;
   const websiteId = `${siteUrl}/#website`;
-  const logoUrl = toAbsoluteUrl(DEFAULT_OG_IMAGE_PATH);
+  const logoUrl = toAbsoluteUrl('/brand/mehandi-by-sana-crest-light-4k.png');
+  const studioBannerUrl = toAbsoluteUrl('/brand/mehandi-by-sana-social-banner-4k.png');
 
   return {
     '@context': 'https://schema.org',
@@ -30,8 +31,8 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         logo: {
           '@type': 'ImageObject',
           url: logoUrl,
-          width: 1200,
-          height: 630,
+          width: 3840,
+          height: 3840,
         },
         founder: {
           '@type': 'Person',
@@ -62,7 +63,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         '@id': `${siteUrl}/#srinagar-studio`,
         name: `${SITE_NAME} — Srinagar Studio`,
         url: siteUrl,
-        image: logoUrl,
+        image: studioBannerUrl,
         telephone: STUDIO_PHONE,
         email: STUDIO_EMAIL,
         priceRange: '₹₹',
@@ -98,7 +99,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         '@id': `${siteUrl}/#bangalore-studio`,
         name: `${SITE_NAME} — Bangalore Studio`,
         url: siteUrl,
-        image: logoUrl,
+        image: studioBannerUrl,
         telephone: STUDIO_PHONE,
         email: STUDIO_EMAIL,
         priceRange: '₹₹',

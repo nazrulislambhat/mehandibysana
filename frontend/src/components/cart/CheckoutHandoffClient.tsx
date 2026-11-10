@@ -9,6 +9,8 @@ import { Button, LinkButton } from '@/components/ui/Button';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
+import { ShieldProtectIcon } from '@/components/graphics/BrandIcons';
 
 interface RazorpaySuccessResponse {
   razorpay_payment_id: string;
@@ -533,12 +535,17 @@ export function CheckoutHandoffClient() {
                 aria-hidden="true"
                 className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
               />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-1.5">
-                03 &middot; Dispatch Receipt Logged
-              </p>
-              <h1 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
-                Thank you, {firstName || 'Guest'}
-              </h1>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-1.5">
+                    03 &middot; Dispatch Receipt Logged
+                  </p>
+                  <h1 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
+                    Thank you, {firstName || 'Guest'}
+                  </h1>
+                </div>
+                <BrandCrest tone="ink-badge" size={44} decorative className="shrink-0" />
+              </div>
               <p className="text-sm text-inverse/75 leading-relaxed mt-2">
                 Your order <strong className="text-inverse">{confirmedOrder.orderNumber}</strong> is queued at our studio desk. Fresh cones are rolled to order before dispatch.
               </p>
@@ -954,12 +961,16 @@ export function CheckoutHandoffClient() {
                 />
 
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
-                    Bag Dossier ({itemCount})
-                  </span>
-                  <span className="font-serif text-xs italic text-inverse/70">
-                    MedusaJS Sync
-                  </span>
+                  <div>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
+                      Bag Dossier ({itemCount})
+                    </span>
+                    <span className="inline-flex items-center gap-1 font-serif text-xs italic text-inverse/70 mt-0.5">
+                      <ShieldProtectIcon size={13} className="text-terracotta shrink-0" />
+                      <span>Razorpay Protected &middot; MedusaJS Sync</span>
+                    </span>
+                  </div>
+                  <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />
                 </div>
 
                 <h2 className="font-serif text-3xl font-medium text-inverse mb-5">

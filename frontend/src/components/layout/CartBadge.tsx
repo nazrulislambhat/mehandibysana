@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useCartStore } from '@/store/cart-store';
+import { ApothecaryBagIcon } from '@/components/graphics/BrandIcons';
 
 export function CartBadge() {
   const cart = useCartStore((state) => state.cart);
@@ -55,22 +56,7 @@ export function CartBadge() {
           : 'border-divider/80 text-ink hover:border-terracotta hover:text-terracotta'
       }`}
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="shrink-0"
-      >
-        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 0 1-8 0" />
-      </svg>
+      <ApothecaryBagIcon size={17} className="shrink-0" />
       <span>Bag</span>
       {itemCount > 0 && subtotal > 0 ? (
         <span className="hidden xl:inline text-[11px] font-normal text-umber group-hover:text-terracotta tabular-nums border-l border-hairline pl-2">

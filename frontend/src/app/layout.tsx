@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { getSiteUrl } from '@/lib/env';
@@ -42,6 +42,34 @@ export const metadata: Metadata = {
   creator: 'Sumaiya Rashid Magray (Sana)',
   publisher: SITE_NAME,
   category: 'beauty & apothecary',
+  manifest: '/manifest.webmanifest',
+  icons: {
+    icon: [
+      { url: '/icons/icon.svg', type: 'image/svg+xml', sizes: 'any' },
+      { url: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icons/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
+      { url: '/icons/icon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: [{ url: '/favicon.ico', sizes: '16x16 32x32 48x48 64x64' }],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icons/apple-touch-icon-167x167.png', sizes: '167x167', type: 'image/png' },
+      { url: '/icons/apple-touch-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: 'default',
+  },
+  other: {
+    'msapplication-TileColor': '#052225',
+    'msapplication-TileImage': '/icons/mstile-150x150.png',
+  },
   robots: {
     index: true,
     follow: true,
@@ -74,6 +102,10 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE_PATH],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#052225',
 };
 
 export default function RootLayout({

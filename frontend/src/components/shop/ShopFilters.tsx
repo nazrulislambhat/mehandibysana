@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { normalizeCategorySlug } from '@/lib/category-slugs';
+import { SearchLensIcon } from '@/components/graphics/BrandIcons';
 import type { StorefrontCategory } from '@/types/storefront';
 
 export interface ShopFiltersProps {
@@ -134,7 +135,8 @@ export function ShopFilters({
               size="sm"
               className="rounded-full"
             >
-              Search
+              <SearchLensIcon size={14} className="shrink-0" />
+              <span>Search</span>
             </Button>
           </form>
 

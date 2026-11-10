@@ -19,6 +19,12 @@ import { ProductDetailInteractive } from '@/components/shop/VariantSelector';
 import { ProductCard } from '@/components/shop/ProductCard';
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import {
+  CourierDispatchIcon,
+  FreezerStorageIcon,
+  HennaConeIcon,
+  PureBotanicalIcon,
+} from '@/components/graphics/BrandIcons';
 import { TextReveal } from '@/components/ui/TextReveal';
 
 export const revalidate = 3600;
@@ -238,9 +244,27 @@ export default async function ProductDetailPage({
               )}
 
               <div className="border-t border-hairline pt-6 space-y-3">
+                <div className="grid grid-cols-3 gap-2.5 pb-1">
+                  <div className="rounded-xl border border-hairline bg-paper px-3 py-2.5 flex items-center gap-2 text-xs text-ink">
+                    <PureBotanicalIcon size={16} className="text-terracotta shrink-0" />
+                    <span className="font-medium leading-tight">100% PPD-Free</span>
+                  </div>
+                  <div className="rounded-xl border border-hairline bg-paper px-3 py-2.5 flex items-center gap-2 text-xs text-ink">
+                    <HennaConeIcon size={16} className="text-terracotta shrink-0" />
+                    <span className="font-medium leading-tight">Fresh Batch</span>
+                  </div>
+                  <div className="rounded-xl border border-hairline bg-paper px-3 py-2.5 flex items-center gap-2 text-xs text-ink">
+                    <CourierDispatchIcon size={16} className="text-terracotta shrink-0" />
+                    <span className="font-medium leading-tight">Pan-India Dispatch</span>
+                  </div>
+                </div>
+
                 <details className="group rounded-2xl border border-hairline bg-paper px-5 py-4">
                   <summary className="cursor-pointer list-none flex items-center justify-between text-sm font-medium text-ink min-h-[28px]">
-                    <span>Storage &amp; Freshness Care</span>
+                    <span className="inline-flex items-center gap-2.5">
+                      <FreezerStorageIcon size={16} className="text-terracotta shrink-0" />
+                      <span>Storage &amp; Freshness Care</span>
+                    </span>
                     <span
                       aria-hidden="true"
                       className="text-terracotta font-semibold group-open:rotate-45 transition-transform"
@@ -255,7 +279,10 @@ export default async function ProductDetailPage({
 
                 <details className="group rounded-2xl border border-hairline bg-paper px-5 py-4">
                   <summary className="cursor-pointer list-none flex items-center justify-between text-sm font-medium text-ink min-h-[28px]">
-                    <span>Dispatch &amp; Pincode Shipping</span>
+                    <span className="inline-flex items-center gap-2.5">
+                      <CourierDispatchIcon size={16} className="text-terracotta shrink-0" />
+                      <span>Dispatch &amp; Pincode Shipping</span>
+                    </span>
                     <span
                       aria-hidden="true"
                       className="text-terracotta font-semibold group-open:rotate-45 transition-transform"

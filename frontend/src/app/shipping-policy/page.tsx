@@ -7,6 +7,7 @@ import {
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
+import { CourierDispatchIcon, LocationPinIcon } from '@/components/graphics/BrandIcons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Shipping & Delivery Policy',
@@ -44,7 +45,10 @@ export default function ShippingPolicyPage() {
         id="dispatch-schedule"
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
       >
-        <p className="font-serif text-xs italic text-terracotta">Section 01</p>
+        <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
+          <CourierDispatchIcon size={14} className="shrink-0" />
+          <span>Section 01</span>
+        </p>
         <h2 className="font-serif text-2xl font-medium text-ink">
           Small-Batch Rolling &amp; Dispatch Schedule
         </h2>
@@ -72,7 +76,10 @@ export default function ShippingPolicyPage() {
         id="pincode-zones"
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-4"
       >
-        <p className="font-serif text-xs italic text-terracotta">Section 02</p>
+        <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
+          <LocationPinIcon size={14} className="shrink-0" />
+          <span>Section 02</span>
+        </p>
         <h2 className="font-serif text-2xl font-medium text-ink">
           India PIN-Code Coverage &amp; On-Demand Rate Check
         </h2>

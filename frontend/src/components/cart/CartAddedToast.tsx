@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store/cart-store';
+import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
 
 function formatMoney(amount: number, symbol: string): string {
   const formatted = Number.isInteger(amount)
@@ -144,19 +145,7 @@ export function CartAddedToast() {
               aria-label="Dismiss bag notification"
               className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-inverse/20 text-inverse/80 hover:border-inverse/50 hover:text-inverse transition-colors cursor-pointer"
             >
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              <CloseCrossIcon size={13} />
             </button>
           </div>
         </div>

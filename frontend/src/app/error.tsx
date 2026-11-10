@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Button, LinkButton } from '@/components/ui/Button';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
 
 export default function RouteError({
   error,
@@ -24,18 +25,23 @@ export default function RouteError({
               aria-hidden="true"
               className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
             />
-            <div className="flex items-center gap-2 mb-2">
-              <span
-                aria-hidden="true"
-                className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-              />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Temporary Hiccup
-              </p>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                  />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    Temporary Hiccup
+                  </p>
+                </div>
+                <h1 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
+                  Something went wrong loading this view.
+                </h1>
+              </div>
+              <BrandCrest tone="ink-badge" size={44} decorative className="shrink-0" />
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl font-medium text-inverse">
-              Something went wrong loading this view.
-            </h1>
           </div>
 
           <div className="p-7 sm:p-10 space-y-6">

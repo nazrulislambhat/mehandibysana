@@ -2,6 +2,14 @@ import React from 'react';
 import Link from 'next/link';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { BrandCrest } from '@/components/graphics/BrandMarks';
+import {
+  LocationPinIcon,
+  MailEnvelopeIcon,
+  PhoneHandsetIcon,
+  ShieldProtectIcon,
+  WhatsAppChatIcon,
+} from '@/components/graphics/BrandIcons';
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 
@@ -43,9 +51,15 @@ export function Footer() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/"
-                  className="font-serif text-3xl sm:text-[2.1rem] font-medium tracking-tight text-inverse hover:text-terracotta transition-colors inline-block"
+                  className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-[2.1rem] font-medium tracking-tight text-inverse hover:text-terracotta transition-colors"
                 >
-                  Mehandi by Sana
+                  <BrandCrest
+                    tone="ink-badge"
+                    size={44}
+                    decorative
+                    className="shrink-0 transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span>Mehandi by Sana</span>
                 </Link>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-inverse/20 bg-inverse/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-inverse/80">
                   <span aria-hidden="true" className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
@@ -63,24 +77,27 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-xs text-inverse/80">
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="hover:text-terracotta underline underline-offset-4 decoration-inverse/30 hover:decoration-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 hover:text-terracotta underline underline-offset-4 decoration-inverse/30 hover:decoration-terracotta transition-colors"
               >
-                sana@mehandibysana.com
+                <MailEnvelopeIcon size={14} className="shrink-0 text-terracotta" />
+                <span>sana@mehandibysana.com</span>
               </a>
               <span aria-hidden="true" className="text-terracotta">&middot;</span>
               <a
                 href="tel:+919149648717"
-                className="hover:text-terracotta tabular-nums transition-colors"
+                className="inline-flex items-center gap-1.5 hover:text-terracotta tabular-nums transition-colors"
               >
-                +91-9149648717
+                <PhoneHandsetIcon size={14} className="shrink-0 text-terracotta" />
+                <span>+91-9149648717</span>
               </a>
               <span aria-hidden="true" className="text-terracotta">&middot;</span>
               <a
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-terracotta hover:text-inverse font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-terracotta hover:text-inverse font-medium transition-colors"
               >
+                <WhatsAppChatIcon size={14} className="shrink-0" />
                 <span>WhatsApp</span>
                 <span aria-hidden="true">&#8599;</span>
               </a>
@@ -142,8 +159,9 @@ export function Footer() {
             <div className="relative h-full rounded-2xl border border-inverse/15 bg-gradient-to-b from-inverse/[0.05] to-transparent p-6 flex flex-col justify-between gap-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between gap-2">
-                  <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                    Studio Locations
+                  <h2 className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    <LocationPinIcon size={14} className="shrink-0" />
+                    <span>Studio Locations</span>
                   </h2>
                   <BotanicalSprig className="w-10 opacity-75 shrink-0" />
                 </div>
@@ -207,7 +225,10 @@ export function Footer() {
           </p>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium text-inverse/75">
-            <span>Razorpay PCI-DSS</span>
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldProtectIcon size={14} className="text-terracotta shrink-0" />
+              <span>Razorpay PCI-DSS</span>
+            </span>
             <span aria-hidden="true" className="text-terracotta">&middot;</span>
             <span>COD Eligible PINs</span>
             <span aria-hidden="true" className="text-terracotta">&middot;</span>

@@ -136,7 +136,18 @@ export function renderBrandedStudioEmailHtml(params: {
   return `<!doctype html>
 <html lang="en">
   <body style="margin:0;padding:24px 12px;background-color:#f9f8f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#111111;">
-    <div style="max-width:620px;margin:0 auto;border:1px solid #e5e5e5;border-radius:10px;background-color:#ffffff;padding:32px;">
+    <div style="max-width:620px;margin:0 auto;border:1px solid #e5e5e5;border-top:3px solid #d9541e;border-radius:10px;background-color:#ffffff;padding:32px;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-bottom:20px;border-bottom:1px solid #e5e5e5;padding-bottom:16px;">
+        <tr>
+          <td style="width:52px;vertical-align:middle;">
+            <img src="${escapeHtml(displaySiteUrl)}/icons/icon-96x96.png" alt="Mehandi by Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;" />
+          </td>
+          <td style="vertical-align:middle;padding-left:12px;">
+            <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#111111;line-height:1.15;">Mehandi by Sana</span>
+            <span style="display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;margin-top:3px;">Srinagar &amp; Bangalore &middot; 0% PPD Organic Henna</span>
+          </td>
+        </tr>
+      </table>
       <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;">
         ${escapeHtml(params.eyebrow)}
       </p>

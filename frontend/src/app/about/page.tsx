@@ -13,6 +13,12 @@ import {
   BotanicalDivider,
   BotanicalSprig,
 } from '@/components/graphics/BotanicalIllustrations';
+import {
+  BridalArchIcon,
+  HennaConeIcon,
+  PureBotanicalIcon,
+  VerifiedHonorSealIcon,
+} from '@/components/graphics/BrandIcons';
 import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlates';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -279,9 +285,20 @@ export default function AboutPage() {
           {STUDIO_PILLARS.map((pillar, idx) => (
             <TextReveal key={pillar.number} variant="fade" delayMs={idx * 80}>
               <article className="rounded-2xl border border-hairline bg-paper p-7 md:p-8 h-full transition-colors hover:border-ink/40">
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-ink font-serif text-xs italic text-inverse mb-5">
-                  {pillar.number}
-                </span>
+                <div className="flex items-center justify-between gap-3 mb-5">
+                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-ink font-serif text-xs italic text-inverse">
+                    {pillar.number}
+                  </span>
+                  <span className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-hairline bg-linen text-ink">
+                    {pillar.number === '01' ? (
+                      <PureBotanicalIcon size={18} />
+                    ) : pillar.number === '02' ? (
+                      <HennaConeIcon size={18} />
+                    ) : (
+                      <BridalArchIcon size={18} />
+                    )}
+                  </span>
+                </div>
                 <h3 className="font-serif text-2xl font-medium text-ink mb-3">
                   {pillar.title}
                 </h3>
@@ -303,10 +320,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span
-                  aria-hidden="true"
-                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                />
+                <VerifiedHonorSealIcon size={15} className="text-terracotta shrink-0" />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
                   07 Honors, Jury &amp; Press Features
                 </p>
@@ -411,13 +425,15 @@ export default function AboutPage() {
                       <span className="hidden md:inline-flex items-center justify-center w-7 h-7 rounded-full bg-terracotta text-inverse font-serif text-xs italic shrink-0">
                         {item.number}
                       </span>
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
-                        Verified Studio Honor
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
+                        <VerifiedHonorSealIcon size={14} className="shrink-0" />
+                        <span>Verified Studio Honor</span>
                       </span>
                     </div>
                   ) : (
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] pt-2 text-umber/80">
-                      Verified Studio Honor
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] pt-2 text-umber/80">
+                      <VerifiedHonorSealIcon size={14} className="text-terracotta shrink-0" />
+                      <span>Verified Studio Honor</span>
                     </div>
                   )}
                 </article>
