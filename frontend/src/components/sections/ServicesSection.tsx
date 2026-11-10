@@ -29,7 +29,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     title: 'Events & Celebrations',
     summary:
       'Bespoke henna sessions for engagements, Eid festivities, family gatherings, and bridal troupes with solo or assistant-artist coverage at your home or venue.',
-    note: 'Srinagar & destination',
+    note: 'Srinagar, Bangalore & destination',
   },
   {
     id: 'bespoke',

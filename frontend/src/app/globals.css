@@ -326,6 +326,31 @@
   animation: routeSweepBar 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Footer Subtle Watermark Branding */
+.footer-wordmark-frame {
+  container-type: inline-size;
+}
+
+.footer-brand-letter {
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transition:
+    transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 540ms ease-out;
+  will-change: transform, opacity;
+}
+
+.footer-brand-letter[data-reveal-pending="true"] {
+  opacity: 0;
+  transform: translate3d(0, 42%, 0);
+}
+
+.footer-brand-letter[data-revealed="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -350,7 +375,8 @@
   .bag-backdrop,
   .bag-drawer-panel,
   .page-transition-shell,
-  .route-progress-bar {
+  .route-progress-bar,
+  .footer-brand-letter {
     transform: none !important;
     opacity: 1 !important;
     animation: none !important;

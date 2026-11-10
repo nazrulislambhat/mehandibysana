@@ -24,7 +24,7 @@ const STUDIO_PILLARS = [
   {
     number: '02',
     title: 'Small-Batch Freshness',
-    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in our Baghat Barzullah studio and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
+    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh at our Srinagar (Baghat Barzullah) and Bangalore studios and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
   },
   {
     number: '03',
@@ -50,7 +50,7 @@ export default function AboutPage() {
                   <div className="pointer-events-none absolute inset-3 rounded-t-[12rem] rounded-b-xl border border-ink/10" />
                 </div>
                 <figcaption className="text-xs font-semibold uppercase tracking-[0.14em] text-umber text-center">
-                  Sumaiya Rashid Magray (Sana) &middot; Baghat Barzullah Atelier, Srinagar
+                  Sumaiya Rashid Magray (Sana) &middot; Srinagar &amp; Bangalore Studios
                 </figcaption>
               </figure>
             </div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana bridges custom bridal artistry with a small-batch botanical apothecary.
+                Founded in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana now operates from Srinagar and Bangalore, bridging bespoke bridal artistry with a small-batch botanical apothecary.
               </p>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
                 After researching the monoterpene chemistry of eucalyptus, cineol, and tea tree oils to optimize natural lawsone dye release, Sana replaced commercial chemical cones with freshly mixed, triple-sifted organic paste hand-rolled to a 0.38mm tip.
@@ -104,7 +104,7 @@ export default function AboutPage() {
             </blockquote>
             <figcaption className="mt-6 pt-5 border-t border-inverse/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               &mdash; Sumaiya Rashid Magray (Sana) &middot;{' '}
-              <span className="text-inverse/75 font-normal">Srinagar, Kashmir</span>
+              <span className="text-inverse/75 font-normal">Srinagar &amp; Bangalore</span>
             </figcaption>
           </figure>
         </TextReveal>

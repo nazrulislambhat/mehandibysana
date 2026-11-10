@@ -354,7 +354,7 @@ export function StudioMenu() {
               {/* Drawer Editorial Footer */}
               <div className="border-t border-hairline bg-linen/50 py-3.5">
                 <div className="editorial-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-umber">
-                  <span>Srinagar, Kashmir &middot; 100% Chemical-Free Botanical Henna</span>
+                  <span>Srinagar &amp; Bangalore &middot; 100% Chemical-Free Botanical Henna</span>
                   <span className="font-medium text-ink">
                     Kashmir Valley Delivery ₹60 &middot; Metro ₹120 &middot; Nationwide ₹150
                   </span>

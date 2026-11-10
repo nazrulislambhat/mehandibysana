@@ -112,7 +112,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared in Srinagar.
+                Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across our Srinagar &amp; Bangalore studios.
               </p>
             </div>
 

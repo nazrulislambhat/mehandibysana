@@ -529,7 +529,7 @@ export function CheckoutHandoffClient() {
                 Thank you, {firstName || 'Guest'}
               </h1>
               <p className="text-sm text-inverse/75 leading-relaxed mt-2">
-                Your order <strong className="text-inverse">{confirmedOrder.orderNumber}</strong> is queued in our Srinagar atelier. Fresh cones are rolled to order before dispatch.
+                Your order <strong className="text-inverse">{confirmedOrder.orderNumber}</strong> is queued at our studio desk. Fresh cones are rolled to order before dispatch.
               </p>
             </div>
 

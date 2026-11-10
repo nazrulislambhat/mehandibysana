@@ -58,7 +58,7 @@ export default async function HomePage() {
                 </h2>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed mt-2 max-w-xl">
-                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and studio preparation tools handcrafted in Srinagar.
+                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and studio preparation tools handcrafted across our Srinagar &amp; Bangalore studios.
               </p>
             </div>
 
@@ -253,7 +253,7 @@ export default async function HomePage() {
                 Planning a celebration or bespoke order?
               </h2>
               <p className="text-base text-inverse/75 leading-relaxed max-w-xl mx-auto mb-8">
-                Bridal and celebration dates are reserved in advance across Srinagar, Jammu &amp; Kashmir, and destination venues. Custom bulk cone orders are freshly mixed and dispatched within 2 business days.
+                Bridal and celebration dates are reserved in advance across Srinagar, Bangalore, Jammu &amp; Kashmir, and destination venues. Custom bulk cone orders are freshly mixed and dispatched within 2 business days.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3.5">
                 <LinkButton

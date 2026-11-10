@@ -50,7 +50,7 @@ const SERVICE_TIERS: ServicePackage[] = [
     title: 'Events & Celebrations',
     summary:
       'Engagement ceremonies, Eid festivities, family celebrations, and bridal troupe bookings (bride plus up to 10 family members) at your home or venue.',
-    ratePlaceholder: 'Srinagar, J&K & destination venues',
+    ratePlaceholder: 'Srinagar, Bangalore & destination',
     includes: [
       'Solo artist or Sana + assistant artists for larger guest lists',
       'Kashmiri Chinar, floral lotus, Arabic vine, or minimalist cuffs',
@@ -80,7 +80,7 @@ const CONSULTATION_STEPS = [
     step: 'Step 01',
     title: 'Share Date & Occasion',
     detail:
-      'Submit your celebration date, venue city (Srinagar, Jammu & Kashmir, or destination), and preferred coverage tier through our booking inquiry form.',
+      'Submit your celebration date, venue city (Srinagar, Bangalore, Jammu & Kashmir, or destination), and preferred coverage tier through our booking inquiry form.',
   },
   {
     num: '02',
@@ -130,7 +130,7 @@ export default function ServicesPage() {
 
             <div className="lg:col-span-5 space-y-5">
               <p className="text-sm md:text-base text-umber leading-relaxed">
-                Based at our Baghat Barzullah studio in Srinagar, we serve brides and celebrations across Jammu &amp; Kashmir and destination venues using exclusively 100% organic, PPD-free henna paste.
+                Operating from our studios in Srinagar (Baghat Barzullah) and Bangalore, we serve brides and celebrations across India and destination venues using exclusively 100% organic, PPD-free henna paste.
               </p>
               <LinkButton
                 href="/contact"

@@ -49,7 +49,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Sana and our Srinagar studio coordinator review every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
+                Sana and our Srinagar &amp; Bangalore studio coordinators review every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
               </p>
             </div>
 
@@ -75,18 +75,23 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2">
-                Srinagar Concierge Desk
+                Srinagar &amp; Bangalore Concierge Desk
               </p>
               <h2 className="font-serif text-3xl font-medium text-inverse mb-5">
-                Location &amp; Direct Contact
+                Locations &amp; Direct Contact
               </h2>
               <dl className="space-y-4 text-sm">
                 <div>
                   <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-inverse/65 mb-1">
-                    Studio Location
+                    Studio Operations
                   </dt>
-                  <dd className="text-inverse leading-relaxed">
-                    Mehandi by Sana Studio, Baghat Barzullah, Srinagar, Jammu &amp; Kashmir 190005
+                  <dd className="text-inverse leading-relaxed space-y-1">
+                    <span className="block">
+                      <strong>Srinagar:</strong> Baghat Barzullah, Srinagar, Jammu &amp; Kashmir 190005
+                    </span>
+                    <span className="block text-inverse/80">
+                      <strong>Bangalore:</strong> Bengaluru Studio Operations &amp; Bridal Bookings, Karnataka
+                    </span>
                   </dd>
                 </div>
                 <div>

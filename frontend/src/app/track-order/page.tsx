@@ -72,7 +72,7 @@ export default async function TrackOrderPage({ searchParams }: TrackOrderPagePro
                 Track your studio parcel
               </h1>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Enter your order reference and email address to view real-time small-batch preparation, PIN zone courier routing, and dispatch milestones from our Srinagar atelier.
+                Enter your order reference and email address to view real-time small-batch preparation, PIN zone courier routing, and dispatch milestones from our Srinagar &amp; Bangalore studios.
               </p>
             </div>
 

@@ -15,6 +15,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/gallery`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${siteUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${siteUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/henna-care`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/track-order`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${siteUrl}/shipping-policy`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${siteUrl}/refund-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${siteUrl}/terms-conditions`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${siteUrl}/privacy-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ];
@@ -29,4 +34,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticRoutes, ...productRoutes];
 }
-

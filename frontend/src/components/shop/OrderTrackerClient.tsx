@@ -46,7 +46,7 @@ const TIMELINE_STEPS = [
     key: 'received',
     step: '01',
     title: 'Order Received',
-    detail: 'Recorded in Srinagar studio queue',
+    detail: 'Recorded in studio preparation queue',
   },
   {
     key: 'preparing',
@@ -309,7 +309,7 @@ export function OrderTrackerClient({
             {/* 4-Stage Visual Progress Timeline */}
             {order.fulfillmentStage === 'cancelled' ? (
               <div className="rounded-xl border border-crimson/35 bg-paper p-4 text-sm text-crimson">
-                This order has been cancelled. Reach out to our Srinagar desk if you need assistance.
+                This order has been cancelled. Reach out to our studio desk if you need assistance.
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3.5">

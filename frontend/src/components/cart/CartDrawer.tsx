@@ -226,7 +226,7 @@ export function CartDrawer() {
                   </span>
                 ) : (
                   <span className="truncate text-umber">
-                    Fresh dispatch from Srinagar within 48h
+                    Fresh dispatch from our studios within 48h
                   </span>
                 )}
               </div>
@@ -334,7 +334,7 @@ export function CartDrawer() {
                 Your bag is awaiting botanicals
               </p>
               <p className="text-sm text-umber max-w-xs leading-relaxed mb-7">
-                Add hand-rolled organic henna cones, aftercare balms, or essential oil kits from our small-batch Srinagar batch.
+                Add hand-rolled organic henna cones, aftercare balms, or essential oil kits from our Srinagar &amp; Bangalore small-batch studio drop.
               </p>
               <LinkButton
                 href="/shop"

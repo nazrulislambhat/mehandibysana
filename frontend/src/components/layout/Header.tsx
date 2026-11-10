@@ -25,7 +25,7 @@ export function Header() {
               aria-hidden="true"
               className="w-1.5 h-1.5 rotate-45 bg-terracotta transition-transform duration-300 group-hover:rotate-90"
             />
-            <span>Srinagar Atelier</span>
+            <span>Srinagar &amp; Bangalore</span>
           </span>
         </Link>
 

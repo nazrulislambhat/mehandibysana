@@ -52,7 +52,7 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     index: '04',
     label: 'About',
     href: '/about',
-    eyebrow: 'Srinagar Atelier · Est. 2018',
+    eyebrow: 'Srinagar & Bangalore · Est. 2020',
     description:
       'Rooted in zero-chemical botanical craft—how Sana blends Sojat henna harvests with pure eucalyptus and clove essential oils.',
     ctaLabel: 'Read Studio Story',
@@ -64,7 +64,7 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     href: '/contact',
     eyebrow: 'Inquiries & Date Reservations',
     description:
-      'Reserve your bridal dates, request wholesale cone batches, or consult with our Srinagar studio team on custom orders.',
+      'Reserve your bridal dates in Srinagar, Bangalore, or destination venues, request wholesale cone batches, or consult with our studio team.',
     ctaLabel: 'Start a Conversation',
     motif: 'bridal',
   },

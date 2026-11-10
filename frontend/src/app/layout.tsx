@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     template: '%s | Mehandi by Sana',
   },
   description:
-    'Kashmir’s organic mehndi atelier by Sumaiya Rashid Magray (Sana) — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehndi services.',
+    'Organic mehndi studio by Sumaiya Rashid Magray (Sana), operating from Srinagar & Bangalore — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehndi services.',
   openGraph: {
     title: 'Mehandi by Sana — Henna Artistry & Botanical Products',
     description:
-      'Handcrafted 100% chemical-free organic henna cones, aftercare balms, botanical hair henna, and bridal mehndi artistry in Srinagar, Kashmir.',
+      'Handcrafted 100% chemical-free organic henna cones, aftercare balms, botanical hair henna, and bridal mehndi artistry across Srinagar & Bangalore.',
     siteName: 'Mehandi by Sana',
     locale: 'en_IN',
     type: 'website',
