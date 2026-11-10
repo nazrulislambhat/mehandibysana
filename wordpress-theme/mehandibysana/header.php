@@ -1,6 +1,6 @@
 <?php
 /**
- * Mehandi by Sana Atelier — Global Header, Desktop Pill Nav, Shop Mega Menu & Mobile StudioMenu
+ * Mehandi by Sana — Global Header, Desktop Pill Nav, Shop Mega Menu & Mobile Navigation
  *
  * @package MehandiBySana
  */
@@ -39,7 +39,7 @@ $first_nav   = $nav_items[0];
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
 				<span class="header-brand-title">MEHANDI BY SANA</span>
-				<span class="header-brand-sub">Srinagar &middot; Atelier</span>
+				<span class="header-brand-sub">Srinagar &middot; Botanicals</span>
 			<?php endif; ?>
 		</a>
 
@@ -117,12 +117,12 @@ $first_nav   = $nav_items[0];
 	</div>
 </header>
 
-<!-- Desktop Shop Atelier Mega Panel -->
+<!-- Desktop Shop Apothecary Mega Panel -->
 <div id="mbs-shop-mega" class="shop-mega-panel" aria-hidden="true">
 	<div class="editorial-container shop-mega-grid">
 		<div class="shop-mega-lead">
 			<div>
-				<span class="eyebrow"><?php esc_html_e( 'Srinagar Atelier Apothecary', 'mehandibysana' ); ?></span>
+				<span class="eyebrow"><?php esc_html_e( 'Small-Batch Botanical Apothecary', 'mehandibysana' ); ?></span>
 				<h2 style="font-size:2.1rem;margin-top:0.5rem;"><?php esc_html_e( 'Small-Batch Botanicals', 'mehandibysana' ); ?></h2>
 				<p style="margin-top:0.75rem;color:var(--color-text-muted);font-size:0.9375rem;line-height:1.65;">
 					<?php esc_html_e( 'Hand-rolled daily with triple-sifted Sojat henna leaf, pure steam-distilled eucalyptus, and clove oil. Delivered across India with PIN zone shipping.', 'mehandibysana' ); ?>
@@ -164,8 +164,8 @@ $first_nav   = $nav_items[0];
 	</div>
 </div>
 
-<!-- Fullscreen Dark Mobile StudioMenu Overlay -->
-<div id="mbs-studio-menu" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e( 'Mobile Studio Menu', 'mehandibysana' ); ?>">
+<!-- Fullscreen Dark Mobile Navigation Overlay -->
+<div id="mbs-studio-menu" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e( 'Mobile Navigation Menu', 'mehandibysana' ); ?>">
 	<div class="editorial-container">
 		<div class="studio-menu-header">
 			<span class="header-brand-title">MEHANDI BY SANA</span>

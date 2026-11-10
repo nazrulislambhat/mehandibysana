@@ -215,7 +215,7 @@ export function CouponCodeBox({
             </p>
           ) : (
             <p className="text-[11px] text-umber">
-              Percentage and flat ₹ studio codes verified instantly at checkout.
+              Percentage and flat ₹ promo codes verified instantly at checkout.
             </p>
           )}
         </div>

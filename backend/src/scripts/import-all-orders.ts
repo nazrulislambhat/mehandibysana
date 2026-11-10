@@ -104,7 +104,7 @@ export default async function importAllOrders({ container }: ExecArgs) {
       const shippingAmount = Math.max(0, parseFloat(o.shipping_total || "0") || 0);
       const shippingMethodTitle =
         o.shipping_lines?.[0]?.method_title ||
-        (shippingAmount === 0 ? "Free Shipping" : "Studio Shipping");
+        (shippingAmount === 0 ? "Free Shipping" : "Dispatch Shipping");
 
       if (items.length === 0) {
         items.push({

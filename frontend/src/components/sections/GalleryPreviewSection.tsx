@@ -36,7 +36,7 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     caption:
       'Kashmiri Chinar leaf silhouette inspired by Dal Lake in fine 0.38mm cone linework.',
     src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-22.webp',
-    alt: 'Kashmiri Chinar leaf silhouette mehndi woven into a modern floral palm design',
+    alt: 'Kashmiri Chinar leaf silhouette mehandi woven into a modern floral palm design',
     aspectClass: 'aspect-square',
     colClass: 'lg:col-span-3',
   },
@@ -60,7 +60,7 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     caption:
       'Delicate jali latticework framed by floating lotus blossoms and soft botanical shading.',
     src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
-    alt: 'Botanical lotus and fine jali grid mehndi work on hands for engagement',
+    alt: 'Botanical lotus and fine jali grid mehandi work on hands for engagement',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-4',
   },
@@ -72,7 +72,7 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     caption:
       'Architectural arches and domes echoing Shalimar Bagh gardens across palms and forearms.',
     src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-19.jpg',
-    alt: 'Royal Mughal archways bridal mehndi design on forearms and palms',
+    alt: 'Royal Mughal archways bridal mehandi design on forearms and palms',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-4 lg:mt-8',
   },

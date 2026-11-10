@@ -17,7 +17,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     id: 'bridal',
     number: '01',
     motif: 'bridal',
-    title: 'Bridal Mehndi',
+    title: 'Bridal Mehandi',
     summary:
       'Full arms and feet coverage featuring traditional Kashmiri, Mughal, and botanical motifs tailored to your wedding celebrations, applied with ultra-fine 0.38mm hand-rolled organic cones.',
     note: '3–8 hrs · Custom quote',
@@ -28,7 +28,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     motif: 'events',
     title: 'Events & Celebrations',
     summary:
-      'Bespoke henna sessions for engagements, Eid festivities, family gatherings, and bridal troupes with solo or assistant-artist coverage at your home or venue.',
+      'Bespoke henna sessions for engagements, Eid festivities, and family gatherings—personally applied by Sana (with independent guest artists arranged on request) at your home or venue.',
     note: 'Srinagar, Bangalore & destination',
   },
   {
@@ -37,7 +37,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     motif: 'botanical',
     title: 'Custom Batches & Workshops',
     summary:
-      'Freshly rolled bulk event cone bundles, DIY self-care kits, and 15-day hands-on mehndi masterclass training in paste formulation, cone rolling, and bridal linework.',
+      'Freshly rolled bulk event cone bundles, DIY self-care kits, and 15-day hands-on mehandi masterclass training in paste formulation, cone rolling, and bridal linework.',
     note: '2-day fresh dispatch',
   },
 ];

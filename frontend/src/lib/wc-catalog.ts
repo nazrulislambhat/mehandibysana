@@ -227,7 +227,7 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
   const buildProductImageAlt = (viewIndex: number): string =>
     viewIndex === 0
       ? `${cleanTitle} — ${primaryCategoryLabel} by Mehandi by Sana`
-      : `${cleanTitle} (studio view ${viewIndex + 1}) by Mehandi by Sana`;
+      : `${cleanTitle} (product view ${viewIndex + 1}) by Mehandi by Sana`;
 
   const imageList: Array<{ id: number; src: string; alt: string }> = [];
   if (raw.thumbnail) {

@@ -5,7 +5,7 @@ export interface PincodeRule {
   id: string;
   pattern: string; // e.g. "190*", "560*", "*"
   label: string; // e.g. "Srinagar Metro Zone (190*)"
-  zone: string; // e.g. "Zone 1 — Srinagar Studio Dispatch"
+  zone: string; // e.g. "Zone 1 — Srinagar Local Dispatch"
   charge: number; // INR delivery fee, e.g. 60, 150
   estimatedDays: string; // e.g. "1–2 business days"
   codAvailable: boolean;
@@ -34,7 +34,7 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     id: "rule-srinagar-190",
     pattern: "190*",
     label: "Srinagar Metro Zone (190*)",
-    zone: "Zone 1 — Srinagar Studio Dispatch",
+    zone: "Zone 1 — Srinagar Local Dispatch",
     charge: 60,
     estimatedDays: "1–2 business days",
     codAvailable: true,
@@ -46,7 +46,7 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     id: "rule-bangalore-560",
     pattern: "560*",
     label: "Bangalore Metro Zone (560*)",
-    zone: "Zone 2 — Bangalore Studio Dispatch",
+    zone: "Zone 2 — Bangalore Local Dispatch",
     charge: 60,
     estimatedDays: "1–2 business days",
     codAvailable: true,

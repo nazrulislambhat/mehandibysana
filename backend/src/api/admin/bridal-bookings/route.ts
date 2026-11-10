@@ -76,7 +76,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         current[idx].advancePaidInr > 0
           ? ` (advance recorded: ₹${current[idx].advancePaidInr})`
           : ""
-      }. Our studio coordinator will connect with you ahead of the event.`,
+      }. Sana will connect with you ahead of the event.`,
     });
   }
 

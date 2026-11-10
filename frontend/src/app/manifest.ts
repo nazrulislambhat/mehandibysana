@@ -3,10 +3,10 @@ import { SITE_NAME } from '@/lib/seo';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE_NAME} — Organic Henna Studio & Botanical Apothecary`,
+    name: `${SITE_NAME} — Freelance Organic Mehandi Artist & Botanical Apothecary`,
     short_name: SITE_NAME,
     description:
-      'Organic mehndi studio by Sumaiya Rashid Magray (Sana) across Srinagar & Bangalore — fresh small-batch henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehndi artistry.',
+      'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sumaiya Rashid Magray (Sana) across Srinagar & Bangalore — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi artistry.',
     start_url: '/',
     display: 'standalone',
     background_color: '#fffee9',

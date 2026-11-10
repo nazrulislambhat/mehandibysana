@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — Privacy Policy
+ * Template Name: Mehandi by Sana — Privacy Policy
  *
  * @package MehandiBySana
  */
@@ -26,10 +26,10 @@ get_header();
 		</article>
 		<article>
 			<h2 style="font-size:1.7rem;color:var(--color-ink);margin-bottom:0.5rem;">2. Payment Processing</h2>
-			<p>Card, UPI, and Netbanking payments are processed directly over encrypted checkout gateways (such as Razorpay) or Cash on Delivery / Offline studio settlement. Mehandi by Sana never stores raw payment card credentials.</p>
+			<p>Card, UPI, and Netbanking payments are processed directly over encrypted checkout gateways (such as Razorpay) or Cash on Delivery / Offline settlement. Mehandi by Sana never stores raw payment card credentials.</p>
 		</article>
 		<article>
-			<h2 style="font-size:1.7rem;color:var(--color-ink);margin-bottom:0.5rem;">3. Courier & Studio Updates</h2>
+			<h2 style="font-size:1.7rem;color:var(--color-ink);margin-bottom:0.5rem;">3. Courier & Dispatch Updates</h2>
 			<p>Delivery coordinates and consignment IDs are shared strictly with our appointed local riders and national courier partners solely for doorstep delivery and parcel tracking lookup.</p>
 		</article>
 		<article>

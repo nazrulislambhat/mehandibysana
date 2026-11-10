@@ -43,7 +43,7 @@ export function Footer() {
       {/* Top burnt-terracotta architectural hairline */}
       <div aria-hidden="true" className="h-[3px] w-full bg-terracotta-solid" />
 
-      {/* Main Editorial Studio Matrix */}
+      {/* Main Editorial Footer Matrix */}
       <div className="editorial-container pt-14 md:pt-20 pb-8 md:pb-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Colophon + Batch Dispatch Subscription */}
@@ -69,7 +69,7 @@ export function Footer() {
               </div>
 
               <p className="text-sm text-plaque-ink/75 leading-relaxed max-w-md">
-                Organic mehndi studio &amp; botanical apothecary founded by Sumaiya Rashid Magray (Sana), operating from Srinagar &amp; Bangalore — fresh small-batch Sojat henna cones, therapeutic essential oils, aftercare balms, and heirloom bridal artistry.
+                Freelance organic mehandi artist &amp; botanical apothecary founded by Sumaiya Rashid Magray (Sana), working across Srinagar &amp; Bangalore — fresh small-batch Sojat henna cones, therapeutic essential oils, aftercare balms, and heirloom bridal artistry.
               </p>
             </div>
 
@@ -130,10 +130,10 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Studio & Policies Index */}
-          <nav aria-label="Footer studio and legal policies" className="lg:col-span-2">
+          {/* Artist & Policies Index */}
+          <nav aria-label="Footer artist links and legal policies" className="lg:col-span-2">
             <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-5">
-              Studio &amp; Care
+              Artist &amp; Care
             </h2>
             <ul className="space-y-2.5 text-sm">
               {STUDIO_POLICY_LINKS.map((item) => (
@@ -155,33 +155,33 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Studio Locations Arch Plaque */}
+          {/* Service Bases Arch Plaque */}
           <div className="lg:col-span-3">
             <div className="relative h-full rounded-2xl border border-plaque-ink/15 bg-gradient-to-b from-plaque-ink/[0.05] to-transparent p-6 flex flex-col justify-between gap-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between gap-2">
                   <h2 className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
                     <LocationPinIcon size={14} className="shrink-0" />
-                    <span>Studio Locations</span>
+                    <span>Srinagar &amp; Bangalore</span>
                   </h2>
                   <BotanicalSprig className="w-10 opacity-75 shrink-0" />
                 </div>
 
                 <div className="space-y-2.5 text-xs text-plaque-ink/80 leading-relaxed">
                   <p>
-                    <span className="font-medium text-plaque-ink block">Srinagar Atelier</span>
+                    <span className="font-medium text-plaque-ink block">Srinagar Dispatch &amp; Bookings</span>
                     <span className="text-plaque-ink/70">
                       Baghat Barzullah, Srinagar, J&amp;K 190005
                     </span>
                   </p>
                   <p>
-                    <span className="font-medium text-plaque-ink block">Bangalore Studio</span>
+                    <span className="font-medium text-plaque-ink block">Bangalore Dispatch &amp; Bookings</span>
                     <span className="text-plaque-ink/70">
-                      Bengaluru, Karnataka &middot; Dispatch &amp; Bookings
+                      Bengaluru, Karnataka &middot; Freelance Visits &amp; Parcel Dispatch
                     </span>
                   </p>
                   <p className="text-plaque-ink/70 pt-0.5">
-                    Desk: Mon &ndash; Sun, 10:00 AM &ndash; 6:30 PM IST
+                    Contact: Mon &ndash; Sun, 10:00 AM &ndash; 6:30 PM IST
                   </p>
                   <p className="text-plaque-ink/70">
                     Dispatch: Small-batch courier Mon &ndash; Sat within 1&ndash;2 business days across India.

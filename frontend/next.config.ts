@@ -71,6 +71,11 @@ const nextConfig: NextConfig = {
         destination: '/product/:handle',
         permanent: true,
       },
+      {
+        source: '/product/reusable-acrylic-mehndi-practice-hand',
+        destination: '/product/reusable-acrylic-mehandi-practice-hand',
+        permanent: true,
+      },
     ];
   },
 };

@@ -465,7 +465,7 @@
       if (addBtn) {
         addBtn.setAttribute('data-variation-id', String(match.id));
         addBtn.disabled = !match.inStock;
-        addBtn.textContent = match.inStock ? 'Add to Atelier Bag — ' + formatINR(match.price * qty) : 'Out of Stock';
+        addBtn.textContent = match.inStock ? 'Add to Bag — ' + formatINR(match.price * qty) : 'Out of Stock';
       }
     }
 
@@ -813,7 +813,7 @@
         return;
       }
 
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending to Srinagar Desk…'; }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending Inquiry…'; }
 
       postAjax('mbs_submit_booking', {
         name: name,
@@ -826,7 +826,7 @@
         companyWebsite: String(fd.get('companyWebsite') || '')
       })
         .then(function (resp) {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Studio Inquiry'; }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Inquiry'; }
           if (resp && resp.success && resp.data) {
             form.style.display = 'none';
             if (successCard) {
@@ -844,7 +844,7 @@
           }
         })
         .catch(function () {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Studio Inquiry'; }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Inquiry'; }
           if (statusEl) {
             statusEl.textContent = 'Network issue. Please reach us directly on WhatsApp.';
             statusEl.style.display = 'block';
@@ -919,7 +919,7 @@
         '</div>' +
         '<div style="padding:1.75rem 2rem;">' +
           '<div class="mbs-timeline-grid">' + timelineHtml + '</div>' +
-          (order.dispatchNote ? '<div style="background:var(--color-surface);border-left:3px solid var(--color-accent);padding:12px 16px;border-radius:6px;margin-bottom:1.5rem;"><strong>Studio Dispatch Note:</strong> ' + escapeHtml(order.dispatchNote) + '</div>' : '') +
+          (order.dispatchNote ? '<div style="background:var(--color-surface);border-left:3px solid var(--color-accent);padding:12px 16px;border-radius:6px;margin-bottom:1.5rem;"><strong>Dispatch Note:</strong> ' + escapeHtml(order.dispatchNote) + '</div>' : '') +
           '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:1rem;">' +
             '<div style="background:var(--color-surface);padding:1.25rem;border-radius:var(--radius-lg);border:1px solid var(--color-border);">' +
               '<div class="eyebrow eyebrow-muted">Courier & Tracking</div>' +

@@ -41,7 +41,7 @@ export async function generateMetadata({
     return buildPageMetadata({
       title: 'Product Not Found',
       description:
-        'This botanical henna formulation could not be found in the Mehandi by Sana studio catalog.',
+        'This botanical henna formulation could not be found in the Mehandi by Sana catalog.',
       canonicalPath: '/shop',
       robots: {
         index: false,
@@ -54,7 +54,7 @@ export async function generateMetadata({
   const rawDescription =
     product.shortDescription ||
     product.description ||
-    `Shop ${product.name} crafted in small batches by Mehandi by Sana across our Srinagar & Bangalore studios.`;
+    `Shop ${product.name} crafted in small batches by Mehandi by Sana across Srinagar & Bangalore.`;
   const description = cleanSeoText(rawDescription, 158);
   const canonicalPath = `/product/${encodeURIComponent(product.slug)}`;
 
@@ -291,7 +291,7 @@ export default async function ProductDetailPage({
                     </span>
                   </summary>
                   <p className="mt-3 text-sm text-umber leading-relaxed">
-                    Orders sync live with our MedusaJS studio inventory. Delivery charges and estimated transit times are calculated for your 6-digit PIN code&mdash;use the Delivery &amp; PIN Estimator above on this product page or in your shopping bag before checkout.
+                    Orders sync live with our MedusaJS batch inventory. Delivery charges and estimated transit times are calculated for your 6-digit PIN code&mdash;use the Delivery &amp; PIN Estimator above on this product page or in your shopping bag before checkout.
                   </p>
                 </details>
               </div>

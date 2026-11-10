@@ -112,7 +112,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         </div>
         <div className="p-7 sm:p-9 space-y-5">
           <p className="text-sm md:text-base text-umber leading-relaxed">
-            Your booking or studio inquiry has been logged for review. We will follow up via email ({values.email}) or phone regarding availability.
+            Your booking or order inquiry has been logged for review. Sana will follow up via email ({values.email}) or phone regarding availability.
           </p>
           <Button
             type="button"
@@ -151,7 +151,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
           Reservation &amp; Custom Order Form
         </span>
         <h2 className="font-serif text-2xl sm:text-3xl font-medium text-ink mt-0.5 mb-1">
-          Booking &amp; Studio Inquiry
+          Booking &amp; Order Inquiry
         </h2>
         <p className="text-xs text-umber">
           Fields marked with <span className="text-terracotta">*</span> are required.
@@ -277,7 +277,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
             }
             className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 py-2.5 text-sm text-ink"
           >
-            <option value="bridal">Bridal Mehndi Booking</option>
+            <option value="bridal">Bridal Mehandi Booking</option>
             <option value="events">Events &amp; Celebrations</option>
             <option value="botanical">Custom Bulk Orders / Workshops</option>
             <option value="order-support">Existing Store Order Question</option>

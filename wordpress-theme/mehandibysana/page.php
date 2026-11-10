@@ -24,13 +24,13 @@ while ( have_posts() ) :
 			<span class="eyebrow">
 				<?php
 				if ( $is_wc_cart ) {
-					esc_html_e( 'Atelier Dispatch Ledger', 'mehandibysana' );
+					esc_html_e( 'Order Dispatch Ledger', 'mehandibysana' );
 				} elseif ( $is_thankyou ) {
 					esc_html_e( 'Order Confirmation · Mehandi by Sana', 'mehandibysana' );
 				} elseif ( $is_wc_checkout ) {
 					esc_html_e( 'Secure Indian Checkout · PIN Shipping & Razorpay / COD', 'mehandibysana' );
 				} else {
-					esc_html_e( 'Mehandi by Sana Atelier', 'mehandibysana' );
+					esc_html_e( 'Mehandi by Sana', 'mehandibysana' );
 				}
 				?>
 			</span>

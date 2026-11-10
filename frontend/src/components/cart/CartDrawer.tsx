@@ -285,7 +285,7 @@ export function CartDrawer() {
                 className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
               />
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Atelier Folio &middot; Srinagar &amp; Bangalore
+                Bag Folio &middot; Srinagar &amp; Bangalore
               </span>
               {highlightedKey ? (
                 <span
@@ -349,7 +349,7 @@ export function CartDrawer() {
         {/* Main Folio Body */}
         {isLoading && items.length === 0 ? (
           <div className="px-6 py-16 text-center text-sm text-umber bg-canvas" role="status">
-            Syncing your atelier bag ledger…
+            Syncing your bag ledger…
           </div>
         ) : items.length === 0 ? (
           <div className="bag-folio-summary flex-1 overflow-y-auto p-6 sm:p-10 bg-canvas">
@@ -386,7 +386,7 @@ export function CartDrawer() {
                   Your bag is awaiting botanicals
                 </p>
                 <p className="text-sm text-umber leading-relaxed mb-5">
-                  Explore fresh Sojat henna cones, aftercare balms, therapeutic oils, and precision tools curated across our Srinagar &amp; Bangalore studios.
+                  Explore fresh Sojat henna cones, aftercare balms, therapeutic oils, and precision tools mixed to order across Srinagar &amp; Bangalore.
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -418,7 +418,7 @@ export function CartDrawer() {
           <div className="flex-1 min-h-0 flex flex-col lg:grid lg:grid-cols-12 overflow-y-auto lg:overflow-hidden">
             {/* Left 7 Columns: Staggered Line-Item Ledger */}
             <div className="lg:col-span-7 shrink-0 flex flex-col lg:min-h-0 bg-canvas lg:overflow-y-auto">
-              {/* Studio Dispatch Status Strip */}
+              {/* Dispatch Status Strip */}
               <div className="border-b border-hairline bg-linen px-5 sm:px-7 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs shrink-0">
                 <span className="inline-flex items-center gap-1.5 text-umber font-medium">
                   <CourierDispatchIcon size={14} className="text-terracotta shrink-0" />
@@ -585,7 +585,7 @@ export function CartDrawer() {
               </div>
             </div>
 
-            {/* Right 5 Columns: Deep Atelier Order Dossier */}
+            {/* Right 5 Columns: Order Dossier */}
             <div className="lg:col-span-5 shrink-0 bag-folio-summary relative flex flex-col lg:min-h-0 justify-between gap-5 bg-plaque text-plaque-ink px-5 sm:px-7 py-5 sm:py-6 border-t lg:border-t-0 lg:border-l border-plaque-border lg:overflow-y-auto">
               <div
                 aria-hidden="true"

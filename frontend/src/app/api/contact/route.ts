@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       process.env.STUDIO_ADMIN_EMAIL?.trim() || 'sana@mehandibysana.com';
     const customerSummary = `We have received your ${service} inquiry${
       eventDate ? ` for ${eventDate}` : ''
-    }. Sana and our Srinagar & Bangalore studio coordinator will review availability within 24 hours.`;
+    }. Sana will personally review availability across Srinagar, Bangalore, or destination venues within 24 hours.`;
 
     await Promise.allSettled([
       sendFrontendFallbackEmail({
@@ -122,12 +122,12 @@ export async function POST(req: NextRequest) {
       sendFrontendFallbackEmail({
         to: adminEmail,
         replyTo: email,
-        subject: `[Studio Alert] New ${service} inquiry (${referenceId}) — ${name}`,
+        subject: `[Inquiry Alert] New ${service} inquiry (${referenceId}) — ${name}`,
         text: `Client: ${name}\nEmail: ${email}\nPhone: ${phone || '—'}\nService: ${service}\nDate: ${
           eventDate || '—'
         }\nLocation: ${location || '—'}\n\n${message}`,
         html: renderStudioFallbackEmailHtml({
-          eyebrow: 'Studio Operations Alert',
+          eyebrow: 'Booking & Inquiry Alert',
           heading: `New Inquiry from ${name}`,
           paragraphs: [
             `Client: ${name} (${email}${phone ? ` · ${phone}` : ''})`,

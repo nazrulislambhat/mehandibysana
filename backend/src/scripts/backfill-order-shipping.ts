@@ -422,7 +422,7 @@ async function main() {
           ? pinCheck.matchedRule.label
           : matchedRule === "*"
             ? "Rest of India (All Other Pincodes)"
-            : `Studio Shipping (${matchedRule})`);
+            : `Dispatch Shipping (${matchedRule})`);
 
       const prevTotals = row.totals || {};
       const curTotal = roundInr(Number(prevTotals.current_order_total ?? itemsSubtotal));

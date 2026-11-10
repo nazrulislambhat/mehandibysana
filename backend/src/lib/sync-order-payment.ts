@@ -374,7 +374,7 @@ export async function syncOrderNativePayment(
                 input.note ||
                 (input.paymentReference
                   ? `Refund Ref: ${input.paymentReference}`
-                  : "Marked refunded in Studio Admin"),
+                  : "Marked refunded in Admin"),
               created_by: actorId,
             },
           });

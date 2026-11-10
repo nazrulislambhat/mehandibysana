@@ -446,7 +446,7 @@ export async function sendOrderConfirmationEmail(
       : "";
 
   const summary = [
-    `Thank you for your order (${b.orderNumber}) with Mehandi by Sana! Fresh small-batch botanicals are being prepared at our Srinagar & Bangalore studio.`,
+    `Thank you for your order (${b.orderNumber}) with Mehandi by Sana! Fresh small-batch botanicals are being prepared for you across Srinagar & Bangalore.`,
     `Items Ordered:\n${itemLines}\n\nSubtotal: ${formatInr(b.subtotal)}\nShipping${
       b.pincode ? ` (PIN ${b.pincode})` : ""
     }: ${b.shippingFee === 0 ? "Free" : formatInr(b.shippingFee)}\n${couponLine}Total: ${formatInr(
@@ -608,7 +608,7 @@ export async function sendOrderShippingEmail(
   } else if (kind === "preparing") {
     notifType = "order_preparing";
     summaryLines.push(
-      `Your Mehandi by Sana order (${b.orderNumber}) is currently being freshly prepared at our studio.`
+      `Your Mehandi by Sana order (${b.orderNumber}) is currently being freshly mixed and packed in small batches.`
     );
   } else {
     notifType = "order_dispatched";
@@ -630,7 +630,7 @@ export async function sendOrderShippingEmail(
   );
 
   if (dispatchNote) {
-    summaryLines.push(`Studio Note: ${dispatchNote}`);
+    summaryLines.push(`Dispatch Note: ${dispatchNote}`);
   }
 
   const showShipmentBox =

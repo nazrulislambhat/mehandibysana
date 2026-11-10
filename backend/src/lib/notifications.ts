@@ -159,7 +159,8 @@ export function renderBrandedStudioEmailHtml(params: {
       ${ctaHtml}
       ${refHtml}
       <p style="margin:22px 0 0;font-size:12px;line-height:1.65;color:#525252;">
-        Mehandi by Sana Studios &middot; Srinagar (Baghat Barzullah, J&amp;K 190005) &amp; Bangalore (Karnataka)<br/>
+        Mehandi by Sana &middot; Freelance Organic Mehandi Artist &amp; Apothecary<br/>
+        Serving Srinagar (Baghat Barzullah, J&amp;K 190005) &amp; Bangalore (Karnataka)<br/>
         <a href="${escapeHtml(displaySiteUrl)}" style="color:#d9541e;text-decoration:underline;">${escapeHtml(displaySiteUrl.replace(/^https?:\/\//, ""))}</a>
         &middot; sana@mehandibysana.com &middot; +91-9149648717<br/>
         <a href="${escapeHtml(displaySiteUrl)}/track-order" style="color:#525252;text-decoration:underline;">Track Order</a>
@@ -402,11 +403,11 @@ export async function dispatchStudioNotification(
       ? "Track Your Order"
       : event.type === "newsletter_subscribed"
         ? "Browse Fresh Cones"
-        : "Visit Studio Contact");
+        : "Visit Contact Page");
 
   const plainText = `Assalamu Alaikum / Hello ${event.recipientName},\n\n${event.summary}\n\nReference: ${event.referenceId}\n${
     isOrderEvent ? `Track your order anytime: ${trackUrl}\n` : ""
-  }\nWarm regards,\nMehandi by Sana Studios · Srinagar & Bangalore\n${siteUrl}`;
+  }\nWarm regards,\nMehandi by Sana · Srinagar & Bangalore\n${siteUrl}`;
 
   const html = renderBrandedStudioEmailHtml({
     eyebrow: eyebrowMap[event.type],
@@ -452,7 +453,7 @@ export async function dispatchStudioNotification(
     adminEmail &&
     adminEmail.toLowerCase() !== event.recipientEmail.toLowerCase()
   ) {
-    const adminSubject = `[Studio Alert] ${subjectMap[event.type]}`;
+    const adminSubject = `[Dispatch Alert] ${subjectMap[event.type]}`;
     const adminSummary = `Customer: ${event.recipientName} (${event.recipientEmail}${
       event.recipientPhone ? ` · ${event.recipientPhone}` : ""
     })\n\n${event.summary}`;
@@ -461,7 +462,7 @@ export async function dispatchStudioNotification(
       subject: adminSubject,
       text: adminSummary,
       html: renderBrandedStudioEmailHtml({
-        eyebrow: "Studio Operations Alert",
+        eyebrow: "Operations Alert",
         heading: adminSubject,
         bodyParagraphs: [
           `Client: ${event.recipientName} (${event.recipientEmail}${
@@ -554,10 +555,10 @@ export async function sendBulkCampaignBatch(params: {
 
     const text = `${greeting}\n\n${params.bodyText}\n\n${
       params.ctaLabel && params.ctaUrl ? `${params.ctaLabel}: ${params.ctaUrl}\n\n` : ""
-    }Warm regards,\nMehandi by Sana Studios · Srinagar & Bangalore\n${status.storefrontUrl}\n\nTo opt out of studio updates, simply reply "Unsubscribe" to sana@mehandibysana.com.`;
+    }Warm regards,\nMehandi by Sana · Srinagar & Bangalore\n${status.storefrontUrl}\n\nTo opt out of dispatch updates, simply reply "Unsubscribe" to sana@mehandibysana.com.`;
 
     const html = renderBrandedStudioEmailHtml({
-      eyebrow: params.eyebrow || "Mehandi by Sana · Studio Update",
+      eyebrow: params.eyebrow || "Mehandi by Sana · Dispatch Update",
       heading: params.subject,
       bodyParagraphs: [greeting, ...params.bodyText.split(/\n{2,}/)],
       ctaLabel: params.ctaLabel,

@@ -43,7 +43,7 @@ while ( have_posts() ) :
 
 	<section class="section-pad surface-bg" style="padding-top:2.5rem;">
 		<div class="editorial-container">
-			<!-- Clean Atelier Breadcrumb -->
+			<!-- Clean Breadcrumb -->
 			<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'mehandibysana' ); ?>" style="font-size:0.78rem;color:var(--color-text-muted);margin-bottom:1.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'mehandibysana' ); ?></a>
 				<span>/</span>
@@ -152,7 +152,7 @@ while ( have_posts() ) :
 						<?php endforeach; ?>
 					<?php endif; ?>
 
-					<!-- Quantity & Add to Atelier Bag -->
+					<!-- Quantity & Add to Bag -->
 					<div style="display:flex;gap:0.85rem;margin-top:1.75rem;flex-wrap:wrap;align-items:center;">
 						<div class="mbs-qty-stepper">
 							<button type="button" data-mbs-qty-step="-1" aria-label="<?php esc_attr_e( 'Decrease quantity', 'mehandibysana' ); ?>">&minus;</button>
@@ -175,7 +175,7 @@ while ( have_posts() ) :
 							if ( empty( $norm['inStock'] ) ) {
 								esc_html_e( 'Currently Out of Stock', 'mehandibysana' );
 							} else {
-								printf( esc_html__( 'Add to Atelier Bag — %s', 'mehandibysana' ), esc_html( mbs_format_inr( $norm['price'], $norm['currencySymbol'] ) ) );
+								printf( esc_html__( 'Add to Bag — %s', 'mehandibysana' ), esc_html( mbs_format_inr( $norm['price'], $norm['currencySymbol'] ) ) );
 							}
 							?>
 						</button>

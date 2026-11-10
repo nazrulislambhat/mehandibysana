@@ -42,13 +42,13 @@ const CATEGORY_SEO_COPY: Record<
   'henna-kits-combos': {
     title: 'Henna Kits, Bridal Cones & DIY Combos',
     description:
-      'Shop complete bridal mehndi combos, beginner henna practice kits, and gift sets prepared fresh across our Srinagar & Bangalore studios.',
+      'Shop complete bridal mehandi combos, beginner henna practice kits, and gift sets prepared fresh across Srinagar & Bangalore.',
     lead: 'Complete small-batch henna starter kits, bridal combo bundles, and coordinated aftercare essentials ready for gifting or practice.',
   },
   'henna-care-essential-oils': {
     title: 'Henna Essential Oils, Sealant Spray & Aftercare Balms',
     description:
-      'Shop steam-distilled eucalyptus & cajeput essential oils, stain darkening aftercare balms, and lemon-sugar sealants for rich mahogany mehndi stain.',
+      'Shop steam-distilled eucalyptus & cajeput essential oils, stain darkening aftercare balms, and lemon-sugar sealants for rich mahogany mehandi stain.',
     lead: 'High-terpene essential oil blends, stain-darkening aftercare balms, and sealant sprays to nourish skin and deepen lawsone oxidation.',
   },
   'mehandi-tools-supplies': {
@@ -61,7 +61,7 @@ const CATEGORY_SEO_COPY: Record<
     title: 'Organic Mehandi Cones, Hair Henna & Aftercare Products',
     description:
       'Explore small-batch Mehandi by Sana apothecary formulations: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
-    lead: 'Our signature small-batch organic mehndi formulations—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and botanical stain aftercare.',
+    lead: 'Our signature small-batch organic mehandi formulations—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and botanical stain aftercare.',
   },
 };
 
@@ -109,7 +109,7 @@ export async function generateMetadata({
     ? categoryCopy.title
     : activeCategoryObj
       ? `${activeCategoryObj.name} — Botanical Henna Collection`
-      : 'Shop Organic Henna Cones, Balms & Studio Supplies';
+      : 'Shop Organic Henna Cones, Balms & Artist Supplies';
 
   const title =
     activeQuery
@@ -121,8 +121,8 @@ export async function generateMetadata({
   const description = categoryCopy
     ? categoryCopy.description
     : activeCategoryObj
-      ? `Browse ${activeCategoryObj.name} formulations crafted in small batches by Mehandi by Sana across our Srinagar & Bangalore studios.`
-      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, botanical oils, aftercare balms, and studio tools crafted across Srinagar & Bangalore.';
+      ? `Browse ${activeCategoryObj.name} formulations crafted in small batches by Mehandi by Sana across Srinagar & Bangalore.`
+      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, botanical oils, aftercare balms, and artist tools crafted across Srinagar & Bangalore.';
 
   return buildPageMetadata({
     title,
@@ -132,7 +132,7 @@ export async function generateMetadata({
       activeCategoryObj?.name || 'organic henna cones',
       'Mehandi by Sana shop',
       '100% organic Sojat henna',
-      'PPD free mehndi cones India',
+      'PPD free mehandi cones India',
       'henna aftercare balm',
     ],
     ...(hasFacetedParams
@@ -229,7 +229,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     : 'Shop Botanical Products';
   const pageLead = categoryCopy
     ? categoryCopy.lead
-    : 'Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across our Srinagar & Bangalore studios.';
+    : 'Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across Srinagar & Bangalore.';
 
   const collectionJson = serializeJsonLd(
     buildCollectionPageJsonLd({
@@ -310,7 +310,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                 />
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
-                  Live Studio Inventory
+                  Live Batch Inventory
                 </p>
                 <p className="font-serif text-3xl font-medium text-plaque-ink tabular-nums">
                   {catalog.total !== null ? catalog.total : '—'}{' '}
@@ -345,7 +345,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         ) : catalog.error ? (
           <FeedbackState
             tone="error"
-            title="Unable to reach studio catalog"
+            title="Unable to reach catalog"
             description={`Catalog items could not be retrieved (${catalog.error}). Please verify that your commerce backend is online.`}
             action={{ label: 'Reset Shop Filters', href: '/shop' }}
           />

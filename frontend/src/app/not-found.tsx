@@ -28,7 +28,7 @@ const WAYFINDING_LINKS = [
   { label: '48-Hour Stain & Care Guide', meta: 'Freezer & Aftercare Ritual', href: '/henna-care' },
   { label: 'Shipping & PIN Zones', meta: 'Dispatch Within 2 Days', href: '/shipping-policy' },
   { label: 'Refunds & Cancellations', meta: 'Perishables & Claims Window', href: '/refund-policy' },
-  { label: 'Contact Studio Concierge', meta: 'Response Within 24 Hours', href: '/contact' },
+  { label: 'Contact Sana', meta: 'Response Within 24 Hours', href: '/contact' },
 ];
 
 export default function NotFound() {
@@ -63,7 +63,7 @@ export default function NotFound() {
             </h1>
 
             <p className="text-sm sm:text-base text-umber leading-relaxed max-w-xl">
-              The product batch, portfolio plate, or link you followed may have retired, moved, or been typed incorrectly. Use one of the studio shortcuts below to jump straight back into fresh organic henna batches or check an active order.
+              The product batch, portfolio plate, or link you followed may have retired, moved, or been typed incorrectly. Use one of the quick shortcuts below to jump straight back into fresh organic henna batches or check an active order.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -112,7 +112,7 @@ export default function NotFound() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
-                      Studio Directory &middot; Srinagar &amp; Bangalore
+                      Quick Directory &middot; Srinagar &amp; Bangalore
                     </p>
                     <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
                       Helpful Destinations

@@ -16,9 +16,10 @@ export function serializeJsonLd(data: Record<string, unknown>): string {
 export function buildSiteGraphJsonLd(): Record<string, unknown> {
   const siteUrl = getSiteUrl();
   const orgId = `${siteUrl}/#organization`;
+  const artistId = `${siteUrl}/#artist`;
   const websiteId = `${siteUrl}/#website`;
   const logoUrl = toAbsoluteUrl('/brand/mehandi-by-sana-crest-light-4k.png');
-  const studioBannerUrl = toAbsoluteUrl('/brand/mehandi-by-sana-social-banner-4k.png');
+  const brandBannerUrl = toAbsoluteUrl('/brand/mehandi-by-sana-social-banner-4k.png');
 
   return {
     '@context': 'https://schema.org',
@@ -28,25 +29,26 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         '@id': orgId,
         name: SITE_NAME,
         url: siteUrl,
+        foundingDate: '2019',
+        description:
+          'Independent freelance organic mehandi practice and small-batch botanical apothecary founded in 2019 by Sumaiya Rashid Magray (Sana), serving clients across Srinagar and Bengaluru.',
         logo: {
           '@type': 'ImageObject',
           url: logoUrl,
           width: 3840,
           height: 3840,
         },
-        founder: {
-          '@type': 'Person',
-          name: 'Sumaiya Rashid Magray',
-          alternateName: 'Sana',
-          jobTitle: 'Founder & Organic Henna Artist',
-          url: `${siteUrl}/about`,
-        },
+        image: brandBannerUrl,
+        founder: { '@id': artistId },
         email: STUDIO_EMAIL,
         telephone: STUDIO_PHONE,
-        areaServed: {
-          '@type': 'Country',
-          name: 'India',
-        },
+        areaServed: [
+          { '@type': 'City', name: 'Srinagar' },
+          { '@type': 'State', name: 'Jammu and Kashmir' },
+          { '@type': 'City', name: 'Bengaluru' },
+          { '@type': 'State', name: 'Karnataka' },
+          { '@type': 'Country', name: 'India' },
+        ],
         contactPoint: [
           {
             '@type': 'ContactPoint',
@@ -59,74 +61,32 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         ],
       },
       {
-        '@type': 'HealthAndBeautyBusiness',
-        '@id': `${siteUrl}/#srinagar-studio`,
-        name: `${SITE_NAME} — Srinagar Studio`,
-        url: siteUrl,
-        image: studioBannerUrl,
-        telephone: STUDIO_PHONE,
-        email: STUDIO_EMAIL,
-        priceRange: '₹₹',
-        parentOrganization: { '@id': orgId },
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Baghat Barzullah',
-          addressLocality: 'Srinagar',
-          addressRegion: 'Jammu and Kashmir',
-          postalCode: '190005',
-          addressCountry: 'IN',
+        '@type': 'Person',
+        '@id': artistId,
+        name: 'Sumaiya Rashid Magray',
+        alternateName: 'Sana',
+        jobTitle: 'Founder & Freelance Organic Mehandi Artist',
+        url: `${siteUrl}/about`,
+        worksFor: { '@id': orgId },
+        homeLocation: {
+          '@type': 'Place',
+          name: 'Srinagar & Bengaluru, India',
         },
-        areaServed: ['Srinagar', 'Jammu and Kashmir', 'India'],
-        openingHoursSpecification: [
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: [
-              'Monday',
-              'Tuesday',
-              'Wednesday',
-              'Thursday',
-              'Friday',
-              'Saturday',
-              'Sunday',
-            ],
-            opens: '10:00',
-            closes: '18:30',
-          },
-        ],
       },
       {
-        '@type': 'HealthAndBeautyBusiness',
-        '@id': `${siteUrl}/#bangalore-studio`,
-        name: `${SITE_NAME} — Bangalore Studio`,
-        url: siteUrl,
-        image: studioBannerUrl,
-        telephone: STUDIO_PHONE,
-        email: STUDIO_EMAIL,
-        priceRange: '₹₹',
-        parentOrganization: { '@id': orgId },
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Bengaluru',
-          addressRegion: 'Karnataka',
-          addressCountry: 'IN',
+        '@type': 'Service',
+        '@id': `${siteUrl}/#freelance-artistry`,
+        name: `${SITE_NAME} — Freelance Bridal & Botanical Mehandi Services`,
+        serviceType: 'Freelance Bridal & Celebration Organic Mehandi Artistry',
+        url: `${siteUrl}/services`,
+        image: brandBannerUrl,
+        provider: { '@id': orgId },
+        areaServed: ['Srinagar', 'Jammu and Kashmir', 'Bengaluru', 'Karnataka', 'India'],
+        availableChannel: {
+          '@type': 'ServiceChannel',
+          serviceUrl: `${siteUrl}/contact`,
+          servicePhone: STUDIO_PHONE,
         },
-        areaServed: ['Bengaluru', 'Karnataka', 'India'],
-        openingHoursSpecification: [
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: [
-              'Monday',
-              'Tuesday',
-              'Wednesday',
-              'Thursday',
-              'Friday',
-              'Saturday',
-              'Sunday',
-            ],
-            opens: '10:00',
-            closes: '18:30',
-          },
-        ],
       },
       {
         '@type': 'WebSite',
@@ -134,7 +94,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         name: SITE_NAME,
         description:
-          'Organic mehndi studio operating from Srinagar & Bangalore — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehndi services.',
+          'Freelance organic mehandi artist & botanical apothecary working across Srinagar & Bangalore since 2019 — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi services.',
         publisher: { '@id': orgId },
         inLanguage: 'en-IN',
         potentialAction: {
@@ -333,9 +293,9 @@ export function buildServicesJsonLd(): Record<string, unknown> {
     '@type': 'WebPage',
     '@id': `${pageUrl}#webpage`,
     url: pageUrl,
-    name: 'Bridal Mehndi Services, Celebrations & Masterclasses | Mehandi by Sana',
+    name: 'Bridal Mehandi Services, Celebrations & Masterclasses | Mehandi by Sana',
     description:
-      'Bespoke bridal mehndi appointments, celebration henna gatherings across Srinagar, Bangalore & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
+      'Bespoke bridal mehandi appointments, celebration henna gatherings across Srinagar, Bangalore & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: {
       '@type': 'OfferCatalog',
@@ -343,7 +303,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
       itemListElement: [
         {
           '@type': 'Service',
-          name: 'Bridal Mehndi',
+          name: 'Bridal Mehandi',
           description:
             'Full-arm and feet bridal coverage with Kashmiri, Mughal archway, peacock, and botanical motifs applied with 0.38mm hand-rolled organic henna cones.',
           provider: { '@id': orgId },
@@ -353,7 +313,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
           '@type': 'Service',
           name: 'Events & Celebrations Henna',
           description:
-            'Engagement ceremonies, Eid festivities, and bridal troupe bookings with solo or assistant artists at home or venue.',
+            'Engagement ceremonies, Eid festivities, and bridal celebration bookings with Sana (plus independent guest artists arranged on request) at home or venue.',
           provider: { '@id': orgId },
           areaServed: ['Srinagar', 'Jammu and Kashmir', 'Bengaluru', 'India'],
         },
@@ -387,9 +347,9 @@ export function buildGalleryJsonLd(
     '@type': 'ImageGallery',
     '@id': `${pageUrl}#gallery`,
     url: pageUrl,
-    name: 'Bridal Mehndi Portfolio & Botanical Stain Gallery | Mehandi by Sana',
+    name: 'Bridal Mehandi Portfolio & Botanical Stain Gallery | Mehandi by Sana',
     description:
-      'Selected organic bridal mehndi designs, Kashmiri Chinar motifs, Mughal archways, and 48-hour natural mahogany stain studies.',
+      'Selected organic bridal mehandi designs, Kashmiri Chinar motifs, Mughal archways, and 48-hour natural mahogany stain studies.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     creator: { '@id': orgId },
     associatedMedia: plates.map((plate) => ({
@@ -440,7 +400,7 @@ export function buildHennaCareHowToJsonLd(): Record<string, unknown> {
         position: 3,
         name: 'Prepare Clean Bare Skin',
         url: `${pageUrl}#skin-prep`,
-        text: 'Wash skin with soap and water and pat dry completely. Apply zero lotions, hand creams, or sunscreen prior to mehndi application.',
+        text: 'Wash skin with soap and water and pat dry completely. Apply zero lotions, hand creams, or sunscreen prior to mehandi application.',
       },
       {
         '@type': 'HowToStep',
@@ -478,7 +438,7 @@ export function buildContactPageJsonLd(): Record<string, unknown> {
     url: pageUrl,
     name: 'Contact & Bridal Booking Inquiries | Mehandi by Sana',
     description:
-      'Request bridal mehndi dates, celebration henna appointments, or studio order guidance in Srinagar & Bangalore.',
+      'Request bridal mehandi dates, celebration henna appointments, or product order guidance from Sana across Srinagar & Bangalore.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: { '@id': `${siteUrl}/#organization` },
   };

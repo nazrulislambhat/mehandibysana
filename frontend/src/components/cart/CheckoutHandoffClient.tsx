@@ -374,7 +374,7 @@ export function CheckoutHandoffClient() {
           amount: createData.amountPaise ?? Math.round(serverVerifiedTotal * 100),
           currency: createData.currency || 'INR',
           name: 'Mehandi by Sana',
-          description: `Organic Henna & Studio Goods · PIN ${pincode}`,
+          description: `Organic Henna & Artist Supplies · PIN ${pincode}`,
           order_id: createData.razorpayOrderId,
           prefill: {
             name: `${firstName.trim()} ${lastName.trim()}`.trim(),
@@ -428,7 +428,7 @@ export function CheckoutHandoffClient() {
                 setSubmitting(false);
                 setSubmitError(
                   verifyData.message ||
-                    'Payment verification failed. Contact studio support with your Razorpay Payment ID.'
+                    'Payment verification failed. Contact Sana via /contact with your Razorpay Payment ID.'
                 );
                 return;
               }
@@ -552,7 +552,7 @@ export function CheckoutHandoffClient() {
                 <BrandCrest tone="ink-badge" size={44} decorative className="shrink-0" />
               </div>
               <p className="text-sm text-plaque-ink/75 leading-relaxed mt-2">
-                Your order <strong className="text-plaque-ink">{confirmedOrder.orderNumber}</strong> is queued at our studio desk. Fresh cones are rolled to order before dispatch.
+                Your order <strong className="text-plaque-ink">{confirmedOrder.orderNumber}</strong> is queued for preparation. Fresh cones are rolled to order before dispatch.
               </p>
             </div>
 
@@ -652,7 +652,7 @@ export function CheckoutHandoffClient() {
                 <span>Return to Shopping Bag</span>
               </Link>
               <h1 className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-tight">
-                Studio Checkout
+                Checkout
               </h1>
             </div>
 
@@ -694,7 +694,7 @@ export function CheckoutHandoffClient() {
               Your bag is empty
             </h2>
             <p className="text-sm text-umber max-w-md mb-7">
-              Add organic henna cones, powders, or studio tools to your bag before checking out.
+              Add organic henna cones, powders, or artist tools to your bag before checking out.
             </p>
             <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full">
               Browse Products &rarr;

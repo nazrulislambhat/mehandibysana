@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — Contact & Bookings Concierge
+ * Template Name: Mehandi by Sana — Contact & Bookings Concierge
  *
  * @package MehandiBySana
  */
@@ -18,26 +18,26 @@ $wa_digits      = function_exists( 'mbs_get_studio_whatsapp_digits' ) ? mbs_get_
 ?>
 <header class="mbs-masthead">
 	<div class="editorial-container">
-		<span class="eyebrow"><?php esc_html_e( 'Srinagar Concierge Desk', 'mehandibysana' ); ?></span>
+		<span class="eyebrow"><?php esc_html_e( 'Direct Artist Desk', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.35rem,4.4vw,3.35rem);margin-top:0.5rem;">
-			<?php esc_html_e( 'Studio Inquiries & Date Reservations', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Bridal Inquiries & Date Reservations', 'mehandibysana' ); ?>
 		</h1>
 		<p style="margin-top:0.85rem;max-width:40rem;color:var(--color-text-muted);font-size:1.02rem;line-height:1.68;">
-			<?php esc_html_e( 'Reach our Srinagar desk directly for bridal availability, wholesale cone inquiries, workshop registrations, or assistance with an active parcel.', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Reach Sana directly for bridal availability, wholesale cone inquiries, workshop registrations, or assistance with an active parcel.', 'mehandibysana' ); ?>
 		</p>
 	</div>
 </header>
 
 <section class="section-pad surface-linen">
 	<div class="editorial-container mbs-ledger-grid">
-		<!-- Left Column: Ink-Black Studio Concierge Dossier -->
+		<!-- Left Column: Ink-Black Artist Concierge Dossier -->
 		<aside class="mbs-dossier-ink">
-			<span class="eyebrow" style="color:var(--color-accent);"><?php esc_html_e( 'Direct Atelier Coordinates', 'mehandibysana' ); ?></span>
-			<h2 style="font-size:2rem;margin-top:0.5rem;"><?php esc_html_e( 'Mehandi by Sana Studio', 'mehandibysana' ); ?></h2>
+			<span class="eyebrow" style="color:var(--color-accent);"><?php esc_html_e( 'Direct Artist Coordinates', 'mehandibysana' ); ?></span>
+			<h2 style="font-size:2rem;margin-top:0.5rem;"><?php esc_html_e( 'Mehandi by Sana', 'mehandibysana' ); ?></h2>
 
 			<dl style="margin:1.75rem 0 0;display:flex;flex-direction:column;gap:1.15rem;">
 				<div>
-					<dt style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.14em;opacity:0.65;"><?php esc_html_e( 'Atelier Location', 'mehandibysana' ); ?></dt>
+					<dt style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.14em;opacity:0.65;"><?php esc_html_e( 'Home Dispatch Base (No Walk-In Storefront)', 'mehandibysana' ); ?></dt>
 					<dd style="margin:4px 0 0;font-size:0.95rem;"><?php echo esc_html( $studio_address ); ?></dd>
 				</div>
 				<div>

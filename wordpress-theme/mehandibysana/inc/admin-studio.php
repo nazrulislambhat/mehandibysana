@@ -38,7 +38,7 @@ function mbs_get_studio_address() {
 function mbs_get_studio_page_definitions() {
 	return array(
 		'services'         => array(
-			'title'    => __( 'Bridal & Studio Services', 'mehandibysana' ),
+			'title'    => __( 'Bridal & Event Services', 'mehandibysana' ),
 			'template' => 'page-templates/template-services.php',
 		),
 		'gallery'          => array(
@@ -46,7 +46,7 @@ function mbs_get_studio_page_definitions() {
 			'template' => 'page-templates/template-gallery.php',
 		),
 		'about'            => array(
-			'title'    => __( 'Our Craft & Studio Story', 'mehandibysana' ),
+			'title'    => __( 'Our Craft & Artist Story', 'mehandibysana' ),
 			'template' => 'page-templates/template-about.php',
 		),
 		'contact'          => array(
@@ -115,8 +115,8 @@ function mbs_setup_studio_pages( $assign_existing_templates = false ) {
  */
 add_action( 'admin_menu', function () {
 	add_menu_page(
-		__( 'Mehandi by Sana Studio', 'mehandibysana' ),
-		__( 'Mehandi Studio', 'mehandibysana' ),
+		__( 'Mehandi by Sana', 'mehandibysana' ),
+		__( 'Mehandi by Sana', 'mehandibysana' ),
 		'manage_options',
 		'mehandibysana-studio',
 		'mbs_render_studio_dashboard_page',
@@ -126,8 +126,8 @@ add_action( 'admin_menu', function () {
 
 	add_submenu_page(
 		'mehandibysana-studio',
-		__( 'Studio Dashboard & Setup', 'mehandibysana' ),
-		__( 'Studio Dashboard', 'mehandibysana' ),
+		__( 'Dashboard & Setup', 'mehandibysana' ),
+		__( 'Dashboard & Setup', 'mehandibysana' ),
 		'manage_options',
 		'mehandibysana-studio',
 		'mbs_render_studio_dashboard_page'
@@ -160,7 +160,7 @@ function mbs_render_studio_dashboard_page() {
 			$count = mbs_setup_studio_pages( true );
 			flush_rewrite_rules();
 			$notice = sprintf(
-				__( 'Studio pages synced and rewrite rules refreshed (%d new pages created).', 'mehandibysana' ),
+				__( 'Pages synced and rewrite rules refreshed (%d new pages created).', 'mehandibysana' ),
 				$count
 			);
 		} elseif ( 'save_settings' === $act ) {
@@ -182,7 +182,7 @@ function mbs_render_studio_dashboard_page() {
 			update_option( 'mbs_historical_orders_offset', $offset );
 			update_option( 'mbs_auto_pincode_shipping', $auto_pin );
 
-			$notice = __( 'Studio settings saved.', 'mehandibysana' );
+			$notice = __( 'Brand settings saved.', 'mehandibysana' );
 		}
 	}
 
@@ -192,9 +192,9 @@ function mbs_render_studio_dashboard_page() {
 	$page_defs     = mbs_get_studio_page_definitions();
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'Mehandi by Sana Atelier — WordPress Studio Hub', 'mehandibysana' ); ?></h1>
+		<h1><?php esc_html_e( 'Mehandi by Sana — WordPress Commerce & Booking Hub', 'mehandibysana' ); ?></h1>
 		<p class="description">
-			<?php esc_html_e( 'Turnkey Srinagar Atelier dashboard: verify WooCommerce status, repair Studio pages, manage Wildcard PIN Shipping & Offline Order Dispatch.', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Turnkey Srinagar & Bangalore dashboard: verify WooCommerce status, repair brand pages, manage Wildcard PIN Shipping & Offline Order Dispatch.', 'mehandibysana' ); ?>
 		</p>
 
 		<?php if ( $notice ) : ?>
@@ -237,7 +237,7 @@ function mbs_render_studio_dashboard_page() {
 
 		<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-top:20px;">
 			<div style="background:#fff;border:1px solid #dcdcde;padding:20px;border-radius:6px;">
-				<h2 style="margin-top:0;"><?php esc_html_e( 'Studio Pages & Templates', 'mehandibysana' ); ?></h2>
+				<h2 style="margin-top:0;"><?php esc_html_e( 'Brand Pages & Templates', 'mehandibysana' ); ?></h2>
 				<table class="widefat striped" style="margin-bottom:16px;">
 					<thead>
 						<tr>
@@ -275,18 +275,18 @@ function mbs_render_studio_dashboard_page() {
 				<form method="post">
 					<?php wp_nonce_field( 'mbs_studio_dashboard', 'mbs_studio_nonce' ); ?>
 					<input type="hidden" name="mbs_studio_action" value="repair_pages" />
-					<button type="submit" class="button button-secondary"><?php esc_html_e( 'Create / Repair All Studio Pages', 'mehandibysana' ); ?></button>
+					<button type="submit" class="button button-secondary"><?php esc_html_e( 'Create / Repair All Pages', 'mehandibysana' ); ?></button>
 				</form>
 			</div>
 
 			<div style="background:#fff;border:1px solid #dcdcde;padding:20px;border-radius:6px;">
-				<h2 style="margin-top:0;"><?php esc_html_e( 'Atelier Settings & Operations', 'mehandibysana' ); ?></h2>
+				<h2 style="margin-top:0;"><?php esc_html_e( 'Contact & Dispatch Settings', 'mehandibysana' ); ?></h2>
 				<form method="post">
 					<?php wp_nonce_field( 'mbs_studio_dashboard', 'mbs_studio_nonce' ); ?>
 					<input type="hidden" name="mbs_studio_action" value="save_settings" />
 					<table class="form-table">
 						<tr>
-							<th><label for="mbs_studio_email"><?php esc_html_e( 'Studio Contact Email', 'mehandibysana' ); ?></label></th>
+							<th><label for="mbs_studio_email"><?php esc_html_e( 'Contact Email', 'mehandibysana' ); ?></label></th>
 							<td><input id="mbs_studio_email" name="mbs_studio_email" type="email" value="<?php echo esc_attr( mbs_get_studio_email() ); ?>" class="regular-text" /></td>
 						</tr>
 						<tr>
@@ -294,14 +294,14 @@ function mbs_render_studio_dashboard_page() {
 							<td><input id="mbs_studio_phone" name="mbs_studio_phone" type="text" value="<?php echo esc_attr( mbs_get_studio_phone() ); ?>" class="regular-text" /></td>
 						</tr>
 						<tr>
-							<th><label for="mbs_studio_address"><?php esc_html_e( 'Atelier Address', 'mehandibysana' ); ?></label></th>
+							<th><label for="mbs_studio_address"><?php esc_html_e( 'Dispatch Locality / Base Address', 'mehandibysana' ); ?></label></th>
 							<td><input id="mbs_studio_address" name="mbs_studio_address" type="text" value="<?php echo esc_attr( mbs_get_studio_address() ); ?>" class="regular-text" /></td>
 						</tr>
 						<tr>
 							<th><label for="mbs_historical_orders_offset"><?php esc_html_e( 'Historical Orders Counter Floor', 'mehandibysana' ); ?></label></th>
 							<td>
 								<input id="mbs_historical_orders_offset" name="mbs_historical_orders_offset" type="number" min="1" value="<?php echo esc_attr( (string) get_option( 'mbs_historical_orders_offset', 3499 ) ); ?>" style="width:120px;" />
-								<p class="description"><?php esc_html_e( 'Hero metric adds live WooCommerce completed orders onto this studio historical baseline.', 'mehandibysana' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Hero metric adds live WooCommerce completed orders onto this historical baseline.', 'mehandibysana' ); ?></p>
 							</td>
 						</tr>
 						<tr>
@@ -309,12 +309,12 @@ function mbs_render_studio_dashboard_page() {
 							<td>
 								<label>
 									<input type="checkbox" name="mbs_auto_pincode_shipping" value="1" <?php checked( 'yes' === get_option( 'mbs_auto_pincode_shipping', 'yes' ) ); ?> />
-									<?php esc_html_e( 'Automatically apply Mehandi Studio Wildcard PIN rates at checkout even without manual WooCommerce Shipping Zones.', 'mehandibysana' ); ?>
+									<?php esc_html_e( 'Automatically apply Mehandi by Sana Wildcard PIN rates at checkout even without manual WooCommerce Shipping Zones.', 'mehandibysana' ); ?>
 								</label>
 							</td>
 						</tr>
 					</table>
-					<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Save Studio Settings', 'mehandibysana' ); ?></button></p>
+					<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Save Settings', 'mehandibysana' ); ?></button></p>
 				</form>
 			</div>
 		</div>
@@ -323,18 +323,18 @@ function mbs_render_studio_dashboard_page() {
 }
 
 /**
- * Add Studio Dispatch & Offline Payment column to WooCommerce Orders List (Classic + HPOS)
+ * Add Order Dispatch & Offline Payment column to WooCommerce Orders List (Classic + HPOS)
  */
 function mbs_add_orders_list_dispatch_column( $columns ) {
 	$new_cols = array();
 	foreach ( $columns as $key => $label ) {
 		$new_cols[ $key ] = $label;
 		if ( 'order_status' === $key ) {
-			$new_cols['mbs_dispatch'] = __( 'Studio Dispatch', 'mehandibysana' );
+			$new_cols['mbs_dispatch'] = __( 'Batch Dispatch', 'mehandibysana' );
 		}
 	}
 	if ( ! isset( $new_cols['mbs_dispatch'] ) ) {
-		$new_cols['mbs_dispatch'] = __( 'Studio Dispatch', 'mehandibysana' );
+		$new_cols['mbs_dispatch'] = __( 'Batch Dispatch', 'mehandibysana' );
 	}
 	return $new_cols;
 }

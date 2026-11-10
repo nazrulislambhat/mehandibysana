@@ -18,7 +18,7 @@ export const metadata: Metadata = buildPageMetadata({
     'Mehandi by Sana FAQ',
     'PPD free organic henna cones',
     'how long fresh henna cones last',
-    'bridal mehndi booking FAQ',
+    'bridal mehandi booking FAQ',
   ],
 });
 
@@ -90,9 +90,9 @@ const FAQ_GROUPS: FaqGroup[] = [
     title: 'Shipping, PIN Zones & Tracking',
     items: [
       {
-        question: 'How fast do orders dispatch from your Srinagar & Bangalore studios?',
+        question: 'How fast do orders dispatch across Srinagar & Bangalore?',
         answer:
-          'Small-batch organic cone orders are rolled fresh and dispatched within 1–2 business days via DTDC Air, Delhivery, Blue Dart, or India Post Speed Post. Transit takes 1–2 business days across local Srinagar & Bangalore metro PINs and 3–6 business days Pan-India. Enter your 6-digit PIN on any product page or inside your shopping bag to check exact delivery rates and ETA for your address.',
+          'Small-batch organic cone orders are mixed and rolled fresh to order and dispatched within 1–2 business days via DTDC Air, Delhivery, Blue Dart, or India Post Speed Post. Transit takes 1–2 business days across local Srinagar & Bangalore metro PINs and 3–6 business days Pan-India. Enter your 6-digit PIN on any product page or inside your shopping bag to check exact delivery rates and ETA for your address.',
       },
       {
         question: 'How can I track my order after checkout?',
@@ -129,14 +129,14 @@ const FAQ_GROUPS: FaqGroup[] = [
     title: 'Bridal Bookings & Mehandi Masterclasses',
     items: [
       {
-        question: 'How far in advance should I reserve Sana for my bridal mehndi?',
+        question: 'How far in advance should I reserve Sana for my bridal mehandi?',
         answer:
           'For peak Kashmir wedding seasons and Eid weeks, we recommend inquiring 4–8 weeks in advance via our Booking Inquiry page. Dates are locked once availability and your booking retainer are confirmed.',
       },
       {
-        question: 'Which cities do you serve for bridal mehndi, and do you travel for destination weddings?',
+        question: 'Which cities do you serve for bridal mehandi, and do you travel for destination weddings?',
         answer:
-          'We operate directly from Srinagar and Bangalore, and Sana and our troupe also travel across Jammu & Kashmir, Karnataka, and outstation Indian destinations—with travel and hospitality terms shared transparently in your custom booking proposal.',
+          'Sana works independently across Srinagar and Bangalore, and also travels across Jammu & Kashmir, Karnataka, and outstation Indian destinations—with travel and hospitality terms shared transparently in your custom booking proposal.',
       },
     ],
   },
@@ -225,14 +225,14 @@ export default function FaqPage() {
           Still Have Questions?
         </p>
         <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
-          Speak directly with our studio coordinators
+          Reach out directly to Sana
         </h2>
         <p className="text-sm text-plaque-ink/75 leading-relaxed">
           Need guidance picking cone counts for a bridal event, verifying an order reference, or planning an urgent delivery? Reach out anytime.
         </p>
         <div className="flex flex-wrap gap-3 pt-1">
           <LinkButton href="/contact" variant="primary" size="md" className="rounded-full">
-            Ask Studio Desk &rarr;
+            Ask Sana Directly &rarr;
           </LinkButton>
           <Link
             href="/henna-care"

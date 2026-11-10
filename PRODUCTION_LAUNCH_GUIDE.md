@@ -292,9 +292,9 @@ Your storefront & backend already have full Razorpay Checkout + HMAC-SHA256 veri
 
 `backend/src/lib/notifications.ts` powers transactional emails with branded HTML + plain-text layouts (`#ffffff` background, `#111111` ink, `#d9541e` CTA buttons with `#fceee3` text) whenever:
 1. An order is confirmed (`order_confirmed` -> includes Track Order link).
-2. A bridal/studio inquiry is submitted on `/contact` (`bridal_booking_received`).
+2. A bridal or batch inquiry is submitted on `/contact` (`bridal_booking_received`).
 3. You click **Confirm** on a booking in Medusa Admin `/app/bridal-bookings` (`bridal_booking_confirmed`).
-4. Any new order or inquiry arrives -> sends a **Studio Owner Alert** to `STUDIO_ADMIN_EMAIL`.
+4. Any new order or inquiry arrives -> sends an **Owner Alert** to `STUDIO_ADMIN_EMAIL`.
 
 It supports **three providers automatically** (priority order):
 

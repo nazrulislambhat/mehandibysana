@@ -1,6 +1,6 @@
 <?php
 /**
- * Mehandi by Sana Atelier — Theme Bootstrap & WooCommerce Integration
+ * Mehandi by Sana — Theme Bootstrap & WooCommerce Integration
  *
  * @package MehandiBySana
  */
@@ -79,8 +79,8 @@ add_action( 'after_setup_theme', function () {
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'Primary Studio Header Menu', 'mehandibysana' ),
-			'footer'  => __( 'Footer Atelier Navigation', 'mehandibysana' ),
+			'primary' => __( 'Primary Header Menu', 'mehandibysana' ),
+			'footer'  => __( 'Footer Navigation', 'mehandibysana' ),
 		)
 	);
 } );

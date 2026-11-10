@@ -524,7 +524,7 @@ export default async function importRealMehandiData({ container }: ExecArgs) {
       handle: "bulk-henna",
       category_ids: getCategoryId("Organic Henna"),
       description:
-        "Freshly prepared bulk organic henna paste (400gm) in piping carrot bag. Ideal for professional artists, bridal events, and high-volume studios.",
+        "Freshly prepared bulk organic henna paste (400gm) in piping carrot bag. Ideal for professional artists, bridal events, and bulk bookings.",
       weight: 400,
       status: ProductStatus.PUBLISHED,
       shipping_profile_id: shippingProfile.id,

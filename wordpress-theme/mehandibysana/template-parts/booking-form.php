@@ -1,6 +1,6 @@
 <?php
 /**
- * Shared Bridal & Studio Booking Inquiry Form (`#mbs-booking-form`)
+ * Shared Bridal & Booking Inquiry Form (`#mbs-booking-form`)
  * Submits asynchronously via `mbs_submit_booking` to `mbs_booking` CPT + email notification.
  *
  * @package MehandiBySana
@@ -41,7 +41,7 @@ $wa_digits       = function_exists( 'mbs_get_studio_whatsapp_digits' ) ? mbs_get
 			<div class="mbs-form-field">
 				<label for="mbs_inq_service" class="mbs-form-label"><?php esc_html_e( 'Commission / Service Type', 'mehandibysana' ); ?></label>
 				<select id="mbs_inq_service" name="service" class="mbs-select">
-					<option value="bridal" <?php selected( $default_service, 'bridal' ); ?>><?php esc_html_e( 'Bridal Mehndi Commission', 'mehandibysana' ); ?></option>
+					<option value="bridal" <?php selected( $default_service, 'bridal' ); ?>><?php esc_html_e( 'Bridal Mehandi Commission', 'mehandibysana' ); ?></option>
 					<option value="events" <?php selected( $default_service, 'events' ); ?>><?php esc_html_e( 'Events, Sangeet & Gatherings', 'mehandibysana' ); ?></option>
 					<option value="botanical" <?php selected( $default_service, 'botanical' ); ?>><?php esc_html_e( 'Bulk Cone Orders / Workshop', 'mehandibysana' ); ?></option>
 					<option value="order-support" <?php selected( $default_service, 'order-support' ); ?>><?php esc_html_e( 'Online Order Question', 'mehandibysana' ); ?></option>
@@ -69,7 +69,7 @@ $wa_digits       = function_exists( 'mbs_get_studio_whatsapp_digits' ) ? mbs_get
 
 		<div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;margin-top:0.5rem;">
 			<button type="submit" class="mbs-btn mbs-btn-primary mbs-btn-lg">
-				<?php esc_html_e( 'Send Studio Inquiry', 'mehandibysana' ); ?>
+				<?php esc_html_e( 'Send Inquiry', 'mehandibysana' ); ?>
 			</button>
 			<a href="https://wa.me/<?php echo esc_attr( $wa_digits ); ?>" target="_blank" rel="noopener noreferrer" style="font-size:0.84rem;color:var(--color-text-muted);text-decoration:underline;text-underline-offset:4px;">
 				<?php printf( esc_html__( 'Or WhatsApp %s', 'mehandibysana' ), esc_html( $studio_phone ) ); ?>
@@ -79,10 +79,10 @@ $wa_digits       = function_exists( 'mbs_get_studio_whatsapp_digits' ) ? mbs_get
 
 	<!-- Ink Black Confirmation Card -->
 	<div id="mbs-booking-success" class="mbs-dossier-ink" style="display:none;">
-		<span class="eyebrow" style="color:var(--color-accent);"><?php esc_html_e( 'Inquiry Logged at Srinagar Desk', 'mehandibysana' ); ?></span>
+		<span class="eyebrow" style="color:var(--color-accent);"><?php esc_html_e( 'Inquiry Logged', 'mehandibysana' ); ?></span>
 		<h3 style="font-size:2.1rem;margin-top:0.5rem;"><?php esc_html_e( 'Assalamu Alaikum — We Received Your Note', 'mehandibysana' ); ?></h3>
 		<p style="margin-top:0.75rem;color:rgba(252,238,227,0.8);font-size:0.95rem;line-height:1.65;">
-			<?php esc_html_e( 'Our studio manager responds within 24 hours via email & WhatsApp.', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Sana responds within 24 hours via email & WhatsApp.', 'mehandibysana' ); ?>
 		</p>
 		<div style="margin:1.25rem 0;padding:1rem 1.25rem;background:rgba(255,255,255,0.06);border:1px solid rgba(252,238,227,0.16);border-radius:var(--radius-md);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
 			<div>

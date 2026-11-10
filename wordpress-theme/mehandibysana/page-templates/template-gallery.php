@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — Bridal & Stain Gallery Archive
+ * Template Name: Mehandi by Sana — Bridal & Stain Gallery Archive
  *
  * @package MehandiBySana
  */
@@ -18,7 +18,7 @@ $rows   = array_chunk( $plates, 2 );
 	<div class="editorial-container">
 		<span class="eyebrow"><?php esc_html_e( 'Exhibition Plates · Natural Stain Oxidation', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.35rem,4.4vw,3.35rem);margin-top:0.5rem;">
-			<?php esc_html_e( 'Studio Gallery & Stain Archive', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Stain Gallery & Botanical Archive', 'mehandibysana' ); ?>
 		</h1>
 		<p style="margin-top:0.85rem;max-width:40rem;color:var(--color-text-muted);font-size:1.02rem;line-height:1.68;">
 			<?php esc_html_e( 'Unretouched natural daylight stains from Hour 36–48 oxidation—created exclusively with freshly sifted Sojat leaf and steam-distilled eucalyptus oil.', 'mehandibysana' ); ?>

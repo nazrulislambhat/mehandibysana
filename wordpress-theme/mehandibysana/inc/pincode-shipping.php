@@ -191,7 +191,7 @@ function mbs_evaluate_pincode( $raw_pin, $subtotal = 0 ) {
 			'estimatedDays'  => '',
 			'codAvailable'   => false,
 			'matchedRule'    => null,
-			'message'        => sprintf( __( 'Delivery to PIN %s is currently unavailable. Please contact our Srinagar desk.', 'mehandibysana' ), $pin ),
+			'message'        => sprintf( __( 'Delivery to PIN %s is currently unavailable. Please contact Sana directly.', 'mehandibysana' ), $pin ),
 		);
 	}
 
@@ -297,7 +297,7 @@ add_action( 'woocommerce_shipping_init', function () {
 		public function __construct( $instance_id = 0 ) {
 			$this->id                 = 'mbs_pincode_shipping';
 			$this->instance_id        = absint( $instance_id );
-			$this->method_title       = __( 'Mehandi Studio Wildcard PIN Shipping', 'mehandibysana' );
+			$this->method_title       = __( 'Mehandi by Sana Wildcard PIN Shipping', 'mehandibysana' );
 			$this->method_description = __( 'Calculates Indian courier rate automatically using Mehandi by Sana 6-digit PIN prefix rules.', 'mehandibysana' );
 			$this->supports           = array( 'shipping-zones', 'instance-settings' );
 			$this->init();
@@ -306,7 +306,7 @@ add_action( 'woocommerce_shipping_init', function () {
 		public function init() {
 			$this->init_form_fields();
 			$this->init_settings();
-			$this->title = $this->get_option( 'title', __( 'Studio Dispatch (PIN Code Delivery)', 'mehandibysana' ) );
+			$this->title = $this->get_option( 'title', __( 'Small-Batch Dispatch (PIN Code Delivery)', 'mehandibysana' ) );
 			add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 		}
 
@@ -326,14 +326,14 @@ add_action( 'woocommerce_shipping_init', function () {
 					return;
 				}
 				$label = sprintf(
-					__( 'Studio Courier (PIN %1$s · %2$s)', 'mehandibysana' ),
+					__( 'Batch Courier (PIN %1$s · %2$s)', 'mehandibysana' ),
 					$eval['pincode'],
 					$eval['estimatedDays']
 				);
 				$cost = (float) $eval['deliveryCharge'];
 			} else {
 				// Default Kashmir/India base preview before PIN entered
-				$label = __( 'Studio Dispatch (Enter 6-digit PIN for exact rate)', 'mehandibysana' );
+				$label = __( 'Batch Dispatch (Enter 6-digit PIN for exact rate)', 'mehandibysana' );
 				$cost  = 60;
 			}
 
@@ -395,13 +395,13 @@ add_filter( 'woocommerce_package_rates', function ( $rates, $package ) {
 			return $rates;
 		}
 		$label = sprintf(
-			__( 'Studio Courier · %1$s (%2$s)', 'mehandibysana' ),
+			__( 'Batch Courier · %1$s (%2$s)', 'mehandibysana' ),
 			$eval['label'],
 			$eval['estimatedDays']
 		);
 		$cost = (float) $eval['deliveryCharge'];
 	} elseif ( empty( $rates ) ) {
-		$label = __( 'Studio Courier · Enter 6-digit PIN (₹60–₹150)', 'mehandibysana' );
+		$label = __( 'Batch Courier · Enter 6-digit PIN (₹60–₹150)', 'mehandibysana' );
 		$cost  = 60;
 	} else {
 		return $rates;
@@ -554,7 +554,7 @@ function mbs_render_pincode_admin_page() {
 	$rules = mbs_get_pincode_rules();
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'Mehandi Studio — Wildcard PIN Shipping & COD Rules', 'mehandibysana' ); ?></h1>
+		<h1><?php esc_html_e( 'Mehandi by Sana — Wildcard PIN Shipping & COD Rules', 'mehandibysana' ); ?></h1>
 		<p class="description">
 			<?php esc_html_e( 'Matches customer 6-digit PIN codes by longest prefix specificity (e.g. 190001 exact beats 19*, which beats * Pan-India fallback). Used automatically by the PDP/Cart PIN Estimator and WooCommerce Checkout.', 'mehandibysana' ); ?>
 		</p>
@@ -608,7 +608,7 @@ function mbs_render_pincode_admin_page() {
 			<p class="submit" style="display:flex;gap:12px;">
 				<button type="submit" class="button button-primary"><?php esc_html_e( 'Save All PIN Rules', 'mehandibysana' ); ?></button>
 				<button type="submit" onclick="if(!confirm('Restore the default 7 India shipping zones?')) return false; this.form.mbs_pin_action.value='restore_defaults';" class="button">
-					<?php esc_html_e( 'Restore Default Studio Rules', 'mehandibysana' ); ?>
+					<?php esc_html_e( 'Restore Default Shipping Rules', 'mehandibysana' ); ?>
 				</button>
 			</p>
 		</form>

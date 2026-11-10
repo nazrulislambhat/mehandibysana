@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce Shop & Category Archive Override — Editorial Atelier Grid & Filter Pills
+ * WooCommerce Shop & Category Archive Override — Editorial Grid & Filter Pills
  *
  * @package MehandiBySana
  */
@@ -128,7 +128,7 @@ if ( is_wp_error( $product_cats ) ) {
 					<?php esc_html_e( 'Try clearing your filter or browsing our complete freshly rolled Srinagar apothecary collection.', 'mehandibysana' ); ?>
 				</p>
 				<a href="<?php echo esc_url( mbs_get_shop_url() ); ?>" class="mbs-btn mbs-btn-ink">
-					<?php esc_html_e( 'View All Studio Items', 'mehandibysana' ); ?>
+					<?php esc_html_e( 'View All Items', 'mehandibysana' ); ?>
 				</a>
 			</div>
 		<?php endif; ?>

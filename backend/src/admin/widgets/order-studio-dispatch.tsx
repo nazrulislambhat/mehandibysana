@@ -62,8 +62,8 @@ const BASE_PAYMENT_METHOD_OPTIONS: Array<{ value: string; label: string }> = [
 
 const COURIER_PRESETS = [
   "Local Courier",
-  "Srinagar Studio Rider",
-  "Bangalore Studio Rider",
+  "Srinagar Local Rider",
+  "Bangalore Local Rider",
   "India Post Speed Post",
   "Delhivery",
   "DTDC",
@@ -608,7 +608,7 @@ const OrderStudioDispatchWidget = ({
       {/* Header + Quick Complete */}
       <div className="px-6 py-4 space-y-3">
         <div>
-          <Heading level="h2">Studio Order, Payment &amp; Courier</Heading>
+          <Heading level="h2">Order, Payment &amp; Courier Dispatch</Heading>
           <Text size="small" className="text-ui-fg-subtle mt-0.5">
             Sync payment status, record manual transactions, dispatch parcels, and send customer emails.
           </Text>
@@ -641,7 +641,7 @@ const OrderStudioDispatchWidget = ({
         {isLedgerOutOfSync && !isCanceled && (
           <div className="rounded-md border border-ui-tag-orange-border bg-ui-tag-orange-bg p-3 space-y-2">
             <Text size="xsmall" weight="plus">
-              Medusa payment ledger shows NOT PAID even though studio status is{" "}
+              Medusa payment ledger shows NOT PAID even though payment status is{" "}
               {currentPaymentStatus.toUpperCase()}.
             </Text>
             <Button

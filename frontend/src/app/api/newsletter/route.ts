@@ -79,13 +79,13 @@ export async function POST(req: NextRequest) {
   const fallback = await sendFrontendFallbackEmail({
     to: email,
     subject: 'Welcome to the Mehandi by Sana Dispatch List — Srinagar & Bangalore',
-    text: 'Thank you for joining the Mehandi by Sana Dispatch List (Srinagar & Bangalore studios). We will notify you when fresh small-batch organic Sojat henna cones and bridal slots open.',
+    text: 'Thank you for joining the Mehandi by Sana Dispatch List (Srinagar & Bangalore). We will notify you when fresh small-batch organic Sojat henna cones and bridal slots open.',
     html: renderStudioFallbackEmailHtml({
       eyebrow: 'Fresh Batch Dispatch List',
-      heading: 'You are on the Studio List',
+      heading: 'You are on the Dispatch List',
       paragraphs: [
         'Assalamu Alaikum / Hello,',
-        'Thank you for joining the Mehandi by Sana Dispatch List across our Srinagar and Bangalore studios. You will receive early alerts whenever fresh small-batch organic henna cones are rolled and when seasonal Eid or bridal booking windows open.',
+        'Thank you for joining the Mehandi by Sana Dispatch List across Srinagar and Bangalore. You will receive early alerts whenever fresh small-batch organic henna cones are rolled and when seasonal Eid or bridal booking windows open.',
       ],
       ctaLabel: 'Explore the Apothecary',
       ctaUrl: `${(process.env.NEXT_PUBLIC_SITE_URL || 'https://mehandibysana.com').replace(/\/+$/, '')}/shop`,

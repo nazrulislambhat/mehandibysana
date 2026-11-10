@@ -48,7 +48,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-22.webp',
     imageAlt:
-      'Kashmiri Chinar leaf silhouette mehndi woven into a floral palm design by Mehandi by Sana',
+      'Kashmiri Chinar leaf silhouette mehandi woven into a floral palm design by Mehandi by Sana',
     aspectClass: 'aspect-square',
     spanClass: 'lg:col-span-5 lg:mt-14',
   },
@@ -62,7 +62,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
     imageAlt:
-      'Botanical lotus and fine jali grid mehndi work on hands for engagement by Mehandi by Sana',
+      'Botanical lotus and fine jali grid mehandi work on hands for engagement by Mehandi by Sana',
     aspectClass: 'aspect-square',
     spanClass: 'lg:col-span-5',
   },
@@ -76,7 +76,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-19.jpg',
     imageAlt:
-      'Royal Mughal archways bridal mehndi design on forearms and palms by Mehandi by Sana',
+      'Royal Mughal archways bridal mehandi design on forearms and palms by Mehandi by Sana',
     aspectClass: 'aspect-[4/5]',
     spanClass: 'lg:col-span-7 lg:mt-10',
   },
@@ -111,13 +111,13 @@ const GALLERY_PLATES: GalleryPlate[] = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Bridal Mehndi Portfolio & Botanical Stain Gallery',
+  title: 'Bridal Mehandi Portfolio & Botanical Stain Gallery',
   description:
     'Selected bridal henna designs, Kashmiri Chinar leaf motifs, Royal Mughal archways, and 48-hour natural mahogany stain studies by Sumaiya Rashid Magray (Sana).',
   canonicalPath: '/gallery',
   keywords: [
-    'Kashmiri bridal mehndi designs',
-    'Chinar mehndi motif',
+    'Kashmiri bridal mehandi designs',
+    'Chinar mehandi motif',
     'organic henna stain gallery',
     'Sumaiya Rashid Magray portfolio',
     'Mehandi by Sana gallery',
@@ -201,7 +201,7 @@ export default function GalleryPage() {
                   Exhibition Folio
                 </p>
                 <p className="font-serif text-2xl font-medium text-plaque-ink">
-                  6 Studio Plates
+                  6 Curated Plates
                 </p>
                 <p className="text-xs text-plaque-ink/70 mt-1">
                   Srinagar &middot; 0% PPD Organic Stain
@@ -217,7 +217,7 @@ export default function GalleryPage() {
         className="editorial-container py-16 md:py-24"
       >
         <h2 id="gallery-plates-heading" className="sr-only">
-          Curated Studio Henna Plates
+          Curated Organic Henna Plates
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {GALLERY_PLATES.map((plate, idx) => (

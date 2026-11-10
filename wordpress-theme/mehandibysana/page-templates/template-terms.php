@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — Terms & Conditions
+ * Template Name: Mehandi by Sana — Terms & Conditions
  *
  * @package MehandiBySana
  */
@@ -13,7 +13,7 @@ get_header();
 ?>
 <header class="mbs-masthead">
 	<div class="editorial-container">
-		<span class="eyebrow"><?php esc_html_e( 'Studio Policy & Client Dossier', 'mehandibysana' ); ?></span>
+		<span class="eyebrow"><?php esc_html_e( 'Brand Policy & Client Dossier', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.25rem,4vw,3.15rem);margin-top:0.5rem;"><?php esc_html_e( 'Terms & Conditions', 'mehandibysana' ); ?></h1>
 	</div>
 </header>
@@ -30,11 +30,11 @@ get_header();
 		</article>
 		<article>
 			<h2 style="font-size:1.7rem;color:var(--color-ink);margin-bottom:0.5rem;">3. Bridal Commissions & Rescheduling</h2>
-			<p>Bridal ceremony dates reserved through our Srinagar studio desk require advance confirmation. Rescheduling requests are accommodated generously based on availability when communicated at least 14 days before the ceremony.</p>
+			<p>Bridal ceremony dates reserved directly with Sana require advance confirmation. Rescheduling requests are accommodated generously based on availability when communicated at least 14 days before the ceremony.</p>
 		</article>
 		<article>
 			<h2 style="font-size:1.7rem;color:var(--color-ink);margin-bottom:0.5rem;">4. Damages & Parcel Assistance</h2>
-			<p>Should a cold-chain box arrive damaged during courier transit, capture clear unboxing photographs within 24 hours and contact <?php echo esc_html( mbs_get_studio_email() ); ?> or <?php echo esc_html( mbs_get_studio_phone() ); ?> for prompt studio resolution.</p>
+			<p>Should a cold-chain box arrive damaged during courier transit, capture clear unboxing photographs within 24 hours and contact <?php echo esc_html( mbs_get_studio_email() ); ?> or <?php echo esc_html( mbs_get_studio_phone() ); ?> for prompt resolution.</p>
 		</article>
 
 		<div style="padding-top:1.25rem;border-top:1px solid var(--color-border);">

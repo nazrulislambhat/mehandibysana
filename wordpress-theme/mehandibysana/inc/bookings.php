@@ -18,7 +18,7 @@ add_action( 'init', function () {
 		array(
 			'labels' => array(
 				'name'               => __( 'Bridal Bookings', 'mehandibysana' ),
-				'singular_name'      => __( 'Studio Booking', 'mehandibysana' ),
+				'singular_name'      => __( 'Bridal Booking', 'mehandibysana' ),
 				'menu_name'          => __( 'Bridal Bookings', 'mehandibysana' ),
 				'all_items'          => __( 'All Bookings & Inquiries', 'mehandibysana' ),
 				'edit_item'          => __( 'Booking Details', 'mehandibysana' ),
@@ -59,7 +59,7 @@ add_action( 'manage_mbs_booking_posts_custom_column', function ( $column, $post_
 			break;
 		case 'mbs_service':
 			$map = array(
-				'bridal'        => 'Bridal Mehndi',
+				'bridal'        => 'Bridal Mehandi',
 				'events'        => 'Events & Celebrations',
 				'botanical'     => 'Bulk Orders / Workshop',
 				'order-support' => 'Store Order Question',
@@ -93,7 +93,7 @@ add_action( 'manage_mbs_booking_posts_custom_column', function ( $column, $post_
 add_action( 'add_meta_boxes', function () {
 	add_meta_box(
 		'mbs_booking_details',
-		__( 'Studio Booking & Client Inquiry Details', 'mehandibysana' ),
+		__( 'Bridal Booking & Client Inquiry Details', 'mehandibysana' ),
 		'mbs_render_booking_metabox',
 		'mbs_booking',
 		'normal',

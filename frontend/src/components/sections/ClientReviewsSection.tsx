@@ -86,7 +86,7 @@ export function ClientReviewsSection() {
             <strong className="font-semibold text-ink">Henna products</strong>{' '}
             and{' '}
             <strong className="font-semibold text-ink">Services</strong>{' '}
-            in their own words — shared directly by brides and repeat studio clients.
+            in their own words — shared directly by brides and repeat clients.
           </p>
         </div>
 

@@ -18,13 +18,13 @@ import {
 } from '@/components/graphics/BrandIcons';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Contact & Bridal Mehndi Bookings',
+  title: 'Contact & Bridal Mehandi Bookings',
   description:
-    'Inquire for bridal mehndi dates, celebration henna appointments, 15-day workshops, or botanical order guidance from Mehandi by Sana across Srinagar & Bangalore.',
+    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or botanical order guidance directly from Sana across Srinagar & Bangalore.',
   canonicalPath: '/contact',
   keywords: [
-    'book bridal mehndi Srinagar',
-    'book bridal mehndi Bangalore',
+    'book bridal mehandi Srinagar',
+    'book bridal mehandi Bangalore',
     'Mehandi by Sana contact',
     'henna consultation India',
   ],
@@ -93,11 +93,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   id="contact-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
                 >
-                  Plan an appointment or studio order.
+                  Plan an appointment or cone order.
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Sana and our Srinagar &amp; Bangalore studio coordinators review every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
+                Working independently across Srinagar and Bangalore, Sana personally reviews every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
               </p>
             </div>
 
@@ -141,14 +141,14 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <LocationPinIcon size={13} className="text-terracotta shrink-0" />
-                    <span>Studio Operations</span>
+                    <span>Service Bases &amp; Dispatch</span>
                   </dt>
                   <dd className="text-plaque-ink leading-relaxed space-y-1">
                     <span className="block">
                       <strong>Srinagar:</strong> Baghat Barzullah, Srinagar, Jammu &amp; Kashmir 190005
                     </span>
                     <span className="block text-plaque-ink/80">
-                      <strong>Bangalore:</strong> Bengaluru Studio Operations &amp; Bridal Bookings, Karnataka
+                      <strong>Bangalore:</strong> Freelance Bridal Appointments &amp; Batch Dispatch, Bengaluru, Karnataka
                     </span>
                   </dd>
                 </div>
@@ -204,7 +204,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 Ordering botanical products?
               </h3>
               <p className="text-sm text-umber leading-relaxed mb-4">
-                Ready-to-ship henna cones, aftercare balms, and studio kits can be ordered directly through the storefront.
+                Ready-to-ship henna cones, aftercare balms, and curated kits can be ordered directly through the storefront.
               </p>
               <Link
                 href="/shop"

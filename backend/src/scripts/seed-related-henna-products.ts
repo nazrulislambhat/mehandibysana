@@ -10,7 +10,7 @@ import type { ExecArgs } from "@medusajs/framework/types";
 
 /**
  * Seeds related henna preparation & artist tools into MedusaJS v2
- * using curated studio imagery hosted in frontend/public/images/tools/.
+ * using curated product imagery hosted in frontend/public/images/tools/.
  */
 const TOOL_IMAGE_BASE_URL = "https://mehandibysana.vercel.app/images/tools";
 
@@ -55,7 +55,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
             name: categoryName,
             handle: categoryHandle,
             description:
-              "Precision cellophane cone sheets, micro weighing scales, stainless measuring spoons, piping bags, sifting cloths, and studio prep tools for henna artists.",
+              "Precision cellophane cone sheets, micro weighing scales, stainless measuring spoons, piping bags, sifting cloths, and artist prep tools for henna artists.",
             is_active: true,
             is_internal: false,
           },
@@ -131,9 +131,9 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       handle: "digital-precision-micro-weighing-scale",
       subtitle: "0.01g high-accuracy backlit digital scale for henna powder & essential oils",
       description:
-        "Studio-grade digital pocket scale with 0.01g readability, instant tare function, stainless steel weighing platform, and protective flip cover. Essential for weighing henna powder, sugar, and eucalyptus essential oil to the exact gram.",
+        "Precision artist-grade digital pocket scale with 0.01g readability, instant tare function, stainless steel weighing platform, and protective flip cover. Essential for weighing henna powder, sugar, and eucalyptus essential oil to the exact gram.",
       weight: 190,
-      options: [{ title: "Capacity", values: ["0.01g – 500g Micro Scale", "0.1g – 3000g Studio Scale"] }],
+      options: [{ title: "Capacity", values: ["0.01g – 500g Micro Scale", "0.1g – 3000g Pro Scale"] }],
       variants: [
         {
           title: "0.01g – 500g Micro Scale",
@@ -145,9 +145,9 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
           ],
         },
         {
-          title: "0.1g – 3000g Studio Scale",
+          title: "0.1g – 3000g Pro Scale",
           sku: "MBS-SCALE-3KG",
-          options: { Capacity: "0.1g – 3000g Studio Scale" },
+          options: { Capacity: "0.1g – 3000g Pro Scale" },
           prices: [
             { amount: 680, currency_code: "inr" },
             { amount: 13, currency_code: "usd" },
@@ -245,8 +245,8 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       },
     },
     {
-      title: "Reusable Acrylic Mehndi Practice Hand Board",
-      handle: "reusable-acrylic-mehndi-practice-hand",
+      title: "Reusable Acrylic Mehandi Practice Hand Board",
+      handle: "reusable-acrylic-mehandi-practice-hand",
       subtitle: "Life-size matte-finish washable acrylic hand template for motif practice",
       description:
         "Durable life-size acrylic practice hand with a lightly frosted skin-grip surface so henna lines hold crisp edges without beading. Wipes clean with water after practice—ideal for bridal motif rehearsals and workshops.",
@@ -274,7 +274,7 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       ],
       metadata: {
         short_description: "Life-size matte-finish washable acrylic hand template for motif practice.",
-        tool_group: "Practice & Studio",
+        tool_group: "Practice & Tools",
         image_pending: false,
       },
     },
@@ -285,12 +285,12 @@ export default async function seedRelatedHennaProducts({ container }: ExecArgs) 
       description:
         "Thick borosilicate glass dye-release bowl with a tight-sealing lid to trap essential oil terpenes during 8–12 hour dye release, paired with a seamless silicone spatula that scrapes every gram of paste cleanly into piping bags.",
       weight: 380,
-      options: [{ title: "Size", values: ["500ml Studio Bowl + Spatula"] }],
+      options: [{ title: "Size", values: ["500ml Mixing Bowl + Spatula"] }],
       variants: [
         {
-          title: "500ml Studio Bowl + Spatula",
+          title: "500ml Mixing Bowl + Spatula",
           sku: "MBS-BOWL-SPATULA",
-          options: { Size: "500ml Studio Bowl + Spatula" },
+          options: { Size: "500ml Mixing Bowl + Spatula" },
           prices: [
             { amount: 220, currency_code: "inr" },
             { amount: 5, currency_code: "usd" },

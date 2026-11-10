@@ -22,16 +22,16 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Organic Henna Cones & Bridal Mehndi Studio',
-  absoluteTitle: 'Mehandi by Sana — Organic Henna Cones & Bridal Mehndi Studio',
+  title: 'Organic Henna Cones & Freelance Bridal Mehandi Artist',
+  absoluteTitle: 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist',
   description:
-    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehndi with Sana across Srinagar & Bangalore.',
+    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehandi with Sana across Srinagar & Bangalore.',
   canonicalPath: '/',
   keywords: [
     'organic henna cones India',
-    'chemical free mehndi cones',
-    'bridal mehndi Srinagar',
-    'bridal mehndi Bangalore',
+    'chemical free mehandi cones',
+    'bridal mehandi Srinagar',
+    'bridal mehandi Bangalore',
     'Mehandi by Sana',
     'organic Sojat henna powder',
     'henna aftercare balm',
@@ -78,7 +78,7 @@ export default async function HomePage() {
                 </h2>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed mt-2 max-w-xl">
-                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and studio preparation tools handcrafted across our Srinagar &amp; Bangalore studios.
+                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and preparation tools mixed &amp; rolled fresh across Srinagar &amp; Bangalore.
               </p>
             </div>
 
@@ -169,7 +169,7 @@ export default async function HomePage() {
           ) : catalog.error ? (
             <FeedbackState
               tone="error"
-              title="Unable to reach studio store right now"
+              title="Unable to reach storefront right now"
               description={`Catalog items could not be loaded (${catalog.error}). Please verify that your MedusaJS API is reachable.`}
               action={{ label: 'Try Shop Page', href: '/shop' }}
             />
@@ -211,7 +211,7 @@ export default async function HomePage() {
                     className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                   />
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                    About the Studio
+                    About the Artist
                   </p>
                 </div>
               </TextReveal>
@@ -225,7 +225,7 @@ export default async function HomePage() {
               </TextReveal>
               <TextReveal variant="fade" delayMs={120}>
                 <p className="text-base md:text-lg text-ink leading-relaxed">
-                  Holding a degree in Electronics &amp; Communication Engineering, Sumaiya Rashid Magray (Sana) founded Kashmir’s first freelance organic henna studio in Baghat Barzullah, Srinagar—replacing harsh chemical cones with pure, skin-safe botanicals.
+                  Holding a degree in Electronics &amp; Communication Engineering, Sumaiya Rashid Magray (Sana) began Kashmir’s first independent organic henna practice in Baghat Barzullah, Srinagar in 2019—working as a freelance artist today (with hopes of opening a dedicated studio someday) and replacing harsh chemical cones with pure, skin-safe botanicals.
                 </p>
               </TextReveal>
               <TextReveal variant="fade" delayMs={180}>

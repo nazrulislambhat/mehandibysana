@@ -26,7 +26,7 @@ export async function generateMetadata({
   );
 
   return buildPageMetadata({
-    title: 'Track Your Studio Order',
+    title: 'Track Your Order',
     description:
       'Check live small-batch preparation, PIN-zone courier dispatch, and AWB tracking milestones for your Mehandi by Sana organic henna order.',
     canonicalPath: '/track-order',
@@ -164,17 +164,17 @@ export default async function TrackOrderPage({ searchParams }: TrackOrderPagePro
                   className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                 />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  06 &middot; Studio Dispatch &amp; Tracking
+                  06 &middot; Batch Dispatch &amp; Tracking
                 </p>
               </div>
               <h1
                 id="track-order-heading"
                 className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
               >
-                Track your studio parcel
+                Track your parcel
               </h1>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Enter your order reference and email address to view real-time small-batch preparation, PIN zone courier routing, and dispatch milestones from our Srinagar &amp; Bangalore studios.
+                Enter your order reference and email address to view real-time small-batch preparation, PIN zone courier routing, and dispatch milestones from Srinagar &amp; Bangalore.
               </p>
             </div>
 

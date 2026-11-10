@@ -51,7 +51,7 @@ export default function RefundPolicyPage() {
           Overview &amp; Perishable Botanical Standard
         </h2>
         <p className="text-umber">
-          Every Mehandi by Sana order is mixed and packed to order at our Srinagar (Baghat Barzullah) and Bangalore studios without chemical stabilizers. For strict personal hygiene, botanical potency, and food-grade safety standards,{' '}
+          Every Mehandi by Sana order is mixed and packed to order in small batches across Srinagar (Baghat Barzullah) and Bangalore without chemical stabilizers. For strict personal hygiene, botanical potency, and food-grade safety standards,{' '}
           <strong>fresh organic henna cones, prepared paste, opened essential oils, and open balms cannot be accepted back once delivered</strong>, except in cases where your parcel arrived damaged, leaked, tampered, incomplete, or incorrect.
         </p>
       </section>
@@ -135,7 +135,7 @@ export default function RefundPolicyPage() {
             with subject <code>Claim: Your Order Number (MBS-...)</code>.
           </li>
           <li>
-            Our coordinator reviews claims within 24 business hours and schedules either same-day fresh replacement dispatch or refund initiation.
+            Sana reviews claims within 24 business hours and schedules either same-day fresh replacement dispatch or refund initiation.
           </li>
         </ol>
       </section>
@@ -150,10 +150,10 @@ export default function RefundPolicyPage() {
         </h2>
         <p className="text-umber">
           Non-perishable items—including sealed pre-cut cellophane sheet packs, unused digital micro scales, stainless steel measuring spoons, acrylic practice hands, and unused mixing bowls—may be requested for return or exchange within{' '}
-          <strong>7 days of delivery</strong> provided all tags, safety seals, and original studio packaging remain intact and unused.
+          <strong>7 days of delivery</strong> provided all tags, safety seals, and original packaging remain intact and unused.
         </p>
         <p className="text-umber">
-          For voluntary returns (change of mind rather than studio defect or transit damage), return courier charges are borne by the customer, and original shipping fees paid at checkout are non-refundable.
+          For voluntary returns (change of mind rather than fulfillment defect or transit damage), return courier charges are borne by the customer, and original shipping fees paid at checkout are non-refundable.
         </p>
       </section>
 
@@ -238,7 +238,7 @@ export default function RefundPolicyPage() {
           Undelivered Parcels &amp; Return-to-Origin (RTO)
         </h2>
         <p className="text-umber">
-          If a prepaid order is returned to our studio as Undelivered / RTO because the recipient refused delivery, entered an incomplete address, or failed to answer repeated courier calls, reshipping incurs a fresh delivery charge. If a customer requests a refund instead of reshipment on an RTO parcel, two-way courier costs and spoilt custom-mixed fresh cone value (where applicable) may be deducted from the refund.
+          If a prepaid order is returned as Undelivered / RTO because the recipient refused delivery, entered an incomplete address, or failed to answer repeated courier calls, reshipping incurs a fresh delivery charge. If a customer requests a refund instead of reshipment on an RTO parcel, two-way courier costs and spoilt custom-mixed fresh cone value (where applicable) may be deducted from the refund.
         </p>
       </section>
 
@@ -255,13 +255,13 @@ export default function RefundPolicyPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Rescheduling (14+ Days Notice):</strong> One complimentary date transfer within 6 months, subject to studio calendar availability.
+            <strong>Rescheduling (14+ Days Notice):</strong> One complimentary date transfer within 6 months, subject to calendar availability.
           </li>
           <li>
             <strong>Client Cancellation:</strong> Retainer deposits are non-refundable for cancellations within 14 days of the event date unless a verified force-majeure reschedule is mutually agreed.
           </li>
           <li>
-            <strong>Studio Cancellation:</strong> In the rare case our studio cannot fulfill a confirmed date due to emergency, 100% of any advance paid is refunded within 3 business days.
+            <strong>Artist Cancellation:</strong> In the rare case Sana cannot fulfill a confirmed date due to emergency, 100% of any advance paid is refunded within 3 business days.
           </li>
         </ul>
         <div className="pt-3 flex flex-wrap gap-3">

@@ -15,15 +15,15 @@ import {
 } from '@/components/graphics/BotanicalIllustrations';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Bridal Mehndi Services, Events & Masterclasses',
+  title: 'Bridal Mehandi Services, Events & Masterclasses',
   description:
-    'Book 100% PPD-free bridal mehndi, engagement celebration henna, custom bulk cones, and 15-day Mehandi Masterclasses across Srinagar & Bangalore with Sana.',
+    'Book 100% PPD-free bridal mehandi, engagement celebration henna, custom bulk cones, and 15-day Mehandi Masterclasses across Srinagar & Bangalore with Sana.',
   canonicalPath: '/services',
   keywords: [
-    'bridal mehndi Srinagar',
-    'bridal mehndi Bangalore',
+    'bridal mehandi Srinagar',
+    'bridal mehandi Bangalore',
     'organic henna artist booking',
-    'Kashmiri bridal mehndi',
+    'Kashmiri bridal mehandi',
     'Mehandi Masterclass India',
     'custom bulk organic henna cones',
   ],
@@ -48,7 +48,7 @@ const SERVICE_TIERS: ServicePackage[] = [
     motif: 'bridal',
     featured: true,
     eyebrow: '01 · Signature',
-    title: 'Bridal Mehndi',
+    title: 'Bridal Mehandi',
     summary:
       'From Intimate Bridal forearms and feet mandalas to Royal Kashmiri full-elbow coverage with Mughal archways, peacocks, and personalized bride & groom initials.',
     ratePlaceholder: '3–8 hrs · Custom quote by coverage',
@@ -65,10 +65,10 @@ const SERVICE_TIERS: ServicePackage[] = [
     eyebrow: '02 · Gatherings',
     title: 'Events & Celebrations',
     summary:
-      'Engagement ceremonies, Eid festivities, family celebrations, and bridal troupe bookings (bride plus up to 10 family members) at your home or venue.',
+      'Engagement ceremonies, Eid festivities, and intimate family celebrations across Srinagar, Bangalore, and destination venues—at your home or event venue.',
     ratePlaceholder: 'Srinagar, Bangalore & destination',
     includes: [
-      'Solo artist or Sana + assistant artists for larger guest lists',
+      'Sana personally (with independent guest artists arranged on request)',
       'Kashmiri Chinar, floral lotus, Arabic vine, or minimalist cuffs',
       'Fresh botanical paste formulated with soothing lavender & eucalyptus',
     ],
@@ -77,7 +77,7 @@ const SERVICE_TIERS: ServicePackage[] = [
     id: 'botanical',
     slug: 'botanical',
     motif: 'botanical',
-    eyebrow: '03 · Studio & Training',
+    eyebrow: '03 · Batches & Training',
     title: 'Custom Batches & Workshops',
     summary:
       'Freshly rolled bulk cone orders for wedding favors and events, alongside our 15-day Mehandi Masterclass covering paste chemistry, cone rolling, and fine linework.',
@@ -103,7 +103,7 @@ const CONSULTATION_STEPS = [
     step: 'Step 02',
     title: 'Design & Availability Review',
     detail:
-      'Sana and our studio coordinator respond within 24 hours to confirm calendar availability, share tailored package rates, and plan bespoke motifs.',
+      'Sana personally responds within 24 hours to confirm calendar availability, share tailored package rates, and plan bespoke motifs.',
   },
   {
     num: '03',
@@ -174,7 +174,7 @@ export default function ServicesPage() {
 
             <div className="lg:col-span-5 space-y-5">
               <p className="text-sm md:text-base text-umber leading-relaxed">
-                Operating from our studios in Srinagar (Baghat Barzullah) and Bangalore, we serve brides and celebrations across India and destination venues using exclusively 100% organic, PPD-free henna paste.
+                Working independently as a freelance artist across Srinagar (Baghat Barzullah) and Bangalore, Sana travels for brides and celebrations across India and destination venues using exclusively 100% organic, PPD-free henna paste.
               </p>
               <LinkButton
                 href="/contact"
@@ -202,7 +202,7 @@ export default function ServicesPage() {
             id="offerings-heading"
             className="font-serif text-3xl md:text-4xl font-medium text-ink"
           >
-            Appointments &amp; Studio Packages
+            Appointments &amp; Packages
           </h2>
         </div>
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Mehandi by Sana Atelier — Homepage Template (9-Section Editorial Experience)
+ * Mehandi by Sana — Homepage Template (9-Section Editorial Experience)
  *
  * @package MehandiBySana
  */
@@ -36,7 +36,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 
 			<div class="mbs-hero-actions reveal-fade-block">
 				<a href="<?php echo esc_url( mbs_get_shop_url() ); ?>" class="mbs-btn mbs-btn-primary mbs-btn-lg">
-					<?php esc_html_e( 'Browse Atelier Shop →', 'mehandibysana' ); ?>
+					<?php esc_html_e( 'Browse Shop →', 'mehandibysana' ); ?>
 				</a>
 				<a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'services', '/services/' ) ); ?>" class="mbs-btn mbs-btn-secondary mbs-btn-lg">
 					<?php esc_html_e( 'Book Bridal Dates', 'mehandibysana' ); ?>
@@ -53,7 +53,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 					<dt><?php esc_html_e( 'Chemical & PPD Free', 'mehandibysana' ); ?></dt>
 				</div>
 				<div>
-					<dd>2018</dd>
+					<dd>2019</dd>
 					<dt><?php esc_html_e( 'Founded in Srinagar', 'mehandibysana' ); ?></dt>
 				</div>
 			</dl>
@@ -68,7 +68,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 					<?php echo mbs_svg_hero_composition(); ?>
 				<?php endif; ?>
 			</div>
-			<span class="mbs-plate-stamp">ATELIER PLATE N&deg; 01</span>
+			<span class="mbs-plate-stamp">BOTANICAL PLATE N&deg; 01</span>
 			<div class="mbs-arch-badge">0.38MM FINE BRIDAL TIP</div>
 		</div>
 	</div>
@@ -87,7 +87,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 	<div class="editorial-container mbs-sticky-grid">
 		<div class="mbs-sticky-col reveal-fade-block">
 			<span class="eyebrow"><?php esc_html_e( 'Commissions & Artistry', 'mehandibysana' ); ?></span>
-			<h2 class="mbs-section-title"><?php esc_html_e( 'Intricate Ceremonial Mehndi', 'mehandibysana' ); ?></h2>
+			<h2 class="mbs-section-title"><?php esc_html_e( 'Intricate Ceremonial Mehandi', 'mehandibysana' ); ?></h2>
 			<p style="margin-top:1rem;color:var(--color-text-muted);line-height:1.68;">
 				<?php esc_html_e( 'From full-arm Kashmiri bridal mandalas woven with Chinar silhouettes and Mughal arches to intimate sangeet gatherings prepared with freshly thawed organic cones.', 'mehandibysana' ); ?>
 			</p>
@@ -104,9 +104,9 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 				array(
 					'num'   => '01',
 					'motif' => 'bridal',
-					'title' => __( 'Bridal Mehndi Commissions', 'mehandibysana' ),
-					'price' => __( 'Custom Quote · Srinagar & Destination', 'mehandibysana' ),
-					'desc'  => __( 'Signature full-arm, palm, and feet compositions crafted by Sumaiya Rashid Magray using 0.38mm ultra-fine organic bridal cones.', 'mehandibysana' ),
+					'title' => __( 'Bridal Mehandi Commissions', 'mehandibysana' ),
+					'price' => __( 'Custom Quote · Srinagar, Bangalore & Destination', 'mehandibysana' ),
+					'desc'  => __( 'Signature full-arm, palm, and feet compositions personally crafted by Sumaiya Rashid Magray using 0.38mm ultra-fine organic bridal cones.', 'mehandibysana' ),
 					'items' => array(
 						__( 'Personalized bride & groom initials', 'mehandibysana' ),
 						__( 'Pre-ceremony skin test & consultation', 'mehandibysana' ),
@@ -119,10 +119,10 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 					'motif' => 'events',
 					'title' => __( 'Engagement, Eid & Sangeet Gatherings', 'mehandibysana' ),
 					'price' => __( 'Group Bookings · Hourly or Per-Hand', 'mehandibysana' ),
-					'desc'  => __( 'Dedicated studio team applying modern botanical trails, mandala palms, and hathphool cuffs for family ceremonies and festive celebrations.', 'mehandibysana' ),
+					'desc'  => __( 'Personally applied by Sana (with independent guest artists arranged on request), rendering modern botanical trails, mandala palms, and hathphool cuffs.', 'mehandibysana' ),
 					'items' => array(
 						__( 'Fresh batch cones included per guest', 'mehandibysana' ),
-						__( '2–4 trained studio artists available', 'mehandibysana' ),
+						__( 'Guest artists arranged on request for large groups', 'mehandibysana' ),
 						__( 'Swift contemporary motifs', 'mehandibysana' ),
 						__( 'Chemical-free & safe for children', 'mehandibysana' ),
 					),
@@ -131,13 +131,13 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 					'num'   => '03',
 					'motif' => 'botanical',
 					'title' => __( 'Private Formulations & Artist Workshops', 'mehandibysana' ),
-					'price' => __( 'Studio Atelier · Small Batches', 'mehandibysana' ),
-					'desc'  => __( 'Hands-on training in paste rheology, cellophane rolling, and custom bulk bridal cone dispatches for independent mehndi artists.', 'mehandibysana' ),
+					'price' => __( 'Small Groups · Custom Availability', 'mehandibysana' ),
+					'desc'  => __( 'Hands-on training in paste rheology, cellophane rolling, and custom bulk bridal cone dispatches for independent mehandi artists.', 'mehandibysana' ),
 					'items' => array(
 						__( 'Sojat leaf sifting & EO ratios', 'mehandibysana' ),
 						__( '0.35mm–0.45mm cellophane pinning', 'mehandibysana' ),
 						__( 'Wholesale salon cold-chain dispatch', 'mehandibysana' ),
-						__( 'Certificate & studio formulation guide', 'mehandibysana' ),
+						__( 'Certificate & paste formulation guide', 'mehandibysana' ),
 					),
 				),
 			);
@@ -177,7 +177,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 			<span class="eyebrow"><?php esc_html_e( 'The Founder & Craft · Srinagar', 'mehandibysana' ); ?></span>
 			<h2 class="mbs-section-title"><?php esc_html_e( 'Pure Lawsone Leaf. Zero Compromise.', 'mehandibysana' ); ?></h2>
 			<p style="margin-top:1rem;color:var(--color-text-muted);line-height:1.68;">
-				<?php esc_html_e( 'Founded in 2018 by Sumaiya Rashid Magray (popularly known as Sana), Mehandi by Sana began in Srinagar with one uncompromising conviction: brides deserve deeply dark mahogany stains without exposing skin to synthetic dyes, kerosene, or chemical accelerators.', 'mehandibysana' ); ?>
+				<?php esc_html_e( 'Founded in 2019 by Sumaiya Rashid Magray (popularly known as Sana), Mehandi by Sana began in Srinagar as Kashmir’s first independent organic henna practice—working as a freelance artist today (with hopes of opening a dedicated studio someday)—with one conviction: brides deserve deeply dark mahogany stains without exposing skin to synthetic dyes, kerosene, or chemical accelerators.', 'mehandibysana' ); ?>
 			</p>
 
 			<blockquote class="mbs-pullquote">
@@ -196,7 +196,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 		<div class="mbs-arch-wrap reveal-fade-block">
 			<div class="mbs-arch-frame" style="background:var(--color-bg);">
 				<?php if ( $founder_img_override ) : ?>
-					<img src="<?php echo esc_url( $founder_img_override ); ?>" alt="<?php esc_attr_e( 'Sumaiya Rashid Magray — Mehandi by Sana Atelier Founder', 'mehandibysana' ); ?>" />
+					<img src="<?php echo esc_url( $founder_img_override ); ?>" alt="<?php esc_attr_e( 'Sumaiya Rashid Magray — Mehandi by Sana Founder & Organic Mehandi Artist', 'mehandibysana' ); ?>" />
 				<?php else : ?>
 					<?php echo mbs_svg_sana_portrait(); ?>
 				<?php endif; ?>
@@ -211,7 +211,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 	<div class="editorial-container">
 		<div class="mbs-section-header reveal-fade-block">
 			<div>
-				<span class="eyebrow"><?php esc_html_e( 'Exhibition Plates · 2018–2026', 'mehandibysana' ); ?></span>
+				<span class="eyebrow"><?php esc_html_e( 'Exhibition Plates · 2019–2026', 'mehandibysana' ); ?></span>
 				<h2 class="mbs-section-title"><?php esc_html_e( 'Curated Stain & Bridal Archive', 'mehandibysana' ); ?></h2>
 			</div>
 			<a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'gallery', '/gallery/' ) ); ?>" class="mbs-btn mbs-btn-secondary">
@@ -307,7 +307,7 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 			<div class="mbs-quotes-stack">
 				<article class="mbs-quote-paper reveal-fade-block">
 					<p style="font-size:1.02rem;line-height:1.65;color:var(--color-ink);">
-						<?php esc_html_e( '“As a working mehndi artist in New Delhi, switching to Mehandi by Sana’s 0.38mm pre-rolled batch elevated my hairline work immediately. Consistent paste viscosity every single box.”', 'mehandibysana' ); ?>
+						<?php esc_html_e( '“As a working mehandi artist in New Delhi, switching to Mehandi by Sana’s 0.38mm pre-rolled batch elevated my hairline work immediately. Consistent paste viscosity every single box.”', 'mehandibysana' ); ?>
 					</p>
 					<div style="margin-top:1rem;font-size:0.825rem;color:var(--color-text-muted);">
 						<strong style="color:var(--color-ink);">Meenakshi Sharma</strong> &middot; Bridal Artist, South Delhi
@@ -335,12 +335,12 @@ $row2_plates = array_slice( $gallery_plates, 3, 3 );
 				<?php esc_html_e( 'Experience Pure Botanical Stain Chemistry', 'mehandibysana' ); ?>
 			</h2>
 			<p style="margin-top:0.85rem;color:rgba(252,238,227,0.74);font-size:0.975rem;line-height:1.65;">
-				<?php esc_html_e( 'Order fresh organic cones rolled this morning or reserve your bridal ceremony dates with our Srinagar studio.', 'mehandibysana' ); ?>
+				<?php esc_html_e( 'Order fresh organic cones rolled this morning or reserve your bridal ceremony dates directly with Sana.', 'mehandibysana' ); ?>
 			</p>
 		</div>
 		<div style="display:flex;flex-wrap:wrap;gap:0.85rem;">
 			<a href="<?php echo esc_url( mbs_get_shop_url() ); ?>" class="mbs-btn mbs-btn-primary mbs-btn-lg">
-				<?php esc_html_e( 'Visit Atelier Shop →', 'mehandibysana' ); ?>
+				<?php esc_html_e( 'Visit Apothecary Shop →', 'mehandibysana' ); ?>
 			</a>
 			<a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'contact', '/contact/' ) ); ?>" class="mbs-btn mbs-btn-inverse-outline mbs-btn-lg">
 				<?php esc_html_e( 'Inquire for Bridal Dates', 'mehandibysana' ); ?>

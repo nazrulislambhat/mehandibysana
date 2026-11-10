@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce Cart Override — 2-Column Atelier Ledger & Ink Black Summary Dossier
+ * WooCommerce Cart Override — 2-Column Bag Ledger & Ink Black Summary Dossier
  *
  * @package MehandiBySana
  */
@@ -13,12 +13,12 @@ if ( WC()->cart->is_empty() ) :
 	?>
 	<div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:3.5rem 1.5rem;text-align:center;max-width:40rem;margin:0 auto;">
 		<div style="display:flex;justify-content:center;margin-bottom:1.25rem;"><?php echo mbs_svg_empty_cart(); ?></div>
-		<h2 style="font-size:2rem;"><?php esc_html_e( 'Your Atelier Bag Is Currently Empty', 'mehandibysana' ); ?></h2>
+		<h2 style="font-size:2rem;"><?php esc_html_e( 'Your Shopping Bag Is Currently Empty', 'mehandibysana' ); ?></h2>
 		<p style="margin:0.75rem auto 1.75rem;color:var(--color-text-muted);max-width:28rem;">
 			<?php esc_html_e( 'Explore our daily batches of freshly hand-rolled Sojat organic cones, hair henna powder, and essential aftercare oils.', 'mehandibysana' ); ?>
 		</p>
 		<a href="<?php echo esc_url( mbs_get_shop_url() ); ?>" class="mbs-btn mbs-btn-primary">
-			<?php esc_html_e( 'Explore Atelier Shop →', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Explore Apothecary Shop →', 'mehandibysana' ); ?>
 		</a>
 	</div>
 	<?php

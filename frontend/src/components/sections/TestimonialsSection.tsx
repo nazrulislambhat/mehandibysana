@@ -80,7 +80,7 @@ export function TestimonialsSection({ reviews = [] }: TestimonialsSectionProps) 
                 className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
               />
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                {hasLiveReviews ? 'Verified Customer Reviews' : 'Press & Studio Ethos'}
+                {hasLiveReviews ? 'Verified Customer Reviews' : 'Press & Craft Ethos'}
               </p>
             </div>
           </TextReveal>

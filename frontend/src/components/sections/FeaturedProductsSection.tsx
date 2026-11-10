@@ -130,7 +130,7 @@ export function FeaturedProductsSection({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-y border-hairline py-3.5">
         <div
           role="tablist"
-          aria-label="Filter featured studio showcase"
+          aria-label="Filter featured product showcase"
           className="inline-flex max-w-full overflow-x-auto whitespace-nowrap items-center gap-1 rounded-full border border-divider/80 bg-canvas p-1 self-start"
         >
           {(
@@ -191,7 +191,7 @@ export function FeaturedProductsSection({
               <div className="inline-flex items-center gap-2">
                 <span className="font-serif text-xs italic text-terracotta">No. 01</span>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
-                  Atelier Spotlight
+                  Signature Spotlight
                 </span>
               </div>
 
@@ -224,7 +224,7 @@ export function FeaturedProductsSection({
                 <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center bg-canvas text-ink">
                   <ServiceMotifIcon variant="botanical" className="w-12 h-12 mb-2.5" />
                   <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
-                    {leadProduct.categories[0]?.name || 'Atelier Tool'}
+                    {leadProduct.categories[0]?.name || 'Botanical Tool'}
                   </span>
                   <span className="font-serif text-lg text-ink mt-1">
                     {leadProduct.name}
@@ -256,7 +256,7 @@ export function FeaturedProductsSection({
           <div className="pt-5 mt-6 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-4">
             <div>
               <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-plaque-ink/55">
-                Studio Price
+                Price
               </span>
               <span className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink tabular-nums">
                 {formatPriceRange(leadProduct)}
@@ -341,7 +341,7 @@ export function FeaturedProductsSection({
                       <div className="h-full w-full flex flex-col items-center justify-center p-4 text-center bg-canvas">
                         <BotanicalSprig className="mb-2" />
                         <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-umber">
-                          {product.variations[0]?.attributes[0]?.value || 'Studio Supply'}
+                          {product.variations[0]?.attributes[0]?.value || 'Artist Supply'}
                         </span>
                       </div>
                     )}

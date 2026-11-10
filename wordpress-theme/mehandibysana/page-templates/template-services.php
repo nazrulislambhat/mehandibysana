@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — Services & Commissions
+ * Template Name: Mehandi by Sana — Services & Commissions
  *
  * @package MehandiBySana
  */
@@ -15,10 +15,10 @@ get_header();
 	<div class="editorial-container">
 		<span class="eyebrow"><?php esc_html_e( 'Bespoke Srinagar & Destination Artistry', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.35rem,4.4vw,3.35rem);margin-top:0.5rem;">
-			<?php esc_html_e( 'Bridal & Ceremonial Mehndi Commissions', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Bridal & Ceremonial Mehandi Commissions', 'mehandibysana' ); ?>
 		</h1>
 		<p style="margin-top:0.85rem;max-width:40rem;color:var(--color-text-muted);font-size:1.02rem;line-height:1.68;">
-			<?php esc_html_e( 'Every appointment uses fresh, hand-rolled 0.38mm organic cones blended 24 hours prior in our Baghat Barzullah studio—guaranteeing serene aroma and deep 48-hour mahogany stains.', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Every on-location appointment uses fresh, hand-rolled 0.38mm organic cones blended 24 hours prior by Sana in Baghat Barzullah, Srinagar—guaranteeing serene aroma and deep 48-hour mahogany stains.', 'mehandibysana' ); ?>
 		</p>
 	</div>
 </header>
@@ -46,9 +46,9 @@ get_header();
 					'motif' => 'events',
 					'title' => __( 'Bridal Sisters, Sangeet & Eid', 'mehandibysana' ),
 					'tag'   => __( 'Hourly / Per-Hand', 'mehandibysana' ),
-					'desc'  => __( 'Studio team of trained organic artists rendering contemporary vines, finger caps, hathphool cuffs, and sun medallions cleanly across guests.', 'mehandibysana' ),
+					'desc'  => __( 'Personally applied by Sana (with independent guest artists arranged on request) rendering contemporary vines, finger caps, hathphool cuffs, and sun medallions cleanly across guests.', 'mehandibysana' ),
 					'specs' => array(
-						__( '2–5 dedicated artists on venue', 'mehandibysana' ),
+						__( 'Independent guest artists arranged on request', 'mehandibysana' ),
 						__( '100% skin-safe for children & elders', 'mehandibysana' ),
 						__( 'Zero stain transfer after flaking', 'mehandibysana' ),
 						__( 'Flexible evening or morning slots', 'mehandibysana' ),
@@ -64,7 +64,7 @@ get_header();
 						__( 'Triple-sifted Sojat henna formulation', 'mehandibysana' ),
 						__( 'Precision 0.35mm–0.45mm cone rolling', 'mehandibysana' ),
 						__( 'Salon wholesale pricing tiers', 'mehandibysana' ),
-						__( 'Studio reference handbook included', 'mehandibysana' ),
+						__( 'Botanical formulation handbook included', 'mehandibysana' ),
 					),
 				),
 			);

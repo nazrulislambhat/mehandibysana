@@ -124,7 +124,7 @@ export default function OpenGraphImage() {
                   color: '#525252',
                 }}
               >
-                Srinagar &amp; Bangalore &middot; Est. 2020
+                Srinagar &amp; Bangalore &middot; Est. 2019
               </div>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function OpenGraphImage() {
                 fontFamily: 'sans-serif',
               }}
             >
-              Small-batch 0.38mm Sojat henna cones, aftercare oils, and heirloom bridal mehndi across India.
+              Small-batch 0.38mm Sojat henna cones, aftercare oils, and heirloom bridal mehandi across India.
             </div>
           </div>
 
@@ -193,7 +193,7 @@ export default function OpenGraphImage() {
               fontWeight: 600,
             }}
           >
-            Atelier &amp; Apothecary
+            Artist &amp; Apothecary
           </div>
         </div>
       </div>

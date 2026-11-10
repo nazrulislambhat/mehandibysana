@@ -179,13 +179,13 @@ export function CourierDispatchIcon({
 }
 
 /**
- * Botanical studio location pin with warm terracotta core.
+ * Botanical location pin with warm terracotta core.
  */
 export function LocationPinIcon({
   size = 18,
   className = '',
   decorative = true,
-  label = 'Studio location',
+  label = 'Location pin',
 }: BrandIconProps) {
   return (
     <svg
@@ -426,13 +426,13 @@ export function PureBotanicalIcon({
 }
 
 /**
- * Mughal arch + lotus finial crown icon for Bridal Mehndi Sessions.
+ * Mughal arch + lotus finial crown icon for Bridal Mehandi Sessions.
  */
 export function BridalArchIcon({
   size = 18,
   className = '',
   decorative = true,
-  label = 'Bridal mehndi session',
+  label = 'Bridal mehandi session',
 }: BrandIconProps) {
   return (
     <svg

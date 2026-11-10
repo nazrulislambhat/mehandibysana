@@ -13,7 +13,7 @@ get_header();
 ?>
 <header class="mbs-masthead">
 	<div class="editorial-container">
-		<span class="eyebrow"><?php esc_html_e( 'Atelier Journal & Archive', 'mehandibysana' ); ?></span>
+		<span class="eyebrow"><?php esc_html_e( 'Journal & Archive', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.25rem,4vw,3.15rem);margin-top:0.5rem;">
 			<?php echo esc_html( is_archive() ? get_the_archive_title() : get_bloginfo( 'name' ) ); ?>
 		</h1>

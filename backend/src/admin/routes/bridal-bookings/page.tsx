@@ -98,7 +98,7 @@ const BridalBookingsAdminPage = () => {
         <div>
           <Heading level="h1">Bridal &amp; Event Bookings</Heading>
           <Text size="small" className="text-ui-fg-subtle mt-1">
-            Review date inquiries submitted from mehandibysana.com/contact, record advance deposits, and confirm studio dates.
+            Review date inquiries submitted from mehandibysana.com/contact, record advance deposits, and confirm appointment dates.
           </Text>
         </div>
 
@@ -119,7 +119,7 @@ const BridalBookingsAdminPage = () => {
       <div className="p-6">
         {loading ? (
           <Text size="small" className="text-ui-fg-subtle">
-            Loading studio inquiries…
+            Loading booking inquiries…
           </Text>
         ) : filtered.length === 0 ? (
           <div className="rounded-lg border border-dashed p-8 text-center">

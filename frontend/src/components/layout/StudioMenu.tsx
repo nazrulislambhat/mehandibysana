@@ -136,7 +136,7 @@ export function StudioMenu() {
             id="studio-navigation-drawer"
             role="dialog"
             aria-modal="true"
-            aria-label="Mehandi by Sana studio menu"
+            aria-label="Mehandi by Sana navigation menu"
             className="fixed inset-0 z-50 flex flex-col"
           >
             {/* Backdrop scrim with smooth open/close fade */}
@@ -174,7 +174,7 @@ export function StudioMenu() {
                     </Link>
                     <span className="hidden sm:inline-flex items-center gap-2 rounded-full border border-hairline bg-linen/80 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-umber">
                       <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
-                      Studio Index
+                      Navigation Index
                     </span>
                   </div>
 
@@ -182,7 +182,7 @@ export function StudioMenu() {
                     ref={closeButtonRef}
                     type="button"
                     onClick={() => closeMenu(true)}
-                    aria-label="Close studio menu"
+                    aria-label="Close navigation menu"
                     className="inline-flex items-center gap-2.5 min-h-[44px] px-4 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:bg-linen hover:border-ink cursor-pointer"
                   >
                     <span>Close</span>
@@ -196,7 +196,7 @@ export function StudioMenu() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-8 lg:gap-12 items-start">
                   {/* Left Column: Staggered Masked Serif Navigation */}
                   <nav
-                    aria-label="Studio chapters"
+                    aria-label="Site chapters"
                     className="lg:col-span-7 flex flex-col divide-y divide-hairline/70 border-y border-hairline/70"
                   >
                     {STUDIO_NAV_ITEMS.map((item, idx) => {
@@ -323,7 +323,7 @@ export function StudioMenu() {
                       </div>
                     </div>
 
-                    {/* Primary Studio Actions */}
+                    {/* Primary Navigation Actions */}
                     <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                       <LinkButton
                         href="/shop"
@@ -341,7 +341,7 @@ export function StudioMenu() {
                         onClick={() => closeMenu(false)}
                         className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6"
                       >
-                        Book Mehndi
+                        Book Mehandi
                       </LinkButton>
                     </div>
                   </div>
@@ -378,7 +378,7 @@ export function StudioMenu() {
         type="button"
         aria-expanded={isExpanded}
         aria-controls="studio-navigation-drawer"
-        aria-label={isExpanded ? 'Close studio menu' : 'Open studio menu'}
+        aria-label={isExpanded ? 'Close navigation menu' : 'Open navigation menu'}
         onClick={() => {
           if (isExpanded) {
             closeMenu(false);

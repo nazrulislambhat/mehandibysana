@@ -39,7 +39,7 @@ export const RELATED_HENNA_SUPPLIES = [
     short_description:
       'Crystal-clear, tear-resistant BOPP cellophane triangles pre-cut for rolling smooth, leak-free 0.38mm fine-tip henna cones.',
     description:
-      '<p>Pre-cut high-clarity BOPP cellophane sheets sized specifically for hand-rolling precision mehndi cones. Flexible enough for effortless rolling without crinkling, yet sturdy enough to hold firm pressure during detailed bridal linework.</p><ul><li>Pack of 100 pre-cut sheets</li><li>Ideal for rolling ultra-fine 0.35mm–0.45mm tips</li><li>Smooth, non-reactive film safe for essential-oil henna paste</li></ul>',
+      '<p>Pre-cut high-clarity BOPP cellophane sheets sized specifically for hand-rolling precision mehandi cones. Flexible enough for effortless rolling without crinkling, yet sturdy enough to hold firm pressure during detailed bridal linework.</p><ul><li>Pack of 100 pre-cut sheets</li><li>Ideal for rolling ultra-fine 0.35mm–0.45mm tips</li><li>Smooth, non-reactive film safe for essential-oil henna paste</li></ul>',
   },
   {
     name: 'Stainless Steel Henna Measuring Spoons Set (6 Piece)',
@@ -107,8 +107,8 @@ export const RELATED_HENNA_SUPPLIES = [
       '<p>Dry-sift raw henna powder or strain rested paste for a velvety, stringy consistency that glides effortlessly through ultra-fine bridal cones.</p><ul><li>Micro-fine weave traps leaf fibers and coarse particles</li><li>Washable and reusable across multiple batches</li><li>Essential for smooth bridal lace and shading work</li></ul>',
   },
   {
-    name: 'Reusable Acrylic Mehndi Practice Hand Board',
-    slug: 'reusable-acrylic-mehndi-practice-hand-board',
+    name: 'Reusable Acrylic Mehandi Practice Hand Board',
+    slug: 'reusable-acrylic-mehandi-practice-hand-board',
     type: 'simple',
     regular_price: '260',
     manage_stock: true,

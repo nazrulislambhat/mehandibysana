@@ -49,7 +49,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         referenceId: "BATCH-LIST",
         skipAdminAlert: true,
         summary: [
-          "Thank you for joining the Mehandi by Sana Studio Dispatch List (Srinagar & Bangalore).",
+          "Thank you for joining the Mehandi by Sana Dispatch List (Srinagar & Bangalore).",
           "You will receive early notifications when fresh small-batch organic Sojat henna cones are freshly rolled, along with seasonal Eid & bridal booking dates.",
         ].join("\n\n"),
         details: {

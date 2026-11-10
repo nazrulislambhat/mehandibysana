@@ -35,7 +35,7 @@ export default function ShippingPolicyPage() {
     <PolicyDocumentLayout
       eyebrow="Logistics & Dispatch"
       title="Shipping & Delivery Policy"
-      subtitle="Every cone batch is mixed fresh across our Srinagar & Bangalore studios and routed nationwide by PIN zone for rapid transit."
+      subtitle="Every cone batch is mixed fresh across Srinagar & Bangalore and routed nationwide by PIN zone for rapid transit."
       effectiveDate="November 10, 2026"
       documentCode="MBS-SP-2026"
       activeSlug="shipping"
@@ -53,8 +53,8 @@ export default function ShippingPolicyPage() {
           Small-Batch Rolling &amp; Dispatch Schedule
         </h2>
         <p className="text-umber">
-          Unlike warehouse stock sitting on shelves for months, our organic henna cones are prepared fresh across our{' '}
-          <strong>Srinagar (Baghat Barzullah) &amp; Bangalore</strong> studios.
+          Unlike warehouse stock sitting on shelves for months, our organic henna cones are prepared fresh in small batches across{' '}
+          <strong>Srinagar (Baghat Barzullah) &amp; Bangalore</strong>.
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
@@ -62,7 +62,7 @@ export default function ShippingPolicyPage() {
             <strong>1–2 business days</strong> after order confirmation so cones arrive at peak dye-release vitality.
           </li>
           <li>
-            <strong>Sealed Oils, Powders &amp; Studio Tools:</strong> Usually packed and handed over within{' '}
+            <strong>Sealed Oils, Powders &amp; Artist Tools:</strong> Usually packed and handed over within{' '}
             <strong>24 business hours</strong> (Monday–Saturday).
           </li>
           <li>
@@ -96,7 +96,7 @@ export default function ShippingPolicyPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Srinagar &amp; Bangalore Studio Metro Zones:</strong> Priority 1–2 business day dispatch across local city hubs.
+            <strong>Srinagar &amp; Bangalore Metro Zones:</strong> Priority 1–2 business day dispatch across local city hubs.
           </li>
           <li>
             <strong>Pan-India Express Coverage:</strong> 3–6 business days via air cargo and India Post Speed Post across serviceable PIN codes nationwide.
@@ -125,7 +125,7 @@ export default function ShippingPolicyPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Local Dispatch Hubs (Srinagar &amp; Bangalore):</strong> Priority local studio dispatch for orders across Srinagar and Bengaluru metro zones.
+            <strong>Local Dispatch Hubs (Srinagar &amp; Bangalore):</strong> Priority local dispatch for orders across Srinagar and Bengaluru metro zones.
           </li>
           <li>
             <strong>Metro &amp; Pan-India:</strong> DTDC Air, Delhivery Express, Blue Dart, or India Post Speed Post (for remote hill/defense/rural PINs).
@@ -142,7 +142,7 @@ export default function ShippingPolicyPage() {
           Order Confirmation &amp; Automated Shipment Emails
         </h2>
         <p className="text-umber">
-          Immediately after placing an order, you receive an order confirmation receipt with your studio reference (<code>MBS-...</code>). As soon as our team completes batch rolling and scans your courier AWB label, an automated shipping notification email with your courier name, AWB number, and direct tracking link is dispatched. You can also check live status anytime via our{' '}
+          Immediately after placing an order, you receive an order confirmation receipt with your order reference (<code>MBS-...</code>). As soon as batch rolling completes and your courier AWB label is scanned, an automated shipping notification email with your courier name, AWB number, and direct tracking link is dispatched. You can also check live status anytime via our{' '}
           <Link href="/track-order" className="text-terracotta underline underline-offset-4 font-medium">
             Track Order portal &rarr;
           </Link>

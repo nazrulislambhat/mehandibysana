@@ -1,6 +1,6 @@
 <?php
 /**
- * Mehandi by Sana Atelier — Global Footer + Slide-Over Bag Drawer + wp_footer
+ * Mehandi by Sana — Global Footer + Slide-Over Bag Drawer + wp_footer
  *
  * @package MehandiBySana
  */
@@ -18,11 +18,11 @@ $studio_address = function_exists( 'mbs_get_studio_address' ) ? mbs_get_studio_a
 <footer class="site-footer" role="contentinfo">
 	<div class="editorial-container">
 		<div class="footer-grid">
-			<!-- Col 1: Atelier Identity -->
+			<!-- Col 1: Artist & Brand Identity -->
 			<div>
 				<span class="header-brand-title" style="display:block;"><?php esc_html_e( 'MEHANDI BY SANA', 'mehandibysana' ); ?></span>
 				<p style="margin-top:0.85rem;font-size:0.9rem;color:rgba(252,238,227,0.72);line-height:1.68;max-width:24rem;">
-					<?php esc_html_e( 'Botanical organic henna cones, artisanal Sojat hair leaf powder, and serene bridal artistry crafted fresh in Srinagar since 2018.', 'mehandibysana' ); ?>
+					<?php esc_html_e( 'Botanical organic henna cones, artisanal Sojat hair leaf powder, and serene freelance bridal artistry crafted fresh since 2019.', 'mehandibysana' ); ?>
 				</p>
 				<p style="margin-top:1rem;font-size:0.825rem;color:rgba(252,238,227,0.6);">
 					<?php echo esc_html( $studio_address ); ?>
@@ -45,9 +45,9 @@ $studio_address = function_exists( 'mbs_get_studio_address' ) ? mbs_get_studio_a
 				</ul>
 			</div>
 
-			<!-- Col 3: Atelier -->
+			<!-- Col 3: Artist & Care -->
 			<div>
-				<div class="footer-heading"><?php esc_html_e( 'Studio', 'mehandibysana' ); ?></div>
+				<div class="footer-heading"><?php esc_html_e( 'Artist & Care', 'mehandibysana' ); ?></div>
 				<ul class="footer-links">
 					<li><a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'services', '/services/' ) ); ?>"><?php esc_html_e( 'Bridal Services', 'mehandibysana' ); ?></a></li>
 					<li><a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'gallery', '/gallery/' ) ); ?>"><?php esc_html_e( 'Stain Gallery', 'mehandibysana' ); ?></a></li>
@@ -61,7 +61,7 @@ $studio_address = function_exists( 'mbs_get_studio_address' ) ? mbs_get_studio_a
 				<div class="footer-heading"><?php esc_html_e( 'Orders & Concierge', 'mehandibysana' ); ?></div>
 				<ul class="footer-links">
 					<li><a href="<?php echo esc_url( mbs_get_track_order_url() ); ?>"><?php esc_html_e( 'Track Your Order', 'mehandibysana' ); ?></a></li>
-					<li><a href="<?php echo esc_url( mbs_get_cart_url() ); ?>"><?php esc_html_e( 'Atelier Bag', 'mehandibysana' ); ?></a></li>
+					<li><a href="<?php echo esc_url( mbs_get_cart_url() ); ?>"><?php esc_html_e( 'Shopping Bag', 'mehandibysana' ); ?></a></li>
 					<li><a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $studio_phone ) ); ?>"><?php echo esc_html( $studio_phone ); ?></a></li>
 					<li><a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'terms-conditions', '/terms-conditions/' ) ); ?>"><?php esc_html_e( 'Terms & Conditions', 'mehandibysana' ); ?></a></li>
 					<li><a href="<?php echo esc_url( mbs_get_page_url_by_slug( 'privacy-policy', '/privacy-policy/' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'mehandibysana' ); ?></a></li>
@@ -70,7 +70,7 @@ $studio_address = function_exists( 'mbs_get_studio_address' ) ? mbs_get_studio_a
 		</div>
 
 		<div class="footer-bottom">
-			<div>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php esc_html_e( 'Mehandi by Sana Atelier · Handcrafted in Kashmir.', 'mehandibysana' ); ?></div>
+			<div>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php esc_html_e( 'Mehandi by Sana · Handcrafted in Kashmir.', 'mehandibysana' ); ?></div>
 			<div><?php esc_html_e( '100% Chemical-Free · Zero PPD · Small-Batch Fresh', 'mehandibysana' ); ?></div>
 		</div>
 	</div>

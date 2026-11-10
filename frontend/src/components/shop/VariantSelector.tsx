@@ -339,7 +339,7 @@ export function VariantSelector({
           <span>
             {activeVariation?.sku
               ? `SKU: ${activeVariation.sku}`
-              : 'Direct Studio Inventory · Batch-Synced'}
+              : 'Direct Batch Inventory · Live Synced'}
           </span>
         </span>
         <Link

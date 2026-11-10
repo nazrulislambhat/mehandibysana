@@ -12,12 +12,12 @@ function escapeHtml(text: string): string {
 
 function formatServiceLabel(raw: string): string {
   const map: Record<string, string> = {
-    bridal: "Bridal Mehndi Booking",
+    bridal: "Bridal Mehandi Booking",
     events: "Events & Celebrations",
     botanical: "Custom Bulk Orders / Workshops",
     "order-support": "Existing Store Order Question",
   };
-  return map[raw] || raw || "Bridal Mehndi Booking";
+  return map[raw] || raw || "Bridal Mehandi Booking";
 }
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
@@ -104,7 +104,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       referenceId: booking.referenceId,
       summary: `We have received your ${serviceLabel} inquiry${
         booking.eventDate ? ` for ${booking.eventDate}` : ""
-      }. Sana and our Srinagar & Bangalore coordinator will review availability within 24 hours.`,
+      }. Sana will personally review availability across Srinagar, Bangalore, or destination venues within 24 hours.`,
       detailsHtml,
       details: {
         service: booking.service,

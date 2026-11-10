@@ -6,7 +6,7 @@ import { CartView } from '@/components/cart/CartView';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Shopping Bag',
   description:
-    'Review your selected organic henna cones, aftercare balms, and studio tools, estimate PIN delivery, and apply promo codes before checkout.',
+    'Review your selected organic henna cones, aftercare balms, and preparation tools, estimate PIN delivery, and apply promo codes before checkout.',
   canonicalPath: '/cart',
   robots: {
     index: false,

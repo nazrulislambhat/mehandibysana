@@ -216,7 +216,7 @@ const PincodeShippingPage = () => {
           <div>
             <Label>Zone Name</Label>
             <Input
-              placeholder="Zone 1 — Srinagar Studio Dispatch"
+              placeholder="Zone 1 — Srinagar Local Dispatch"
               value={zone}
               onChange={(e) => setZone(e.target.value)}
             />

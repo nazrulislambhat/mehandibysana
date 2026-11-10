@@ -45,10 +45,10 @@ export function Hero({
 
             <div className="space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8">
               <p>
-                Founded by Sumaiya Rashid Magray (Sana) and operating from Srinagar and Bangalore, Mehandi by Sana is an organic henna studio dedicated to 100% botanical, PPD-free artistry.
+                Founded by independent freelance artist Sumaiya Rashid Magray (Sana) across Srinagar and Bangalore, Mehandi by Sana is dedicated to 100% botanical, PPD-free artistry and small-batch organic formulations.
               </p>
               <p>
-                Book bespoke bridal and celebration mehndi appointments, or order freshly rolled henna cones, essential oils, aftercare balms, and hair henna crafted in small batches.
+                Book bespoke bridal and celebration mehandi appointments, or order freshly rolled henna cones, essential oils, aftercare balms, and hair henna crafted in small batches.
               </p>
             </div>
 
@@ -101,10 +101,10 @@ export function Hero({
                   Years in Practice
                 </dt>
                 <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-terracotta">
-                  5+ Years
+                  7+ Years
                 </dd>
                 <dd className="order-3 text-xs text-umber mt-0.5">
-                  Since 2020 &middot; 0% PPD
+                  Since 2019 &middot; 0% PPD
                 </dd>
               </div>
             </dl>

@@ -218,7 +218,7 @@ export async function createMedusaStoreOrder(
       ? pinEvaluation.matchedRule.label
       : matchedPincodeRule === "*"
         ? "Pan-India Express Shipping"
-        : `Studio Shipping (${matchedPincodeRule})`;
+        : `Dispatch Shipping (${matchedPincodeRule})`;
 
   const shippingMethodName =
     shippingFee === 0

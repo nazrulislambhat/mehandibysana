@@ -34,7 +34,7 @@ const STUDIO_CATEGORY_SPECS: CategorySpec[] = [
     handle: "henna-kits-combos",
     rank: 2,
     description:
-      "Curated bridal henna suites, self-care stain boxes, and complete beginner DIY mehndi kits.",
+      "Curated bridal henna suites, self-care stain boxes, and complete beginner DIY mehandi kits.",
     productHandles: [
       "mbs-henna-kit",
       "mbs-self-care-kit",
@@ -58,7 +58,7 @@ const STUDIO_CATEGORY_SPECS: CategorySpec[] = [
     handle: "mehandi-tools-supplies",
     rank: 4,
     description:
-      "Pre-cut cellophane sheets, micro weighing scales, stainless measuring spoons, piping bags, filter cloths, and studio prep tools.",
+      "Pre-cut cellophane sheets, micro weighing scales, stainless measuring spoons, piping bags, filter cloths, and artist prep tools.",
     productHandles: [
       "pre-cut-cellophane-henna-cone-sheets",
       "stainless-steel-henna-measuring-spoons",
@@ -66,7 +66,7 @@ const STUDIO_CATEGORY_SPECS: CategorySpec[] = [
       "cone-filling-piping-bags",
       "cone-sealing-tape-tip-pins-set",
       "triple-sifting-fine-mesh-filter-cloth",
-      "reusable-acrylic-mehndi-practice-hand",
+      "reusable-acrylic-mehandi-practice-hand",
       "glass-mixing-bowl-silicone-spatula-set",
     ],
   },

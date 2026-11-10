@@ -75,7 +75,7 @@ export function CartView() {
 
   return (
     <div className="bg-canvas pb-20 md:pb-28">
-      {/* Crisp White Atelier Masthead + 3-Step Studio Bar */}
+      {/* Crisp White Bag Masthead + 3-Step Order Bar */}
       <section className="border-b border-hairline bg-canvas">
         <div className="editorial-container py-10 md:py-14">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
@@ -86,7 +86,7 @@ export function CartView() {
                   className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                 />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  Atelier Ledger &middot; Dispatch Queue
+                  Order Ledger &middot; Dispatch Queue
                 </p>
               </div>
               <div className="flex flex-wrap items-baseline gap-3">
@@ -170,7 +170,7 @@ export function CartView() {
 
         {isLoading && items.length === 0 ? (
           <div className="rounded-2xl border border-hairline bg-paper py-20 text-center text-sm text-umber">
-            Syncing your studio shopping bag…
+            Syncing your shopping bag…
           </div>
         ) : items.length === 0 ? (
           <div className="rounded-2xl border border-hairline bg-paper px-6 py-16 text-center flex flex-col items-center">
@@ -182,15 +182,15 @@ export function CartView() {
               Your bag is empty
             </h2>
             <p className="text-sm md:text-base text-umber max-w-md leading-relaxed mb-8">
-              Explore small-batch organic henna cones, aftercare balms, essential oils, and bridal starter kits rolled fresh at our Srinagar &amp; Bangalore studios.
+              Explore small-batch organic henna cones, aftercare balms, essential oils, and bridal starter kits mixed fresh to order across Srinagar &amp; Bangalore.
             </p>
             <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full">
-              Browse Studio Catalog &rarr;
+              Browse Full Catalog &rarr;
             </LinkButton>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-            {/* Left 7 Cols: Numbered Atelier Item Ledger */}
+            {/* Left 7 Cols: Numbered Item Ledger */}
             <div className="lg:col-span-7 space-y-4">
               <ul className="space-y-4">
                 {items.map((item, idx) => {

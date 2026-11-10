@@ -95,7 +95,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const subject =
         "Mehandi by Sana — Email Delivery Verification";
       const plainText = [
-        "Assalamu Alaikum / Hello from Mehandi by Sana Studio,",
+        "Assalamu Alaikum / Hello from Mehandi by Sana,",
         "",
         `This is a verification email confirming that automated order confirmation and shipping dispatch emails are active via provider: ${emailProvider.provider.toUpperCase()}.`,
         "",
@@ -104,10 +104,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       ].join("\n");
 
       const html = renderBrandedStudioEmailHtml({
-        eyebrow: "Studio Email Diagnostics",
+        eyebrow: "Email Delivery Diagnostics",
         heading: "Email Delivery Is Working",
         bodyParagraphs: [
-          "Assalamu Alaikum / Hello from Mehandi by Sana Studio,",
+          "Assalamu Alaikum / Hello from Mehandi by Sana,",
           `This test confirms your email transport (${emailProvider.provider.toUpperCase()}) can send automated order confirmation, payment receipt, and shipping notification emails to customers.`,
           `Sender Address: ${emailProvider.fromEmail}`,
         ],

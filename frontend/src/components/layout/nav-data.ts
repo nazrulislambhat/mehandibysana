@@ -34,7 +34,7 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     href: '/services',
     eyebrow: 'Bridal & Festive Commissions',
     description:
-      'Bespoke Kashmiri bridal mehndi, intimate engagement gatherings, and custom botanical stain consultations by Sumaiya Rashid Magray.',
+      'Bespoke Kashmiri bridal mehandi, intimate engagement gatherings, and custom botanical stain consultations by Sumaiya Rashid Magray.',
     ctaLabel: 'Explore Booking Tiers',
     motif: 'bridal',
   },
@@ -52,10 +52,10 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     index: '04',
     label: 'About',
     href: '/about',
-    eyebrow: 'Srinagar & Bangalore · Est. 2020',
+    eyebrow: 'Srinagar & Bangalore · Est. 2019',
     description:
       'Rooted in zero-chemical botanical craft—how Sana blends Sojat henna harvests with pure eucalyptus and clove essential oils.',
-    ctaLabel: 'Read Studio Story',
+    ctaLabel: 'Read Artist Story',
     motif: 'botanical',
   },
   {
@@ -64,7 +64,7 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     href: '/contact',
     eyebrow: 'Inquiries & Date Reservations',
     description:
-      'Reserve your bridal dates in Srinagar, Bangalore, or destination venues, request wholesale cone batches, or consult with our studio team.',
+      'Reserve your bridal dates in Srinagar, Bangalore, or destination venues, request wholesale cone batches, or consult directly with Sana.',
     ctaLabel: 'Start a Conversation',
     motif: 'bridal',
   },
@@ -74,7 +74,7 @@ export const SHOP_COLLECTIONS: ShopCollectionItem[] = [
   {
     index: '01',
     title: 'All Botanicals & Tools',
-    subtitle: 'Complete 19-piece studio catalog & fresh batches',
+    subtitle: 'Complete 19-piece catalog & fresh batches',
     href: '/shop',
     badge: 'All 19',
   },

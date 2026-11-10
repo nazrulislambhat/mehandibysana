@@ -144,7 +144,7 @@ $tabs = array(
 
 								<div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid rgba(252,238,227,0.16);">
 									<div>
-										<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.14em;color:rgba(252,238,227,0.55);"><?php esc_html_e( 'Studio Price', 'mehandibysana' ); ?></div>
+										<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.14em;color:rgba(252,238,227,0.55);"><?php esc_html_e( 'Price', 'mehandibysana' ); ?></div>
 										<div style="font-size:1.35rem;font-weight:600;color:var(--color-text-inverse);"><?php echo esc_html( $flagship['priceDisplay'] ); ?></div>
 									</div>
 									<a href="<?php echo esc_url( $flagship['permalink'] ); ?>" class="mbs-btn mbs-btn-primary mbs-btn-sm">
@@ -170,7 +170,7 @@ $tabs = array(
 				<?php esc_html_e( 'Every cone is prepared with triple-sifted Sojat henna, zero PPD, and dispatched fresh from Srinagar.', 'mehandibysana' ); ?>
 			</p>
 			<a href="<?php echo esc_url( mbs_get_shop_url() ); ?>" class="mbs-btn mbs-btn-secondary">
-				<?php esc_html_e( 'Browse All Studio Items →', 'mehandibysana' ); ?>
+				<?php esc_html_e( 'Browse All Items →', 'mehandibysana' ); ?>
 			</a>
 		</div>
 	</div>

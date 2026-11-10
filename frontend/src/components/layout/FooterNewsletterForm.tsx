@@ -49,7 +49,7 @@ export function FooterNewsletterForm() {
       setFeedback(
         data.alreadySubscribed
           ? 'You are already subscribed to the fresh-batch dispatch list.'
-          : 'You are on the Studio Dispatch List for fresh Sojat henna drops & bridal dates.'
+          : 'You are on the Fresh Batch Dispatch List for new Sojat henna drops & bridal dates.'
       );
     } catch {
       setStatus('error');
@@ -69,7 +69,7 @@ export function FooterNewsletterForm() {
       </div>
 
       <p className="text-xs text-plaque-ink/75 leading-relaxed">
-        Receive quiet studio notes when new 0.38mm cone harvests are rolled or Eid &amp; bridal slots open.
+        Receive fresh-batch alerts when new 0.38mm cone harvests are rolled or Eid &amp; bridal slots open.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-2.5" noValidate>

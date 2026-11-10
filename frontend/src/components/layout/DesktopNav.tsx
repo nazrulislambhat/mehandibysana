@@ -289,7 +289,7 @@ export function DesktopNav() {
         })}
       </nav>
 
-      {/* Animated Shop Atelier Mega-Panel */}
+      {/* Animated Shop Apothecary Mega-Panel */}
       {isMegaVisible ? (
         <div
           id="desktop-shop-mega-menu"
@@ -310,7 +310,7 @@ export function DesktopNav() {
               <div className="col-span-7 p-6 lg:p-7 border-r border-hairline">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-umber">
-                    Apothecary &amp; Atelier Collections
+                    Apothecary &amp; Product Collections
                   </span>
                   <Link
                     href="/shop"
@@ -387,7 +387,7 @@ export function DesktopNav() {
 
                   <div className="mt-4 rounded-xl border border-hairline bg-paper/90 p-3.5 space-y-1.5">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink">
-                      Studio Dispatch Standards
+                      Batch Dispatch Standards
                     </p>
                     <div className="flex items-center justify-between text-xs text-umber">
                       <span>Fresh Rolling</span>

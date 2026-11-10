@@ -20,7 +20,7 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 const TOC: PolicyTocItem[] = [
-  { id: 'definitions-scope', number: '01', title: 'Definitions & Studio Identity' },
+  { id: 'definitions-scope', number: '01', title: 'Definitions & Brand Identity' },
   { id: 'eligibility-account', number: '02', title: 'Eligibility & Order Accuracy' },
   { id: 'botanical-perishability', number: '03', title: 'Small-Batch Purity & Perishability' },
   { id: 'allergy-safety', number: '04', title: 'Patch Testing & Safe External Use' },
@@ -37,9 +37,9 @@ const TOC: PolicyTocItem[] = [
 export default function TermsConditionsPage() {
   return (
     <PolicyDocumentLayout
-      eyebrow="Legal & Studio Commitments"
+      eyebrow="Legal & Service Commitments"
       title="Terms & Conditions"
-      subtitle="Please review these terms carefully before ordering small-batch organic henna products, reserving bridal mehndi dates, or using mehandibysana.com."
+      subtitle="Please review these terms carefully before ordering small-batch organic henna products, reserving bridal mehandi dates, or using mehandibysana.com."
       effectiveDate="November 10, 2026"
       documentCode="MBS-TC-2026"
       activeSlug="terms"
@@ -51,16 +51,16 @@ export default function TermsConditionsPage() {
       >
         <p className="font-serif text-xs italic text-terracotta">Clause 01</p>
         <h2 className="font-serif text-2xl font-medium text-ink">
-          Definitions &amp; Studio Identity
+          Definitions &amp; Brand Identity
         </h2>
         <p className="text-umber">
           This storefront (<strong>mehandibysana.com</strong>) is operated by{' '}
-          <strong>Mehandi by Sana</strong>, founded by Sumaiya Rashid Magray (Sana), operating from our studios in{' '}
+          <strong>Mehandi by Sana</strong>, founded in 2019 by independent freelance artist Sumaiya Rashid Magray (Sana), working across{' '}
           <strong>Baghat Barzullah, Srinagar (Jammu &amp; Kashmir 190005)</strong> and{' '}
           <strong>Bangalore (Karnataka), India</strong>.
         </p>
         <p className="text-umber">
-          Throughout these Terms &amp; Conditions, &ldquo;Studio&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Mehandi by Sana, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical apothecary goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
+          Throughout these Terms &amp; Conditions, &ldquo;Mehandi by Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent practice and botanical apothecary, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical apothecary goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
           <Link href="/privacy-policy" className="text-terracotta underline underline-offset-4">
             Privacy Policy
           </Link>
@@ -169,7 +169,7 @@ export default function TermsConditionsPage() {
             ).
           </li>
           <li>
-            Studio coupon codes may specify percentage or fixed-INR discounts, minimum order subtotals, active validity windows, and single-use or total usage caps. Coupons cannot be combined sequentially, transferred for cash value, or applied retroactively after an order has been placed.
+            Promotional coupon codes may specify percentage or fixed-INR discounts, minimum order subtotals, active validity windows, and single-use or total usage caps. Coupons cannot be combined sequentially, transferred for cash value, or applied retroactively after an order has been placed.
           </li>
           <li>
             In the event of a manifest pricing or catalog display error, we reserve the right to cancel the affected order prior to dispatch and issue a complete refund of any captured payment.
@@ -193,7 +193,7 @@ export default function TermsConditionsPage() {
             <strong>Cash on Delivery (COD):</strong> Available on eligible Indian PIN codes subject to courier serviceability. Customers placing COD orders agree to remit the full invoice total in cash or instant verified UPI upon parcel presentation. Repeated COD refusals may restrict future COD eligibility.
           </li>
           <li>
-            <strong>100% Promotional Coupon Orders:</strong> Orders whose verified grand total equals &#8377;0 after a valid studio voucher bypass gateway payment and proceed directly into dispatch review.
+            <strong>100% Promotional Coupon Orders:</strong> Orders whose verified grand total equals &#8377;0 after a valid promo voucher bypass gateway payment and proceed directly into dispatch review.
           </li>
         </ul>
       </section>
@@ -207,7 +207,7 @@ export default function TermsConditionsPage() {
           Preparation Lead Times, Courier Transit &amp; Risk of Loss
         </h2>
         <p className="text-umber">
-          Fresh henna orders are typically mixed, rolled, sealed, and dispatched from our Srinagar &amp; Bangalore studios within 1–2 business days (excluding severe weather closures or national holidays). Once scanned by our logistics partner (Delhivery, DTDC Air, Blue Dart, or India Post Speed Post), transit tracking details are emailed to your checkout address and viewable anytime on our{' '}
+          Fresh henna orders are typically mixed, rolled, sealed, and dispatched from Srinagar or Bangalore within 1–2 business days (excluding severe weather closures or national holidays). Once scanned by our logistics partner (Delhivery, DTDC Air, Blue Dart, or India Post Speed Post), transit tracking details are emailed to your checkout address and viewable anytime on our{' '}
           <Link href="/track-order" className="text-terracotta underline underline-offset-4">
             Order Tracker
           </Link>
@@ -245,13 +245,13 @@ export default function TermsConditionsPage() {
         </h2>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Inquiry vs. Confirmed Date:</strong> Submitting the contact form generates an inquiry reference (<code>INQ-...</code>) and does not guarantee date reservation until availability is confirmed by our studio coordinator and any quoted advance retainer is received.
+            <strong>Inquiry vs. Confirmed Date:</strong> Submitting the contact form generates an inquiry reference (<code>INQ-...</code>) and does not guarantee date reservation until availability is confirmed by Sana and any quoted advance retainer is received.
           </li>
           <li>
-            <strong>Event Readiness:</strong> Clients must ensure adequate seating, daylight or bright warm lighting, and calm drying space at the home or venue. Waxing, manicures, and pedicures should be completed at least 24 hours before mehndi application so skin pores and lotions do not block lawsone absorption.
+            <strong>Event Readiness:</strong> Clients must ensure adequate seating, daylight or bright warm lighting, and calm drying space at the home or venue. Waxing, manicures, and pedicures should be completed at least 24 hours before mehandi application so skin pores and lotions do not block lawsone absorption.
           </li>
           <li>
-            <strong>Outstation Travel:</strong> Destination bookings outside our local Srinagar &amp; Bangalore studio areas may carry separate travel, lodging, or local conveyance terms confirmed in writing prior to booking lock.
+            <strong>Outstation Travel:</strong> Destination bookings outside Srinagar &amp; Bangalore city limits may carry separate travel, lodging, or local conveyance terms confirmed in writing prior to booking lock.
           </li>
           <li>
             <strong>Masterclasses:</strong> Course schedules and &#8377;3,500 batch registrations follow the confirmed intake dates communicated upon enrollment.
@@ -265,7 +265,7 @@ export default function TermsConditionsPage() {
       >
         <p className="font-serif text-xs italic text-terracotta">Clause 10</p>
         <h2 className="font-serif text-2xl font-medium text-ink">
-          Intellectual Property &amp; Studio Content
+          Intellectual Property &amp; Brand Content
         </h2>
         <p className="text-umber">
           The brand name <strong>MEHANDI BY SANA</strong>, logo marks, product formulations, photography, original Chinar and Mughal bridal design plates, botanical illustrations, stain guide visuals, and editorial copy on mehandibysana.com are the exclusive intellectual property of Sumaiya Rashid Magray (Mehandi by Sana). Visitors may view or save personal bridal reference inspiration with attribution, but may not scrape, commercially reproduce, counterfeit product labels, or falsely claim affiliation.
@@ -294,7 +294,7 @@ export default function TermsConditionsPage() {
           Governing Law, Consumer Redressal &amp; Updates
         </h2>
         <p className="text-umber">
-          These Terms are governed by the laws of India, including applicable provisions of the Consumer Protection Act, 2019 and Consumer Protection (E-Commerce) Rules, 2020. Any disputes arising out of orders or studio engagements shall be subject to the exclusive jurisdiction of the competent courts in{' '}
+          These Terms are governed by the laws of India, including applicable provisions of the Consumer Protection Act, 2019 and Consumer Protection (E-Commerce) Rules, 2020. Any disputes arising out of orders or service engagements shall be subject to the exclusive jurisdiction of the competent courts in{' '}
           <strong>Srinagar, Jammu &amp; Kashmir, India</strong>. We may update these Terms periodically by revising the effective date above; continued storefront use indicates acceptance of updated terms.
         </p>
         <div className="pt-3 flex flex-wrap gap-3">

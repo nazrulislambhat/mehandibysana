@@ -46,7 +46,7 @@ const TIMELINE_STEPS = [
     key: 'received',
     step: '01',
     title: 'Order Received',
-    detail: 'Recorded in studio preparation queue',
+    detail: 'Recorded in batch preparation queue',
   },
   {
     key: 'preparing',
@@ -243,7 +243,7 @@ export function OrderTrackerClient({
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
           <p className="text-xs text-umber">
-            Works for new MedusaJS orders (<code className="font-mono">MBS-...</code>) and imported studio records.
+            Works for new MedusaJS orders (<code className="font-mono">MBS-...</code>) and imported order records.
           </p>
           <Button
             type="submit"
@@ -268,7 +268,7 @@ export function OrderTrackerClient({
 
       {order ? (
         <div className="overflow-hidden rounded-2xl border border-hairline bg-paper shadow-[0_20px_50px_-20px_rgba(17,17,17,0.16)]">
-          {/* Deep Pine Atelier / Ink Black Header Strip */}
+          {/* Header Strip */}
           <div className="bg-plaque text-plaque-ink border-b border-plaque-border p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative">
             <div
               aria-hidden="true"
@@ -276,7 +276,7 @@ export function OrderTrackerClient({
             />
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1">
-                Live Studio Dispatch Status
+                Live Order Dispatch Status
               </p>
               <h2 className="font-serif text-3xl sm:text-4xl font-medium text-plaque-ink">
                 Order {order.orderNumber}
@@ -321,7 +321,7 @@ export function OrderTrackerClient({
             {order.dispatchNote ? (
               <div className="rounded-xl border border-terracotta/35 bg-linen p-4 text-xs sm:text-sm text-ink leading-relaxed">
                 <span className="font-semibold uppercase tracking-[0.12em] text-[10px] text-terracotta block mb-1">
-                  Studio Dispatch Update
+                  Dispatch Update
                 </span>
                 {order.dispatchNote}
               </div>
@@ -329,7 +329,7 @@ export function OrderTrackerClient({
             {/* 4-Stage Visual Progress Timeline */}
             {order.fulfillmentStage === 'cancelled' ? (
               <div className="rounded-xl border border-crimson/35 bg-paper p-4 text-sm text-crimson">
-                This order has been cancelled. Reach out to our studio desk if you need assistance.
+                This order has been cancelled. Reach out directly via Contact if you need assistance.
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3.5">
@@ -463,13 +463,13 @@ export function OrderTrackerClient({
             <div className="border-t border-hairline pt-6 flex flex-wrap items-center justify-between gap-3">
               <a
                 href={`https://wa.me/919149648717?text=${encodeURIComponent(
-                  `Assalamu Alaikum Mehandi by Sana Studio, I would like an update on Order ${order.orderNumber}.`
+                  `Assalamu Alaikum Mehandi by Sana, I would like an update on Order ${order.orderNumber}.`
                 )}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
               >
-                Ask Studio on WhatsApp
+                Ask Sana on WhatsApp
               </a>
               <LinkButton href="/shop" variant="primary" size="md" className="rounded-full">
                 Continue Shopping &rarr;

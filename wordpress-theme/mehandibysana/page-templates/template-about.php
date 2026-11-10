@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — About & Botanical Craft
+ * Template Name: Mehandi by Sana — About & Botanical Craft
  *
  * @package MehandiBySana
  */
@@ -14,12 +14,12 @@ $founder_img_override = get_theme_mod( 'mbs_founder_image_override', '' );
 ?>
 <header class="mbs-masthead">
 	<div class="editorial-container">
-		<span class="eyebrow"><?php esc_html_e( 'Founded 2018 · Baghat Barzullah, Srinagar', 'mehandibysana' ); ?></span>
+		<span class="eyebrow"><?php esc_html_e( 'Founded 2019 · Baghat Barzullah, Srinagar', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.35rem,4.4vw,3.35rem);margin-top:0.5rem;">
 			<?php esc_html_e( 'Botanical Henna Purity Without Shortcuts', 'mehandibysana' ); ?>
 		</h1>
 		<p style="margin-top:0.85rem;max-width:42rem;color:var(--color-text-muted);font-size:1.02rem;line-height:1.68;">
-			<?php esc_html_e( 'Led by Sumaiya Rashid Magray (Sana), our Kashmir atelier pairs centuries-old botanical dye-release intuition with repeatable small-batch precision.', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Guided independently by Sumaiya Rashid Magray (Sana) without a walk-in storefront studio today (with hopes of opening a dedicated space someday), Mehandi by Sana pairs centuries-old botanical dye-release intuition with repeatable small-batch precision.', 'mehandibysana' ); ?>
 		</p>
 	</div>
 </header>
@@ -48,7 +48,7 @@ $founder_img_override = get_theme_mod( 'mbs_founder_image_override', '' );
 		<div class="mbs-arch-wrap">
 			<div class="mbs-arch-frame">
 				<?php if ( $founder_img_override ) : ?>
-					<img src="<?php echo esc_url( $founder_img_override ); ?>" alt="<?php esc_attr_e( 'Sumaiya Rashid Magray — Mehandi by Sana Atelier Founder', 'mehandibysana' ); ?>" />
+					<img src="<?php echo esc_url( $founder_img_override ); ?>" alt="<?php esc_attr_e( 'Sumaiya Rashid Magray — Independent Organic Mehandi Artist', 'mehandibysana' ); ?>" />
 				<?php else : ?>
 					<?php echo mbs_svg_sana_portrait(); ?>
 				<?php endif; ?>

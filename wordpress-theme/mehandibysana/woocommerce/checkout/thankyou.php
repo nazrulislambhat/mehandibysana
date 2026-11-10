@@ -33,7 +33,7 @@ if ( $order ) :
 		</div>
 	<?php else : ?>
 		<div class="mbs-dossier-ink" style="margin-bottom:2.25rem;">
-			<span class="eyebrow" style="color:var(--color-accent);"><?php esc_html_e( 'Fresh Batch Scheduled · Srinagar Atelier', 'mehandibysana' ); ?></span>
+			<span class="eyebrow" style="color:var(--color-accent);"><?php esc_html_e( 'Fresh Batch Scheduled · Srinagar', 'mehandibysana' ); ?></span>
 			<h2 style="font-size:clamp(2rem,3.6vw,2.75rem);margin-top:0.5rem;">
 				<?php
 				printf(

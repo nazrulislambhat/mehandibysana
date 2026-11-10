@@ -13,7 +13,7 @@ add_action( 'customize_register', function ( $wp_customize ) {
 	$wp_customize->add_section(
 		'mbs_atelier_media',
 		array(
-			'title'       => __( 'Mehandi by Sana — Atelier Artwork & Gallery Plates', 'mehandibysana' ),
+			'title'       => __( 'Mehandi by Sana — Brand Artwork & Gallery Plates', 'mehandibysana' ),
 			'priority'    => 35,
 			'description' => __( 'Optionally upload real photography to override the built-in botanical SVG illustrations or the 6 bridal exhibition gallery plates.', 'mehandibysana' ),
 		)

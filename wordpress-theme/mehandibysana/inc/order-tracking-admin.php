@@ -23,7 +23,7 @@ function mbs_get_courier_presets() {
 		'Blue Dart',
 		'Tirupati Courier',
 		'Trackon Courier',
-		'Self Pickup (Baghat Barzullah Studio)',
+		'Self Pickup (Baghat Barzullah, Srinagar)',
 	);
 }
 
@@ -41,7 +41,7 @@ add_action( 'add_meta_boxes', function () {
 
 	add_meta_box(
 		'mbs_studio_order_dispatch',
-		__( 'Mehandi by Sana — Studio Dispatch, Courier & Offline Payment', 'mehandibysana' ),
+		__( 'Mehandi by Sana — Order Dispatch, Courier & Offline Payment', 'mehandibysana' ),
 		'mbs_render_order_dispatch_metabox',
 		$screens,
 		'side',
@@ -109,7 +109,7 @@ function mbs_render_order_dispatch_metabox( $post_or_order_object ) {
 		</p>
 
 		<p>
-			<label for="mbs_dispatch_note" style="display:block;font-weight:600;margin-bottom:4px;"><?php esc_html_e( 'Studio Dispatch Note (Shown to Customer)', 'mehandibysana' ); ?></label>
+			<label for="mbs_dispatch_note" style="display:block;font-weight:600;margin-bottom:4px;"><?php esc_html_e( 'Order Dispatch Note (Shown to Customer)', 'mehandibysana' ); ?></label>
 			<textarea id="mbs_dispatch_note" name="mbs_dispatch_note" rows="3" style="width:100%;" placeholder="<?php esc_attr_e( 'e.g. Freshly rolled and dispatched via local courier rider today.', 'mehandibysana' ); ?>"><?php echo esc_textarea( $note ); ?></textarea>
 		</p>
 
@@ -209,7 +209,7 @@ function mbs_save_order_dispatch_meta( $order_id, $order = null ) {
 			if ( ! $order->get_date_paid() ) {
 				$order->set_date_paid( time() );
 			}
-			$order->add_order_note( __( 'Offline payment marked received by Studio Admin.', 'mehandibysana' ) );
+			$order->add_order_note( __( 'Offline payment marked received by Admin.', 'mehandibysana' ) );
 		}
 	} elseif ( ! $order->is_paid() ) {
 		$order->update_meta_data( '_mbs_payment_status', 'pending' );
@@ -218,10 +218,10 @@ function mbs_save_order_dispatch_meta( $order_id, $order = null ) {
 	// Automatically complete WC order if requested or stage is delivered
 	if ( ! empty( $_POST['mbs_complete_wc_order'] ) || 'delivered' === $stage ) {
 		if ( 'completed' !== $order->get_status() ) {
-			$order->set_status( 'completed', __( 'Completed via Mehandi Studio Dispatch.', 'mehandibysana' ) );
+			$order->set_status( 'completed', __( 'Completed via Mehandi by Sana Dispatch.', 'mehandibysana' ) );
 		}
 	} elseif ( 'cancelled' === $stage && 'cancelled' !== $order->get_status() ) {
-		$order->set_status( 'cancelled', __( 'Cancelled via Mehandi Studio Dispatch.', 'mehandibysana' ) );
+		$order->set_status( 'cancelled', __( 'Cancelled via Mehandi by Sana Dispatch.', 'mehandibysana' ) );
 	}
 
 	$order->save();
@@ -248,7 +248,7 @@ function mbs_send_customer_dispatch_email( $order ) {
 	}
 
 	$stage     = $order->get_meta( '_mbs_fulfillment_stage' ) ?: 'dispatched';
-	$courier   = $order->get_meta( '_mbs_courier_name' ) ?: 'Studio Courier';
+	$courier   = $order->get_meta( '_mbs_courier_name' ) ?: 'Courier';
 	$awb       = $order->get_meta( '_mbs_tracking_number' );
 	$track_url = $order->get_meta( '_mbs_tracking_url' );
 	$note      = $order->get_meta( '_mbs_dispatch_note' );
@@ -275,7 +275,7 @@ function mbs_send_customer_dispatch_email( $order ) {
 	?>
 	<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;color:#111111;">
 		<div style="background:#111111;color:#fceee3;padding:24px 28px;border-top:4px solid #d9541e;">
-			<p style="margin:0 0 6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;font-weight:bold;">Mehandi by Sana &middot; Srinagar Atelier</p>
+			<p style="margin:0 0 6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;font-weight:bold;">Mehandi by Sana &middot; Srinagar &amp; Bangalore</p>
 			<h1 style="margin:0;font-size:24px;font-family:Georgia,serif;font-weight:normal;">Order #<?php echo esc_html( $order_num ); ?> Update</h1>
 		</div>
 		<div style="padding:24px 28px;background:#ffffff;line-height:1.6;">
@@ -397,7 +397,7 @@ function mbs_lookup_tracked_order( $raw_ref, $raw_email ) {
 
 	$stage     = mbs_infer_stage_from_wc_status( $order );
 	$is_paid   = $order->is_paid() || 'paid' === strtolower( (string) $order->get_meta( '_mbs_payment_status' ) );
-	$pay_title = $order->get_payment_method_title() ?: __( 'Studio Checkout', 'mehandibysana' );
+	$pay_title = $order->get_payment_method_title() ?: __( 'Online Checkout', 'mehandibysana' );
 
 	$items = array();
 	foreach ( $order->get_items() as $item_id => $item ) {
@@ -436,7 +436,7 @@ function mbs_lookup_tracked_order( $raw_ref, $raw_email ) {
 			'paymentId'        => (string) $order->get_transaction_id(),
 			'trackingNumber'   => (string) $order->get_meta( '_mbs_tracking_number' ),
 			'trackingUrl'      => (string) $order->get_meta( '_mbs_tracking_url' ),
-			'courierName'      => (string) ( $order->get_meta( '_mbs_courier_name' ) ?: __( 'India Post / Studio Courier', 'mehandibysana' ) ),
+			'courierName'      => (string) ( $order->get_meta( '_mbs_courier_name' ) ?: __( 'India Post / Courier', 'mehandibysana' ) ),
 			'dispatchNote'     => (string) $order->get_meta( '_mbs_dispatch_note' ),
 			'pincodeRule'      => (string) ( $order->get_meta( '_mbs_pincode_rule' ) ?: ( $order->get_shipping_method() ?: __( 'Standard Dispatch', 'mehandibysana' ) ) ),
 			'subtotal'         => (float) $order->get_subtotal(),

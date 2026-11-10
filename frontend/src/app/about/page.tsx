@@ -22,15 +22,15 @@ import {
 import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlates';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'About Sumaiya Rashid Magray (Sana) & Studio',
+  title: 'About Sumaiya Rashid Magray (Sana) & Her Journey',
   description:
-    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, operating from Srinagar & Bangalore.',
+    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Srinagar & Bangalore since 2019.',
   canonicalPath: '/about',
   keywords: [
     'Sumaiya Rashid Magray',
     'Mehandi by Sana story',
     'Kashmir organic henna pioneer',
-    'Srinagar Bangalore henna studio',
+    'Srinagar Bangalore freelance henna artist',
     'Maenz 2019 Kashmir',
   ],
 });
@@ -108,7 +108,7 @@ const AWARDS_AND_HONORS: AwardHonorItem[] = [
     category: 'Podcast Conversation',
     title: 'Karnikazzz Buzzz Podcast',
     description:
-      'Long-form podcast guest interview discussing organic henna formulation, building a boutique studio, and entrepreneurial resilience.',
+      'Long-form podcast guest interview discussing organic henna formulation, building an independent organic henna practice, and entrepreneurial resilience.',
     links: [
       {
         label: 'Apple Podcasts',
@@ -145,7 +145,7 @@ const STUDIO_PILLARS = [
   {
     number: '02',
     title: 'Small-Batch Freshness',
-    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh at our Srinagar (Baghat Barzullah) and Bangalore studios and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
+    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Srinagar (Baghat Barzullah) and Bangalore and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
   },
   {
     number: '03',
@@ -199,7 +199,7 @@ export default function AboutPage() {
                   <div className="pointer-events-none absolute inset-3 rounded-t-[12rem] rounded-b-xl border border-ink/10" />
                 </div>
                 <figcaption className="text-xs font-semibold uppercase tracking-[0.14em] text-umber text-center">
-                  Sumaiya Rashid Magray (Sana) &middot; Srinagar &amp; Bangalore Studios
+                  Sumaiya Rashid Magray (Sana) &middot; Freelance Artist &middot; Srinagar &amp; Bangalore
                 </figcaption>
               </figure>
             </div>
@@ -224,7 +224,7 @@ export default function AboutPage() {
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana now operates from Srinagar and Bangalore, bridging bespoke bridal artistry with a small-batch botanical apothecary.
+                Founded in 2019 in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Srinagar and Bangalore.
               </p>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
                 After researching the monoterpene chemistry of eucalyptus, cineol, and tea tree oils to optimize natural lawsone dye release, Sana replaced commercial chemical cones with freshly mixed, triple-sifted organic paste hand-rolled to a 0.38mm tip.
@@ -426,13 +426,13 @@ export default function AboutPage() {
                       </span>
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
                         <VerifiedHonorSealIcon size={14} className="shrink-0" />
-                        <span>Verified Studio Honor</span>
+                        <span>Verified Honor</span>
                       </span>
                     </div>
                   ) : (
                     <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] pt-2 text-umber/80">
                       <VerifiedHonorSealIcon size={14} className="text-terracotta shrink-0" />
-                      <span>Verified Studio Honor</span>
+                      <span>Verified Honor</span>
                     </div>
                   )}
                 </article>
@@ -463,7 +463,7 @@ export default function AboutPage() {
               href="/contact"
               className="inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1.5"
             >
-              Connect with the studio &rarr;
+              Connect with Sana &rarr;
             </Link>
           </div>
         </section>

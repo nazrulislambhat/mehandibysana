@@ -45,7 +45,7 @@ export function ProductCard({
           <div className="relative aspect-[4/5] w-full">
             <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full border border-plaque-border bg-plaque px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-plaque-ink">
               <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
-              Atelier Spotlight
+              Signature Spotlight
             </span>
             {primaryImage ? (
               <Image

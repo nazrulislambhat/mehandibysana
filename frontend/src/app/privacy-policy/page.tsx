@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
     <PolicyDocumentLayout
       eyebrow="Privacy & Data Protection"
       title="Privacy Policy"
-      subtitle="How Mehandi by Sana respects, secures, and minimizes your personal information across purchases, order tracking, bridal bookings, and studio communications."
+      subtitle="How Mehandi by Sana respects, secures, and minimizes your personal information across purchases, order tracking, bridal bookings, and direct communications."
       effectiveDate="November 10, 2026"
       documentCode="MBS-PP-2026"
       activeSlug="privacy"
@@ -102,7 +102,7 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>Responding to return, replacement, refund, or customer care requests.</li>
           <li>
-            Sending seasonal batch availability or studio launch announcements strictly when you opt into the Studio Dispatch List or are an active client (with instant opt-out).
+            Sending seasonal batch availability or release announcements strictly when you opt into the Fresh Batch Dispatch List or are an active client (with instant opt-out).
           </li>
         </ul>
       </section>
@@ -195,7 +195,7 @@ export default function PrivacyPolicyPage() {
             <strong>Right to Correction &amp; Updating:</strong> Update misspelled emails, shipping addresses, or phone details prior to dispatch.
           </li>
           <li>
-            <strong>Right to Erasure &amp; Consent Withdrawal:</strong> Request removal of non-statutory personal details or opt out of all studio broadcast emails anytime by emailing us or replying &ldquo;Unsubscribe&rdquo; to any batch announcement.
+            <strong>Right to Erasure &amp; Consent Withdrawal:</strong> Request removal of non-statutory personal details or opt out of all broadcast emails anytime by emailing us or replying &ldquo;Unsubscribe&rdquo; to any batch announcement.
           </li>
         </ul>
       </section>
@@ -229,7 +229,7 @@ export default function PrivacyPolicyPage() {
             <strong>Name:</strong> Sumaiya Rashid Magray (Sana), Founder &amp; Privacy Officer
           </p>
           <p>
-            <strong>Studios:</strong> Mehandi by Sana Studio &middot; Baghat Barzullah, Srinagar (J&amp;K 190005) &amp; Bangalore (Karnataka)
+            <strong>Service Bases:</strong> Mehandi by Sana &middot; Baghat Barzullah, Srinagar (J&amp;K 190005) &amp; Bangalore (Karnataka)
           </p>
           <p>
             <strong>Email:</strong>{' '}
@@ -256,7 +256,7 @@ export default function PrivacyPolicyPage() {
             Terms &amp; Conditions &rarr;
           </LinkButton>
           <LinkButton href="/contact" variant="secondary" size="md" className="rounded-full">
-            Contact Studio
+            Contact Sana
           </LinkButton>
         </div>
       </section>

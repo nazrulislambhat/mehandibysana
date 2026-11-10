@@ -144,7 +144,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       }
 
       const result = await sendBulkCampaignBatch({
-        recipients: [{ email: testEmail, firstName: "Sana Studio Test" }],
+        recipients: [{ email: testEmail, firstName: "Sana Test" }],
         subject: `[TEST] ${subject}`,
         bodyText,
         ctaLabel: body.ctaLabel?.trim() || undefined,

@@ -21,12 +21,12 @@ import {
 export const metadata: Metadata = buildPageMetadata({
   title: 'Henna Storage, Application & 48-Hour Stain Care Guide',
   description:
-    'Learn how to freeze fresh organic henna cones (-18°C), thaw gently without condensation, seal bridal mehndi for dark mahogany stain, and mix Sojat hair henna.',
+    'Learn how to freeze fresh organic henna cones (-18°C), thaw gently without condensation, seal bridal mehandi for dark mahogany stain, and mix Sojat hair henna.',
   canonicalPath: '/henna-care',
   keywords: [
     'how to store organic henna cones',
     'henna aftercare 48 hour stain',
-    'freeze fresh mehndi cones',
+    'freeze fresh mehandi cones',
     'natural henna stain progression',
     'hair henna mixing guide',
   ],
@@ -49,7 +49,7 @@ export default function HennaCarePage() {
       eyebrow="Botanical Ritual & Care"
       title="Henna Storage & 48-Hour Stain Care"
       subtitle="Because 100% pure organic henna contains zero synthetic chemical dyes, proper freezer storage, skin prep, and water-free aftercare unlock dramatic espresso-mahogany color."
-      effectiveDate="Studio Reference Guide"
+      effectiveDate="Artist Reference Guide"
       documentCode="MBS-CARE-01"
       activeSlug="care"
       toc={TOC}
@@ -128,7 +128,7 @@ export default function HennaCarePage() {
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
             Wash hands and forearms thoroughly with plain soap and water, pat completely dry, and apply{' '}
-            <strong>zero moisturizer, hand cream, sunscreen, or perfume oils</strong> before mehndi—lotion forms an occlusive film that blocks lawsone binding.
+            <strong>zero moisturizer, hand cream, sunscreen, or perfume oils</strong> before mehandi—lotion forms an occlusive film that blocks lawsone binding.
           </li>
           <li>
             Complete waxing, manicures, or exfoliation scrubs at least{' '}

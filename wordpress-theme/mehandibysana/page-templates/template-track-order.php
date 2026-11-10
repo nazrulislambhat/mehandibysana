@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Mehandi Studio — Parcel Order Tracker
+ * Template Name: Mehandi by Sana — Parcel Order Tracker
  *
  * @package MehandiBySana
  */
@@ -21,7 +21,7 @@ $ssr_result    = ( '' !== $prefill_order && '' !== $prefill_email )
 	<div class="editorial-container">
 		<span class="eyebrow"><?php esc_html_e( 'Srinagar Dispatch & Live Courier Tracking', 'mehandibysana' ); ?></span>
 		<h1 style="font-size:clamp(2.35rem,4.4vw,3.35rem);margin-top:0.5rem;">
-			<?php esc_html_e( 'Track Your Atelier Parcel', 'mehandibysana' ); ?>
+			<?php esc_html_e( 'Track Your Parcel', 'mehandibysana' ); ?>
 		</h1>
 		<p style="margin-top:0.85rem;max-width:40rem;color:var(--color-text-muted);font-size:1.02rem;line-height:1.68;">
 			<?php esc_html_e( 'Enter your order number (for example #1042 or 1042) along with the billing email address used at checkout to check real-time preparation, local courier or AWB tracking, and payment status.', 'mehandibysana' ); ?>
@@ -117,7 +117,7 @@ $ssr_result    = ( '' !== $prefill_order && '' !== $prefill_email )
 
 						<?php if ( ! empty( $o['dispatchNote'] ) ) : ?>
 							<div style="background:var(--color-surface);border-left:3px solid var(--color-accent);padding:12px 16px;border-radius:6px;margin-bottom:1.5rem;">
-								<strong><?php esc_html_e( 'Studio Dispatch Note:', 'mehandibysana' ); ?></strong> <?php echo esc_html( $o['dispatchNote'] ); ?>
+								<strong><?php esc_html_e( 'Dispatch Note:', 'mehandibysana' ); ?></strong> <?php echo esc_html( $o['dispatchNote'] ); ?>
 							</div>
 						<?php endif; ?>
 

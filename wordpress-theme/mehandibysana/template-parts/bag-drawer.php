@@ -1,6 +1,6 @@
 <?php
 /**
- * Slide-Over Atelier Bag Drawer (Synchronized live with WC()->cart via AJAX)
+ * Slide-Over Shopping Bag Drawer (Synchronized live with WC()->cart via AJAX)
  *
  * @package MehandiBySana
  */
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- Header -->
 	<div class="mbs-drawer-head">
 		<div>
-			<span class="eyebrow"><?php esc_html_e( 'Atelier Dispatch Ledger', 'mehandibysana' ); ?></span>
+			<span class="eyebrow"><?php esc_html_e( 'Dispatch Ledger', 'mehandibysana' ); ?></span>
 			<div style="display:flex;align-items:baseline;gap:8px;margin-top:2px;">
 				<h2 style="font-size:1.55rem;"><?php esc_html_e( 'Your Bag', 'mehandibysana' ); ?></h2>
 				<span id="mbs-drawer-count-title" style="font-size:0.8125rem;color:var(--color-text-muted);">0 items</span>
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- Empty state -->
 		<div id="mbs-drawer-empty" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;padding:2.5rem 1rem;gap:1rem;">
 			<?php echo mbs_svg_empty_cart(); ?>
-			<h3 style="font-size:1.55rem;"><?php esc_html_e( 'Your atelier bag is quiet', 'mehandibysana' ); ?></h3>
+			<h3 style="font-size:1.55rem;"><?php esc_html_e( 'Your shopping bag is quiet', 'mehandibysana' ); ?></h3>
 			<p style="font-size:0.875rem;color:var(--color-text-muted);max-width:260px;">
 				<?php esc_html_e( 'Add freshly rolled organic henna cones, essential oils, or herbal hair henna from our daily batch.', 'mehandibysana' ); ?>
 			</p>
