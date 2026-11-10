@@ -15,6 +15,107 @@ export const metadata: Metadata = {
     'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s first freelance organic henna artist and botanical apothecary founder.',
 };
 
+interface AwardHonorItem {
+  number: string;
+  category: string;
+  title: string;
+  description: string;
+  links?: Array<{
+    label: string;
+    href: string;
+  }>;
+}
+
+const AWARDS_AND_HONORS: AwardHonorItem[] = [
+  {
+    number: '01',
+    category: 'Print & Digital Feature',
+    title: 'Greater Kashmir',
+    description:
+      '“Engineering graduate breaks stereotypes with her henna art” — feature spotlighting Sana’s journey from electronics engineering into pioneering organic henna across Kashmir.',
+    links: [
+      {
+        label: 'Read article',
+        href: 'https://www.greaterkashmir.com/todays-paper/engineering-graduate-breaks-stereotypes-with-her-henna-art',
+      },
+    ],
+  },
+  {
+    number: '02',
+    category: 'Video & Reel Spotlight',
+    title: 'Rising Kashmir',
+    description:
+      '“Watch engineering graduate Sumaiya Rashid Magray defies norms with her stunning henna art” — featured across Rising Kashmir video and Instagram reel spotlights.',
+    links: [
+      {
+        label: 'Watch on Facebook',
+        href: 'https://www.facebook.com/therisingkashmir/videos/watch-engineering-graduate-sumaiya-rashid-magray-defies-norms-with-her-stunning-/629453583286646/',
+      },
+      {
+        label: 'Watch Instagram Reel',
+        href: 'https://www.instagram.com/rising_kashmir/reel/DHiZp67TroI',
+      },
+    ],
+  },
+  {
+    number: '03',
+    category: 'Regional Press Profile',
+    title: 'Indus Post',
+    description:
+      '“Meet Kashmir’s first organic henna artist” — profiling Mehandi by Sana’s small-batch botanical cones and bridal practice.',
+    links: [
+      {
+        label: 'Read profile',
+        href: 'https://theinduspost.com/2020/01/25/kashmir/meet-kashmirs-first-organic-henna-artist/',
+      },
+    ],
+  },
+  {
+    number: '04',
+    category: 'Video Documentary',
+    title: 'Kashmir Unheard',
+    description:
+      'Video feature chronicling Sana’s craft, commitment to PPD-free natural henna, and grassroots entrepreneurial journey.',
+    links: [
+      {
+        label: 'Watch feature',
+        href: 'https://m.facebook.com/watch/?v=371832803538773&_rdr',
+      },
+    ],
+  },
+  {
+    number: '05',
+    category: 'Podcast Conversation',
+    title: 'Karnikazzz Buzzz Podcast',
+    description:
+      'Long-form podcast guest interview discussing organic henna formulation, building a boutique studio, and entrepreneurial resilience.',
+    links: [
+      {
+        label: 'Apple Podcasts',
+        href: 'https://podcasts.apple.com/in/podcast/karnikazzz-buzzz/id1560325608?i=1000565756235',
+      },
+      {
+        label: 'Spotify',
+        href: 'https://open.spotify.com/episode/52ouapYYVb9tUfsKW6fCKl?si=paZhCq3HTW2Q2QPiVmNZbw',
+      },
+    ],
+  },
+  {
+    number: '06',
+    category: 'Event Organization & Jury',
+    title: 'Organized Maenz 2019 & Competition Jury',
+    description:
+      'Organized Maenz 2019 — Since then, Sana has judged various henna competitions throughout Kashmir.',
+  },
+  {
+    number: '07',
+    category: 'National Representation · Dec 2018',
+    title: 'North India National Youth Festival',
+    description:
+      'Attended the North India National Youth Festival at Panjab University in December 2018, representing Kashmir.',
+  },
+];
+
 const STUDIO_PILLARS = [
   {
     number: '01',
@@ -149,54 +250,137 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Verified Media Recognition Strip */}
-        <div className="mt-16 pt-12 border-t border-hairline">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta mb-2">
-            Media &amp; Recognition
-          </p>
-          <h2 className="font-serif text-2xl md:text-3xl font-medium text-ink mb-6">
-            Featured across Kashmir
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-hairline bg-paper p-7 flex flex-col justify-between gap-4 hover:border-ink/40 transition-colors">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-umber mb-1.5">
-                  Greater Kashmir
-                </p>
-                <p className="font-serif text-xl sm:text-2xl text-ink leading-snug">
-                  &ldquo;Engineering graduate breaks stereotypes with her henna art&rdquo;
-                </p>
-              </div>
-              <a
-                href="https://www.greaterkashmir.com/todays-paper/engineering-graduate-breaks-stereotypes-with-her-henna-art"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full border border-terracotta/45 px-4 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta hover:text-inverse self-start transition-colors"
-              >
-                Read article &nearr;
-              </a>
-            </div>
-
-            <div className="rounded-2xl border border-hairline bg-paper p-7 flex flex-col justify-between gap-4 hover:border-ink/40 transition-colors">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-umber mb-1.5">
-                  Rising Kashmir
-                </p>
-                <p className="font-serif text-xl sm:text-2xl text-ink leading-snug">
-                  &ldquo;Watch engineering graduate Sumaiya Rashid Magray defies norms with her stunning henna art&rdquo;
+        {/* All 7 Verified Awards & Honors */}
+        <section
+          id="awards-honors"
+          aria-labelledby="awards-honors-heading"
+          className="mt-16 pt-14 border-t border-hairline"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span
+                  aria-hidden="true"
+                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                  07 Honors, Jury &amp; Press Features
                 </p>
               </div>
-              <a
-                href="https://www.facebook.com/therisingkashmir/videos/watch-engineering-graduate-sumaiya-rashid-magray-defies-norms-with-her-stunning-/629453583286646/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full border border-terracotta/45 px-4 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta hover:text-inverse self-start transition-colors"
-              >
-                Watch video feature &nearr;
-              </a>
+              <TextReveal variant="line">
+                <h2
+                  id="awards-honors-heading"
+                  className="font-serif text-3xl md:text-4xl font-medium text-ink"
+                >
+                  Awards &amp; Honors
+                </h2>
+              </TextReveal>
             </div>
+            <p className="text-sm text-umber max-w-md leading-relaxed">
+              Recognition across newspapers, documentaries, podcasts, competitions, and national youth stages.
+            </p>
           </div>
-        </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {AWARDS_AND_HONORS.map((item, idx) => (
+              <TextReveal
+                key={item.number}
+                variant="fade"
+                delayMs={idx * 55}
+                className={
+                  item.number === '07'
+                    ? 'md:col-span-2 lg:col-span-3 flex'
+                    : 'flex'
+                }
+              >
+                <article
+                  className={`relative overflow-hidden w-full rounded-2xl p-7 flex flex-col justify-between gap-5 transition-colors ${
+                    item.number === '07'
+                      ? 'bg-ink text-inverse border border-ink shadow-[0_20px_50px_-20px_rgba(17,17,17,0.3)] md:flex-row md:items-stretch'
+                      : 'bg-paper text-ink border border-hairline hover:border-ink/40'
+                  }`}
+                >
+                  {item.number === '07' ? (
+                    <div
+                      aria-hidden="true"
+                      className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta"
+                    />
+                  ) : null}
+
+                  <div className="space-y-2.5 flex-1">
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className={`text-[11px] font-semibold uppercase tracking-[0.14em] ${
+                          item.number === '07'
+                            ? 'text-terracotta'
+                            : 'text-umber'
+                        }`}
+                      >
+                        {item.category}
+                      </span>
+                      <span
+                        className={`inline-flex items-center justify-center w-7 h-7 rounded-full font-serif text-xs italic shrink-0 ${
+                          item.number === '07'
+                            ? 'md:hidden bg-terracotta text-inverse'
+                            : 'bg-ink text-inverse'
+                        }`}
+                      >
+                        {item.number}
+                      </span>
+                    </div>
+
+                    <h3
+                      className={`font-serif text-xl sm:text-2xl font-medium leading-snug ${
+                        item.number === '07' ? 'text-inverse' : 'text-ink'
+                      }`}
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        item.number === '07'
+                          ? 'text-inverse/80 max-w-3xl'
+                          : 'text-umber'
+                      }`}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {item.links && item.links.length > 0 ? (
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {item.links.map((link) => (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center rounded-full border border-terracotta/45 px-3.5 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta hover:text-inverse transition-colors"
+                        >
+                          {link.label} &#8599;
+                        </a>
+                      ))}
+                    </div>
+                  ) : item.number === '07' ? (
+                    <div className="flex items-center justify-between md:flex-col md:items-end md:justify-between md:shrink-0 pt-2 md:pt-0">
+                      <span className="hidden md:inline-flex items-center justify-center w-7 h-7 rounded-full bg-terracotta text-inverse font-serif text-xs italic shrink-0">
+                        {item.number}
+                      </span>
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
+                        Verified Studio Honor
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] pt-2 text-umber/80">
+                      Verified Studio Honor
+                    </div>
+                  )}
+                </article>
+              </TextReveal>
+            ))}
+          </div>
+        </section>
 
         <div className="mt-14 pt-10 border-t border-hairline flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-3">

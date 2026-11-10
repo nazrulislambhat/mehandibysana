@@ -198,7 +198,7 @@ export default async function ProductDetailPage({
                     </span>
                   </summary>
                   <p className="mt-3 text-sm text-umber leading-relaxed">
-                    Orders sync live with our MedusaJS studio inventory. Delivery rates are calculated automatically by your 6-digit PIN code prefix (₹60 for 19* Jammu &amp; Kashmir, ₹120 for NCR/North India, and ₹150 Pan-India).
+                    Orders sync live with our MedusaJS studio inventory. Delivery charges and estimated transit times are calculated for your 6-digit PIN code&mdash;use the Delivery &amp; PIN Estimator above on this product page or in your shopping bag before checkout.
                   </p>
                 </details>
               </div>

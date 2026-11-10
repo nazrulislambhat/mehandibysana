@@ -6,6 +6,7 @@ import { FeaturedProductsSection } from '@/components/sections/FeaturedProductsS
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';
 import { ServicesSection } from '@/components/sections/ServicesSection';
 import { GalleryPreviewSection } from '@/components/sections/GalleryPreviewSection';
+import { ClientReviewsSection } from '@/components/sections/ClientReviewsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { FeedbackState } from '@/components/ui/FeedbackState';
 import { LinkButton } from '@/components/ui/Button';
@@ -227,6 +228,8 @@ export default async function HomePage() {
       </section>
 
       <GalleryPreviewSection />
+
+      <ClientReviewsSection />
 
       <TestimonialsSection reviews={catalog.reviews} />
 

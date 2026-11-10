@@ -5,18 +5,17 @@ import {
   PolicyDocumentLayout,
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
-import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { LinkButton } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
   title: 'Shipping & Delivery Policy',
   description:
-    'Small-batch Srinagar & Bangalore dispatch schedule, Pan-India PIN-code shipping rates, courier partners, parcel tracking, and fresh cone transit care for Mehandi by Sana.',
+    'Small-batch Srinagar & Bangalore dispatch schedule, Pan-India PIN-code delivery estimation, courier partners, parcel tracking, and fresh cone transit care for Mehandi by Sana.',
 };
 
 const TOC: PolicyTocItem[] = [
   { id: 'dispatch-schedule', number: '01', title: 'Small-Batch Dispatch Schedule' },
-  { id: 'pincode-zones', number: '02', title: 'India PIN-Code Zones & Rates' },
+  { id: 'pincode-zones', number: '02', title: 'India PIN-Code Zones & Estimator' },
   { id: 'courier-partners', number: '03', title: 'Courier Partners & Air Routing' },
   { id: 'parcel-tracking', number: '04', title: 'Live Order & Email Tracking' },
   { id: 'fresh-arrival', number: '05', title: 'Care Upon Parcel Arrival' },
@@ -34,20 +33,6 @@ export default function ShippingPolicyPage() {
       activeSlug="shipping"
       toc={TOC}
     >
-      {/* Live Interactive PIN Estimator Card */}
-      <section
-        id="pincode-check"
-        className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-4"
-      >
-        <div>
-          <p className="font-serif text-xs italic text-terracotta">Instant Lookup</p>
-          <h2 className="font-serif text-2xl font-medium text-ink mt-0.5">
-            Check Delivery Speed &amp; Rate for Your PIN Code
-          </h2>
-        </div>
-        <PincodeChecker compact />
-      </section>
-
       <section
         id="dispatch-schedule"
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
@@ -82,49 +67,34 @@ export default function ShippingPolicyPage() {
       >
         <p className="font-serif text-xs italic text-terracotta">Section 02</p>
         <h2 className="font-serif text-2xl font-medium text-ink">
-          India PIN-Code Zones &amp; Transparent Shipping Rates
+          India PIN-Code Coverage &amp; On-Demand Rate Check
         </h2>
         <p className="text-umber">
-          Shipping charges match our automated checkout estimator with zero surprise markups:
+          We dispatch across regional metro hubs and Pan-India destinations based on your 6-digit destination PIN code. Exact delivery charges and estimated courier transit windows for your address are revealed on demand directly inside the Delivery &amp; PIN Estimator on any{' '}
+          <Link href="/shop" className="text-terracotta underline underline-offset-4 font-medium">
+            product page
+          </Link>{' '}
+          or within your{' '}
+          <Link href="/cart" className="text-terracotta underline underline-offset-4 font-medium">
+            shopping bag
+          </Link>{' '}
+          before checkout.
         </p>
-
-        <div className="overflow-x-auto rounded-xl border border-hairline">
-          <table className="w-full text-left text-xs sm:text-sm border-collapse">
-            <thead>
-              <tr className="bg-linen border-b border-hairline text-ink">
-                <th className="py-3 px-4 font-semibold">Zone &amp; Region</th>
-                <th className="py-3 px-4 font-semibold">PIN Prefix</th>
-                <th className="py-3 px-4 font-semibold">Flat Rate</th>
-                <th className="py-3 px-4 font-semibold">Est. Transit</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-hairline text-umber">
-              <tr>
-                <td className="py-3 px-4 font-medium text-ink">Zone A &mdash; Kashmir Valley &amp; Ladakh</td>
-                <td className="py-3 px-4 font-mono">19*</td>
-                <td className="py-3 px-4 font-semibold text-ink tabular-nums">&#8377;60</td>
-                <td className="py-3 px-4">1–2 business days</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-4 font-medium text-ink">Zone A &mdash; Jammu Region</td>
-                <td className="py-3 px-4 font-mono">18*</td>
-                <td className="py-3 px-4 font-semibold text-ink tabular-nums">&#8377;60</td>
-                <td className="py-3 px-4">2–3 business days</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-4 font-medium text-ink">Zone B &mdash; Delhi NCR, Haryana, Punjab, W. UP</td>
-                <td className="py-3 px-4 font-mono">11*, 12*, 14*, 20*</td>
-                <td className="py-3 px-4 font-semibold text-ink tabular-nums">&#8377;120</td>
-                <td className="py-3 px-4">3–4 business days</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-4 font-medium text-ink">Zone C &mdash; Pan-India Express</td>
-                <td className="py-3 px-4 font-mono">All Other PINs (*)</td>
-                <td className="py-3 px-4 font-semibold text-ink tabular-nums">&#8377;150</td>
-                <td className="py-3 px-4">4–6 business days</td>
-              </tr>
-            </tbody>
-          </table>
+        <ul className="list-disc pl-5 space-y-1.5 text-umber">
+          <li>
+            <strong>Srinagar &amp; Bangalore Studio Metro Zones:</strong> Priority 1–2 business day dispatch across local city hubs.
+          </li>
+          <li>
+            <strong>Pan-India Express Coverage:</strong> 3–6 business days via air cargo and India Post Speed Post across serviceable PIN codes nationwide.
+          </li>
+        </ul>
+        <div className="pt-1 flex flex-wrap gap-3">
+          <LinkButton href="/shop" variant="primary" size="sm" className="rounded-full">
+            Browse Products to Check PIN &rarr;
+          </LinkButton>
+          <LinkButton href="/cart" variant="secondary" size="sm" className="rounded-full">
+            Open Shopping Bag Estimator
+          </LinkButton>
         </div>
       </section>
 

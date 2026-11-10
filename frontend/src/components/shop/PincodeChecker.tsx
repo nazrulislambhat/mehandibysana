@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePincodeStore } from '@/store/pincode-store';
 
 export interface PincodeCheckerProps {
@@ -9,9 +9,9 @@ export interface PincodeCheckerProps {
 }
 
 const QUICK_SAMPLES = [
-  { pin: '190001', label: '190001 · Kashmir' },
-  { pin: '110001', label: '110001 · Delhi NCR' },
-  { pin: '400001', label: '400001 · Mumbai' },
+  { pin: '190001', label: '190001 · Srinagar' },
+  { pin: '560001', label: '560001 · Bangalore' },
+  { pin: '110001', label: '110001 · Delhi' },
 ];
 
 export function PincodeChecker({
@@ -25,14 +25,20 @@ export function PincodeChecker({
   const setPincode = usePincodeStore((s) => s.setPincode);
   const checkPincode = usePincodeStore((s) => s.checkPincode);
 
+  useEffect(() => {
+    if (pincode.length === 6) {
+      void checkPincode(pincode, subtotal);
+    }
+  }, [pincode, subtotal, checkPincode]);
+
   const handleCheckSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    void checkPincode(pincode, subtotal);
+    void checkPincode(pincode, subtotal, { force: true });
   };
 
   const handleQuickSample = (samplePin: string) => {
     setPincode(samplePin);
-    void checkPincode(samplePin, subtotal);
+    void checkPincode(samplePin, subtotal, { force: true });
   };
 
   return (

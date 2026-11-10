@@ -27,7 +27,7 @@ export function AddToCartButton({
   variant = 'primary',
   size = 'md',
   className = '',
-  openDrawerOnAdd = true,
+  openDrawerOnAdd = false,
 }: AddToCartButtonProps) {
   const addItem = useCartStore((state) => state.addItem);
   const [submitting, setSubmitting] = useState(false);

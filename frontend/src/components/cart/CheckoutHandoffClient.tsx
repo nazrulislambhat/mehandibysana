@@ -137,6 +137,12 @@ export function CheckoutHandoffClient() {
   const currency = cart?.currencySymbol ?? '₹';
   const subtotal = cart?.subtotal ?? 0;
 
+  useEffect(() => {
+    if (pincode.length === 6) {
+      void checkPincode(pincode, subtotal);
+    }
+  }, [pincode, subtotal, checkPincode]);
+
   const activePinCheck =
     pincodeResult && pincodeResult.pincode === pincode && pincode.length === 6
       ? pincodeResult
@@ -181,10 +187,7 @@ export function CheckoutHandoffClient() {
       return;
     }
 
-    let resolvedDelivery = activePinCheck;
-    if (!resolvedDelivery) {
-      resolvedDelivery = await checkPincode(pincode, subtotal);
-    }
+    const resolvedDelivery = await checkPincode(pincode, subtotal, { force: true });
 
     if (!resolvedDelivery || !resolvedDelivery.serviceable) {
       setSubmitError(
@@ -333,6 +336,7 @@ export function CheckoutHandoffClient() {
           currency?: string;
           pricing?: {
             total?: number;
+            shippingFee?: number;
             discountAmount?: number;
           };
           message?: string;
@@ -354,6 +358,10 @@ export function CheckoutHandoffClient() {
           createData.pricing?.total !== undefined
             ? createData.pricing.total
             : finalTotal;
+        const serverVerifiedShipping =
+          createData.pricing?.shippingFee !== undefined
+            ? createData.pricing.shippingFee
+            : finalShipping;
         const serverVerifiedDiscount =
           createData.pricing?.discountAmount !== undefined
             ? createData.pricing.discountAmount
@@ -403,6 +411,7 @@ export function CheckoutHandoffClient() {
                 razorpayPaymentId?: string;
                 pricing?: {
                   total?: number;
+                  shippingFee?: number;
                   discountAmount?: number;
                 };
                 message?: string;
@@ -426,7 +435,8 @@ export function CheckoutHandoffClient() {
                 discountAmount:
                   verifyData.pricing?.discountAmount ?? serverVerifiedDiscount,
                 total: verifyData.pricing?.total ?? serverVerifiedTotal,
-                deliveryFee: finalShipping,
+                deliveryFee:
+                  verifyData.pricing?.shippingFee ?? serverVerifiedShipping,
                 pincode,
                 pattern: matchedPattern,
                 paymentMethod: 'Razorpay Online (Paid)',
@@ -476,6 +486,7 @@ export function CheckoutHandoffClient() {
         orderNumber?: string;
         pricing?: {
           total?: number;
+          shippingFee?: number;
           discountAmount?: number;
         };
         message?: string;
@@ -498,7 +509,7 @@ export function CheckoutHandoffClient() {
         couponCode: resolvedCouponCode || undefined,
         discountAmount: data.pricing?.discountAmount ?? finalDiscount,
         total: data.pricing?.total ?? finalTotal,
-        deliveryFee: finalShipping,
+        deliveryFee: data.pricing?.shippingFee ?? finalShipping,
         pincode,
         pattern: matchedPattern,
         paymentMethod: 'Cash on Delivery (COD)',
@@ -853,7 +864,7 @@ export function CheckoutHandoffClient() {
                         className="mt-1 accent-[#d9541e]"
                       />
                       <div>
-                        <span className="block font-semibold">Razorpay Online</span>
+                        <span className="block font-semibold">Razorpay</span>
                         <span
                           className={`block text-[11px] mt-0.5 ${
                             paymentMethod === 'razorpay'

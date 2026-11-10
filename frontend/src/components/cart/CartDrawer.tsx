@@ -196,14 +196,21 @@ export function CartDrawer() {
     };
   }, [isOpen, lastAddedKey, lastAddedAt, clearLastAdded]);
 
+  const items = cart?.items ?? [];
+  const itemCount = cart?.itemsCount ?? 0;
+  const subtotal = cart?.subtotal ?? 0;
+
+  useEffect(() => {
+    if (isOpen && pincode.length === 6) {
+      void checkPincode(pincode, subtotal);
+    }
+  }, [isOpen, pincode, subtotal, checkPincode]);
+
   const isVisible = isOpen || phase !== 'closed';
   if (!isClient || !isVisible) return null;
 
   const renderState: FolioPhase = isOpen && phase === 'closed' ? 'opening' : phase;
 
-  const items = cart?.items ?? [];
-  const itemCount = cart?.itemsCount ?? 0;
-  const subtotal = cart?.subtotal ?? 0;
   const currency = cart?.currencySymbol ?? '₹';
   const activeDelivery =
     pincodeResult?.serviceable && pincodeResult.pincode.length === 6
@@ -218,12 +225,12 @@ export function CartDrawer() {
 
   const handleQuickPinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    void checkPincode(pincode, subtotal);
+    void checkPincode(pincode, subtotal, { force: true });
   };
 
   const handleSamplePin = (sample: string) => {
     setPincode(sample);
-    void checkPincode(sample, subtotal);
+    void checkPincode(sample, subtotal, { force: true });
   };
 
   const modalWidthClass =
@@ -425,7 +432,7 @@ export function CartDrawer() {
                 <span className="font-medium text-ink tabular-nums">
                   {activeDelivery
                     ? `PIN ${activeDelivery.pincode} · ${activeDelivery.estimatedDays}`
-                    : 'Kashmir ₹60 · Metro ₹120 · India ₹150'}
+                    : 'Check PIN in Order Dossier'}
                 </span>
               </div>
 
@@ -467,7 +474,7 @@ export function CartDrawer() {
                             : 'border-hairline hover:border-divider'
                         }`}
                       >
-                        <div className="relative h-24 w-20 sm:h-28 sm:w-22 shrink-0 overflow-hidden rounded-xl border border-hairline bg-linen">
+                        <div className="relative h-24 w-20 sm:h-28 sm:w-[88px] shrink-0 overflow-hidden rounded-xl border border-hairline bg-linen">
                           <span
                             aria-hidden="true"
                             className="absolute top-1.5 left-1.5 z-10 rounded-full bg-ink px-1.5 py-0.5 font-serif text-[10px] italic text-inverse leading-none"
@@ -479,6 +486,7 @@ export function CartDrawer() {
                               src={item.image.src}
                               alt={item.image.alt || item.name}
                               fill
+                              unoptimized
                               sizes="88px"
                               className="object-cover"
                             />
@@ -661,9 +669,9 @@ export function CartDrawer() {
 
                       <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
                         {[
-                          { pin: '190001', tag: '190001 · J&K' },
+                          { pin: '190001', tag: '190001 · Srinagar' },
+                          { pin: '560001', tag: '560001 · Bangalore' },
                           { pin: '110001', tag: '110001 · Delhi' },
-                          { pin: '400001', tag: '400001 · Mumbai' },
                         ].map((sample) => (
                           <button
                             key={sample.pin}

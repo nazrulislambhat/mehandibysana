@@ -4,7 +4,11 @@ import {
   hashMedusaId,
   resolveStorefrontAssetUrl,
 } from '@/lib/wc-catalog';
-import type { StorefrontCart, StorefrontCartItem } from '@/types/storefront';
+import type {
+  StorefrontCart,
+  StorefrontCartItem,
+  StorefrontProduct,
+} from '@/types/storefront';
 
 export interface StoreProxyResult {
   cart: StorefrontCart | null;
@@ -25,6 +29,7 @@ interface MedusaCartLineItem {
   subtotal?: number;
   variant_id?: string;
   variant_title?: string | null;
+  product_id?: string | null;
   product_handle?: string | null;
 }
 
@@ -48,8 +53,45 @@ function buildHeaders(publishableKey: string | null): Record<string, string> {
   return headers;
 }
 
-function normalizeMedusaCart(raw: MedusaCart): StorefrontCart {
+async function normalizeMedusaCart(raw: MedusaCart): Promise<StorefrontCart> {
   const rawItems = raw.items || [];
+
+  const byVariantId = new Map<string, StorefrontProduct>();
+  const byProductId = new Map<string, StorefrontProduct>();
+  const byHandle = new Map<string, StorefrontProduct>();
+  const byTitle = new Map<string, StorefrontProduct>();
+
+  const needsCatalogEnrichment = rawItems.some(
+    (item) =>
+      !item.thumbnail ||
+      !item.thumbnail.trim() ||
+      !item.product_handle
+  );
+
+  if (rawItems.length > 0 && needsCatalogEnrichment) {
+    try {
+      const catalog = await fetchCatalogProducts({ perPage: 100 });
+      for (const prod of catalog.products) {
+        if (prod.medusaId) {
+          byProductId.set(prod.medusaId, prod);
+        }
+        if (prod.slug) {
+          byHandle.set(prod.slug.toLowerCase(), prod);
+        }
+        if (prod.name) {
+          byTitle.set(prod.name.trim().toLowerCase(), prod);
+        }
+        for (const variation of prod.variations) {
+          if (variation.medusaVariantId) {
+            byVariantId.set(variation.medusaVariantId, prod);
+          }
+        }
+      }
+    } catch {
+      // Non-fatal fallback: continue with line-item fields directly
+    }
+  }
+
   const items: StorefrontCartItem[] = rawItems.map((item) => {
     const qty = Math.max(1, Number(item.quantity) || 1);
     const unitPrice = Number(item.unit_price) || 0;
@@ -67,24 +109,42 @@ function normalizeMedusaCart(raw: MedusaCart): StorefrontCart {
         ? item.variant_title
         : null;
 
+    const matchedProduct =
+      (item.variant_id ? byVariantId.get(item.variant_id) : undefined) ??
+      (item.product_id ? byProductId.get(item.product_id) : undefined) ??
+      (item.product_handle
+        ? byHandle.get(item.product_handle.toLowerCase())
+        : undefined) ??
+      (item.title ? byTitle.get(item.title.trim().toLowerCase()) : undefined);
+
+    const directThumb =
+      item.thumbnail && item.thumbnail.trim()
+        ? resolveStorefrontAssetUrl(item.thumbnail)
+        : '';
+    const catalogThumb = matchedProduct?.images[0]?.src
+      ? resolveStorefrontAssetUrl(matchedProduct.images[0].src)
+      : '';
+    const resolvedSrc = directThumb || catalogThumb;
+    const resolvedSlug = item.product_handle || matchedProduct?.slug || '';
+
     return {
       key: item.id,
       productId: hashMedusaId(item.variant_id || item.id),
       medusaVariantId: item.variant_id,
-      name: item.title || 'Henna Product',
+      name: item.title || matchedProduct?.name || 'Henna Product',
       quantity: qty,
       unitPrice,
       lineTotal,
       currencySymbol: '₹',
-      image: item.thumbnail
+      image: resolvedSrc
         ? {
             id: hashMedusaId(`${item.id}-img`),
-            src: resolveStorefrontAssetUrl(item.thumbnail),
-            alt: item.title || 'Product',
+            src: resolvedSrc,
+            alt: item.title || matchedProduct?.name || 'Product',
           }
         : null,
       variationLabel: variantLabel,
-      slug: item.product_handle || '',
+      slug: resolvedSlug,
     };
   });
 
@@ -260,7 +320,7 @@ export async function proxyStoreCart(params: {
         };
       }
       return {
-        cart: normalizeMedusaCart(activeCart),
+        cart: await normalizeMedusaCart(activeCart),
         cartToken: activeCart.id,
         nonce: 'medusa-v2',
         status: 200,
@@ -290,7 +350,7 @@ export async function proxyStoreCart(params: {
       const variantId = await resolveMedusaVariantId(params.body);
       if (!variantId) {
         return {
-          cart: normalizeMedusaCart(activeCart),
+          cart: await normalizeMedusaCart(activeCart),
           cartToken: activeCart.id,
           nonce: 'medusa-v2',
           status: 400,
@@ -319,7 +379,7 @@ export async function proxyStoreCart(params: {
 
       if (!addRes.ok || !addData.cart) {
         return {
-          cart: normalizeMedusaCart(activeCart),
+          cart: await normalizeMedusaCart(activeCart),
           cartToken: activeCart.id,
           nonce: 'medusa-v2',
           status: addRes.status,
@@ -328,7 +388,7 @@ export async function proxyStoreCart(params: {
       }
 
       return {
-        cart: normalizeMedusaCart(addData.cart),
+        cart: await normalizeMedusaCart(addData.cart),
         cartToken: addData.cart.id,
         nonce: 'medusa-v2',
         status: 200,
@@ -342,7 +402,7 @@ export async function proxyStoreCart(params: {
       const quantity = Math.max(1, Number(params.body?.quantity) || 1);
       if (!lineId) {
         return {
-          cart: normalizeMedusaCart(activeCart),
+          cart: await normalizeMedusaCart(activeCart),
           cartToken: activeCart.id,
           nonce: 'medusa-v2',
           status: 400,
@@ -367,7 +427,7 @@ export async function proxyStoreCart(params: {
 
       if (!updRes.ok || !updData.cart) {
         return {
-          cart: normalizeMedusaCart(activeCart),
+          cart: await normalizeMedusaCart(activeCart),
           cartToken: activeCart.id,
           nonce: 'medusa-v2',
           status: updRes.status,
@@ -376,7 +436,7 @@ export async function proxyStoreCart(params: {
       }
 
       return {
-        cart: normalizeMedusaCart(updData.cart),
+        cart: await normalizeMedusaCart(updData.cart),
         cartToken: updData.cart.id,
         nonce: 'medusa-v2',
         status: 200,
@@ -389,7 +449,7 @@ export async function proxyStoreCart(params: {
       const lineId = String(params.body?.key || '');
       if (!lineId) {
         return {
-          cart: normalizeMedusaCart(activeCart),
+          cart: await normalizeMedusaCart(activeCart),
           cartToken: activeCart.id,
           nonce: 'medusa-v2',
           status: 400,
@@ -417,7 +477,7 @@ export async function proxyStoreCart(params: {
         nextCart = delData.parent || delData.cart || null;
         if (!delRes.ok) {
           return {
-            cart: normalizeMedusaCart(activeCart),
+            cart: await normalizeMedusaCart(activeCart),
             cartToken: activeCart.id,
             nonce: 'medusa-v2',
             status: delRes.status,
@@ -437,7 +497,7 @@ export async function proxyStoreCart(params: {
       }
 
       return {
-        cart: nextCart ? normalizeMedusaCart(nextCart) : normalizeMedusaCart(activeCart),
+        cart: await normalizeMedusaCart(nextCart ?? activeCart),
         cartToken: activeCart.id,
         nonce: 'medusa-v2',
         status: 200,
@@ -446,7 +506,7 @@ export async function proxyStoreCart(params: {
     }
 
     return {
-      cart: normalizeMedusaCart(activeCart),
+      cart: await normalizeMedusaCart(activeCart),
       cartToken: activeCart.id,
       nonce: 'medusa-v2',
       status: 400,

@@ -83,7 +83,7 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         question: 'How fast do orders dispatch from your Srinagar & Bangalore studios?',
         answer:
-          'Small-batch organic cone orders are rolled fresh and dispatched within 1–2 business days via DTDC Air, Delhivery, Blue Dart, or India Post Speed Post. Transit takes 1–3 days in Jammu & Kashmir (19*/18* PINs, ₹60), 3–4 days to Delhi/North metros (₹120), and 4–6 days Pan-India (₹150).',
+          'Small-batch organic cone orders are rolled fresh and dispatched within 1–2 business days via DTDC Air, Delhivery, Blue Dart, or India Post Speed Post. Transit takes 1–2 business days across local Srinagar & Bangalore metro PINs and 3–6 business days Pan-India. Enter your 6-digit PIN on any product page or inside your shopping bag to check exact delivery rates and ETA for your address.',
       },
       {
         question: 'How can I track my order after checkout?',

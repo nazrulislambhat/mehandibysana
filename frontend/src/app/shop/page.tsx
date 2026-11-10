@@ -132,7 +132,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   </span>
                 </p>
                 <p className="mt-2 pt-2 border-t border-inverse/15 text-[11px] text-inverse/70">
-                  Kashmir ₹60 &middot; Metro ₹120 &middot; Pan-India ₹150
+                  Small-batch dispatch &middot; Check PIN on product or bag
                 </p>
               </div>
             </div>

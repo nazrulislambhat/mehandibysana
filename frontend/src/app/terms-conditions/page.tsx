@@ -156,11 +156,11 @@ export default function TermsConditionsPage() {
             All storefront prices are quoted in <strong>Indian Rupees (INR / &#8377;)</strong> and are inclusive of applicable GST unless explicitly stated otherwise.
           </li>
           <li>
-            PIN-code delivery charges are calculated dynamically at checkout before payment based on destination zone rates published in our{' '}
+            PIN-code delivery charges are calculated dynamically for your 6-digit PIN code and can be checked beforehand on any product page, inside your shopping bag estimator, or at checkout prior to payment (see our{' '}
             <Link href="/shipping-policy" className="text-terracotta underline underline-offset-4">
               Shipping Policy
             </Link>
-            .
+            ).
           </li>
           <li>
             Studio coupon codes may specify percentage or fixed-INR discounts, minimum order subtotals, active validity windows, and single-use or total usage caps. Coupons cannot be combined sequentially, transferred for cash value, or applied retroactively after an order has been placed.

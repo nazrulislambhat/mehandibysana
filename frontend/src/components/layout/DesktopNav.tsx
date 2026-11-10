@@ -394,19 +394,19 @@ export function DesktopNav() {
 
                   <div className="mt-4 rounded-xl border border-hairline bg-paper/90 p-3.5 space-y-1.5">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink">
-                      Pincode Delivery Tiers
+                      Studio Dispatch Standards
                     </p>
                     <div className="flex items-center justify-between text-xs text-umber">
-                      <span>Kashmir Valley (19*)</span>
-                      <span className="font-semibold text-terracotta">₹60</span>
+                      <span>Fresh Rolling</span>
+                      <span className="font-medium text-ink">1–2 business days</span>
                     </div>
                     <div className="flex items-center justify-between text-xs text-umber">
-                      <span>North &amp; Metro Hubs (11*–20*)</span>
-                      <span className="font-semibold text-ink">₹120</span>
+                      <span>Coverage</span>
+                      <span className="font-medium text-ink">Pan-India Courier</span>
                     </div>
                     <div className="flex items-center justify-between text-xs text-umber">
-                      <span>Rest of India (*)</span>
-                      <span className="font-semibold text-ink">₹150</span>
+                      <span>Delivery Estimate</span>
+                      <span className="font-medium text-terracotta">PIN check on product &amp; bag</span>
                     </div>
                   </div>
                 </div>

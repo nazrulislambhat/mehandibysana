@@ -39,7 +39,9 @@ export function CartView() {
   const removeItem = useCartStore((state) => state.removeItem);
   const clearError = useCartStore((state) => state.clearError);
 
+  const pincode = usePincodeStore((state) => state.pincode);
   const pincodeResult = usePincodeStore((state) => state.result);
+  const checkPincode = usePincodeStore((state) => state.checkPincode);
   const couponValidation = useCouponStore((state) => state.validation);
 
   useEffect(() => {
@@ -52,6 +54,12 @@ export function CartView() {
   const itemCount = cart?.itemsCount ?? 0;
   const currency = cart?.currencySymbol ?? '₹';
   const subtotal = cart?.subtotal ?? 0;
+
+  useEffect(() => {
+    if (pincode.length === 6) {
+      void checkPincode(pincode, subtotal);
+    }
+  }, [pincode, subtotal, checkPincode]);
   const deliveryFee =
     pincodeResult?.serviceable && pincodeResult.pincode.length === 6
       ? pincodeResult.deliveryCharge
@@ -204,6 +212,7 @@ export function CartView() {
                             src={item.image.src}
                             alt={item.image.alt || item.name}
                             fill
+                            unoptimized
                             sizes="112px"
                             className="object-cover"
                           />

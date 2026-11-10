@@ -84,7 +84,7 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      addItem: async ({ id, quantity = 1, variation, openBag = true }) => {
+      addItem: async ({ id, quantity = 1, variation, openBag = false }) => {
         const { cartToken, nonce, cart: prevCart } = get();
         const prevItems = prevCart?.items ?? [];
         set({ isLoading: true, error: null });

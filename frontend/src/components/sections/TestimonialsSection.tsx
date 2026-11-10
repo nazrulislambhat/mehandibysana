@@ -140,7 +140,7 @@ export function TestimonialsSection({ reviews = [] }: TestimonialsSectionProps) 
                         rel="noopener noreferrer"
                         className="inline-flex items-center rounded-full border border-terracotta/45 px-3 py-1 text-xs font-medium text-terracotta hover:bg-terracotta hover:text-inverse transition-colors"
                       >
-                        {item.linkLabel || 'Read article'} &nearr;
+                        {item.linkLabel || 'Read article'} &#8599;
                       </a>
                     ) : null}
                   </figcaption>
