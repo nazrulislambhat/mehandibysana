@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useCartStore } from '@/store/cart-store';
+import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
+import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 
@@ -95,6 +97,10 @@ export function CheckoutHandoffClient() {
   const setPincode = usePincodeStore((state) => state.setPincode);
   const checkPincode = usePincodeStore((state) => state.checkPincode);
 
+  const couponValidation = useCouponStore((state) => state.validation);
+  const removeCoupon = useCouponStore((state) => state.removeCoupon);
+  const syncCoupon = useCouponStore((state) => state.syncWithTotals);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -109,6 +115,9 @@ export function CheckoutHandoffClient() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [confirmedOrder, setConfirmedOrder] = useState<{
     orderNumber: string;
+    subtotal: number;
+    couponCode?: string;
+    discountAmount: number;
     total: number;
     deliveryFee: number;
     pincode: string;
@@ -134,7 +143,13 @@ export function CheckoutHandoffClient() {
       : null;
 
   const deliveryFee = activePinCheck?.serviceable ? activePinCheck.deliveryCharge : 0;
-  const grandTotal = subtotal + deliveryFee;
+  const activeCouponCode = couponValidation?.valid ? couponValidation.code : '';
+  const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
+  const grandTotal = Math.max(
+    0,
+    Math.round((subtotal + deliveryFee - discountAmount) * 100) / 100
+  );
+  const isZeroTotalCouponOrder = grandTotal === 0 && Boolean(activeCouponCode);
 
   const handlePincodeFieldChange = (val: string) => {
     const clean = val.replace(/\D/g, '').slice(0, 6);
@@ -178,18 +193,24 @@ export function CheckoutHandoffClient() {
       return;
     }
 
-    if (paymentMethod === 'cod' && !resolvedDelivery.codAvailable) {
+    const finalShipping = resolvedDelivery.deliveryCharge;
+    const finalDiscount = couponValidation?.valid ? couponValidation.discountAmount : 0;
+    const resolvedCouponCode = couponValidation?.valid ? couponValidation.code : '';
+    const finalTotal = Math.max(
+      0,
+      Math.round((subtotal + finalShipping - finalDiscount) * 100) / 100
+    );
+    const matchedPattern = resolvedDelivery.matchedRule?.pattern || '*';
+
+    if (finalTotal > 0 && paymentMethod === 'cod' && !resolvedDelivery.codAvailable) {
       setSubmitError(
         `Cash on Delivery is unavailable for PIN ${pincode}. Please choose Razorpay Online Payment.`
       );
       return;
     }
 
-    const finalShipping = resolvedDelivery.deliveryCharge;
-    const finalTotal = subtotal + finalShipping;
-    const matchedPattern = resolvedDelivery.matchedRule?.pattern || '*';
-
     const baseOrderPayload = {
+      ...(resolvedCouponCode ? { couponCode: resolvedCouponCode } : {}),
       customer: {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
@@ -211,6 +232,8 @@ export function CheckoutHandoffClient() {
       pricing: {
         subtotal,
         shippingFee: finalShipping,
+        discountAmount: finalDiscount,
+        couponCode: resolvedCouponCode || undefined,
         total: finalTotal,
         pincodeRule: matchedPattern,
       },
@@ -223,6 +246,53 @@ export function CheckoutHandoffClient() {
     setSubmitError(null);
 
     try {
+      // Flow 0: 100% Coupon Discount (₹0 total — skip payment gateway)
+      if (finalTotal === 0 && resolvedCouponCode) {
+        const freeRes = await fetch('/api/checkout-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...baseOrderPayload,
+            payment: {
+              method: 'free_coupon',
+              status: 'paid',
+            },
+          }),
+        });
+
+        const freeData = (await freeRes.json()) as {
+          success?: boolean;
+          code?: string;
+          orderNumber?: string;
+          message?: string;
+        };
+
+        if (!freeRes.ok || !freeData.success) {
+          if (freeData.code?.startsWith('COUPON_')) {
+            void syncCoupon(subtotal, finalShipping);
+          }
+          setSubmitting(false);
+          setSubmitError(freeData.message || 'Unable to place discounted order.');
+          return;
+        }
+
+        removeCoupon();
+        resetCartAfterOrder();
+        setConfirmedOrder({
+          orderNumber: freeData.orderNumber || 'MBS-FREE',
+          subtotal,
+          couponCode: resolvedCouponCode,
+          discountAmount: finalDiscount,
+          total: 0,
+          deliveryFee: finalShipping,
+          pincode,
+          pattern: matchedPattern,
+          paymentMethod: '100% Coupon Discount',
+        });
+        setSubmitting(false);
+        return;
+      }
+
       // Flow A: Razorpay Online Checkout (UPI, Cards, NetBanking, Wallets)
       if (paymentMethod === 'razorpay') {
         const sdkLoaded = await loadRazorpayCheckoutScript();
@@ -240,25 +310,38 @@ export function CheckoutHandoffClient() {
           body: JSON.stringify({
             amount: finalTotal,
             currency: 'INR',
+            items: baseOrderPayload.items,
+            pincode,
+            shippingFee: finalShipping,
+            ...(resolvedCouponCode ? { couponCode: resolvedCouponCode } : {}),
             notes: {
               customer_name: `${firstName.trim()} ${lastName.trim()}`.trim(),
               customer_email: email.trim(),
               pincode,
               pincode_rule: matchedPattern,
+              ...(resolvedCouponCode ? { coupon_code: resolvedCouponCode } : {}),
             },
           }),
         });
 
         const createData = (await createRes.json()) as {
           success?: boolean;
+          code?: string;
           keyId?: string;
           razorpayOrderId?: string;
           amountPaise?: number;
           currency?: string;
+          pricing?: {
+            total?: number;
+            discountAmount?: number;
+          };
           message?: string;
         };
 
         if (!createRes.ok || !createData.success || !createData.keyId || !createData.razorpayOrderId) {
+          if (createData.code?.startsWith('COUPON_')) {
+            void syncCoupon(subtotal, finalShipping);
+          }
           setSubmitting(false);
           setSubmitError(
             createData.message ||
@@ -267,9 +350,18 @@ export function CheckoutHandoffClient() {
           return;
         }
 
+        const serverVerifiedTotal =
+          createData.pricing?.total !== undefined
+            ? createData.pricing.total
+            : finalTotal;
+        const serverVerifiedDiscount =
+          createData.pricing?.discountAmount !== undefined
+            ? createData.pricing.discountAmount
+            : finalDiscount;
+
         const rzp = new window.Razorpay({
           key: createData.keyId,
-          amount: createData.amountPaise ?? Math.round(finalTotal * 100),
+          amount: createData.amountPaise ?? Math.round(serverVerifiedTotal * 100),
           currency: createData.currency || 'INR',
           name: 'Mehandi by Sana',
           description: `Organic Henna & Studio Goods · PIN ${pincode}`,
@@ -282,6 +374,7 @@ export function CheckoutHandoffClient() {
           notes: {
             pincode,
             pincode_rule: matchedPattern,
+            ...(resolvedCouponCode ? { coupon_code: resolvedCouponCode } : {}),
           },
           theme: {
             color: '#d9541e',
@@ -308,6 +401,10 @@ export function CheckoutHandoffClient() {
                 success?: boolean;
                 orderNumber?: string;
                 razorpayPaymentId?: string;
+                pricing?: {
+                  total?: number;
+                  discountAmount?: number;
+                };
                 message?: string;
               };
 
@@ -320,10 +417,15 @@ export function CheckoutHandoffClient() {
                 return;
               }
 
+              removeCoupon();
               resetCartAfterOrder();
               setConfirmedOrder({
                 orderNumber: verifyData.orderNumber || 'MBS-PAID',
-                total: finalTotal,
+                subtotal,
+                couponCode: resolvedCouponCode || undefined,
+                discountAmount:
+                  verifyData.pricing?.discountAmount ?? serverVerifiedDiscount,
+                total: verifyData.pricing?.total ?? serverVerifiedTotal,
                 deliveryFee: finalShipping,
                 pincode,
                 pattern: matchedPattern,
@@ -370,20 +472,32 @@ export function CheckoutHandoffClient() {
 
       const data = (await res.json()) as {
         success?: boolean;
+        code?: string;
         orderNumber?: string;
+        pricing?: {
+          total?: number;
+          discountAmount?: number;
+        };
         message?: string;
       };
 
       if (!res.ok || !data.success) {
+        if (data.code?.startsWith('COUPON_')) {
+          void syncCoupon(subtotal, finalShipping);
+        }
         setSubmitting(false);
         setSubmitError(data.message || 'Unable to place order in MedusaJS.');
         return;
       }
 
+      removeCoupon();
       resetCartAfterOrder();
       setConfirmedOrder({
         orderNumber: data.orderNumber || 'MBS-ORDER',
-        total: finalTotal,
+        subtotal,
+        couponCode: resolvedCouponCode || undefined,
+        discountAmount: data.pricing?.discountAmount ?? finalDiscount,
+        total: data.pricing?.total ?? finalTotal,
         deliveryFee: finalShipping,
         pincode,
         pattern: matchedPattern,
@@ -436,6 +550,22 @@ export function CheckoutHandoffClient() {
                   </div>
                 ) : null}
                 <div className="flex justify-between gap-3">
+                  <dt className="text-umber">Items Subtotal</dt>
+                  <dd className="font-medium text-ink tabular-nums">
+                    {formatMoney(confirmedOrder.subtotal, currency)}
+                  </dd>
+                </div>
+                {confirmedOrder.discountAmount > 0 ? (
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-terracotta">
+                      Coupon{confirmedOrder.couponCode ? ` (${confirmedOrder.couponCode})` : ''}
+                    </dt>
+                    <dd className="font-semibold text-terracotta tabular-nums">
+                      &minus;{formatMoney(confirmedOrder.discountAmount, currency)}
+                    </dd>
+                  </div>
+                ) : null}
+                <div className="flex justify-between gap-3">
                   <dt className="text-umber">
                     Delivery PIN ({confirmedOrder.pincode} &middot; {confirmedOrder.pattern})
                   </dt>
@@ -449,7 +579,9 @@ export function CheckoutHandoffClient() {
                 </div>
                 <div className="flex justify-between border-t border-divider/60 pt-3">
                   <dt className="font-semibold text-ink">
-                    {confirmedOrder.razorpayPaymentId ? 'Total Paid' : 'Total Payable'}
+                    {confirmedOrder.razorpayPaymentId || confirmedOrder.total === 0
+                      ? 'Total Paid'
+                      : 'Total Payable'}
                   </dt>
                   <dd className="font-serif text-2xl font-medium text-ink tabular-nums">
                     {formatMoney(confirmedOrder.total, currency)}
@@ -695,63 +827,74 @@ export function CheckoutHandoffClient() {
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  <label
-                    className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
-                      paymentMethod === 'razorpay'
-                        ? 'border-ink bg-ink text-inverse shadow-xs'
-                        : 'border-divider bg-canvas text-ink hover:border-ink/60'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      checked={paymentMethod === 'razorpay'}
-                      onChange={() => setPaymentMethod('razorpay')}
-                      className="mt-1 accent-[#d9541e]"
-                    />
-                    <div>
-                      <span className="block font-semibold">Razorpay Online</span>
-                      <span
-                        className={`block text-[11px] mt-0.5 ${
-                          paymentMethod === 'razorpay'
-                            ? 'text-inverse/75'
-                            : 'text-umber'
-                        }`}
-                      >
-                        UPI, Credit/Debit Cards, NetBanking
-                      </span>
-                    </div>
-                  </label>
+                {isZeroTotalCouponOrder ? (
+                  <div className="rounded-xl border border-terracotta/45 bg-linen p-4 text-sm text-ink">
+                    <p className="font-semibold">
+                      Covered 100% by coupon <span className="font-mono text-terracotta">{activeCouponCode}</span>
+                    </p>
+                    <p className="text-xs text-umber mt-1">
+                      Your order total is ₹0. No online or COD payment is required.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <label
+                      className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
+                        paymentMethod === 'razorpay'
+                          ? 'border-ink bg-ink text-inverse shadow-xs'
+                          : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        checked={paymentMethod === 'razorpay'}
+                        onChange={() => setPaymentMethod('razorpay')}
+                        className="mt-1 accent-[#d9541e]"
+                      />
+                      <div>
+                        <span className="block font-semibold">Razorpay Online</span>
+                        <span
+                          className={`block text-[11px] mt-0.5 ${
+                            paymentMethod === 'razorpay'
+                              ? 'text-inverse/75'
+                              : 'text-umber'
+                          }`}
+                        >
+                          UPI, Credit/Debit Cards, NetBanking
+                        </span>
+                      </div>
+                    </label>
 
-                  <label
-                    className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
-                      paymentMethod === 'cod'
-                        ? 'border-ink bg-ink text-inverse shadow-xs'
-                        : 'border-divider bg-canvas text-ink hover:border-ink/60'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      checked={paymentMethod === 'cod'}
-                      onChange={() => setPaymentMethod('cod')}
-                      className="mt-1 accent-[#d9541e]"
-                    />
-                    <div>
-                      <span className="block font-semibold">Cash on Delivery</span>
-                      <span
-                        className={`block text-[11px] mt-0.5 ${
-                          paymentMethod === 'cod'
-                            ? 'text-inverse/75'
-                            : 'text-umber'
-                        }`}
-                      >
-                        Pay in cash upon parcel arrival
-                      </span>
-                    </div>
-                  </label>
-                </div>
+                    <label
+                      className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
+                        paymentMethod === 'cod'
+                          ? 'border-ink bg-ink text-inverse shadow-xs'
+                          : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        checked={paymentMethod === 'cod'}
+                        onChange={() => setPaymentMethod('cod')}
+                        className="mt-1 accent-[#d9541e]"
+                      />
+                      <div>
+                        <span className="block font-semibold">Cash on Delivery</span>
+                        <span
+                          className={`block text-[11px] mt-0.5 ${
+                            paymentMethod === 'cod'
+                              ? 'text-inverse/75'
+                              : 'text-umber'
+                          }`}
+                        >
+                          Pay in cash upon parcel arrival
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+                )}
 
                 <div>
                   <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5">
@@ -775,18 +918,23 @@ export function CheckoutHandoffClient() {
                 className="w-full rounded-full min-h-[52px]"
               >
                 {submitting
-                  ? paymentMethod === 'razorpay'
-                    ? 'Opening Razorpay…'
-                    : 'Placing Order…'
-                  : paymentMethod === 'razorpay'
-                    ? `Pay with Razorpay · ${formatMoney(grandTotal, currency)}`
-                    : `Place COD Order · ${formatMoney(grandTotal, currency)}`}
+                  ? isZeroTotalCouponOrder
+                    ? 'Confirming Free Order…'
+                    : paymentMethod === 'razorpay'
+                      ? 'Opening Razorpay…'
+                      : 'Placing Order…'
+                  : isZeroTotalCouponOrder
+                    ? `Complete Order · ${formatMoney(0, currency)}`
+                    : paymentMethod === 'razorpay'
+                      ? `Pay with Razorpay · ${formatMoney(grandTotal, currency)}`
+                      : `Place COD Order · ${formatMoney(grandTotal, currency)}`}
               </Button>
             </form>
 
             {/* Right Column */}
             <aside className="lg:col-span-5 space-y-5 lg:sticky lg:top-24">
               <PincodeChecker subtotal={subtotal} compact />
+              <CouponCodeBox subtotal={subtotal} shippingFee={deliveryFee} />
 
               <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
                 <div
@@ -837,6 +985,16 @@ export function CheckoutHandoffClient() {
                       {formatMoney(subtotal, currency)}
                     </dd>
                   </div>
+                  {discountAmount > 0 && activeCouponCode ? (
+                    <div className="flex justify-between">
+                      <dt className="text-terracotta">
+                        Coupon ({activeCouponCode})
+                      </dt>
+                      <dd className="font-semibold text-terracotta tabular-nums">
+                        &minus;{formatMoney(discountAmount, currency)}
+                      </dd>
+                    </div>
+                  ) : null}
                   <div className="flex justify-between">
                     <dt className="text-inverse/75">
                       Delivery

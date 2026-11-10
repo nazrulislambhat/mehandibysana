@@ -2,6 +2,7 @@
 
 import React, { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import { normalizeCategorySlug } from '@/lib/category-slugs';
 import type { StorefrontCategory } from '@/types/storefront';
 
 export interface ShopFiltersProps {
@@ -79,7 +80,9 @@ export function ShopFilters({
           </button>
 
           {categories.map((cat) => {
-            const isSelected = activeCategory === cat.slug;
+            const isSelected =
+              normalizeCategorySlug(activeCategory) ===
+              normalizeCategorySlug(cat.slug);
             return (
               <button
                 key={cat.id}

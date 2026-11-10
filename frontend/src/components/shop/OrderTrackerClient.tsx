@@ -26,6 +26,8 @@ export interface TrackedOrder {
   courierName: string;
   dispatchNote?: string;
   pincodeRule: string;
+  couponCode?: string;
+  discountAmount?: number;
   subtotal: number;
   shippingFee: number;
   total: number;
@@ -411,6 +413,16 @@ export function OrderTrackerClient({
                       {formatInr(order.subtotal)}
                     </dd>
                   </div>
+                  {(order.discountAmount ?? 0) > 0 ? (
+                    <div className="flex justify-between">
+                      <dt className="text-terracotta">
+                        Discount{order.couponCode ? ` (${order.couponCode})` : ''}
+                      </dt>
+                      <dd className="font-semibold text-terracotta tabular-nums">
+                        &minus;{formatInr(order.discountAmount ?? 0)}
+                      </dd>
+                    </div>
+                  ) : null}
                   <div className="flex justify-between">
                     <dt className="text-umber">Delivery ({order.pincodeRule})</dt>
                     <dd className="font-medium text-ink tabular-nums">

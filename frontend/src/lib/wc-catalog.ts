@@ -1,3 +1,4 @@
+import { normalizeCategorySlug } from '@/lib/category-slugs';
 import { getServerEnv } from '@/lib/env';
 import type {
   CatalogSummary,
@@ -106,8 +107,11 @@ interface MedusaCategory {
   id: string;
   name: string;
   handle: string;
+  rank?: number | null;
   description?: string | null;
 }
+
+export { normalizeCategorySlug };
 
 function medusaHeaders(publishableKey: string | null): Record<string, string> {
   const headers: Record<string, string> = {
@@ -439,8 +443,9 @@ export async function fetchCatalogProducts(
   let list = [...allResult.products];
 
   if (options.categorySlug) {
+    const targetSlug = normalizeCategorySlug(options.categorySlug);
     list = list.filter((p) =>
-      p.categories.some((c) => c.slug === options.categorySlug)
+      p.categories.some((c) => normalizeCategorySlug(c.slug) === targetSlug)
     );
   } else if (options.categoryId) {
     list = list.filter((p) =>
@@ -518,19 +523,24 @@ export async function fetchCatalogCategories(): Promise<StorefrontCategory[]> {
     const countsByHandle = new Map<string, number>();
     for (const prod of productsResult.products) {
       for (const cat of prod.categories) {
-        countsByHandle.set(cat.slug, (countsByHandle.get(cat.slug) || 0) + 1);
+        const key = normalizeCategorySlug(cat.slug);
+        countsByHandle.set(key, (countsByHandle.get(key) || 0) + 1);
       }
     }
 
     return rawCats
       .filter((c) => c.handle !== 'uncategorized')
-      .map((c) => ({
-        id: hashMedusaId(c.id),
-        medusaId: c.id,
-        name: decodeHtmlEntities(c.name),
-        slug: c.handle,
-        count: countsByHandle.get(c.handle) ?? 0,
-      }))
+      .sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999))
+      .map((c) => {
+        const cleanSlug = normalizeCategorySlug(c.handle);
+        return {
+          id: hashMedusaId(c.id),
+          medusaId: c.id,
+          name: decodeHtmlEntities(c.name),
+          slug: cleanSlug,
+          count: countsByHandle.get(cleanSlug) ?? 0,
+        };
+      })
       .filter((c) => c.count > 0);
   } catch {
     return [];

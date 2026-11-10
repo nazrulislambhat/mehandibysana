@@ -4,8 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCartStore } from '@/store/cart-store';
+import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { LinkButton } from '@/components/ui/Button';
+import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 
 type DrawerPhase = 'closed' | 'opening' | 'open' | 'closing';
@@ -39,6 +41,7 @@ export function CartDrawer() {
   const pinError = usePincodeStore((state) => state.error);
   const setPincode = usePincodeStore((state) => state.setPincode);
   const checkPincode = usePincodeStore((state) => state.checkPincode);
+  const couponValidation = useCouponStore((state) => state.validation);
 
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [phase, setPhase] = useState<DrawerPhase>('closed');
@@ -113,7 +116,12 @@ export function CartDrawer() {
     pincodeResult?.serviceable && pincodeResult.pincode.length === 6
       ? pincodeResult
       : null;
-  const estimatedTotal = subtotal + (activeDelivery?.deliveryCharge ?? 0);
+  const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
+  const appliedCouponCode = couponValidation?.valid ? couponValidation.code : '';
+  const estimatedTotal = Math.max(
+    0,
+    Math.round((subtotal + (activeDelivery?.deliveryCharge ?? 0) - discountAmount) * 100) / 100
+  );
 
   const handleQuickPinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -444,6 +452,14 @@ export function CartDrawer() {
 
         {/* Ink Black Receipt Dock Footer */}
         <div className="bg-ink text-inverse px-6 py-5 space-y-4 shrink-0 border-t border-ink">
+          {items.length > 0 ? (
+            <CouponCodeBox
+              subtotal={subtotal}
+              shippingFee={activeDelivery?.deliveryCharge ?? 0}
+              variant="drawer"
+            />
+          ) : null}
+
           <div className="space-y-1.5">
             <div className="flex items-baseline justify-between">
               <span className="text-xs uppercase tracking-[0.14em] text-inverse/75">
@@ -453,6 +469,15 @@ export function CartDrawer() {
                 {formatMoney(subtotal, currency)}
               </span>
             </div>
+
+            {discountAmount > 0 && appliedCouponCode ? (
+              <div className="flex items-center justify-between text-xs text-terracotta">
+                <span>Coupon ({appliedCouponCode})</span>
+                <span className="font-semibold tabular-nums">
+                  &minus;{formatMoney(discountAmount, currency)}
+                </span>
+              </div>
+            ) : null}
 
             {activeDelivery ? (
               <>
@@ -476,9 +501,21 @@ export function CartDrawer() {
                 </div>
               </>
             ) : (
-              <p className="text-[11px] text-inverse/70 leading-relaxed">
-                PIN delivery calculated below: ₹60 Kashmir &middot; ₹120 North/Metro &middot; ₹150 Pan-India.
-              </p>
+              <>
+                {discountAmount > 0 ? (
+                  <div className="pt-2 border-t border-inverse/15 flex items-baseline justify-between">
+                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-inverse">
+                      After Coupon (Excl. PIN Shipping)
+                    </span>
+                    <span className="font-serif text-2xl font-medium text-inverse tabular-nums">
+                      {formatMoney(estimatedTotal, currency)}
+                    </span>
+                  </div>
+                ) : null}
+                <p className="text-[11px] text-inverse/70 leading-relaxed">
+                  PIN delivery calculated above: ₹60 Kashmir &middot; ₹120 North/Metro &middot; ₹150 Pan-India.
+                </p>
+              </>
             )}
           </div>
 

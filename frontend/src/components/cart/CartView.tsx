@@ -4,8 +4,10 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCartStore } from '@/store/cart-store';
+import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
+import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 
@@ -38,6 +40,7 @@ export function CartView() {
   const clearError = useCartStore((state) => state.clearError);
 
   const pincodeResult = usePincodeStore((state) => state.result);
+  const couponValidation = useCouponStore((state) => state.validation);
 
   useEffect(() => {
     if (isHydrated && cartToken && cart === null && !isLoading && !error) {
@@ -53,7 +56,12 @@ export function CartView() {
     pincodeResult?.serviceable && pincodeResult.pincode.length === 6
       ? pincodeResult.deliveryCharge
       : null;
-  const estimatedTotal = subtotal + (deliveryFee ?? 0);
+  const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
+  const appliedCouponCode = couponValidation?.valid ? couponValidation.code : '';
+  const estimatedTotal = Math.max(
+    0,
+    Math.round((subtotal + (deliveryFee ?? 0) - discountAmount) * 100) / 100
+  );
 
   return (
     <div className="bg-canvas pb-20 md:pb-28">
@@ -298,6 +306,7 @@ export function CartView() {
               className="lg:col-span-5 space-y-5 lg:sticky lg:top-24"
             >
               <PincodeChecker subtotal={subtotal} compact />
+              <CouponCodeBox subtotal={subtotal} shippingFee={deliveryFee ?? 0} />
 
               <div className="relative overflow-hidden rounded-2xl bg-ink text-inverse p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
                 {/* Burnt Orange signature trim */}
@@ -326,6 +335,16 @@ export function CartView() {
                       {formatMoney(subtotal, currency)}
                     </dd>
                   </div>
+                  {discountAmount > 0 && appliedCouponCode ? (
+                    <div className="flex justify-between gap-3">
+                      <dt className="text-terracotta">
+                        Coupon ({appliedCouponCode})
+                      </dt>
+                      <dd className="font-semibold text-terracotta tabular-nums">
+                        &minus;{formatMoney(discountAmount, currency)}
+                      </dd>
+                    </div>
+                  ) : null}
                   <div className="flex justify-between gap-3">
                     <dt className="text-inverse/75">
                       Delivery
