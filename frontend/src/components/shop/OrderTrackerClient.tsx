@@ -22,7 +22,9 @@ export interface TrackedOrder {
   paymentStatus: string;
   paymentId: string;
   trackingNumber: string;
+  trackingUrl?: string;
   courierName: string;
+  dispatchNote?: string;
   pincodeRule: string;
   subtotal: number;
   shippingFee: number;
@@ -270,19 +272,38 @@ export function OrderTrackerClient({
 
             <div className="flex flex-col sm:items-end gap-2">
               <BotanicalSprig className="w-12 h-4 text-inverse/70" />
-              {order.trackingNumber ? (
-                <span className="inline-flex items-center rounded-full border border-inverse/25 px-3.5 py-1 font-mono text-xs text-inverse">
-                  AWB: {order.trackingNumber}
-                </span>
-              ) : (
+              <div className="flex flex-wrap sm:justify-end items-center gap-2">
                 <span className="inline-flex items-center rounded-full bg-terracotta px-3.5 py-1 text-xs font-medium text-inverse">
                   {order.courierName}
                 </span>
-              )}
+                {order.trackingNumber ? (
+                  <span className="inline-flex items-center rounded-full border border-inverse/25 px-3.5 py-1 font-mono text-xs text-inverse">
+                    Ref / AWB: {order.trackingNumber}
+                  </span>
+                ) : null}
+              </div>
+              {order.trackingUrl ? (
+                <a
+                  href={order.trackingUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-inverse transition-colors"
+                >
+                  Open Courier Tracking &rarr;
+                </a>
+              ) : null}
             </div>
           </div>
 
           <div className="p-6 sm:p-8 md:p-10 space-y-8">
+            {order.dispatchNote ? (
+              <div className="rounded-xl border border-terracotta/35 bg-linen p-4 text-xs sm:text-sm text-ink leading-relaxed">
+                <span className="font-semibold uppercase tracking-[0.12em] text-[10px] text-terracotta block mb-1">
+                  Studio Dispatch Update
+                </span>
+                {order.dispatchNote}
+              </div>
+            ) : null}
             {/* 4-Stage Visual Progress Timeline */}
             {order.fulfillmentStage === 'cancelled' ? (
               <div className="rounded-xl border border-crimson/35 bg-paper p-4 text-sm text-crimson">

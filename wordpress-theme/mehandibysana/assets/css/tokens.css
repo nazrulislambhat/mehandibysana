@@ -1,0 +1,105 @@
+/**
+ * Design Tokens — Mehandi by Sana Atelier
+ * Portable CSS Custom Properties powering typography, palette, spacing, radii & motion.
+ */
+
+:root {
+  /* ==========================================================================
+     COLORS — White (#ffffff) canvas, Linen (#f7f7f7), Ink Black (#111111),
+     Cream (#fceee3) inverse, Burnt Orange (#d9541e) accent
+     ========================================================================== */
+  --color-bg: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-card: #ffffff;
+
+  --color-text: #111111;
+  --color-text-muted: #525252;
+  --color-text-inverse: #fceee3;
+
+  --color-accent: #d9541e;
+  --color-accent-hover: #b84214;
+  --color-accent-soft: #f5f5f5;
+
+  --color-border: #e5e5e5;
+  --color-border-strong: #a3a3a3;
+  --color-focus: #d9541e;
+
+  --color-success: #d9541e;
+  --color-warning: #d9541e;
+  --color-error: #b91c1c;
+
+  /* Semantic aliases */
+  --color-canvas: var(--color-bg);
+  --color-linen: var(--color-surface);
+  --color-paper: var(--color-card);
+  --color-ink: var(--color-text);
+  --color-umber: var(--color-text-muted);
+  --color-inverse: var(--color-text-inverse);
+  --color-terracotta: var(--color-accent);
+  --color-terracotta-dark: var(--color-accent-hover);
+  --color-terracotta-soft: var(--color-accent-soft);
+  --color-hairline: var(--color-border);
+  --color-divider: var(--color-border-strong);
+  --color-crimson: var(--color-error);
+
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.375rem;    /* 38px */
+  --text-5xl: 3.125rem;    /* 50px */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* ==========================================================================
+     SPACING & LAYOUT
+     ========================================================================== */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  --container-max: 72rem;       /* 1152px */
+  --container-padding: 1.25rem; /* 20px mobile gutter */
+
+  /* ==========================================================================
+     RADII
+     ========================================================================== */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     SHADOWS & MOTION
+     ========================================================================== */
+  --shadow-sm: 0 1px 2px rgba(17, 17, 17, 0.06);
+  --shadow-md: 0 8px 24px rgba(17, 17, 17, 0.09);
+
+  --transition-fast: 150ms ease;
+  --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
