@@ -54,12 +54,14 @@ export function VariantSelector({
 
   const initialSelection = useMemo(() => {
     const firstValidVariation =
-      product.variations.find((v) => v.inStock) ?? product.variations[0] ?? null;
+      product.variations.find((v) => v.inStock) ??
+      product.variations[0] ??
+      null;
 
     const map: Record<string, string> = {};
     for (const group of attributeGroups) {
       const matched = firstValidVariation?.attributes.find(
-        (a) => a.attribute.toLowerCase() === group.name.toLowerCase()
+        (a) => a.attribute.toLowerCase() === group.name.toLowerCase(),
       );
       map[group.name] = matched?.value ?? group.options[0] ?? '';
     }
@@ -82,11 +84,11 @@ export function VariantSelector({
           const picked = selectedOptions[group.name];
           if (!picked) return false;
           const attrMatch = variation.attributes.find(
-            (a) => a.attribute.toLowerCase() === group.name.toLowerCase()
+            (a) => a.attribute.toLowerCase() === group.name.toLowerCase(),
           );
           if (!attrMatch) return true;
           return attrMatch.value.toLowerCase() === picked.toLowerCase();
-        })
+        }),
       ) ?? null
     );
   }, [isVariable, product.variations, attributeGroups, selectedOptions]);
@@ -102,21 +104,24 @@ export function VariantSelector({
             const picked = next[group.name];
             if (!picked) return false;
             const attrMatch = variation.attributes.find(
-              (a) => a.attribute.toLowerCase() === group.name.toLowerCase()
+              (a) => a.attribute.toLowerCase() === group.name.toLowerCase(),
             );
             if (!attrMatch) return true;
             return attrMatch.value.toLowerCase() === picked.toLowerCase();
-          })
+          }),
         ) ?? null;
       onVariationChange(matched);
     }
   };
 
-  const optionHasVariation = (attrName: string, optionValue: string): boolean => {
+  const optionHasVariation = (
+    attrName: string,
+    optionValue: string,
+  ): boolean => {
     if (!isVariable || product.variations.length === 0) return true;
     return product.variations.some((variation) => {
       const attrMatch = variation.attributes.find(
-        (a) => a.attribute.toLowerCase() === attrName.toLowerCase()
+        (a) => a.attribute.toLowerCase() === attrName.toLowerCase(),
       );
       return attrMatch
         ? attrMatch.value.toLowerCase() === optionValue.toLowerCase()
@@ -129,7 +134,7 @@ export function VariantSelector({
     return product.variations.some((variation) => {
       if (!variation.inStock) return false;
       const attrMatch = variation.attributes.find(
-        (a) => a.attribute.toLowerCase() === attrName.toLowerCase()
+        (a) => a.attribute.toLowerCase() === attrName.toLowerCase(),
       );
       return attrMatch
         ? attrMatch.value.toLowerCase() === optionValue.toLowerCase()
@@ -161,14 +166,20 @@ export function VariantSelector({
 
   const availableOptionsSummary = attributeGroups
     .map((group) => {
-      const validOpts = group.options.filter((opt) => optionHasStock(group.name, opt));
+      const validOpts = group.options.filter((opt) =>
+        optionHasStock(group.name, opt),
+      );
       return validOpts.length > 0 ? validOpts.join(', ') : null;
     })
     .filter(Boolean)
     .join(' · ');
 
-  const selectableGroups = attributeGroups.filter((group) => group.options.length > 1);
-  const fixedSpecs = attributeGroups.filter((group) => group.options.length === 1);
+  const selectableGroups = attributeGroups.filter(
+    (group) => group.options.length > 1,
+  );
+  const fixedSpecs = attributeGroups.filter(
+    (group) => group.options.length === 1,
+  );
 
   return (
     <div className="space-y-6">
@@ -245,7 +256,9 @@ export function VariantSelector({
                       type="button"
                       aria-pressed={isSelected}
                       aria-label={
-                        isUnavailable ? `${option} (currently unavailable)` : option
+                        isUnavailable
+                          ? `${option} (currently unavailable)`
+                          : option
                       }
                       onClick={() => handleOptionSelect(group.name, option)}
                       className={`min-h-[42px] px-4 py-2 rounded-full text-sm font-medium border cursor-pointer transition-colors ${
@@ -328,7 +341,7 @@ export function VariantSelector({
             }
             size="lg"
             variant="primary"
-            className="w-full rounded-full min-h-[50px]"
+            className="w-full rounded-md min-h-[50px]"
           />
         </div>
       </div>
@@ -365,7 +378,7 @@ export function ProductDetailInteractive({
   footerChildren?: React.ReactNode;
 }) {
   const [variationImage, setVariationImage] = useState<StorefrontImage | null>(
-    null
+    null,
   );
 
   return (

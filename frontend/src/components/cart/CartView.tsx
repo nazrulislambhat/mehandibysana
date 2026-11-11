@@ -66,11 +66,15 @@ export function CartView() {
     pincodeResult?.serviceable && pincodeResult.pincode.length === 6
       ? pincodeResult.deliveryCharge
       : null;
-  const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
-  const appliedCouponCode = couponValidation?.valid ? couponValidation.code : '';
+  const discountAmount = couponValidation?.valid
+    ? couponValidation.discountAmount
+    : 0;
+  const appliedCouponCode = couponValidation?.valid
+    ? couponValidation.code
+    : '';
   const estimatedTotal = Math.max(
     0,
-    Math.round((subtotal + (deliveryFee ?? 0) - discountAmount) * 100) / 100
+    Math.round((subtotal + (deliveryFee ?? 0) - discountAmount) * 100) / 100,
   );
 
   return (
@@ -108,9 +112,7 @@ export function CartView() {
                   <span
                     key={st.num}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium ${
-                      st.active
-                        ? 'bg-ink text-inverse'
-                        : 'text-umber'
+                      st.active ? 'bg-ink text-inverse' : 'text-umber'
                     }`}
                   >
                     <span
@@ -133,7 +135,7 @@ export function CartView() {
                 onClick={() => void fetchCart()}
                 className="rounded-full"
               >
-                {isLoading ? 'Syncing…' : 'Sync Bag'}
+                {isLoading ? 'Updating…' : 'Update Bag'}
               </Button>
             </div>
           </div>
@@ -182,9 +184,16 @@ export function CartView() {
               Your bag is empty
             </h2>
             <p className="text-sm md:text-base text-umber max-w-md leading-relaxed mb-8">
-              Explore small-batch organic henna cones, aftercare balms, essential oils, and bridal starter kits mixed fresh to order across Srinagar &amp; Bengaluru.
+              Explore small-batch organic henna cones, aftercare balms,
+              essential oils, and bridal starter kits mixed fresh to order
+              across Srinagar &amp; Bengaluru.
             </p>
-            <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full">
+            <LinkButton
+              href="/shop"
+              variant="primary"
+              size="lg"
+              className="rounded-full"
+            >
               Browse Full Catalog &rarr;
             </LinkButton>
           </div>
@@ -229,7 +238,9 @@ export function CartView() {
                         <div className="flex flex-wrap items-start justify-between gap-4">
                           <div className="min-w-0">
                             <Link
-                              href={item.slug ? `/product/${item.slug}` : '/shop'}
+                              href={
+                                item.slug ? `/product/${item.slug}` : '/shop'
+                              }
                               className="font-serif text-2xl font-medium text-ink hover:text-terracotta leading-snug"
                             >
                               {item.name}
@@ -241,7 +252,11 @@ export function CartView() {
                                 </span>
                               ) : null}
                               <span className="text-xs text-umber tabular-nums">
-                                Unit price: {formatMoney(item.unitPrice, item.currencySymbol)}
+                                Unit price:{' '}
+                                {formatMoney(
+                                  item.unitPrice,
+                                  item.currencySymbol,
+                                )}
                               </span>
                             </div>
                           </div>
@@ -257,7 +272,10 @@ export function CartView() {
                               type="button"
                               disabled={busy}
                               onClick={() =>
-                                void updateItemQuantity(item.key, item.quantity - 1)
+                                void updateItemQuantity(
+                                  item.key,
+                                  item.quantity - 1,
+                                )
                               }
                               aria-label={`Decrease quantity of ${item.name}`}
                               className="w-8 h-8 rounded-full flex items-center justify-center text-base text-ink hover:bg-linen disabled:text-umber/50 cursor-pointer"
@@ -274,7 +292,10 @@ export function CartView() {
                               type="button"
                               disabled={busy}
                               onClick={() =>
-                                void updateItemQuantity(item.key, item.quantity + 1)
+                                void updateItemQuantity(
+                                  item.key,
+                                  item.quantity + 1,
+                                )
                               }
                               aria-label={`Increase quantity of ${item.name}`}
                               className="w-8 h-8 rounded-full flex items-center justify-center text-base text-ink hover:bg-linen disabled:text-umber/50 cursor-pointer"
@@ -306,7 +327,8 @@ export function CartView() {
                   <span>&larr; Continue browsing catalog</span>
                 </Link>
                 <span className="text-xs text-umber">
-                  Packed fresh in protective batches &middot; Sealed before transit
+                  Packed fresh in protective batches &middot; Sealed before
+                  transit
                 </span>
               </div>
             </div>
@@ -317,7 +339,10 @@ export function CartView() {
               className="lg:col-span-5 space-y-5 lg:sticky lg:top-24"
             >
               <PincodeChecker subtotal={subtotal} compact />
-              <CouponCodeBox subtotal={subtotal} shippingFee={deliveryFee ?? 0} />
+              <CouponCodeBox
+                subtotal={subtotal}
+                shippingFee={deliveryFee ?? 0}
+              />
 
               <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 md:p-8 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.3)]">
                 {/* Burnt Orange signature trim */}
@@ -335,7 +360,12 @@ export function CartView() {
                       Srinagar &amp; Bengaluru
                     </span>
                   </div>
-                  <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />
+                  <BrandCrest
+                    tone="transparent-cream"
+                    size={32}
+                    decorative
+                    className="shrink-0"
+                  />
                 </div>
 
                 <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-6">
@@ -368,7 +398,9 @@ export function CartView() {
                     </dt>
                     <dd
                       className={`font-medium tabular-nums ${
-                        deliveryFee !== null ? 'text-terracotta' : 'text-plaque-ink/70'
+                        deliveryFee !== null
+                          ? 'text-terracotta'
+                          : 'text-plaque-ink/70'
                       }`}
                     >
                       {deliveryFee !== null
@@ -400,8 +432,14 @@ export function CartView() {
                 </LinkButton>
 
                 <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">
-                  <ShieldProtectIcon size={14} className="text-terracotta shrink-0" />
-                  <span>Supports Razorpay UPI / Cards &amp; Cash on Delivery across serviceable PIN codes.</span>
+                  <ShieldProtectIcon
+                    size={14}
+                    className="text-terracotta shrink-0"
+                  />
+                  <span>
+                    Supports Razorpay UPI / Cards &amp; Cash on Delivery across
+                    serviceable PIN codes.
+                  </span>
                 </p>
               </div>
             </aside>

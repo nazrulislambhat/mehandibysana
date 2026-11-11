@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalHeroStudy } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-
+import { ShoppingBag, House } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Page Not Found (404)',
   description:
@@ -16,18 +16,50 @@ export const metadata: Metadata = {
 };
 
 const COLLECTION_SHORTCUTS = [
-  { label: 'Organic Henna Cones & Powder', href: '/shop?category=organic-henna' },
-  { label: 'Bridal & Self-Care Kits', href: '/shop?category=henna-kits-combos' },
-  { label: 'Essential Oils & Balms', href: '/shop?category=henna-care-essential-oils' },
-  { label: 'Artist Tools & Cellophane', href: '/shop?category=mehandi-tools-supplies' },
+  {
+    label: 'Organic Henna Cones & Powder',
+    href: '/shop?category=organic-henna',
+  },
+  {
+    label: 'Bridal & Self-Care Kits',
+    href: '/shop?category=henna-kits-combos',
+  },
+  {
+    label: 'Essential Oils & Balms',
+    href: '/shop?category=henna-care-essential-oils',
+  },
+  {
+    label: 'Artist Tools & Cellophane',
+    href: '/shop?category=mehandi-tools-supplies',
+  },
 ];
 
 const WAYFINDING_LINKS = [
-  { label: 'Track Your Parcel', meta: 'Order ID & Email Lookup', href: '/track-order' },
-  { label: 'Bridal & Event Bookings', meta: 'Srinagar, Bengaluru & Destination Dates', href: '/services' },
-  { label: '48-Hour Stain & Care Guide', meta: 'Freezer & Aftercare Ritual', href: '/henna-care' },
-  { label: 'Shipping & PIN Zones', meta: 'Dispatch Within 2 Days', href: '/shipping-policy' },
-  { label: 'Refunds & Cancellations', meta: 'Perishables & Claims Window', href: '/refund-policy' },
+  {
+    label: 'Track Your Parcel',
+    meta: 'Order ID & Email Lookup',
+    href: '/track-order',
+  },
+  {
+    label: 'Bridal & Event Bookings',
+    meta: 'Srinagar, Bengaluru & Destination Dates',
+    href: '/services',
+  },
+  {
+    label: '48-Hour Stain & Care Guide',
+    meta: 'Freezer & Aftercare Ritual',
+    href: '/henna-care',
+  },
+  {
+    label: 'Shipping & PIN Zones',
+    meta: 'Dispatch Within 2 Days',
+    href: '/shipping-policy',
+  },
+  {
+    label: 'Refunds & Cancellations',
+    meta: 'Perishables & Claims Window',
+    href: '/refund-policy',
+  },
   { label: 'Contact Sana', meta: 'Response Within 24 Hours', href: '/contact' },
 ];
 
@@ -52,7 +84,10 @@ export default function NotFound() {
               <span className="font-serif text-[5.25rem] sm:text-[7.5rem] font-medium leading-none tracking-tight text-ink">
                 404
               </span>
-              <span className="h-px flex-1 max-w-[140px] bg-divider mb-4" aria-hidden="true" />
+              <span
+                className="h-px flex-1 max-w-[140px] bg-divider mb-4"
+                aria-hidden="true"
+              />
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-umber mb-2">
                 Archive Missing
               </span>
@@ -63,15 +98,28 @@ export default function NotFound() {
             </h1>
 
             <p className="text-sm sm:text-base text-umber leading-relaxed max-w-xl">
-              The product batch, portfolio plate, or link you followed may have retired, moved, or been typed incorrectly. Use one of the quick shortcuts below to jump straight back into fresh organic henna batches or check an active order.
+              The product batch, portfolio plate, or link you followed may have
+              retired, moved, or been typed incorrectly. Use one of the quick
+              shortcuts below to jump straight back into fresh organic henna
+              batches or check an active order.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full">
-                Browse Full Shop &rarr;
+              <LinkButton
+                href="/shop"
+                variant="primary"
+                size="lg"
+                className="rounded-md"
+              >
+                Shop <ShoppingBag className="w-3.5 h-3.5" />
               </LinkButton>
-              <LinkButton href="/" variant="secondary" size="lg" className="rounded-full">
-                Return Home
+              <LinkButton
+                href="/"
+                variant="secondary"
+                size="lg"
+                className="rounded-md"
+              >
+                Return Home <House className="w-3.5 h-3.5" />
               </LinkButton>
             </div>
 
@@ -118,7 +166,12 @@ export default function NotFound() {
                       Helpful Destinations
                     </h2>
                   </div>
-                  <BrandCrest tone="ink-badge" size={40} decorative className="shrink-0" />
+                  <BrandCrest
+                    tone="ink-badge"
+                    size={40}
+                    decorative
+                    className="shrink-0"
+                  />
                 </div>
 
                 <ul className="divide-y divide-plaque-ink/12">
@@ -148,7 +201,15 @@ export default function NotFound() {
                 </ul>
 
                 <div className="pt-2 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-2 text-xs text-plaque-ink/70">
-                  <span>Need help? sana@mehandibysana.com</span>
+                  <span>
+                    Need help?{' '}
+                    <a
+                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
+                      href="mailto:sana@mehandibysana.com"
+                    >
+                      sana@mehandibysana.com
+                    </a>
+                  </span>
                   <a
                     href="tel:+919149648717"
                     className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
