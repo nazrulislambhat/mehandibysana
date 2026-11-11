@@ -2,7 +2,7 @@ import React from 'react';
 import { TextReveal } from '@/components/ui/TextReveal';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig, ServiceMotifIcon } from '@/components/graphics/BotanicalIllustrations';
-
+import { LineDotRightHorizontal } from 'lucide-react';
 interface ServiceItem {
   id: string;
   number: string;
@@ -29,7 +29,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     title: 'Events & Celebrations',
     summary:
       'Bespoke henna sessions for engagements, Eid festivities, and family gatherings—personally applied by Sana (with independent guest artists arranged on request) at your home or venue.',
-    note: 'Srinagar, Bangalore & destination',
+    note: 'Srinagar, Bengaluru & destination',
   },
   {
     id: 'bespoke',
@@ -83,9 +83,9 @@ export function ServicesSection() {
                 href="/services"
                 variant="ink"
                 size="md"
-                className="rounded-full"
+                className="rounded-md"
               >
-                Explore all services &rarr;
+                Explore all services <LineDotRightHorizontal className='w-4 h-4' />
               </LinkButton>
             </TextReveal>
           </div>

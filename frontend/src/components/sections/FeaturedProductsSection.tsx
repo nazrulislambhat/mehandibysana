@@ -78,7 +78,7 @@ function getCleanNote(product: StorefrontProduct): string {
 
   return variantHint
     ? `Available options: ${variantHint}`
-    : 'Small-batch botanical formulation crafted at Mehandi by Sana (Srinagar & Bangalore).';
+    : 'Small-batch botanical formulation crafted at Mehandi by Sana (Srinagar & Bengaluru).';
 }
 
 export function FeaturedProductsSection({
@@ -172,7 +172,7 @@ export function FeaturedProductsSection({
         </div>
 
         <p className="text-xs text-umber">
-          <span className="font-semibold text-ink">100% Chemical-Free</span> &middot; Dispatched across India from Srinagar &amp; Bangalore
+          <span className="font-semibold text-ink">100% Chemical-Free</span> &middot; Dispatched across India from Srinagar &amp; Bengaluru
         </p>
       </div>
 

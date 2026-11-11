@@ -13,9 +13,9 @@ import {
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
-
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 const APOTHECARY_LINKS = [
-  { label: 'Shop All', href: '/shop' },
+  { label: 'Shop', href: '/shop' },
   { label: 'Organic Henna', href: '/shop?category=organic-henna' },
   { label: 'Bridal & Care Kits', href: '/shop?category=henna-kits-combos' },
   { label: 'Essential Oils', href: '/shop?category=henna-care-essential-oils' },
@@ -64,12 +64,12 @@ export function Footer() {
                 </Link>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-plaque-ink/80">
                   <span aria-hidden="true" className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
-                  Est. 2019 &middot; Srinagar &amp; Bangalore
+                  Est. 2019 &middot; Srinagar &amp; Bengaluru
                 </span>
               </div>
 
               <p className="text-sm text-plaque-ink/75 leading-relaxed max-w-md">
-                Freelance organic mehandi artist &amp; botanical apothecary founded by Sumaiya Rashid Magray (Sana), working across Srinagar &amp; Bangalore — fresh small-batch Sojat henna cones, therapeutic essential oils, aftercare balms, and heirloom bridal artistry.
+                Founded by Sana, a freelance organic mehandi artist working across Srinagar &amp; Bengaluru. She offers fresh small-batch Sojat henna cones, therapeutic essential oils, aftercare balms, and heirloom bridal artistry.
               </p>
             </div>
 
@@ -162,29 +162,29 @@ export function Footer() {
                 <div className="flex items-center justify-between gap-2">
                   <h2 className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
                     <LocationPinIcon size={14} className="shrink-0" />
-                    <span>Srinagar &amp; Bangalore</span>
+                    <span>Srinagar &amp; Bengaluru</span>
                   </h2>
                   <BotanicalSprig className="w-10 opacity-75 shrink-0" />
                 </div>
 
                 <div className="space-y-2.5 text-xs text-plaque-ink/80 leading-relaxed">
                   <p>
-                    <span className="font-medium text-plaque-ink block">Srinagar Dispatch &amp; Bookings</span>
+                    <span className="font-medium text-plaque-ink block">Srinagar: Dispatch &amp; Bookings</span>
                     <span className="text-plaque-ink/70">
-                      Baghat Barzullah, Srinagar, J&amp;K 190005
+                      Srinagar, Jammu & Kashmir
                     </span>
                   </p>
                   <p>
-                    <span className="font-medium text-plaque-ink block">Bangalore Dispatch &amp; Bookings</span>
+                    <span className="font-medium text-plaque-ink block">Bengaluru: Dispatch &amp; Bookings</span>
                     <span className="text-plaque-ink/70">
-                      Bengaluru, Karnataka &middot; Freelance Visits &amp; Parcel Dispatch
+                      Bengaluru, Karnataka
                     </span>
                   </p>
                   <p className="text-plaque-ink/70 pt-0.5">
-                    Contact: Mon &ndash; Sun, 10:00 AM &ndash; 6:30 PM IST
+                    Contact: Mon &ndash; Sun, 09:00 AM &ndash; 09:00 PM IST
                   </p>
                   <p className="text-plaque-ink/70">
-                    Dispatch: Small-batch courier Mon &ndash; Sat within 1&ndash;2 business days across India.
+                    Dispatch: Small-batch courier Mon &ndash; Sat within 3&ndash;5 business days across India.
                   </p>
                 </div>
               </div>
@@ -196,8 +196,8 @@ export function Footer() {
                   size="md"
                   className="w-full rounded-full text-xs"
                 >
-                  <span>Request Bridal Date</span>
-                  <span aria-hidden="true">&rarr;</span>
+                  <span>Request Bridal Date</span> <LineDotRightHorizontal className='w-4 h-4'/>
+               
                 </LinkButton>
                 <LinkButton
                   href="/track-order"
@@ -215,14 +215,14 @@ export function Footer() {
 
       {/* Background Wordmark & Bottom Copyright Bar */}
       <div className="relative overflow-hidden">
-        <div className="w-full max-w-[96rem] mx-auto px-4 sm:px-8 pt-2 pb-1">
+        <div className="w-full max-w-[72rem] mx-auto px-8 md:px-6 pt-2 pb-1">
           <FooterBrandWordmark />
         </div>
 
         {/* Bottom Copyright & Trust Strip */}
-        <div className="relative z-10 w-full max-w-[96rem] mx-auto px-4 sm:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-plaque-ink/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-plaque-ink/70">
-          <p>
-            &copy; {currentYear} MEHANDI BY SANA . All rights reserved.
+        <div className="relative z-10 w-full max-w-[72rem] mx-auto px-4 md:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-plaque-ink/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-plaque-ink/70">
+          <p className='text-[10px]'>
+            &copy; {currentYear} Mehandi By Sana . All rights reserved.
           </p>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-medium text-plaque-ink/75">
@@ -242,7 +242,6 @@ export function Footer() {
             <Link href="/terms-conditions" className="hover:text-terracotta transition-colors">
               Terms
             </Link>
-            <span aria-hidden="true" className="text-terracotta hidden sm:inline">&middot;</span>
             <ThemeToggle variant="segmented" surface="plaque" />
           </div>
         </div>

@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
           Data Fiduciary Identity &amp; Scope
         </h2>
         <p className="text-umber">
-          This Privacy Policy describes how <strong>Mehandi by Sana</strong> (operating from Baghat Barzullah, Srinagar, J&amp;K 190005 and Bangalore, Karnataka) collects, uses, stores, and protects personal data when you visit{' '}
+          This Privacy Policy describes how <strong>Mehandi by Sana</strong> (operating from Baghat Barzullah, Srinagar, J&amp;K 190005 and Bengaluru, Karnataka) collects, uses, stores, and protects personal data when you visit{' '}
           <strong>mehandibysana.com</strong>, place storefront orders, use our PIN code or order tracking utilities, subscribe to fresh batch notifications, or submit bridal/workshop inquiries, in alignment with India&rsquo;s{' '}
           <strong>Digital Personal Data Protection Act, 2023 (DPDPA)</strong> and Information Technology Rules.
         </p>
@@ -229,7 +229,7 @@ export default function PrivacyPolicyPage() {
             <strong>Name:</strong> Sumaiya Rashid Magray (Sana), Founder &amp; Privacy Officer
           </p>
           <p>
-            <strong>Service Bases:</strong> Mehandi by Sana &middot; Baghat Barzullah, Srinagar (J&amp;K 190005) &amp; Bangalore (Karnataka)
+            <strong>Service Bases:</strong> Mehandi by Sana &middot; Baghat Barzullah, Srinagar (J&amp;K 190005) &amp; Bengaluru (Karnataka)
           </p>
           <p>
             <strong>Email:</strong>{' '}

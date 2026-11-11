@@ -17,11 +17,11 @@ import {
 export const metadata: Metadata = buildPageMetadata({
   title: 'Bridal Mehandi Services, Events & Masterclasses',
   description:
-    'Book 100% PPD-free bridal mehandi, engagement celebration henna, custom bulk cones, and 15-day Mehandi Masterclasses across Srinagar & Bangalore with Sana.',
+    'Book 100% PPD-free bridal mehandi, engagement celebration henna, custom bulk cones, and 15-day Mehandi Masterclasses across Srinagar & Bengaluru with Sana.',
   canonicalPath: '/services',
   keywords: [
     'bridal mehandi Srinagar',
-    'bridal mehandi Bangalore',
+    'bridal mehandi Bengaluru',
     'organic henna artist booking',
     'Kashmiri bridal mehandi',
     'Mehandi Masterclass India',
@@ -65,8 +65,8 @@ const SERVICE_TIERS: ServicePackage[] = [
     eyebrow: '02 · Gatherings',
     title: 'Events & Celebrations',
     summary:
-      'Engagement ceremonies, Eid festivities, and intimate family celebrations across Srinagar, Bangalore, and destination venues—at your home or event venue.',
-    ratePlaceholder: 'Srinagar, Bangalore & destination',
+      'Engagement ceremonies, Eid festivities, and intimate family celebrations across Srinagar, Bengaluru, and destination venues—at your home or event venue.',
+    ratePlaceholder: 'Srinagar, Bengaluru & destination',
     includes: [
       'Sana personally (with independent guest artists arranged on request)',
       'Kashmiri Chinar, floral lotus, Arabic vine, or minimalist cuffs',
@@ -96,7 +96,7 @@ const CONSULTATION_STEPS = [
     step: 'Step 01',
     title: 'Share Date & Occasion',
     detail:
-      'Submit your celebration date, venue city (Srinagar, Bangalore, Jammu & Kashmir, or destination), and preferred coverage tier through our booking inquiry form.',
+      'Submit your celebration date, venue city (Srinagar, Bengaluru, Jammu & Kashmir, or destination), and preferred coverage tier through our booking inquiry form.',
   },
   {
     num: '02',
@@ -174,7 +174,7 @@ export default function ServicesPage() {
 
             <div className="lg:col-span-5 space-y-5">
               <p className="text-sm md:text-base text-umber leading-relaxed">
-                Working independently as a freelance artist across Srinagar (Baghat Barzullah) and Bangalore, Sana travels for brides and celebrations across India and destination venues using exclusively 100% organic, PPD-free henna paste.
+                Working independently as a freelance artist across Srinagar (Baghat Barzullah) and Bengaluru, Sana travels for brides and celebrations across India and destination venues using exclusively 100% organic, PPD-free henna paste.
               </p>
               <LinkButton
                 href="/contact"

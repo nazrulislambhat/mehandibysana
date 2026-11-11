@@ -104,7 +104,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       referenceId: booking.referenceId,
       summary: `We have received your ${serviceLabel} inquiry${
         booking.eventDate ? ` for ${booking.eventDate}` : ""
-      }. Sana will personally review availability across Srinagar, Bangalore, or destination venues within 24 hours.`,
+      }. Sana will personally review availability across Srinagar, Bengaluru, or destination venues within 24 hours.`,
       detailsHtml,
       details: {
         service: booking.service,

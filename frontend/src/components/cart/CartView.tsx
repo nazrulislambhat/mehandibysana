@@ -182,7 +182,7 @@ export function CartView() {
               Your bag is empty
             </h2>
             <p className="text-sm md:text-base text-umber max-w-md leading-relaxed mb-8">
-              Explore small-batch organic henna cones, aftercare balms, essential oils, and bridal starter kits mixed fresh to order across Srinagar &amp; Bangalore.
+              Explore small-batch organic henna cones, aftercare balms, essential oils, and bridal starter kits mixed fresh to order across Srinagar &amp; Bengaluru.
             </p>
             <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full">
               Browse Full Catalog &rarr;
@@ -332,7 +332,7 @@ export function CartView() {
                       Order Dossier
                     </span>
                     <span className="font-serif text-xs italic text-plaque-ink/70 block mt-0.5">
-                      Srinagar &amp; Bangalore
+                      Srinagar &amp; Bengaluru
                     </span>
                   </div>
                   <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />

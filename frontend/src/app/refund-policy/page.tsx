@@ -51,7 +51,7 @@ export default function RefundPolicyPage() {
           Overview &amp; Perishable Botanical Standard
         </h2>
         <p className="text-umber">
-          Every Mehandi by Sana order is mixed and packed to order in small batches across Srinagar (Baghat Barzullah) and Bangalore without chemical stabilizers. For strict personal hygiene, botanical potency, and food-grade safety standards,{' '}
+          Every Mehandi by Sana order is mixed and packed to order in small batches across Srinagar (Baghat Barzullah) and Bengaluru without chemical stabilizers. For strict personal hygiene, botanical potency, and food-grade safety standards,{' '}
           <strong>fresh organic henna cones, prepared paste, opened essential oils, and open balms cannot be accepted back once delivered</strong>, except in cases where your parcel arrived damaged, leaked, tampered, incomplete, or incorrect.
         </p>
       </section>

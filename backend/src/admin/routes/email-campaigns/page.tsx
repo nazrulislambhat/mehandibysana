@@ -142,7 +142,7 @@ const EmailCampaignsAdminPage = () => {
     "Freshly Rolled Organic Sojat Henna Batch Open — Mehandi by Sana"
   );
   const [bodyText, setBodyText] = useState(
-    "This week's fresh organic Sojat henna paste and 0.38mm pin-tip bridal cones are freshly mixed and packed across Srinagar & Bangalore.\n\nOrders dispatch Pan-India within 2 business days with frozen-fresh storage guidance included."
+    "This week's fresh organic Sojat henna paste and 0.38mm pin-tip bridal cones are freshly mixed and packed across Srinagar & Bengaluru.\n\nOrders dispatch Pan-India within 2 business days with frozen-fresh storage guidance included."
   );
   const [ctaLabel, setCtaLabel] = useState("Shop Fresh Batch");
   const [ctaUrl, setCtaUrl] = useState("https://mehandibysana.com/shop");

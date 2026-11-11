@@ -174,7 +174,7 @@ export default async function TrackOrderPage({ searchParams }: TrackOrderPagePro
                 Track your parcel
               </h1>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Enter your order reference and email address to view real-time small-batch preparation, PIN zone courier routing, and dispatch milestones from Srinagar &amp; Bangalore.
+                Enter your order reference and email address to view real-time small-batch preparation, PIN zone courier routing, and dispatch milestones from Srinagar &amp; Bengaluru.
               </p>
             </div>
 

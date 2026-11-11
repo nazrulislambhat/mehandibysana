@@ -12,7 +12,7 @@ import { CourierDispatchIcon, LocationPinIcon } from '@/components/graphics/Bran
 export const metadata: Metadata = buildPageMetadata({
   title: 'Shipping & Delivery Policy',
   description:
-    'Small-batch Srinagar & Bangalore dispatch schedule, Pan-India PIN-code delivery estimation, air courier partners, parcel tracking, and fresh cone arrival care.',
+    'Small-batch Srinagar & Bengaluru dispatch schedule, Pan-India PIN-code delivery estimation, air courier partners, parcel tracking, and fresh cone arrival care.',
   canonicalPath: '/shipping-policy',
   keywords: [
     'Mehandi by Sana shipping policy',
@@ -35,7 +35,7 @@ export default function ShippingPolicyPage() {
     <PolicyDocumentLayout
       eyebrow="Logistics & Dispatch"
       title="Shipping & Delivery Policy"
-      subtitle="Every cone batch is mixed fresh across Srinagar & Bangalore and routed nationwide by PIN zone for rapid transit."
+      subtitle="Every cone batch is mixed fresh across Srinagar & Bengaluru and routed nationwide by PIN zone for rapid transit."
       effectiveDate="November 10, 2026"
       documentCode="MBS-SP-2026"
       activeSlug="shipping"
@@ -54,7 +54,7 @@ export default function ShippingPolicyPage() {
         </h2>
         <p className="text-umber">
           Unlike warehouse stock sitting on shelves for months, our organic henna cones are prepared fresh in small batches across{' '}
-          <strong>Srinagar (Baghat Barzullah) &amp; Bangalore</strong>.
+          <strong>Srinagar (Baghat Barzullah) &amp; Bengaluru</strong>.
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
@@ -96,7 +96,7 @@ export default function ShippingPolicyPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Srinagar &amp; Bangalore Metro Zones:</strong> Priority 1–2 business day dispatch across local city hubs.
+            <strong>Srinagar &amp; Bengaluru Metro Zones:</strong> Priority 1–2 business day dispatch across local city hubs.
           </li>
           <li>
             <strong>Pan-India Express Coverage:</strong> 3–6 business days via air cargo and India Post Speed Post across serviceable PIN codes nationwide.
@@ -125,7 +125,7 @@ export default function ShippingPolicyPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Local Dispatch Hubs (Srinagar &amp; Bangalore):</strong> Priority local dispatch for orders across Srinagar and Bengaluru metro zones.
+            <strong>Local Dispatch Hubs (Srinagar &amp; Bengaluru):</strong> Priority local dispatch for orders across Srinagar and Bengaluru metro zones.
           </li>
           <li>
             <strong>Metro &amp; Pan-India:</strong> DTDC Air, Delhivery Express, Blue Dart, or India Post Speed Post (for remote hill/defense/rural PINs).

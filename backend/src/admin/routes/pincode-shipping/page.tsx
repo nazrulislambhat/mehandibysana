@@ -149,7 +149,7 @@ const PincodeShippingPage = () => {
             <Heading level="h1">Wildcard Pincode Delivery Rates</Heading>
             <Text className="text-ui-fg-subtle mt-1">
               Configure prefix wildcards (e.g. <code>190*</code> for Srinagar PINs at ₹60,{" "}
-              <code>560*</code> for Bangalore PINs at ₹60, or <code>*</code> for Pan-India at ₹150). Most specific prefix wins.
+              <code>560*</code> for Bengaluru PINs at ₹60, or <code>*</code> for Pan-India at ₹150). Most specific prefix wins.
             </Text>
           </div>
           <div className="flex items-center gap-2">

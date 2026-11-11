@@ -93,8 +93,8 @@ const STAIN_STAGES: StainStage[] = [
     id: 'one-day',
     step: '03',
     timeLabel: 'After 1 Day · 24–48 hrs',
-    title: 'Deep Bridal Mahogany & Espresso',
-    shadeName: 'Peak Bridal Mahogany',
+    title: 'Deep Bridal Stain & Espresso',
+    shadeName: 'Peak Bridal Stain',
     swatchHex: '#4E190F',
     secondaryHex: '#360F08',
     pasteOverlay: false,
@@ -103,7 +103,7 @@ const STAIN_STAGES: StainStage[] = [
     scienceNote:
       'Full epidermal oxidation locks dense mahogany pigment into the stratum corneum for long-lasting bridal richness.',
     careTip:
-      'Moisturize daily with botanical balm or sweet almond oil to preserve crisp line clarity and slow natural exfoliation.',
+      'Keep paste on for 4–6 hours. Mist with our sealant spray and scrape off with oil or balm—never wash with water.',
   },
 ];
 
@@ -156,7 +156,7 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
             <div
               role="group"
               aria-label="Select skin undertone preview"
-              className="inline-flex flex-wrap items-center gap-2 rounded-full border border-divider bg-paper p-1.5"
+              className="inline-flex flex-wrap items-center gap-2 rounded-xl border border-divider bg-paper p-1.5"
             >
               {SKIN_TONES.map((tone) => {
                 const isSelected = tone.id === skinToneId;
@@ -491,7 +491,7 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
                         ? '0 hrs · Olive Paste / Saffron'
                         : stage.id === 'six-hours'
                           ? '6 hrs · Warm Copper'
-                          : '24+ hrs · Deep Mahogany'}
+                          : '24+ hrs · Deep Stain'}
                     </p>
                   </button>
                 );

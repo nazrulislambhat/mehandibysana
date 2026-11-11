@@ -94,7 +94,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         name: SITE_NAME,
         description:
-          'Freelance organic mehandi artist & botanical apothecary working across Srinagar & Bangalore since 2019 — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi services.',
+          'Freelance organic mehandi artist & botanical apothecary working across Srinagar & Bengaluru since 2019 — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi services.',
         publisher: { '@id': orgId },
         inLanguage: 'en-IN',
         potentialAction: {
@@ -275,7 +275,7 @@ export function buildAboutPageJsonLd(
       worksFor: { '@id': `${siteUrl}/#organization` },
       homeLocation: {
         '@type': 'Place',
-        name: 'Srinagar & Bangalore, India',
+        name: 'Srinagar & Bengaluru, India',
       },
       award: awards.map((a) => `${a.title}: ${a.description}`),
       ...(pressUrls.length > 0 ? { subjectOf: pressUrls } : {}),
@@ -295,7 +295,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
     url: pageUrl,
     name: 'Bridal Mehandi Services, Celebrations & Masterclasses | Mehandi by Sana',
     description:
-      'Bespoke bridal mehandi appointments, celebration henna gatherings across Srinagar, Bangalore & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
+      'Bespoke bridal mehandi appointments, celebration henna gatherings across Srinagar, Bengaluru & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: {
       '@type': 'OfferCatalog',
@@ -438,7 +438,7 @@ export function buildContactPageJsonLd(): Record<string, unknown> {
     url: pageUrl,
     name: 'Contact & Bridal Booking Inquiries | Mehandi by Sana',
     description:
-      'Request bridal mehandi dates, celebration henna appointments, or product order guidance from Sana across Srinagar & Bangalore.',
+      'Request bridal mehandi dates, celebration henna appointments, or product order guidance from Sana across Srinagar & Bengaluru.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: { '@id': `${siteUrl}/#organization` },
   };

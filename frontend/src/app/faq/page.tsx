@@ -12,7 +12,7 @@ import { LinkButton } from '@/components/ui/Button';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Frequently Asked Questions (FAQ)',
   description:
-    'Answers on 100% PPD-free organic henna cones, -18°C freezer storage, 48-hour stain oxidation, Pan-India PIN delivery, Razorpay payments, and Srinagar & Bangalore bridal bookings.',
+    'Answers on 100% PPD-free organic henna cones, -18°C freezer storage, 48-hour stain oxidation, Pan-India PIN delivery, Razorpay payments, and Srinagar & Bengaluru bridal bookings.',
   canonicalPath: '/faq',
   keywords: [
     'Mehandi by Sana FAQ',
@@ -90,9 +90,9 @@ const FAQ_GROUPS: FaqGroup[] = [
     title: 'Shipping, PIN Zones & Tracking',
     items: [
       {
-        question: 'How fast do orders dispatch across Srinagar & Bangalore?',
+        question: 'How fast do orders dispatch across Srinagar & Bengaluru?',
         answer:
-          'Small-batch organic cone orders are mixed and rolled fresh to order and dispatched within 1–2 business days via DTDC Air, Delhivery, Blue Dart, or India Post Speed Post. Transit takes 1–2 business days across local Srinagar & Bangalore metro PINs and 3–6 business days Pan-India. Enter your 6-digit PIN on any product page or inside your shopping bag to check exact delivery rates and ETA for your address.',
+          'Small-batch organic cone orders are mixed and rolled fresh to order and dispatched within 1–2 business days via DTDC Air, Delhivery, Blue Dart, or India Post Speed Post. Transit takes 1–2 business days across local Srinagar & Bengaluru metro PINs and 3–6 business days Pan-India. Enter your 6-digit PIN on any product page or inside your shopping bag to check exact delivery rates and ETA for your address.',
       },
       {
         question: 'How can I track my order after checkout?',
@@ -136,7 +136,7 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         question: 'Which cities do you serve for bridal mehandi, and do you travel for destination weddings?',
         answer:
-          'Sana works independently across Srinagar and Bangalore, and also travels across Jammu & Kashmir, Karnataka, and outstation Indian destinations—with travel and hospitality terms shared transparently in your custom booking proposal.',
+          'Sana works independently across Srinagar and Bengaluru, and also travels across Jammu & Kashmir, Karnataka, and outstation Indian destinations—with travel and hospitality terms shared transparently in your custom booking proposal.',
       },
     ],
   },

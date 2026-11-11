@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import { fetchHomepageCatalogSummary } from '@/lib/wc-catalog';
 import { Hero } from '@/components/sections/Hero';
 import { FeaturedProductsSection } from '@/components/sections/FeaturedProductsSection';
@@ -25,13 +26,13 @@ export const metadata: Metadata = buildPageMetadata({
   title: 'Organic Henna Cones & Freelance Bridal Mehandi Artist',
   absoluteTitle: 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist',
   description:
-    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehandi with Sana across Srinagar & Bangalore.',
+    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehandi with Sana across Srinagar & Bengaluru.',
   canonicalPath: '/',
   keywords: [
     'organic henna cones India',
     'chemical free mehandi cones',
     'bridal mehandi Srinagar',
-    'bridal mehandi Bangalore',
+    'bridal mehandi Bengaluru',
     'Mehandi by Sana',
     'organic Sojat henna powder',
     'henna aftercare balm',
@@ -78,7 +79,7 @@ export default async function HomePage() {
                 </h2>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed mt-2 max-w-xl">
-                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and preparation tools mixed &amp; rolled fresh across Srinagar &amp; Bangalore.
+                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and preparation tools mixed &amp; rolled fresh across Srinagar &amp; Bengaluru.
               </p>
             </div>
 
@@ -86,7 +87,7 @@ export default async function HomePage() {
               href="/shop"
               variant="secondary"
               size="sm"
-              className="rounded-full self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em]"
+              className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em]"
             >
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
               <span aria-hidden="true" className="text-terracotta group-hover/btn:text-on-accent transition-colors">&rarr;</span>
@@ -225,7 +226,7 @@ export default async function HomePage() {
               </TextReveal>
               <TextReveal variant="fade" delayMs={120}>
                 <p className="text-base md:text-lg text-ink leading-relaxed">
-                  Holding a degree in Electronics &amp; Communication Engineering, Sumaiya Rashid Magray (Sana) began Kashmir’s first independent organic henna practice in Baghat Barzullah, Srinagar in 2019—working as a freelance artist today (with hopes of opening a dedicated studio someday) and replacing harsh chemical cones with pure, skin-safe botanicals.
+                  Sana left the world of circuits behind for something closer to her heart. In 2019, she began Kashmir’s first independent organic henna practice in Srinagar, and today she runs it full-time while raising her two little boys, replacing harsh chemical cones with pure, skin-safe botanicals.
                 </p>
               </TextReveal>
               <TextReveal variant="fade" delayMs={180}>
@@ -274,27 +275,27 @@ export default async function HomePage() {
                 id="booking-cta-heading"
                 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-plaque-ink leading-tight mb-5"
               >
-                Planning a celebration or bespoke order?
+                Celebrating something special? Let’s create it together.
               </h2>
               <p className="text-base text-plaque-ink/75 leading-relaxed max-w-xl mx-auto mb-8">
-                Bridal and celebration dates are reserved in advance across Srinagar, Bangalore, Jammu &amp; Kashmir, and destination venues. Custom bulk cone orders are freshly mixed and dispatched within 2 business days.
+                Bridal and celebration bookings are taken in advance across Srinagar, Bengaluru, and destination venues. Custom bulk cones are freshly mixed and dispatched within 2 business days.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3.5">
                 <LinkButton
                   href="/contact"
                   variant="accent"
                   size="lg"
-                  className="rounded-full"
+                  className="rounded-md"
                 >
-                  Request a Booking &rarr;
+                  Request a Booking <LineDotRightHorizontal className='w-4 h-4'/>
                 </LinkButton>
                 <LinkButton
                   href="/shop"
                   variant="inverse"
                   size="lg"
-                  className="rounded-full"
+                  className="rounded-md"
                 >
-                  Shop Products
+                  Shop Products <ShoppingBag className='w-4 h-4'/>
                 </LinkButton>
               </div>
             </div>

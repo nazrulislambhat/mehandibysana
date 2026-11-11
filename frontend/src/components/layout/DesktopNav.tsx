@@ -373,7 +373,7 @@ export function DesktopNav() {
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
                       <HennaConeIcon size={14} className="shrink-0" />
-                      <span>Srinagar &amp; Bangalore Batch</span>
+                      <span>Srinagar &amp; Bengaluru Batch</span>
                     </span>
                     <BotanicalSprig className="w-12 h-4" />
                   </div>
@@ -382,7 +382,7 @@ export function DesktopNav() {
                     100% Chemical-Free Bridal &amp; Hair Henna
                   </h3>
                   <p className="text-xs text-umber leading-relaxed mt-2">
-                    Hand-sifted Sojat henna leaf blended with pure eucalyptus &amp; clove oils. Rolled to order and shipped nationwide from Srinagar &amp; Bangalore.
+                    Hand-sifted Sojat henna leaf blended with pure eucalyptus &amp; clove oils. Rolled to order and shipped nationwide from Srinagar &amp; Bengaluru.
                   </p>
 
                   <div className="mt-4 rounded-xl border border-hairline bg-paper/90 p-3.5 space-y-1.5">

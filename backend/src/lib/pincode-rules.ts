@@ -43,10 +43,10 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "rule-bangalore-560",
+    id: "rule-Bengaluru-560",
     pattern: "560*",
-    label: "Bangalore Metro Zone (560*)",
-    zone: "Zone 2 — Bangalore Local Dispatch",
+    label: "Bengaluru Metro Zone (560*)",
+    zone: "Zone 2 — Bengaluru Local Dispatch",
     charge: 60,
     estimatedDays: "1–2 business days",
     codAvailable: true,

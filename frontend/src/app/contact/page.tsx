@@ -20,11 +20,11 @@ import {
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact & Bridal Mehandi Bookings',
   description:
-    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or botanical order guidance directly from Sana across Srinagar & Bangalore.',
+    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or botanical order guidance directly from Sana across Srinagar & Bengaluru.',
   canonicalPath: '/contact',
   keywords: [
     'book bridal mehandi Srinagar',
-    'book bridal mehandi Bangalore',
+    'book bridal mehandi Bengaluru',
     'Mehandi by Sana contact',
     'henna consultation India',
   ],
@@ -97,7 +97,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Working independently across Srinagar and Bangalore, Sana personally reviews every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
+                Working independently across Srinagar and Bengaluru, Sana personally reviews every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
               </p>
             </div>
 
@@ -132,7 +132,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 className="pointer-events-none hidden sm:block absolute top-6 right-6"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2 sm:pr-14">
-                Srinagar &amp; Bangalore Concierge Desk
+                Srinagar &amp; Bengaluru Concierge Desk
               </p>
               <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-5 sm:pr-14">
                 Locations &amp; Direct Contact
@@ -148,7 +148,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                       <strong>Srinagar:</strong> Baghat Barzullah, Srinagar, Jammu &amp; Kashmir 190005
                     </span>
                     <span className="block text-plaque-ink/80">
-                      <strong>Bangalore:</strong> Freelance Bridal Appointments &amp; Batch Dispatch, Bengaluru, Karnataka
+                      <strong>Bengaluru:</strong> Freelance Bridal Appointments &amp; Batch Dispatch, Bengaluru, Karnataka
                     </span>
                   </dd>
                 </div>

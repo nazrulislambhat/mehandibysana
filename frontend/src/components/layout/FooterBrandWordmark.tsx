@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-const BRAND_LETTERS = 'MEHANDIBYSANA'.split('');
+const BRAND_LETTERS = 'MEHANDI BY SANA'.split('');
 
 export function FooterBrandWordmark() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -64,7 +64,7 @@ export function FooterBrandWordmark() {
     >
       <p
         aria-label="Mehandi by Sana"
-        className="m-0 font-sans font-semibold uppercase tracking-[-0.015em] leading-[0.84] text-[clamp(2rem,10.2cqi,9.75rem)] text-plaque-ink/[0.07] flex items-baseline justify-center whitespace-nowrap w-full"
+        className="m-0 font-sans font-semibold uppercase tracking-[-0.015em] leading-[0.84] text-[clamp(2rem,10.2cqi,9.75rem)] text-plaque-ink/[0.05] flex items-baseline justify-center whitespace-nowrap w-full"
       >
         <span className="sr-only">MEHANDI BY SANA</span>
         <span aria-hidden="true" className="inline-flex items-baseline whitespace-nowrap">
@@ -79,7 +79,7 @@ export function FooterBrandWordmark() {
                   revealState === 'revealed' ? `${charIndex * 28}ms` : '0ms',
               }}
             >
-              {char}
+              {char === ' ' ? '\u00A0' : char}
             </span>
           ))}
         </span>

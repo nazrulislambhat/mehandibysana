@@ -46,7 +46,7 @@ export function ThemeToggle({
           onClick={() => setTheme('light')}
           aria-pressed={!isDark}
           data-theme-option="light"
-          className={`inline-flex items-center gap-1.5 min-h-[34px] rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+          className={`inline-flex items-center gap-1.5 min-h-[24px] rounded-full px-2 py-1 text-xs font-medium transition-all cursor-pointer ${
             !isDark
               ? isPlaque
                 ? 'bg-plaque-ink text-plaque shadow-xs'
@@ -66,7 +66,7 @@ export function ThemeToggle({
                 : 'shrink-0'
             }
           />
-          <span>Light</span>
+          
         </button>
 
         <button
@@ -74,7 +74,7 @@ export function ThemeToggle({
           onClick={() => setTheme('dark')}
           aria-pressed={isDark}
           data-theme-option="dark"
-          className={`inline-flex items-center gap-1.5 min-h-[34px] rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+          className={`inline-flex items-center gap-1.5 min-h-[24px] rounded-full px-2 py-1 text-xs font-medium transition-all cursor-pointer ${
             isDark
               ? isPlaque
                 ? 'bg-plaque-ink text-plaque shadow-xs'
@@ -94,7 +94,7 @@ export function ThemeToggle({
                 : 'shrink-0'
             }
           />
-          <span>Dark</span>
+      
         </button>
       </div>
     );

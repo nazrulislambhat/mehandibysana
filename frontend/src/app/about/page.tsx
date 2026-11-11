@@ -24,13 +24,13 @@ import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlat
 export const metadata: Metadata = buildPageMetadata({
   title: 'About Sumaiya Rashid Magray (Sana) & Her Journey',
   description:
-    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Srinagar & Bangalore since 2019.',
+    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Srinagar & Bengaluru since 2019.',
   canonicalPath: '/about',
   keywords: [
     'Sumaiya Rashid Magray',
     'Mehandi by Sana story',
     'Kashmir organic henna pioneer',
-    'Srinagar Bangalore freelance henna artist',
+    'Srinagar Bengaluru freelance henna artist',
     'Maenz 2019 Kashmir',
   ],
 });
@@ -145,7 +145,7 @@ const STUDIO_PILLARS = [
   {
     number: '02',
     title: 'Small-Batch Freshness',
-    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Srinagar (Baghat Barzullah) and Bangalore and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
+    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Srinagar (Baghat Barzullah) and Bengaluru and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
   },
   {
     number: '03',
@@ -199,7 +199,7 @@ export default function AboutPage() {
                   <div className="pointer-events-none absolute inset-3 rounded-t-[12rem] rounded-b-xl border border-ink/10" />
                 </div>
                 <figcaption className="text-xs font-semibold uppercase tracking-[0.14em] text-umber text-center">
-                  Sumaiya Rashid Magray (Sana) &middot; Freelance Artist &middot; Srinagar &amp; Bangalore
+                  Sumaiya Rashid Magray (Sana) &middot; Freelance Artist &middot; Srinagar &amp; Bengaluru
                 </figcaption>
               </figure>
             </div>
@@ -224,7 +224,7 @@ export default function AboutPage() {
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in 2019 in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Srinagar and Bangalore.
+                Founded in 2019 in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Srinagar and Bengaluru.
               </p>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
                 After researching the monoterpene chemistry of eucalyptus, cineol, and tea tree oils to optimize natural lawsone dye release, Sana replaced commercial chemical cones with freshly mixed, triple-sifted organic paste hand-rolled to a 0.38mm tip.
@@ -253,7 +253,7 @@ export default function AboutPage() {
             </blockquote>
             <figcaption className="mt-6 pt-5 border-t border-plaque-ink/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               &mdash; Sumaiya Rashid Magray (Sana) &middot;{' '}
-              <span className="text-plaque-ink/75 font-normal">Srinagar &amp; Bangalore</span>
+              <span className="text-plaque-ink/75 font-normal">Srinagar &amp; Bengaluru</span>
             </figcaption>
           </figure>
         </TextReveal>

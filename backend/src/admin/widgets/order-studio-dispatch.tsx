@@ -63,7 +63,7 @@ const BASE_PAYMENT_METHOD_OPTIONS: Array<{ value: string; label: string }> = [
 const COURIER_PRESETS = [
   "Local Courier",
   "Srinagar Local Rider",
-  "Bangalore Local Rider",
+  "Bengaluru Local Rider",
   "India Post Speed Post",
   "Delhivery",
   "DTDC",

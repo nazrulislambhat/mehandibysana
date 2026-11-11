@@ -2,6 +2,8 @@ import React from 'react';
 import { LinkButton } from '@/components/ui/Button';
 import { HeroHennaComposition } from '@/components/graphics/HennaArtworkPlates';
 
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+
 export interface HeroProps {
   totalProducts: number | null;
   ordersCount?: number | null;
@@ -14,9 +16,9 @@ export function Hero({
   isConfigured,
 }: HeroProps) {
   const formattedOrders =
-    ordersCount !== null && ordersCount > 0
+    ordersCount !== null && ordersCount > 10000
       ? `${ordersCount.toLocaleString('en-IN')}+`
-      : '3,480+';
+      : '5,480+';
 
   return (
     <section
@@ -32,7 +34,7 @@ export function Hero({
                 className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Mehandi by Sana &middot; Srinagar &amp; Bangalore
+                Mehandi by Sana &middot; Srinagar &amp; Bengaluru
               </p>
             </div>
 
@@ -45,11 +47,9 @@ export function Hero({
 
             <div className="space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8">
               <p>
-                Founded by independent freelance artist Sumaiya Rashid Magray (Sana) across Srinagar and Bangalore, Mehandi by Sana is dedicated to 100% botanical, PPD-free artistry and small-batch organic formulations.
+                Founded by independent freelance artist Sana across Srinagar and Bengaluru, Mehandi by Sana is dedicated to 100% natural, PPD-free artistry and small-batch organic henna products.
               </p>
-              <p>
-                Book bespoke bridal and celebration mehandi appointments, or order freshly rolled henna cones, essential oils, aftercare balms, and hair henna crafted in small batches.
-              </p>
+              
             </div>
 
             <div className="flex flex-wrap items-center gap-3.5 mb-10">
@@ -57,17 +57,17 @@ export function Hero({
                 href="/shop"
                 variant="primary"
                 size="lg"
-                className="rounded-full"
+                className="rounded-md"
               >
-                Shop Products &rarr;
+                Shop Products <ShoppingBag className='w-4 h-4'/>
               </LinkButton>
               <LinkButton
                 href="/contact"
                 variant="secondary"
                 size="lg"
-                className="rounded-full"
+                className="rounded-md"
               >
-                Book a Service
+                Book a Service <LineDotRightHorizontal className="w-4 h-4"/>
               </LinkButton>
             </div>
 

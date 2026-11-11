@@ -54,7 +54,7 @@ export async function generateMetadata({
   const rawDescription =
     product.shortDescription ||
     product.description ||
-    `Shop ${product.name} crafted in small batches by Mehandi by Sana across Srinagar & Bangalore.`;
+    `Shop ${product.name} crafted in small batches by Mehandi by Sana across Srinagar & Bengaluru.`;
   const description = cleanSeoText(rawDescription, 158);
   const canonicalPath = `/product/${encodeURIComponent(product.slug)}`;
 

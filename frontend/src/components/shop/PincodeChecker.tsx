@@ -12,7 +12,7 @@ export interface PincodeCheckerProps {
 
 const QUICK_SAMPLES = [
   { pin: '190001', label: '190001 · Srinagar' },
-  { pin: '560001', label: '560001 · Bangalore' },
+  { pin: '560001', label: '560001 · Bengaluru' },
   { pin: '110001', label: '110001 · Delhi' },
 ];
 

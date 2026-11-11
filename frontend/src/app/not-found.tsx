@@ -24,7 +24,7 @@ const COLLECTION_SHORTCUTS = [
 
 const WAYFINDING_LINKS = [
   { label: 'Track Your Parcel', meta: 'Order ID & Email Lookup', href: '/track-order' },
-  { label: 'Bridal & Event Bookings', meta: 'Srinagar, Bangalore & Destination Dates', href: '/services' },
+  { label: 'Bridal & Event Bookings', meta: 'Srinagar, Bengaluru & Destination Dates', href: '/services' },
   { label: '48-Hour Stain & Care Guide', meta: 'Freezer & Aftercare Ritual', href: '/henna-care' },
   { label: 'Shipping & PIN Zones', meta: 'Dispatch Within 2 Days', href: '/shipping-policy' },
   { label: 'Refunds & Cancellations', meta: 'Perishables & Claims Window', href: '/refund-policy' },
@@ -112,7 +112,7 @@ export default function NotFound() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
-                      Quick Directory &middot; Srinagar &amp; Bangalore
+                      Quick Directory &middot; Srinagar &amp; Bengaluru
                     </p>
                     <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
                       Helpful Destinations

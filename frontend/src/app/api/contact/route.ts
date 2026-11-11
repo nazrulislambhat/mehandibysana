@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       process.env.STUDIO_ADMIN_EMAIL?.trim() || 'sana@mehandibysana.com';
     const customerSummary = `We have received your ${service} inquiry${
       eventDate ? ` for ${eventDate}` : ''
-    }. Sana will personally review availability across Srinagar, Bangalore, or destination venues within 24 hours.`;
+    }. Sana will personally review availability across Srinagar, Bengaluru, or destination venues within 24 hours.`;
 
     await Promise.allSettled([
       sendFrontendFallbackEmail({

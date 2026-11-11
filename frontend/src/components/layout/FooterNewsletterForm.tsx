@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { LineDotRightHorizontal } from 'lucide-react';
 
 export function FooterNewsletterForm() {
   const [email, setEmail] = useState('');
@@ -109,8 +110,8 @@ export function FooterNewsletterForm() {
             disabled={status === 'submitting'}
             className="min-h-[42px] shrink-0 rounded-full text-xs"
           >
-            <span>{status === 'submitting' ? 'Joining…' : 'Join Batch List'}</span>
-            {status !== 'submitting' ? <span aria-hidden="true">&rarr;</span> : null}
+            <span>{status === 'submitting' ? 'Joining…' : 'Join List'}</span>
+            {status !== 'submitting' ? <LineDotRightHorizontal className='w-4 h-4'/> : null}
           </Button>
         </div>
       </form>
