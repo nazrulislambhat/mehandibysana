@@ -2,8 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { LineDotRightHorizontal } from 'lucide-react'
-import { FaInstagram } from 'react-icons/fa';
+import { LineDotRightHorizontal } from 'lucide-react';
+
 import { buildPageMetadata, toAbsoluteUrl } from '@/lib/seo';
 import {
   buildBreadcrumbJsonLd,
@@ -103,8 +103,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     title: 'Eid Sunburst Medallion',
     caption:
       'Centerpiece sunburst medallion with crisp finger caps showing rich natural oxidation without chemical dyes.',
-    imageSrc:
-      'https://mehandibysana.com/wp-content/uploads/2023/08/176480.jpg',
+    imageSrc: 'https://mehandibysana.com/wp-content/uploads/2023/08/176480.jpg',
     imageAlt:
       'Eid sunburst medallion organic henna palm stain with dark mahogany oxidation by Mehandi by Sana',
     aspectClass: 'aspect-[4/5]',
@@ -138,7 +137,7 @@ export default function GalleryPage() {
     buildBreadcrumbJsonLd([
       { name: 'Home', path: '/' },
       { name: 'Gallery', path: '/gallery' },
-    ])
+    ]),
   );
 
   return (
@@ -189,7 +188,10 @@ export default function GalleryPage() {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                A curated archive of Sana’s hand-drawn organic henna commissions across Srinagar & Bengaluru, and destination celebrations—created exclusively with freshly rolled, PPD-free botanical cones.
+                A curated archive of Sana’s hand-drawn organic henna commissions
+                across Srinagar & Bengaluru, and destination
+                celebrations—created exclusively with freshly rolled, PPD-free
+                botanical cones.
               </p>
             </div>
 
@@ -234,7 +236,10 @@ export default function GalleryPage() {
                   className={`relative ${plate.aspectClass} w-full overflow-hidden rounded-2xl border border-hairline bg-linen`}
                 >
                   <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full bg-plaque/90 backdrop-blur-sm border border-plaque-border/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-plaque-ink">
-                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+                    <span
+                      aria-hidden="true"
+                      className="w-1.5 h-1.5 rounded-full bg-terracotta"
+                    />
                     {plate.number}
                   </span>
                   <Image
@@ -277,7 +282,10 @@ export default function GalleryPage() {
               Inquire about a bespoke design
             </h2>
             <p className="text-sm text-plaque-ink/75 leading-relaxed">
-              Share your celebration date, venue location, and motif inspirations—Sana tailors each bridal or festive layout to your preferences and prepares fresh cones specifically for your session.
+              Share your celebration date, venue location, and motif
+              inspirations—Sana tailors each bridal or festive layout to your
+              preferences and prepares fresh cones specifically for your
+              session.
             </p>
           </div>
           <div className="flex flex-wrap gap-2 shrink-0">
@@ -287,16 +295,17 @@ export default function GalleryPage() {
               size="md"
               className="rounded-md"
             >
-              Request a Booking <LineDotRightHorizontal className='w-3.5 h-3.5'/>
+              Request a Booking{' '}
+              <LineDotRightHorizontal className="w-3.5 h-3.5" />
             </LinkButton>
-         
+
             <Link
               href="https://instagram.com/mehandibysana"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 justify-center min-h-[44px] rounded-md border border-plaque-ink/30 bg-transparent px-6 py-2.5 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
             >
-              Instagram <FaInstagram/>
+              Instagram
             </Link>
           </div>
         </div>
