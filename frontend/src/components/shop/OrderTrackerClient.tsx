@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { LineDotRightHorizontalIcon } from 'lucide-react';
 
 export interface TrackedOrderItem {
   id: string;
@@ -242,17 +243,15 @@ export function OrderTrackerClient({
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-          <p className="text-xs text-umber">
-            Works for new MedusaJS orders (<code className="font-mono">MBS-...</code>) and imported order records.
-          </p>
+        
           <Button
             type="submit"
             variant="primary"
             size="md"
             disabled={loading}
-            className="rounded-full"
+            className="rounded-md"
           >
-            {loading ? 'Checking Status…' : 'Track Order →'}
+            {loading ? 'Checking Status…' : 'Track Order '}<LineDotRightHorizontalIcon className='w-3.5 h-3.5'/>
           </Button>
         </div>
       </form>

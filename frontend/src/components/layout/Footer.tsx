@@ -13,7 +13,7 @@ import {
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { LineDotRightHorizontal } from 'lucide-react';
 const APOTHECARY_LINKS = [
   { label: 'Shop', href: '/shop' },
   { label: 'Organic Henna', href: '/shop?category=organic-henna' },
@@ -63,50 +63,68 @@ export function Footer() {
                   />
                 </Link>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-plaque-ink/80">
-                  <span aria-hidden="true" className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta"
+                  />
                   Est. 2019 &middot; Srinagar &amp; Bengaluru
                 </span>
               </div>
 
               <p className="text-sm text-plaque-ink/75 leading-relaxed max-w-md">
-                Founded by Sana, a freelance organic mehandi artist working across Srinagar &amp; Bengaluru. She offers fresh small-batch Sojat henna cones, therapeutic essential oils, aftercare balms, and heirloom bridal artistry.
+                Founded by Sana, a freelance organic mehandi artist working
+                across Srinagar &amp; Bengaluru. She offers fresh small-batch
+                Sojat henna cones, therapeutic essential oils, aftercare balms,
+                and heirloom bridal artistry.
               </p>
             </div>
 
             <FooterNewsletterForm />
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-xs text-plaque-ink/80">
+            <div className="flex flex-wrap md:flex-nowrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-plaque-ink/80">
               <a
                 href="mailto:sana@mehandibysana.com"
                 className="inline-flex items-center gap-1.5 hover:text-terracotta underline underline-offset-4 decoration-plaque-ink/30 hover:decoration-terracotta transition-colors"
               >
-                <MailEnvelopeIcon size={14} className="shrink-0 text-terracotta" />
+                <MailEnvelopeIcon
+                  size={14}
+                  className="shrink-0 text-terracotta"
+                />
                 <span>sana@mehandibysana.com</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">&middot;</span>
+              <span aria-hidden="true" className="text-terracotta">
+                &middot;
+              </span>
               <a
                 href="tel:+919149648717"
                 className="inline-flex items-center gap-1.5 hover:text-terracotta tabular-nums transition-colors"
               >
-                <PhoneHandsetIcon size={14} className="shrink-0 text-terracotta" />
+                <PhoneHandsetIcon
+                  size={14}
+                  className="shrink-0 text-terracotta"
+                />
                 <span>+91-9149648717</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">&middot;</span>
+              <span aria-hidden="true" className="text-terracotta">
+                &middot;
+              </span>
               <a
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-terracotta hover:text-plaque-ink font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-terracotta hover:underline font-medium transition-colors"
               >
                 <WhatsAppChatIcon size={14} className="shrink-0" />
                 <span>WhatsApp</span>
-                <span aria-hidden="true">&#8599;</span>
               </a>
             </div>
           </div>
 
           {/* Apothecary Index */}
-          <nav aria-label="Footer apothecary categories" className="lg:col-span-2">
+          <nav
+            aria-label="Footer apothecary categories"
+            className="lg:col-span-2"
+          >
             <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-5">
               Apothecary
             </h2>
@@ -131,7 +149,10 @@ export function Footer() {
           </nav>
 
           {/* Artist & Policies Index */}
-          <nav aria-label="Footer artist links and legal policies" className="lg:col-span-2">
+          <nav
+            aria-label="Footer artist links and legal policies"
+            className="lg:col-span-2"
+          >
             <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-5">
               Artist &amp; Care
             </h2>
@@ -169,13 +190,17 @@ export function Footer() {
 
                 <div className="space-y-2.5 text-xs text-plaque-ink/80 leading-relaxed">
                   <p>
-                    <span className="font-medium text-plaque-ink block">Srinagar: Dispatch &amp; Bookings</span>
+                    <span className="font-medium text-plaque-ink block">
+                      Srinagar: Dispatch &amp; Bookings
+                    </span>
                     <span className="text-plaque-ink/70">
                       Srinagar, Jammu & Kashmir
                     </span>
                   </p>
                   <p>
-                    <span className="font-medium text-plaque-ink block">Bengaluru: Dispatch &amp; Bookings</span>
+                    <span className="font-medium text-plaque-ink block">
+                      Bengaluru: Dispatch &amp; Bookings
+                    </span>
                     <span className="text-plaque-ink/70">
                       Bengaluru, Karnataka
                     </span>
@@ -184,7 +209,8 @@ export function Footer() {
                     Contact: Mon &ndash; Sun, 09:00 AM &ndash; 09:00 PM IST
                   </p>
                   <p className="text-plaque-ink/70">
-                    Dispatch: Small-batch courier Mon &ndash; Sat within 3&ndash;5 business days across India.
+                    Dispatch: Small-batch courier Mon &ndash; Sat within
+                    3&ndash;5 business days across India.
                   </p>
                 </div>
               </div>
@@ -194,16 +220,16 @@ export function Footer() {
                   href="/contact"
                   variant="accent"
                   size="md"
-                  className="w-full rounded-full text-xs"
+                  className="w-full rounded-md text-xs"
                 >
-                  <span>Request Bridal Date</span> <LineDotRightHorizontal className='w-3.5 h-3.5'/>
-               
+                  <span>Request Bridal Date</span>{' '}
+                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </LinkButton>
                 <LinkButton
                   href="/track-order"
                   variant="inverse"
                   size="sm"
-                  className="w-full rounded-full text-xs border-plaque-ink/20"
+                  className="w-full rounded-md text-xs border-plaque-ink/20"
                 >
                   Track Your Order
                 </LinkButton>
@@ -221,25 +247,42 @@ export function Footer() {
 
         {/* Bottom Copyright & Trust Strip */}
         <div className="relative z-10 w-full max-w-[72rem] mx-auto px-4 md:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-plaque-ink/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-plaque-ink/70">
-          <p className='text-[10px]'>
+          <p className="text-[10px]">
             &copy; {currentYear} Mehandi By Sana . All rights reserved.
           </p>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-medium text-plaque-ink/75">
             <span className="inline-flex items-center gap-1.5">
-              <ShieldProtectIcon size={14} className="text-terracotta shrink-0" />
+              <ShieldProtectIcon
+                size={14}
+                className="text-terracotta shrink-0"
+              />
               <span>Razorpay PCI-DSS</span>
             </span>
-            <span aria-hidden="true" className="text-terracotta">&middot;</span>
+            <span aria-hidden="true" className="text-terracotta">
+              &middot;
+            </span>
             <span>COD Eligible PINs</span>
-            <span aria-hidden="true" className="text-terracotta">&middot;</span>
+            <span aria-hidden="true" className="text-terracotta">
+              &middot;
+            </span>
             <span>India DPDP Compliant</span>
-            <span aria-hidden="true" className="text-terracotta">&middot;</span>
-            <Link href="/privacy-policy" className="hover:text-terracotta transition-colors">
+            <span aria-hidden="true" className="text-terracotta">
+              &middot;
+            </span>
+            <Link
+              href="/privacy-policy"
+              className="hover:text-terracotta transition-colors"
+            >
               Privacy
             </Link>
-            <span aria-hidden="true" className="text-terracotta">&middot;</span>
-            <Link href="/terms-conditions" className="hover:text-terracotta transition-colors">
+            <span aria-hidden="true" className="text-terracotta">
+              &middot;
+            </span>
+            <Link
+              href="/terms-conditions"
+              className="hover:text-terracotta transition-colors"
+            >
               Terms
             </Link>
             <ThemeToggle variant="segmented" surface="plaque" />

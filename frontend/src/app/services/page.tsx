@@ -120,7 +120,7 @@ export default function ServicesPage() {
     buildBreadcrumbJsonLd([
       { name: 'Home', path: '/' },
       { name: 'Services', path: '/services' },
-    ])
+    ]),
   );
 
   return (
@@ -174,7 +174,10 @@ export default function ServicesPage() {
 
             <div className="lg:col-span-5 space-y-5">
               <p className="text-sm md:text-base text-umber leading-relaxed">
-                Working independently as a freelance artist across Srinagar (Baghat Barzullah) and Bengaluru, Sana travels for brides and celebrations across India and destination venues using exclusively 100% organic, PPD-free henna paste.
+                Working independently as a freelance artist across Srinagar and
+                Bengaluru, Sana travels for brides and celebrations across India
+                and destination venues using exclusively 100% organic, PPD-free
+                henna paste.
               </p>
               <LinkButton
                 href="/contact"
@@ -318,7 +321,9 @@ export default function ServicesPage() {
               </h2>
             </TextReveal>
             <p className="text-sm md:text-base text-umber leading-relaxed">
-              We recommend reserving bridal dates 4–8 weeks in advance during peak wedding seasons, and 2–3 weeks ahead for engagement, Eid, or custom bulk cone orders.
+              We recommend reserving bridal dates 4–8 weeks in advance during
+              peak wedding seasons, and 2–3 weeks ahead for engagement, Eid, or
+              custom bulk cone orders.
             </p>
           </div>
 

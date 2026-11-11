@@ -41,22 +41,24 @@ const FAQ_GROUPS: FaqGroup[] = [
     title: 'Organic Cones & Botanical Purity',
     items: [
       {
-        question: 'Are Mehandi by Sana cones 100% chemical-free and PPD-free?',
+        question: 'Are Mehandi By Sana cones 100% chemical-free and PPD-free?',
         answer:
           'Yes. Every cone is mixed from triple-cloth sifted Sojat (Rajasthan) organic henna leaf powder, pure steam-distilled essential oils (eucalyptus, lavender, or cajeput), raw sugar, and filtered water or lemon hydrosol. We never add PPD, metallic salts, ammonia, artificial dyes, or synthetic preservatives.',
       },
       {
-        question: 'Why did my stain start bright orange instead of dark brown immediately?',
+        question:
+          'Why did my stain start bright orange instead of dark brown immediately?',
         answer:
           'Pure organic lawsone always reveals a luminous saffron-tangerine stain right after flaking off dried paste. Over the next 24 to 48 hours, natural epidermal oxidation deepens it into lush espresso-mahogany. Instant black or burgundy cones indicate chemical dye adulteration—never pure henna.',
       },
       {
         question: 'What is the cone tip size and weight?',
         answer:
-          'Our signature cellophane cones are hand-rolled to a crisp 0.38mm ultra-fine pin tip (~25g standard fill) so brides and professional artists can draw delicate Mughal arches, jali grids, and floral shading cleanly without hand fatigue.',
+          'Our signature cellophane cones are hand-rolled to a crisp 0.38mm ultra-fine pin tip (~20g standard fill) so brides and professional artists can draw delicate Mughal arches, jali grids, and floral shading cleanly without hand fatigue.',
       },
       {
-        question: 'Are your organic cones safe for pregnant women and children?',
+        question:
+          'Are your organic cones safe for pregnant women and children?',
         answer:
           'Yes, our natural skin-safe lavender and pure henna formulations avoid harsh petrochemicals or synthetic solvents. For expecting mothers or children with sensitive skin, please inform us when ordering or select gentle lavender formulations, and perform a small inner-wrist patch test 24 hours prior.',
       },
@@ -68,7 +70,8 @@ const FAQ_GROUPS: FaqGroup[] = [
     title: 'Freezer Storage & Dark Stain Tips',
     items: [
       {
-        question: 'How long do fresh cones stay fresh? Do I really need a freezer?',
+        question:
+          'How long do fresh cones stay fresh? Do I really need a freezer?',
         answer:
           'Fresh preservative-free cones stay peak-potent for ~48 hours at cool room temperature or ~4–5 days chilled. Immediately transfer unused cones into an airtight pouch in your deep freezer (-18°C or colder) within 48 hours of delivery, where they keep vibrant dye release for 3–4 months.',
       },
@@ -100,7 +103,8 @@ const FAQ_GROUPS: FaqGroup[] = [
           'Use our live Order Tracker page anytime with your order reference (e.g., MBS-...) and checkout email. You also receive automated order confirmation and shipment AWB emails when your parcel dispatches.',
       },
       {
-        question: 'Do you support Cash on Delivery (COD) and online UPI/Card payments?',
+        question:
+          'Do you support Cash on Delivery (COD) and online UPI/Card payments?',
         answer:
           'Yes. Online payments run over Razorpay (UPI, Google Pay, PhonePe, Credit/Debit Cards, NetBanking, Wallets) with encrypted cryptographic verification, and Cash on Delivery is supported across serviceable India PIN codes.',
       },
@@ -129,12 +133,14 @@ const FAQ_GROUPS: FaqGroup[] = [
     title: 'Bridal Bookings & Mehandi Masterclasses',
     items: [
       {
-        question: 'How far in advance should I reserve Sana for my bridal mehandi?',
+        question:
+          'How far in advance should I reserve Sana for my bridal mehandi?',
         answer:
           'For peak Kashmir wedding seasons and Eid weeks, we recommend inquiring 4–8 weeks in advance via our Booking Inquiry page. Dates are locked once availability and your booking retainer are confirmed.',
       },
       {
-        question: 'Which cities do you serve for bridal mehandi, and do you travel for destination weddings?',
+        question:
+          'Which cities do you serve for bridal mehandi, and do you travel for destination weddings?',
         answer:
           'Sana works independently across Srinagar and Bengaluru, and also travels across Jammu & Kashmir, Karnataka, and outstation Indian destinations—with travel and hospitality terms shared transparently in your custom booking proposal.',
       },
@@ -160,7 +166,7 @@ export default function FaqPage() {
           '@type': 'Answer',
           text: item.answer,
         },
-      }))
+      })),
     ),
   };
 
@@ -228,11 +234,17 @@ export default function FaqPage() {
           Reach out directly to Sana
         </h2>
         <p className="text-sm text-plaque-ink/75 leading-relaxed">
-          Need guidance picking cone counts for a bridal event, verifying an order reference, or planning an urgent delivery? Reach out anytime.
+          Need guidance picking cone counts for a bridal event, verifying an
+          order reference, or planning an urgent delivery? Reach out anytime.
         </p>
         <div className="flex flex-wrap gap-3 pt-1">
-          <LinkButton href="/contact" variant="primary" size="md" className="rounded-full">
-            Ask Sana Directly &rarr;
+          <LinkButton
+            href="/contact"
+            variant="primary"
+            size="md"
+            className="rounded-md"
+          >
+            Ask Sana Directly
           </LinkButton>
           <Link
             href="/henna-care"
@@ -245,4 +257,3 @@ export default function FaqPage() {
     </PolicyDocumentLayout>
   );
 }
-

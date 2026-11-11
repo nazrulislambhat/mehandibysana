@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
+import { LineDotRightHorizontal } from 'lucide-react'
+
 import {
   PolicyDocumentLayout,
   type PolicyTocItem,
@@ -55,12 +57,12 @@ export default function TermsConditionsPage() {
         </h2>
         <p className="text-umber">
           This storefront (<strong>mehandibysana.com</strong>) is operated by{' '}
-          <strong>Mehandi by Sana</strong>, founded in 2019 by independent freelance artist Sana, working across{' '}
-          <strong>Baghat Barzullah, Srinagar (Jammu &amp; Kashmir 190001)</strong> and{' '}
+          <strong>Mehandi By Sana</strong>, founded in 2019 by independent freelance artist Sana, working across{' '}
+          <strong>Srinagar (J&K)</strong> and{' '}
           <strong>Bengaluru (Karnataka), India</strong>.
         </p>
         <p className="text-umber">
-          Throughout these Terms &amp; Conditions, &ldquo;Mehandi by Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent practice and botanical apothecary, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical apothecary goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
+          Throughout these Terms &amp; Conditions, &ldquo;Mehandi By Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent practice and botanical apothecary, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical apothecary goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
           <Link href="/privacy-policy" className="text-terracotta underline underline-offset-4">
             Privacy Policy
           </Link>
@@ -92,7 +94,7 @@ export default function TermsConditionsPage() {
             You agree to provide truthful full name, deliverable street address, accurate 6-digit Indian PIN code, active mobile/WhatsApp number, and reachable email address.
           </li>
           <li>
-            Mehandi by Sana is not responsible for courier delays, spoilt fresh cones, or Return-to-Origin (RTO) surcharges resulting from incomplete house numbers, mismatched PIN codes, or unreachable delivery phone numbers.
+            Mehandi By Sana is not responsible for courier delays, spoilt fresh cones, or Return-to-Origin (RTO) surcharges resulting from incomplete house numbers, mismatched PIN codes, or unreachable delivery phone numbers.
           </li>
         </ul>
       </section>
@@ -207,7 +209,7 @@ export default function TermsConditionsPage() {
           Preparation Lead Times, Courier Transit &amp; Risk of Loss
         </h2>
         <p className="text-umber">
-          Fresh henna orders are typically mixed, rolled, sealed, and dispatched from Srinagar or Bengaluru within 1–2 business days (excluding severe weather closures or national holidays). Once scanned by our logistics partner (Delhivery, DTDC Air, Blue Dart, or India Post Speed Post), transit tracking details are emailed to your checkout address and viewable anytime on our{' '}
+          Fresh henna orders are typically mixed, rolled, sealed, and dispatched from Srinagar or Bengaluru within 1–2 business days (excluding severe weather closures or national holidays). Once scanned by our logistics partner (Delhivery, ShreeMaruti, DTDC Air, Blue Dart, or India Post Speed Post), transit tracking details are emailed to your checkout address and viewable anytime on our{' '}
           <Link href="/track-order" className="text-terracotta underline underline-offset-4">
             Order Tracker
           </Link>
@@ -268,7 +270,7 @@ export default function TermsConditionsPage() {
           Intellectual Property &amp; Brand Content
         </h2>
         <p className="text-umber">
-          The brand name <strong>MEHANDI BY SANA</strong>, logo marks, product formulations, photography, original Chinar and Mughal bridal design plates, botanical illustrations, stain guide visuals, and editorial copy on mehandibysana.com are the exclusive intellectual property of Sumaiya Rashid Magray (Mehandi by Sana). Visitors may view or save personal bridal reference inspiration with attribution, but may not scrape, commercially reproduce, counterfeit product labels, or falsely claim affiliation.
+          The brand name <strong>MEHANDI BY SANA</strong>, logo marks, product formulations, photography, original Chinar and Mughal bridal design plates, botanical illustrations, stain guide visuals, and editorial copy on mehandibysana.com are the exclusive intellectual property of Sumaiya Rashid Magray (Mehandi By Sana). Visitors may view or save personal bridal reference inspiration with attribution, but may not scrape, commercially reproduce, counterfeit product labels, or falsely claim affiliation.
         </p>
       </section>
 
@@ -297,11 +299,11 @@ export default function TermsConditionsPage() {
           These Terms are governed by the laws of India, including applicable provisions of the Consumer Protection Act, 2019 and Consumer Protection (E-Commerce) Rules, 2020. Any disputes arising out of orders or service engagements shall be subject to the exclusive jurisdiction of the competent courts in{' '}
           <strong>Srinagar, Jammu &amp; Kashmir, India</strong>. We may update these Terms periodically by revising the effective date above; continued storefront use indicates acceptance of updated terms.
         </p>
-        <div className="pt-3 flex flex-wrap gap-3">
-          <LinkButton href="/refund-policy" variant="primary" size="md" className="rounded-full">
-            Read Refund Policy &rarr;
+        <div className="pt-3 flex flex-wrap gap-2">
+          <LinkButton href="/refund-policy" variant="primary" size="md" className="rounded-md">
+            Read Refund Policy <LineDotRightHorizontal className='w-3.5 h-3.5'/>
           </LinkButton>
-          <LinkButton href="/privacy-policy" variant="secondary" size="md" className="rounded-full">
+          <LinkButton href="/privacy-policy" size="md" className="rounded-md" variant="secondary">
             Privacy Policy
           </LinkButton>
         </div>

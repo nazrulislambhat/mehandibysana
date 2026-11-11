@@ -7,7 +7,9 @@ import { LineDotRightHorizontal } from 'lucide-react';
 export function FooterNewsletterForm() {
   const [email, setEmail] = useState('');
   const [companyWebsite, setCompanyWebsite] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    'idle' | 'submitting' | 'success' | 'error'
+  >('idle');
   const [feedback, setFeedback] = useState('');
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -41,7 +43,10 @@ export function FooterNewsletterForm() {
 
       if (!res.ok || !data.ok) {
         setStatus('error');
-        setFeedback(data.error || 'Could not save your email right now. Please try again.');
+        setFeedback(
+          data.error ||
+            'Could not save your email right now. Please try again.',
+        );
         return;
       }
 
@@ -50,7 +55,7 @@ export function FooterNewsletterForm() {
       setFeedback(
         data.alreadySubscribed
           ? 'You are already subscribed to the fresh-batch dispatch list.'
-          : 'You are on the Fresh Batch Dispatch List for new Sojat henna drops & bridal dates.'
+          : 'You are on the Fresh Batch Dispatch List for new Sojat henna drops & bridal dates.',
       );
     } catch {
       setStatus('error');
@@ -70,7 +75,8 @@ export function FooterNewsletterForm() {
       </div>
 
       <p className="text-xs text-plaque-ink/75 leading-relaxed">
-        Receive fresh-batch alerts when new 0.38mm cone harvests are rolled or Eid &amp; bridal slots open.
+        Receive fresh-batch alerts when new 0.38mm cone harvests are rolled or
+        Eid &amp; bridal slots open.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-2.5" noValidate>
@@ -108,10 +114,12 @@ export function FooterNewsletterForm() {
             variant="accent"
             size="sm"
             disabled={status === 'submitting'}
-            className="min-h-[42px] shrink-0 rounded-full text-xs"
+            className="min-h-[42px] shrink-0 rounded-md text-xs"
           >
             <span>{status === 'submitting' ? 'Joining…' : 'Join List'}</span>
-            {status !== 'submitting' ? <LineDotRightHorizontal className='w-3.5 h-3.5'/> : null}
+            {status !== 'submitting' ? (
+              <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            ) : null}
           </Button>
         </div>
       </form>
@@ -129,4 +137,3 @@ export function FooterNewsletterForm() {
     </div>
   );
 }
-

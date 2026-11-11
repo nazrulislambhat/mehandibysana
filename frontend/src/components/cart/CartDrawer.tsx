@@ -45,7 +45,7 @@ export function CartDrawer() {
   const isClient = useSyncExternalStore(
     emptySubscribe,
     () => true,
-    () => false
+    () => false,
   );
 
   const isOpen = useCartStore((state) => state.isDrawerOpen);
@@ -85,7 +85,7 @@ export function CartDrawer() {
       restoreFocusRef.current = restoreFocus;
       closeDrawer();
     },
-    [closeDrawer]
+    [closeDrawer],
   );
 
   useEffect(() => {
@@ -105,7 +105,10 @@ export function CartDrawer() {
         setPhase((prev) => (prev === 'closed' ? 'closed' : 'closing'));
         timer = window.setTimeout(() => {
           setPhase('closed');
-          if (restoreFocusRef.current && previousFocusRef.current?.isConnected) {
+          if (
+            restoreFocusRef.current &&
+            previousFocusRef.current?.isConnected
+          ) {
             previousFocusRef.current.focus();
           }
           previousFocusRef.current = null;
@@ -125,7 +128,9 @@ export function CartDrawer() {
     if (!isOpen) return;
 
     previousFocusRef.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -148,8 +153,8 @@ export function CartDrawer() {
       if (event.key === 'Tab' && dialogRef.current) {
         const focusable = Array.from(
           dialogRef.current.querySelectorAll<HTMLElement>(
-            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-          )
+            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
         ).filter((el) => el.offsetParent !== null);
 
         if (focusable.length === 0) return;
@@ -215,18 +220,25 @@ export function CartDrawer() {
   const isVisible = isOpen || phase !== 'closed';
   if (!isClient || !isVisible) return null;
 
-  const renderState: FolioPhase = isOpen && phase === 'closed' ? 'opening' : phase;
+  const renderState: FolioPhase =
+    isOpen && phase === 'closed' ? 'opening' : phase;
 
   const currency = cart?.currencySymbol ?? '₹';
   const activeDelivery =
     pincodeResult?.serviceable && pincodeResult.pincode.length === 6
       ? pincodeResult
       : null;
-  const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
-  const appliedCouponCode = couponValidation?.valid ? couponValidation.code : '';
+  const discountAmount = couponValidation?.valid
+    ? couponValidation.discountAmount
+    : 0;
+  const appliedCouponCode = couponValidation?.valid
+    ? couponValidation.code
+    : '';
   const estimatedTotal = Math.max(
     0,
-    Math.round((subtotal + (activeDelivery?.deliveryCharge ?? 0) - discountAmount) * 100) / 100
+    Math.round(
+      (subtotal + (activeDelivery?.deliveryCharge ?? 0) - discountAmount) * 100,
+    ) / 100,
   );
 
   const handleQuickPinSubmit = (e: React.FormEvent) => {
@@ -272,7 +284,10 @@ export function CartDrawer() {
         </div>
 
         {/* Architectural Dual-Tone Top Edge */}
-        <div aria-hidden="true" className="hidden sm:block h-[3px] w-full bg-plaque relative shrink-0">
+        <div
+          aria-hidden="true"
+          className="hidden sm:block h-[3px] w-full bg-plaque relative shrink-0"
+        >
           <span className="absolute left-0 top-0 h-full w-36 bg-terracotta-solid" />
         </div>
 
@@ -348,7 +363,10 @@ export function CartDrawer() {
 
         {/* Main Folio Body */}
         {isLoading && items.length === 0 ? (
-          <div className="px-6 py-16 text-center text-sm text-umber bg-canvas" role="status">
+          <div
+            className="px-6 py-16 text-center text-sm text-umber bg-canvas"
+            role="status"
+          >
             Syncing your bag ledger…
           </div>
         ) : items.length === 0 ? (
@@ -386,7 +404,9 @@ export function CartDrawer() {
                   Your bag is awaiting botanicals
                 </p>
                 <p className="text-sm text-umber leading-relaxed mb-5">
-                  Explore fresh Sojat henna cones, aftercare balms, therapeutic oils, and precision tools mixed to order across Srinagar &amp; Bengaluru.
+                  Explore fresh Sojat henna cones, aftercare balms, therapeutic
+                  oils, and precision tools mixed to order across Srinagar &amp;
+                  Bengaluru.
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -407,9 +427,9 @@ export function CartDrawer() {
                   variant="primary"
                   size="md"
                   onClick={() => handleClose(false)}
-                  className="rounded-full w-full sm:w-auto min-w-[210px]"
+                  className="rounded-md w-full sm:w-auto min-w-[210px]"
                 >
-                  Explore Full Apothecary &rarr;
+                  Explore Full Apothecary
                 </LinkButton>
               </div>
             </div>
@@ -421,7 +441,10 @@ export function CartDrawer() {
               {/* Dispatch Status Strip */}
               <div className="border-b border-hairline bg-linen px-5 sm:px-7 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs shrink-0">
                 <span className="inline-flex items-center gap-1.5 text-umber font-medium">
-                  <CourierDispatchIcon size={14} className="text-terracotta shrink-0" />
+                  <CourierDispatchIcon
+                    size={14}
+                    className="text-terracotta shrink-0"
+                  />
                   <span>Fresh small-batch dispatch within 48h</span>
                 </span>
                 <span className="font-medium text-ink tabular-nums">
@@ -496,14 +519,19 @@ export function CartDrawer() {
                           <div>
                             <div className="flex items-start justify-between gap-2.5">
                               <Link
-                                href={item.slug ? `/product/${item.slug}` : '/shop'}
+                                href={
+                                  item.slug ? `/product/${item.slug}` : '/shop'
+                                }
                                 onClick={() => handleClose(false)}
                                 className="font-serif text-[1.15rem] sm:text-[1.25rem] font-medium text-ink hover:text-terracotta leading-snug line-clamp-2"
                               >
                                 {item.name}
                               </Link>
                               <span className="font-serif text-lg sm:text-xl font-medium text-ink tabular-nums shrink-0">
-                                {formatMoney(item.lineTotal, item.currencySymbol)}
+                                {formatMoney(
+                                  item.lineTotal,
+                                  item.currencySymbol,
+                                )}
                               </span>
                             </div>
 
@@ -514,7 +542,11 @@ export function CartDrawer() {
                                 </span>
                               ) : null}
                               <span className="text-[11px] text-umber tabular-nums">
-                                {formatMoney(item.unitPrice, item.currencySymbol)} each
+                                {formatMoney(
+                                  item.unitPrice,
+                                  item.currencySymbol,
+                                )}{' '}
+                                each
                               </span>
                               {isJustAdded ? (
                                 <span className="inline-flex items-center gap-1 rounded-full border border-terracotta bg-canvas px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-terracotta">
@@ -530,7 +562,10 @@ export function CartDrawer() {
                                 type="button"
                                 disabled={busy}
                                 onClick={() =>
-                                  void updateItemQuantity(item.key, item.quantity - 1)
+                                  void updateItemQuantity(
+                                    item.key,
+                                    item.quantity - 1,
+                                  )
                                 }
                                 aria-label={`Decrease quantity of ${item.name}`}
                                 className="w-7 h-7 rounded-full flex items-center justify-center text-sm text-ink hover:bg-linen disabled:text-umber/50 cursor-pointer"
@@ -547,7 +582,10 @@ export function CartDrawer() {
                                 type="button"
                                 disabled={busy}
                                 onClick={() =>
-                                  void updateItemQuantity(item.key, item.quantity + 1)
+                                  void updateItemQuantity(
+                                    item.key,
+                                    item.quantity + 1,
+                                  )
                                 }
                                 aria-label={`Increase quantity of ${item.name}`}
                                 className="w-7 h-7 rounded-full flex items-center justify-center text-sm text-ink hover:bg-linen disabled:text-umber/50 cursor-pointer"
@@ -574,7 +612,9 @@ export function CartDrawer() {
 
               {/* Botanical Storage Footer Note */}
               <div className="border-t border-hairline bg-linen/50 px-5 sm:px-7 py-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-umber shrink-0">
-                <span>100% organic Sojat henna · Sealed fresh before courier handoff</span>
+                <span>
+                  100% organic Sojat henna · Sealed fresh before courier handoff
+                </span>
                 <Link
                   href="/henna-care"
                   onClick={() => handleClose(false)}
@@ -618,7 +658,8 @@ export function CartDrawer() {
                       </span>
                       {activeDelivery ? (
                         <span className="text-plaque-ink font-medium truncate block mt-0.5">
-                          {activeDelivery.pincode} · {activeDelivery.matchedRule?.pattern}
+                          {activeDelivery.pincode} ·{' '}
+                          {activeDelivery.matchedRule?.pattern}
                         </span>
                       ) : (
                         <span className="text-plaque-ink/75 block mt-0.5">
@@ -642,7 +683,10 @@ export function CartDrawer() {
 
                   {showPinChecker ? (
                     <div className="pt-2 border-t border-plaque-ink/12 space-y-2">
-                      <form onSubmit={handleQuickPinSubmit} className="flex items-center gap-2">
+                      <form
+                        onSubmit={handleQuickPinSubmit}
+                        className="flex items-center gap-2"
+                      >
                         <label htmlFor="drawer-pin-input" className="sr-only">
                           6-digit PIN code
                         </label>
@@ -687,11 +731,15 @@ export function CartDrawer() {
                       </div>
 
                       {pinError ? (
-                        <p className="text-[11px] text-terracotta">{pinError}</p>
+                        <p className="text-[11px] text-terracotta">
+                          {pinError}
+                        </p>
                       ) : pincodeResult &&
                         !pincodeResult.serviceable &&
                         pincodeResult.pincode.length === 6 ? (
-                        <p className="text-[11px] text-terracotta">{pincodeResult.message}</p>
+                        <p className="text-[11px] text-terracotta">
+                          {pincodeResult.message}
+                        </p>
                       ) : null}
                     </div>
                   ) : null}
@@ -732,7 +780,9 @@ export function CartDrawer() {
                     </span>
                     <span
                       className={`font-semibold tabular-nums ${
-                        activeDelivery ? 'text-terracotta' : 'text-plaque-ink/70'
+                        activeDelivery
+                          ? 'text-terracotta'
+                          : 'text-plaque-ink/70'
                       }`}
                     >
                       {activeDelivery
@@ -789,8 +839,14 @@ export function CartDrawer() {
                 </div>
 
                 <p className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] text-plaque-ink/65 text-center leading-relaxed pt-0.5">
-                  <ShieldProtectIcon size={13} className="text-terracotta shrink-0" />
-                  <span>Razorpay UPI / Cards &middot; Cash on Delivery across serviceable PINs</span>
+                  <ShieldProtectIcon
+                    size={13}
+                    className="text-terracotta shrink-0"
+                  />
+                  <span>
+                    Razorpay UPI / Cards &middot; Cash on Delivery across
+                    serviceable PINs
+                  </span>
                 </p>
               </div>
             </div>
@@ -798,6 +854,6 @@ export function CartDrawer() {
         )}
       </aside>
     </div>,
-    document.body
+    document.body,
   );
 }
