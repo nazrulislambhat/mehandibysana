@@ -48,7 +48,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     buildBreadcrumbJsonLd([
       { name: 'Home', path: '/' },
       { name: 'Contact', path: '/contact' },
-    ])
+    ]),
   );
 
   return (
@@ -98,14 +98,20 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Working independently across Srinagar and Bengaluru, Sana personally reviews every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead, custom cone batches dispatch within 2 business days.
+                Working independently across Srinagar and Bengaluru, Sana
+                personally reviews every inquiry within 24 hours. Bridal dates
+                are best reserved 4–8 weeks ahead, custom cone batches dispatch
+                within 2 business days.
               </p>
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
               <div className="rounded-2xl border border-hairline bg-paper px-5 py-4 text-xs text-umber">
                 <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-[0.14em] text-ink mb-1">
-                  <ClockWindowIcon size={14} className="text-terracotta shrink-0" />
+                  <ClockWindowIcon
+                    size={14}
+                    className="text-terracotta shrink-0"
+                  />
                   <span>Response Window</span>
                 </span>
                 <span className="block">
@@ -141,48 +147,46 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <dl className="space-y-4 text-sm">
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <LocationPinIcon size={13} className="text-terracotta shrink-0" />
+                    <LocationPinIcon
+                      size={13}
+                      className="text-terracotta shrink-0"
+                    />
                     <span>Service Bases &amp; Dispatch</span>
                   </dt>
                   <dd className="text-plaque-ink leading-relaxed space-y-1">
-                    <span className="block">
-                      Srinagar, Jammu and Kashmir
-                    </span>
-                    <span className="block text-plaque-ink/80">
-                      Bengaluru, Karnataka
-                    </span>
+                    <span className="block">Srinagar, Jammu and Kashmir</span>
+                    <span className="block">Bengaluru, Karnataka</span>
                   </dd>
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <MailEnvelopeIcon size={13} className="text-terracotta shrink-0" />
+                    <MailEnvelopeIcon
+                      size={13}
+                      className="text-terracotta shrink-0"
+                    />
                     <span>Direct Email</span>
                   </dt>
                   <dd className="text-plaque-ink">
                     <a
                       href="mailto:sana@mehandibysana.com"
-                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
+                      className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 transition-colors hover:no-underline"
                     >
                       sana@mehandibysana.com
-                    </a>{' '}
-                
-                    <a
-                      href="mailto:mehandibysana@gmail.com"
-                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
-                    >
-                      mehandibysana@gmail.com
                     </a>
                   </dd>
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <PhoneHandsetIcon size={13} className="text-terracotta shrink-0" />
+                    <PhoneHandsetIcon
+                      size={13}
+                      className="text-terracotta shrink-0"
+                    />
                     <span>Phone / WhatsApp</span>
                   </dt>
                   <dd className="text-plaque-ink">
                     <a
                       href="tel:+919149648717"
-                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
+                      className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 transition-colors hover:no-underline"
                     >
                       +91-9149648717
                     </a>
@@ -190,7 +194,10 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <ClockWindowIcon size={13} className="text-terracotta shrink-0" />
+                    <ClockWindowIcon
+                      size={13}
+                      className="text-terracotta shrink-0"
+                    />
                     <span>Hours</span>
                   </dt>
                   <dd className="text-plaque-ink/80">
@@ -205,13 +212,14 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 Ordering botanical products?
               </h3>
               <p className="text-sm text-umber leading-relaxed mb-4">
-                Ready-to-ship henna cones, aftercare balms, and curated kits can be ordered directly through the storefront.
+                Ready-to-ship henna cones, aftercare balms, and curated kits can
+                be ordered directly through the storefront.
               </p>
               <Link
                 href="/shop"
                 className="inline-flex gap-1.5 items-center justify-center rounded-md border border-divider bg-canvas px-4 py-2 text-xs sm:text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
               >
-                Visit the Shop <ShoppingBag className='w-4 h-4'/>
+                Visit the Shop <ShoppingBag className="w-3.5 h-3.5" />
               </Link>
             </div>
           </aside>

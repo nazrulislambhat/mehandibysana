@@ -1,9 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  buildBreadcrumbJsonLd,
-  serializeJsonLd,
-} from '@/lib/structured-data';
+import { buildBreadcrumbJsonLd, serializeJsonLd } from '@/lib/structured-data';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 
 export interface PolicyTocItem {
@@ -59,7 +56,7 @@ export function PolicyDocumentLayout({
     buildBreadcrumbJsonLd([
       { name: 'Home', path: '/' },
       { name: breadcrumbLabel, path: breadcrumbPath },
-    ])
+    ]),
   );
 
   return (
@@ -108,10 +105,14 @@ export function PolicyDocumentLayout({
                   <span className="font-semibold uppercase tracking-[0.14em] text-ink">
                     {documentCode}
                   </span>
-                  <span className="text-terracotta font-semibold">India / J&amp;K</span>
+                  <span className="text-terracotta font-semibold">
+                    Srinagar / Bengaluru, India
+                  </span>
                 </div>
                 <p className="text-umber">Effective: {effectiveDate}</p>
-                <p className="text-umber/85">Mehandi by Sana &middot; mehandibysana.com</p>
+                <p className="text-umber/85">
+                  Mehandi By Sana &middot; mehandibysana.com
+                </p>
               </div>
             </div>
           </div>
@@ -190,23 +191,22 @@ export function PolicyDocumentLayout({
                 Direct Contact &amp; Grievance Desk
               </p>
               <h2 className="font-serif text-xl font-medium text-plaque-ink">
-                Mehandi by Sana
+                Mehandi By Sana
               </h2>
-              <p className="text-xs text-plaque-ink/75 leading-relaxed">
-                Sumaiya Rashid Magray (Sana) &middot; Independent freelance artist working from Baghat Barzullah, Srinagar (J&amp;K 190001) &amp; Bengaluru (Karnataka)
-              </p>
+
               <div className="pt-2 border-t border-plaque-ink/15 space-y-1.5 text-xs">
                 <a
                   href="mailto:sana@mehandibysana.com"
-                  className="block text-terracotta hover:text-plaque-ink underline underline-offset-4"
+                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 hover:no-underline"
                 >
                   sana@mehandibysana.com
                 </a>
+
                 <a
                   href="tel:+919149648717"
-                  className="block text-plaque-ink/85 hover:text-terracotta tabular-nums"
+                  className="block text-[#789904] hover:text-[#789904]/80 tabular-nums mt-2 underline underline-offset-4 hover:no-underline"
                 >
-                  +91-9149648717 (Mon–Sun, 10 AM – 6:30 PM IST)
+                  +91-9149648717
                 </a>
               </div>
             </div>
@@ -221,4 +221,3 @@ export function PolicyDocumentLayout({
     </div>
   );
 }
-

@@ -22,13 +22,33 @@ export const metadata: Metadata = buildPageMetadata({
 const TOC: PolicyTocItem[] = [
   { id: 'overview', number: '01', title: 'Overview & Perishable Standard' },
   { id: 'eligibility-matrix', number: '02', title: 'Return & Refund Matrix' },
-  { id: 'damaged-claims', number: '03', title: 'Damaged, Leaked or Wrong Item Claims' },
-  { id: 'non-perishable-tools', number: '04', title: 'Sealed Tools & Dry Accessories' },
-  { id: 'stain-freezer-exclusions', number: '05', title: 'Exclusions & Freezer Storage Rule' },
-  { id: 'order-cancellations', number: '06', title: 'Pre-Dispatch Cancellations' },
+  {
+    id: 'damaged-claims',
+    number: '03',
+    title: 'Damaged, Leaked or Wrong Item Claims',
+  },
+  {
+    id: 'non-perishable-tools',
+    number: '04',
+    title: 'Sealed Tools & Dry Accessories',
+  },
+  {
+    id: 'stain-freezer-exclusions',
+    number: '05',
+    title: 'Exclusions & Freezer Storage Rule',
+  },
+  {
+    id: 'order-cancellations',
+    number: '06',
+    title: 'Pre-Dispatch Cancellations',
+  },
   { id: 'refund-timelines', number: '07', title: 'Refund Timelines & Coupons' },
   { id: 'rto-undelivered', number: '08', title: 'Undelivered & RTO Parcels' },
-  { id: 'bridal-cancellations', number: '09', title: 'Bridal & Course Cancellations' },
+  {
+    id: 'bridal-cancellations',
+    number: '09',
+    title: 'Bridal & Course Cancellations',
+  },
 ];
 
 export default function RefundPolicyPage() {
@@ -51,8 +71,16 @@ export default function RefundPolicyPage() {
           Overview &amp; Perishable Botanical Standard
         </h2>
         <p className="text-umber">
-          Every Mehandi by Sana order is mixed and packed to order in small batches across Srinagar (Baghat Barzullah) and Bengaluru without chemical stabilizers. For strict personal hygiene, botanical potency, and food-grade safety standards,{' '}
-          <strong>fresh organic henna cones, prepared paste, opened essential oils, and open balms cannot be accepted back once delivered</strong>, except in cases where your parcel arrived damaged, leaked, tampered, incomplete, or incorrect.
+          Every Mehandi By Sana order is mixed and packed to order in small
+          batches across Srinagar and Bengaluru without chemical stabilizers.
+          For strict personal hygiene, botanical potency, and food-grade safety
+          standards,{' '}
+          <strong>
+            fresh organic henna cones, prepared paste, opened essential oils,
+            and open balms cannot be accepted back once delivered
+          </strong>
+          , except in cases where your parcel arrived damaged, leaked, tampered,
+          incomplete, or incorrect.
         </p>
       </section>
 
@@ -71,29 +99,49 @@ export default function RefundPolicyPage() {
               <tr className="bg-linen border-b border-hairline text-ink">
                 <th className="py-3 px-4 font-semibold">Category</th>
                 <th className="py-3 px-4 font-semibold">Standard Return</th>
-                <th className="py-3 px-4 font-semibold">Damaged / Wrong Item</th>
+                <th className="py-3 px-4 font-semibold">
+                  Damaged / Wrong Item
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-hairline text-umber">
               <tr>
-                <td className="py-3 px-4 font-medium text-ink">Fresh Organic Cones &amp; Kits</td>
+                <td className="py-3 px-4 font-medium text-ink">
+                  Fresh Organic Cones &amp; Kits
+                </td>
                 <td className="py-3 px-4">No (perishable small-batch)</td>
-                <td className="py-3 px-4">Free replacement or full refund (48h claim)</td>
+                <td className="py-3 px-4">
+                  Free replacement or full refund (48h claim)
+                </td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-medium text-ink">Essential Oils, Balms &amp; Powders</td>
-                <td className="py-3 px-4">Only if factory seal unbroken (7d)</td>
-                <td className="py-3 px-4">Free replacement or full refund (48h claim)</td>
+                <td className="py-3 px-4 font-medium text-ink">
+                  Essential Oils, Balms &amp; Powders
+                </td>
+                <td className="py-3 px-4">
+                  Only if factory seal unbroken (7d)
+                </td>
+                <td className="py-3 px-4">
+                  Free replacement or full refund (48h claim)
+                </td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-medium text-ink">Artist Tools (Sheets, Scales, Bowls)</td>
+                <td className="py-3 px-4 font-medium text-ink">
+                  Artist Tools (Sheets, Scales, Bowls)
+                </td>
                 <td className="py-3 px-4">Eligible within 7 days if unused</td>
-                <td className="py-3 px-4">Free replacement or full refund (48h claim)</td>
+                <td className="py-3 px-4">
+                  Free replacement or full refund (48h claim)
+                </td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-medium text-ink">Custom Bulk Cone Batches</td>
+                <td className="py-3 px-4 font-medium text-ink">
+                  Custom Bulk Cone Batches
+                </td>
                 <td className="py-3 px-4">No (custom rolled to order)</td>
-                <td className="py-3 px-4">Replacement or proportional refund (48h claim)</td>
+                <td className="py-3 px-4">
+                  Replacement or proportional refund (48h claim)
+                </td>
               </tr>
             </tbody>
           </table>
@@ -109,13 +157,17 @@ export default function RefundPolicyPage() {
           Damaged, Leaked, Missing, or Wrong Items (48-Hour Window)
         </h2>
         <p className="text-umber">
-          If a cone bursts in transit, an oil bottle leaks, an item is missing, or you receive the wrong SKU, we take full responsibility and will ship a priority replacement batch or issue a refund at no extra delivery cost. Please raise your claim within{' '}
+          If a cone bursts in transit, an oil bottle leaks, an item is missing,
+          or you receive the wrong SKU, we take full responsibility and will
+          ship a priority replacement batch or issue a refund at no extra
+          delivery cost. Please raise your claim within{' '}
           <strong>48 hours of courier delivery timestamp</strong>:
         </p>
         <ol className="list-decimal pl-5 space-y-1.5 text-umber">
           <li>
             Capture clear photos of the outer shipping label/AWB sticker and an{' '}
-            <strong>uncut unboxing video</strong> from sealed parcel opening showing the damaged or missing items.
+            <strong>uncut unboxing video</strong> from sealed parcel opening
+            showing the damaged or missing items.
           </li>
           <li>
             Email{' '}
@@ -135,7 +187,8 @@ export default function RefundPolicyPage() {
             with subject <code>Claim: Your Order Number (MBS-...)</code>.
           </li>
           <li>
-            Sana reviews claims within 24 business hours and schedules either same-day fresh replacement dispatch or refund initiation.
+            Sana reviews claims within 24 business hours and schedules either
+            same-day fresh replacement dispatch or refund initiation.
           </li>
         </ol>
       </section>
@@ -149,11 +202,16 @@ export default function RefundPolicyPage() {
           Returns on Sealed Tools &amp; Non-Perishable Supplies
         </h2>
         <p className="text-umber">
-          Non-perishable items—including sealed pre-cut cellophane sheet packs, unused digital micro scales, stainless steel measuring spoons, acrylic practice hands, and unused mixing bowls—may be requested for return or exchange within{' '}
-          <strong>7 days of delivery</strong> provided all tags, safety seals, and original packaging remain intact and unused.
+          Non-perishable items—including sealed pre-cut cellophane sheet packs,
+          unused digital micro scales, stainless steel measuring spoons, acrylic
+          practice hands, and unused mixing bowls—may be requested for return or
+          exchange within <strong>7 days of delivery</strong> provided all tags,
+          safety seals, and original packaging remain intact and unused.
         </p>
         <p className="text-umber">
-          For voluntary returns (change of mind rather than fulfillment defect or transit damage), return courier charges are borne by the customer, and original shipping fees paid at checkout are non-refundable.
+          For voluntary returns (change of mind rather than fulfillment defect
+          or transit damage), return courier charges are borne by the customer,
+          and original shipping fees paid at checkout are non-refundable.
         </p>
       </section>
 
@@ -167,13 +225,22 @@ export default function RefundPolicyPage() {
         </h2>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Natural Stain Progression:</strong> Pure organic henna leaves a bright saffron-orange initial stain immediately after flaking the dried paste, deepening to dark mahogany over 24–48 hours. Immediate bright orange colour is proof of 0% PPD authenticity, not product failure.
+            <strong>Natural Stain Progression:</strong> Pure organic henna
+            leaves a bright saffron-orange initial stain immediately after
+            flaking the dried paste, deepening to dark mahogany over 24–48
+            hours. Immediate bright orange colour is proof of 0% PPD
+            authenticity, not product failure.
           </li>
           <li>
-            <strong>Improper Storage:</strong> Cones kept outside a deep freezer (-18&deg;C) for more than 48 hours post-delivery naturally lose potency and are ineligible for refund.
+            <strong>Improper Storage:</strong> Cones kept outside a deep freezer
+            (-18&deg;C) for more than 48 hours post-delivery naturally lose
+            potency and are ineligible for refund.
           </li>
           <li>
-            <strong>Skin Chemistry / Water Contact:</strong> Washing hands with soap/water within the first 12 hours or pre-applying barriers such as heavy creams prevents full keratin binding and falls outside warranty.
+            <strong>Skin Chemistry / Water Contact:</strong> Washing hands with
+            soap/water within the first 12 hours or pre-applying barriers such
+            as heavy creams prevents full keratin binding and falls outside
+            warranty.
           </li>
         </ul>
       </section>
@@ -187,7 +254,10 @@ export default function RefundPolicyPage() {
           Order Cancellation Prior to Dispatch
         </h2>
         <p className="text-umber">
-          You may cancel an unshipped storefront order for a <strong>100% full refund</strong> anytime before fresh paste batching or courier pickup by messaging your order ID (<code>MBS-...</code>) and registered email to{' '}
+          You may cancel an unshipped storefront order for a{' '}
+          <strong>100% full refund</strong> anytime before fresh paste batching
+          or courier pickup by messaging your order ID (<code>MBS-...</code>)
+          and registered email to{' '}
           <a
             href="mailto:sana@mehandibysana.com"
             className="text-terracotta underline underline-offset-4"
@@ -201,8 +271,9 @@ export default function RefundPolicyPage() {
           >
             +91-9149648717
           </a>
-          . Once your order status transitions to{' '}
-          <strong>Dispatched</strong> and an AWB tracking number is generated, cancellation is no longer possible.
+          . Once your order status transitions to <strong>Dispatched</strong>{' '}
+          and an AWB tracking number is generated, cancellation is no longer
+          possible.
         </p>
       </section>
 
@@ -216,15 +287,25 @@ export default function RefundPolicyPage() {
         </h2>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Razorpay Prepaid Orders (UPI, Cards, NetBanking, Wallets):</strong> Once approved, refunds are triggered via Razorpay back to the original payment instrument within 24 hours and reflect in your bank/card statement within{' '}
-            <strong>5–7 business days</strong> depending on issuing bank processing.
+            <strong>
+              Razorpay Prepaid Orders (UPI, Cards, NetBanking, Wallets):
+            </strong>{' '}
+            Once approved, refunds are triggered via Razorpay back to the
+            original payment instrument within 24 hours and reflect in your
+            bank/card statement within <strong>5–7 business days</strong>{' '}
+            depending on issuing bank processing.
           </li>
           <li>
-            <strong>Cash on Delivery (COD) / Manual UPI Transfers:</strong> Approved refunds (for damaged claims on paid COD parcels) are transferred directly via UPI, IMPS, or NEFT within{' '}
-            <strong>3–5 business days</strong> upon receiving your verified UPI ID or bank account details.
+            <strong>Cash on Delivery (COD) / Manual UPI Transfers:</strong>{' '}
+            Approved refunds (for damaged claims on paid COD parcels) are
+            transferred directly via UPI, IMPS, or NEFT within{' '}
+            <strong>3–5 business days</strong> upon receiving your verified UPI
+            ID or bank account details.
           </li>
           <li>
-            <strong>Coupon &amp; Promotional Discounts:</strong> Refunds always equal the actual net monetary amount paid after coupon deductions; promotional discount codes themselves cannot be converted into cash.
+            <strong>Coupon &amp; Promotional Discounts:</strong> Refunds always
+            equal the actual net monetary amount paid after coupon deductions;
+            promotional discount codes themselves cannot be converted into cash.
           </li>
         </ul>
       </section>
@@ -238,7 +319,12 @@ export default function RefundPolicyPage() {
           Undelivered Parcels &amp; Return-to-Origin (RTO)
         </h2>
         <p className="text-umber">
-          If a prepaid order is returned as Undelivered / RTO because the recipient refused delivery, entered an incomplete address, or failed to answer repeated courier calls, reshipping incurs a fresh delivery charge. If a customer requests a refund instead of reshipment on an RTO parcel, two-way courier costs and spoilt custom-mixed fresh cone value (where applicable) may be deducted from the refund.
+          If a prepaid order is returned as Undelivered / RTO because the
+          recipient refused delivery, entered an incomplete address, or failed
+          to answer repeated courier calls, reshipping incurs a fresh delivery
+          charge. If a customer requests a refund instead of reshipment on an
+          RTO parcel, two-way courier costs and spoilt custom-mixed fresh cone
+          value (where applicable) may be deducted from the refund.
         </p>
       </section>
 
@@ -251,24 +337,40 @@ export default function RefundPolicyPage() {
           Bridal Bookings &amp; Workshop Cancellations
         </h2>
         <p className="text-umber">
-          Calendar advance retainers lock Sana&rsquo;s exclusive date allocation and cover pre-booking consultations and fresh batch scheduling.
+          Calendar advance retainers lock Sana&rsquo;s exclusive date allocation
+          and cover pre-booking consultations and fresh batch scheduling.
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Rescheduling (14+ Days Notice):</strong> One complimentary date transfer within 6 months, subject to calendar availability.
+            <strong>Rescheduling (14+ Days Notice):</strong> One complimentary
+            date transfer within 6 months, subject to calendar availability.
           </li>
           <li>
-            <strong>Client Cancellation:</strong> Retainer deposits are non-refundable for cancellations within 14 days of the event date unless a verified force-majeure reschedule is mutually agreed.
+            <strong>Client Cancellation:</strong> Retainer deposits are
+            non-refundable for cancellations within 14 days of the event date
+            unless a verified force-majeure reschedule is mutually agreed.
           </li>
           <li>
-            <strong>Artist Cancellation:</strong> In the rare case Sana cannot fulfill a confirmed date due to emergency, 100% of any advance paid is refunded within 3 business days.
+            <strong>Artist Cancellation:</strong> In the rare case Sana cannot
+            fulfill a confirmed date due to emergency, 100% of any advance paid
+            is refunded within 3 business days.
           </li>
         </ul>
         <div className="pt-3 flex flex-wrap gap-3">
-          <LinkButton href="/track-order" variant="primary" size="md" className="rounded-full">
-            Track an Order &rarr;
+          <LinkButton
+            href="/track-order"
+            variant="primary"
+            size="md"
+            className="rounded-md"
+          >
+            Track an Order
           </LinkButton>
-          <LinkButton href="/contact?service=order-support" variant="secondary" size="md" className="rounded-full">
+          <LinkButton
+            href="/contact?service=order-support"
+            variant="secondary"
+            size="md"
+            className="rounded-md"
+          >
             Report a Parcel Issue
           </LinkButton>
         </div>

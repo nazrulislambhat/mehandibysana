@@ -366,7 +366,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         disabled={submitting}
         className="w-full rounded-md min-h-[50px]"
       >
-        {submitting ? 'Submitting Inquiry…' : 'Send Inquiry'} <LineDotRightHorizontalIcon className='w-4 h-4'/>
+        {submitting ? 'Submitting Inquiry…' : 'Send Inquiry'} <LineDotRightHorizontalIcon className='w-3.5 h-3.5'/>
       </Button>
     </form>
   );

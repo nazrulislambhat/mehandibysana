@@ -287,7 +287,7 @@ export default async function HomePage() {
                   size="lg"
                   className="rounded-md"
                 >
-                  Request a Booking <LineDotRightHorizontal className='w-4 h-4'/>
+                  Request a Booking <LineDotRightHorizontal className='w-3.5 h-3.5'/>
                 </LinkButton>
                 <LinkButton
                   href="/shop"
@@ -295,7 +295,7 @@ export default async function HomePage() {
                   size="lg"
                   className="rounded-md"
                 >
-                  Shop Products <ShoppingBag className='w-4 h-4'/>
+                  Shop Products <ShoppingBag className='w-3.5 h-3.5'/>
                 </LinkButton>
               </div>
             </div>

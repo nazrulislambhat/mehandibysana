@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { TextReveal } from '@/components/ui/TextReveal';
-
+import { LineDotRightHorizontalIcon } from 'lucide-react';
 interface SelectedWorkPlate {
   id: string;
   plate: string;
@@ -116,9 +116,10 @@ export function GalleryPreviewSection() {
 
           <Link
             href="/gallery"
-            className="inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 self-start md:self-auto py-1.5"
+            className="inline-flex items-center min-h-[36px] text-sm gap-2 font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 self-start md:self-auto py-1.5"
           >
-            Explore full gallery &rarr;
+            Explore full gallery
+            <LineDotRightHorizontalIcon className="w-3.5 h-3.5 underline" />
           </Link>
         </div>
 
@@ -136,7 +137,10 @@ export function GalleryPreviewSection() {
                   className={`relative ${item.aspectClass} w-full overflow-hidden rounded-xl border border-hairline bg-linen`}
                 >
                   <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-plaque/90 backdrop-blur-sm border border-plaque-border/80 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-plaque-ink">
-                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+                    <span
+                      aria-hidden="true"
+                      className="w-1.5 h-1.5 rounded-full bg-terracotta"
+                    />
                     {item.plate}
                   </span>
                   <Image

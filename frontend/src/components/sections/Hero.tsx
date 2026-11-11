@@ -59,7 +59,7 @@ export function Hero({
                 size="lg"
                 className="rounded-md"
               >
-                Shop Products <ShoppingBag className='w-4 h-4'/>
+                Shop Products <ShoppingBag className='w-3.5 h-3.5'/>
               </LinkButton>
               <LinkButton
                 href="/contact"
@@ -67,7 +67,7 @@ export function Hero({
                 size="lg"
                 className="rounded-md"
               >
-                Book a Service <LineDotRightHorizontal className="w-4 h-4"/>
+                Book a Service <LineDotRightHorizontal className="w-3.5 h-3.5"/>
               </LinkButton>
             </div>
 

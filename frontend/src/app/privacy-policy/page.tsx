@@ -20,15 +20,35 @@ export const metadata: Metadata = buildPageMetadata({
 
 const TOC: PolicyTocItem[] = [
   { id: 'data-fiduciary', number: '01', title: 'Data Fiduciary & Scope' },
-  { id: 'information-collected', number: '02', title: 'Personal Information We Collect' },
-  { id: 'purpose-lawful-use', number: '03', title: 'Purpose & Lawful Processing' },
+  {
+    id: 'information-collected',
+    number: '02',
+    title: 'Personal Information We Collect',
+  },
+  {
+    id: 'purpose-lawful-use',
+    number: '03',
+    title: 'Purpose & Lawful Processing',
+  },
   { id: 'cookies-storage', number: '04', title: 'Cookies & Browser Storage' },
-  { id: 'razorpay-security', number: '05', title: 'Payment Security & Verification' },
-  { id: 'third-party-sharing', number: '06', title: 'Trusted Service Partners' },
+  {
+    id: 'razorpay-security',
+    number: '05',
+    title: 'Payment Security & Verification',
+  },
+  {
+    id: 'third-party-sharing',
+    number: '06',
+    title: 'Trusted Service Partners',
+  },
   { id: 'data-retention', number: '07', title: 'Data Retention & Safeguards' },
   { id: 'your-rights', number: '08', title: 'Your Rights (DPDP Act, 2023)' },
   { id: 'minors-updates', number: '09', title: 'Children & Policy Updates' },
-  { id: 'grievance-officer', number: '10', title: 'Grievance Officer & Contact' },
+  {
+    id: 'grievance-officer',
+    number: '10',
+    title: 'Grievance Officer & Contact',
+  },
 ];
 
 export default function PrivacyPolicyPage() {
@@ -51,9 +71,15 @@ export default function PrivacyPolicyPage() {
           Data Fiduciary Identity &amp; Scope
         </h2>
         <p className="text-umber">
-          This Privacy Policy describes how <strong>Mehandi by Sana</strong> (operating from Baghat Barzullah, Srinagar, J&amp;K 190001 and Bengaluru, Karnataka) collects, uses, stores, and protects personal data when you visit{' '}
-          <strong>mehandibysana.com</strong>, place storefront orders, use our PIN code or order tracking utilities, subscribe to fresh batch notifications, or submit bridal/workshop inquiries, in alignment with India&rsquo;s{' '}
-          <strong>Digital Personal Data Protection Act, 2023 (DPDPA)</strong> and Information Technology Rules.
+          This Privacy Policy describes how <strong>Mehandi By Sana</strong>{' '}
+          (operating from Srinagar, J&K and Bengaluru, Karnataka) collects,
+          uses, stores, and protects personal data when you visit{' '}
+          <strong>mehandibysana.com</strong>, place storefront orders, use our
+          PIN code or order tracking utilities, subscribe to fresh batch
+          notifications, or submit bridal/workshop inquiries, in alignment with
+          India&rsquo;s{' '}
+          <strong>Digital Personal Data Protection Act, 2023 (DPDPA)</strong>{' '}
+          and Information Technology Rules.
         </p>
       </section>
 
@@ -67,19 +93,31 @@ export default function PrivacyPolicyPage() {
         </h2>
         <ul className="list-disc pl-5 space-y-2 text-umber">
           <li>
-            <strong>Checkout &amp; Order Details:</strong> First and last name, email address, phone/WhatsApp number, street shipping address, city, state, 6-digit PIN code, applied coupon code, and optional special delivery instructions.
+            <strong>Checkout &amp; Order Details:</strong> First and last name,
+            email address, phone/WhatsApp number, street shipping address, city,
+            state, 6-digit PIN code, applied coupon code, and optional special
+            delivery instructions.
           </li>
           <li>
-            <strong>Order Tracking Verification:</strong> Order reference ID (e.g., <code>MBS-...</code>) and matching checkout email when querying our order tracker.
+            <strong>Order Tracking Verification:</strong> Order reference ID
+            (e.g., <code>MBS-...</code>) and matching checkout email when
+            querying our order tracker.
           </li>
           <li>
-            <strong>Bridal &amp; Event Booking Inquiries:</strong> Full name, email, phone/WhatsApp, selected service tier, preferred ceremony date, event venue/city, and design notes submitted through our Contact form.
+            <strong>Bridal &amp; Event Booking Inquiries:</strong> Full name,
+            email, phone/WhatsApp, selected service tier, preferred ceremony
+            date, event venue/city, and design notes submitted through our
+            Contact form.
           </li>
           <li>
-            <strong>Fresh Batch Dispatch List (Optional):</strong> Email address explicitly submitted to receive notifications when fresh henna cone batches open.
+            <strong>Fresh Batch Dispatch List (Optional):</strong> Email address
+            explicitly submitted to receive notifications when fresh henna cone
+            batches open.
           </li>
           <li>
-            <strong>Anti-Spam &amp; Security Protection:</strong> Invisible honeypot validation fields and minimal server request logs solely to protect forms against automated abuse.
+            <strong>Anti-Spam &amp; Security Protection:</strong> Invisible
+            honeypot validation fields and minimal server request logs solely to
+            protect forms against automated abuse.
           </li>
         </ul>
       </section>
@@ -93,16 +131,27 @@ export default function PrivacyPolicyPage() {
           Purpose &amp; Lawful Basis of Processing
         </h2>
         <p className="text-umber">
-          We process your information strictly for legitimate operational purposes:
+          We process your information strictly for legitimate operational
+          purposes:
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
-          <li>Preparing fresh batches, generating GST/order records, and dispatching parcels to your PIN code.</li>
           <li>
-            Sending essential transactional communications: order confirmation receipts, Razorpay/offline payment confirmations, AWB shipping notifications, delivery confirmations, and bridal booking responses.
+            Preparing fresh batches, generating GST/order records, and
+            dispatching parcels to your PIN code.
           </li>
-          <li>Responding to return, replacement, refund, or customer care requests.</li>
           <li>
-            Sending seasonal batch availability or release announcements strictly when you opt into the Fresh Batch Dispatch List or are an active client (with instant opt-out).
+            Sending essential transactional communications: order confirmation
+            receipts, Razorpay/offline payment confirmations, AWB shipping
+            notifications, delivery confirmations, and bridal booking responses.
+          </li>
+          <li>
+            Responding to return, replacement, refund, or customer care
+            requests.
+          </li>
+          <li>
+            Sending seasonal batch availability or release announcements
+            strictly when you opt into the Fresh Batch Dispatch List or are an
+            active client (with instant opt-out).
           </li>
         </ul>
       </section>
@@ -116,14 +165,20 @@ export default function PrivacyPolicyPage() {
           Cookies, Local Storage &amp; Zero Ad-Tracking Commitment
         </h2>
         <p className="text-umber">
-          We minimize browser storage to what is genuinely necessary for a fast, smooth shopping bag:
+          We minimize browser storage to what is genuinely necessary for a fast,
+          smooth shopping bag:
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Essential Shopping Bag &amp; Cart State:</strong> Local browser storage persists your selected cone/product quantities, active coupon code, and checked 6-digit PIN delivery estimate across page navigations.
+            <strong>Essential Shopping Bag &amp; Cart State:</strong> Local
+            browser storage persists your selected cone/product quantities,
+            active coupon code, and checked 6-digit PIN delivery estimate across
+            page navigations.
           </li>
           <li>
-            <strong>No Third-Party Data Brokering:</strong> We do <strong>not</strong> sell, rent, or auction your phone number or email address to third-party marketing aggregators or ad networks.
+            <strong>No Third-Party Data Brokering:</strong> We do{' '}
+            <strong>not</strong> sell, rent, or auction your phone number or
+            email address to third-party marketing aggregators or ad networks.
           </li>
         </ul>
       </section>
@@ -137,8 +192,13 @@ export default function PrivacyPolicyPage() {
           Checkout &amp; Payment Security
         </h2>
         <p className="text-umber">
-          Sensitive financial credentials—such as full credit/debit card numbers, CVV codes, UPI PINs, or netbanking passwords—are never collected, viewed, or stored by Mehandi by Sana servers. All online transactions run directly over encrypted TLS inside{' '}
-          <strong>Razorpay&rsquo;s PCI-DSS Level 1</strong> certified environment, and our backend verifies every payment using cryptographic HMAC-SHA256 signatures before marking an order paid.
+          Sensitive financial credentials—such as full credit/debit card
+          numbers, CVV codes, UPI PINs, or netbanking passwords—are never
+          collected, viewed, or stored by Mehandi by Sana servers. All online
+          transactions run directly over encrypted TLS inside{' '}
+          <strong>Razorpay&rsquo;s PCI-DSS Level 1</strong> certified
+          environment, and our backend verifies every payment using
+          cryptographic HMAC-SHA256 signatures before marking an order paid.
         </p>
       </section>
 
@@ -151,17 +211,25 @@ export default function PrivacyPolicyPage() {
           Limited Operational Data Sharing
         </h2>
         <p className="text-umber">
-          We share only the minimum data needed with verified operational partners bound to confidentiality:
+          We share only the minimum data needed with verified operational
+          partners bound to confidentiality:
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Courier &amp; Logistics Partners</strong> (Delhivery, DTDC, Blue Dart, India Post): Name, delivery address, PIN code, and phone number to complete doorstep delivery and OTP/NDR verification.
+            <strong>Courier &amp; Logistics Partners</strong> (Delhivery, DTDC,
+            Blue Dart, India Post): Name, delivery address, PIN code, and phone
+            number to complete doorstep delivery and OTP/NDR verification.
           </li>
           <li>
-            <strong>Payment Gateway</strong> (Razorpay Software Pvt. Ltd.): Transaction amount, order reference, customer contact email/phone for payment execution, fraud screening, and statutory refunds.
+            <strong>Payment Gateway</strong> (Razorpay Software Pvt. Ltd.):
+            Transaction amount, order reference, customer contact email/phone
+            for payment execution, fraud screening, and statutory refunds.
           </li>
           <li>
-            <strong>Transactional Email &amp; Cloud Infrastructure</strong> (Resend / Brevo / authenticated SMTP, Vercel, Railway managed PostgreSQL): Encrypted delivery of transactional notifications and order records.
+            <strong>Transactional Email &amp; Cloud Infrastructure</strong>{' '}
+            (Resend / Brevo / authenticated SMTP, Vercel, Railway managed
+            PostgreSQL): Encrypted delivery of transactional notifications and
+            order records.
           </li>
         </ul>
       </section>
@@ -175,7 +243,13 @@ export default function PrivacyPolicyPage() {
           Data Retention &amp; Security Measures
         </h2>
         <p className="text-umber">
-          Order invoices, shipping records, and tax ledgers are retained for statutory periods required under Indian accounting and GST regulations. Bridal inquiries and newsletter preferences are kept only as long as reasonably useful for client service or until you request removal. Access to administrative databases and secret API tokens is restricted behind authenticated sessions and server-side TLS encryption.
+          Order invoices, shipping records, and tax ledgers are retained for
+          statutory periods required under Indian accounting and GST
+          regulations. Bridal inquiries and newsletter preferences are kept only
+          as long as reasonably useful for client service or until you request
+          removal. Access to administrative databases and secret API tokens is
+          restricted behind authenticated sessions and server-side TLS
+          encryption.
         </p>
       </section>
 
@@ -189,13 +263,19 @@ export default function PrivacyPolicyPage() {
         </h2>
         <ul className="list-disc pl-5 space-y-1.5 text-umber">
           <li>
-            <strong>Right to Access:</strong> Request confirmation and a clear summary of personal data held about your orders or inquiries.
+            <strong>Right to Access:</strong> Request confirmation and a clear
+            summary of personal data held about your orders or inquiries.
           </li>
           <li>
-            <strong>Right to Correction &amp; Updating:</strong> Update misspelled emails, shipping addresses, or phone details prior to dispatch.
+            <strong>Right to Correction &amp; Updating:</strong> Update
+            misspelled emails, shipping addresses, or phone details prior to
+            dispatch.
           </li>
           <li>
-            <strong>Right to Erasure &amp; Consent Withdrawal:</strong> Request removal of non-statutory personal details or opt out of all broadcast emails anytime by emailing us or replying &ldquo;Unsubscribe&rdquo; to any batch announcement.
+            <strong>Right to Erasure &amp; Consent Withdrawal:</strong> Request
+            removal of non-statutory personal details or opt out of all
+            broadcast emails anytime by emailing us or replying
+            &ldquo;Unsubscribe&rdquo; to any batch announcement.
           </li>
         </ul>
       </section>
@@ -209,7 +289,11 @@ export default function PrivacyPolicyPage() {
           Children&rsquo;s Privacy &amp; Policy Updates
         </h2>
         <p className="text-umber">
-          Our online store is intended for adults aged 18 and above. If we become aware that personal data of a minor has been submitted without verifiable parent/guardian consent, we will promptly delete those details upon notice. Changes to this policy are reflected by updating the Effective Date at the top of this dossier.
+          Our online store is intended for adults aged 18 and above. If we
+          become aware that personal data of a minor has been submitted without
+          verifiable parent/guardian consent, we will promptly delete those
+          details upon notice. Changes to this policy are reflected by updating
+          the Effective Date at the top of this dossier.
         </p>
       </section>
 
@@ -222,14 +306,16 @@ export default function PrivacyPolicyPage() {
           Grievance Officer &amp; Privacy Inquiries
         </h2>
         <p className="text-umber">
-          To exercise any privacy right, withdraw consent, or report a data concern, contact our designated Grievance Officer directly:
+          To exercise any privacy right, withdraw consent, or report a data
+          concern, contact our designated Grievance Officer directly:
         </p>
         <div className="rounded-xl border border-hairline bg-linen p-4 text-xs sm:text-sm space-y-1 text-ink">
           <p>
-            <strong>Name:</strong> Sumaiya Rashid Magray (Sana), Founder &amp; Privacy Officer
+            <strong>Name:</strong> Sana
           </p>
           <p>
-            <strong>Service Bases:</strong> Mehandi by Sana &middot; Baghat Barzullah, Srinagar (J&amp;K 190001) &amp; Bengaluru (Karnataka)
+            <strong>Service Bases:</strong> Mehandi by Sana &middot; Srinagar
+            (J&K) &amp; Bengaluru (Karnataka)
           </p>
           <p>
             <strong>Email:</strong>{' '}
@@ -247,15 +333,24 @@ export default function PrivacyPolicyPage() {
               className="text-terracotta underline underline-offset-4 tabular-nums"
             >
               +91-9149648717
-            </a>{' '}
-            (Acknowledge within 48 hours)
+            </a>
           </p>
         </div>
         <div className="pt-3 flex flex-wrap gap-3">
-          <LinkButton href="/terms-conditions" variant="primary" size="md" className="rounded-full">
-            Terms &amp; Conditions &rarr;
+          <LinkButton
+            href="/terms-conditions"
+            variant="primary"
+            size="md"
+            className="rounded-md"
+          >
+            Terms &amp; Conditions
           </LinkButton>
-          <LinkButton href="/contact" variant="secondary" size="md" className="rounded-full">
+          <LinkButton
+            href="/contact"
+            variant="secondary"
+            size="md"
+            className="rounded-md"
+          >
             Contact Sana
           </LinkButton>
         </div>

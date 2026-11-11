@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { TextReveal } from '@/components/ui/TextReveal';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
-
+import { LineDotRightHorizontalIcon } from 'lucide-react';
 interface ClientReviewEntry {
   number: string;
   category: string;
@@ -84,9 +84,8 @@ export function ClientReviewsSection() {
           <p className="text-sm md:text-base text-umber leading-relaxed max-w-md">
             Our{' '}
             <strong className="font-semibold text-ink">Henna products</strong>{' '}
-            and{' '}
-            <strong className="font-semibold text-ink">Services</strong>{' '}
-            in their own words — shared directly by brides and repeat clients.
+            and <strong className="font-semibold text-ink">Services</strong> in
+            their own words — shared directly by brides and repeat clients.
           </p>
         </div>
 
@@ -172,18 +171,7 @@ export function ClientReviewsSection() {
             </TextReveal>
           ))}
         </div>
-
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-6 text-xs sm:text-sm text-umber">
-          <span>All messages transcribed verbatim from real client notes on mehandibysana.com</span>
-          <Link
-            href="/shop"
-            className="font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
-          >
-            Explore Nail Henna &amp; Organic Cones &rarr;
-          </Link>
-        </div>
       </div>
     </section>
   );
 }
-
