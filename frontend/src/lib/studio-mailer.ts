@@ -73,7 +73,7 @@ export function renderStudioFallbackEmailHtml(params: {
       ${ctaHtml}
       ${refHtml}
       <p style="margin:22px 0 0;font-size:12px;line-height:1.65;color:#525252;">
-        Mehandi by Sana &middot; Srinagar (Baghat Barzullah, J&amp;K 190005) &amp; Bengaluru (Karnataka)<br/>
+        Mehandi by Sana &middot; Srinagar (Baghat Barzullah, J&amp;K 190001) &amp; Bengaluru (Karnataka)<br/>
         <a href="${escapeHtml(siteUrl)}" style="color:#d9541e;text-decoration:underline;">${escapeHtml(
           siteUrl.replace(/^https?:\/\//, '')
         )}</a>

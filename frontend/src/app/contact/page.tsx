@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import { buildPageMetadata } from '@/lib/seo';
 import {
   buildBreadcrumbJsonLd,
@@ -93,11 +94,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   id="contact-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
                 >
-                  Plan an appointment or cone order.
+                  Plan an appointment or order.
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Working independently across Srinagar and Bengaluru, Sana personally reviews every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead; custom cone batches dispatch within 2 business days.
+                Working independently across Srinagar and Bengaluru, Sana personally reviews every inquiry within 24 hours. Bridal dates are best reserved 4–8 weeks ahead, custom cone batches dispatch within 2 business days.
               </p>
             </div>
 
@@ -108,7 +109,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <span>Response Window</span>
                 </span>
                 <span className="block">
-                  Within 24 Hours &middot; Mon–Sun (10 AM – 6:30 PM IST)
+                  Within 24 Hours &middot; Mon–Sun (09:00 AM – 09:00 PM IST)
                 </span>
               </div>
             </div>
@@ -145,10 +146,10 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dt>
                   <dd className="text-plaque-ink leading-relaxed space-y-1">
                     <span className="block">
-                      <strong>Srinagar:</strong> Baghat Barzullah, Srinagar, Jammu &amp; Kashmir 190005
+                      Srinagar, Jammu and Kashmir
                     </span>
                     <span className="block text-plaque-ink/80">
-                      <strong>Bengaluru:</strong> Freelance Bridal Appointments &amp; Batch Dispatch, Bengaluru, Karnataka
+                      Bengaluru, Karnataka
                     </span>
                   </dd>
                 </div>
@@ -164,7 +165,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     >
                       sana@mehandibysana.com
                     </a>{' '}
-                    &middot;{' '}
+                
                     <a
                       href="mailto:mehandibysana@gmail.com"
                       className="text-terracotta hover:text-plaque-ink underline underline-offset-4 transition-colors"
@@ -193,7 +194,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     <span>Hours</span>
                   </dt>
                   <dd className="text-plaque-ink/80">
-                    Monday – Sunday, 10:00 AM – 6:30 PM IST
+                    Mon – Sun, 09:00 AM – 09:00 PM IST
                   </dd>
                 </div>
               </dl>
@@ -208,9 +209,9 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </p>
               <Link
                 href="/shop"
-                className="inline-flex items-center justify-center rounded-full border border-divider bg-canvas px-4 py-2 text-xs sm:text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
+                className="inline-flex gap-1.5 items-center justify-center rounded-md border border-divider bg-canvas px-4 py-2 text-xs sm:text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
               >
-                Visit the Shop &rarr;
+                Visit the Shop <ShoppingBag className='w-4 h-4'/>
               </Link>
             </div>
           </aside>
