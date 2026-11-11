@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import {LineDotRightHorizontal } from 'lucide-react'
+import { FaInstagram } from 'react-icons/fa';
 import { buildPageMetadata, toAbsoluteUrl } from '@/lib/seo';
 import {
   buildBreadcrumbJsonLd,
@@ -113,7 +115,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
 export const metadata: Metadata = buildPageMetadata({
   title: 'Bridal Mehandi Portfolio & Botanical Stain Gallery',
   description:
-    'Selected bridal henna designs, Kashmiri Chinar leaf motifs, Royal Mughal archways, and 48-hour natural mahogany stain studies by Sumaiya Rashid Magray (Sana).',
+    'Selected bridal henna designs, Kashmiri Chinar leaf motifs, Royal Mughal archways, and 48-hour natural mahogany stain studies by Sana.',
   canonicalPath: '/gallery',
   keywords: [
     'Kashmiri bridal mehandi designs',
@@ -187,7 +189,7 @@ export default function GalleryPage() {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                A curated archive of Sana’s hand-drawn organic henna commissions across Srinagar, Jammu &amp; Kashmir, and destination celebrations—created exclusively with freshly rolled, PPD-free botanical cones.
+                A curated archive of Sana’s hand-drawn organic henna commissions across Srinagar & Bengaluru, and destination celebrations—created exclusively with freshly rolled, PPD-free botanical cones.
               </p>
             </div>
 
@@ -278,20 +280,23 @@ export default function GalleryPage() {
               Share your celebration date, venue location, and motif inspirations—Sana tailors each bridal or festive layout to your preferences and prepares fresh cones specifically for your session.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3 shrink-0">
+          <div className="flex flex-wrap gap-2 shrink-0">
             <LinkButton
               href="/contact"
               variant="accent"
               size="md"
-              className="rounded-full"
+              className="rounded-md"
             >
-              Request a Booking &rarr;
+              Request a Booking <LineDotRightHorizontal className='w-3.5 h-3.5'/>
             </LinkButton>
+         
             <Link
-              href="/shop"
-              className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-plaque-ink/30 bg-transparent px-6 py-2.5 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
+              href="https://instagram.com/mehandibysana"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 justify-center min-h-[44px] rounded-md border border-plaque-ink/30 bg-transparent px-6 py-2.5 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
             >
-              Shop Products
+              Instagram <FaInstagram/>
             </Link>
           </div>
         </div>

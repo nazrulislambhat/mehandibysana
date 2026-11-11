@@ -226,7 +226,7 @@ export default function PrivacyPolicyPage() {
         </p>
         <div className="rounded-xl border border-hairline bg-linen p-4 text-xs sm:text-sm space-y-1 text-ink">
           <p>
-            <strong>Name:</strong> Sumaiya Rashid Magray (Sana), Founder &amp; Privacy Officer
+            <strong>Name:</strong> Sana, Founder &amp; Privacy Officer
           </p>
           <p>
             <strong>Service Bases:</strong> Mehandi by Sana &middot; Baghat Barzullah, Srinagar (J&amp;K 190001) &amp; Bengaluru (Karnataka)

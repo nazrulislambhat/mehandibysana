@@ -31,7 +31,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         foundingDate: '2019',
         description:
-          'Independent freelance organic mehandi practice and small-batch botanical apothecary founded in 2019 by Sumaiya Rashid Magray (Sana), serving clients across Srinagar and Bengaluru.',
+          'Independent freelance organic mehandi practice and small-batch botanical apothecary founded in 2019 by Sana, serving clients across Srinagar and Bengaluru.',
         logo: {
           '@type': 'ImageObject',
           url: logoUrl,
@@ -265,7 +265,7 @@ export function buildAboutPageJsonLd(
     url: pageUrl,
     name: 'About Mehandi by Sana',
     description:
-      'Story of Sumaiya Rashid Magray (Sana), Electronics & Communication Engineering graduate turned Kashmir pioneer in 100% chemical-free organic henna artistry and apothecary care.',
+      'Story of Sana, Electronics & Communication Engineering graduate turned Kashmir pioneer in 100% chemical-free organic henna artistry and apothecary care.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: {
       '@type': 'Person',

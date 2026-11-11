@@ -173,7 +173,7 @@ export function SanaBurqaAtelierPortrait({ className = '' }: { className?: strin
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Illustration of Sumaiya Rashid Magray (Sana) wearing a modest black burqa and applying organic henna in Srinagar"
+      aria-label="Illustration of Sana wearing a modest black burqa and applying organic henna in Srinagar"
       className={className}
     >
       {/* Adaptive Arch Canvas */}

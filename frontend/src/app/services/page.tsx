@@ -96,7 +96,7 @@ const CONSULTATION_STEPS = [
     step: 'Step 01',
     title: 'Share Date & Occasion',
     detail:
-      'Submit your celebration date, venue city (Srinagar, Bengaluru, Jammu & Kashmir, or destination), and preferred coverage tier through our booking inquiry form.',
+      'Submit your celebration date, venue city (Srinagar, Bengaluru, or destination), and preferred coverage tier through our booking inquiry form.',
   },
   {
     num: '02',
@@ -286,7 +286,7 @@ export default function ServicesPage() {
                     href={`/contact?service=${encodeURIComponent(tier.slug)}`}
                     variant={isFeatured ? 'primary' : 'secondary'}
                     size="md"
-                    className="w-full rounded-full"
+                    className="w-full rounded-md"
                   >
                     Request {tier.title}
                   </LinkButton>

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
+import {ShoppingBag, LineDotRightHorizontal } from 'lucide-react'
 import {
   buildAboutPageJsonLd,
   buildBreadcrumbJsonLd,
@@ -22,9 +23,9 @@ import {
 import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlates';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'About Sumaiya Rashid Magray (Sana) & Her Journey',
+  title: 'About Sana & Her Journey',
   description:
-    'Meet Sumaiya Rashid Magray (Sana) — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Srinagar & Bengaluru since 2019.',
+    'Meet Sana — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Srinagar & Bengaluru since 2019.',
   canonicalPath: '/about',
   keywords: [
     'Sumaiya Rashid Magray',
@@ -56,7 +57,7 @@ const AWARDS_AND_HONORS: AwardHonorItem[] = [
     links: [
       {
         label: 'Read article',
-        href: 'https://www.greaterkashmir.com/todays-paper/engineering-graduate-breaks-stereotypes-with-her-henna-art',
+        href: 'https://www.greaterkashmir.com/opinion/engineering-graduate-breaks-stereotypes-with-her-henna-art/',
       },
     ],
   },
@@ -145,7 +146,7 @@ const STUDIO_PILLARS = [
   {
     number: '02',
     title: 'Small-Batch Freshness',
-    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Srinagar (Baghat Barzullah) and Bengaluru and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
+    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Srinagar / Bengaluru and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
   },
   {
     number: '03',
@@ -199,7 +200,7 @@ export default function AboutPage() {
                   <div className="pointer-events-none absolute inset-3 rounded-t-[12rem] rounded-b-xl border border-ink/10" />
                 </div>
                 <figcaption className="text-xs font-semibold uppercase tracking-[0.14em] text-umber text-center">
-                  Sumaiya Rashid Magray (Sana) &middot; Freelance Artist &middot; Srinagar &amp; Bengaluru
+                  Sana &middot; Freelance Artist || Engineer &middot; Srinagar &amp; Bengaluru
                 </figcaption>
               </figure>
             </div>
@@ -219,16 +220,14 @@ export default function AboutPage() {
                   id="about-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]"
                 >
-                  From electronics engineering to pioneering organic henna in Kashmir.
+                  From electronics engineering to pioneering organic henna in Kashmir & Bengaluru.
                 </h1>
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in 2019 in Srinagar by Sumaiya Rashid Magray (Sana)—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Srinagar and Bengaluru.
+                Founded in 2019 in Srinagar by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Srinagar and Bengaluru.
               </p>
-              <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                After researching the monoterpene chemistry of eucalyptus, cineol, and tea tree oils to optimize natural lawsone dye release, Sana replaced commercial chemical cones with freshly mixed, triple-sifted organic paste hand-rolled to a 0.38mm tip.
-              </p>
+              
             </div>
           </div>
         </div>
@@ -252,7 +251,7 @@ export default function AboutPage() {
               Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient botanical ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.
             </blockquote>
             <figcaption className="mt-6 pt-5 border-t border-plaque-ink/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
-              &mdash; Sumaiya Rashid Magray (Sana) &middot;{' '}
+              &mdash; Sana &middot;{' '}
               <span className="text-plaque-ink/75 font-normal">Srinagar &amp; Bengaluru</span>
             </figcaption>
           </figure>
@@ -446,24 +445,24 @@ export default function AboutPage() {
                 href="/shop"
                 variant="primary"
                 size="md"
-                className="rounded-full"
+                className="rounded-md"
               >
-                Explore Products &rarr;
+                Explore Products <ShoppingBag className='w-3.5 h-3.5'/>
               </LinkButton>
               <LinkButton
                 href="/services"
                 variant="secondary"
                 size="md"
-                className="rounded-full"
+                className="rounded-md"
               >
-                View Services
+                View Services <LineDotRightHorizontal className='w-3.5 h-3.5'/>
               </LinkButton>
             </div>
             <Link
               href="/contact"
               className="inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1.5"
             >
-              Connect with Sana &rarr;
+              Connect with Sana
             </Link>
           </div>
         </section>

@@ -23,5 +23,8 @@
     "ecommerce"
   ],
   "author": "Mehandi By Sana",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "react-icons": "^5.7.0"
+  }
 }

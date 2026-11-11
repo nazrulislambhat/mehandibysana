@@ -28,7 +28,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 const DEFAULT_TITLE = 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist';
 const DEFAULT_DESCRIPTION =
-  'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sumaiya Rashid Magray (Sana) across Srinagar & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehandi services.';
+  'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sana across Srinagar & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehandi services.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     template: '%s | Mehandi by Sana',
   },
   description: DEFAULT_DESCRIPTION,
-  authors: [{ name: 'Sumaiya Rashid Magray (Sana)', url: '/about' }],
-  creator: 'Sumaiya Rashid Magray (Sana)',
+  authors: [{ name: 'Sana', url: '/about' }],
+  creator: 'Sana',
   publisher: SITE_NAME,
   category: 'beauty & apothecary',
   manifest: '/manifest.webmanifest',

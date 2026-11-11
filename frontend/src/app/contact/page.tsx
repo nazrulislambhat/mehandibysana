@@ -211,7 +211,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 href="/shop"
                 className="inline-flex gap-1.5 items-center justify-center rounded-md border border-divider bg-canvas px-4 py-2 text-xs sm:text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
               >
-                Visit the Shop <ShoppingBag className='w-4 h-4'/>
+                Visit the Shop <ShoppingBag className='w-3.5 h-3.5'/>
               </Link>
             </div>
           </aside>

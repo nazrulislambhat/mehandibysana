@@ -111,7 +111,7 @@ export function FooterNewsletterForm() {
             className="min-h-[42px] shrink-0 rounded-full text-xs"
           >
             <span>{status === 'submitting' ? 'Joining…' : 'Join List'}</span>
-            {status !== 'submitting' ? <LineDotRightHorizontal className='w-4 h-4'/> : null}
+            {status !== 'submitting' ? <LineDotRightHorizontal className='w-3.5 h-3.5'/> : null}
           </Button>
         </div>
       </form>

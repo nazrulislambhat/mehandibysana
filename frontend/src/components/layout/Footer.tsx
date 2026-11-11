@@ -196,7 +196,7 @@ export function Footer() {
                   size="md"
                   className="w-full rounded-full text-xs"
                 >
-                  <span>Request Bridal Date</span> <LineDotRightHorizontal className='w-4 h-4'/>
+                  <span>Request Bridal Date</span> <LineDotRightHorizontal className='w-3.5 h-3.5'/>
                
                 </LinkButton>
                 <LinkButton

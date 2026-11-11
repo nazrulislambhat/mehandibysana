@@ -476,7 +476,7 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
                       <span
                         aria-hidden="true"
                         style={{ backgroundColor: stage.swatchHex }}
-                        className="w-4 h-4 rounded-full border border-ink/20"
+                        className="w-3.5 h-3.5 rounded-full border border-ink/20"
                       />
                     </div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-ink">
