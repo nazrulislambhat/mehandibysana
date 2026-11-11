@@ -193,7 +193,7 @@ export function PolicyDocumentLayout({
                 Mehandi by Sana
               </h2>
               <p className="text-xs text-plaque-ink/75 leading-relaxed">
-                Sumaiya Rashid Magray (Sana) &middot; Independent freelance artist working from Baghat Barzullah, Srinagar (J&amp;K 190005) &amp; Bengaluru (Karnataka)
+                Sumaiya Rashid Magray (Sana) &middot; Independent freelance artist working from Baghat Barzullah, Srinagar (J&amp;K 190001) &amp; Bengaluru (Karnataka)
               </p>
               <div className="pt-2 border-t border-plaque-ink/15 space-y-1.5 text-xs">
                 <a

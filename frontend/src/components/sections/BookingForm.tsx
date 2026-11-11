@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-
+import { ShoppingBag, LineDotRightHorizontalIcon } from 'lucide-react';
 export interface BookingFormProps {
   initialService?: string;
 }
@@ -249,12 +249,14 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
             htmlFor="contact-phone"
             className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-2"
           >
-            Phone / WhatsApp
+            Phone / WhatsApp <span className="text-terracotta">*</span>
           </label>
           <input
             id="contact-phone"
             name="phone"
             type="tel"
+            required
+             aria-required="true"
             value={values.phone}
             onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value }))}
             className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 py-2.5 text-sm text-ink"
@@ -362,9 +364,9 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         variant="primary"
         size="lg"
         disabled={submitting}
-        className="w-full rounded-full min-h-[50px]"
+        className="w-full rounded-md min-h-[50px]"
       >
-        {submitting ? 'Submitting Inquiry…' : 'Send Inquiry →'}
+        {submitting ? 'Submitting Inquiry…' : 'Send Inquiry'} <LineDotRightHorizontalIcon className='w-4 h-4'/>
       </Button>
     </form>
   );

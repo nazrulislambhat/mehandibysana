@@ -56,7 +56,7 @@ export default function TermsConditionsPage() {
         <p className="text-umber">
           This storefront (<strong>mehandibysana.com</strong>) is operated by{' '}
           <strong>Mehandi by Sana</strong>, founded in 2019 by independent freelance artist Sumaiya Rashid Magray (Sana), working across{' '}
-          <strong>Baghat Barzullah, Srinagar (Jammu &amp; Kashmir 190005)</strong> and{' '}
+          <strong>Baghat Barzullah, Srinagar (Jammu &amp; Kashmir 190001)</strong> and{' '}
           <strong>Bengaluru (Karnataka), India</strong>.
         </p>
         <p className="text-umber">
