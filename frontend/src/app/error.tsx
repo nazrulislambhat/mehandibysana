@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
+import { Repeat, House } from 'lucide-react';
 
 export default function RouteError({
   error,
@@ -40,13 +41,20 @@ export default function RouteError({
                   Something went wrong loading this view.
                 </h1>
               </div>
-              <BrandCrest tone="ink-badge" size={44} decorative className="shrink-0" />
+              <BrandCrest
+                tone="ink-badge"
+                size={44}
+                decorative
+                className="shrink-0"
+              />
             </div>
           </div>
 
           <div className="p-7 sm:p-10 space-y-6">
             <p className="text-sm sm:text-base text-umber leading-relaxed">
-              Our storefront encountered an unexpected interruption while loading live catalog or order details. Your shopping bag items remain safely saved on this device.
+              Our storefront encountered an unexpected interruption while
+              loading live catalog or order details. Your shopping bag items
+              remain safely saved on this device.
             </p>
 
             {error?.digest ? (
@@ -60,13 +68,18 @@ export default function RouteError({
                 type="button"
                 variant="primary"
                 size="md"
-                className="rounded-full"
+                className="rounded-md"
                 onClick={() => reset()}
               >
-                Try Again
+                Try Again <Repeat className="w-3.5 h-3.5" />
               </Button>
-              <LinkButton href="/" variant="secondary" size="md" className="rounded-full">
-                Return Home
+              <LinkButton
+                href="/"
+                variant="secondary"
+                size="md"
+                className="rounded-md"
+              >
+                Return Home <House className="w-3.5 h-3.5" />
               </LinkButton>
               <Link
                 href="/shop"
@@ -100,4 +113,3 @@ export default function RouteError({
     </div>
   );
 }
-

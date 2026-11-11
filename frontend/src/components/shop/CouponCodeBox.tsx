@@ -159,11 +159,15 @@ export function CouponCodeBox({
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="font-semibold text-ink">
-                <span className="font-mono text-terracotta">{validation.code}</span>{' '}
-                applied — saving ₹{validation.discountAmount.toLocaleString('en-IN')}
+                <span className="font-mono text-terracotta">
+                  {validation.code}
+                </span>{' '}
+                applied — saving ₹
+                {validation.discountAmount.toLocaleString('en-IN')}
               </p>
               <p className="text-umber mt-0.5">
-                {validation.coupon?.description || validation.coupon?.summaryLabel}
+                {validation.coupon?.description ||
+                  validation.coupon?.summaryLabel}
                 {expiryLabel ? ` · Valid till ${expiryLabel}` : ''}
               </p>
             </div>
@@ -203,7 +207,7 @@ export function CouponCodeBox({
               type="button"
               disabled={isApplying || !codeInput.trim()}
               onClick={() => void handleApply()}
-              className="inline-flex items-center justify-center min-h-[42px] rounded-full bg-ink px-5 text-xs sm:text-sm font-medium text-inverse hover:bg-terracotta-solid hover:text-on-accent disabled:bg-linen disabled:text-umber disabled:border disabled:border-divider cursor-pointer transition-colors"
+              className="inline-flex items-center justify-center min-h-[42px] rounded-md bg-ink px-5 text-xs sm:text-sm font-medium text-inverse hover:bg-terracotta-solid hover:text-on-accent disabled:bg-linen disabled:text-umber disabled:border disabled:border-divider cursor-pointer transition-colors"
             >
               {isApplying ? 'Applying…' : 'Apply'}
             </button>

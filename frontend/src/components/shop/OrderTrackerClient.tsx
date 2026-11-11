@@ -18,7 +18,12 @@ export interface TrackedOrder {
   orderNumber: string;
   createdAt: string;
   status: string;
-  fulfillmentStage: 'received' | 'preparing' | 'dispatched' | 'delivered' | 'cancelled';
+  fulfillmentStage:
+    | 'received'
+    | 'preparing'
+    | 'dispatched'
+    | 'delivered'
+    | 'cancelled';
   paymentMethod: string;
   paymentStatus: string;
   paymentId: string;
@@ -96,45 +101,50 @@ export function OrderTrackerClient({
   const [error, setError] = useState<string | null>(initialLookupError);
   const [order, setOrder] = useState<TrackedOrder | null>(initialTrackedOrder);
 
-  const performLookup = useCallback(async (targetOrder: string, targetEmail: string) => {
-    const cleanOrder = targetOrder.trim();
-    const cleanEmail = targetEmail.trim();
-    if (!cleanOrder || !cleanEmail) return;
+  const performLookup = useCallback(
+    async (targetOrder: string, targetEmail: string) => {
+      const cleanOrder = targetOrder.trim();
+      const cleanEmail = targetEmail.trim();
+      if (!cleanOrder || !cleanEmail) return;
 
-    setLoading(true);
-    setError(null);
+      setLoading(true);
+      setError(null);
 
-    try {
-      const res = await fetch(
-        `/api/track-order?orderNumber=${encodeURIComponent(cleanOrder)}&email=${encodeURIComponent(cleanEmail)}`,
-        { cache: 'no-store' }
-      );
-      const data = (await res.json()) as {
-        found?: boolean;
-        order?: TrackedOrder;
-        message?: string;
-      };
+      try {
+        const res = await fetch(
+          `/api/track-order?orderNumber=${encodeURIComponent(cleanOrder)}&email=${encodeURIComponent(cleanEmail)}`,
+          { cache: 'no-store' },
+        );
+        const data = (await res.json()) as {
+          found?: boolean;
+          order?: TrackedOrder;
+          message?: string;
+        };
 
-      if (!res.ok || !data.found || !data.order) {
+        if (!res.ok || !data.found || !data.order) {
+          setOrder(null);
+          setError(
+            data.message ||
+              'No matching order found. Check your Order Reference and Email Address.',
+          );
+          setLoading(false);
+          return;
+        }
+
+        setOrder(data.order);
+        setLoading(false);
+      } catch (err) {
         setOrder(null);
         setError(
-          data.message ||
-            'No matching order found. Check your Order Reference and Email Address.'
+          err instanceof Error
+            ? err.message
+            : 'Unable to look up order right now.',
         );
         setLoading(false);
-        return;
       }
-
-      setOrder(data.order);
-      setLoading(false);
-    } catch (err) {
-      setOrder(null);
-      setError(
-        err instanceof Error ? err.message : 'Unable to look up order right now.'
-      );
-      setLoading(false);
-    }
-  }, []);
+    },
+    [],
+  );
 
   useEffect(() => {
     if (
@@ -152,7 +162,7 @@ export function OrderTrackerClient({
       try {
         const res = await fetch(
           `/api/track-order?orderNumber=${encodeURIComponent(initialOrder.trim())}&email=${encodeURIComponent(initialEmail.trim())}`,
-          { cache: 'no-store' }
+          { cache: 'no-store' },
         );
         const data = (await res.json()) as {
           found?: boolean;
@@ -164,7 +174,7 @@ export function OrderTrackerClient({
           setOrder(null);
           setError(
             data.message ||
-              'No matching order found. Check your Order Reference and Email Address.'
+              'No matching order found. Check your Order Reference and Email Address.',
           );
           return;
         }
@@ -173,7 +183,9 @@ export function OrderTrackerClient({
       } catch (err) {
         if (!active) return;
         setError(
-          err instanceof Error ? err.message : 'Unable to look up order right now.'
+          err instanceof Error
+            ? err.message
+            : 'Unable to look up order right now.',
         );
       }
     };
@@ -228,7 +240,8 @@ export function OrderTrackerClient({
               htmlFor="track-order-email"
               className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5"
             >
-              Email Address Used at Checkout <span className="text-terracotta">*</span>
+              Email Address Used at Checkout{' '}
+              <span className="text-terracotta">*</span>
             </label>
             <input
               id="track-order-email"
@@ -243,7 +256,6 @@ export function OrderTrackerClient({
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-        
           <Button
             type="submit"
             variant="primary"
@@ -251,7 +263,8 @@ export function OrderTrackerClient({
             disabled={loading}
             className="rounded-md"
           >
-            {loading ? 'Checking Status…' : 'Track Order '}<LineDotRightHorizontalIcon className='w-3.5 h-3.5'/>
+            {loading ? 'Checking Status…' : 'Track Order '}
+            <LineDotRightHorizontalIcon className="w-3.5 h-3.5" />
           </Button>
         </div>
       </form>
@@ -287,7 +300,8 @@ export function OrderTrackerClient({
                   month: 'long',
                   year: 'numeric',
                 })}{' '}
-                &middot; {order.paymentMethod} ({order.paymentStatus.toUpperCase()})
+                &middot; {order.paymentMethod} (
+                {order.paymentStatus.toUpperCase()})
               </p>
             </div>
 
@@ -328,7 +342,8 @@ export function OrderTrackerClient({
             {/* 4-Stage Visual Progress Timeline */}
             {order.fulfillmentStage === 'cancelled' ? (
               <div className="rounded-xl border border-crimson/35 bg-paper p-4 text-sm text-crimson">
-                This order has been cancelled. Reach out directly via Contact if you need assistance.
+                This order has been cancelled. Reach out directly via Contact if
+                you need assistance.
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3.5">
@@ -349,7 +364,9 @@ export function OrderTrackerClient({
                       <div className="flex items-center justify-between gap-2 mb-2">
                         <span
                           className={`font-serif text-xs italic ${
-                            isCurrent ? 'text-terracotta-on-ink' : 'text-terracotta'
+                            isCurrent
+                              ? 'text-terracotta-on-ink'
+                              : 'text-terracotta'
                           }`}
                         >
                           {st.step}
@@ -401,7 +418,9 @@ export function OrderTrackerClient({
                           {item.title} &times; {item.quantity}
                         </p>
                         {item.variantTitle ? (
-                          <p className="text-xs text-umber">{item.variantTitle}</p>
+                          <p className="text-xs text-umber">
+                            {item.variantTitle}
+                          </p>
                         ) : null}
                       </div>
                       <span className="font-medium text-ink tabular-nums">
@@ -418,9 +437,11 @@ export function OrderTrackerClient({
                 </h3>
                 {order.shippingAddress ? (
                   <p className="text-xs text-ink leading-relaxed">
-                    {order.shippingAddress.firstName} {order.shippingAddress.lastName}
+                    {order.shippingAddress.firstName}{' '}
+                    {order.shippingAddress.lastName}
                     <br />
-                    {order.shippingAddress.city}, {order.shippingAddress.province} —{' '}
+                    {order.shippingAddress.city},{' '}
+                    {order.shippingAddress.province} —{' '}
                     <strong>{order.shippingAddress.postalCode}</strong>
                   </p>
                 ) : null}
@@ -435,7 +456,8 @@ export function OrderTrackerClient({
                   {(order.discountAmount ?? 0) > 0 ? (
                     <div className="flex justify-between">
                       <dt className="text-terracotta">
-                        Discount{order.couponCode ? ` (${order.couponCode})` : ''}
+                        Discount
+                        {order.couponCode ? ` (${order.couponCode})` : ''}
                       </dt>
                       <dd className="font-semibold text-terracotta tabular-nums">
                         &minus;{formatInr(order.discountAmount ?? 0)}
@@ -443,7 +465,9 @@ export function OrderTrackerClient({
                     </div>
                   ) : null}
                   <div className="flex justify-between">
-                    <dt className="text-umber">Delivery ({order.pincodeRule})</dt>
+                    <dt className="text-umber">
+                      Delivery ({order.pincodeRule})
+                    </dt>
                     <dd className="font-medium text-ink tabular-nums">
                       {formatInr(order.shippingFee)}
                     </dd>
@@ -462,16 +486,21 @@ export function OrderTrackerClient({
             <div className="border-t border-hairline pt-6 flex flex-wrap items-center justify-between gap-3">
               <a
                 href={`https://wa.me/919149648717?text=${encodeURIComponent(
-                  `Assalamu Alaikum Mehandi by Sana, I would like an update on Order ${order.orderNumber}.`
+                  `Assalamu Alaikum Mehandi by Sana, I would like an update on Order ${order.orderNumber}.`,
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
+                className="inline-flex items-center justify-center min-h-[44px] rounded-md border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
               >
                 Ask Sana on WhatsApp
               </a>
-              <LinkButton href="/shop" variant="primary" size="md" className="rounded-full">
-                Continue Shopping &rarr;
+              <LinkButton
+                href="/shop"
+                variant="primary"
+                size="md"
+                className="rounded-md"
+              >
+                Continue Shopping
               </LinkButton>
             </div>
           </div>

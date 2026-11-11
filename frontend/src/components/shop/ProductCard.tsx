@@ -33,7 +33,9 @@ export function ProductCard({
   const hasSelectableOptions =
     product.variations.length > 1 ||
     product.attributes.some((attr) => attr.options.length > 1);
-  const effectiveInStock = defaultVariation ? defaultVariation.inStock : product.inStock;
+  const effectiveInStock = defaultVariation
+    ? defaultVariation.inStock
+    : product.inStock;
 
   if (variant === 'spotlight') {
     return (
@@ -44,7 +46,10 @@ export function ProductCard({
         >
           <div className="relative aspect-[4/5] w-full">
             <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full border border-plaque-border bg-plaque px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-plaque-ink">
-              <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+              <span
+                aria-hidden="true"
+                className="w-1.5 h-1.5 rounded-full bg-terracotta"
+              />
               Signature Spotlight
             </span>
             {primaryImage ? (
@@ -128,7 +133,7 @@ export function ProductCard({
                 inStock={effectiveInStock}
                 size="md"
                 variant="primary"
-                className="rounded-full"
+                className="rounded-md"
               />
             )}
             <Link
@@ -168,7 +173,7 @@ export function ProductCard({
           )}
 
           {!product.inStock ? (
-            <span className="absolute top-3 left-3 rounded-full border border-plaque-border bg-plaque px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-plaque-ink">
+            <span className="absolute top-3 left-3 rounded-md border border-plaque-border bg-terracotta px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-plaque-ink">
               Out of stock
             </span>
           ) : null}
@@ -207,7 +212,7 @@ export function ProductCard({
             href={`/product/${product.slug}`}
             variant="secondary"
             size="sm"
-            className="w-full rounded-full"
+            className="w-full rounded-md"
           >
             Select Options
           </LinkButton>
@@ -219,7 +224,7 @@ export function ProductCard({
             inStock={effectiveInStock}
             variant="secondary"
             size="sm"
-            className="w-full rounded-full"
+            className="w-full rounded-md"
           />
         )}
       </div>
