@@ -16,7 +16,9 @@ const statusArg = args.find((arg) => arg.startsWith('--status='));
 const targetStatus = statusArg ? statusArg.split('=')[1] : 'draft';
 
 if (!['draft', 'publish'].includes(targetStatus)) {
-  console.error('Invalid --status value. Use --status=draft or --status=publish.');
+  console.error(
+    'Invalid --status value. Use --status=draft or --status=publish.',
+  );
   process.exit(1);
 }
 
@@ -97,7 +99,7 @@ export const RELATED_HENNA_SUPPLIES = [
     name: 'Triple-Sifting Fine Mesh Henna Filter Cloth',
     slug: 'triple-sifting-henna-filter-cloth',
     type: 'simple',
-    regular_price: '150',
+    regular_price: '120',
     manage_stock: true,
     stock_quantity: 30,
     stock_status: 'instock',
@@ -126,21 +128,29 @@ async function run() {
   const key = process.env.WC_CONSUMER_KEY || '';
   const secret = process.env.WC_CONSUMER_SECRET || '';
 
-  console.log(`Mode: ${apply ? `APPLY (status=${targetStatus})` : 'DRY-RUN (preview only)'}`);
+  console.log(
+    `Mode: ${apply ? `APPLY (status=${targetStatus})` : 'DRY-RUN (preview only)'}`,
+  );
   console.log(`Target store: ${wpBaseUrl || '(WP_BASE_URL not set)'}`);
   console.log(`Category: ${RELATED_CATEGORY.name} (${RELATED_CATEGORY.slug})`);
   console.log(`Items (${RELATED_HENNA_SUPPLIES.length}):`);
   for (const item of RELATED_HENNA_SUPPLIES) {
-    console.log(`  - ${item.name} [slug=${item.slug}, price=₹${item.regular_price}]`);
+    console.log(
+      `  - ${item.name} [slug=${item.slug}, price=₹${item.regular_price}]`,
+    );
   }
 
   if (!apply) {
-    console.log('\nDry-run complete. Re-run with --apply --status=draft (or --status=publish) to create in WooCommerce.');
+    console.log(
+      '\nDry-run complete. Re-run with --apply --status=draft (or --status=publish) to create in WooCommerce.',
+    );
     return;
   }
 
   if (!wpBaseUrl || !key || !secret) {
-    console.error('Missing WP_BASE_URL, WC_CONSUMER_KEY, or WC_CONSUMER_SECRET in environment.');
+    console.error(
+      'Missing WP_BASE_URL, WC_CONSUMER_KEY, or WC_CONSUMER_SECRET in environment.',
+    );
     process.exit(1);
   }
 
@@ -153,7 +163,7 @@ async function run() {
   // 1. Find or create category
   const catSearchRes = await fetch(
     `${wpBaseUrl}/wp-json/wc/v3/products/categories?slug=${encodeURIComponent(RELATED_CATEGORY.slug)}`,
-    { headers }
+    { headers },
   );
   if (!catSearchRes.ok) {
     throw new Error(`Failed querying categories: HTTP ${catSearchRes.status}`);
@@ -162,30 +172,39 @@ async function run() {
   let categoryId = existingCats[0]?.id ?? null;
 
   if (!categoryId) {
-    const catCreateRes = await fetch(`${wpBaseUrl}/wp-json/wc/v3/products/categories`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(RELATED_CATEGORY),
-    });
+    const catCreateRes = await fetch(
+      `${wpBaseUrl}/wp-json/wc/v3/products/categories`,
+      {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(RELATED_CATEGORY),
+      },
+    );
     if (!catCreateRes.ok) {
       throw new Error(`Failed creating category: HTTP ${catCreateRes.status}`);
     }
     const createdCat = await catCreateRes.json();
     categoryId = createdCat.id;
-    console.log(`Created category "${RELATED_CATEGORY.name}" (id=${categoryId})`);
+    console.log(
+      `Created category "${RELATED_CATEGORY.name}" (id=${categoryId})`,
+    );
   } else {
-    console.log(`Using existing category "${RELATED_CATEGORY.name}" (id=${categoryId})`);
+    console.log(
+      `Using existing category "${RELATED_CATEGORY.name}" (id=${categoryId})`,
+    );
   }
 
   // 2. Idempotently create each related product
   for (const item of RELATED_HENNA_SUPPLIES) {
     const existingRes = await fetch(
       `${wpBaseUrl}/wp-json/wc/v3/products?slug=${encodeURIComponent(item.slug)}&status=any`,
-      { headers }
+      { headers },
     );
     const existing = existingRes.ok ? await existingRes.json() : [];
     if (Array.isArray(existing) && existing.length > 0) {
-      console.log(`Skipped existing product: ${item.name} (id=${existing[0].id}, status=${existing[0].status})`);
+      console.log(
+        `Skipped existing product: ${item.name} (id=${existing[0].id}, status=${existing[0].status})`,
+      );
       continue;
     }
 
@@ -201,12 +220,16 @@ async function run() {
 
     if (!createRes.ok) {
       const errBody = await createRes.text();
-      console.error(`Failed creating ${item.name}: HTTP ${createRes.status} -> ${errBody.slice(0, 200)}`);
+      console.error(
+        `Failed creating ${item.name}: HTTP ${createRes.status} -> ${errBody.slice(0, 200)}`,
+      );
       continue;
     }
 
     const created = await createRes.json();
-    console.log(`Created product: ${created.name} (id=${created.id}, status=${created.status})`);
+    console.log(
+      `Created product: ${created.name} (id=${created.id}, status=${created.status})`,
+    );
   }
 }
 
@@ -214,4 +237,3 @@ run().catch((err) => {
   console.error(err);
   process.exit(1);
 });
-
