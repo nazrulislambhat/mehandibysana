@@ -36,7 +36,7 @@ const CATEGORY_SEO_COPY: Record<
   'organic-henna': {
     title: 'Organic Henna Cones, Bridal Paste & Powder',
     description:
-      'Shop 100% PPD-free fresh organic Sojat henna cones rolled to 0.38mm, organic nail henna cones, and triple-sifted body & hair henna powder by Mehandi by Sana.',
+      'Shop 100% PPD-free fresh organic Sojat henna cones rolled to 0.38mm, organic nail henna cones, and triple-sifted body & hair henna powder by Mehandi By Sana.',
     lead: 'Hand-rolled 0.38mm fresh organic henna cones, natural nail henna, and triple-sifted Sojat leaf powder crafted without chemical dyes.',
   },
   'henna-kits-combos': {
@@ -60,7 +60,7 @@ const CATEGORY_SEO_COPY: Record<
   'mehandi-products': {
     title: 'Organic Mehandi Cones, Hair Henna & Aftercare Products',
     description:
-      'Explore small-batch Mehandi by Sana apothecary formulations: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
+      'Explore small-batch Mehandi By Sana apothecary formulations: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
     lead: 'Our signature small-batch organic mehandi formulations—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and botanical stain aftercare.',
   },
 };
@@ -89,13 +89,14 @@ export async function generateMetadata({
   const categories = await fetchCatalogCategories();
   const normalizedCat = rawCategory ? normalizeCategorySlug(rawCategory) : '';
   const activeCategoryObj = normalizedCat
-    ? categories.find((c) => normalizeCategorySlug(c.slug) === normalizedCat) ??
-      null
+    ? (categories.find(
+        (c) => normalizeCategorySlug(c.slug) === normalizedCat,
+      ) ?? null)
     : null;
   const canonicalCategory = activeCategoryObj?.slug || normalizedCat;
 
   const hasFacetedParams = Boolean(
-    activeQuery || (activeSort && activeSort !== 'default')
+    activeQuery || (activeSort && activeSort !== 'default'),
   );
   const canonicalPath = hasFacetedParams
     ? buildCleanShopPath(canonicalCategory, 1)
@@ -111,12 +112,11 @@ export async function generateMetadata({
       ? `${activeCategoryObj.name} — Botanical Henna Collection`
       : 'Shop Organic Henna Cones, Balms & Artist Supplies';
 
-  const title =
-    activeQuery
-      ? `Search "${activeQuery}" in ${activeCategoryObj ? activeCategoryObj.name : 'Shop'}`
-      : currentPage > 1 && !hasFacetedParams
-        ? `${baseTitle} (Page ${currentPage})`
-        : baseTitle;
+  const title = activeQuery
+    ? `Search "${activeQuery}" in ${activeCategoryObj ? activeCategoryObj.name : 'Shop'}`
+    : currentPage > 1 && !hasFacetedParams
+      ? `${baseTitle} (Page ${currentPage})`
+      : baseTitle;
 
   const description = categoryCopy
     ? categoryCopy.description
@@ -147,7 +147,7 @@ export async function generateMetadata({
 }
 
 function mapSortToQuery(
-  sort: string
+  sort: string,
 ): Pick<ProductQueryOptions, 'orderby' | 'order'> {
   switch (sort) {
     case 'price-asc':
@@ -191,8 +191,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     ? normalizeCategorySlug(activeCategory)
     : '';
   const activeCategoryObj = normalizedCat
-    ? categories.find((c) => normalizeCategorySlug(c.slug) === normalizedCat) ??
-      null
+    ? (categories.find(
+        (c) => normalizeCategorySlug(c.slug) === normalizedCat,
+      ) ?? null)
     : null;
   const canonicalCategory = activeCategoryObj?.slug || normalizedCat;
   const categoryCopy = canonicalCategory
@@ -237,9 +238,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
       description: pageLead,
       path: buildCleanShopPath(canonicalCategory, currentPage),
       products: catalog.products,
-    })
+    }),
   );
-  const breadcrumbJson = serializeJsonLd(buildBreadcrumbJsonLd(breadcrumbItems));
+  const breadcrumbJson = serializeJsonLd(
+    buildBreadcrumbJsonLd(breadcrumbItems),
+  );
 
   return (
     <div className="bg-canvas pb-20 md:pb-28">
@@ -272,7 +275,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   Shop
                 </Link>
                 <span aria-hidden="true">/</span>
-                <span className="text-ink font-medium">{activeCategoryObj.name}</span>
+                <span className="text-ink font-medium">
+                  {activeCategoryObj.name}
+                </span>
               </>
             ) : (
               <span className="text-ink font-medium">Shop</span>
