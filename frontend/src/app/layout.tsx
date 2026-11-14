@@ -9,6 +9,7 @@ import { THEME_INIT_SCRIPT } from '@/lib/theme';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { FloatingContactBubble } from '@/components/layout/FloatingContactBubble';
 import { CartAddedToast } from '@/components/cart/CartAddedToast';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 
@@ -141,6 +142,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <FloatingContactBubble />
       </body>
     </html>
   );

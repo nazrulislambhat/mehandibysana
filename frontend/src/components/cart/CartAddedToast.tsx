@@ -83,7 +83,7 @@ export function CartAddedToast() {
   return (
     <div
       aria-live="polite"
-      className="pointer-events-none fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 sm:w-[390px] z-40 flex justify-end"
+      className="pointer-events-none fixed bottom-20 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 sm:w-[390px] z-40 flex justify-end"
     >
       <div
         onMouseEnter={() => setPaused(true)}
