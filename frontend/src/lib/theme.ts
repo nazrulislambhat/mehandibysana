@@ -3,7 +3,7 @@ export type Theme = 'light' | 'dark';
 export const THEME_STORAGE_KEY = 'mbs-theme';
 
 export const THEME_COLOR_BY_MODE: Record<Theme, string> = {
-  light: '#ffffff',
+  light: '#E7DDCF',
   dark: '#181818',
 };
 
@@ -11,7 +11,7 @@ export const THEME_COLOR_BY_MODE: Record<Theme, string> = {
  * Blocking pre-paint bootstrap injected in <head> to eliminate any light/dark FOUC.
  * Reads explicit localStorage preference ('mbs-theme'), falling back to OS prefers-color-scheme.
  */
-export const THEME_INIT_SCRIPT = `(function(){try{var k='${THEME_STORAGE_KEY}';var s=localStorage.getItem(k);var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||s==='light'?s:(m?'dark':'light');var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t;var c=t==='dark'?'#181818':'#ffffff';var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){metas[i].setAttribute('content',c);metas[i].removeAttribute('media');}}catch(e){}})();`;
+export const THEME_INIT_SCRIPT = `(function(){try{var k='${THEME_STORAGE_KEY}';var s=localStorage.getItem(k);var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||s==='light'?s:(m?'dark':'light');var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t;var c=t==='dark'?'#181818':'#E7DDCF';var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){metas[i].setAttribute('content',c);metas[i].removeAttribute('media');}}catch(e){}})();`;
 
 const listeners = new Set<() => void>();
 let globalListenersAttached = false;

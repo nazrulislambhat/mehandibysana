@@ -315,10 +315,10 @@ function renderOrderDetailsTableHtml(
   const discountRow =
     b.discountAmount > 0
       ? `<tr>
-          <td colspan="2" style="padding:6px 12px;font-size:13px;color:#166534;">
+          <td colspan="2" style="padding:6px 12px;font-size:13px;color:#789904;font-weight:600;">
             Discount${b.couponCode ? ` (${escapeHtml(b.couponCode)})` : ""}
           </td>
-          <td style="padding:6px 12px;font-size:13px;color:#166534;text-align:right;white-space:nowrap;">
+          <td style="padding:6px 12px;font-size:13px;color:#789904;font-weight:600;text-align:right;white-space:nowrap;">
             -${escapeHtml(formatInr(b.discountAmount))}
           </td>
         </tr>`
@@ -326,40 +326,40 @@ function renderOrderDetailsTableHtml(
 
   return `
     ${shippingBoxHtml}
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:1px solid #d4c8b8;border-radius:8px;overflow:hidden;">
       <thead>
-        <tr style="background-color:#f9f8f6;">
-          <th align="left" style="padding:10px 12px;border-bottom:1px solid #e5e5e5;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#525252;">Item</th>
-          <th align="center" style="padding:10px 12px;border-bottom:1px solid #e5e5e5;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#525252;">Qty</th>
-          <th align="right" style="padding:10px 12px;border-bottom:1px solid #e5e5e5;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#525252;">Amount</th>
+        <tr style="background-color:#E7DDCF;">
+          <th align="left" style="padding:10px 12px;border-bottom:1px solid #d4c8b8;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#3D3D3D;">Item</th>
+          <th align="center" style="padding:10px 12px;border-bottom:1px solid #d4c8b8;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#3D3D3D;">Qty</th>
+          <th align="right" style="padding:10px 12px;border-bottom:1px solid #d4c8b8;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#3D3D3D;">Amount</th>
         </tr>
       </thead>
       <tbody>
         ${itemRows}
         <tr>
-          <td colspan="2" style="padding:8px 12px 4px;font-size:13px;color:#525252;">Subtotal</td>
-          <td style="padding:8px 12px 4px;font-size:13px;color:#111111;text-align:right;white-space:nowrap;">${escapeHtml(
+          <td colspan="2" style="padding:8px 12px 4px;font-size:13px;color:#6b6357;">Subtotal</td>
+          <td style="padding:8px 12px 4px;font-size:13px;color:#3D3D3D;text-align:right;white-space:nowrap;">${escapeHtml(
             formatInr(b.subtotal)
           )}</td>
         </tr>
         <tr>
-          <td colspan="2" style="padding:4px 12px;font-size:13px;color:#525252;">Shipping${
+          <td colspan="2" style="padding:4px 12px;font-size:13px;color:#6b6357;">Shipping${
             b.pincode ? ` (PIN ${escapeHtml(b.pincode)})` : ""
           }</td>
-          <td style="padding:4px 12px;font-size:13px;color:#111111;text-align:right;white-space:nowrap;">${escapeHtml(
+          <td style="padding:4px 12px;font-size:13px;color:#3D3D3D;text-align:right;white-space:nowrap;">${escapeHtml(
             b.shippingFee === 0 ? "Free" : formatInr(b.shippingFee)
           )}</td>
         </tr>
         ${discountRow}
-        <tr style="background-color:#f9f8f6;">
-          <td colspan="2" style="padding:10px 12px;border-top:1px solid #e5e5e5;font-size:15px;font-weight:700;color:#111111;">Total</td>
-          <td style="padding:10px 12px;border-top:1px solid #e5e5e5;font-size:15px;font-weight:700;color:#d9541e;text-align:right;white-space:nowrap;">${escapeHtml(
+        <tr style="background-color:#f4efe8;">
+          <td colspan="2" style="padding:10px 12px;border-top:1px solid #d4c8b8;font-size:15px;font-weight:700;color:#181818;">Total</td>
+          <td style="padding:10px 12px;border-top:1px solid #d4c8b8;font-size:15px;font-weight:700;color:#DD6013;text-align:right;white-space:nowrap;">${escapeHtml(
             formatInr(b.total)
           )}</td>
         </tr>
       </tbody>
     </table>
-    <div style="margin-top:14px;padding:12px 14px;border:1px solid #eeeeee;border-radius:8px;background-color:#fafafa;font-size:13px;line-height:1.6;color:#333333;">
+    <div style="margin-top:14px;padding:12px 14px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.6;color:#3D3D3D;">
       <strong>Payment:</strong> ${escapeHtml(b.paymentStatusLabel)} &middot; ${escapeHtml(
         b.paymentMethodLabel
       )}${b.paymentRef ? ` (Ref: ${escapeHtml(b.paymentRef)})` : ""}<br/>

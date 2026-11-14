@@ -1,6 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
 import { LinkButton } from '@/components/ui/Button';
-import { HeroHennaComposition } from '@/components/graphics/HennaArtworkPlates';
 
 import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 
@@ -112,7 +112,14 @@ export function Hero({
 
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-t-[14rem] rounded-b-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.14)]">
-              <HeroHennaComposition className="w-full h-full" />
+              <Image
+                src="/mehandibysana-73.webp"
+                alt="Mehandi by Sana artisanal henna cone and natural botanical products"
+                fill
+                priority
+                sizes="(min-width: 1024px) 40vw, (min-width: 640px) 450px, 100vw"
+                className="object-cover object-center w-full h-full"
+              />
               <div className="pointer-events-none absolute inset-3 rounded-t-[13rem] rounded-b-xl border border-ink/10" />
               <div className="pointer-events-none absolute bottom-5 left-5 right-5 flex items-center justify-between gap-2 rounded-full border border-plaque-border bg-plaque/95 backdrop-blur-sm px-4 py-2 text-[11px] font-medium text-plaque-ink">
                 <span className="flex items-center gap-2">

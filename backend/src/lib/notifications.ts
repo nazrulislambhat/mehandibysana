@@ -108,7 +108,7 @@ export function renderBrandedStudioEmailHtml(params: {
     .filter((p) => p.trim().length > 0)
     .map(
       (p) =>
-        `<p style="margin:0 0 14px;font-size:15px;line-height:1.65;color:#111111;">${escapeHtml(
+        `<p style="margin:0 0 14px;font-size:15px;line-height:1.65;color:#3D3D3D;">${escapeHtml(
           p
         ).replace(/\n/g, "<br/>")}</p>`
     )
@@ -119,14 +119,14 @@ export function renderBrandedStudioEmailHtml(params: {
   const ctaHtml =
     params.ctaLabel && params.ctaUrl
       ? `<div style="margin:26px 0 8px;">
-          <a href="${escapeHtml(params.ctaUrl)}" style="display:inline-block;background-color:#d9541e;color:#fceee3;text-decoration:none;font-weight:600;font-size:14px;padding:12px 24px;border-radius:6px;">
+          <a href="${escapeHtml(params.ctaUrl)}" style="display:inline-block;background-color:#DD6013;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 24px;border-radius:6px;">
             ${escapeHtml(params.ctaLabel)}
           </a>
         </div>`
       : "";
 
   const refHtml = params.referenceId
-    ? `<p style="margin:18px 0 0;padding-top:14px;border-top:1px solid #e5e5e5;font-family:monospace;font-size:12px;color:#525252;">Reference: ${escapeHtml(
+    ? `<p style="margin:18px 0 0;padding-top:14px;border-top:1px solid #d4c8b8;font-family:monospace;font-size:12px;color:#6b6357;">Reference: ${escapeHtml(
         params.referenceId
       )}</p>`
     : "";
@@ -135,37 +135,37 @@ export function renderBrandedStudioEmailHtml(params: {
 
   return `<!doctype html>
 <html lang="en">
-  <body style="margin:0;padding:24px 12px;background-color:#f9f8f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#111111;">
-    <div style="max-width:620px;margin:0 auto;border:1px solid #e5e5e5;border-top:3px solid #d9541e;border-radius:10px;background-color:#ffffff;padding:32px;">
-      <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-bottom:20px;border-bottom:1px solid #e5e5e5;padding-bottom:16px;">
+  <body style="margin:0;padding:24px 12px;background-color:#E7DDCF;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#3D3D3D;">
+    <div style="max-width:620px;margin:0 auto;border:1px solid #d4c8b8;border-top:4px solid #DD6013;border-radius:10px;background-color:#ffffff;padding:32px;box-shadow:0 4px 16px rgba(24,24,24,0.06);">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-bottom:20px;border-bottom:1px solid #e7ddcf;padding-bottom:16px;">
         <tr>
           <td style="width:52px;vertical-align:middle;">
             <img src="${escapeHtml(displaySiteUrl)}/icons/icon-96x96.png" alt="Mehandi by Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;" />
           </td>
           <td style="vertical-align:middle;padding-left:12px;">
-            <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#111111;line-height:1.15;">Mehandi by Sana</span>
-            <span style="display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;margin-top:3px;">Srinagar &amp; Bengaluru &middot; 0% PPD Organic Henna</span>
+            <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#181818;line-height:1.15;">Mehandi by Sana</span>
+            <span style="display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#96410D;margin-top:3px;">Srinagar &amp; Bengaluru &middot; 0% PPD Organic Henna</span>
           </td>
         </tr>
       </table>
-      <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#d9541e;">
+      <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#DD6013;">
         ${escapeHtml(params.eyebrow)}
       </p>
-      <h1 style="margin:0 0 20px;font-family:Georgia,serif;font-size:26px;font-weight:500;line-height:1.25;color:#111111;">
+      <h1 style="margin:0 0 20px;font-family:Georgia,serif;font-size:26px;font-weight:500;line-height:1.25;color:#181818;">
         ${escapeHtml(params.heading)}
       </h1>
       ${paragraphsHtml}
       ${detailsBlockHtml}
       ${ctaHtml}
       ${refHtml}
-      <p style="margin:22px 0 0;font-size:12px;line-height:1.65;color:#525252;">
+      <p style="margin:22px 0 0;font-size:12px;line-height:1.65;color:#6b6357;border-top:1px solid #e7ddcf;padding-top:16px;">
         Mehandi by Sana &middot; Freelance Organic Mehandi Artist &amp; Apothecary<br/>
         Serving Srinagar (Baghat Barzullah, J&amp;K 190001) &amp; Bengaluru (Karnataka)<br/>
-        <a href="${escapeHtml(displaySiteUrl)}" style="color:#d9541e;text-decoration:underline;">${escapeHtml(displaySiteUrl.replace(/^https?:\/\//, ""))}</a>
+        <a href="${escapeHtml(displaySiteUrl)}" style="color:#96410D;text-decoration:underline;font-weight:600;">${escapeHtml(displaySiteUrl.replace(/^https?:\/\//, ""))}</a>
         &middot; sana@mehandibysana.com &middot; +91-9149648717<br/>
-        <a href="${escapeHtml(displaySiteUrl)}/track-order" style="color:#525252;text-decoration:underline;">Track Order</a>
-        &middot; <a href="${escapeHtml(displaySiteUrl)}/henna-care" style="color:#525252;text-decoration:underline;">Henna Storage &amp; Stain Care</a>
-        &middot; <a href="${escapeHtml(displaySiteUrl)}/refund-policy" style="color:#525252;text-decoration:underline;">Refund Policy</a>
+        <a href="${escapeHtml(displaySiteUrl)}/track-order" style="color:#6b6357;text-decoration:underline;">Track Order</a>
+        &middot; <a href="${escapeHtml(displaySiteUrl)}/henna-care" style="color:#6b6357;text-decoration:underline;">Henna Storage &amp; Stain Care</a>
+        &middot; <a href="${escapeHtml(displaySiteUrl)}/refund-policy" style="color:#6b6357;text-decoration:underline;">Refund Policy</a>
         ${params.footerNote ? `<br/>${escapeHtml(params.footerNote)}` : ""}
       </p>
     </div>
@@ -331,7 +331,10 @@ export interface NotificationEvent {
     | "order_payment_offline"
     | "bridal_booking_received"
     | "bridal_booking_confirmed"
-    | "newsletter_subscribed";
+    | "newsletter_subscribed"
+    | "password_reset"
+    | "customer_welcome"
+    | "admin_invite";
   recipientEmail: string;
   recipientName: string;
   recipientPhone?: string;
@@ -372,6 +375,9 @@ export async function dispatchStudioNotification(
     bridal_booking_received: `Booking Inquiry Received (${event.referenceId}) — Mehandi by Sana`,
     bridal_booking_confirmed: `Bridal Session Confirmed (${event.referenceId}) — Mehandi by Sana`,
     newsletter_subscribed: `Welcome to the Mehandi by Sana Dispatch List`,
+    password_reset: `Reset Your Password (${event.referenceId}) — Mehandi by Sana`,
+    customer_welcome: `Welcome to Mehandi by Sana — Artisanal Botanical Henna`,
+    admin_invite: `Invitation to Mehandi by Sana Admin Dashboard`,
   };
 
   const eyebrowMap: Record<NotificationEvent["type"], string> = {
@@ -384,6 +390,9 @@ export async function dispatchStudioNotification(
     bridal_booking_received: "Booking Inquiry Received",
     bridal_booking_confirmed: "Appointment Confirmed",
     newsletter_subscribed: "Fresh Batch Dispatch List",
+    password_reset: "Account Security",
+    customer_welcome: "Welcome to Mehandi by Sana",
+    admin_invite: "Staff Invitation",
   };
 
   const isOrderEvent = event.type.startsWith("order_");
