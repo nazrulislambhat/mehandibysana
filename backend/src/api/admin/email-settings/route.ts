@@ -162,7 +162,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           </table>
           <div style="padding:12px 14px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.6;color:#3D3D3D;">
             <strong>Payment:</strong> Paid &middot; Razorpay Online (Ref: pay_demo73)<br/>
-            <strong>Delivery To:</strong> Test Customer &mdash; Baghat Barzullah, Srinagar, J&amp;K 190001 &middot; +91-9149648717
+            <strong>Delivery To:</strong> Test Customer &mdash; Srinagar, J&amp;K 190001 &middot; +91-9149648717
           </div>
         `;
       } else if (template === "shipping_dispatch") {

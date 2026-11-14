@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerEnv } from '@/lib/env';
 import {
@@ -97,6 +99,41 @@ export async function POST(req: NextRequest) {
 
   // Fallback direct SMTP / Resend / Brevo email dispatch if Medusa backend did not handle it
   if (!backendHandled) {
+    try {
+      const dataDir =
+        process.env.STUDIO_DATA_DIR?.trim() ||
+        path.resolve(process.cwd(), '../studio-data');
+      const bookingsFile = path.join(dataDir, 'bridal-bookings.json');
+      if (fs.existsSync(dataDir)) {
+        let existing: any[] = [];
+        try {
+          if (fs.existsSync(bookingsFile)) {
+            existing = JSON.parse(fs.readFileSync(bookingsFile, 'utf8'));
+          }
+        } catch {}
+        const now = new Date().toISOString();
+        existing.unshift({
+          id: `bk_${Date.now()}_${Math.floor(Math.random() * 900 + 100)}`,
+          referenceId,
+          name,
+          email,
+          phone,
+          service,
+          eventDate,
+          location,
+          message,
+          status: 'pending',
+          advancePaidInr: 0,
+          adminNotes: '',
+          createdAt: now,
+          updatedAt: now,
+        });
+        fs.writeFileSync(bookingsFile, JSON.stringify(existing, null, 2), 'utf8');
+      }
+    } catch (saveErr) {
+      console.warn('[Contact API] Failed to record booking to studio-data:', saveErr);
+    }
+
     const adminEmail =
       process.env.STUDIO_ADMIN_EMAIL?.trim() || 'sana@mehandibysana.com';
     const customerSummary = `We have received your ${service} inquiry${

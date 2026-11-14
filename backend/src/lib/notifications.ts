@@ -159,8 +159,8 @@ export function renderBrandedStudioEmailHtml(params: {
       ${ctaHtml}
       ${refHtml}
       <p style="margin:22px 0 0;font-size:12px;line-height:1.65;color:#6b6357;border-top:1px solid #e7ddcf;padding-top:16px;">
-        Mehandi by Sana &middot; Freelance Organic Mehandi Artist &amp; Apothecary<br/>
-        Serving Srinagar (Baghat Barzullah, J&amp;K 190001) &amp; Bengaluru (Karnataka)<br/>
+        Mehandi By Sana &middot; Organic Mehandi Artist<br/>
+        Srinagar &amp; Bengaluru<br/>
         <a href="${escapeHtml(displaySiteUrl)}" style="color:#96410D;text-decoration:underline;font-weight:600;">${escapeHtml(displaySiteUrl.replace(/^https?:\/\//, ""))}</a>
         &middot; sana@mehandibysana.com &middot; +91-9149648717<br/>
         <a href="${escapeHtml(displaySiteUrl)}/track-order" style="color:#6b6357;text-decoration:underline;">Track Order</a>
