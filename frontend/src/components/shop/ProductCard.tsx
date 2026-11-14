@@ -149,48 +149,48 @@ export function ProductCard({
   }
 
   return (
-    <article className="group flex flex-col justify-between h-full rounded-2xl border border-hairline bg-paper p-3.5 transition-all duration-200 hover:border-ink/40 hover:shadow-[0_14px_34px_-18px_rgba(17,17,17,0.14)]">
+    <article className="group flex flex-col justify-between h-full rounded-xl sm:rounded-2xl border border-hairline bg-paper p-2.5 sm:p-3.5 transition-all duration-200 hover:border-ink/40 hover:shadow-[0_14px_34px_-18px_rgba(24,24,24,0.14)]">
       <Link
         href={`/product/${product.slug}`}
-        className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring-focus rounded-xl"
+        className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring-focus rounded-lg sm:rounded-xl"
       >
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-linen border border-hairline/70 mb-4">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg sm:rounded-xl bg-linen border border-hairline/70 mb-2.5 sm:mb-4">
           {primaryImage ? (
             <Image
               src={primaryImage.src}
               alt={primaryImage.alt || product.name}
               fill
               priority={priority}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             />
           ) : (
-            <div className="h-full w-full flex items-center justify-center p-6 text-center">
-              <span className="text-xs uppercase tracking-[0.14em] text-umber">
+            <div className="h-full w-full flex items-center justify-center p-4 sm:p-6 text-center">
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.14em] text-umber">
                 No image available
               </span>
             </div>
           )}
 
           {!product.inStock ? (
-            <span className="absolute top-3 left-3 rounded-md border border-plaque-border bg-terracotta px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-plaque-ink">
+            <span className="absolute top-2 left-2 sm:top-3 sm:left-3 rounded-md border border-plaque-border bg-terracotta px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.12em] text-plaque-ink">
               Out of stock
             </span>
           ) : null}
         </div>
 
-        <div className="px-1.5 flex flex-col gap-1">
+        <div className="px-1 sm:px-1.5 flex flex-col gap-0.5 sm:gap-1">
           {primaryCategory ? (
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
+            <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta truncate">
               {primaryCategory}
             </p>
           ) : null}
 
-          <h3 className="font-serif text-xl font-medium text-ink group-hover:text-terracotta leading-snug">
+          <h3 className="font-serif text-sm sm:text-xl font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 min-h-[2.5rem] sm:min-h-0">
             {product.name}
           </h3>
 
-          <div className="flex items-baseline gap-2 mt-0.5 text-sm">
+          <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 mt-0.5 text-xs sm:text-sm">
             <span className="font-semibold text-ink tabular-nums">
               {formatPrice(product.price, product.currencySymbol)}
               {product.maxPrice && product.maxPrice > product.price
@@ -198,7 +198,7 @@ export function ProductCard({
                 : ''}
             </span>
             {product.onSale && product.regularPrice && !product.maxPrice ? (
-              <span className="text-umber line-through text-xs tabular-nums">
+              <span className="text-umber line-through text-[11px] sm:text-xs tabular-nums">
                 {formatPrice(product.regularPrice, product.currencySymbol)}
               </span>
             ) : null}
@@ -206,13 +206,13 @@ export function ProductCard({
         </div>
       </Link>
 
-      <div className="mt-4 pt-3 px-1.5 border-t border-hairline/70">
+      <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 px-0.5 sm:px-1.5 border-t border-hairline/70">
         {hasSelectableOptions ? (
           <LinkButton
             href={`/product/${product.slug}`}
             variant="secondary"
             size="sm"
-            className="w-full rounded-md"
+            className="w-full rounded-md text-xs sm:text-sm py-1.5 px-2 sm:px-3 min-h-[34px] sm:min-h-[38px] text-center justify-center"
           >
             Select Options
           </LinkButton>
@@ -224,7 +224,7 @@ export function ProductCard({
             inStock={effectiveInStock}
             variant="secondary"
             size="sm"
-            className="w-full rounded-md"
+            className="w-full rounded-md text-xs sm:text-sm py-1.5 px-2 sm:px-3 min-h-[34px] sm:min-h-[38px] text-center justify-center"
           />
         )}
       </div>

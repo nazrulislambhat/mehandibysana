@@ -12,6 +12,7 @@ import {
 } from '@/lib/structured-data';
 import { LinkButton } from '@/components/ui/Button';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { InstagramFeedSection } from '@/components/sections/InstagramFeedSection';
 
 interface GalleryPlate {
   id: string;
@@ -266,6 +267,14 @@ export default function GalleryPage() {
               </figure>
             </TextReveal>
           ))}
+        </div>
+
+        {/* Live Instagram Feed */}
+        <div className="mt-16 md:mt-24">
+          <InstagramFeedSection
+            title="Follow our daily portfolio on Instagram."
+            subtitle="Explore real bridal hand and foot compositions, intricate Kashmiri Chinar details, and fresh botanical cones posted weekly by Sana."
+          />
         </div>
 
         {/* Bespoke Commission Plaque Banner */}

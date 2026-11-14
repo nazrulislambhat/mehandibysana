@@ -1,8 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import { TextReveal } from '@/components/ui/TextReveal';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
-import { LineDotRightHorizontalIcon } from 'lucide-react';
 interface ClientReviewEntry {
   number: string;
   category: string;

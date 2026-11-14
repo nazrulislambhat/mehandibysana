@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { buildPageMetadata } from '@/lib/seo';
 import {
   buildBreadcrumbJsonLd,

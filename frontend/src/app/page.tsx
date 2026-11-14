@@ -11,6 +11,7 @@ import { ServicesSection } from '@/components/sections/ServicesSection';
 import { GalleryPreviewSection } from '@/components/sections/GalleryPreviewSection';
 import { ClientReviewsSection } from '@/components/sections/ClientReviewsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
+import { InstagramFeedSection } from '@/components/sections/InstagramFeedSection';
 import { FeedbackState } from '@/components/ui/FeedbackState';
 import { LinkButton } from '@/components/ui/Button';
 import { TextReveal } from '@/components/ui/TextReveal';
@@ -254,6 +255,8 @@ export default async function HomePage() {
       <ClientReviewsSection />
 
       <TestimonialsSection reviews={catalog.reviews} />
+
+      <InstagramFeedSection />
 
       <div className="pt-8 bg-canvas">
         <BotanicalDivider />

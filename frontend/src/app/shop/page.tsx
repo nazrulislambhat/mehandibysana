@@ -367,7 +367,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 ? `${activeCategoryObj.name} Catalog`
                 : 'Botanical Henna Formulations'}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-10">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-x-7 lg:gap-y-10">
               {catalog.products.map((product, index) => (
                 <TextReveal
                   key={product.id}

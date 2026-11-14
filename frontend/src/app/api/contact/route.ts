@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
         path.resolve(process.cwd(), '../studio-data');
       const bookingsFile = path.join(dataDir, 'bridal-bookings.json');
       if (fs.existsSync(dataDir)) {
-        let existing: any[] = [];
+        let existing: Record<string, unknown>[] = [];
         try {
           if (fs.existsSync(bookingsFile)) {
             existing = JSON.parse(fs.readFileSync(bookingsFile, 'utf8'));
