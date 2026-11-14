@@ -9,8 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sana across Srinagar & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi artistry.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#fffee9',
-    theme_color: '#052225',
+    background_color: '#E7DDCF',
+    theme_color: '#181818',
     categories: ['shopping', 'beauty', 'lifestyle'],
     icons: [
       {

@@ -281,7 +281,10 @@ const EmailCampaignsAdminPage = () => {
     }
   };
 
-  const handleTestTransport = async () => {
+  const [testingTemplate, setTestingTemplate] = useState<string | null>(null);
+
+  const handleTestTransport = async (template: string = "verification") => {
+    setTestingTemplate(template);
     setTestingTransport(true);
     setTransportMessage(null);
     try {
@@ -291,6 +294,7 @@ const EmailCampaignsAdminPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           action: "test",
+          template,
           saveBeforeTest: true,
           testEmail: diagnosticEmail.trim(),
           ...buildSettingsPayload(),
@@ -302,25 +306,27 @@ const EmailCampaignsAdminPage = () => {
         message?: string;
         error?: string;
         settings?: SanitizedEmailSettings;
+        templateLabel?: string;
       };
       if (json.settings) hydrateSettingsForm(json.settings);
       await fetchContacts();
       if (json.sent) {
-        toast.success(json.message || "Verification email delivered.");
+        toast.success(json.message || "Test email delivered.");
         setTransportMessage({
           ok: true,
-          text: json.message || "Verification email delivered.",
+          text: json.message || "Test email delivered.",
         });
       } else {
         const errText =
-          json.error || json.message || "Verification email failed.";
+          json.error || json.message || "Test email delivery failed.";
         toast.error(errText);
         setTransportMessage({ ok: false, text: errText });
       }
     } catch (err: any) {
-      toast.error(err?.message || "Failed to send verification email.");
+      toast.error(err?.message || "Failed to send test email.");
     } finally {
       setTestingTransport(false);
+      setTestingTemplate(null);
     }
   };
 
@@ -753,26 +759,74 @@ const EmailCampaignsAdminPage = () => {
             </Button>
           </div>
 
-          <div className="flex flex-wrap items-end gap-2">
-            <div className="w-64">
-              <Label size="xsmall">Send Verification Email To</Label>
-              <Input
-                size="small"
-                type="email"
-                placeholder="your-email@example.com"
-                value={diagnosticEmail}
-                onChange={(e) => setDiagnosticEmail(e.target.value)}
-              />
+          <div className="flex flex-col gap-2 w-full pt-3 border-t border-ui-border-base">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <Text size="small" weight="plus">
+                  Email &amp; Notification Template Diagnostics
+                </Text>
+                <Text size="xsmall" className="text-ui-fg-muted">
+                  Test and preview each automated email template directly in your inbox.
+                </Text>
+              </div>
+              <div className="w-72">
+                <Input
+                  size="small"
+                  type="email"
+                  placeholder="your-email@example.com"
+                  value={diagnosticEmail}
+                  onChange={(e) => setDiagnosticEmail(e.target.value)}
+                />
+              </div>
             </div>
-            <Button
-              size="small"
-              variant="secondary"
-              disabled={savingSettings || testingTransport}
-              isLoading={testingTransport}
-              onClick={handleTestTransport}
-            >
-              Save &amp; Send Test Email
-            </Button>
+
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <Button
+                size="small"
+                variant="secondary"
+                disabled={savingSettings || testingTransport}
+                isLoading={testingTransport && testingTemplate === "customer_order"}
+                onClick={() => handleTestTransport("customer_order")}
+              >
+                Test Customer &amp; Owner Order Email
+              </Button>
+              <Button
+                size="small"
+                variant="secondary"
+                disabled={savingSettings || testingTransport}
+                isLoading={testingTransport && testingTemplate === "shipping_dispatch"}
+                onClick={() => handleTestTransport("shipping_dispatch")}
+              >
+                Test Shipping Email
+              </Button>
+              <Button
+                size="small"
+                variant="secondary"
+                disabled={savingSettings || testingTransport}
+                isLoading={testingTransport && testingTemplate === "password_reset"}
+                onClick={() => handleTestTransport("password_reset")}
+              >
+                Test Password Reset Email
+              </Button>
+              <Button
+                size="small"
+                variant="secondary"
+                disabled={savingSettings || testingTransport}
+                isLoading={testingTransport && testingTemplate === "campaign_preview"}
+                onClick={() => handleTestTransport("campaign_preview")}
+              >
+                Test Campaign Email
+              </Button>
+              <Button
+                size="small"
+                variant="transparent"
+                disabled={savingSettings || testingTransport}
+                isLoading={testingTransport && testingTemplate === "verification"}
+                onClick={() => handleTestTransport("verification")}
+              >
+                Diagnostic Ping
+              </Button>
+            </div>
           </div>
         </div>
 
