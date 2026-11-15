@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { Repeat, House, ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { Repeat, House, ShoppingBag } from 'lucide-react';
 
 export default function RouteError({
   error,
@@ -85,9 +85,8 @@ export default function RouteError({
                 href="/shop"
                 className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
               >
-                <ShoppingBag className="w-3.5 h-3.5" />
                 <span>Browse Shop</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                <ShoppingBag className="w-3.5 h-3.5" />
               </Link>
             </div>
 

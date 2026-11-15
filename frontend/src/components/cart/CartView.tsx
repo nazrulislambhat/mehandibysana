@@ -195,9 +195,8 @@ export function CartView() {
               size="lg"
               className="rounded-full inline-flex items-center gap-1.5"
             >
-              <ShoppingBag className="w-4 h-4" />
               <span>Browse Full Catalog</span>
-              <LineDotRightHorizontal className="w-3.5 h-3.5" />
+              <ShoppingBag className="w-4 h-4" />
             </LinkButton>
           </div>
         ) : (

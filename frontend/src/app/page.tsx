@@ -90,9 +90,8 @@ export default async function HomePage() {
               size="sm"
               className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em] inline-flex items-center gap-1.5"
             >
-              <ShoppingBag className="w-3.5 h-3.5" />
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
-              <LineDotRightHorizontal className="w-3.5 h-3.5 text-terracotta group-hover/btn:text-on-accent transition-colors" />
+              <ShoppingBag className="w-3.5 h-3.5 text-terracotta group-hover/btn:text-on-accent transition-colors" />
             </LinkButton>
           </div>
 

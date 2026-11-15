@@ -26,7 +26,7 @@ import {
   PureBotanicalIcon,
 } from '@/components/graphics/BrandIcons';
 import { TextReveal } from '@/components/ui/TextReveal';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 
 export const revalidate = 3600;
 
@@ -329,9 +329,8 @@ export default async function ProductDetailPage({
                 href="/shop"
                 className="link-kinetic inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
               >
-                <ShoppingBag className="w-3.5 h-3.5" />
                 <span>View all products</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                <ShoppingBag className="w-3.5 h-3.5" />
               </Link>
             </div>
 

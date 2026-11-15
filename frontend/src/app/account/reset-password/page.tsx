@@ -4,7 +4,7 @@ import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { CheckCircle2, Lock, AlertCircle, ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { CheckCircle2, Lock, AlertCircle, ShoppingBag } from 'lucide-react';
 
 function ResetPasswordForm() {
   const searchParams = useSearchParams();
@@ -78,9 +78,8 @@ function ResetPasswordForm() {
         </p>
         <Link href="/shop">
           <Button variant="primary" size="md" className="rounded-md w-full sm:w-auto inline-flex items-center gap-1.5">
-            <ShoppingBag className="w-4 h-4" />
             <span>Continue to Shop</span>
-            <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            <ShoppingBag className="w-4 h-4" />
           </Button>
         </Link>
       </div>

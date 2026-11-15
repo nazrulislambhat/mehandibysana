@@ -700,9 +700,8 @@ export function CheckoutHandoffClient() {
               Add organic henna cones, powders, or artist tools to your bag before checking out.
             </p>
             <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full inline-flex items-center gap-1.5">
-              <ShoppingBag className="w-4 h-4" />
               <span>Browse Products</span>
-              <LineDotRightHorizontal className="w-3.5 h-3.5" />
+              <ShoppingBag className="w-4 h-4" />
             </LinkButton>
           </div>
         ) : (
