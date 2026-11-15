@@ -22,7 +22,7 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
   logger.info("=====================================================");
 
   const targetEmail = "nazrulislambhat@gmail.com";
-  const orderNumber = "MBS-TEST-9921";
+  const orderNumber = "MBS-TEST-9922";
   const invoiceNumber = `INV-${orderNumber}`;
   const siteUrl = "https://mehandibysana.com";
 
@@ -33,7 +33,7 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
       month: "short",
       year: "numeric",
     }),
-    orderId: "order_test_dummy_01",
+    orderId: "order_test_dummy_02",
     orderNumber,
     orderDate: new Date().toLocaleDateString("en-IN", {
       day: "numeric",
@@ -46,9 +46,9 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
     billingAddress: "42 Lavender Lane, Rajbagh, Srinagar, Kashmir, PIN 190008",
     shippingAddress: "42 Lavender Lane, Rajbagh, Srinagar, Kashmir, PIN 190008",
     pincode: "190008",
-    paymentStatus: "PAID",
-    paymentMethod: "Razorpay Online (UPI / GPay)",
-    paymentRef: "pay_Pz92kLmnOp48Xq",
+    paymentStatus: "PENDING PAYMENT",
+    paymentMethod: "Offline UPI (GPay / PhonePe)",
+    paymentRef: "",
     paymentDate: new Date().toLocaleDateString("en-IN", {
       day: "numeric",
       month: "short",
@@ -138,8 +138,8 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
   logger.info(`Dispatching email with attached PDF to ${targetEmail} via Brevo...`);
   const result = await sendStudioEmail({
     to: targetEmail,
-    subject: `Tax Invoice ${sampleData.invoiceNumber} (${sampleData.orderNumber}) [PAID] — Mehandi By Sana`,
-    text: `Invoice ${sampleData.invoiceNumber} for Order ${sampleData.orderNumber}\nPayment Status: PAID\nTotal: ₹${sampleData.total}\nAttached: ${sampleData.invoiceNumber}.pdf`,
+    subject: `Tax Invoice ${sampleData.invoiceNumber} (${sampleData.orderNumber}) [${sampleData.paymentStatus}] — Mehandi By Sana`,
+    text: `Invoice ${sampleData.invoiceNumber} for Order ${sampleData.orderNumber}\nPayment Status: ${sampleData.paymentStatus}\nTotal: ₹${sampleData.total}\nAttached: ${sampleData.invoiceNumber}.pdf`,
     html: emailHtml,
     attachments: [
       {
@@ -161,7 +161,7 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
 
   logger.info("Dispatching test invoice PDF to Telegram...");
   const teleOutcome = await sendTelegramDocument(pdfBuffer, `${sampleData.invoiceNumber}.pdf`, {
-    caption: `🧾 <b>Test Tax Invoice ${sampleData.invoiceNumber} [PAID]</b>\nAttached PDF for testing order #${sampleData.orderNumber} (₹${sampleData.total}).`,
+    caption: `🧾 <b>Test Tax Invoice ${sampleData.invoiceNumber} [${sampleData.paymentStatus}]</b>\nAttached PDF for testing order #${sampleData.orderNumber} (₹${sampleData.total}).`,
     mimeType: "application/pdf",
   });
   logger.info(`Telegram Sent: ${teleOutcome.success}${teleOutcome.messageId ? ` (Message ID: ${teleOutcome.messageId})` : ""}`);
