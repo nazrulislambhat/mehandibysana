@@ -204,7 +204,7 @@ export default function NotFound() {
                   <span>
                     Need help?{' '}
                     <a
-                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
+                      className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
                       href="mailto:sana@mehandibysana.com"
                     >
                       sana@mehandibysana.com
@@ -212,7 +212,7 @@ export default function NotFound() {
                   </span>
                   <a
                     href="tel:+919149648717"
-                    className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
+                    className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
                   >
                     +91-9149648717
                   </a>

@@ -194,19 +194,37 @@ export function PolicyDocumentLayout({
                 Mehandi By Sana
               </h2>
 
-              <div className="pt-2 border-t border-plaque-ink/15 space-y-1.5 text-xs">
+              <div className="pt-2 border-t border-plaque-ink/15 space-y-2 text-xs">
                 <a
                   href="mailto:sana@mehandibysana.com"
-                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 hover:no-underline"
+                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
                 >
                   sana@mehandibysana.com
                 </a>
 
                 <a
                   href="tel:+919149648717"
-                  className="block text-[#789904] hover:text-[#789904]/80 tabular-nums mt-2 underline underline-offset-4 hover:no-underline"
+                  className="block text-[#789904] hover:text-[#789904]/80 tabular-nums underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
                 >
                   +91-9149648717
+                </a>
+
+                <a
+                  href="https://wa.me/919149648717"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+                >
+                  WhatsApp Concierge
+                </a>
+
+                <a
+                  href="https://www.instagram.com/mehandibysana"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+                >
+                  @mehandibysana (Instagram)
                 </a>
               </div>
             </div>

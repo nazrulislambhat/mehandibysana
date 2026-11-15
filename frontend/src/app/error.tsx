@@ -94,14 +94,14 @@ export default function RouteError({
               <span className="space-x-3">
                 <a
                   href="mailto:sana@mehandibysana.com"
-                  className="text-terracotta hover:underline underline-offset-4"
+                  className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
                 >
                   sana@mehandibysana.com
                 </a>
-                <span>&middot;</span>
+                <span className="text-[#789904]/50">&middot;</span>
                 <a
                   href="tel:+919149648717"
-                  className="text-terracotta hover:underline underline-offset-4 tabular-nums"
+                  className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
                 >
                   +91-9149648717
                 </a>

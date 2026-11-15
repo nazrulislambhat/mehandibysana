@@ -255,7 +255,7 @@ export default function ShippingPolicyPage() {
           outstation transit, if urgent bridal dates approach, contact{' '}
           <a
             href="tel:+919149648717"
-            className="text-terracotta underline underline-offset-4 tabular-nums"
+            className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
           >
             +91-9149648717
           </a>{' '}
