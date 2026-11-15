@@ -363,7 +363,6 @@ export function VariantSelector({
         >
           <ShoppingBag className="w-3.5 h-3.5" />
           <span>View Shopping Bag</span>
-          <LineDotRightHorizontal className="w-3.5 h-3.5" />
         </Link>
       </div>
 
