@@ -10,6 +10,7 @@ import {
   type StudioNavItem,
 } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import {
   BotanicalHeroStudy,
   BotanicalSprig,
@@ -261,7 +262,7 @@ export function StudioMenu() {
                                 aria-hidden="true"
                                 className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-transparent group-hover:border-divider group-hover:bg-paper text-umber group-hover:text-terracotta group-hover:translate-x-0.5 transition-all"
                               >
-                                &rarr;
+                                <LineDotRightHorizontal className="w-3.5 h-3.5" />
                               </span>
                             </div>
                           </Link>
@@ -298,7 +299,7 @@ export function StudioMenu() {
                           className="inline-flex items-center gap-2 text-sm font-medium text-terracotta hover:text-terracotta-dark"
                         >
                           <span>{activePreview.ctaLabel}</span>
-                          <span aria-hidden="true">&rarr;</span>
+                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
                         </Link>
                         <BotanicalSprig className="w-11 h-4" />
                       </div>
@@ -330,9 +331,10 @@ export function StudioMenu() {
                         variant="primary"
                         size="md"
                         onClick={() => closeMenu(false)}
-                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6"
+                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6 inline-flex items-center justify-center gap-1.5"
                       >
-                        Shop Products
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>Shop Products</span>
                       </LinkButton>
                       <LinkButton
                         href="/contact"

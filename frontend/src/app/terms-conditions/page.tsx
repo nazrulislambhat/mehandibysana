@@ -229,9 +229,10 @@ export default function TermsConditionsPage() {
           Because freshly rolled organic henna cones and unsealed essential oils are hygiene-sensitive and perishable, they cannot be returned after dispatch unless received physically damaged, leaked, or incorrect. Complete rules, evidence requirements, and refund processing timelines (5–7 business days) are set out in our dedicated{' '}
           <Link
             href="/refund-policy"
-            className="text-terracotta hover:text-terracotta-dark underline underline-offset-4 font-medium"
+            className="text-terracotta hover:text-terracotta-dark underline underline-offset-4 font-medium inline-flex items-center gap-1"
           >
-            Refund, Return &amp; Cancellation Policy &rarr;
+            <span>Refund, Return &amp; Cancellation Policy</span>
+            <LineDotRightHorizontal className="w-3.5 h-3.5" />
           </Link>
           .
         </p>

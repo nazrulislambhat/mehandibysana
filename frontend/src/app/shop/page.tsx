@@ -17,6 +17,7 @@ import { ProductCard } from '@/components/shop/ProductCard';
 import { ShopFilters } from '@/components/shop/ShopFilters';
 import { FeedbackState } from '@/components/ui/FeedbackState';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { LineDotRightHorizontal } from 'lucide-react';
 
 export const revalidate = 1800;
 
@@ -403,7 +404,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                       rel="next"
                       className="inline-flex items-center min-h-[40px] px-5 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
                     >
-                      Next &rarr;
+                      <span>Next</span>
+                      <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1.5" />
                     </Link>
                   ) : null}
                 </div>

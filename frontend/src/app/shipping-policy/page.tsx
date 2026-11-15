@@ -7,6 +7,7 @@ import {
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import {
   CourierDispatchIcon,
   LocationPinIcon,
@@ -139,9 +140,10 @@ export default function ShippingPolicyPage() {
             href="/shop"
             variant="primary"
             size="sm"
-            className="rounded-md"
+            className="rounded-md inline-flex items-center gap-1.5"
           >
-            Browse Products to Check PIN
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Browse Products to Check PIN</span>
           </LinkButton>
           <LinkButton
             href="/cart"
@@ -198,9 +200,10 @@ export default function ShippingPolicyPage() {
           live status anytime via our{' '}
           <Link
             href="/track-order"
-            className="text-terracotta underline underline-offset-4 font-medium"
+            className="text-terracotta underline underline-offset-4 font-medium inline-flex items-center gap-1"
           >
-            Track Order portal &rarr;
+            <span>Track Order portal</span>
+            <LineDotRightHorizontal className="w-3.5 h-3.5" />
           </Link>
           .
         </p>

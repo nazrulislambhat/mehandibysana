@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { LineDotRightHorizontal } from 'lucide-react';
 
 export interface InstagramPost {
   id: string;
@@ -194,7 +195,7 @@ export function InstagramFeedSection({
             className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
           >
             <span>instagram.com/{username}</span>
-            <span aria-hidden="true">&rarr;</span>
+            <LineDotRightHorizontal className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SHOP_COLLECTIONS, STUDIO_NAV_ITEMS } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { ChevronDownIcon, HennaConeIcon } from '@/components/graphics/BrandIcons';
 
@@ -315,10 +316,11 @@ export function DesktopNav() {
                   <Link
                     href="/shop"
                     onClick={() => closeMegaMenu(false)}
-                    className="text-xs font-medium text-terracotta hover:text-terracotta-dark inline-flex items-center gap-1"
+                    className="text-xs font-medium text-terracotta hover:text-terracotta-dark inline-flex items-center gap-1.5"
                   >
+                    <ShoppingBag className="w-3.5 h-3.5" />
                     <span>View full catalog</span>
-                    <span aria-hidden="true">&rarr;</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
@@ -360,7 +362,7 @@ export function DesktopNav() {
                         aria-hidden="true"
                         className="mt-1 text-umber/60 group-hover:text-terracotta group-hover:translate-x-0.5 transition-all text-sm shrink-0"
                       >
-                        &rarr;
+                        <LineDotRightHorizontal className="w-3.5 h-3.5" />
                       </span>
                     </Link>
                   ))}
@@ -417,9 +419,10 @@ export function DesktopNav() {
                     variant="primary"
                     size="sm"
                     onClick={() => closeMegaMenu(false)}
-                    className="rounded-lg text-xs min-h-[36px] py-2"
+                    className="rounded-lg text-xs min-h-[36px] py-2 inline-flex items-center gap-1.5"
                   >
-                    Shop All 19 Items
+                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <span>Shop All 19 Items</span>
                   </LinkButton>
                 </div>
               </div>

@@ -14,6 +14,7 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { SHOP_COLLECTIONS } from '@/components/layout/nav-data';
 import {
@@ -341,10 +342,10 @@ export function CartDrawer() {
               <Link
                 href="/cart"
                 onClick={() => handleClose(false)}
-                className="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-umber hover:text-terracotta underline underline-offset-4 py-1.5"
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-umber hover:text-terracotta underline underline-offset-4 py-1.5"
               >
                 <span>Open Full Cart</span>
-                <span aria-hidden="true">&rarr;</span>
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </Link>
             ) : null}
 
@@ -427,9 +428,10 @@ export function CartDrawer() {
                   variant="primary"
                   size="md"
                   onClick={() => handleClose(false)}
-                  className="rounded-md w-full sm:w-auto min-w-[210px]"
+                  className="rounded-md w-full sm:w-auto min-w-[210px] inline-flex items-center justify-center gap-1.5"
                 >
-                  Explore All Henna Products
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <span>Explore All Henna Products</span>
                 </LinkButton>
               </div>
             </div>
@@ -618,9 +620,10 @@ export function CartDrawer() {
                 <Link
                   href="/henna-care"
                   onClick={() => handleClose(false)}
-                  className="link-kinetic font-medium text-terracotta hover:text-terracotta-dark"
+                  className="link-kinetic font-medium text-terracotta hover:text-terracotta-dark inline-flex items-center gap-1"
                 >
-                  Henna Care Guide &rarr;
+                  <span>Henna Care Guide</span>
+                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -811,10 +814,10 @@ export function CartDrawer() {
                   variant="accent"
                   size="lg"
                   onClick={() => handleClose(false)}
-                  className="w-full min-h-[48px] rounded-full text-sm"
+                  className="w-full min-h-[48px] rounded-full text-sm inline-flex items-center justify-center gap-1.5"
                 >
                   <span>Proceed to Checkout</span>
-                  <span aria-hidden="true">&rarr;</span>
+                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </LinkButton>
 
                 <div className="grid grid-cols-2 gap-2">

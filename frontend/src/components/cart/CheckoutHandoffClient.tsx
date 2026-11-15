@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
@@ -617,17 +618,19 @@ export function CheckoutHandoffClient() {
                   href={`/track-order?order=${encodeURIComponent(confirmedOrder.orderNumber)}&email=${encodeURIComponent(email)}`}
                   variant="primary"
                   size="lg"
-                  className="rounded-full"
+                  className="rounded-full inline-flex items-center gap-1.5"
                 >
-                  Track This Order &rarr;
+                  <span>Track This Order</span>
+                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </LinkButton>
                 <LinkButton
                   href="/shop"
                   variant="secondary"
                   size="lg"
-                  className="rounded-full"
+                  className="rounded-full inline-flex items-center gap-1.5"
                 >
-                  Continue Shopping
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Continue Shopping</span>
                 </LinkButton>
               </div>
             </div>
@@ -696,8 +699,10 @@ export function CheckoutHandoffClient() {
             <p className="text-sm text-umber max-w-md mb-7">
               Add organic henna cones, powders, or artist tools to your bag before checking out.
             </p>
-            <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full">
-              Browse Products &rarr;
+            <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full inline-flex items-center gap-1.5">
+              <ShoppingBag className="w-4 h-4" />
+              <span>Browse Products</span>
+              <LineDotRightHorizontal className="w-3.5 h-3.5" />
             </LinkButton>
           </div>
         ) : (

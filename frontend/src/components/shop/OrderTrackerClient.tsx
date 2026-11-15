@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
-import { LineDotRightHorizontalIcon } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 
 export interface TrackedOrderItem {
   id: string;
@@ -261,10 +261,10 @@ export function OrderTrackerClient({
             variant="primary"
             size="md"
             disabled={loading}
-            className="rounded-md"
+            className="rounded-md inline-flex items-center gap-1.5"
           >
-            {loading ? 'Checking Status…' : 'Track Order '}
-            <LineDotRightHorizontalIcon className="w-3.5 h-3.5" />
+            <span>{loading ? 'Checking Status…' : 'Track Order'}</span>
+            <LineDotRightHorizontal className="w-3.5 h-3.5" />
           </Button>
         </div>
       </form>
@@ -322,9 +322,10 @@ export function OrderTrackerClient({
                   href={order.trackingUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-plaque-ink transition-colors"
+                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-plaque-ink transition-colors inline-flex items-center gap-1"
                 >
-                  Open Courier Tracking &rarr;
+                  <span>Open Courier Tracking</span>
+                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </a>
               ) : null}
             </div>
@@ -498,9 +499,10 @@ export function OrderTrackerClient({
                 href="/shop"
                 variant="primary"
                 size="md"
-                className="rounded-md"
+                className="rounded-md inline-flex items-center gap-1.5"
               >
-                Continue Shopping
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>Continue Shopping</span>
               </LinkButton>
             </div>
           </div>

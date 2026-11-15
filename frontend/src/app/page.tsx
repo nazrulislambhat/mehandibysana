@@ -88,10 +88,11 @@ export default async function HomePage() {
               href="/shop"
               variant="secondary"
               size="sm"
-              className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em]"
+              className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em] inline-flex items-center gap-1.5"
             >
+              <ShoppingBag className="w-3.5 h-3.5" />
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
-              <span aria-hidden="true" className="text-terracotta group-hover/btn:text-on-accent transition-colors">&rarr;</span>
+              <LineDotRightHorizontal className="w-3.5 h-3.5 text-terracotta group-hover/btn:text-on-accent transition-colors" />
             </LinkButton>
           </div>
 
@@ -118,9 +119,10 @@ export default async function HomePage() {
                       href="/shop"
                       variant="secondary"
                       size="md"
-                      className="rounded-full"
+                      className="rounded-full inline-flex items-center gap-1.5"
                     >
-                      Open Shop Page
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Open Shop Page</span>
                     </LinkButton>
                   </div>
                 </div>
@@ -141,9 +143,10 @@ export default async function HomePage() {
                   </div>
                   <Link
                     href="/shop"
-                    className="mt-5 inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
+                    className="mt-5 inline-flex items-center gap-1.5 min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
                   >
-                    View cones &rarr;
+                    <span>View cones</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
@@ -161,9 +164,10 @@ export default async function HomePage() {
                   </div>
                   <Link
                     href="/shop"
-                    className="mt-5 inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
+                    className="mt-5 inline-flex items-center gap-1.5 min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
                   >
-                    View kits &rarr;
+                    <span>View kits</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -239,9 +243,10 @@ export default async function HomePage() {
                 <div className="pt-2">
                   <Link
                     href="/about"
-                    className="link-kinetic min-h-[32px] text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
+                    className="link-kinetic inline-flex items-center gap-1.5 min-h-[32px] text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
                   >
-                    Read the full story &rarr;
+                    <span>Read the full story</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </TextReveal>

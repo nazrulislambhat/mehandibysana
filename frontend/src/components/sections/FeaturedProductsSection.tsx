@@ -6,6 +6,7 @@ import Image from 'next/image';
 import type { StorefrontProduct } from '@/types/storefront';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { LinkButton } from '@/components/ui/Button';
+import { LineDotRightHorizontal } from 'lucide-react';
 import { BotanicalSprig, ServiceMotifIcon } from '@/components/graphics/BotanicalIllustrations';
 
 export interface FeaturedProductsSectionProps {
@@ -278,9 +279,10 @@ export function FeaturedProductsSection({
                 href={`/product/${leadProduct.slug}`}
                 variant="accent"
                 size="md"
-                className="rounded-full"
+                className="rounded-full inline-flex items-center gap-1.5"
               >
-                {leadProduct.inStock ? 'Choose Pack →' : 'View Formulation →'}
+                <span>{leadProduct.inStock ? 'Choose Pack' : 'View Formulation'}</span>
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </LinkButton>
             )}
           </div>
@@ -376,9 +378,10 @@ export function FeaturedProductsSection({
                         href={`/product/${product.slug}`}
                         variant="ink"
                         size="xs"
-                        className="rounded-full"
+                        className="rounded-full inline-flex items-center gap-1.5"
                       >
-                        Select Pack &rarr;
+                        <span>Select Pack</span>
+                        <LineDotRightHorizontal className="w-3.5 h-3.5" />
                       </LinkButton>
                     ) : (
                       <AddToCartButton
@@ -396,9 +399,10 @@ export function FeaturedProductsSection({
                       href={`/product/${product.slug}`}
                       variant="secondary"
                       size="xs"
-                      className="rounded-full"
+                      className="rounded-full inline-flex items-center gap-1.5"
                     >
-                      Inspect &rarr;
+                      <span>Inspect</span>
+                      <LineDotRightHorizontal className="w-3.5 h-3.5" />
                     </LinkButton>
                   )}
                 </div>

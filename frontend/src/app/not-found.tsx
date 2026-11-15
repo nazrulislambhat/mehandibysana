@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalHeroStudy } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { ShoppingBag, House } from 'lucide-react';
+import { ShoppingBag, House, LineDotRightHorizontal } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Page Not Found (404)',
   description:
@@ -193,7 +193,7 @@ export default function NotFound() {
                           aria-hidden="true"
                           className="text-terracotta transition-transform duration-200 group-hover:translate-x-1"
                         >
-                          &rarr;
+                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
                         </span>
                       </Link>
                     </li>

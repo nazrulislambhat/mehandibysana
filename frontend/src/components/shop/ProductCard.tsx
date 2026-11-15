@@ -4,6 +4,7 @@ import Image from 'next/image';
 import type { StorefrontProduct } from '@/types/storefront';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { LinkButton } from '@/components/ui/Button';
+import { LineDotRightHorizontal } from 'lucide-react';
 
 export interface ProductCardProps {
   product: StorefrontProduct;
@@ -121,9 +122,10 @@ export function ProductCard({
                 href={`/product/${product.slug}`}
                 variant="primary"
                 size="md"
-                className="rounded-full"
+                className="rounded-full inline-flex items-center gap-1.5"
               >
-                Select Options &rarr;
+                <span>Select Options</span>
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </LinkButton>
             ) : (
               <AddToCartButton
