@@ -15,6 +15,12 @@ import {
   formatOrderPaymentMethodLabel,
   normalizeFulfillmentStage,
 } from "./studio-order-meta";
+import {
+  buildInvoiceDataFromOrder,
+  generateInvoicePdf,
+  generateInvoiceHtml,
+  saveInvoiceFiles,
+} from "./invoice-generator";
 
 function escapeHtml(text: string): string {
   return String(text || "")
@@ -533,6 +539,33 @@ export async function sendOrderConfirmationEmail(
     }`,
   ].join("\n\n");
 
+  let invoiceAttachment: { filename: string; content: Buffer; contentType: string } | undefined;
+  let savedRelativePdfPath = "";
+  let generatedPdfBuffer: Buffer | undefined;
+  let generatedInvoiceNumber = "";
+  try {
+    const invoiceData = buildInvoiceDataFromOrder(order);
+    generatedInvoiceNumber = invoiceData.invoiceNumber;
+    const [pdfBuffer, htmlInvoice] = await Promise.all([
+      generateInvoicePdf(invoiceData),
+      generateInvoiceHtml(invoiceData),
+    ]);
+    generatedPdfBuffer = pdfBuffer;
+    const { relativePdfPath } = await saveInvoiceFiles(
+      invoiceData,
+      pdfBuffer,
+      htmlInvoice
+    );
+    savedRelativePdfPath = relativePdfPath;
+    invoiceAttachment = {
+      filename: `${invoiceData.invoiceNumber}.pdf`,
+      content: pdfBuffer,
+      contentType: "application/pdf",
+    };
+  } catch (invErr) {
+    console.warn(`[Order Email] Non-fatal invoice generation error on ${order.id}:`, invErr);
+  }
+
   const result = await dispatchStudioNotification({
     scope,
     type: "order_confirmed",
@@ -543,6 +576,7 @@ export async function sendOrderConfirmationEmail(
     deliveryAddress: shipAddr,
     summary,
     detailsHtml: renderOrderDetailsTableHtml(b),
+    attachments: invoiceAttachment ? [invoiceAttachment] : undefined,
     skipAdminAlert: options?.skipAdminAlert,
     skipTelegramAlert: true, // notifyTelegramOrderPlaced is called directly with full items & complete address
     details: {
@@ -582,6 +616,8 @@ export async function sendOrderConfirmationEmail(
       targetDeliveryDate: b.targetDeliveryDate,
       deliverySpeed: b.deliverySpeedLabel,
       specialInstructions: b.specialInstructions,
+      invoicePdfBuffer: generatedPdfBuffer,
+      invoiceNumber: generatedInvoiceNumber,
     });
   }
 
@@ -593,6 +629,7 @@ export async function sendOrderConfirmationEmail(
         user_id: options?.actorId || "system",
         metadata: {
           ...existingMeta,
+          ...(savedRelativePdfPath ? { invoice_pdf_path: savedRelativePdfPath } : {}),
           order_confirmation_email_attempted_at: nowIso,
           order_confirmation_email_sent: result.customerEmailSent,
           ...(result.customerEmailSent
