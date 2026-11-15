@@ -34,7 +34,7 @@ export function Hero({
                 className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Mehandi by Sana &middot; Kashmir &amp; Bengaluru
+                Mehandi By Sana &middot; Kashmir &amp; Bengaluru
               </p>
             </div>
 
@@ -47,7 +47,7 @@ export function Hero({
 
             <div className="space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8">
               <p>
-                Founded by independent freelance artist Sana across Kashmir and Bengaluru, Mehandi by Sana is dedicated to 100% natural, PPD-free artistry and small-batch organic henna products.
+                Founded by independent freelance artist Sana across Kashmir and Bengaluru, Mehandi By Sana is dedicated to 100% natural, PPD-free artistry and small-batch organic henna products.
               </p>
               
             </div>
@@ -114,7 +114,7 @@ export function Hero({
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-t-[14rem] rounded-b-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.14)]">
               <Image
                 src="/mehandibysana-73.webp"
-                alt="Mehandi by Sana organic henna cones and natural products"
+                alt="Mehandi By Sana organic henna cones and natural products"
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, (min-width: 640px) 450px, 100vw"

@@ -101,11 +101,11 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const template = body.template || "verification";
       const siteUrl = emailProvider.storefrontUrl || "https://mehandibysana.com";
 
-      let subject = "Mehandi by Sana — Email Delivery Verification";
+      let subject = "Mehandi By Sana — Email Delivery Verification";
       let eyebrow = "Email Delivery Diagnostics";
       let heading = "Email Delivery Is Working";
       let paragraphs = [
-        "Assalamu Alaikum / Hello from Mehandi by Sana,",
+        "Assalamu Alaikum / Hello from Mehandi By Sana,",
         `This test confirms your email transport (${emailProvider.provider.toUpperCase()}) can send automated order confirmation, payment receipt, and shipping notification emails to customers.`,
         `Sender Address: ${emailProvider.fromEmail}`,
       ];
@@ -115,7 +115,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       let ctaUrl: string | undefined = siteUrl;
 
       if (template === "customer_order") {
-        subject = "Order Confirmed (#MBS-DEMO-73) — Mehandi by Sana";
+        subject = "Order Confirmed (#MBS-DEMO-73) — Mehandi By Sana";
         eyebrow = "Order Confirmation (Demo Test)";
         heading = "Order Confirmed (#MBS-DEMO-73)";
         referenceId = "MBS-DEMO-73";
@@ -123,7 +123,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         ctaUrl = `${siteUrl}/track-order?order=MBS-DEMO-73&email=${encodeURIComponent(targetEmail)}`;
         paragraphs = [
           "Assalamu Alaikum / Hello Test Customer,",
-          "Thank you for your order (#MBS-DEMO-73) with Mehandi by Sana! Fresh organic henna is being prepared for you across Kashmir & Bengaluru.",
+          "Thank you for your order (#MBS-DEMO-73) with Mehandi By Sana! Fresh organic henna is being prepared for you across Kashmir & Bengaluru.",
           "This is a demonstration preview of the automated Order Confirmation email sent to customers immediately upon checkout, including full line items, delivery address, and tracking link.",
         ];
         detailsHtml = `
@@ -166,7 +166,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           </div>
         `;
       } else if (template === "shipping_dispatch") {
-        subject = "Order Shipped (#MBS-DEMO-73) — Mehandi by Sana";
+        subject = "Order Shipped (#MBS-DEMO-73) — Mehandi By Sana";
         eyebrow = "Parcel Dispatched (Demo Test)";
         heading = "Your Fresh Cones Have Been Dispatched";
         referenceId = "MBS-DEMO-73";
@@ -174,7 +174,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         ctaUrl = `${siteUrl}/track-order?order=MBS-DEMO-73&email=${encodeURIComponent(targetEmail)}`;
         paragraphs = [
           "Assalamu Alaikum / Hello Test Customer,",
-          "Your Mehandi by Sana parcel (#MBS-DEMO-73) has been freshly packed, sealed, and handed over to our courier partner.",
+          "Your Mehandi By Sana parcel (#MBS-DEMO-73) has been freshly packed, sealed, and handed over to our courier partner.",
           "Our fresh organic henna cones are made with pure Sojat triple-filtered powder and organic cajeput/eucalyptus essential oils. To keep cones in peak staining potency, freeze immediately upon delivery until application day.",
         ];
         detailsHtml = `
@@ -187,7 +187,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           </div>
         `;
       } else if (template === "password_reset") {
-        subject = "Reset Your Password — Mehandi by Sana";
+        subject = "Reset Your Password — Mehandi By Sana";
         eyebrow = "Account Security (Demo Test)";
         heading = "Reset Your Password";
         referenceId = "PW-RESET-DEMO";
@@ -195,12 +195,12 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         ctaUrl = `${siteUrl}/account/reset-password?token=demo_token_123&email=${encodeURIComponent(targetEmail)}`;
         paragraphs = [
           "Assalamu Alaikum / Hello,",
-          `We received a request to reset the password for your Mehandi by Sana account (${targetEmail}).`,
+          `We received a request to reset the password for your Mehandi By Sana account (${targetEmail}).`,
           "To choose a new password, click the button below. For your security, this password reset link is valid for 15 minutes.",
           "If you did not request a password reset, you can safely ignore this email — your account credentials remain unchanged.",
         ];
       } else if (template === "campaign_preview") {
-        subject = "Fresh Harvest Organic Sojat Cones Now In Stock — Mehandi by Sana";
+        subject = "Fresh Harvest Organic Sojat Cones Now In Stock — Mehandi By Sana";
         eyebrow = "Fresh Batch Dispatch Update";
         heading = "New Small-Batch Harvest Cones";
         referenceId = "CAMPAIGN-PREVIEW";

@@ -79,7 +79,7 @@ function getCleanNote(product: StorefrontProduct): string {
 
   return variantHint
     ? `Available options: ${variantHint}`
-    : 'Handcrafted organic henna product made fresh at Mehandi by Sana (Kashmir & Bengaluru).';
+    : 'Handcrafted organic henna product made fresh at Mehandi By Sana (Kashmir & Bengaluru).';
 }
 
 export function FeaturedProductsSection({
@@ -270,7 +270,7 @@ export function FeaturedProductsSection({
                 medusaVariantId={leadDefaultVar?.medusaVariantId}
                 inStock={leadProduct.inStock}
                 variation={leadDefaultVar?.attributes}
-                openDrawerOnAdd={true}
+                openDrawerOnAdd={false}
                 variant="accent"
                 size="md"
                 className="rounded-full cursor-pointer"
@@ -390,7 +390,7 @@ export function FeaturedProductsSection({
                         medusaVariantId={defaultVar?.medusaVariantId}
                         inStock={product.inStock}
                         variation={defaultVar?.attributes}
-                        openDrawerOnAdd={true}
+                        openDrawerOnAdd={false}
                         variant="accent"
                         size="sm"
                         className="rounded-full cursor-pointer"

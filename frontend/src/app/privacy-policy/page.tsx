@@ -10,10 +10,10 @@ import { LinkButton } from '@/components/ui/Button';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Privacy Policy & Data Protection',
   description:
-    'Privacy practices, India DPDP Act 2023 compliance, Razorpay PCI-DSS payment security, essential storage disclosure, and Grievance Officer details for Mehandi by Sana.',
+    'Privacy practices, India DPDP Act 2023 compliance, Razorpay PCI-DSS payment security, essential storage disclosure, and Grievance Officer details for Mehandi By Sana.',
   canonicalPath: '/privacy-policy',
   keywords: [
-    'Mehandi by Sana privacy policy',
+    'Mehandi By Sana privacy policy',
     'DPDP Act 2023 henna store privacy',
   ],
 });
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
     <PolicyDocumentLayout
       eyebrow="Privacy & Data Protection"
       title="Privacy Policy"
-      subtitle="How Mehandi by Sana respects, secures, and minimizes your personal information across purchases, order tracking, bridal bookings, and direct communications."
+      subtitle="How Mehandi By Sana respects, secures, and minimizes your personal information across purchases, order tracking, bridal bookings, and direct communications."
       effectiveDate="November 10, 2026"
       documentCode="MBS-PP-2026"
       activeSlug="privacy"
@@ -194,7 +194,7 @@ export default function PrivacyPolicyPage() {
         <p className="text-umber">
           Sensitive financial credentials—such as full credit/debit card
           numbers, CVV codes, UPI PINs, or netbanking passwords—are never
-          collected, viewed, or stored by Mehandi by Sana servers. All online
+          collected, viewed, or stored by Mehandi By Sana servers. All online
           transactions run directly over encrypted TLS inside{' '}
           <strong>Razorpay&rsquo;s PCI-DSS Level 1</strong> certified
           environment, and our backend verifies every payment using
@@ -314,7 +314,7 @@ export default function PrivacyPolicyPage() {
             <strong>Name:</strong> Sana
           </p>
           <p>
-            <strong>Service Bases:</strong> Mehandi by Sana &middot; Kashmir
+            <strong>Service Bases:</strong> Mehandi By Sana &middot; Kashmir
             (J&K) &amp; Bengaluru (Karnataka)
           </p>
           <p>

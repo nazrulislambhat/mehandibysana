@@ -263,7 +263,7 @@ export function buildAboutPageJsonLd(
     '@type': 'AboutPage',
     '@id': `${pageUrl}#webpage`,
     url: pageUrl,
-    name: 'About Mehandi by Sana',
+    name: 'About Mehandi By Sana',
     description:
       'Story of Sana, Electronics & Communication Engineering graduate turned Kashmir pioneer in 100% chemical-free organic henna artistry and natural henna care.',
     isPartOf: { '@id': `${siteUrl}/#website` },
@@ -293,13 +293,13 @@ export function buildServicesJsonLd(): Record<string, unknown> {
     '@type': 'WebPage',
     '@id': `${pageUrl}#webpage`,
     url: pageUrl,
-    name: 'Bridal Mehandi Services, Celebrations & Masterclasses | Mehandi by Sana',
+    name: 'Bridal Mehandi Services, Celebrations & Masterclasses | Mehandi By Sana',
     description:
       'Bespoke bridal mehandi appointments, celebration henna gatherings across Kashmir, Bengaluru & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: {
       '@type': 'OfferCatalog',
-      name: 'Mehandi by Sana Services & Workshops',
+      name: 'Mehandi By Sana Services & Workshops',
       itemListElement: [
         {
           '@type': 'Service',
@@ -347,7 +347,7 @@ export function buildGalleryJsonLd(
     '@type': 'ImageGallery',
     '@id': `${pageUrl}#gallery`,
     url: pageUrl,
-    name: 'Bridal Mehandi Portfolio & Henna Stain Gallery | Mehandi by Sana',
+    name: 'Bridal Mehandi Portfolio & Henna Stain Gallery | Mehandi By Sana',
     description:
       'Selected organic bridal mehandi designs, Kashmiri Chinar motifs, Mughal archways, and 48-hour natural mahogany stain studies.',
     isPartOf: { '@id': `${siteUrl}/#website` },
@@ -376,7 +376,7 @@ export function buildHennaCareHowToJsonLd(): Record<string, unknown> {
       'Step-by-step storage, thawing, clean skin preparation, sealing, and 48-hour oxidation care guide for 100% pure organic Sojat henna.',
     totalTime: 'P2D',
     supply: [
-      { '@type': 'HowToSupply', name: '100% Pure Organic Henna Cones (Mehandi by Sana)' },
+      { '@type': 'HowToSupply', name: '100% Pure Organic Henna Cones (Mehandi By Sana)' },
       { '@type': 'HowToSupply', name: 'Sealant Spray or Lemon-Sugar Cotton Dab' },
       { '@type': 'HowToSupply', name: 'Sana Stain Darkening Aftercare Balm or Sweet Oil' },
     ],
@@ -436,7 +436,7 @@ export function buildContactPageJsonLd(): Record<string, unknown> {
     '@type': 'ContactPage',
     '@id': `${pageUrl}#webpage`,
     url: pageUrl,
-    name: 'Contact & Bridal Booking Inquiries | Mehandi by Sana',
+    name: 'Contact & Bridal Booking Inquiries | Mehandi By Sana',
     description:
       'Request bridal mehandi dates, celebration henna appointments, or product order guidance from Sana across Kashmir & Bengaluru.',
     isPartOf: { '@id': `${siteUrl}/#website` },

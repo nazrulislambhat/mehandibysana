@@ -1,5 +1,5 @@
 /**
- * Normalized Domain Types for Mehandi by Sana Headless Storefront.
+ * Normalized Domain Types for Mehandi By Sana Headless Storefront.
  * Decouples UI components from raw MedusaJS / WooCommerce payloads.
  */
 

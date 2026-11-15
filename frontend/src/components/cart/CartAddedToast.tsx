@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store/cart-store';
 import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
 
@@ -83,7 +82,7 @@ export function CartAddedToast() {
   return (
     <div
       aria-live="polite"
-      className="pointer-events-none fixed bottom-20 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 sm:w-[390px] z-40 flex justify-end"
+      className="pointer-events-none fixed bottom-20 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 sm:w-[390px] z-[60] flex justify-end"
     >
       <div
         onMouseEnter={() => setPaused(true)}
@@ -130,20 +129,19 @@ export function CartAddedToast() {
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <Button
+            <button
               type="button"
-              variant="accent"
-              size="xs"
               onClick={handleOpenBag}
-              className="rounded-full"
+              aria-label="View shopping bag"
+              className="relative z-10 inline-flex min-h-[34px] items-center justify-center rounded-full bg-terracotta-solid px-3.5 text-xs font-semibold text-white shadow-sm hover:bg-terracotta-dark active:scale-95 transition-all cursor-pointer pointer-events-auto select-none"
             >
               View Bag
-            </Button>
+            </button>
             <button
               type="button"
               onClick={handleDismiss}
               aria-label="Dismiss bag notification"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-plaque-ink/20 text-plaque-ink/80 hover:border-plaque-ink/50 hover:text-plaque-ink transition-colors cursor-pointer"
+              className="relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-full border border-plaque-ink/20 text-plaque-ink/80 hover:border-plaque-ink/50 hover:text-plaque-ink transition-colors cursor-pointer pointer-events-auto"
             >
               <CloseCrossIcon size={13} />
             </button>

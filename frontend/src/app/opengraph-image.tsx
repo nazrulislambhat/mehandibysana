@@ -114,7 +114,7 @@ export default function OpenGraphImage() {
                   fontWeight: 600,
                 }}
               >
-                Mehandi by Sana
+                Mehandi By Sana
               </div>
               <div
                 style={{

@@ -1,4 +1,4 @@
-# Mehandi by Sana — Headless Storefront
+# Mehandi By Sana — Headless Storefront
 
 Minimal, editorial headless storefront for **mehandibysana.com** built with **Next.js 16 (App Router, TypeScript, Tailwind CSS v4)** and **Zustand**, backed by **WordPress + WooCommerce**.
 

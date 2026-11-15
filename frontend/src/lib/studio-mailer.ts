@@ -90,7 +90,7 @@ export async function sendFrontendFallbackEmail(
 ): Promise<FrontendEmailResult> {
   const fromEmail =
     process.env.STUDIO_FROM_EMAIL?.trim() ||
-    'Mehandi by Sana <orders@mehandibysana.com>';
+    'Mehandi By Sana <orders@mehandibysana.com>';
   const replyTo =
     input.replyTo?.trim() ||
     process.env.STUDIO_ADMIN_EMAIL?.trim() ||
@@ -145,7 +145,7 @@ export async function sendFrontendFallbackEmail(
       const fromMatch = fromEmail.match(/^\s*"?([^"<]+?)"?\s*<([^>]+)>\s*$/);
       const sender = fromMatch
         ? { name: fromMatch[1].trim(), email: fromMatch[2].trim() }
-        : { name: 'Mehandi by Sana', email: fromEmail };
+        : { name: 'Mehandi By Sana', email: fromEmail };
 
       const res = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',

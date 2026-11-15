@@ -19,7 +19,7 @@ export const metadata: Metadata = buildPageMetadata({
     'Small-batch Kashmir & Bengaluru dispatch schedule, Pan-India PIN-code delivery estimation, air courier partners, parcel tracking, and fresh cone arrival care.',
   canonicalPath: '/shipping-policy',
   keywords: [
-    'Mehandi by Sana shipping policy',
+    'Mehandi By Sana shipping policy',
     'organic henna cones delivery India',
     'PIN code henna delivery estimator',
   ],

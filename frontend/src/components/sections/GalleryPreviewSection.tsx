@@ -24,7 +24,7 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     caption:
       'Symmetrical bridal mandala with traditional peacock motifs, floral vines, and personalized initials.',
     src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-23.webp',
-    alt: 'Full bridal arms and soles mandala henna featuring peacock motifs and floral vines by Mehandi by Sana',
+    alt: 'Full bridal arms and soles mandala henna featuring peacock motifs and floral vines by Mehandi By Sana',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-6',
   },

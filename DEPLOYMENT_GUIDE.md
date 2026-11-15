@@ -1,4 +1,4 @@
-# Mehandi by Sana — Production Deployment & Zero-Data-Loss Cutover Guide
+# Mehandi By Sana — Production Deployment & Zero-Data-Loss Cutover Guide
 
 > **Full Step-by-Step Option A (Managed PaaS) Guide Available:** See [PRODUCTION_LAUNCH_GUIDE.md](./PRODUCTION_LAUNCH_GUIDE.md) for the complete Local-to-Production runbook covering **Cloudflare R2 -> Railway -> Vercel**, importing the latest WooCommerce `.sql` dump, Razorpay live + webhooks, Resend/Brevo/SMTP email integration, and exporting/running campaigns from your **2,065+ customer email list**.
 
@@ -40,7 +40,7 @@ S3_ENDPOINT=https://<account-id>.r2.cloudflarestorage.com
 
 # Optional Order & Booking Notifications (Resend + WhatsApp Webhook)
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxx
-STUDIO_FROM_EMAIL="Mehandi by Sana <orders@mehandibysana.com>"
+STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
 WHATSAPP_WEBHOOK_URL=https://your-automation-webhook.example.com/notify
 ```
 

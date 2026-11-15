@@ -8,7 +8,7 @@ import { ShoppingBag, House, LineDotRightHorizontal } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Page Not Found (404)',
   description:
-    'The page you are looking for could not be found on Mehandi by Sana. Explore organic henna cones, bridal artistry, or track an existing order.',
+    'The page you are looking for could not be found on Mehandi By Sana. Explore organic henna cones, bridal artistry, or track an existing order.',
   robots: {
     index: false,
     follow: true,

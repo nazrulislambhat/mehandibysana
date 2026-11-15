@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import { upsertNewsletterSubscriber } from "../../../lib/newsletter-subscribers";
 import { dispatchStudioNotification } from "../../../lib/notifications";
+import { sendTelegramMessage, escapeTelegramHtml } from "../../../lib/telegram";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -49,7 +50,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         referenceId: "BATCH-LIST",
         skipAdminAlert: true,
         summary: [
-          "Thank you for joining the Mehandi by Sana Dispatch List (Kashmir & Bengaluru).",
+          "Thank you for joining the Mehandi By Sana Dispatch List (Kashmir & Bengaluru).",
           "You will receive early notifications when fresh small-batch organic Sojat henna cones are freshly rolled, along with seasonal Eid & bridal booking dates.",
         ].join("\n\n"),
         details: {
@@ -59,6 +60,18 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       });
       emailSent = outcome.customerEmailSent;
       provider = outcome.provider;
+
+      void sendTelegramMessage(`
+🌿 <b>NEW SUBSCRIBER — Mehandi By Sana</b>
+
+A customer has joined the <b>Fresh Batch Dispatch List</b> from the website footer!
+
+✉️ <b>Email:</b> ${escapeTelegramHtml(subscriber.email)}
+🏷️ <b>Source:</b> ${escapeTelegramHtml(subscriber.source || "Website Footer")}
+📅 <b>Date:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
+
+Saved to PostgreSQL database &amp; synced with <b>Customer Emails &amp; Marketing &rarr; Fresh Batch Subscribers</b> for email campaigns.
+      `.trim());
     }
 
     return res.status(alreadySubscribed ? 200 : 201).json({

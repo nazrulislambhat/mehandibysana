@@ -33,7 +33,7 @@ export default function GlobalError({
   const isDark = activeTheme === 'dark';
 
   useEffect(() => {
-    console.error('[Mehandi by Sana Global Error]:', error);
+    console.error('[Mehandi By Sana Global Error]:', error);
   }, [error]);
 
   return (
@@ -93,7 +93,7 @@ export default function GlobalError({
                   color: '#e5a365',
                 }}
               >
-                Mehandi by Sana &middot; Recovery Mode
+                Mehandi By Sana &middot; Recovery Mode
               </p>
               <h1
                 style={{

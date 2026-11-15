@@ -306,14 +306,21 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
 
       if (resolvedPaymentStatus === "paid") {
+        const shipAddr =
+          (updatedOrder || existingOrder).shipping_address ||
+          existingOrder.shipping_address ||
+          {};
+        const custName =
+          `${shipAddr?.first_name || ""} ${shipAddr?.last_name || ""}`.trim() ||
+          existingOrder.email ||
+          "Customer";
+
         void notifyTelegramPaymentReceived({
           orderNumber: deriveOrderNumber(updatedOrder || existingOrder),
-          customerName:
-            `${existingOrder.shipping_address?.first_name || ""} ${
-              existingOrder.shipping_address?.last_name || ""
-            }`.trim() ||
-            existingOrder.email ||
-            "Customer",
+          customerName: custName,
+          email: existingOrder.email || undefined,
+          phone: shipAddr?.phone || undefined,
+          address: shipAddr,
           amount:
             Number(body.paymentAmount) ||
             Number(existingMeta.total) ||
@@ -434,7 +441,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     let emailResult: DispatchNotificationResult | null = null;
     let emailSkippedReason: string | null = null;
 
-    if (body.sendEmail) {
+    const shouldSendEmail =
+      body.sendEmail === true ||
+      (body.sendEmail !== false &&
+        (body.action === "ship_order" ||
+          body.action === "complete_order" ||
+          updatedMeta.fulfillment_stage === "dispatched"));
+
+    if (shouldSendEmail) {
       const resolvedStage = normalizeFulfillmentStage(
         updatedMeta.fulfillment_stage,
         updatedOrder?.status || existingOrder.status
@@ -443,7 +457,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const emailKind: "dispatched" | "delivered" | "preparing" | "completed" =
         resolvedStage === "delivered"
           ? "delivered"
-          : resolvedStage === "dispatched"
+          : resolvedStage === "dispatched" || body.action === "ship_order"
             ? "dispatched"
             : body.action === "complete_order"
               ? "completed"
@@ -465,7 +479,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       emailSkippedReason = outcome.skippedReason || null;
     }
 
-    const finalOrder = body.sendEmail
+    const finalOrder = shouldSendEmail
       ? await fetchRefreshedOrderDetail(req.scope, id)
       : updatedOrder;
 
@@ -473,14 +487,21 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       body.action === "ship_order" ||
       updatedMeta.fulfillment_stage === "dispatched"
     ) {
+      const shipAddr =
+        (finalOrder || updatedOrder || existingOrder).shipping_address ||
+        existingOrder.shipping_address ||
+        {};
+      const custName =
+        `${shipAddr?.first_name || ""} ${shipAddr?.last_name || ""}`.trim() ||
+        existingOrder.email ||
+        "Customer";
+
       void notifyTelegramOrderShipped({
         orderNumber: deriveOrderNumber(finalOrder || updatedOrder || existingOrder),
-        customerName:
-          `${existingOrder.shipping_address?.first_name || ""} ${
-            existingOrder.shipping_address?.last_name || ""
-          }`.trim() ||
-          existingOrder.email ||
-          "Customer",
+        customerName: custName,
+        email: existingOrder.email || undefined,
+        phone: shipAddr?.phone || undefined,
+        address: shipAddr,
         dispatchOrigin: String(
           updatedMeta.dispatch_origin || "Srinagar Atelier (Kashmir)"
         ),

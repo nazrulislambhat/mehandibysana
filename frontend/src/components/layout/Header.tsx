@@ -17,7 +17,7 @@ export function Header() {
       <div className="editorial-container h-[74px] flex items-center justify-between gap-4 lg:gap-6">
         <Link
           href="/"
-          aria-label="Mehandi by Sana Home"
+          aria-label="Mehandi By Sana Home"
           className="group inline-flex items-center gap-2.5 sm:gap-3 py-1.5 whitespace-nowrap"
         >
           <BrandCrest

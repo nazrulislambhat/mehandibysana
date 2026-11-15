@@ -488,7 +488,7 @@ export function OrderTrackerClient({
             <div className="border-t border-hairline pt-6 flex flex-wrap items-center justify-between gap-3">
               <a
                 href={`https://wa.me/919149648717?text=${encodeURIComponent(
-                  `Assalamu Alaikum Mehandi by Sana, I would like an update on Order ${order.orderNumber}.`,
+                  `Assalamu Alaikum Mehandi By Sana, I would like an update on Order ${order.orderNumber}.`,
                 )}`}
                 target="_blank"
                 rel="noreferrer"

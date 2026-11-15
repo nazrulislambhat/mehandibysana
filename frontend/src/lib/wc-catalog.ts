@@ -226,8 +226,8 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
     : 'Organic Henna Products';
   const buildProductImageAlt = (viewIndex: number): string =>
     viewIndex === 0
-      ? `${cleanTitle} — ${primaryCategoryLabel} by Mehandi by Sana`
-      : `${cleanTitle} (product view ${viewIndex + 1}) by Mehandi by Sana`;
+      ? `${cleanTitle} — ${primaryCategoryLabel} by Mehandi By Sana`
+      : `${cleanTitle} (product view ${viewIndex + 1}) by Mehandi By Sana`;
 
   const imageList: Array<{ id: number; src: string; alt: string }> = [];
   if (raw.thumbnail) {

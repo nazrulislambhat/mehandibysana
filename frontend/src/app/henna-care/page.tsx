@@ -234,7 +234,7 @@ export default function HennaCarePage() {
           Organic Triple-Sifted Hair Henna Preparation
         </h2>
         <p className="text-umber">
-          Mix Mehandi by Sana pure Sojat Hair Henna Powder with brewed black
+          Mix Mehandi By Sana pure Sojat Hair Henna Powder with brewed black
           tea, hibiscus, or warm chamomile decoction (plus 1 tsp alma or
           fenugreek if desired) in a clean{' '}
           <Link

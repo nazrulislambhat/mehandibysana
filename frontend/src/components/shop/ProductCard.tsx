@@ -133,7 +133,7 @@ export function ProductCard({
                 medusaVariantId={defaultVariation?.medusaVariantId}
                 variation={defaultVariation?.attributes}
                 inStock={effectiveInStock}
-                openDrawerOnAdd={true}
+                openDrawerOnAdd={false}
                 size="md"
                 variant="primary"
                 className="rounded-md cursor-pointer"
@@ -225,7 +225,7 @@ export function ProductCard({
             medusaVariantId={defaultVariation?.medusaVariantId}
             variation={defaultVariation?.attributes}
             inStock={effectiveInStock}
-            openDrawerOnAdd={true}
+            openDrawerOnAdd={false}
             variant="secondary"
             size="sm"
             className="w-full rounded-md text-xs sm:text-sm py-1.5 px-2 sm:px-3 min-h-[34px] sm:min-h-[38px] text-center justify-center cursor-pointer"

@@ -146,7 +146,7 @@ export function FloatingContactBubble() {
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end select-none"
+      className="pointer-events-none fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end select-none"
       aria-label="Direct contact and social channels"
     >
       {/* Expanded Popup Options Card */}
@@ -157,8 +157,8 @@ export function FloatingContactBubble() {
         aria-hidden={!isOpen}
         className={`mb-3 w-[290px] sm:w-[320px] rounded-2xl border border-hairline/80 bg-[var(--cl-white,#ffffff)] dark:bg-[var(--cl-bg-dark,#181818)] shadow-[0_18px_45px_-10px_rgba(0,0,0,0.3)] backdrop-blur-md p-4 transition-all duration-300 ease-out origin-bottom-right ${
           isOpen
-            ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
+            ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto visible'
+            : 'opacity-0 scale-90 translate-y-4 pointer-events-none invisible'
         }`}
       >
         {/* Header strip */}
@@ -254,7 +254,7 @@ export function FloatingContactBubble() {
             ? 'Close contact options'
             : 'Open contact options: Instagram and WhatsApp'
         }
-        className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-[var(--cl-bg-dark,#181818)] text-[var(--cl-white,#ffffff)] hover:bg-[var(--cl-orange,#DD6013)] border-2 border-[var(--cl-bg,#E7DDCF)]/40 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.4)] hover:shadow-[0_14px_30px_-5px_rgba(221,96,19,0.45)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cl-orange,#DD6013)]"
+        className="pointer-events-auto group relative flex items-center justify-center w-14 h-14 rounded-full bg-[var(--cl-bg-dark,#181818)] text-[var(--cl-white,#ffffff)] hover:bg-[var(--cl-orange,#DD6013)] border-2 border-[var(--cl-bg,#E7DDCF)]/40 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.4)] hover:shadow-[0_14px_30px_-5px_rgba(221,96,19,0.45)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cl-orange,#DD6013)]"
       >
         {/* Pulsing online indicator dot */}
         <span
