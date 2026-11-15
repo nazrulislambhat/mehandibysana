@@ -109,6 +109,7 @@ export function renderBrandedStudioEmailHtml(params: {
   ctaUrl?: string;
   footerNote?: string;
   storefrontUrl?: string;
+  logoUrl?: string;
 }): string {
   const paragraphsHtml = params.bodyParagraphs
     .filter((p) => p.trim().length > 0)
@@ -138,6 +139,10 @@ export function renderBrandedStudioEmailHtml(params: {
     : "";
 
   const displaySiteUrl = (params.storefrontUrl || "https://mehandibysana.com").replace(/\/+$/, "");
+  const logoUrl =
+    params.logoUrl ||
+    process.env.STUDIO_EMAIL_LOGO_URL?.trim() ||
+    "https://mehandibysana.vercel.app/icons/icon-192x192.png";
 
   return `<!doctype html>
 <html lang="en">
@@ -146,7 +151,9 @@ export function renderBrandedStudioEmailHtml(params: {
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-bottom:20px;border-bottom:1px solid #e7ddcf;padding-bottom:16px;">
         <tr>
           <td style="width:52px;vertical-align:middle;">
-            <img src="${escapeHtml(displaySiteUrl)}/icons/icon-96x96.png" alt="Mehandi By Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;" />
+            <a href="${escapeHtml(displaySiteUrl)}" style="text-decoration:none;display:block;">
+              <img src="${escapeHtml(logoUrl)}" alt="Mehandi By Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;object-fit:cover;" />
+            </a>
           </td>
           <td style="vertical-align:middle;padding-left:12px;">
             <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#181818;line-height:1.15;">Mehandi By Sana</span>

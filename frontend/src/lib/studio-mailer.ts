@@ -63,6 +63,19 @@ export function renderStudioFallbackEmailHtml(params: {
 <html lang="en">
   <body style="margin:0;padding:24px 12px;background-color:#E7DDCF;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#3D3D3D;">
     <div style="max-width:620px;margin:0 auto;border:1px solid #d4c8b8;border-top:4px solid #DD6013;border-radius:10px;background-color:#ffffff;padding:32px;box-shadow:0 4px 16px rgba(24,24,24,0.06);">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-bottom:20px;border-bottom:1px solid #e7ddcf;padding-bottom:16px;">
+        <tr>
+          <td style="width:52px;vertical-align:middle;">
+            <a href="${escapeHtml(siteUrl)}" style="text-decoration:none;display:block;">
+              <img src="https://mehandibysana.vercel.app/icons/icon-192x192.png" alt="Mehandi By Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;object-fit:cover;" />
+            </a>
+          </td>
+          <td style="vertical-align:middle;padding-left:12px;">
+            <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#181818;line-height:1.15;">Mehandi By Sana</span>
+            <span style="display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#96410D;margin-top:3px;">Kashmir &amp; Bengaluru &middot; 0% PPD Organic Henna</span>
+          </td>
+        </tr>
+      </table>
       <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#DD6013;">
         ${escapeHtml(params.eyebrow)}
       </p>
