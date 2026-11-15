@@ -82,53 +82,53 @@ export function Footer() {
 
             <FooterNewsletterForm />
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-3 pt-1 text-xs text-plaque-ink/80">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3 pt-1 text-xs">
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 hover:text-[#789904] tabular-nums transition-colors underline underline-offset-4 decoration-plaque-ink/30 hover:decoration-[#789904] text-[#789904]"
+                className="inline-flex items-center gap-1.5 text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
               >
                 <MailEnvelopeIcon
                   size={14}
-                  className="shrink-0 text-terracotta"
+                  className="shrink-0 text-[#789904]"
                 />
                 <span>sana@mehandibysana.com</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">
+              <span aria-hidden="true" className="text-[#789904]/50">
                 &middot;
               </span>
               <a
                 href="tel:+919149648717"
-                className="inline-flex items-center gap-1.5 hover:text-[#789904] tabular-nums transition-colors underline underline-offset-4 decoration-plaque-ink/30 hover:decoration-[#789904] text-[#789904]"
+                className="inline-flex items-center gap-1.5 text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
               >
                 <PhoneHandsetIcon
                   size={14}
-                  className="shrink-0 text-terracotta"
+                  className="shrink-0 text-[#789904]"
                 />
                 <span>+91-9149648717</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">
+              <span aria-hidden="true" className="text-[#789904]/50">
                 &middot;
               </span>
               <a
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-terracotta hover:underline font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
               >
-                <WhatsAppChatIcon size={14} className="shrink-0" />
+                <WhatsAppChatIcon size={14} className="shrink-0 text-[#789904]" />
                 <span>WhatsApp</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">
+              <span aria-hidden="true" className="text-[#789904]/50">
                 &middot;
               </span>
               <a
                 href="https://www.instagram.com/mehandibysana"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-terracotta hover:underline font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
                 aria-label="Instagram profile @mehandibysana"
               >
-                <InstagramIcon size={14} className="shrink-0" />
+                <InstagramIcon size={14} className="shrink-0 text-[#789904]" />
                 <span>@mehandibysana</span>
               </a>
             </div>

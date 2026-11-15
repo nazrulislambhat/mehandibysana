@@ -110,8 +110,8 @@ export function InstagramFeedSection({
           <div className="max-w-2xl">
             <TextReveal variant="fade">
               <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 py-1.5 mb-3.5">
-                <InstagramIcon className="w-3.5 h-3.5 text-terracotta shrink-0" />
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+                <InstagramIcon className="w-3.5 h-3.5 text-[#789904] shrink-0" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#789904]">
                   Instagram Journal &middot; @{username}
                 </p>
               </div>
@@ -137,7 +137,7 @@ export function InstagramFeedSection({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Follow @${username} on Instagram`}
-              className="inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-inverse hover:bg-terracotta transition-colors shadow-sm"
+              className="inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-inverse hover:bg-[#789904] transition-colors shadow-sm"
             >
               <InstagramIcon className="w-4 h-4 shrink-0" />
               <span>Follow @{username}</span>
