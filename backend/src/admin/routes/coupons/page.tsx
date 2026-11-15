@@ -165,7 +165,7 @@ const CouponsAdminPage = () => {
   // Live Coupon Simulator state
   const [testCode, setTestCode] = useState("");
   const [testSubtotal, setTestSubtotal] = useState("180");
-  const [testShipping, setTestShipping] = useState("150");
+  const [testShipping, setTestShipping] = useState("120");
   const [testing, setTesting] = useState(false);
   const [testResult, setTestResult] = useState<ValidationPreview | null>(null);
 
