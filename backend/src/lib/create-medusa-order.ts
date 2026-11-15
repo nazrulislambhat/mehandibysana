@@ -10,6 +10,10 @@ import {
 } from "./coupons";
 import { sendOrderConfirmationEmail } from "./order-emails";
 import { evaluatePincode } from "./pincode-rules";
+import {
+  calculateDeliverySurcharge,
+  resolveDeliverySpeedLabel,
+} from "./delivery-schedule";
 import { syncOrderNativePayment } from "./sync-order-payment";
 
 export interface StoreOrderPayload {
@@ -52,6 +56,9 @@ export interface StoreOrderPayload {
     targetDate?: string;
     specialInstructions?: string;
     isGift?: boolean;
+    deliverySpeed?: "standard" | "urgent";
+    deliverySpeedLabel?: string;
+    deliverySurcharge?: number;
   };
 }
 
@@ -152,7 +159,7 @@ export async function createMedusaStoreOrder(
 
   // Authoritatively enforce the configured 3-zone shipping rules whenever the PIN is serviceable
   // (190* -> ₹60, 560* -> ₹60, all other -> ₹150) so stale client cache never drops shipping.
-  const shippingFee = roundInr(
+  const baseShippingFee = roundInr(
     pinEvaluation.serviceable
       ? Math.max(0, Number(pinEvaluation.deliveryCharge) || 0)
       : hasExplicitShipping
@@ -161,6 +168,13 @@ export async function createMedusaStoreOrder(
           ? Math.max(0, Number(catchAllEvaluation.deliveryCharge) || 0)
           : 0
   );
+
+  const deliverySpeed = body.deliveryDetails?.deliverySpeed || "standard";
+  const urgentSurcharge = calculateDeliverySurcharge(
+    shippingAddress.postal_code,
+    deliverySpeed
+  );
+  const shippingFee = roundInr(baseShippingFee + urgentSurcharge);
 
   const rawCouponCode = normalizeCouponCode(
     body.couponCode ?? body.pricing?.couponCode ?? ""
@@ -220,10 +234,20 @@ export async function createMedusaStoreOrder(
         ? "Pan-India Express Shipping"
         : `Dispatch Shipping (${matchedPincodeRule})`;
 
+  const resolvedSpeedLabel =
+    body.deliveryDetails?.deliverySpeedLabel ||
+    resolveDeliverySpeedLabel(
+      shippingAddress.postal_code,
+      deliverySpeed,
+      body.deliveryDetails?.targetDate
+    );
+
   const shippingMethodName =
-    shippingFee === 0
-      ? `Free Delivery · ${shippingZoneLabel}`
-      : shippingZoneLabel;
+    deliverySpeed === "urgent"
+      ? `⚡ Urgent Express (${resolvedSpeedLabel}) · ${shippingZoneLabel}`
+      : shippingFee === 0
+        ? `Free Delivery · ${shippingZoneLabel}`
+        : shippingZoneLabel;
 
   let defaultShippingOptionId: string | undefined;
   try {
@@ -322,6 +346,9 @@ export async function createMedusaStoreOrder(
       discount_total: discountAmount,
       total,
       target_delivery_date: body.deliveryDetails?.targetDate || "",
+      delivery_speed: deliverySpeed,
+      delivery_speed_label: resolvedSpeedLabel,
+      delivery_surcharge: urgentSurcharge,
       special_instructions: body.deliveryDetails?.specialInstructions || "",
       is_gift: body.deliveryDetails?.isGift || false,
     },

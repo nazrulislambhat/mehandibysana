@@ -6,6 +6,7 @@ import {
   validateCouponForOrder,
 } from "../../../../lib/coupons";
 import { evaluatePincode } from "../../../../lib/pincode-rules";
+import { calculateDeliverySurcharge } from "../../../../lib/delivery-schedule";
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const keyId = process.env.RAZORPAY_KEY_ID?.trim();
@@ -29,6 +30,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       couponCode?: string;
       pincode?: string;
       shippingFee?: number;
+      deliverySpeed?: string;
+      deliverySurcharge?: number;
       items?: Array<{
         quantity?: number;
         price?: number;
@@ -43,6 +46,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     let computedShipping = 0;
     let computedDiscount = 0;
     let verifiedCouponCode = "";
+    let urgentSurcharge = 0;
 
     if (hasItems) {
       computedSubtotal = roundInr(
@@ -66,7 +70,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
       // Enforce authoritative 3-zone delivery rates whenever the PIN is serviceable
       // (190* -> ₹60, 560* -> ₹60, all other -> ₹150).
-      computedShipping = roundInr(
+      const baseShipping = roundInr(
         pinEval.serviceable
           ? Math.max(0, Number(pinEval.deliveryCharge) || 0)
           : hasExplicitShipping
@@ -75,6 +79,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
               ? Math.max(0, Number(catchAllEval.deliveryCharge) || 0)
               : 0
       );
+
+      urgentSurcharge = calculateDeliverySurcharge(
+        cleanPin,
+        body.deliverySpeed
+      );
+
+      computedShipping = roundInr(baseShipping + urgentSurcharge);
 
       if (rawCouponCode) {
         const couponRes = await validateCouponForOrder(req.scope, {
@@ -129,6 +140,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
     const notesPayload: Record<string, string> = {
       ...(body.notes || {}),
+      ...(body.deliverySpeed ? { delivery_speed: body.deliverySpeed } : {}),
+      ...(urgentSurcharge > 0
+        ? { delivery_surcharge: String(urgentSurcharge) }
+        : {}),
       ...(verifiedCouponCode
         ? {
             coupon_code: verifiedCouponCode,
