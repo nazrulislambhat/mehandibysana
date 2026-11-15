@@ -12,6 +12,7 @@ import {
   sendStudioEmail,
   renderBrandedStudioEmailHtml,
 } from "../lib/notifications";
+import { sendTelegramDocument } from "../lib/telegram";
 
 export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER);
@@ -157,5 +158,12 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
   if (result.error) {
     logger.error(`Error     : ${result.error}`);
   }
+
+  logger.info("Dispatching test invoice PDF to Telegram...");
+  const teleOutcome = await sendTelegramDocument(pdfBuffer, `${sampleData.invoiceNumber}.pdf`, {
+    caption: `🧾 <b>Test Tax Invoice ${sampleData.invoiceNumber} [PAID]</b>\nAttached PDF for testing order #${sampleData.orderNumber} (₹${sampleData.total}).`,
+    mimeType: "application/pdf",
+  });
+  logger.info(`Telegram Sent: ${teleOutcome.success}${teleOutcome.messageId ? ` (Message ID: ${teleOutcome.messageId})` : ""}`);
   logger.info("=====================================================");
 }

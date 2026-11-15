@@ -11,6 +11,7 @@ import {
   renderBrandedStudioEmailHtml,
 } from "./notifications";
 import { deriveOrderNumber, formatOrderPaymentMethodLabel } from "./studio-order-meta";
+import { sendTelegramDocument, escapeTelegramHtml } from "./telegram";
 
 export interface InvoiceItem {
   title: string;
@@ -952,6 +953,27 @@ export async function sendOrderInvoiceEmail(
     html: emailHtml,
     attachments,
     scope,
+  });
+
+  // Also dispatch PDF invoice to Telegram
+  const telegramCaption = `🧾 <b>Official Tax Invoice (${escapeTelegramHtml(
+    invoiceData.invoiceNumber
+  )}) [${escapeTelegramHtml(invoiceData.paymentStatus)}]</b>
+Order #${escapeTelegramHtml(invoiceData.orderNumber)} &middot; ₹${Number(
+    invoiceData.total || 0
+  ).toLocaleString("en-IN")}
+Customer: ${escapeTelegramHtml(invoiceData.customerName)} (${escapeTelegramHtml(
+    invoiceData.customerEmail || "N/A"
+  )})
+Payment: ${escapeTelegramHtml(invoiceData.paymentMethod)}${
+    invoiceData.paymentRef
+      ? ` (Ref: <code>${escapeTelegramHtml(invoiceData.paymentRef)}</code>)`
+      : ""
+  }`.trim();
+
+  void sendTelegramDocument(pdfBuffer, `${invoiceData.invoiceNumber}.pdf`, {
+    caption: telegramCaption,
+    mimeType: "application/pdf",
   });
 
   // Update order metadata with invoice details

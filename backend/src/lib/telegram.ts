@@ -266,6 +266,88 @@ export async function sendTelegramMessage(
   }
 }
 
+export async function sendTelegramDocument(
+  document: Buffer | Uint8Array,
+  filename: string,
+  options?: {
+    caption?: string;
+    mimeType?: string;
+    parseMode?: "HTML" | "Markdown";
+  }
+): Promise<{ success: boolean; messageId?: number; error?: string }> {
+  const { configured, botToken, chatId, targetPhone } = getTelegramConfig();
+
+  if (!configured || !botToken || !chatId) {
+    console.log(
+      `[Telegram] Skipped document dispatch (TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set for phone ${targetPhone}).`
+    );
+    appendTelegramLog({
+      status: "skipped",
+      reason: "credentials_not_configured",
+      targetPhone,
+      filename,
+    });
+    return {
+      success: false,
+      error: "Telegram Bot Token or Chat ID not configured in backend .env",
+    };
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append("chat_id", chatId);
+    if (options?.caption) {
+      formData.append("caption", options.caption.slice(0, 1024));
+      formData.append("parse_mode", options.parseMode || "HTML");
+    }
+    formData.append(
+      "document",
+      new Blob([document as any], { type: options?.mimeType || "application/pdf" }),
+      filename
+    );
+
+    const url = `https://api.telegram.org/bot${botToken}/sendDocument`;
+    const res = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = (await res.json()) as any;
+    if (!res.ok || !data.ok) {
+      const errMsg = data?.description || `HTTP ${res.status}`;
+      console.warn("[Telegram] sendDocument API error:", errMsg);
+      appendTelegramLog({
+        status: "error",
+        error: errMsg,
+        filename,
+        captionPreview: options?.caption?.slice(0, 100),
+      });
+      return { success: false, error: errMsg };
+    }
+
+    appendTelegramLog({
+      status: "sent",
+      type: "document",
+      messageId: data.result?.message_id,
+      chatId,
+      filename,
+    });
+
+    return { success: true, messageId: data.result?.message_id };
+  } catch (err: any) {
+    console.error("[Telegram] sendDocument network exception:", err);
+    appendTelegramLog({
+      status: "exception",
+      error: err?.message || String(err),
+      filename,
+    });
+    return {
+      success: false,
+      error: err?.message || "Failed to reach Telegram API sendDocument",
+    };
+  }
+}
+
 /**
  * 1. Alert on Order Placed (Storefront / Manual)
  * Includes complete customer contact info and full delivery address
@@ -297,6 +379,9 @@ export async function notifyTelegramOrderPlaced(order: {
   targetDeliveryDate?: string;
   deliverySpeed?: string;
   specialInstructions?: string;
+  invoicePdfBuffer?: Buffer;
+  invoicePdfPath?: string;
+  invoiceNumber?: string;
 }) {
   const itemsText =
     order.items && order.items.length > 0
@@ -393,33 +478,64 @@ ${breakdownBlock}
     (order.items || []).find((it) => Boolean(it.thumbnail))?.thumbnail;
   const photoUrl = resolvePublicImageUrl(candidateImage);
 
+  let outcome: { success: boolean; messageId?: number; error?: string };
+
   if (photoUrl) {
     // If the full message fits Telegram's 1024-character caption limit, send together
     if (message.length <= 1024) {
       const photoResult = await sendTelegramPhoto(photoUrl, message);
       if (photoResult.success) {
-        return photoResult;
+        outcome = photoResult;
+      } else {
+        // If sendPhoto failed, fallback to standard message
+        outcome = await sendTelegramMessage(message);
       }
-      // If sendPhoto failed, fallback to standard message
-      return sendTelegramMessage(message);
-    }
-
-    // Otherwise, send photo with summary caption and immediately follow with full details
-    const summaryCaption = `
+    } else {
+      // Otherwise, send photo with summary caption and immediately follow with full details
+      const summaryCaption = `
 🛍️ <b>NEW ORDER #${escapeTelegramHtml(order.orderNumber)}</b>
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
 📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "N/A"}${deliveryScheduleLine}${speedLine}${priorityActionBanner}
 💰 <b>Payable Total:</b> ₹${Number(order.total || 0).toLocaleString("en-IN")} (${escapeTelegramHtml(order.paymentMethod.toUpperCase())})
-    `.trim();
+      `.trim();
 
-    const photoRes = await sendTelegramPhoto(photoUrl, summaryCaption);
-    if (photoRes.success) {
-      await sendTelegramMessage(message);
-      return photoRes;
+      const photoRes = await sendTelegramPhoto(photoUrl, summaryCaption);
+      if (photoRes.success) {
+        await sendTelegramMessage(message);
+        outcome = photoRes;
+      } else {
+        outcome = await sendTelegramMessage(message);
+      }
+    }
+  } else {
+    outcome = await sendTelegramMessage(message);
+  }
+
+  // If invoice PDF is available, dispatch document attachment to Telegram
+  let pdfBuffer: Buffer | undefined = order.invoicePdfBuffer;
+  if (!pdfBuffer && order.invoicePdfPath && fs.existsSync(order.invoicePdfPath)) {
+    try {
+      pdfBuffer = fs.readFileSync(order.invoicePdfPath);
+    } catch (err) {
+      console.warn("[Telegram] Failed to read invoice PDF from path:", err);
     }
   }
 
-  return sendTelegramMessage(message);
+  if (pdfBuffer) {
+    const invNum = order.invoiceNumber || `INV-MBS-${order.orderNumber}`;
+    const invoiceCaption = `🧾 <b>Official Tax Invoice (${escapeTelegramHtml(invNum)}) [${escapeTelegramHtml(
+      order.paymentStatus.toUpperCase()
+    )}]</b>\nOrder #${escapeTelegramHtml(order.orderNumber)} &middot; ₹${Number(
+      order.total || 0
+    ).toLocaleString("en-IN")}\nCustomer: ${escapeTelegramHtml(order.customerName)}`;
+
+    void sendTelegramDocument(pdfBuffer, `${invNum}.pdf`, {
+      caption: invoiceCaption,
+      mimeType: "application/pdf",
+    });
+  }
+
+  return outcome;
 }
 
 /**

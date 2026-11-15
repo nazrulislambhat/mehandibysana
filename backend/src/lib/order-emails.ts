@@ -541,12 +541,16 @@ export async function sendOrderConfirmationEmail(
 
   let invoiceAttachment: { filename: string; content: Buffer; contentType: string } | undefined;
   let savedRelativePdfPath = "";
+  let generatedPdfBuffer: Buffer | undefined;
+  let generatedInvoiceNumber = "";
   try {
     const invoiceData = buildInvoiceDataFromOrder(order);
+    generatedInvoiceNumber = invoiceData.invoiceNumber;
     const [pdfBuffer, htmlInvoice] = await Promise.all([
       generateInvoicePdf(invoiceData),
       generateInvoiceHtml(invoiceData),
     ]);
+    generatedPdfBuffer = pdfBuffer;
     const { relativePdfPath } = await saveInvoiceFiles(
       invoiceData,
       pdfBuffer,
@@ -612,6 +616,8 @@ export async function sendOrderConfirmationEmail(
       targetDeliveryDate: b.targetDeliveryDate,
       deliverySpeed: b.deliverySpeedLabel,
       specialInstructions: b.specialInstructions,
+      invoicePdfBuffer: generatedPdfBuffer,
+      invoiceNumber: generatedInvoiceNumber,
     });
   }
 
