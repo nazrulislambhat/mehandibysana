@@ -104,10 +104,10 @@ export async function POST(req: NextRequest) {
         process.env.STUDIO_DATA_DIR?.trim() ||
         path.resolve(process.cwd(), '../studio-data');
       const bookingsFile = path.join(dataDir, 'bridal-bookings.json');
-      if (fs.existsSync(dataDir)) {
+      if (fs.existsSync(/*turbopackIgnore: true*/ dataDir)) {
         let existing: Record<string, unknown>[] = [];
         try {
-          if (fs.existsSync(bookingsFile)) {
+          if (fs.existsSync(/*turbopackIgnore: true*/ bookingsFile)) {
             existing = JSON.parse(fs.readFileSync(bookingsFile, 'utf8'));
           }
         } catch {}

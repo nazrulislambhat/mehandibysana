@@ -1,3 +1,4 @@
+import path from 'path';
 import type { NextConfig } from 'next';
 
 function buildRemotePatterns(): NonNullable<NextConfig['images']>['remotePatterns'] {
@@ -50,6 +51,9 @@ function buildRemotePatterns(): NonNullable<NextConfig['images']>['remotePattern
 }
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: path.resolve(__dirname, '..'),
+  },
   allowedDevOrigins: ['localhost', '127.0.0.1'],
   images: {
     remotePatterns: buildRemotePatterns(),
