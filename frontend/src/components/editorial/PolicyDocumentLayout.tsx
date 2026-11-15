@@ -106,7 +106,7 @@ export function PolicyDocumentLayout({
                     {documentCode}
                   </span>
                   <span className="text-terracotta font-semibold">
-                    Srinagar / Bengaluru, India
+                    Kashmir / Bengaluru, India
                   </span>
                 </div>
                 <p className="text-umber">Effective: {effectiveDate}</p>

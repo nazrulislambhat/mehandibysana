@@ -72,7 +72,7 @@ export default function PrivacyPolicyPage() {
         </h2>
         <p className="text-umber">
           This Privacy Policy describes how <strong>Mehandi By Sana</strong>{' '}
-          (operating from Srinagar, J&K and Bengaluru, Karnataka) collects,
+          (operating from Kashmir, J&K and Bengaluru, Karnataka) collects,
           uses, stores, and protects personal data when you visit{' '}
           <strong>mehandibysana.com</strong>, place storefront orders, use our
           PIN code or order tracking utilities, subscribe to fresh batch
@@ -314,7 +314,7 @@ export default function PrivacyPolicyPage() {
             <strong>Name:</strong> Sana
           </p>
           <p>
-            <strong>Service Bases:</strong> Mehandi by Sana &middot; Srinagar
+            <strong>Service Bases:</strong> Mehandi by Sana &middot; Kashmir
             (J&K) &amp; Bengaluru (Karnataka)
           </p>
           <p>

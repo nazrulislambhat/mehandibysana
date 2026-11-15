@@ -25,13 +25,13 @@ import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlat
 export const metadata: Metadata = buildPageMetadata({
   title: 'About Sana & Her Journey',
   description:
-    'Meet Sana — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Srinagar & Bengaluru since 2019.',
+    'Meet Sana — Electronics & Communication Engineer turned Kashmir’s pioneer in 100% PPD-free organic henna artistry, working independently as a freelance artist across Kashmir & Bengaluru since 2019.',
   canonicalPath: '/about',
   keywords: [
     'Sumaiya Rashid Magray',
     'Mehandi by Sana story',
     'Kashmir organic henna pioneer',
-    'Srinagar Bengaluru freelance henna artist',
+    'Kashmir Bengaluru freelance henna artist',
     'Maenz 2019 Kashmir',
   ],
 });
@@ -146,7 +146,7 @@ const STUDIO_PILLARS = [
   {
     number: '02',
     title: 'Small-Batch Freshness',
-    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Srinagar / Bengaluru and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
+    body: 'Every batch of paste, aftercare balm, and hair blend is mixed fresh in small batches across Kashmir / Bengaluru and hand-rolled into ultra-fine 0.38mm cones for reliable lawsone release.',
   },
   {
     number: '03',
@@ -200,7 +200,7 @@ export default function AboutPage() {
                   <div className="pointer-events-none absolute inset-3 rounded-t-[12rem] rounded-b-xl border border-ink/10" />
                 </div>
                 <figcaption className="text-xs font-semibold uppercase tracking-[0.14em] text-umber text-center">
-                  Sana &middot; Freelance Artist || Engineer &middot; Srinagar &amp; Bengaluru
+                  Sana &middot; Freelance Artist || Engineer &middot; Kashmir &amp; Bengaluru
                 </figcaption>
               </figure>
             </div>
@@ -225,7 +225,7 @@ export default function AboutPage() {
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in 2019 in Srinagar by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Srinagar and Bengaluru.
+                Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Kashmir and Bengaluru.
               </p>
               
             </div>
@@ -252,7 +252,7 @@ export default function AboutPage() {
             </blockquote>
             <figcaption className="mt-6 pt-5 border-t border-plaque-ink/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               &mdash; Sana &middot;{' '}
-              <span className="text-plaque-ink/75 font-normal">Srinagar &amp; Bengaluru</span>
+              <span className="text-plaque-ink/75 font-normal">Kashmir &amp; Bengaluru</span>
             </figcaption>
           </figure>
         </TextReveal>

@@ -174,7 +174,7 @@ export function FloatingContactBubble() {
               </p>
             </div>
             <p className="text-xs text-[var(--cl-txt,#3D3D3D)] dark:text-[var(--cl-txt-light,#DBCAB6)] mt-0.5">
-              Srinagar &amp; Bengaluru Studio
+              Kashmir, J&amp;K &middot; Bengaluru, Karnataka
             </p>
           </div>
           <button

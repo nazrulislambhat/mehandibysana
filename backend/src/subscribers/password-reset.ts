@@ -131,7 +131,7 @@ export default async function authAndAccountHandler({
 
     const summary = [
       `Assalamu Alaikum / Welcome ${firstName},`,
-      `Thank you for creating an account with Mehandi by Sana. We are dedicated to 100% natural, PPD-free organic henna and small-batch botanical artistry across Srinagar and Bengaluru.`,
+      `Thank you for creating an account with Mehandi by Sana. We are dedicated to 100% natural, PPD-free organic henna and small-batch botanical artistry across Kashmir and Bengaluru.`,
       `Through your account, you can track fresh cone batches, view order history, and access curated stain care guides.`,
     ].join("\n\n");
 

@@ -1,9 +1,9 @@
 [
   {
-    "id": "rule-srinagar-190",
+    "id": "rule-kashmir-190",
     "pattern": "190*",
-    "label": "Srinagar Metro Zone (190*)",
-    "zone": "Zone 1 — Srinagar Local Dispatch",
+    "label": "Kashmir Metro Zone (190*)",
+    "zone": "Zone 1 — Kashmir Local Dispatch",
     "charge": 60,
     "estimatedDays": "1–2 business days",
     "codAvailable": true,

@@ -215,7 +215,7 @@ export default function HennaCarePage() {
         </h2>
         <p className="text-umber">
           Body heat significantly accelerates lawsone keratin bonding. In chilly
-          Srinagar winters or air-conditioned venues, warm hands gently near
+          Kashmir winters or air-conditioned venues, warm hands gently near
           cloves toasted in a dry skillet (bhaap / clove steam for 1–2 minutes
           carefully above heat) and keep covered beneath warm woollen mittens
           after balm application.

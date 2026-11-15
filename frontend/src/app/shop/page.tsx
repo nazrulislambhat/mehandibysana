@@ -42,7 +42,7 @@ const CATEGORY_SEO_COPY: Record<
   'henna-kits-combos': {
     title: 'Henna Kits, Bridal Cones & DIY Combos',
     description:
-      'Shop complete bridal mehandi combos, beginner henna practice kits, and gift sets prepared fresh across Srinagar & Bengaluru.',
+      'Shop complete bridal mehandi combos, beginner henna practice kits, and gift sets prepared fresh across Kashmir & Bengaluru.',
     lead: 'Complete small-batch henna starter kits, bridal combo bundles, and coordinated aftercare essentials ready for gifting or practice.',
   },
   'henna-care-essential-oils': {
@@ -121,8 +121,8 @@ export async function generateMetadata({
   const description = categoryCopy
     ? categoryCopy.description
     : activeCategoryObj
-      ? `Browse ${activeCategoryObj.name} formulations crafted in small batches by Mehandi by Sana across Srinagar & Bengaluru.`
-      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, botanical oils, aftercare balms, and artist tools crafted across Srinagar & Bengaluru.';
+      ? `Browse ${activeCategoryObj.name} formulations crafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`
+      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, botanical oils, aftercare balms, and artist tools crafted across Kashmir & Bengaluru.';
 
   return buildPageMetadata({
     title,
@@ -230,7 +230,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     : 'Shop Botanical Products';
   const pageLead = categoryCopy
     ? categoryCopy.lead
-    : 'Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across Srinagar & Bengaluru.';
+    : 'Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across Kashmir & Bengaluru.';
 
   const collectionJson = serializeJsonLd(
     buildCollectionPageJsonLd({

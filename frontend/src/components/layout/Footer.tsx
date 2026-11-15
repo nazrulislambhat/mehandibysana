@@ -67,13 +67,13 @@ export function Footer() {
                     aria-hidden="true"
                     className="w-1.5 h-1.5 rotate-45 bg-terracotta"
                   />
-                  Est. 2019 &middot; Srinagar &amp; Bengaluru
+                  Est. 2019 &middot; Kashmir &amp; Bengaluru
                 </span>
               </div>
 
               <p className="text-sm text-plaque-ink/75 leading-relaxed max-w-md">
                 Founded by Sana, a freelance organic mehandi artist working
-                across Srinagar &amp; Bengaluru. She offers fresh small-batch
+                across Kashmir &amp; Bengaluru. She offers fresh small-batch
                 Sojat henna cones, therapeutic essential oils, aftercare balms,
                 and heirloom bridal artistry.
               </p>
@@ -183,7 +183,7 @@ export function Footer() {
                 <div className="flex items-center justify-between gap-2">
                   <h2 className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
                     <LocationPinIcon size={14} className="shrink-0" />
-                    <span>Srinagar &amp; Bengaluru</span>
+                    <span>Kashmir &amp; Bengaluru</span>
                   </h2>
                   <BotanicalSprig className="w-10 opacity-75 shrink-0" />
                 </div>
@@ -191,10 +191,10 @@ export function Footer() {
                 <div className="space-y-2.5 text-xs text-plaque-ink/80 leading-relaxed">
                   <p>
                     <span className="font-medium text-plaque-ink block">
-                      Srinagar: Dispatch &amp; Bookings
+                      Kashmir: Dispatch &amp; Bookings
                     </span>
                     <span className="text-plaque-ink/70">
-                      Srinagar, Jammu & Kashmir
+                      Kashmir, J&amp;K
                     </span>
                   </p>
                   <p>

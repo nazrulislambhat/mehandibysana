@@ -29,7 +29,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 const DEFAULT_TITLE = 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist';
 const DEFAULT_DESCRIPTION =
-  'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sana across Srinagar & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehandi services.';
+  'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sana across Kashmir & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehandi services.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),

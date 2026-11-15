@@ -31,7 +31,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         foundingDate: '2019',
         description:
-          'Independent freelance organic mehandi practice and small-batch botanical apothecary founded in 2019 by Sana, serving clients across Srinagar and Bengaluru.',
+          'Independent freelance organic mehandi practice and small-batch botanical apothecary founded in 2019 by Sana, serving clients across Kashmir and Bengaluru.',
         logo: {
           '@type': 'ImageObject',
           url: logoUrl,
@@ -43,7 +43,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         email: STUDIO_EMAIL,
         telephone: STUDIO_PHONE,
         areaServed: [
-          { '@type': 'City', name: 'Srinagar' },
+          { '@type': 'City', name: 'Kashmir' },
           { '@type': 'State', name: 'Jammu and Kashmir' },
           { '@type': 'City', name: 'Bengaluru' },
           { '@type': 'State', name: 'Karnataka' },
@@ -70,7 +70,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         worksFor: { '@id': orgId },
         homeLocation: {
           '@type': 'Place',
-          name: 'Srinagar & Bengaluru, India',
+          name: 'Kashmir & Bengaluru, India',
         },
       },
       {
@@ -81,7 +81,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: `${siteUrl}/services`,
         image: brandBannerUrl,
         provider: { '@id': orgId },
-        areaServed: ['Srinagar', 'Jammu and Kashmir', 'Bengaluru', 'Karnataka', 'India'],
+        areaServed: ['Kashmir', 'Jammu and Kashmir', 'Bengaluru', 'Karnataka', 'India'],
         availableChannel: {
           '@type': 'ServiceChannel',
           serviceUrl: `${siteUrl}/contact`,
@@ -94,7 +94,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         name: SITE_NAME,
         description:
-          'Freelance organic mehandi artist & botanical apothecary working across Srinagar & Bengaluru since 2019 — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi services.',
+          'Freelance organic mehandi artist & botanical apothecary working across Kashmir & Bengaluru since 2019 — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi services.',
         publisher: { '@id': orgId },
         inLanguage: 'en-IN',
         potentialAction: {
@@ -275,7 +275,7 @@ export function buildAboutPageJsonLd(
       worksFor: { '@id': `${siteUrl}/#organization` },
       homeLocation: {
         '@type': 'Place',
-        name: 'Srinagar & Bengaluru, India',
+        name: 'Kashmir & Bengaluru, India',
       },
       award: awards.map((a) => `${a.title}: ${a.description}`),
       ...(pressUrls.length > 0 ? { subjectOf: pressUrls } : {}),
@@ -295,7 +295,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
     url: pageUrl,
     name: 'Bridal Mehandi Services, Celebrations & Masterclasses | Mehandi by Sana',
     description:
-      'Bespoke bridal mehandi appointments, celebration henna gatherings across Srinagar, Bengaluru & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
+      'Bespoke bridal mehandi appointments, celebration henna gatherings across Kashmir, Bengaluru & destination venues, custom bulk cones, and 15-day Mehandi Masterclasses.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: {
       '@type': 'OfferCatalog',
@@ -307,7 +307,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
           description:
             'Full-arm and feet bridal coverage with Kashmiri, Mughal archway, peacock, and botanical motifs applied with 0.38mm hand-rolled organic henna cones.',
           provider: { '@id': orgId },
-          areaServed: ['Srinagar', 'Jammu and Kashmir', 'Bengaluru', 'India'],
+          areaServed: ['Kashmir', 'Jammu and Kashmir', 'Bengaluru', 'India'],
         },
         {
           '@type': 'Service',
@@ -315,7 +315,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
           description:
             'Engagement ceremonies, Eid festivities, and bridal celebration bookings with Sana (plus independent guest artists arranged on request) at home or venue.',
           provider: { '@id': orgId },
-          areaServed: ['Srinagar', 'Jammu and Kashmir', 'Bengaluru', 'India'],
+          areaServed: ['Kashmir', 'Jammu and Kashmir', 'Bengaluru', 'India'],
         },
         {
           '@type': 'Course',
@@ -438,7 +438,7 @@ export function buildContactPageJsonLd(): Record<string, unknown> {
     url: pageUrl,
     name: 'Contact & Bridal Booking Inquiries | Mehandi by Sana',
     description:
-      'Request bridal mehandi dates, celebration henna appointments, or product order guidance from Sana across Srinagar & Bengaluru.',
+      'Request bridal mehandi dates, celebration henna appointments, or product order guidance from Sana across Kashmir & Bengaluru.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: { '@id': `${siteUrl}/#organization` },
   };

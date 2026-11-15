@@ -13,7 +13,7 @@ import { LinkButton } from '@/components/ui/Button';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Terms & Conditions',
   description:
-    'Storefront, small-batch organic botanical product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi by Sana (Srinagar & Bengaluru).',
+    'Storefront, small-batch organic botanical product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi by Sana (Kashmir & Bengaluru).',
   canonicalPath: '/terms-conditions',
   keywords: [
     'Mehandi by Sana terms and conditions',
@@ -58,7 +58,7 @@ export default function TermsConditionsPage() {
         <p className="text-umber">
           This storefront (<strong>mehandibysana.com</strong>) is operated by{' '}
           <strong>Mehandi By Sana</strong>, founded in 2019 by independent freelance artist Sana, working across{' '}
-          <strong>Srinagar (J&K)</strong> and{' '}
+          <strong>Kashmir (J&amp;K)</strong> and{' '}
           <strong>Bengaluru (Karnataka), India</strong>.
         </p>
         <p className="text-umber">
@@ -209,7 +209,7 @@ export default function TermsConditionsPage() {
           Preparation Lead Times, Courier Transit &amp; Risk of Loss
         </h2>
         <p className="text-umber">
-          Fresh henna orders are typically mixed, rolled, sealed, and dispatched from Srinagar or Bengaluru within 1–2 business days (excluding severe weather closures or national holidays). Once scanned by our logistics partner (Delhivery, ShreeMaruti, DTDC Air, Blue Dart, or India Post Speed Post), transit tracking details are emailed to your checkout address and viewable anytime on our{' '}
+          Fresh henna orders are typically mixed, rolled, sealed, and dispatched from Kashmir or Bengaluru within 1–2 business days (excluding severe weather closures or national holidays). Once scanned by our logistics partner (Delhivery, ShreeMaruti, DTDC Air, Blue Dart, or India Post Speed Post), transit tracking details are emailed to your checkout address and viewable anytime on our{' '}
           <Link href="/track-order" className="text-terracotta underline underline-offset-4">
             Order Tracker
           </Link>
@@ -253,7 +253,7 @@ export default function TermsConditionsPage() {
             <strong>Event Readiness:</strong> Clients must ensure adequate seating, daylight or bright warm lighting, and calm drying space at the home or venue. Waxing, manicures, and pedicures should be completed at least 24 hours before mehandi application so skin pores and lotions do not block lawsone absorption.
           </li>
           <li>
-            <strong>Outstation Travel:</strong> Destination bookings outside Srinagar &amp; Bengaluru city limits may carry separate travel, lodging, or local conveyance terms confirmed in writing prior to booking lock.
+            <strong>Outstation Travel:</strong> Destination bookings outside Kashmir &amp; Bengaluru city limits may carry separate travel, lodging, or local conveyance terms confirmed in writing prior to booking lock.
           </li>
           <li>
             <strong>Masterclasses:</strong> Course schedules and &#8377;3,500 batch registrations follow the confirmed intake dates communicated upon enrollment.
@@ -297,7 +297,7 @@ export default function TermsConditionsPage() {
         </h2>
         <p className="text-umber">
           These Terms are governed by the laws of India, including applicable provisions of the Consumer Protection Act, 2019 and Consumer Protection (E-Commerce) Rules, 2020. Any disputes arising out of orders or service engagements shall be subject to the exclusive jurisdiction of the competent courts in{' '}
-          <strong>Srinagar, Jammu &amp; Kashmir, India</strong>. We may update these Terms periodically by revising the effective date above; continued storefront use indicates acceptance of updated terms.
+          <strong>Kashmir, Jammu &amp; Kashmir, India</strong>. We may update these Terms periodically by revising the effective date above; continued storefront use indicates acceptance of updated terms.
         </p>
         <div className="pt-3 flex flex-wrap gap-2">
           <LinkButton href="/refund-policy" variant="primary" size="md" className="rounded-md">

@@ -95,7 +95,7 @@ export interface InstagramFeedSectionProps {
 export function InstagramFeedSection({
   className = '',
   title = 'Artistry in motion & fresh studio dispatches.',
-  subtitle = 'Follow our daily bridal sessions, stain progression reveals, and fresh small-batch Sojat henna preparation across Srinagar & Bengaluru.',
+  subtitle = 'Follow our daily bridal sessions, stain progression reveals, and fresh small-batch Sojat henna preparation across Kashmir & Bengaluru.',
 }: InstagramFeedSectionProps) {
   const profileUrl = 'https://www.instagram.com/mehandibysana';
   const username = 'mehandibysana';
@@ -184,7 +184,7 @@ export function InstagramFeedSection({
               aria-hidden="true"
               className="w-2 h-2 rounded-full bg-[var(--cl-green,#789904)] shrink-0 animate-pulse"
             />
-            <span>Active daily updates on Instagram &middot; Srinagar &amp; Bengaluru</span>
+            <span>Active daily updates on Instagram &middot; Kashmir &amp; Bengaluru</span>
           </div>
 
           <a

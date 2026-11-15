@@ -42,7 +42,7 @@ const WAYFINDING_LINKS = [
   },
   {
     label: 'Bridal & Event Bookings',
-    meta: 'Srinagar, Bengaluru & Destination Dates',
+    meta: 'Kashmir, Bengaluru & Destination Dates',
     href: '/services',
   },
   {
@@ -160,7 +160,7 @@ export default function NotFound() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-1.5">
-                      Quick Directory &middot; Srinagar &amp; Bengaluru
+                      Quick Directory &middot; Kashmir &amp; Bengaluru
                     </p>
                     <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
                       Helpful Destinations

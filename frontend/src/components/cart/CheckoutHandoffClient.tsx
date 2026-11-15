@@ -108,7 +108,7 @@ export function CheckoutHandoffClient() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [city, setCity] = useState('Srinagar');
+  const [city, setCity] = useState('Kashmir');
   const [stateName, setStateName] = useState('Jammu & Kashmir');
   const [paymentMethod, setPaymentMethod] = useState<'razorpay' | 'cod'>('razorpay');
   const [notes, setNotes] = useState('');

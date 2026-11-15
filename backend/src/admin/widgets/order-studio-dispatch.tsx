@@ -62,7 +62,7 @@ const BASE_PAYMENT_METHOD_OPTIONS: Array<{ value: string; label: string }> = [
 
 const COURIER_PRESETS = [
   "Local Courier",
-  "Srinagar Local Rider",
+  "Kashmir Local Rider",
   "Bengaluru Local Rider",
   "India Post Speed Post",
   "Delhivery",
@@ -1040,7 +1040,7 @@ const OrderStudioDispatchWidget = ({
             <Label size="xsmall">Message to Customer (Optional)</Label>
             <Textarea
               rows={2}
-              placeholder="e.g. Shipped via local Srinagar courier, reaching today by 6 PM."
+              placeholder="e.g. Shipped via local Kashmir courier, reaching today by 6 PM."
               value={dispatchNote}
               onChange={(e) => setDispatchNote(e.target.value)}
             />

@@ -21,10 +21,10 @@ import {
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact & Bridal Mehandi Bookings',
   description:
-    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or botanical order guidance directly from Sana across Srinagar & Bengaluru.',
+    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or botanical order guidance directly from Sana across Kashmir & Bengaluru.',
   canonicalPath: '/contact',
   keywords: [
-    'book bridal mehandi Srinagar',
+    'book bridal mehandi Kashmir',
     'book bridal mehandi Bengaluru',
     'Mehandi by Sana contact',
     'henna consultation India',
@@ -98,7 +98,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Working independently across Srinagar and Bengaluru, Sana
+                Working independently across Kashmir and Bengaluru, Sana
                 personally reviews every inquiry within 24 hours. Bridal dates
                 are best reserved 4–8 weeks ahead, custom cone batches dispatch
                 within 2 business days.
@@ -126,7 +126,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       <section className="editorial-container pt-12 md:pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           <aside className="lg:col-span-5 lg:sticky lg:top-28 space-y-5">
-            {/* Srinagar Concierge Dossier Plaque */}
+            {/* Kashmir Concierge Dossier Plaque */}
             <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-7 sm:p-8 shadow-[0_20px_50px_-18px_rgba(17,17,17,0.3)]">
               <div
                 aria-hidden="true"
@@ -139,7 +139,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 className="pointer-events-none hidden sm:block absolute top-6 right-6"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2 sm:pr-14">
-                Srinagar &amp; Bengaluru Concierge Desk
+                Kashmir &amp; Bengaluru Concierge Desk
               </p>
               <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-5 sm:pr-14">
                 Locations &amp; Direct Contact
@@ -154,7 +154,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     <span>Service Bases &amp; Dispatch</span>
                   </dt>
                   <dd className="text-plaque-ink leading-relaxed space-y-1">
-                    <span className="block">Srinagar, Jammu and Kashmir</span>
+                    <span className="block">Kashmir, J&amp;K</span>
                     <span className="block">Bengaluru, Karnataka</span>
                   </dd>
                 </div>
