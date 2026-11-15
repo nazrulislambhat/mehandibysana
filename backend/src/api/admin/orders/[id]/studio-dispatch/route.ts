@@ -27,9 +27,9 @@ import {
   type StudioPaymentStatus,
 } from "../../../../../lib/sync-order-payment";
 import {
-  notifyWhatsAppOrderShipped,
-  notifyWhatsAppPaymentReceived,
-} from "../../../../../lib/whatsapp";
+  notifyTelegramOrderShipped,
+  notifyTelegramPaymentReceived,
+} from "../../../../../lib/telegram";
 
 interface StudioDispatchBody {
   action?:
@@ -306,7 +306,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
 
       if (resolvedPaymentStatus === "paid") {
-        void notifyWhatsAppPaymentReceived({
+        void notifyTelegramPaymentReceived({
           orderNumber: deriveOrderNumber(updatedOrder || existingOrder),
           customerName:
             `${existingOrder.shipping_address?.first_name || ""} ${
@@ -473,7 +473,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       body.action === "ship_order" ||
       updatedMeta.fulfillment_stage === "dispatched"
     ) {
-      void notifyWhatsAppOrderShipped({
+      void notifyTelegramOrderShipped({
         orderNumber: deriveOrderNumber(finalOrder || updatedOrder || existingOrder),
         customerName:
           `${existingOrder.shipping_address?.first_name || ""} ${

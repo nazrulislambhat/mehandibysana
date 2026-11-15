@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import nodemailer from "nodemailer";
-import { sendWhatsAppMessage } from "./whatsapp";
+import { sendTelegramMessage } from "./telegram";
 import {
   ensureStudioEmailSettingsLoaded,
   getEffectiveEmailSettings,
@@ -495,7 +495,7 @@ export async function dispatchStudioNotification(
     });
   }
 
-  // Optional WhatsApp Instant Alert (Direct to Phone +91 9149648717 via CallMeBot)
+  // Optional Telegram Instant Alert (Direct to Phone via Bot API)
   try {
     const icon =
       event.type === "order_confirmed"
@@ -519,19 +519,21 @@ export async function dispatchStudioNotification(
               ? "ORDER DELIVERED"
               : "ORDER UPDATE";
 
-    const whatsappText = `${icon} *${title} — Mehandi by Sana*
+    const telegramText = `
+${icon} <b>${title} — Mehandi by Sana</b>
 
-*Order:* ${event.referenceId}
-*Customer:* ${event.recipientName} (${event.recipientEmail}${
+<b>Order:</b> ${event.referenceId}
+<b>Customer:</b> ${event.recipientName} (${event.recipientEmail}${
       event.recipientPhone ? ` · ${event.recipientPhone}` : ""
     })
 
-*Summary:*
-${event.summary}`;
+<b>Summary:</b>
+${event.summary}
+    `.trim();
 
-    void sendWhatsAppMessage(whatsappText);
-  } catch (waErr) {
-    console.warn("[Notifications] WhatsApp alert dispatch failed:", waErr);
+    void sendTelegramMessage(telegramText);
+  } catch (teleErr) {
+    console.warn("[Notifications] Telegram alert dispatch failed:", teleErr);
   }
 
   // Optional WhatsApp / Automation Webhook
