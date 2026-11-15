@@ -28,7 +28,7 @@ export const metadata: Metadata = buildPageMetadata({
   keywords: [
     'book bridal mehandi Kashmir',
     'book bridal mehandi Bengaluru',
-    'Mehandi by Sana contact',
+    'Mehandi By Sana contact',
     'henna consultation India',
   ],
 });

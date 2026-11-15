@@ -70,7 +70,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       recipientName: current[idx].name,
       recipientPhone: current[idx].phone,
       referenceId: current[idx].referenceId,
-      summary: `Your ${current[idx].service} booking with Mehandi by Sana${
+      summary: `Your ${current[idx].service} booking with Mehandi By Sana${
         current[idx].eventDate ? ` for ${current[idx].eventDate}` : ""
       } is confirmed${
         current[idx].advancePaidInr > 0

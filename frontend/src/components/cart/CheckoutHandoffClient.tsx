@@ -374,7 +374,7 @@ export function CheckoutHandoffClient() {
           key: createData.keyId,
           amount: createData.amountPaise ?? Math.round(serverVerifiedTotal * 100),
           currency: createData.currency || 'INR',
-          name: 'Mehandi by Sana',
+          name: 'Mehandi By Sana',
           description: `Organic Henna & Artist Supplies · PIN ${pincode}`,
           order_id: createData.razorpayOrderId,
           prefill: {

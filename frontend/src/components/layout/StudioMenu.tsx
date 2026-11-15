@@ -137,7 +137,7 @@ export function StudioMenu() {
             id="studio-navigation-drawer"
             role="dialog"
             aria-modal="true"
-            aria-label="Mehandi by Sana navigation menu"
+            aria-label="Mehandi By Sana navigation menu"
             className="fixed inset-0 z-50 flex flex-col"
           >
             {/* Backdrop scrim with smooth open/close fade */}
@@ -171,7 +171,7 @@ export function StudioMenu() {
                       className="inline-flex items-center gap-2.5 font-serif text-xl sm:text-2xl font-medium tracking-tight text-ink hover:text-terracotta py-1.5"
                     >
                       <BrandCrest tone="auto-badge" size={32} decorative className="shrink-0" />
-                      <span>Mehandi by Sana</span>
+                      <span>Mehandi By Sana</span>
                     </Link>
                     <span className="hidden sm:inline-flex items-center gap-2 rounded-full border border-hairline bg-linen/80 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-umber">
                       <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />

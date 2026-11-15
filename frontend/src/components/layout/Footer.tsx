@@ -53,7 +53,7 @@ export function Footer() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/"
-                  aria-label="Mehandi by Sana Home"
+                  aria-label="Mehandi By Sana Home"
                   className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-[2.1rem] font-medium tracking-tight text-plaque-ink hover:text-terracotta transition-colors"
                 >
                   <BrandCrest

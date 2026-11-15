@@ -1,4 +1,4 @@
-# Mehandi by Sana — Complete Local-to-Production Launch & Operations Guide (Option A: Managed PaaS)
+# Mehandi By Sana — Complete Local-to-Production Launch & Operations Guide (Option A: Managed PaaS)
 
 This guide covers the complete end-to-end path from your local workspace to live production on **mehandibysana.com** using **Option A (Managed PaaS — Zero Server Maintenance)**:
 
@@ -125,7 +125,7 @@ Medusa uses `@medusajs/medusa/file-s3` automatically whenever `S3_BUCKET`, `S3_A
 
    # Email Notifications & Campaigns (Step 5)
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxx
-   STUDIO_FROM_EMAIL="Mehandi by Sana <orders@mehandibysana.com>"
+   STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
    STUDIO_ADMIN_EMAIL=sana@mehandibysana.com
    ```
 
@@ -312,7 +312,7 @@ It supports **three providers automatically** (priority order):
 5. Add to **Railway Backend Variables** (and `backend/.env` locally if testing):
    ```bash
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxx
-   STUDIO_FROM_EMAIL="Mehandi by Sana <orders@mehandibysana.com>"
+   STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
    STUDIO_ADMIN_EMAIL=sana@mehandibysana.com
    STORE_SITE_URL=https://mehandibysana.com
    ```
@@ -327,7 +327,7 @@ SMTP_PORT=465
 SMTP_SECURE=true
 SMTP_USER=orders@mehandibysana.com
 SMTP_PASS=<ZOHO_APP_SPECIFIC_PASSWORD>
-STUDIO_FROM_EMAIL="Mehandi by Sana <orders@mehandibysana.com>"
+STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
 STUDIO_ADMIN_EMAIL=sana@mehandibysana.com
 ```
 *(If on Railway free/hobby tier and port `465`/`587` times out, switch immediately to `RESEND_API_KEY` or `BREVO_API_KEY`.)*

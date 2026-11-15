@@ -37,7 +37,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-23.webp',
     imageAlt:
-      'Full bridal arms and soles mandala henna featuring peacock motifs and floral vines by Mehandi by Sana',
+      'Full bridal arms and soles mandala henna featuring peacock motifs and floral vines by Mehandi By Sana',
     aspectClass: 'aspect-[4/5]',
     spanClass: 'lg:col-span-7',
   },
@@ -51,7 +51,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-22.webp',
     imageAlt:
-      'Kashmiri Chinar leaf silhouette mehandi woven into a floral palm design by Mehandi by Sana',
+      'Kashmiri Chinar leaf silhouette mehandi woven into a floral palm design by Mehandi By Sana',
     aspectClass: 'aspect-square',
     spanClass: 'lg:col-span-5 lg:mt-14',
   },
@@ -65,7 +65,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
     imageAlt:
-      'Lotus and fine jali grid mehandi work on hands for engagement by Mehandi by Sana',
+      'Lotus and fine jali grid mehandi work on hands for engagement by Mehandi By Sana',
     aspectClass: 'aspect-square',
     spanClass: 'lg:col-span-5',
   },
@@ -79,7 +79,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-19.jpg',
     imageAlt:
-      'Royal Mughal archways bridal mehandi design on forearms and palms by Mehandi by Sana',
+      'Royal Mughal archways bridal mehandi design on forearms and palms by Mehandi By Sana',
     aspectClass: 'aspect-[4/5]',
     spanClass: 'lg:col-span-7 lg:mt-10',
   },
@@ -93,7 +93,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-20.jpg',
     imageAlt:
-      'Minimalist hathphool cuff contemporary henna design with negative space by Mehandi by Sana',
+      'Minimalist hathphool cuff contemporary henna design with negative space by Mehandi By Sana',
     aspectClass: 'aspect-[4/5]',
     spanClass: 'lg:col-span-6',
   },
@@ -106,7 +106,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
       'Centerpiece sunburst medallion with crisp finger caps showing rich natural oxidation without chemical dyes.',
     imageSrc: 'https://mehandibysana.com/wp-content/uploads/2023/08/176480.jpg',
     imageAlt:
-      'Eid sunburst medallion organic henna palm stain with dark mahogany oxidation by Mehandi by Sana',
+      'Eid sunburst medallion organic henna palm stain with dark mahogany oxidation by Mehandi By Sana',
     aspectClass: 'aspect-[4/5]',
     spanClass: 'lg:col-span-6 lg:mt-12',
   },
@@ -122,7 +122,7 @@ export const metadata: Metadata = buildPageMetadata({
     'Chinar mehandi motif',
     'organic henna stain gallery',
     'Sumaiya Rashid Magray portfolio',
-    'Mehandi by Sana gallery',
+    'Mehandi By Sana gallery',
   ],
   images: [
     {

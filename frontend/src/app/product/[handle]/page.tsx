@@ -42,7 +42,7 @@ export async function generateMetadata({
     return buildPageMetadata({
       title: 'Product Not Found',
       description:
-        'This henna product could not be found in the Mehandi by Sana catalog.',
+        'This henna product could not be found in the Mehandi By Sana catalog.',
       canonicalPath: '/shop',
       robots: {
         index: false,
@@ -55,7 +55,7 @@ export async function generateMetadata({
   const rawDescription =
     product.shortDescription ||
     product.description ||
-    `Shop ${product.name} crafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`;
+    `Shop ${product.name} crafted in small batches by Mehandi By Sana across Kashmir & Bengaluru.`;
   const description = cleanSeoText(rawDescription, 158);
   const canonicalPath = `/product/${encodeURIComponent(product.slug)}`;
 
@@ -66,7 +66,7 @@ export async function generateMetadata({
     keywords: [
       product.name,
       ...(primaryCategory ? [primaryCategory] : []),
-      'Mehandi by Sana',
+      'Mehandi By Sana',
       'organic henna India',
     ],
     images:

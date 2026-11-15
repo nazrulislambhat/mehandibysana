@@ -122,7 +122,7 @@ export async function generateMetadata({
   const description = categoryCopy
     ? categoryCopy.description
     : activeCategoryObj
-      ? `Browse ${activeCategoryObj.name} products handcrafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`
+      ? `Browse ${activeCategoryObj.name} products handcrafted in small batches by Mehandi By Sana across Kashmir & Bengaluru.`
       : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, essential oils, aftercare balms, and artist tools crafted across Kashmir & Bengaluru.';
 
   return buildPageMetadata({
@@ -131,7 +131,7 @@ export async function generateMetadata({
     canonicalPath,
     keywords: [
       activeCategoryObj?.name || 'organic henna cones',
-      'Mehandi by Sana shop',
+      'Mehandi By Sana shop',
       '100% organic Sojat henna',
       'PPD free mehandi cones India',
       'henna aftercare balm',

@@ -362,20 +362,23 @@ function renderOrderDetailsTableHtml(
         </tr>
       </tbody>
     </table>
-    <div style="margin-top:14px;padding:12px 14px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.6;color:#3D3D3D;">
-      ${
-        b.dispatchOrigin
-          ? `<strong>Dispatch Origin:</strong> ${escapeHtml(b.dispatchOrigin)}<br/>`
-          : ""
-      }
-      <strong>Payment:</strong> ${escapeHtml(b.paymentStatusLabel)} &middot; ${escapeHtml(
-        b.paymentMethodLabel
-      )}${b.paymentRef ? ` (Ref: ${escapeHtml(b.paymentRef)})` : ""}<br/>
+    <div style="margin-top:16px;padding:14px 16px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.65;color:#3D3D3D;">
+      <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#96410D;">
+        Customer &amp; Delivery Information
+      </p>
+      <strong>Customer:</strong> ${escapeHtml(b.customerName)}${
+        b.phone ? ` &middot; 📞 ${escapeHtml(b.phone)}` : ""
+      }${b.email ? ` &middot; ✉️ ${escapeHtml(b.email)}` : ""}<br/>
       ${
         b.addressText
-          ? `<strong>Delivery To:</strong> ${escapeHtml(b.customerName)} &mdash; ${escapeHtml(
-              b.addressText
-            )}${b.phone ? ` &middot; ${escapeHtml(b.phone)}` : ""}`
+          ? `<strong>Delivery Address:</strong> ${escapeHtml(b.addressText)}<br/>`
+          : ""
+      }
+      <strong>Payment:</strong> ${escapeHtml(b.paymentStatusLabel)} (${escapeHtml(
+        b.paymentMethodLabel
+      )})${b.paymentRef ? ` &middot; Ref: <code>${escapeHtml(b.paymentRef)}</code>` : ""}${
+        b.dispatchOrigin
+          ? `<br/><strong>Dispatch Origin:</strong> ${escapeHtml(b.dispatchOrigin)}`
           : ""
       }
     </div>
@@ -456,7 +459,7 @@ export async function sendOrderConfirmationEmail(
       : "";
 
   const summary = [
-    `Thank you for your order (${b.orderNumber}) with Mehandi by Sana! Fresh organic henna is being prepared for you across Kashmir & Bengaluru.`,
+    `Thank you for your order (${b.orderNumber}) with Mehandi By Sana! Fresh organic henna is being prepared for you across Kashmir & Bengaluru.`,
     `Items Ordered:\n${itemLines}\n\nSubtotal: ${formatInr(b.subtotal)}\nShipping${
       b.pincode ? ` (PIN ${b.pincode})` : ""
     }: ${b.shippingFee === 0 ? "Free" : formatInr(b.shippingFee)}\n${couponLine}Total: ${formatInr(
@@ -635,24 +638,24 @@ export async function sendOrderShippingEmail(
   } else if (kind === "delivered") {
     notifType = "order_delivered";
     summaryLines.push(
-      `Your Mehandi by Sana order (${b.orderNumber}) has been delivered${
+      `Your Mehandi By Sana order (${b.orderNumber}) has been delivered${
         courierName ? ` via ${courierName}` : ""
       }. We hope your organic henna cones stain rich and deep!`
     );
   } else if (kind === "completed") {
     notifType = "order_completed";
     summaryLines.push(
-      `Your Mehandi by Sana order (${b.orderNumber}) has been marked completed.`
+      `Your Mehandi By Sana order (${b.orderNumber}) has been marked completed.`
     );
   } else if (kind === "preparing") {
     notifType = "order_preparing";
     summaryLines.push(
-      `Your Mehandi by Sana order (${b.orderNumber}) is currently being freshly mixed and packed in small batches.`
+      `Your Mehandi By Sana order (${b.orderNumber}) is currently being freshly mixed and packed in small batches.`
     );
   } else {
     notifType = "order_dispatched";
     summaryLines.push(
-      `Good news! Your Mehandi by Sana order (${b.orderNumber}) has been shipped via ${courierName}.`
+      `Good news! Your Mehandi By Sana order (${b.orderNumber}) has been shipped via ${courierName}.`
     );
     if (trackingNumber) {
       summaryLines.push(`Tracking / AWB Details: ${trackingNumber}`);

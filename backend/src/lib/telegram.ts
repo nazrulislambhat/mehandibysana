@@ -246,7 +246,7 @@ export async function notifyTelegramOrderPlaced(order: {
     : "";
 
   const message = `
-🛍️ <b>NEW ORDER PLACED — Mehandi by Sana</b>
+🛍️ <b>NEW ORDER PLACED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(order.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
@@ -299,7 +299,7 @@ export async function notifyTelegramOrderShipped(order: {
       : "";
 
   const message = `
-🚀 <b>ORDER SHIPPED / DISPATCHED — Mehandi by Sana</b>
+🚀 <b>ORDER SHIPPED / DISPATCHED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(order.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
@@ -345,7 +345,7 @@ export async function notifyTelegramPaymentReceived(payment: {
       : "";
 
   const message = `
-💰 <b>PAYMENT RECORDED — Mehandi by Sana</b>
+💰 <b>PAYMENT RECORDED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(payment.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(payment.customerName)}
@@ -366,7 +366,7 @@ ${payment.referenceId ? `🔖 <b>UTR / Ref ID:</b> <code>${escapeTelegramHtml(pa
  */
 export async function testTelegramAlert(targetPhone = "9149648717") {
   const message = `
-✨ <b>Mehandi by Sana — Telegram Alerts Activated!</b>
+✨ <b>Mehandi By Sana — Telegram Alerts Activated!</b>
 
 This confirms that your Telegram Order Notification bot is connected to your phone (+91 ${targetPhone}).
 

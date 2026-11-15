@@ -28,10 +28,10 @@ export async function generateMetadata({
   return buildPageMetadata({
     title: 'Track Your Order',
     description:
-      'Check live small-batch preparation, PIN-zone courier dispatch, and AWB tracking milestones for your Mehandi by Sana organic henna order.',
+      'Check live small-batch preparation, PIN-zone courier dispatch, and AWB tracking milestones for your Mehandi By Sana organic henna order.',
     canonicalPath: '/track-order',
     keywords: [
-      'Mehandi by Sana order tracker',
+      'Mehandi By Sana order tracker',
       'track organic henna parcel India',
     ],
     ...(hasLookupParams

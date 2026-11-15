@@ -195,7 +195,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         paymentId: meta.payment_id || "",
         trackingNumber: meta.tracking_number || "",
         trackingUrl: sanitizeHttpUrl(meta.tracking_url),
-        courierName: meta.courier_name || "Mehandi by Sana Dispatch",
+        courierName: meta.courier_name || "Mehandi By Sana Dispatch",
         dispatchNote: meta.dispatch_note ? String(meta.dispatch_note) : "",
         pincodeRule: meta.pincode_rule || "*",
         couponCode,

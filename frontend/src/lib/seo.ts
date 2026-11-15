@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/env';
 
-export const SITE_NAME = 'Mehandi by Sana';
+export const SITE_NAME = 'Mehandi By Sana';
 export const DEFAULT_OG_IMAGE_PATH = '/opengraph-image';
 export const STUDIO_PHONE = '+91-9149648717';
 export const STUDIO_EMAIL = 'sana@mehandibysana.com';

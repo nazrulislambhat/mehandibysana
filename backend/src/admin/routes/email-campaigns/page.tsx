@@ -106,7 +106,7 @@ const EmailCampaignsAdminPage = () => {
   const [preferredProvider, setPreferredProvider] =
     useState<PreferredProvider>("auto");
   const [fromEmail, setFromEmail] = useState(
-    "Mehandi by Sana <orders@mehandibysana.com>"
+    "Mehandi By Sana <orders@mehandibysana.com>"
   );
   const [adminEmail, setAdminEmail] = useState("");
   const [storefrontUrl, setStorefrontUrl] = useState(
@@ -139,7 +139,7 @@ const EmailCampaignsAdminPage = () => {
   // Bulk campaign composer state
   const [testEmail, setTestEmail] = useState("sana@mehandibysana.com");
   const [subject, setSubject] = useState(
-    "Freshly Rolled Organic Sojat Henna Batch Open — Mehandi by Sana"
+    "Freshly Rolled Organic Sojat Henna Batch Open — Mehandi By Sana"
   );
   const [bodyText, setBodyText] = useState(
     "This week's fresh organic Sojat henna paste and 0.38mm pin-tip bridal cones are freshly mixed and packed across Kashmir & Bengaluru.\n\nOrders dispatch Pan-India within 2 business days with frozen-fresh storage guidance included."
@@ -152,7 +152,7 @@ const EmailCampaignsAdminPage = () => {
     setSavedMeta(s);
     setPreferredProvider(s.preferredProvider || "auto");
     setFromEmail(
-      s.fromEmail || "Mehandi by Sana <orders@mehandibysana.com>"
+      s.fromEmail || "Mehandi By Sana <orders@mehandibysana.com>"
     );
     setAdminEmail(s.adminEmail || "");
     setStorefrontUrl(s.storefrontUrl || "https://mehandibysana.com");
@@ -518,7 +518,7 @@ const EmailCampaignsAdminPage = () => {
             <Label size="xsmall">From Email</Label>
             <Input
               size="small"
-              placeholder="Mehandi by Sana <orders@mehandibysana.com>"
+              placeholder="Mehandi By Sana <orders@mehandibysana.com>"
               value={fromEmail}
               onChange={(e) => setFromEmail(e.target.value)}
             />

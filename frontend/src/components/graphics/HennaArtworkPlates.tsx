@@ -19,7 +19,7 @@ export function HeroHennaComposition({ className = '' }: { className?: string })
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Botanical henna mandala and cone illustration by Mehandi by Sana"
+      aria-label="Botanical henna mandala and cone illustration by Mehandi By Sana"
       className={className}
     >
       {/* Subtle Adaptive Arch Ground & Architectural Hairlines */}

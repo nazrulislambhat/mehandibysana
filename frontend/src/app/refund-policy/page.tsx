@@ -13,7 +13,7 @@ export const metadata: Metadata = buildPageMetadata({
     'Perishable fresh organic henna cone rules, 48-hour transit damage claim process, sealed tool returns, cancellations, and 5–7 day Razorpay refund timelines.',
   canonicalPath: '/refund-policy',
   keywords: [
-    'Mehandi by Sana refund policy',
+    'Mehandi By Sana refund policy',
     'organic henna return policy',
     'order cancellation henna store',
   ],

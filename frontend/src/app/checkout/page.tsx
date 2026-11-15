@@ -6,7 +6,7 @@ import { CheckoutHandoffClient } from '@/components/cart/CheckoutHandoffClient';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Checkout',
   description:
-    'Complete your Mehandi by Sana order securely with Razorpay UPI, cards, or Cash on Delivery across serviceable India PIN codes.',
+    'Complete your Mehandi By Sana order securely with Razorpay UPI, cards, or Cash on Delivery across serviceable India PIN codes.',
   canonicalPath: '/checkout',
   robots: {
     index: false,

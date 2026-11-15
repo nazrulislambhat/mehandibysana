@@ -132,7 +132,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     const text =
       body.customMessage?.trim() ||
       `
-✨ <b>Mehandi by Sana — Telegram Alerts Activated!</b>
+✨ <b>Mehandi By Sana — Telegram Alerts Activated!</b>
 
 This confirms that your Telegram Order Notification bot is connected to your phone (+91 ${targetPhone}).
 

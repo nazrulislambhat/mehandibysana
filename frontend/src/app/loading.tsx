@@ -6,7 +6,7 @@ export default function AppLoading() {
   return (
     <div
       aria-busy="true"
-      aria-label="Loading Mehandi by Sana storefront content"
+      aria-label="Loading Mehandi By Sana storefront content"
       className="editorial-container py-20 md:py-28"
     >
       <div className="max-w-3xl mx-auto space-y-8 animate-pulse motion-reduce:animate-none">

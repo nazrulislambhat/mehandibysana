@@ -30,7 +30,7 @@ export const metadata: Metadata = buildPageMetadata({
   canonicalPath: '/about',
   keywords: [
     'Sumaiya Rashid Magray',
-    'Mehandi by Sana story',
+    'Mehandi By Sana story',
     'Kashmir organic henna pioneer',
     'Kashmir Bengaluru freelance henna artist',
     'Maenz 2019 Kashmir',
@@ -84,7 +84,7 @@ const AWARDS_AND_HONORS: AwardHonorItem[] = [
     category: 'Regional Press Profile',
     title: 'Indus Post',
     description:
-      '“Meet Kashmir’s first organic henna artist” — profiling Mehandi by Sana’s handcrafted organic henna cones and bridal practice.',
+      '“Meet Kashmir’s first organic henna artist” — profiling Mehandi By Sana’s handcrafted organic henna cones and bridal practice.',
     links: [
       {
         label: 'Read profile',
@@ -213,7 +213,7 @@ export default function AboutPage() {
                   className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                 />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  04 &middot; About Mehandi by Sana
+                  04 &middot; About Mehandi By Sana
                 </p>
               </div>
               <TextReveal variant="line" immediate>
@@ -226,7 +226,7 @@ export default function AboutPage() {
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with handcrafted organic henna products across Kashmir and Bengaluru.
+                Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi By Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with handcrafted organic henna products across Kashmir and Bengaluru.
               </p>
               
             </div>

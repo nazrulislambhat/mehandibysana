@@ -441,7 +441,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     let emailResult: DispatchNotificationResult | null = null;
     let emailSkippedReason: string | null = null;
 
-    if (body.sendEmail) {
+    const shouldSendEmail =
+      body.sendEmail === true ||
+      (body.sendEmail !== false &&
+        (body.action === "ship_order" ||
+          body.action === "complete_order" ||
+          updatedMeta.fulfillment_stage === "dispatched"));
+
+    if (shouldSendEmail) {
       const resolvedStage = normalizeFulfillmentStage(
         updatedMeta.fulfillment_stage,
         updatedOrder?.status || existingOrder.status
@@ -450,7 +457,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const emailKind: "dispatched" | "delivered" | "preparing" | "completed" =
         resolvedStage === "delivered"
           ? "delivered"
-          : resolvedStage === "dispatched"
+          : resolvedStage === "dispatched" || body.action === "ship_order"
             ? "dispatched"
             : body.action === "complete_order"
               ? "completed"
@@ -472,7 +479,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       emailSkippedReason = outcome.skippedReason || null;
     }
 
-    const finalOrder = body.sendEmail
+    const finalOrder = shouldSendEmail
       ? await fetchRefreshedOrderDetail(req.scope, id)
       : updatedOrder;
 

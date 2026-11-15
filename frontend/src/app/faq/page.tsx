@@ -15,7 +15,7 @@ export const metadata: Metadata = buildPageMetadata({
     'Answers on 100% PPD-free organic henna cones, -18°C freezer storage, 48-hour stain oxidation, Pan-India PIN delivery, Razorpay payments, and Kashmir & Bengaluru bridal bookings.',
   canonicalPath: '/faq',
   keywords: [
-    'Mehandi by Sana FAQ',
+    'Mehandi By Sana FAQ',
     'PPD free organic henna cones',
     'how long fresh henna cones last',
     'bridal mehandi booking FAQ',

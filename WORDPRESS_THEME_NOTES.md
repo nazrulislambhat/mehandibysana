@@ -270,7 +270,7 @@ body.woocommerce-checkout {
 ```php
 <?php
 /**
- * Plugin Name: Mehandi by Sana — Store API Cart-Token Checkout Handoff
+ * Plugin Name: Mehandi By Sana — Store API Cart-Token Checkout Handoff
  * Description: Bridges incoming ?cart_token= JWT from the headless Next.js storefront into WC()->session on /checkout/.
  */
 

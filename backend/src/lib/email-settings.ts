@@ -174,12 +174,14 @@ export function getEffectiveEmailSettings(): StudioEmailSettingsRecord {
   const fromEmail =
     db.fromEmail?.trim() ||
     process.env.STUDIO_FROM_EMAIL?.trim() ||
-    "Mehandi by Sana <orders@mehandibysana.com>";
+    "Mehandi By Sana <orders@mehandibysana.com>";
 
   const adminEmail =
-    db.adminEmail !== undefined && db.updatedAt
+    db.adminEmail !== undefined && db.updatedAt && db.adminEmail.trim()
       ? db.adminEmail.trim()
-      : db.adminEmail?.trim() || process.env.STUDIO_ADMIN_EMAIL?.trim() || "";
+      : db.adminEmail?.trim() ||
+        process.env.STUDIO_ADMIN_EMAIL?.trim() ||
+        "sana@mehandibysana.com";
 
   const storefrontUrl = (
     db.storefrontUrl?.trim() ||

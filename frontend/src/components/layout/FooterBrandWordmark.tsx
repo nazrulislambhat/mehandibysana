@@ -63,7 +63,7 @@ export function FooterBrandWordmark() {
       className="footer-wordmark-frame w-full pointer-events-none select-none overflow-hidden"
     >
       <p
-        aria-label="Mehandi by Sana"
+        aria-label="Mehandi By Sana"
         className="m-0 font-sans font-semibold uppercase tracking-[-0.015em] leading-[0.84] text-[clamp(2rem,10.2cqi,9.75rem)] text-plaque-ink/[0.05] flex items-baseline justify-center whitespace-nowrap w-full"
       >
         <span className="sr-only">MEHANDI BY SANA</span>

@@ -14,7 +14,7 @@ export default function RouteError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Mehandi by Sana Route Error]:', error);
+    console.error('[Mehandi By Sana Route Error]:', error);
   }, [error]);
 
   return (

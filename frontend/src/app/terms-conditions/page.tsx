@@ -13,10 +13,10 @@ import { LinkButton } from '@/components/ui/Button';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Terms & Conditions',
   description:
-    'Storefront, organic henna product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi by Sana (Kashmir & Bengaluru).',
+    'Storefront, organic henna product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi By Sana (Kashmir & Bengaluru).',
   canonicalPath: '/terms-conditions',
   keywords: [
-    'Mehandi by Sana terms and conditions',
+    'Mehandi By Sana terms and conditions',
     'henna storefront terms India',
   ],
 });
@@ -108,7 +108,7 @@ export default function TermsConditionsPage() {
           Small-Batch Purity &amp; Mandatory Perishable Care
         </h2>
         <p className="text-umber">
-          Every organic henna cone sold by Mehandi by Sana is hand-mixed in small batches using triple-sifted Sojat henna leaf powder, pure steam-distilled essential oils (eucalyptus, lavender, or cajeput), sugar, and lemon hydrosol, with{' '}
+          Every organic henna cone sold by Mehandi By Sana is hand-mixed in small batches using triple-sifted Sojat henna leaf powder, pure steam-distilled essential oils (eucalyptus, lavender, or cajeput), sugar, and lemon hydrosol, with{' '}
           <strong>0% PPD, ammonia, synthetic dyes, or chemical preservatives</strong>.
         </p>
         <div className="rounded-xl border border-terracotta/35 bg-linen p-4 text-xs sm:text-sm text-ink space-y-1.5">
@@ -284,7 +284,7 @@ export default function TermsConditionsPage() {
           Natural Results Disclaimer &amp; Limitation of Liability
         </h2>
         <p className="text-umber">
-          Natural henna stain darkness varies naturally across skin thickness, body warmth, circulation, pre-application oils/lotions, and post-removal water avoidance. While our formulations are crafted for rich mahogany oxidation, no artificial chemical guarantees are made. To the maximum extent permitted by Indian law, Mehandi by Sana&rsquo;s total cumulative liability for any claim relating to an order or booking shall not exceed the actual amount paid by the Customer for that specific order or booking.
+          Natural henna stain darkness varies naturally across skin thickness, body warmth, circulation, pre-application oils/lotions, and post-removal water avoidance. While our formulations are crafted for rich mahogany oxidation, no artificial chemical guarantees are made. To the maximum extent permitted by Indian law, Mehandi By Sana&rsquo;s total cumulative liability for any claim relating to an order or booking shall not exceed the actual amount paid by the Customer for that specific order or booking.
         </p>
       </section>
 

@@ -143,7 +143,7 @@ export async function POST(req: NextRequest) {
     await Promise.allSettled([
       sendFrontendFallbackEmail({
         to: email,
-        subject: `Booking Inquiry Received (${referenceId}) — Mehandi by Sana`,
+        subject: `Booking Inquiry Received (${referenceId}) — Mehandi By Sana`,
         text: `Assalamu Alaikum / Hello ${name},\n\n${customerSummary}\n\nReference: ${referenceId}`,
         html: renderStudioFallbackEmailHtml({
           eyebrow: 'Booking Inquiry Received',

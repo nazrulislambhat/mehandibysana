@@ -96,7 +96,7 @@ function parseFromHeader(fromRaw: string): { name: string; email: string } {
   if (match) {
     return { name: match[1].trim(), email: match[2].trim() };
   }
-  return { name: "Mehandi by Sana", email: fromRaw.trim() };
+  return { name: "Mehandi By Sana", email: fromRaw.trim() };
 }
 
 export function renderBrandedStudioEmailHtml(params: {
@@ -146,10 +146,10 @@ export function renderBrandedStudioEmailHtml(params: {
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-bottom:20px;border-bottom:1px solid #e7ddcf;padding-bottom:16px;">
         <tr>
           <td style="width:52px;vertical-align:middle;">
-            <img src="${escapeHtml(displaySiteUrl)}/icons/icon-96x96.png" alt="Mehandi by Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;" />
+            <img src="${escapeHtml(displaySiteUrl)}/icons/icon-96x96.png" alt="Mehandi By Sana emblem" width="44" height="44" style="display:block;width:44px;height:44px;border-radius:10px;border:0;" />
           </td>
           <td style="vertical-align:middle;padding-left:12px;">
-            <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#181818;line-height:1.15;">Mehandi by Sana</span>
+            <span style="display:block;font-family:Georgia,serif;font-size:20px;font-weight:500;color:#181818;line-height:1.15;">Mehandi By Sana</span>
             <span style="display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#96410D;margin-top:3px;">Kashmir &amp; Bengaluru &middot; 0% PPD Organic Henna</span>
           </td>
         </tr>
@@ -374,18 +374,18 @@ export async function dispatchStudioNotification(
   const siteUrl = settings.storefrontUrl || "https://mehandibysana.com";
 
   const subjectMap: Record<NotificationEvent["type"], string> = {
-    order_confirmed: `Order Confirmed (${event.referenceId}) — Mehandi by Sana`,
-    order_preparing: `Order Preparing (${event.referenceId}) — Mehandi by Sana`,
-    order_dispatched: `Order Shipped (${event.referenceId}) — Mehandi by Sana`,
-    order_delivered: `Order Delivered (${event.referenceId}) — Mehandi by Sana`,
-    order_completed: `Order Completed (${event.referenceId}) — Mehandi by Sana`,
-    order_payment_offline: `Payment Received (${event.referenceId}) — Mehandi by Sana`,
-    bridal_booking_received: `Booking Inquiry Received (${event.referenceId}) — Mehandi by Sana`,
-    bridal_booking_confirmed: `Bridal Session Confirmed (${event.referenceId}) — Mehandi by Sana`,
-    newsletter_subscribed: `Welcome to the Mehandi by Sana Dispatch List`,
-    password_reset: `Reset Your Password (${event.referenceId}) — Mehandi by Sana`,
-    customer_welcome: `Welcome to Mehandi by Sana — 100% Pure Organic Henna`,
-    admin_invite: `Invitation to Mehandi by Sana Admin Dashboard`,
+    order_confirmed: `Order Confirmed (${event.referenceId}) — Mehandi By Sana`,
+    order_preparing: `Order Preparing (${event.referenceId}) — Mehandi By Sana`,
+    order_dispatched: `Order Shipped (${event.referenceId}) — Mehandi By Sana`,
+    order_delivered: `Order Delivered (${event.referenceId}) — Mehandi By Sana`,
+    order_completed: `Order Completed (${event.referenceId}) — Mehandi By Sana`,
+    order_payment_offline: `Payment Received (${event.referenceId}) — Mehandi By Sana`,
+    bridal_booking_received: `Booking Inquiry Received (${event.referenceId}) — Mehandi By Sana`,
+    bridal_booking_confirmed: `Bridal Session Confirmed (${event.referenceId}) — Mehandi By Sana`,
+    newsletter_subscribed: `Welcome to the Mehandi By Sana Dispatch List`,
+    password_reset: `Reset Your Password (${event.referenceId}) — Mehandi By Sana`,
+    customer_welcome: `Welcome to Mehandi By Sana — 100% Pure Organic Henna`,
+    admin_invite: `Invitation to Mehandi By Sana Admin Dashboard`,
   };
 
   const eyebrowMap: Record<NotificationEvent["type"], string> = {
@@ -399,7 +399,7 @@ export async function dispatchStudioNotification(
     bridal_booking_confirmed: "Appointment Confirmed",
     newsletter_subscribed: "Fresh Batch Dispatch List",
     password_reset: "Account Security",
-    customer_welcome: "Welcome to Mehandi by Sana",
+    customer_welcome: "Welcome to Mehandi By Sana",
     admin_invite: "Staff Invitation",
   };
 
@@ -424,11 +424,11 @@ export async function dispatchStudioNotification(
 
   const plainText = `Assalamu Alaikum / Hello ${event.recipientName},\n\n${event.summary}\n\nReference: ${event.referenceId}\n${
     isOrderEvent ? `Track your order anytime: ${trackUrl}\n` : ""
-  }\nWarm regards,\nMehandi by Sana · Kashmir & Bengaluru\n${siteUrl}`;
+  }\nWarm regards,\nMehandi By Sana · Kashmir & Bengaluru\n${siteUrl}`;
 
   const html = renderBrandedStudioEmailHtml({
     eyebrow: eyebrowMap[event.type],
-    heading: subjectMap[event.type].replace(" — Mehandi by Sana", ""),
+    heading: subjectMap[event.type].replace(" — Mehandi By Sana", ""),
     bodyParagraphs: [
       `Assalamu Alaikum / Hello ${event.recipientName},`,
       ...event.summary.split(/\n{2,}/),
@@ -555,7 +555,7 @@ export async function dispatchStudioNotification(
         : "";
 
       const telegramText = `
-${icon} <b>${title} — Mehandi by Sana</b>
+${icon} <b>${title} — Mehandi By Sana</b>
 
 <b>Reference:</b> #${escapeTelegramHtml(event.referenceId)}
 <b>Customer:</b> ${escapeTelegramHtml(event.recipientName)}${phoneBlock}${emailBlock}
@@ -640,17 +640,17 @@ export async function sendBulkCampaignBatch(params: {
 
     const text = `${greeting}\n\n${params.bodyText}\n\n${
       params.ctaLabel && params.ctaUrl ? `${params.ctaLabel}: ${params.ctaUrl}\n\n` : ""
-    }Warm regards,\nMehandi by Sana · Kashmir & Bengaluru\n${status.storefrontUrl}\n\nTo opt out of dispatch updates, simply reply "Unsubscribe" to sana@mehandibysana.com.`;
+    }Warm regards,\nMehandi By Sana · Kashmir & Bengaluru\n${status.storefrontUrl}\n\nTo opt out of dispatch updates, simply reply "Unsubscribe" to sana@mehandibysana.com.`;
 
     const html = renderBrandedStudioEmailHtml({
-      eyebrow: params.eyebrow || "Mehandi by Sana · Dispatch Update",
+      eyebrow: params.eyebrow || "Mehandi By Sana · Dispatch Update",
       heading: params.subject,
       bodyParagraphs: [greeting, ...params.bodyText.split(/\n{2,}/)],
       ctaLabel: params.ctaLabel,
       ctaUrl: params.ctaUrl,
       storefrontUrl: status.storefrontUrl,
       footerNote:
-        'You received this because you shopped or booked with Mehandi by Sana. Reply "Unsubscribe" to opt out.',
+        'You received this because you shopped or booked with Mehandi By Sana. Reply "Unsubscribe" to opt out.',
     });
 
     const result = await sendStudioEmail({

@@ -220,7 +220,7 @@ const BridalBookingsAdminPage = () => {
                       {b.phone ? (
                         <a
                           href={`https://wa.me/${b.phone.replace(/\D/g, "")}?text=${encodeURIComponent(
-                            `Assalamu Alaikum ${b.name}, regarding your Mehandi by Sana booking inquiry (${b.referenceId}): `
+                            `Assalamu Alaikum ${b.name}, regarding your Mehandi By Sana booking inquiry (${b.referenceId}): `
                           )}`}
                           target="_blank"
                           rel="noreferrer"

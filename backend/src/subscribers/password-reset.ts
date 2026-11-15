@@ -62,7 +62,7 @@ export default async function authAndAccountHandler({
 
     const summary = [
       `Assalamu Alaikum / Hello,`,
-      `We received a request to reset the password for your Mehandi by Sana ${accountTypeLabel} account (${recipientEmail}).`,
+      `We received a request to reset the password for your Mehandi By Sana ${accountTypeLabel} account (${recipientEmail}).`,
       `To choose a new password, click the secure link below. This password reset link is valid for 15 minutes.`,
       `If you did not request this change, please ignore this email. Your password will remain unchanged.`,
     ].join("\n\n");
@@ -97,7 +97,7 @@ export default async function authAndAccountHandler({
     const inviteUrl = `${adminUrl}/invite?token=${encodeURIComponent(token)}`;
     const summary = [
       `Assalamu Alaikum / Hello,`,
-      `You have been invited to join the Mehandi by Sana studio operations and admin portal.`,
+      `You have been invited to join the Mehandi By Sana studio operations and admin portal.`,
       `Click the button below to accept your invitation and configure your admin credentials.`,
     ].join("\n\n");
 
@@ -131,16 +131,16 @@ export default async function authAndAccountHandler({
 
     const summary = [
       `Assalamu Alaikum / Welcome ${firstName},`,
-      `Thank you for creating an account with Mehandi by Sana. We are dedicated to 100% natural, PPD-free organic henna across Kashmir and Bengaluru.`,
+      `Thank you for creating an account with Mehandi By Sana. We are dedicated to 100% natural, PPD-free organic henna across Kashmir and Bengaluru.`,
       `Through your account, you can track fresh cone batches, view order history, and access curated stain care guides.`,
     ].join("\n\n");
 
     const html = renderBrandedStudioEmailHtml({
       eyebrow: "Welcome to the Studio",
-      heading: "Welcome to Mehandi by Sana",
+      heading: "Welcome to Mehandi By Sana",
       bodyParagraphs: [
         `Assalamu Alaikum / Welcome ${firstName},`,
-        `Thank you for joining Mehandi by Sana. Every cone, powder batch, and aftercare product we prepare is 100% pure, chemical-free, and crafted from premium Rajasthani Sojat crops and pure essential oils.`,
+        `Thank you for joining Mehandi By Sana. Every cone, powder batch, and aftercare product we prepare is 100% pure, chemical-free, and crafted from premium Rajasthani Sojat crops and pure essential oils.`,
         `Track orders, discover fresh harvest cone batches, and explore aftercare recommendations anytime from our shop.`,
       ],
       referenceId: `WELCOME-${recipientEmail.split("@")[0].toUpperCase()}`,
@@ -153,7 +153,7 @@ export default async function authAndAccountHandler({
     try {
       await sendStudioEmail({
         to: recipientEmail,
-        subject: `Welcome to Mehandi by Sana — 100% Pure Organic Henna`,
+        subject: `Welcome to Mehandi By Sana — 100% Pure Organic Henna`,
         text: summary,
         html,
         scope: container as any,
