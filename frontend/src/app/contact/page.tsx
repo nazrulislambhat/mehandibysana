@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ShoppingBag } from 'lucide-react';
-import { CircleArrowUpRightExit } from '@/components/ui/icons';
 import { buildPageMetadata } from '@/lib/seo';
 import {
   buildBreadcrumbJsonLd,
@@ -210,8 +209,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                     >
-                      <span>Chat on WhatsApp (+91-9149648717)</span>
-                      <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
+                      Chat on WhatsApp (+91-9149648717)
                     </a>
                   </dd>
                 </div>
@@ -230,8 +228,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                     >
-                      <span>@mehandibysana</span>
-                      <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
+                      @mehandibysana
                     </a>
                   </dd>
                 </div>

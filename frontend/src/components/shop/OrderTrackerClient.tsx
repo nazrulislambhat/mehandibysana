@@ -326,7 +326,7 @@ export function OrderTrackerClient({
                   className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-plaque-ink transition-colors inline-flex items-center gap-1.5"
                 >
                   <span>Open Courier Tracking</span>
-                  <CircleArrowUpRightExit className="w-3.5 h-3.5" />
+                  <CircleArrowUpRightExit className="w-3 h-3" />
                 </a>
               ) : null}
             </div>
@@ -492,10 +492,9 @@ export function OrderTrackerClient({
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-md border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
+                className="inline-flex items-center justify-center min-h-[44px] rounded-md border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
               >
-                <span>Ask Sana on WhatsApp</span>
-                <CircleArrowUpRightExit className="w-3.5 h-3.5 opacity-80" />
+                Ask Sana on WhatsApp
               </a>
               <LinkButton
                 href="/shop"

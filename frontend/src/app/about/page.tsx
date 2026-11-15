@@ -416,7 +416,7 @@ export default function AboutPage() {
                           className="inline-flex items-center gap-1.5 rounded-full border border-terracotta/45 px-3.5 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
                         >
                           <span>{link.label}</span>
-                          <CircleArrowUpRightExit className="w-3.5 h-3.5" />
+                          <CircleArrowUpRightExit className="w-3 h-3" />
                         </a>
                       ))}
                     </div>
