@@ -1,0 +1,87 @@
+name: Railway Database Backup
+
+on:
+  schedule:
+    # Runs daily at 02:00 AM UTC (07:30 AM IST)
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Optional note/reason for manual backup snapshot'
+        required: false
+        default: 'Manual on-demand snapshot'
+
+jobs:
+  backup:
+    name: Backup PostgreSQL Database
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install PostgreSQL Client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client
+
+      - name: Verify Secret Availability
+        env:
+          DB_URL: ${{ secrets.RAILWAY_STAGING_DATABASE_URL }}
+        run: |
+          if [ -z "$DB_URL" ]; then
+            echo "::error::Secret RAILWAY_STAGING_DATABASE_URL is not configured in repository settings."
+            exit 1
+          fi
+          echo "Database URL secret detected."
+
+      - name: Create Database Dump
+        env:
+          DB_URL: ${{ secrets.RAILWAY_STAGING_DATABASE_URL }}
+          REASON: ${{ github.event.inputs.reason || 'Automated daily backup' }}
+        run: |
+          mkdir -p backups
+          TIMESTAMP=$(date -u +%Y%m%d_%H%M%S)
+          BACKUP_FILE="backups/railway_backup_${TIMESTAMP}.sql.gz"
+          META_FILE="backups/railway_backup_${TIMESTAMP}_metadata.txt"
+
+          echo "Starting pg_dump at $(date -u)..."
+          echo "Reason: $REASON"
+
+          # Perform pg_dump with clean, if-exists and compression
+          pg_dump "$DB_URL" \
+            --no-owner \
+            --no-acl \
+            --clean \
+            --if-exists \
+            --format=plain | gzip -9 > "$BACKUP_FILE"
+
+          # Verify non-empty backup file
+          if [ ! -s "$BACKUP_FILE" ]; then
+            echo "::error::Backup file is empty or failed to generate."
+            exit 1
+          fi
+
+          FILE_SIZE=$(du -h "$BACKUP_FILE" | cut -f1)
+          echo "Backup created successfully: $BACKUP_FILE ($FILE_SIZE)"
+
+          # Write metadata summary
+          cat <<EOF > "$META_FILE"
+          Mehandi By Sana — Railway PostgreSQL Backup
+          ===========================================
+          Generated At (UTC): $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          Run ID: ${{ github.run_id }}
+          Trigger: ${{ github.event_name }}
+          Reason: $REASON
+          File Name: $(basename "$BACKUP_FILE")
+          File Size: $FILE_SIZE
+          Restore Command:
+            gunzip -c $(basename "$BACKUP_FILE") | psql "\$DATABASE_URL"
+          EOF
+
+          echo "Metadata generated:"
+          cat "$META_FILE"
+
+      - name: Upload Backup Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: railway-db-backup-${{ github.run_id }}
+          path: backups/
+          retention-days: 90
