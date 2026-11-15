@@ -84,12 +84,12 @@ interface SanitizedEmailSettings {
 }
 
 const SEGMENT_LABELS: Record<CampaignSegment, string> = {
-  all: "All Valid Customers",
+  all: "All Marketable Customers",
+  newsletter: "🌿 Fresh Batch Dispatch List (Footer)",
   repeat_buyers: "Repeat Buyers (2+ Orders)",
   kashmir_local: "Kashmir (PIN 19xxxx)",
   bridal_inquiries: "Bridal & Event Leads",
   one_time_buyers: "One-Time Buyers",
-  newsletter: "Batch List Subscribers",
 };
 
 const EmailCampaignsAdminPage = () => {
@@ -420,11 +420,14 @@ const EmailCampaignsAdminPage = () => {
     <Container className="divide-y p-0">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-6 py-5">
         <div>
-          <Heading level="h1">
-            Order Email Delivery &amp; Customer Campaigns
-          </Heading>
-          <Text size="small" className="text-ui-fg-subtle mt-1">
-            Configure live SMTP / Resend / Brevo credentials for automated Order Confirmation &amp; Shipping emails, plus customer campaign exports.
+          <div className="flex items-center gap-2 mb-1">
+            <Heading level="h1">
+              Customer Emails &amp; Marketing Directory
+            </Heading>
+            <Badge color="green" size="xsmall">2,081+ Contacts</Badge>
+          </div>
+          <Text size="small" className="text-ui-fg-subtle">
+            All customer emails from order history and live footer subscribers (Fresh Batch Dispatch List) stored in PostgreSQL. Segment, export to CSV, or push email marketing campaigns.
           </Text>
         </div>
 
@@ -459,6 +462,92 @@ const EmailCampaignsAdminPage = () => {
             Save Snapshot to studio-data
           </Button>
         </div>
+      </div>
+
+      {/* Metric Cards Banner */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 py-4 bg-ui-bg-subtle/30">
+        <button
+          type="button"
+          onClick={() => setSegment("all")}
+          className={`p-3 rounded-lg border text-left transition-colors cursor-pointer ${
+            segment === "all"
+              ? "border-ui-border-interactive bg-ui-bg-base shadow-sm ring-1 ring-ui-border-interactive"
+              : "border-ui-border-base bg-ui-bg-subtle hover:bg-ui-bg-base"
+          }`}
+        >
+          <Text size="xsmall" className="text-ui-fg-muted font-semibold uppercase tracking-wider">
+            Total Marketable Emails
+          </Text>
+          <div className="flex items-baseline gap-2 mt-1">
+            <span className="text-2xl font-bold tracking-tight">
+              {data?.segmentCounts?.all ?? 0}
+            </span>
+            <span className="text-xs text-ui-fg-subtle">all contacts</span>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSegment("newsletter")}
+          className={`p-3 rounded-lg border text-left transition-colors cursor-pointer ${
+            segment === "newsletter"
+              ? "border-ui-tag-orange-border bg-ui-tag-orange-bg/20 shadow-sm ring-1 ring-ui-tag-orange-border"
+              : "border-ui-border-base bg-ui-bg-subtle hover:bg-ui-bg-base"
+          }`}
+        >
+          <div className="flex items-center justify-between">
+            <Text size="xsmall" className="text-ui-fg-muted font-semibold uppercase tracking-wider">
+              Fresh Batch Subscribers
+            </Text>
+            <Badge color="orange" size="2xsmall">Footer Alerts</Badge>
+          </div>
+          <div className="flex items-baseline gap-2 mt-1">
+            <span className="text-2xl font-bold tracking-tight text-ui-fg-interactive">
+              {data?.segmentCounts?.newsletter ?? 0}
+            </span>
+            <span className="text-xs text-ui-fg-subtle">footer signups</span>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSegment("repeat_buyers")}
+          className={`p-3 rounded-lg border text-left transition-colors cursor-pointer ${
+            segment === "repeat_buyers"
+              ? "border-ui-border-interactive bg-ui-bg-base shadow-sm ring-1 ring-ui-border-interactive"
+              : "border-ui-border-base bg-ui-bg-subtle hover:bg-ui-bg-base"
+          }`}
+        >
+          <Text size="xsmall" className="text-ui-fg-muted font-semibold uppercase tracking-wider">
+            Repeat Customers
+          </Text>
+          <div className="flex items-baseline gap-2 mt-1">
+            <span className="text-2xl font-bold tracking-tight">
+              {data?.segmentCounts?.repeat_buyers ?? 0}
+            </span>
+            <span className="text-xs text-ui-fg-subtle">2+ orders</span>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSegment("kashmir_local")}
+          className={`p-3 rounded-lg border text-left transition-colors cursor-pointer ${
+            segment === "kashmir_local"
+              ? "border-ui-border-interactive bg-ui-bg-base shadow-sm ring-1 ring-ui-border-interactive"
+              : "border-ui-border-base bg-ui-bg-subtle hover:bg-ui-bg-base"
+          }`}
+        >
+          <Text size="xsmall" className="text-ui-fg-muted font-semibold uppercase tracking-wider">
+            Kashmir Valley (19xxxx)
+          </Text>
+          <div className="flex items-baseline gap-2 mt-1">
+            <span className="text-2xl font-bold tracking-tight">
+              {data?.segmentCounts?.kashmir_local ?? 0}
+            </span>
+            <span className="text-xs text-ui-fg-subtle">local delivery</span>
+          </div>
+        </button>
       </div>
 
       {/* Automated Order & Shipping Email Settings */}
@@ -981,8 +1070,23 @@ const EmailCampaignsAdminPage = () => {
                 {(data?.contacts || []).map((c) => (
                   <Table.Row key={c.email}>
                     <Table.Cell>
-                      <div className="font-medium text-sm">
-                        {`${c.firstName} ${c.lastName}`.trim() || "Customer"}
+                      <div className="font-medium text-sm flex items-center gap-1.5 flex-wrap">
+                        <span>
+                          {`${c.firstName} ${c.lastName}`.trim() ||
+                            (c.sources?.includes("newsletter")
+                              ? "Fresh Batch Subscriber"
+                              : "Customer")}
+                        </span>
+                        {c.sources?.includes("newsletter") && (
+                          <Badge color="orange" size="2xsmall">
+                            Fresh Batch List
+                          </Badge>
+                        )}
+                        {c.sources?.includes("bridal_inquiry") && (
+                          <Badge color="purple" size="2xsmall">
+                            Bridal Lead
+                          </Badge>
+                        )}
                       </div>
                       <div className="font-mono text-xs text-ui-fg-subtle">
                         {c.email}
@@ -995,9 +1099,15 @@ const EmailCampaignsAdminPage = () => {
                       </div>
                     </Table.Cell>
                     <Table.Cell>
-                      <Badge color={c.ordersCount >= 2 ? "green" : "grey"}>
-                        {c.ordersCount}
-                      </Badge>
+                      {c.ordersCount > 0 ? (
+                        <Badge color={c.ordersCount >= 2 ? "green" : "grey"}>
+                          {c.ordersCount}
+                        </Badge>
+                      ) : (
+                        <Badge color="blue" size="2xsmall">
+                          Newsletter
+                        </Badge>
+                      )}
                     </Table.Cell>
                     <Table.Cell className="tabular-nums text-xs font-medium">
                       ₹{Math.round(c.totalSpentInr).toLocaleString("en-IN")}
@@ -1014,7 +1124,7 @@ const EmailCampaignsAdminPage = () => {
 };
 
 export const config = defineRouteConfig({
-  label: "Email Campaigns",
+  label: "Customer Emails & Marketing",
   icon: Envelope,
 });
 
