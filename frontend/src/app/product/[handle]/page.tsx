@@ -198,27 +198,31 @@ export default async function ProductDetailPage({
           headerChildren={
             <div>
               {primaryCategory ? (
-                <div className="flex items-center gap-2 mb-2.5">
-                  <span
-                    aria-hidden="true"
-                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                  />
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
-                    {primaryCategory.name}
-                  </p>
-                </div>
+                <TextReveal variant="fade" delayMs={40} immediate>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                    />
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
+                      {primaryCategory.name}
+                    </p>
+                  </div>
+                </TextReveal>
               ) : null}
 
-              <TextReveal variant="line" immediate>
+              <TextReveal variant="line" delayMs={100} immediate>
                 <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.85rem] font-medium text-ink leading-[1.12] mb-3">
                   {product.name}
                 </h1>
               </TextReveal>
 
               {product.shortDescription ? (
-                <p className="text-sm md:text-base text-umber leading-relaxed">
-                  {product.shortDescription}
-                </p>
+                <TextReveal variant="fade" delayMs={180} immediate>
+                  <p className="text-sm md:text-base text-umber leading-relaxed">
+                    {product.shortDescription}
+                  </p>
+                </TextReveal>
               ) : null}
             </div>
           }
