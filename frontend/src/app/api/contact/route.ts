@@ -104,10 +104,10 @@ export async function POST(req: NextRequest) {
         process.env.STUDIO_DATA_DIR?.trim() ||
         path.resolve(process.cwd(), '../studio-data');
       const bookingsFile = path.join(dataDir, 'bridal-bookings.json');
-      if (fs.existsSync(dataDir)) {
+      if (fs.existsSync(/*turbopackIgnore: true*/ dataDir)) {
         let existing: Record<string, unknown>[] = [];
         try {
-          if (fs.existsSync(bookingsFile)) {
+          if (fs.existsSync(/*turbopackIgnore: true*/ bookingsFile)) {
             existing = JSON.parse(fs.readFileSync(bookingsFile, 'utf8'));
           }
         } catch {}
@@ -134,8 +134,7 @@ export async function POST(req: NextRequest) {
       console.warn('[Contact API] Failed to record booking to studio-data:', saveErr);
     }
 
-    const adminEmail =
-      process.env.STUDIO_ADMIN_EMAIL?.trim() || 'sana@mehandibysana.com';
+    const adminEmail = 'mehandibysana@gmail.com';
     const customerSummary = `We have received your ${service} inquiry${
       eventDate ? ` for ${eventDate}` : ''
     }. Sana will personally review availability across Kashmir, Bengaluru, or destination venues within 24 hours.`;
