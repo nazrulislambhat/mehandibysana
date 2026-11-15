@@ -56,7 +56,7 @@ export default async function sendTestInvoiceEmail({ container }: ExecArgs) {
     }),
     items: [
       {
-        title: "100% Pure Organic Rajasthani Sojat Henna Cones (0.38mm Tip)",
+        title: "100% Pure Organic Henna Cones (0.38mm Tip)",
         variant: "Pack of 5 Cones",
         quantity: 1,
         unitPrice: 350,

@@ -74,7 +74,7 @@ export const OrdersDispatchOverviewWidget = () => {
             <Badge size="2xsmall" color="purple">STUDIO DISPATCH</Badge>
           </div>
           <Text size="xsmall" className="text-ui-fg-subtle mt-0.5">
-            Real-time tracking of order fulfillment origins (Srinagar Atelier vs Bengaluru Studio vs Pickups).
+            Real-time tracking of order fulfillment origins (Srinagar Studio vs Bengaluru Studio vs Pickups).
           </Text>
         </div>
 
