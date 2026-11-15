@@ -337,7 +337,7 @@ export function VariantSelector({
             }
             quantity={quantity}
             inStock={activeInStock}
-            openDrawerOnAdd={true}
+            openDrawerOnAdd={false}
             unavailableLabel={
               hasMissingVariation ? 'Option unavailable' : 'Out of stock'
             }
