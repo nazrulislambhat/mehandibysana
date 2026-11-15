@@ -186,12 +186,19 @@ export function renderBrandedStudioEmailHtml(params: {
 </html>`;
 }
 
+export interface EmailAttachment {
+  filename: string;
+  content: Buffer | string;
+  contentType?: string;
+}
+
 export interface SendEmailInput {
   to: string | string[];
   subject: string;
   text: string;
   html?: string;
   replyTo?: string;
+  attachments?: EmailAttachment[];
   scope?: { resolve: (key: string) => any };
 }
 
@@ -233,6 +240,16 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
           subject: input.subject,
           text: input.text,
           ...(input.html ? { html: input.html } : {}),
+          ...(input.attachments?.length
+            ? {
+                attachments: input.attachments.map((att) => ({
+                  filename: att.filename,
+                  content: Buffer.isBuffer(att.content)
+                    ? att.content.toString("base64")
+                    : att.content,
+                })),
+              }
+            : {}),
         }),
       });
       const payload = (await res.json()) as { id?: string; message?: string; name?: string };
@@ -270,6 +287,16 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
           subject: input.subject,
           textContent: input.text,
           ...(input.html ? { htmlContent: input.html } : {}),
+          ...(input.attachments?.length
+            ? {
+                attachment: input.attachments.map((att) => ({
+                  name: att.filename,
+                  content: Buffer.isBuffer(att.content)
+                    ? att.content.toString("base64")
+                    : Buffer.from(att.content).toString("base64"),
+                })),
+              }
+            : {}),
         }),
       });
       const payload = (await res.json()) as { messageId?: string; message?: string };
@@ -317,6 +344,13 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
         subject: input.subject,
         text: input.text,
         html: input.html,
+        attachments: input.attachments?.map((att) => ({
+          filename: att.filename,
+          content: Buffer.isBuffer(att.content)
+            ? att.content
+            : Buffer.from(att.content),
+          contentType: att.contentType,
+        })),
       });
 
       return { sent: true, provider: "smtp", messageId: info.messageId };
@@ -363,6 +397,7 @@ export interface NotificationEvent {
   ctaUrl?: string;
   skipAdminAlert?: boolean;
   skipTelegramAlert?: boolean;
+  attachments?: EmailAttachment[];
   scope?: { resolve: (key: string) => any };
 }
 
@@ -462,6 +497,7 @@ export async function dispatchStudioNotification(
       subject: subjectMap[event.type],
       text: plainText,
       html,
+      attachments: event.attachments,
       scope: event.scope,
     });
     appendAudit({
@@ -518,6 +554,7 @@ export async function dispatchStudioNotification(
         referenceId: event.referenceId,
         storefrontUrl: siteUrl,
       }),
+      attachments: event.attachments,
       scope: event.scope,
     });
     appendAudit({

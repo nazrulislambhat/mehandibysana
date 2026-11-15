@@ -266,6 +266,8 @@ const OrderStudioDispatchWidget = ({
     | "dispatch"
     | "resend_confirm"
     | "resend_ship"
+    | "send_invoice"
+    | "send_paid_invoice"
     | null
   >(null);
 
@@ -477,6 +479,31 @@ const OrderStudioDispatchWidget = ({
     );
   };
 
+  const handleSendInvoiceEmail = async (forcePaid: boolean) => {
+    setSubmitting(forcePaid ? "send_paid_invoice" : "send_invoice");
+    try {
+      const res = await fetch(`/admin/orders/${data.id}/invoice`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ forcePaid }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) {
+        toast.error(json.message || "Failed to dispatch invoice email.");
+        return;
+      }
+      await refreshOrderCaches();
+      toast.success(
+        `Tax invoice ${json.invoiceNumber || ""} (${forcePaid ? "PAID" : "Current Status"}) sent to customer & sana@mehandibysana.com!`
+      );
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to dispatch invoice email.");
+    } finally {
+      setSubmitting(null);
+    }
+  };
+
   const currentStage = resolveStage(initialMeta, orderStatus);
   const currentOrigin = String(
     initialMeta.dispatch_origin || dispatchOrigin || "Srinagar Atelier (Kashmir)"
@@ -491,6 +518,13 @@ const OrderStudioDispatchWidget = ({
     initialMeta.shipping_email_sent_at || initialMeta.shipping_email_attempted_at
   );
   const shipSent = Boolean(initialMeta.shipping_email_sent);
+
+  const invoiceNumber = String(
+    initialMeta.invoice_number ||
+      `INV-MBS-${(orderAny.display_id ? String(orderAny.display_id).padStart(4, "0") : data.id.slice(-6)).toUpperCase()}`
+  );
+  const invoicePdfPath = String(initialMeta.invoice_pdf_path || "");
+  const invoiceSentAt = formatTimestampShort(initialMeta.invoice_sent_at);
 
   return (
     <Container className="divide-y p-0 shadow-sm border border-ui-border-base bg-ui-bg-base mb-6">
@@ -829,6 +863,86 @@ const OrderStudioDispatchWidget = ({
                 ✓ Complete Order &amp; Send Delivery Email
               </Button>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* SECTION 4: TAX INVOICE & BILLING */}
+      {!isCanceled && (
+        <div className="px-6 py-5 space-y-4 bg-ui-bg-subtle/20 border-t border-ui-border-base">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-base">🧾</span>
+                <Text size="small" weight="plus" className="text-ui-fg-base">
+                  Official Tax Invoice ({invoiceNumber})
+                </Text>
+                <Badge
+                  size="small"
+                  color={isOrderPaid ? "green" : paymentStatus === "refunded" ? "red" : "orange"}
+                >
+                  {isOrderPaid ? "PAID" : paymentStatus === "refunded" ? "REFUNDED" : "PENDING / COD"}
+                </Badge>
+              </div>
+              <Text size="xsmall" className="text-ui-fg-subtle mt-0.5">
+                Auto-generated PDF with GST details, order items, shipping fee, discounts, and payment status badge.
+                {invoiceSentAt && ` • Last emailed: ${invoiceSentAt}`}
+              </Text>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                href={`/admin/orders/${data.id}/invoice?download=true`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-md border border-ui-border-base bg-ui-bg-base px-3 py-1.5 text-xs font-medium text-ui-fg-base shadow-sm hover:bg-ui-bg-base-hover transition-colors"
+              >
+                📥 Download PDF
+              </a>
+              <a
+                href={`/admin/orders/${data.id}/invoice?format=html`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-md border border-ui-border-base bg-ui-bg-base px-3 py-1.5 text-xs font-medium text-ui-fg-base shadow-sm hover:bg-ui-bg-base-hover transition-colors"
+              >
+                👁️ View HTML
+              </a>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-ui-border-base">
+            <div className="text-xs text-ui-fg-subtle">
+              {invoicePdfPath ? (
+                <span>
+                  Saved backend copy: <code className="text-ui-fg-muted font-mono">{invoicePdfPath}</code>
+                </span>
+              ) : (
+                <span>PDF generated on-demand and cached permanently in Medusa storage.</span>
+              )}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                size="small"
+                variant="secondary"
+                disabled={submitting !== null}
+                isLoading={submitting === "send_invoice"}
+                onClick={() => handleSendInvoiceEmail(false)}
+              >
+                📧 Send Current Invoice
+              </Button>
+
+              <Button
+                size="small"
+                variant="primary"
+                disabled={submitting !== null}
+                isLoading={submitting === "send_paid_invoice"}
+                onClick={() => handleSendInvoiceEmail(true)}
+                className="bg-emerald-700 hover:bg-emerald-800 text-white font-medium"
+              >
+                💳 Send Complete Paid Invoice (with PDF)
+              </Button>
+            </div>
           </div>
         </div>
       )}
