@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { normalizeCategorySlug } from '@/lib/category-slugs';
 import { SearchLensIcon } from '@/components/graphics/BrandIcons';
+import { ChevronDown } from 'lucide-react';
 import type { StorefrontCategory } from '@/types/storefront';
 
 export interface ShopFiltersProps {
@@ -144,18 +145,23 @@ export function ShopFilters({
             <label htmlFor="shop-sort-select" className="sr-only">
               Sort products
             </label>
-            <select
-              id="shop-sort-select"
-              value={activeSort || 'default'}
-              onChange={(e) => navigateWithParams({ sort: e.target.value })}
-              className="min-h-[40px] rounded-full border border-divider bg-paper px-4 py-2 text-sm text-ink cursor-pointer"
-            >
-              <option value="default">Sort: Featured</option>
-              <option value="date">Sort: Newest</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="title">Name: A to Z</option>
-            </select>
+            <div className="relative inline-block">
+              <select
+                id="shop-sort-select"
+                value={activeSort || 'default'}
+                onChange={(e) => navigateWithParams({ sort: e.target.value })}
+                className="min-h-[40px] appearance-none rounded-full border border-divider bg-paper pl-4 pr-10 py-2 text-sm text-ink cursor-pointer focus:outline-none focus:ring-1 focus:ring-terracotta focus:border-terracotta transition-colors"
+              >
+                <option value="default">Sort: Featured</option>
+                <option value="date">Sort: Newest</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="title">Name: A to Z</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-umber">
+                <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
+              </div>
+            </div>
           </div>
 
           {hasFilters ? (

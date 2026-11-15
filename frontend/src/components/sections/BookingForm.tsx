@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { LineDotRightHorizontalIcon } from 'lucide-react';
+import { ChevronDown, LineDotRightHorizontalIcon } from 'lucide-react';
 export interface BookingFormProps {
   initialService?: string;
 }
@@ -270,20 +270,25 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
           >
             Inquiry Type
           </label>
-          <select
-            id="contact-service"
-            name="service"
-            value={values.service}
-            onChange={(e) =>
-              setValues((v) => ({ ...v, service: e.target.value }))
-            }
-            className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 py-2.5 text-sm text-ink"
-          >
-            <option value="bridal">Bridal Mehandi Booking</option>
-            <option value="events">Events &amp; Celebrations</option>
-            <option value="botanical">Custom Bulk Orders / Workshops</option>
-            <option value="order-support">Existing Store Order Question</option>
-          </select>
+          <div className="relative">
+            <select
+              id="contact-service"
+              name="service"
+              value={values.service}
+              onChange={(e) =>
+                setValues((v) => ({ ...v, service: e.target.value }))
+              }
+              className="w-full min-h-[44px] appearance-none rounded-xl border border-divider bg-canvas pl-3.5 pr-11 py-2.5 text-sm text-ink cursor-pointer focus:outline-none focus:ring-1 focus:ring-terracotta focus:border-terracotta transition-colors"
+            >
+              <option value="bridal">Bridal Mehandi Booking</option>
+              <option value="events">Events &amp; Celebrations</option>
+              <option value="botanical">Custom Bulk Orders / Workshops</option>
+              <option value="order-support">Existing Store Order Question</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-umber/80">
+              <ChevronDown className="w-4 h-4" aria-hidden="true" />
+            </div>
+          </div>
         </div>
       </div>
 
