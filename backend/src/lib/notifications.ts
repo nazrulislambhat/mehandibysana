@@ -206,7 +206,10 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
     return { sent: false, provider, error: "No valid recipient email." };
   }
 
-  const replyTo = input.replyTo || settings.adminEmail || "sana@mehandibysana.com";
+  const replyTo =
+    input.replyTo ||
+    (settings.adminEmail ? settings.adminEmail.split(/[,;\s]+/)[0] : "mehandibysana@gmail.com") ||
+    "mehandibysana@gmail.com";
 
   if (provider === "resend") {
     try {
@@ -463,19 +466,37 @@ export async function dispatchStudioNotification(
     });
   }
 
-  // Optional Studio Admin Copy (configured in Email Settings or STUDIO_ADMIN_EMAIL env)
-  const adminEmail = settings.adminEmail?.trim();
-  if (
-    !event.skipAdminAlert &&
-    adminEmail &&
-    adminEmail.toLowerCase() !== event.recipientEmail.toLowerCase()
-  ) {
+  // Admin Operations Copy (Order alerts to both mehandibysana@gmail.com & nazrulislambhat@gmail.com; Contact queries to mehandibysana@gmail.com)
+  let adminRecipients: string[] = [];
+  if (event.type === "bridal_booking_received") {
+    adminRecipients = ["mehandibysana@gmail.com"];
+  } else {
+    const rawAdminConfig =
+      settings.adminEmail ||
+      process.env.STUDIO_ADMIN_EMAIL ||
+      "mehandibysana@gmail.com, nazrulislambhat@gmail.com";
+    const parsed = rawAdminConfig
+      .split(/[,;\s]+/)
+      .map((e) => e.trim().toLowerCase())
+      .filter((e) => Boolean(e) && e.includes("@"));
+    const set = new Set(parsed);
+    set.add("mehandibysana@gmail.com");
+    set.add("nazrulislambhat@gmail.com");
+    adminRecipients = Array.from(set);
+  }
+
+  // Filter out customer's own email so they do not receive admin operations alert
+  adminRecipients = adminRecipients.filter(
+    (e) => e.toLowerCase() !== event.recipientEmail.toLowerCase()
+  );
+
+  if (!event.skipAdminAlert && adminRecipients.length > 0) {
     const adminSubject = `[Dispatch Alert] ${subjectMap[event.type]}`;
     const adminSummary = `Customer: ${event.recipientName} (${event.recipientEmail}${
       event.recipientPhone ? ` · ${event.recipientPhone}` : ""
     })\n\n${event.summary}`;
     const adminRes = await sendStudioEmail({
-      to: adminEmail,
+      to: adminRecipients,
       subject: adminSubject,
       text: adminSummary,
       html: renderBrandedStudioEmailHtml({
@@ -497,7 +518,7 @@ export async function dispatchStudioNotification(
       kind: "admin_alert_email",
       type: event.type,
       referenceId: event.referenceId,
-      to: adminEmail,
+      to: adminRecipients.join(", "),
       ...adminRes,
     });
   }

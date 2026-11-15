@@ -134,8 +134,7 @@ export async function POST(req: NextRequest) {
       console.warn('[Contact API] Failed to record booking to studio-data:', saveErr);
     }
 
-    const adminEmail =
-      process.env.STUDIO_ADMIN_EMAIL?.trim() || 'sana@mehandibysana.com';
+    const adminEmail = 'mehandibysana@gmail.com';
     const customerSummary = `We have received your ${service} inquiry${
       eventDate ? ` for ${eventDate}` : ''
     }. Sana will personally review availability across Kashmir, Bengaluru, or destination venues within 24 hours.`;

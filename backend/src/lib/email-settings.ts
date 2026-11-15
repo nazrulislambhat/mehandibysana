@@ -181,7 +181,7 @@ export function getEffectiveEmailSettings(): StudioEmailSettingsRecord {
       ? db.adminEmail.trim()
       : db.adminEmail?.trim() ||
         process.env.STUDIO_ADMIN_EMAIL?.trim() ||
-        "sana@mehandibysana.com";
+        "mehandibysana@gmail.com, nazrulislambhat@gmail.com";
 
   const storefrontUrl = (
     db.storefrontUrl?.trim() ||
