@@ -112,7 +112,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         </div>
         <div className="p-7 sm:p-9 space-y-5">
           <p className="text-sm md:text-base text-umber leading-relaxed">
-            Your booking or order inquiry has been logged for review. Sana will follow up via email ({values.email}) or phone regarding availability.
+            Your booking or order inquiry has been logged for review. We will get in touch with you via phone, email, or call regarding availability.
           </p>
           <Button
             type="button"

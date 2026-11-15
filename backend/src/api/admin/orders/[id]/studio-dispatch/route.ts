@@ -1,5 +1,5 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
+import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils";
 import {
   cancelOrderWorkflow,
   completeOrderWorkflow,
@@ -40,6 +40,7 @@ interface StudioDispatchBody {
     | "update_payment"
     | "mark_offline_paid"
     | "cancel_order"
+    | "delete_order"
     | "resend_confirmation_email"
     | "resend_shipping_email";
   completeOrder?: boolean;
@@ -147,6 +148,25 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       return res
         .status(404)
         .json({ success: false, message: "Order not found." });
+    }
+
+    if (body.action === "delete_order") {
+      const orderService = req.scope.resolve(Modules.ORDER);
+      const remoteLink = req.scope.resolve(ContainerRegistrationKeys.REMOTE_LINK);
+      try {
+        await remoteLink.dismiss({
+          [Modules.ORDER]: { order_id: id },
+        });
+      } catch (linkErr: any) {
+        console.warn(`[Order Delete] RemoteLink dismiss non-fatal warning: ${linkErr.message}`);
+      }
+      await orderService.deleteOrders([id]);
+      return res.status(200).json({
+        success: true,
+        deleted: true,
+        id,
+        message: `Order #${existingOrder.display_id || id} has been permanently deleted.`,
+      });
     }
 
     const currentStatus = String(existingOrder.status || "").toLowerCase();
