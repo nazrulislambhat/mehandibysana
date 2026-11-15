@@ -17,15 +17,15 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y postgresql-client
 
-      - name: Reset Admin Passwords to Known Hash
+      - name: Inspect Database Name and API Keys
         env:
           DB_URL: ${{ secrets.RAILWAY_STAGING_DATABASE_URL }}
         run: |
-          echo "Updating provider_metadata password hashes on Railway..."
-          psql "$DB_URL" -c "
-            UPDATE provider_identity
-            SET provider_metadata = jsonb_build_object('password', 'c2NyeXB0AA8AAAAIAAAAAfwwp6do+mAgCnibdJVS1/UMc+oEDHOW1VMBQws+/HCKZXx4iizmAT8K3lfzBeTEwBDPuz6e+xRII5VYyOMAvb5QqDVVQbJaI29lRGT1Wz5D')
-            WHERE entity_id IN ('sana@mehandibysana.com', 'nazrulislambhat@gmail.com');
-          "
-          echo "Verifying updated provider identities on Railway:"
-          psql "$DB_URL" -c "SELECT id, entity_id, provider, (provider_metadata->>'password' IS NOT NULL) AS has_password FROM provider_identity;"
+          echo "=== 1. Current Database & User ==="
+          psql "$DB_URL" -c "SELECT current_database(), current_user, inet_server_addr(), inet_server_port();"
+          
+          echo "=== 2. API Keys in Database ==="
+          psql "$DB_URL" -c "SELECT id, token, type, title FROM api_key;"
+
+          echo "=== 3. Product Count in Database ==="
+          psql "$DB_URL" -c "SELECT count(*) FROM product;"
