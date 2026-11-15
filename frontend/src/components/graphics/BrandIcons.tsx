@@ -404,13 +404,13 @@ export function ShieldProtectIcon({
 }
 
 /**
- * 100% Chemical-free botanical Sojat leaf badge icon.
+ * 100% Chemical-free organic Sojat henna leaf badge icon.
  */
 export function PureBotanicalIcon({
   size = 18,
   className = '',
   decorative = true,
-  label = 'Pure organic botanical',
+  label = 'Pure organic henna',
 }: BrandIconProps) {
   return (
     <svg

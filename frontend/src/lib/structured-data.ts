@@ -305,7 +305,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
           '@type': 'Service',
           name: 'Bridal Mehandi',
           description:
-            'Full-arm and feet bridal coverage with Kashmiri, Mughal archway, peacock, and botanical motifs applied with 0.38mm hand-rolled organic henna cones.',
+            'Full-arm and feet bridal coverage with Kashmiri, Mughal archway, peacock, and floral motifs applied with 0.38mm hand-rolled organic henna cones.',
           provider: { '@id': orgId },
           areaServed: ['Kashmir', 'Jammu and Kashmir', 'Bengaluru', 'India'],
         },
@@ -347,7 +347,7 @@ export function buildGalleryJsonLd(
     '@type': 'ImageGallery',
     '@id': `${pageUrl}#gallery`,
     url: pageUrl,
-    name: 'Bridal Mehandi Portfolio & Botanical Stain Gallery | Mehandi by Sana',
+    name: 'Bridal Mehandi Portfolio & Henna Stain Gallery | Mehandi by Sana',
     description:
       'Selected organic bridal mehandi designs, Kashmiri Chinar motifs, Mughal archways, and 48-hour natural mahogany stain studies.',
     isPartOf: { '@id': `${siteUrl}/#website` },

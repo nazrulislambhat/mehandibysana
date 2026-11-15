@@ -131,7 +131,7 @@ export default async function authAndAccountHandler({
 
     const summary = [
       `Assalamu Alaikum / Welcome ${firstName},`,
-      `Thank you for creating an account with Mehandi by Sana. We are dedicated to 100% natural, PPD-free organic henna and small-batch botanical artistry across Kashmir and Bengaluru.`,
+      `Thank you for creating an account with Mehandi by Sana. We are dedicated to 100% natural, PPD-free organic henna across Kashmir and Bengaluru.`,
       `Through your account, you can track fresh cone batches, view order history, and access curated stain care guides.`,
     ].join("\n\n");
 
@@ -140,8 +140,8 @@ export default async function authAndAccountHandler({
       heading: "Welcome to Mehandi by Sana",
       bodyParagraphs: [
         `Assalamu Alaikum / Welcome ${firstName},`,
-        `Thank you for joining Mehandi by Sana. Every cone, powder batch, and aftercare elixir we prepare is 100% pure, chemical-free, and formulated from premium Rajasthani Sojat crops and pure essential oils.`,
-        `Track orders, discover fresh harvest cone batches, and explore aftercare recommendations anytime from our apothecary.`,
+        `Thank you for joining Mehandi by Sana. Every cone, powder batch, and aftercare product we prepare is 100% pure, chemical-free, and crafted from premium Rajasthani Sojat crops and pure essential oils.`,
+        `Track orders, discover fresh harvest cone batches, and explore aftercare recommendations anytime from our shop.`,
       ],
       referenceId: `WELCOME-${recipientEmail.split("@")[0].toUpperCase()}`,
       ctaLabel: "Explore Fresh Cones",
@@ -153,7 +153,7 @@ export default async function authAndAccountHandler({
     try {
       await sendStudioEmail({
         to: recipientEmail,
-        subject: `Welcome to Mehandi by Sana — Artisanal Botanical Henna`,
+        subject: `Welcome to Mehandi by Sana — 100% Pure Organic Henna`,
         text: summary,
         html,
         scope: container as any,

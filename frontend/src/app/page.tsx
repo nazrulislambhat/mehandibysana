@@ -27,7 +27,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: 'Organic Henna Cones & Freelance Bridal Mehandi Artist',
   absoluteTitle: 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist',
   description:
-    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehandi with Sana across Kashmir & Bengaluru.',
+    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & natural hair henna, or book bridal mehandi with Sana across Kashmir & Bengaluru.',
   canonicalPath: '/',
   keywords: [
     'organic henna cones India',

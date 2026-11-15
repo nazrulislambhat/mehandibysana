@@ -401,7 +401,7 @@ export function CartDrawer() {
 
               <div className="sm:col-span-7 flex flex-col items-start text-left">
                 <p className="font-serif text-3xl sm:text-4xl font-medium text-ink leading-tight mb-2">
-                  Your bag is awaiting botanicals
+                  Your bag is awaiting fresh henna
                 </p>
                 <p className="text-sm text-umber leading-relaxed mb-5">
                   Explore fresh Sojat henna cones, aftercare balms, therapeutic

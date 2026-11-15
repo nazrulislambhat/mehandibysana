@@ -25,7 +25,7 @@ export const INSTAGRAM_POSTS: InstagramPost[] = [
   {
     id: 'ig-3',
     src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
-    alt: 'Fine botanical lotus and lattice work by @mehandibysana',
+    alt: 'Fine lotus and lattice henna work by @mehandibysana',
     caption: 'Lotus blossoms & fine jali latticework',
   },
   {
@@ -44,7 +44,7 @@ export const INSTAGRAM_POSTS: InstagramPost[] = [
     id: 'ig-6',
     src: 'https://mehandibysana.com/wp-content/uploads/2023/08/176480.jpg',
     alt: 'Deep mahogany 48-hour stain progression study by @mehandibysana',
-    caption: '48-hour deep mahogany botanical stain results',
+    caption: '48-hour deep mahogany natural henna stain results',
   },
   {
     id: 'ig-7',

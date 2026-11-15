@@ -123,7 +123,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         ctaUrl = `${siteUrl}/track-order?order=MBS-DEMO-73&email=${encodeURIComponent(targetEmail)}`;
         paragraphs = [
           "Assalamu Alaikum / Hello Test Customer,",
-          "Thank you for your order (#MBS-DEMO-73) with Mehandi by Sana! Fresh small-batch botanicals are being prepared for you across Kashmir & Bengaluru.",
+          "Thank you for your order (#MBS-DEMO-73) with Mehandi by Sana! Fresh organic henna is being prepared for you across Kashmir & Bengaluru.",
           "This is a demonstration preview of the automated Order Confirmation email sent to customers immediately upon checkout, including full line items, delivery address, and tracking link.",
         ];
         detailsHtml = `
@@ -209,7 +209,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         paragraphs = [
           "Assalamu Alaikum / Hello,",
           "We just blended a new artisanal small batch of fresh Sojat henna cones with organic eucalyptus and cajeput essential oils.",
-          "Every cone is hand-rolled with 0.38mm precision pin tips for ultra-fine bridal lines, dark mahogany stain progression, and 100% PPD-free botanical purity.",
+          "Every cone is hand-rolled with 0.38mm precision pin tips for ultra-fine bridal lines, dark mahogany stain progression, and 100% PPD-free pure organic henna.",
           "Limited batches are shipped every Monday & Thursday to ensure maximum freshness across India.",
         ];
       }

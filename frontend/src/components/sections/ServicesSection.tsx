@@ -19,7 +19,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     motif: 'bridal',
     title: 'Bridal Mehandi',
     summary:
-      'Full arms and feet coverage featuring traditional Kashmiri, Mughal, and botanical motifs tailored to your wedding celebrations, applied with ultra-fine 0.38mm hand-rolled organic cones.',
+      'Full arms and feet coverage featuring traditional Kashmiri, Mughal, and floral motifs tailored to your wedding celebrations, applied with ultra-fine 0.38mm hand-rolled organic cones.',
     note: '3–8 hrs · Custom quote',
   },
   {

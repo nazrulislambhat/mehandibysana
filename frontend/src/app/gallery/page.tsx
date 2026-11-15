@@ -59,13 +59,13 @@ const GALLERY_PLATES: GalleryPlate[] = [
     id: 'plate-03',
     number: 'Plate 03',
     category: 'Engagement',
-    title: 'Botanical Lotus & Grid Work',
+    title: 'Lotus & Grid Work',
     caption:
       'Fine jali latticework framed by floating lotus blossoms and delicate shading techniques.',
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
     imageAlt:
-      'Botanical lotus and fine jali grid mehandi work on hands for engagement by Mehandi by Sana',
+      'Lotus and fine jali grid mehandi work on hands for engagement by Mehandi by Sana',
     aspectClass: 'aspect-square',
     spanClass: 'lg:col-span-5',
   },
@@ -273,7 +273,7 @@ export default function GalleryPage() {
         <div className="mt-16 md:mt-24">
           <InstagramFeedSection
             title="Follow our daily portfolio on Instagram."
-            subtitle="Explore real bridal hand and foot compositions, intricate Kashmiri Chinar details, and fresh botanical cones posted weekly by Sana."
+            subtitle="Explore real bridal hand and foot compositions, intricate Kashmiri Chinar details, and fresh organic henna cones posted weekly by Sana."
           />
         </div>
 

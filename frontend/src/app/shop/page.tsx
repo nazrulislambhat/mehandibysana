@@ -109,7 +109,7 @@ export async function generateMetadata({
   const baseTitle = categoryCopy
     ? categoryCopy.title
     : activeCategoryObj
-      ? `${activeCategoryObj.name} — Botanical Henna Collection`
+      ? `${activeCategoryObj.name} — Organic Henna Collection`
       : 'Shop Organic Henna Cones, Balms & Artist Supplies';
 
   const title = activeQuery
@@ -121,8 +121,8 @@ export async function generateMetadata({
   const description = categoryCopy
     ? categoryCopy.description
     : activeCategoryObj
-      ? `Browse ${activeCategoryObj.name} formulations crafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`
-      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, botanical oils, aftercare balms, and artist tools crafted across Kashmir & Bengaluru.';
+      ? `Browse ${activeCategoryObj.name} products handcrafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`
+      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, essential oils, aftercare balms, and artist tools crafted across Kashmir & Bengaluru.';
 
   return buildPageMetadata({
     title,
@@ -227,7 +227,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
   const pageHeading = activeCategoryObj
     ? activeCategoryObj.name
-    : 'Shop Botanical Products';
+    : 'Shop Organic Henna Products';
   const pageLead = categoryCopy
     ? categoryCopy.lead
     : 'Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across Kashmir & Bengaluru.';
@@ -365,7 +365,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <h2 id="catalog-grid-heading" className="sr-only">
               {activeCategoryObj
                 ? `${activeCategoryObj.name} Catalog`
-                : 'Botanical Henna Formulations'}
+                : 'Organic Henna Products'}
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-x-7 lg:gap-y-10">
               {catalog.products.map((product, index) => (

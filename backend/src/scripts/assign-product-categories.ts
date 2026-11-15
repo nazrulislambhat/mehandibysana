@@ -74,7 +74,7 @@ const STUDIO_CATEGORY_SPECS: CategorySpec[] = [
     name: "Mehandi Products",
     handle: "mehandi-products",
     rank: 5,
-    description: "Core small-batch botanical henna cones, kits, and care essentials.",
+    description: "Core organic henna cones, kits, and care essentials.",
     productHandles: [
       "organic-henna-cones",
       "chemical-free-organic-hair-henna-powder",

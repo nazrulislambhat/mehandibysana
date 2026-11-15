@@ -62,7 +62,7 @@ const STAIN_STAGES: StainStage[] = [
     step: '01',
     timeLabel: 'On Application · 0 hrs',
     title: 'Fresh Olive Paste & Bright Saffron Base',
-    shadeName: 'Botanical Olive Paste → Tangerine Base',
+    shadeName: 'Natural Henna Paste → Tangerine Base',
     swatchHex: '#3E4B2C',
     secondaryHex: '#E07826',
     pasteOverlay: true,

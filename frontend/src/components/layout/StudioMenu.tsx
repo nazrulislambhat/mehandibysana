@@ -352,7 +352,7 @@ export function StudioMenu() {
               <div className="border-t border-hairline bg-linen/50 py-3 pb-4 sm:py-3.5">
                 <div className="editorial-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-umber">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span>Kashmir &amp; Bengaluru &middot; 100% Chemical-Free Botanical Henna</span>
+                    <span>Kashmir &amp; Bengaluru &middot; 100% Chemical-Free Organic Henna</span>
                     <span className="font-medium text-ink hidden md:inline">
                       Pan-India Courier &amp; Speed Post Dispatch
                     </span>
