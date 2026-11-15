@@ -17,16 +17,15 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y postgresql-client
 
-      - name: Apply Admin Migration
+      - name: Inspect and Fix Admin Accounts
         env:
           DB_URL: ${{ secrets.RAILWAY_STAGING_DATABASE_URL }}
         run: |
-          if [ -z "$DB_URL" ]; then
-            echo "::error::Secret RAILWAY_STAGING_DATABASE_URL is not configured."
-            exit 1
-          fi
-          echo "Executing update-admin-to-sana.sql on Railway database..."
-          psql "$DB_URL" -f backend/scripts/update-admin-to-sana.sql
-          echo "Verifying users in Railway database:"
+          echo "=== 1. Inspecting User Table ==="
           psql "$DB_URL" -c "SELECT id, email, first_name, last_name FROM \"user\";"
-          psql "$DB_URL" -c "SELECT id, provider, entity_id FROM provider_identity;"
+          
+          echo "=== 2. Inspecting Provider Identity Table ==="
+          psql "$DB_URL" -c "SELECT id, entity_id, provider, auth_identity_id, (provider_metadata IS NOT NULL) AS has_meta, left(provider_metadata->>'password', 20) AS pass_start FROM provider_identity;"
+
+          echo "=== 3. Inspecting Auth Identity Table ==="
+          psql "$DB_URL" -c "SELECT id, app_metadata FROM auth_identity;"
