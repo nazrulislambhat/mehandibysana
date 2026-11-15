@@ -2,6 +2,7 @@ import type { SubscriberArgs, SubscriberConfig } from "@medusajs/framework";
 import {
   AuthWorkflowEvents,
   CustomerWorkflowEvents,
+  InviteWorkflowEvents,
   UserEvents,
   ContainerRegistrationKeys,
 } from "@medusajs/framework/utils";
@@ -38,7 +39,13 @@ export default async function authAndAccountHandler({
 }: SubscriberArgs<Record<string, unknown>>) {
   const settings = getEffectiveEmailSettings();
   const siteUrl = (settings.storefrontUrl || "https://mehandibysana.com").replace(/\/+$/, "");
-  const adminUrl = (process.env.MEDUSA_ADMIN_URL || "https://admin.mehandibysana.com").replace(/\/+$/, "");
+  const rawAdminHost = (
+    process.env.MEDUSA_ADMIN_URL?.trim() ||
+    (process.env.NODE_ENV === "production"
+      ? "https://api.mehandibysana.com/app"
+      : "http://localhost:9000/app")
+  ).replace(/\/+$/, "");
+  const adminUrl = rawAdminHost.endsWith("/app") ? rawAdminHost : `${rawAdminHost}/app`;
 
   // 1. Password Reset Request
   if (name === AuthWorkflowEvents.PASSWORD_RESET) {
@@ -86,8 +93,82 @@ export default async function authAndAccountHandler({
     return;
   }
 
-  // 2. Staff Member / Admin User Invite Token
-  if (name === UserEvents.INVITE_TOKEN_GENERATED) {
+  // 2. Staff Member / Admin User Invite Token (Medusa v2 InviteWorkflowEvents.CREATED & RESENT)
+  if (
+    name === InviteWorkflowEvents.CREATED ||
+    name === InviteWorkflowEvents.RESENT ||
+    name === UserEvents.INVITE_TOKEN_GENERATED
+  ) {
+    const rawItems = Array.isArray(data)
+      ? data
+      : Array.isArray((data as any)?.invites)
+        ? (data as any).invites
+        : [data];
+
+    const inviteIds = rawItems
+      .map((item: any) => item?.id || item?.invite_id)
+      .filter((id: unknown): id is string => typeof id === "string" && Boolean(id.trim()));
+
+    // Path A: Query invite entity by id from Medusa graph
+    if (inviteIds.length > 0) {
+      try {
+        const query = container.resolve(ContainerRegistrationKeys.QUERY) as any;
+        for (const inviteId of inviteIds) {
+          try {
+            const { data: invites } = await query.graph({
+              entity: "invite",
+              fields: ["id", "email", "token", "expires_at"],
+              filters: { id: inviteId },
+            });
+            const invite = invites?.[0];
+            if (!invite?.email || !invite?.token) {
+              console.warn(`[Subscriber invite] Invite ${inviteId} missing email or token.`);
+              continue;
+            }
+
+            const inviteUrl = `${adminUrl}/invite?token=${encodeURIComponent(invite.token)}`;
+            const summary = [
+              `Assalamu Alaikum / Hello,`,
+              `You have been invited to join the Mehandi By Sana studio operations and admin portal.`,
+              `Click the button below to accept your invitation and set up your admin credentials.`,
+            ].join("\n\n");
+
+            const html = renderBrandedStudioEmailHtml({
+              eyebrow: "Staff Invitation",
+              heading: "Invitation to Mehandi By Sana Admin",
+              bodyParagraphs: [
+                "Assalamu Alaikum / Hello,",
+                "You have been invited to join the Mehandi By Sana studio operations and admin portal.",
+                "As an authorized team member, you will have access to customer orders, fresh cone batch inventory, and live client inquiries.",
+                "Please click the button below to accept your invitation and configure your password.",
+              ],
+              referenceId: `INVITE-${invite.id.slice(0, 8).toUpperCase()}`,
+              ctaLabel: "Accept Studio Invitation",
+              ctaUrl: inviteUrl,
+              storefrontUrl: siteUrl,
+              footerNote: "This invitation link is valid for 7 days. If you did not expect this invitation, you can safely ignore this email.",
+            });
+
+            await sendStudioEmail({
+              to: invite.email,
+              subject: "Invitation to Mehandi By Sana Admin Portal",
+              text: `${summary}\n\nAccept your invitation: ${inviteUrl}`,
+              html,
+              scope: container as any,
+            });
+
+            console.log(`[Subscriber invite] Branded invitation email dispatched to ${invite.email}`);
+          } catch (itemErr) {
+            console.warn(`[Subscriber invite] Failed processing invite ${inviteId}:`, itemErr);
+          }
+        }
+      } catch (graphErr) {
+        console.warn("[Subscriber invite] Graph query failed for invites:", graphErr);
+      }
+      return;
+    }
+
+    // Path B: Fallback if raw payload provided token and email directly
     const inviteData = data as UserInvitePayload;
     const recipientEmail = String(inviteData.user?.email || "").trim();
     const token = String(inviteData.token || "").trim();
@@ -168,6 +249,8 @@ export default async function authAndAccountHandler({
 export const config: SubscriberConfig = {
   event: [
     AuthWorkflowEvents.PASSWORD_RESET,
+    InviteWorkflowEvents.CREATED,
+    InviteWorkflowEvents.RESENT,
     UserEvents.INVITE_TOKEN_GENERATED,
     CustomerWorkflowEvents.CREATED,
   ],

@@ -6,7 +6,10 @@ import {
   type DispatchNotificationResult,
   type NotificationEvent,
 } from "./notifications";
-import { notifyTelegramOrderPlaced } from "./telegram";
+import {
+  notifyTelegramOrderPlaced,
+  resolvePublicImageUrl,
+} from "./telegram";
 import {
   deriveOrderNumber,
   formatOrderPaymentMethodLabel,
@@ -49,6 +52,7 @@ interface ComputedOrderBreakdown {
     quantity: number;
     unitPrice: number;
     lineTotal: number;
+    thumbnail?: string;
   }>;
   subtotal: number;
   shippingFee: number;
@@ -127,12 +131,16 @@ async function loadOrderForEmail(
     const variant = String(
       it.variant_title || it.metadata?.variant_title || ""
     ).trim();
+    const thumbnail = String(
+      it.thumbnail || it.metadata?.thumbnail || ""
+    ).trim();
     return {
       title: String(it.title || "Henna Product").trim(),
       variant,
       quantity: qty,
       unitPrice,
       lineTotal: unitPrice * qty,
+      thumbnail: thumbnail || undefined,
     };
   });
 
@@ -275,14 +283,36 @@ function renderOrderDetailsTableHtml(
 ): string {
   const itemRows = b.items
     .map(
-      (it) => `
+      (it) => {
+        const itemThumb = it.thumbnail
+          ? resolvePublicImageUrl(it.thumbnail) || it.thumbnail
+          : "";
+
+        return `
       <tr>
         <td style="padding:10px 12px;border-bottom:1px solid #eeeeee;font-size:14px;color:#111111;">
-          <strong>${escapeHtml(it.title)}</strong>${
-            it.variant
-              ? `<br/><span style="font-size:12px;color:#6b6560;">${escapeHtml(it.variant)}</span>`
-              : ""
-          }
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+            <tr>
+              ${
+                itemThumb
+                  ? `<td style="vertical-align:middle;padding-right:12px;">
+                      <img src="${escapeHtml(
+                        itemThumb
+                      )}" width="44" height="44" style="width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid #e8e2d8;display:block;" alt="${escapeHtml(
+                      it.title
+                    )}"/>
+                    </td>`
+                  : ""
+              }
+              <td style="vertical-align:middle;">
+                <strong>${escapeHtml(it.title)}</strong>${
+                  it.variant
+                    ? `<br/><span style="font-size:12px;color:#6b6560;">${escapeHtml(it.variant)}</span>`
+                    : ""
+                }
+              </td>
+            </tr>
+          </table>
         </td>
         <td style="padding:10px 12px;border-bottom:1px solid #eeeeee;font-size:14px;color:#111111;text-align:center;">
           &times;${it.quantity}
@@ -290,7 +320,8 @@ function renderOrderDetailsTableHtml(
         <td style="padding:10px 12px;border-bottom:1px solid #eeeeee;font-size:14px;color:#111111;text-align:right;white-space:nowrap;">
           ${escapeHtml(formatInr(it.lineTotal))}
         </td>
-      </tr>`
+      </tr>`;
+      }
     )
     .join("");
 
@@ -534,6 +565,7 @@ export async function sendOrderConfirmationEmail(
       address: shipAddr as any,
       city: shipAddr.city ? String(shipAddr.city) : undefined,
       pincode: b.pincode,
+      imageUrl: b.items.find((it) => Boolean(it.thumbnail))?.thumbnail,
       items: b.items,
       subtotal: b.subtotal,
       shippingFee: b.shippingFee,

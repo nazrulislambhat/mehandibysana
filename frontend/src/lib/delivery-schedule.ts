@@ -1,12 +1,11 @@
 /**
  * Delivery Scheduling & Logistics Rules for Mehandi By Sana
- * Handles Kashmir morning rider dispatches (9–11 AM cut-off),
- * Bengaluru same-day on-demand couriers (Rapido / Porter),
- * and Pan-India express logistics.
+ * Coordinates Standard scheduled delivery (+1 day minimum)
+ * and Priority Delivery (+₹140 surcharge, depending on delivery person availability).
  */
 
 export type DeliveryZoneType = 'kashmir' | 'bengaluru' | 'pan_india';
-export type DeliverySpeedType = 'standard' | 'urgent';
+export type DeliverySpeedType = 'standard' | 'priority';
 
 export interface DeliverySpeedOption {
   id: DeliverySpeedType;
@@ -14,7 +13,7 @@ export interface DeliverySpeedOption {
   badge?: string;
   subtitle: string;
   description: string;
-  surcharge: number; // In INR
+  surcharge: number; // In INR (₹140 for priority)
   available: boolean;
   unavailableReason?: string;
   earliestDate: string; // YYYY-MM-DD
@@ -36,11 +35,9 @@ export interface ZoneDeliveryRules {
   istTimeFormatted: string;
   istHour: number;
   istMinute: number;
-  isKashmirMorningWindowPassed: boolean; // past 11:00 AM IST
-  isBengaluruNightWindowPassed: boolean; // past 8:00 PM IST
   speedOptions: DeliverySpeedOption[];
   minDate: string; // YYYY-MM-DD
-  maxDate: string; // YYYY-MM-DD (typically +60 days for wedding bookings)
+  maxDate: string; // YYYY-MM-DD
   defaultDate: string; // YYYY-MM-DD
   quickDates: QuickDateOption[];
   notice?: {
@@ -50,9 +47,9 @@ export interface ZoneDeliveryRules {
   };
 }
 
-export const BANGALORE_RAPIDO_SURCHARGE = 140; // ₹140 on-demand direct courier fee
-export const KASHMIR_MORNING_CUTOFF_HOUR = 11; // 11:00 AM IST
-export const BENGALURU_EVENING_CUTOFF_HOUR = 20; // 8:00 PM IST
+export const PRIORITY_DELIVERY_SURCHARGE = 140; // ₹140 on-demand / priority rider fee
+export const KASHMIR_MORNING_CUTOFF_HOUR = 11; // 11:00 AM IST daily rider departure
+export const NIGHT_CUTOFF_HOUR = 21; // 9:00 PM IST (past which same-day cannot be dispatched)
 
 /**
  * Returns current date/time representation in Indian Standard Time (IST - Asia/Kolkata).
@@ -60,12 +57,12 @@ export const BENGALURU_EVENING_CUTOFF_HOUR = 20; // 8:00 PM IST
 export function getIstDateTime(): {
   dateObj: Date;
   year: number;
-  month: number; // 1-12
-  day: number; // 1-31
-  hour: number; // 0-23
-  minute: number; // 0-59
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
   formattedTime: string;
-  todayIsoDate: string; // YYYY-MM-DD
+  todayIsoDate: string;
 } {
   const now = new Date();
   const istFormatter = new Intl.DateTimeFormat('en-IN', {
@@ -110,7 +107,7 @@ export function getIstDateTime(): {
 }
 
 /**
- * Adds days to a YYYY-MM-DD ISO string and returns the target YYYY-MM-DD string.
+ * Adds days to a YYYY-MM-DD ISO string.
  */
 export function addDaysToIsoDate(isoDate: string, daysToAdd: number): string {
   const [y, m, d] = isoDate.split('-').map(Number);
@@ -174,18 +171,18 @@ export function resolveZoneFromPincode(pincode: string): {
   if (cleaned.startsWith('56')) {
     return {
       zone: 'bengaluru',
-      zoneLabel: 'Bengaluru Metro (Local & On-Demand Rapido Fleet)',
+      zoneLabel: 'Bengaluru Metro (Local & On-Demand Courier Fleet)',
     };
   }
 
   return {
     zone: 'pan_india',
-    zoneLabel: 'Pan-India Express (National Logistics Network)',
+    zoneLabel: 'Pan-India Express (National Logistics)',
   };
 }
 
 /**
- * Evaluates the full delivery rules, available speeds, cut-off warnings, and minimum dates.
+ * Evaluates delivery rules, available speed options, and minimum dates.
  */
 export function evaluateDeliveryRules(
   pincode: string,
@@ -194,181 +191,109 @@ export function evaluateDeliveryRules(
   const { zone, zoneLabel } = resolveZoneFromPincode(pincode);
   const { hour, minute, formattedTime, todayIsoDate } = getIstDateTime();
 
-  const isKashmirMorningWindowPassed = hour >= KASHMIR_MORNING_CUTOFF_HOUR;
-  const isBengaluruNightWindowPassed = hour >= BENGALURU_EVENING_CUTOFF_HOUR;
-
   const tomorrowIso = addDaysToIsoDate(todayIsoDate, 1);
   const dayAfterIso = addDaysToIsoDate(todayIsoDate, 2);
   const maxDate = addDaysToIsoDate(todayIsoDate, 60);
 
+  const isNightClosed = hour >= NIGHT_CUTOFF_HOUR;
+  const isKashmirMorningRiderPassed = hour >= KASHMIR_MORNING_CUTOFF_HOUR;
+
   const speedOptions: DeliverySpeedOption[] = [];
+
+  // 1. Standard Delivery Option
+  // Customer can only select +1 day (tomorrow) or later on standard delivery
+  speedOptions.push({
+    id: 'standard',
+    title: 'Standard Delivery',
+    badge: 'Scheduled Route',
+    subtitle: `Tomorrow (${formatIsoDateCompact(tomorrowIso)}) or later`,
+    description:
+      zone === 'kashmir'
+        ? 'Scheduled morning rider run. Riders depart between 9:00 AM – 11:00 AM daily.'
+        : zone === 'bengaluru'
+          ? 'Standard local courier route (1–2 business days).'
+          : 'Standard national express cargo transit (3–6 business days).',
+    surcharge: 0,
+    available: true,
+    earliestDate: zone === 'pan_india' ? addDaysToIsoDate(todayIsoDate, 3) : tomorrowIso,
+    earliestDateLabel:
+      zone === 'pan_india'
+        ? `${formatIsoDateCompact(addDaysToIsoDate(todayIsoDate, 3))} onwards`
+        : `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
+  });
+
+  // 2. Priority Delivery Option
+  // Incurs additional ₹140 charge, subject to delivery person availability
+  const prioritySameDayPossible = !isNightClosed && zone !== 'pan_india';
+  const priorityEarliest = prioritySameDayPossible ? todayIsoDate : tomorrowIso;
+
+  speedOptions.push({
+    id: 'priority',
+    title: 'Priority Delivery',
+    badge: '⚡ Fastest Dispatch',
+    subtitle: prioritySameDayPossible
+      ? `Today (${formatIsoDateCompact(todayIsoDate)}) · +₹${PRIORITY_DELIVERY_SURCHARGE} Extra Charge`
+      : `Tomorrow (${formatIsoDateCompact(tomorrowIso)}) · +₹${PRIORITY_DELIVERY_SURCHARGE} Extra Charge`,
+    description:
+      zone === 'kashmir'
+        ? 'Priority rider assignment (subject to delivery person availability). Regular riders take the load 9–11 AM.'
+        : zone === 'bengaluru'
+          ? 'Direct on-demand courier (via Rapido / Porter) straight to your address, subject to rider availability.'
+          : 'Priority flight routing for perishable cones (2–3 business days).',
+    surcharge: PRIORITY_DELIVERY_SURCHARGE,
+    available: true,
+    earliestDate: zone === 'pan_india' ? addDaysToIsoDate(todayIsoDate, 2) : priorityEarliest,
+    earliestDateLabel:
+      zone === 'pan_india'
+        ? `${formatIsoDateCompact(addDaysToIsoDate(todayIsoDate, 2))} onwards`
+        : prioritySameDayPossible
+          ? `Today (${formatIsoDateCompact(todayIsoDate)})`
+          : `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
+  });
+
+  // Operational notices depending on current selection & logistics context
   let notice: ZoneDeliveryRules['notice'] = undefined;
 
-  if (zone === 'kashmir') {
-    // Kashmir logistics:
-    // Riders take daily morning load between 9:00 AM - 11:00 AM.
-    // If before 11:00 AM: Same-day delivery is possible.
-    // If >= 11:00 AM: Riders departed. Same-day is impossible. Earliest is tomorrow (+1 day).
-
-    const sameDayAvailable = !isKashmirMorningWindowPassed;
-
-    speedOptions.push({
-      id: 'standard',
-      title: 'Standard Dispatch',
-      badge: 'Recommended',
-      subtitle: sameDayAvailable ? 'Tomorrow or later' : 'Next-day rider batch',
-      description: sameDayAvailable
-        ? 'Scheduled dispatch with the next standard morning rider round.'
-        : 'Dispatched with tomorrow morning’s 9:00–11:00 AM rider departure.',
-      surcharge: 0,
-      available: true,
-      earliestDate: tomorrowIso,
-      earliestDateLabel: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-    });
-
-    if (sameDayAvailable) {
-      speedOptions.push({
-        id: 'urgent',
-        title: 'Urgent Same-Day Delivery',
-        badge: '⚡ Morning Rider Dispatch',
-        subtitle: `Today (${formatIsoDateCompact(todayIsoDate)})`,
-        description:
-          'Riders take the morning load between 9:00–11:00 AM. Your cones will be added to today’s departure.',
-        surcharge: 0,
-        available: true,
-        earliestDate: todayIsoDate,
-        earliestDateLabel: `Today (${formatIsoDateCompact(todayIsoDate)})`,
-      });
-
+  if (selectedSpeed === 'priority') {
+    if (zone === 'kashmir') {
       notice = {
-        type: 'success',
-        title: `Morning Dispatch Active (${formattedTime})`,
+        type: isKashmirMorningRiderPassed ? 'warning' : 'info',
+        title: `Priority Rider Dispatch (${formattedTime}) · Subject to Delivery Person Availability`,
         message:
-          'Kashmir riders take the load between 9:00 AM – 11:00 AM. Orders placed now qualify for same-day delivery across Srinagar and nearby areas.',
+          isKashmirMorningRiderPassed
+            ? 'In Kashmir, daily delivery riders take the morning load between 9:00 AM – 11:00 AM. Priority delivery incurs an extra ₹140 rider charge and is fulfilled based on active delivery person availability in your area. If a dedicated rider cannot be confirmed for your chosen date, our studio will reach out promptly to reschedule or refund the priority fee.'
+            : 'Morning rider dispatch is underway (9:00 AM – 11:00 AM). Priority delivery schedules your cones on the earliest departure, subject to active delivery rider availability.',
       };
-    } else {
-      speedOptions.push({
-        id: 'urgent',
-        title: 'Priority Next-Morning Dispatch',
-        badge: '⚡ First Rider Load',
-        subtitle: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-        description:
-          'Added as first priority to tomorrow’s 9:00 AM rider run for earliest daytime arrival.',
-        surcharge: 0,
-        available: true,
-        earliestDate: tomorrowIso,
-        earliestDateLabel: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-      });
-
-      notice = {
-        type: 'warning',
-        title: `Riders Departed for Today (${formattedTime})`,
-        message:
-          'In Kashmir, delivery riders take the daily load between 9:00 AM – 11:00 AM. Because it is currently past 11:00 AM, same-day delivery is closed for today. Your order will be dispatched tomorrow morning.',
-      };
-    }
-  } else if (zone === 'bengaluru') {
-    // Bengaluru logistics:
-    // Can be done via local on-demand courier (Rapido / Porter) for same-day delivery,
-    // even in the afternoon/second part of the day!
-    // But extra delivery charge applies (+₹140) because point-to-point couriers are expensive.
-
-    const rapidoAvailable = !isBengaluruNightWindowPassed;
-
-    speedOptions.push({
-      id: 'standard',
-      title: 'Standard Local Delivery',
-      badge: 'Batch Route',
-      subtitle: 'Tomorrow or later',
-      description: 'Dispatched via standard route couriers within 1–2 business days.',
-      surcharge: 0,
-      available: true,
-      earliestDate: tomorrowIso,
-      earliestDateLabel: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-    });
-
-    if (rapidoAvailable) {
-      speedOptions.push({
-        id: 'urgent',
-        title: 'Urgent Same-Day (via Rapido / Local Courier)',
-        badge: '⚡ Direct Point-to-Point',
-        subtitle: `Today (${formatIsoDateCompact(todayIsoDate)}) · +₹${BANGALORE_RAPIDO_SURCHARGE} Courier Fare`,
-        description:
-          'On-demand direct rider (Rapido / Porter) dispatched from our Bengaluru studio straight to your doorstep today.',
-        surcharge: BANGALORE_RAPIDO_SURCHARGE,
-        available: true,
-        earliestDate: todayIsoDate,
-        earliestDateLabel: `Today (${formatIsoDateCompact(todayIsoDate)})`,
-      });
-
+    } else if (zone === 'bengaluru') {
       notice = {
         type: 'info',
-        title: `Bengaluru Direct Courier Available (${formattedTime})`,
+        title: `Bengaluru Priority Courier (${formattedTime}) · Subject to Delivery Person Availability`,
         message:
-          'Need it urgently today? Choose "Urgent Same-Day (via Rapido / Local Courier)" for direct point-to-point bike dispatch (+₹140 on-demand courier fare). Standard delivery ships tomorrow.',
+          'Priority delivery is dispatched via direct on-demand courier (Rapido / Porter) for +₹140 extra courier fare, depending on live courier rider availability. Dispatched directly from our studio to your doorstep.',
       };
     } else {
-      speedOptions.push({
-        id: 'urgent',
-        title: 'Priority Next-Morning Rapido',
-        badge: '⚡ Direct Courier',
-        subtitle: `Tomorrow (${formatIsoDateCompact(tomorrowIso)}) · +₹${BANGALORE_RAPIDO_SURCHARGE}`,
-        description:
-          'Direct Rapido bike courier dispatched first thing tomorrow morning (8:00 AM).',
-        surcharge: BANGALORE_RAPIDO_SURCHARGE,
-        available: true,
-        earliestDate: tomorrowIso,
-        earliestDateLabel: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-      });
-
       notice = {
-        type: 'warning',
-        title: `Late Evening Order (${formattedTime})`,
+        type: 'info',
+        title: 'Priority Flight Transit · Event Planning',
         message:
-          'Local on-demand couriers are closed for the night (after 8:00 PM). Urgent orders placed now will be dispatched via Rapido first thing tomorrow morning.',
+          'Priority orders receive expedited air cargo dispatch (+₹140). Please pick your target celebration date below so your organic henna arrives at peak stain freshness.',
       };
     }
   } else {
-    // Pan-India Express (All other PIN codes):
-    // Shipped via national logistics (BlueDart, Delhivery, DTDC).
-    // Earliest transit is typically 3 business days.
-    const panIndiaEarliest = addDaysToIsoDate(todayIsoDate, 3);
-
-    speedOptions.push({
-      id: 'standard',
-      title: 'Standard Pan-India Express',
-      badge: 'Air / Surface Cargo',
-      subtitle: 'Estimated 3–6 business days',
-      description: 'Handcrafted fresh, frozen solid in insulated packaging, and shipped nationally.',
-      surcharge: 0,
-      available: true,
-      earliestDate: panIndiaEarliest,
-      earliestDateLabel: `${formatIsoDateCompact(panIndiaEarliest)} onwards`,
-    });
-
-    speedOptions.push({
-      id: 'urgent',
-      title: 'Priority Express Flight Transit',
-      badge: '⚡ Priority Air',
-      subtitle: 'Estimated 2–3 business days',
-      description: 'Priority flight routing for perishable henna cones arriving before your event.',
-      surcharge: 0,
-      available: true,
-      earliestDate: addDaysToIsoDate(todayIsoDate, 2),
-      earliestDateLabel: `${formatIsoDateCompact(addDaysToIsoDate(todayIsoDate, 2))} onwards`,
-    });
-
-    notice = {
-      type: 'info',
-      title: 'Perishable Henna Freshness Planning',
-      message:
-        'Pan-India shipments require 2–5 transit days. Please select your ceremony/event date below so our artisan blends and freezes your batch for peak stain freshness on arrival.',
-    };
+    // Standard Delivery notice
+    if (zone === 'kashmir' && isKashmirMorningRiderPassed) {
+      notice = {
+        type: 'info',
+        title: `Scheduled Next-Day Dispatch (${formattedTime})`,
+        message:
+          'Kashmir riders take the daily load between 9:00 AM – 11:00 AM. Standard delivery orders placed now will be dispatched tomorrow morning. Need it faster? Select Priority Delivery above (subject to rider availability).',
+      };
+    }
   }
 
-  // Determine minimum selectable date based on selected speed
-  const activeSpeed = speedOptions.find((s) => s.id === selectedSpeed) || speedOptions[0];
-  const minDate = activeSpeed.earliestDate;
+  // Active minimum selectable date
+  const activeOption = speedOptions.find((s) => s.id === selectedSpeed) || speedOptions[0];
+  const minDate = activeOption.earliestDate;
   const defaultDate = minDate;
 
   // Build quick dates
@@ -376,7 +301,7 @@ export function evaluateDeliveryRules(
   if (minDate <= todayIsoDate) {
     quickDates.push({
       label: `Today (${formatIsoDateCompact(todayIsoDate)})`,
-      sublabel: 'Urgent Same-Day',
+      sublabel: 'Priority Same-Day',
       date: todayIsoDate,
       isToday: true,
       isTomorrow: false,
@@ -384,7 +309,7 @@ export function evaluateDeliveryRules(
   }
   quickDates.push({
     label: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-    sublabel: 'Next-Day Dispatch',
+    sublabel: selectedSpeed === 'priority' ? 'Priority Dispatch' : 'Standard Route',
     date: tomorrowIso,
     isToday: false,
     isTomorrow: true,
@@ -404,8 +329,6 @@ export function evaluateDeliveryRules(
     istTimeFormatted: formattedTime,
     istHour: hour,
     istMinute: minute,
-    isKashmirMorningWindowPassed,
-    isBengaluruNightWindowPassed,
     speedOptions,
     minDate,
     maxDate,

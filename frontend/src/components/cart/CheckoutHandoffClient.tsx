@@ -10,7 +10,7 @@ import { ShoppingBag, LineDotRightHorizontal, Calendar, Zap, AlertCircle, Clock,
 import {
   evaluateDeliveryRules,
   formatIsoDateDisplay,
-  BANGALORE_RAPIDO_SURCHARGE,
+  PRIORITY_DELIVERY_SURCHARGE,
   type DeliverySpeedType,
 } from '@/lib/delivery-schedule';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
@@ -174,8 +174,8 @@ export function CheckoutHandoffClient() {
       : null;
 
   const deliverySurcharge =
-    deliverySpeed === 'urgent' && pincode.startsWith('56')
-      ? BANGALORE_RAPIDO_SURCHARGE
+    deliverySpeed === 'priority'
+      ? PRIORITY_DELIVERY_SURCHARGE
       : 0;
 
   const baseDeliveryFee = activePinCheck?.serviceable ? activePinCheck.deliveryCharge : 0;
@@ -961,7 +961,7 @@ export function CheckoutHandoffClient() {
                         >
                           <div className="flex items-center justify-between gap-2 mb-1">
                             <span className="font-semibold text-sm flex items-center gap-1.5">
-                              {opt.id === 'urgent' ? (
+                              {opt.id === 'priority' ? (
                                 <Zap size={15} className={isSelected ? 'text-terracotta' : 'text-amber-600'} />
                               ) : (
                                 <Truck size={15} className={isSelected ? 'text-inverse/70' : 'text-umber'} />
@@ -1262,7 +1262,7 @@ export function CheckoutHandoffClient() {
                     <div className="flex justify-between text-xs">
                       <dt className="text-terracotta flex items-center gap-1">
                         <Zap size={11} className="shrink-0" />
-                        <span>Rapido On-Demand Courier Fare</span>
+                        <span>Priority Delivery Surcharge</span>
                       </dt>
                       <dd className="font-medium text-terracotta tabular-nums">
                         +{formatMoney(deliverySurcharge, currency)}

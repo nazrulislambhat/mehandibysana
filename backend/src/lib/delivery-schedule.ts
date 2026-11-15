@@ -1,12 +1,12 @@
 /**
  * Delivery Scheduling & Logistics Rules for Medusa Backend
- * Coordinates delivery speeds, Kashmir morning rider dispatch (9–11 AM cut-off),
- * and Bengaluru same-day on-demand couriers (Rapido / Porter).
+ * Coordinates Standard delivery and Priority Delivery (+₹140 surcharge,
+ * subject to delivery person availability).
  */
 
-export const BANGALORE_RAPIDO_SURCHARGE = 140; // ₹140 on-demand direct courier fee
-export const KASHMIR_MORNING_CUTOFF_HOUR = 11; // 11:00 AM IST
-export const BENGALURU_EVENING_CUTOFF_HOUR = 20; // 8:00 PM IST
+export const PRIORITY_DELIVERY_SURCHARGE = 140; // ₹140 on-demand / priority rider fee
+export const KASHMIR_MORNING_CUTOFF_HOUR = 11; // 11:00 AM IST daily rider departure
+export const NIGHT_CUTOFF_HOUR = 21; // 9:00 PM IST
 
 export function getIstDateTime(): {
   hour: number;
@@ -44,15 +44,9 @@ export function calculateDeliverySurcharge(
   pincode: string,
   deliverySpeed?: string
 ): number {
-  const cleanPin = String(pincode || "").replace(/\D/g, "").slice(0, 6);
-  if (deliverySpeed !== "urgent") return 0;
-
-  // Bengaluru (560*) Rapido / on-demand direct bike courier surcharge
-  if (cleanPin.startsWith("56")) {
-    return BANGALORE_RAPIDO_SURCHARGE;
+  if (deliverySpeed === "priority" || deliverySpeed === "urgent") {
+    return PRIORITY_DELIVERY_SURCHARGE;
   }
-
-  // Kashmir & Pan-India urgent currently do not assess extra courier fee
   return 0;
 }
 
@@ -65,19 +59,19 @@ export function resolveDeliverySpeedLabel(
   const { todayIsoDate } = getIstDateTime();
   const isSameDay = targetDate === todayIsoDate;
 
-  if (deliverySpeed === "urgent") {
+  if (deliverySpeed === "priority" || deliverySpeed === "urgent") {
     if (cleanPin.startsWith("56")) {
       return isSameDay
-        ? "Urgent Same-Day (via Rapido Local Courier)"
-        : "Priority Next-Morning Rapido Courier";
+        ? "⚡ Priority Same-Day (Bengaluru On-Demand Courier · Subject to Rider Availability)"
+        : "⚡ Priority Delivery (Bengaluru Courier · Subject to Rider Availability)";
     }
     if (cleanPin.startsWith("19")) {
       return isSameDay
-        ? "Urgent Same-Day (Morning Rider Dispatch)"
-        : "Priority Next-Morning Rider Dispatch";
+        ? "⚡ Priority Same-Day (Kashmir Rider Dispatch · Subject to Rider Availability)"
+        : "⚡ Priority Morning Rider Dispatch (Subject to Rider Availability)";
     }
-    return "Priority Air Express";
+    return "⚡ Priority Air Express (Subject to Courier Availability)";
   }
 
-  return "Standard Delivery";
+  return "Standard Delivery (Scheduled Route)";
 }
