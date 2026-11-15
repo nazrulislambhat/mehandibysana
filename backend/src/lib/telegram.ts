@@ -354,13 +354,26 @@ export async function notifyTelegramOrderPlaced(order: {
     ? `\n📝 <b>Special Instructions:</b> <i>${escapeTelegramHtml(order.specialInstructions)}</i>`
     : "";
 
+  const isPriorityRequest = Boolean(
+    order.deliverySpeed?.toLowerCase().includes("priority") ||
+    order.deliverySpeed?.toLowerCase().includes("urgent")
+  );
+
+  const priorityActionBanner = isPriorityRequest
+    ? `\n\n⚠️ <b>ACTION REQUIRED — CALL CUSTOMER:</b>\nCheck courier availability for <b>${escapeTelegramHtml(
+        order.targetDeliveryDate || "requested date"
+      )}</b> and call <b>${escapeTelegramHtml(
+        order.phone || "customer"
+      )}</b> to decide whether we can ship it!`
+    : "";
+
   const message = `
 🛍️ <b>NEW ORDER PLACED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(order.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
 📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "Not provided"}
-✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}${deliveryScheduleLine}${speedLine}${notesLine}
+✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}${deliveryScheduleLine}${speedLine}${notesLine}${priorityActionBanner}
 
 📍 <b>Delivery Address:</b>
 ${formattedAddress}
@@ -395,7 +408,7 @@ ${breakdownBlock}
     const summaryCaption = `
 🛍️ <b>NEW ORDER #${escapeTelegramHtml(order.orderNumber)}</b>
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
-📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "N/A"}${deliveryScheduleLine}${speedLine}
+📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "N/A"}${deliveryScheduleLine}${speedLine}${priorityActionBanner}
 💰 <b>Payable Total:</b> ₹${Number(order.total || 0).toLocaleString("en-IN")} (${escapeTelegramHtml(order.paymentMethod.toUpperCase())})
     `.trim();
 

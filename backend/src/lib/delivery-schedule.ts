@@ -1,10 +1,10 @@
 /**
  * Delivery Scheduling & Logistics Rules for Medusa Backend
- * Coordinates Standard delivery and Priority Delivery (+₹140 surcharge,
- * subject to delivery person availability).
+ * Coordinates Standard delivery and Priority Delivery (No upfront fee;
+ * studio checks date and calls customer depending on courier availability).
  */
 
-export const PRIORITY_DELIVERY_SURCHARGE = 140; // ₹140 on-demand / priority rider fee
+export const PRIORITY_DELIVERY_SURCHARGE = 0; // No set charges upfront at checkout
 export const KASHMIR_MORNING_CUTOFF_HOUR = 11; // 11:00 AM IST daily rider departure
 export const NIGHT_CUTOFF_HOUR = 21; // 9:00 PM IST
 
@@ -41,12 +41,11 @@ export function getIstDateTime(): {
 }
 
 export function calculateDeliverySurcharge(
-  pincode: string,
-  deliverySpeed?: string
+  _pincode: string,
+  _deliverySpeed?: string
 ): number {
-  if (deliverySpeed === "priority" || deliverySpeed === "urgent") {
-    return PRIORITY_DELIVERY_SURCHARGE;
-  }
+  // There are no set upfront charges for priority delivery.
+  // The studio checks courier availability for the date and coordinates with customer via call.
   return 0;
 }
 
@@ -62,15 +61,15 @@ export function resolveDeliverySpeedLabel(
   if (deliverySpeed === "priority" || deliverySpeed === "urgent") {
     if (cleanPin.startsWith("56")) {
       return isSameDay
-        ? "⚡ Priority Same-Day (Bengaluru On-Demand Courier · Subject to Rider Availability)"
-        : "⚡ Priority Delivery (Bengaluru Courier · Subject to Rider Availability)";
+        ? "⚡ Priority Same-Day (Bengaluru Courier · Pending Call Confirmation)"
+        : "⚡ Priority Delivery (Bengaluru Courier · Pending Call Confirmation)";
     }
     if (cleanPin.startsWith("19")) {
       return isSameDay
-        ? "⚡ Priority Same-Day (Kashmir Rider Dispatch · Subject to Rider Availability)"
-        : "⚡ Priority Morning Rider Dispatch (Subject to Rider Availability)";
+        ? "⚡ Priority Same-Day (Kashmir Rider · Pending Call Confirmation)"
+        : "⚡ Priority Morning Rider (Pending Call Confirmation)";
     }
-    return "⚡ Priority Air Express (Subject to Courier Availability)";
+    return "⚡ Priority Express Request (Pending Call Confirmation)";
   }
 
   return "Standard Delivery (Scheduled Route)";

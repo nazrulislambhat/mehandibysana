@@ -1,7 +1,7 @@
 /**
  * Delivery Scheduling & Logistics Rules for Mehandi By Sana
  * Coordinates Standard scheduled delivery (+1 day minimum)
- * and Priority Delivery (+₹140 surcharge, depending on delivery person availability).
+ * and Priority Delivery (No upfront fee; studio checks date & calls customer based on courier availability).
  */
 
 export type DeliveryZoneType = 'kashmir' | 'bengaluru' | 'pan_india';
@@ -13,7 +13,7 @@ export interface DeliverySpeedOption {
   badge?: string;
   subtitle: string;
   description: string;
-  surcharge: number; // In INR (₹140 for priority)
+  surcharge: number; // ₹0 upfront (no set charges at checkout)
   available: boolean;
   unavailableReason?: string;
   earliestDate: string; // YYYY-MM-DD
@@ -47,7 +47,7 @@ export interface ZoneDeliveryRules {
   };
 }
 
-export const PRIORITY_DELIVERY_SURCHARGE = 140; // ₹140 on-demand / priority rider fee
+export const PRIORITY_DELIVERY_SURCHARGE = 0; // No set charges upfront at checkout
 export const KASHMIR_MORNING_CUTOFF_HOUR = 11; // 11:00 AM IST daily rider departure
 export const NIGHT_CUTOFF_HOUR = 21; // 9:00 PM IST (past which same-day cannot be dispatched)
 
@@ -201,7 +201,7 @@ export function evaluateDeliveryRules(
   const speedOptions: DeliverySpeedOption[] = [];
 
   // 1. Standard Delivery Option
-  // Customer can only select +1 day (tomorrow) or later on standard delivery
+  // Regular scheduled dispatch (+1 day minimum)
   speedOptions.push({
     id: 'standard',
     title: 'Standard Delivery',
@@ -223,24 +223,20 @@ export function evaluateDeliveryRules(
   });
 
   // 2. Priority Delivery Option
-  // Incurs additional ₹140 charge, subject to delivery person availability
+  // No set upfront charge — studio checks date & calls customer based on courier availability
   const prioritySameDayPossible = !isNightClosed && zone !== 'pan_india';
   const priorityEarliest = prioritySameDayPossible ? todayIsoDate : tomorrowIso;
 
   speedOptions.push({
     id: 'priority',
     title: 'Priority Delivery',
-    badge: '⚡ Fastest Dispatch',
+    badge: '⚡ Subject to Availability',
     subtitle: prioritySameDayPossible
-      ? `Today (${formatIsoDateCompact(todayIsoDate)}) · +₹${PRIORITY_DELIVERY_SURCHARGE} Extra Charge`
-      : `Tomorrow (${formatIsoDateCompact(tomorrowIso)}) · +₹${PRIORITY_DELIVERY_SURCHARGE} Extra Charge`,
+      ? `Requested for Today (${formatIsoDateCompact(todayIsoDate)}) · Confirmed via Call`
+      : `Requested for Tomorrow (${formatIsoDateCompact(tomorrowIso)}) · Confirmed via Call`,
     description:
-      zone === 'kashmir'
-        ? 'Priority rider assignment (subject to delivery person availability). Regular riders take the load 9–11 AM.'
-        : zone === 'bengaluru'
-          ? 'Direct on-demand courier (via Rapido / Porter) straight to your address, subject to rider availability.'
-          : 'Priority flight routing for perishable cones (2–3 business days).',
-    surcharge: PRIORITY_DELIVERY_SURCHARGE,
+      'We will check the date and call you directly to confirm courier/rider availability and coordinate dispatch.',
+    surcharge: 0,
     available: true,
     earliestDate: zone === 'pan_india' ? addDaysToIsoDate(todayIsoDate, 2) : priorityEarliest,
     earliestDateLabel:
@@ -255,30 +251,12 @@ export function evaluateDeliveryRules(
   let notice: ZoneDeliveryRules['notice'] = undefined;
 
   if (selectedSpeed === 'priority') {
-    if (zone === 'kashmir') {
-      notice = {
-        type: isKashmirMorningRiderPassed ? 'warning' : 'info',
-        title: `Priority Rider Dispatch (${formattedTime}) · Subject to Delivery Person Availability`,
-        message:
-          isKashmirMorningRiderPassed
-            ? 'In Kashmir, daily delivery riders take the morning load between 9:00 AM – 11:00 AM. Priority delivery incurs an extra ₹140 rider charge and is fulfilled based on active delivery person availability in your area. If a dedicated rider cannot be confirmed for your chosen date, our studio will reach out promptly to reschedule or refund the priority fee.'
-            : 'Morning rider dispatch is underway (9:00 AM – 11:00 AM). Priority delivery schedules your cones on the earliest departure, subject to active delivery rider availability.',
-      };
-    } else if (zone === 'bengaluru') {
-      notice = {
-        type: 'info',
-        title: `Bengaluru Priority Courier (${formattedTime}) · Subject to Delivery Person Availability`,
-        message:
-          'Priority delivery is dispatched via direct on-demand courier (Rapido / Porter) for +₹140 extra courier fare, depending on live courier rider availability. Dispatched directly from our studio to your doorstep.',
-      };
-    } else {
-      notice = {
-        type: 'info',
-        title: 'Priority Flight Transit · Event Planning',
-        message:
-          'Priority orders receive expedited air cargo dispatch (+₹140). Please pick your target celebration date below so your organic henna arrives at peak stain freshness.',
-      };
-    }
+    notice = {
+      type: 'info',
+      title: `⚡ Priority Delivery Verification (${formattedTime}) · Confirmed via Call`,
+      message:
+        'Because courier and rider availability varies dynamically by location and time, there is no fixed upfront charge. Our atelier will check your preferred date, verify live courier availability (local riders in Kashmir or Rapido in Bengaluru), and call you directly to confirm whether we can ship it and coordinate delivery.',
+    };
   } else {
     // Standard Delivery notice
     if (zone === 'kashmir' && isKashmirMorningRiderPassed) {
@@ -286,7 +264,7 @@ export function evaluateDeliveryRules(
         type: 'info',
         title: `Scheduled Next-Day Dispatch (${formattedTime})`,
         message:
-          'Kashmir riders take the daily load between 9:00 AM – 11:00 AM. Standard delivery orders placed now will be dispatched tomorrow morning. Need it faster? Select Priority Delivery above (subject to rider availability).',
+          'Kashmir riders take the daily load between 9:00 AM – 11:00 AM. Standard delivery orders placed now will be dispatched tomorrow morning. Need it faster? Choose Priority Delivery above (we will call you to confirm courier availability).',
       };
     }
   }
@@ -301,7 +279,7 @@ export function evaluateDeliveryRules(
   if (minDate <= todayIsoDate) {
     quickDates.push({
       label: `Today (${formatIsoDateCompact(todayIsoDate)})`,
-      sublabel: 'Priority Same-Day',
+      sublabel: 'Same-Day Priority',
       date: todayIsoDate,
       isToday: true,
       isTomorrow: false,

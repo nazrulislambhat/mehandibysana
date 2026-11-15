@@ -426,6 +426,10 @@ function renderOrderDetailsTableHtml(
             )}`
           : ""
       }${
+        b.deliverySpeedLabel?.toLowerCase().includes("priority")
+          ? `<br/><span style="font-size:12px;color:#96410D;background:#fef3eb;padding:3px 6px;border-radius:4px;display:inline-block;margin-top:4px;">📞 Note: Our studio will check courier availability for your date and call you directly to confirm whether it can be shipped.</span>`
+          : ""
+      }${
         b.specialInstructions
           ? `<br/><strong>📝 Special Instructions:</strong> <em>${escapeHtml(
               b.specialInstructions

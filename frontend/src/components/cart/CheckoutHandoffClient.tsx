@@ -1258,14 +1258,14 @@ export function CheckoutHandoffClient() {
                         : 'Enter 6-digit PIN'}
                     </dd>
                   </div>
-                  {deliverySurcharge > 0 ? (
+                  {deliverySpeed === 'priority' ? (
                     <div className="flex justify-between text-xs">
                       <dt className="text-terracotta flex items-center gap-1">
                         <Zap size={11} className="shrink-0" />
-                        <span>Priority Delivery Surcharge</span>
+                        <span>Priority Request</span>
                       </dt>
-                      <dd className="font-medium text-terracotta tabular-nums">
-                        +{formatMoney(deliverySurcharge, currency)}
+                      <dd className="font-medium text-terracotta text-right text-[11px]">
+                        Subject to Courier Availability (Confirmed via call)
                       </dd>
                     </div>
                   ) : null}
