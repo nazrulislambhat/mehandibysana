@@ -3,6 +3,7 @@ import path from "node:path";
 import nodemailer from "nodemailer";
 import {
   sendTelegramMessage,
+  sendTelegramDocument,
   formatTelegramAddress,
   escapeTelegramHtml,
   type TelegramAddressInput,
@@ -629,6 +630,29 @@ ${escapeTelegramHtml(event.summary)}
       `.trim();
 
       void sendTelegramMessage(telegramText);
+
+      // If PDF attachments are present (e.g. tax invoice), forward document to Telegram
+      if (Array.isArray(event.attachments) && event.attachments.length > 0) {
+        for (const att of event.attachments) {
+          if (
+            att.filename.toLowerCase().endsWith(".pdf") ||
+            att.contentType === "application/pdf"
+          ) {
+            const buf =
+              typeof att.content === "string"
+                ? Buffer.from(att.content, "base64")
+                : Buffer.isBuffer(att.content)
+                  ? att.content
+                  : Buffer.from(att.content);
+            void sendTelegramDocument(buf, att.filename, {
+              caption: `📎 <b>${escapeTelegramHtml(att.filename)}</b>\nRef: #${escapeTelegramHtml(
+                event.referenceId
+              )} &middot; Customer: ${escapeTelegramHtml(event.recipientName)}`,
+              mimeType: "application/pdf",
+            });
+          }
+        }
+      }
     } catch (teleErr) {
       console.warn("[Notifications] Telegram alert dispatch failed:", teleErr);
     }
