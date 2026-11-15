@@ -61,6 +61,7 @@ interface ComputedOrderBreakdown {
   trackingNumber: string;
   trackingUrl: string;
   dispatchNote: string;
+  dispatchOrigin: string;
 }
 
 async function loadOrderForEmail(
@@ -252,6 +253,7 @@ async function loadOrderForEmail(
       trackingNumber: String(meta.tracking_number || labelTrackingNumber || "").trim(),
       trackingUrl: String(meta.tracking_url || labelTrackingUrl || "").trim(),
       dispatchNote: String(meta.dispatch_note || "").trim(),
+      dispatchOrigin: String(meta.dispatch_origin || "").trim(),
     },
   };
 }
@@ -360,6 +362,11 @@ function renderOrderDetailsTableHtml(
       </tbody>
     </table>
     <div style="margin-top:14px;padding:12px 14px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.6;color:#3D3D3D;">
+      ${
+        b.dispatchOrigin
+          ? `<strong>Dispatch Origin:</strong> ${escapeHtml(b.dispatchOrigin)}<br/>`
+          : ""
+      }
       <strong>Payment:</strong> ${escapeHtml(b.paymentStatusLabel)} &middot; ${escapeHtml(
         b.paymentMethodLabel
       )}${b.paymentRef ? ` (Ref: ${escapeHtml(b.paymentRef)})` : ""}<br/>
@@ -522,6 +529,7 @@ export async function sendOrderShippingEmail(
     trackingNumber?: string;
     trackingUrl?: string;
     dispatchNote?: string;
+    dispatchOrigin?: string;
     skipAdminAlert?: boolean;
     actorId?: string;
   }
@@ -573,6 +581,8 @@ export async function sendOrderShippingEmail(
     options?.trackingNumber?.trim() || b.trackingNumber || "";
   const trackingUrl = options?.trackingUrl?.trim() || b.trackingUrl || "";
   const dispatchNote = options?.dispatchNote?.trim() || b.dispatchNote || "";
+  const dispatchOrigin =
+    options?.dispatchOrigin?.trim() || b.dispatchOrigin || "";
 
   let notifType: NotificationEvent["type"] = "order_dispatched";
   const summaryLines: string[] = [];
@@ -621,6 +631,14 @@ export async function sendOrderShippingEmail(
     if (trackingUrl) {
       summaryLines.push(`Track Parcel Online: ${trackingUrl}`);
     }
+  }
+
+  if (dispatchOrigin) {
+    summaryLines.push(
+      dispatchOrigin.toLowerCase().includes("pickup")
+        ? `Pickup Location: ${dispatchOrigin}`
+        : `Dispatched from: ${dispatchOrigin}`
+    );
   }
 
   summaryLines.push(
