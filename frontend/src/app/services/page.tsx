@@ -70,7 +70,7 @@ const SERVICE_TIERS: ServicePackage[] = [
     includes: [
       'Sana personally (with independent guest artists arranged on request)',
       'Kashmiri Chinar, floral lotus, Arabic vine, or minimalist cuffs',
-      'Fresh botanical paste formulated with soothing lavender & eucalyptus',
+      'Fresh organic henna paste formulated with soothing lavender & eucalyptus',
     ],
   },
   {

@@ -113,7 +113,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Bridal Mehandi Portfolio & Botanical Stain Gallery',
+  title: 'Bridal Mehandi Portfolio & Henna Stain Gallery',
   description:
     'Selected bridal henna designs, Kashmiri Chinar leaf motifs, Royal Mughal archways, and 48-hour natural mahogany stain studies by Sana.',
   canonicalPath: '/gallery',
@@ -185,14 +185,14 @@ export default function GalleryPage() {
                   id="gallery-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
                 >
-                  Selected Artistry &amp; Botanical Studies
+                  Selected Artistry &amp; Henna Stain Studies
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
                 A curated archive of Sana’s hand-drawn organic henna commissions
                 across Kashmir & Bengaluru, and destination
                 celebrations—created exclusively with freshly rolled, PPD-free
-                botanical cones.
+                organic henna cones.
               </p>
             </div>
 

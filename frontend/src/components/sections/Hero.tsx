@@ -42,7 +42,7 @@ export function Hero({
               id="hero-heading"
               className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-ink leading-[1.09] tracking-tight mb-6"
             >
-              Henna artistry &amp; natural botanical products.
+              Henna artistry &amp; organic henna products.
             </h1>
 
             <div className="space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8">
@@ -114,7 +114,7 @@ export function Hero({
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-t-[14rem] rounded-b-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.14)]">
               <Image
                 src="/mehandibysana-73.webp"
-                alt="Mehandi by Sana artisanal henna cone and natural botanical products"
+                alt="Mehandi by Sana organic henna cones and natural products"
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, (min-width: 640px) 450px, 100vw"

@@ -197,14 +197,14 @@ export function PolicyDocumentLayout({
               <div className="pt-2 border-t border-plaque-ink/15 space-y-2 text-xs">
                 <a
                   href="mailto:sana@mehandibysana.com"
-                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
                   sana@mehandibysana.com
                 </a>
 
                 <a
                   href="tel:+919149648717"
-                  className="block text-[#789904] hover:text-[#789904]/80 tabular-nums underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+                  className="block text-brand-green hover:text-brand-green-hover tabular-nums underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
                   +91-9149648717
                 </a>
@@ -213,7 +213,7 @@ export function PolicyDocumentLayout({
                   href="https://wa.me/919149648717"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
                   WhatsApp Concierge
                 </a>
@@ -222,7 +222,7 @@ export function PolicyDocumentLayout({
                   href="https://www.instagram.com/mehandibysana"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
                   @mehandibysana (Instagram)
                 </a>

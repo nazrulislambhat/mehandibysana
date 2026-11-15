@@ -31,6 +31,10 @@
   --color-accent-on-ink: #e86c36;  /* Terracotta accent index over dark selected pill */
   --color-accent-soft: #f5f5f5;    /* Neutral soft surface (never orange-tinted bg) */
 
+  --color-brand-green: #789904;        /* Signature olive-henna green for contact & social */
+  --color-brand-green-hover: #648003;  /* Deepened olive-henna hover */
+  --cl-green: #789904;
+
   --color-border: #e5e5e5;         /* Crisp neutral hairline border */
   --color-border-strong: #a3a3a3;  /* Accessible neutral UI/input divider */
   --color-focus: #d9541e;          /* High-visibility Burnt Orange focus outline */
@@ -135,6 +139,10 @@
   --color-accent-ink: #fffaf5;
   --color-accent-on-ink: #b84214;
   --color-accent-soft: #222222;
+
+  --color-brand-green: #8fad06;
+  --color-brand-green-hover: #a3c40a;
+  --cl-green: #8fad06;
 
   --color-border: #2d2d2d;
   --color-border-strong: #424242;

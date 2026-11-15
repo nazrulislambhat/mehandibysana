@@ -17,7 +17,7 @@ export const metadata: Metadata = buildPageMetadata({
   canonicalPath: '/terms-conditions',
   keywords: [
     'Mehandi by Sana terms and conditions',
-    'henna apothecary storefront terms India',
+    'henna storefront terms India',
   ],
 });
 
@@ -62,7 +62,7 @@ export default function TermsConditionsPage() {
           <strong>Bengaluru (Karnataka), India</strong>.
         </p>
         <p className="text-umber">
-          Throughout these Terms &amp; Conditions, &ldquo;Mehandi By Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent practice and botanical apothecary, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical apothecary goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
+          Throughout these Terms &amp; Conditions, &ldquo;Mehandi By Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent organic henna practice, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical henna goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
           <Link href="/privacy-policy" className="text-terracotta underline underline-offset-4">
             Privacy Policy
           </Link>

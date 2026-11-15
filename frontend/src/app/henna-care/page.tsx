@@ -62,7 +62,7 @@ export default function HennaCarePage() {
 
   return (
     <PolicyDocumentLayout
-      eyebrow="Botanical Ritual & Care"
+      eyebrow="Henna Ritual & Care"
       title="Henna Storage & 48-Hour Stain Care"
       subtitle="Because 100% pure organic henna contains zero synthetic chemical dyes, proper freezer storage, skin prep, and water-free aftercare unlock dramatic espresso-mahogany color."
       effectiveDate="Artist Reference Guide"
@@ -91,7 +91,7 @@ export default function HennaCarePage() {
           Deep Freeze Unused Cones Immediately (-18&deg;C)
         </h2>
         <p className="text-umber">
-          Fresh Sojat henna paste is a living botanical blend with no
+          Fresh Sojat henna paste is 100% natural and pure with no
           preservatives. Once your parcel reaches you, place any cones you are
           not using within the next 48 hours inside a sealed zip-lock bag or
           airtight container and store flat in your{' '}

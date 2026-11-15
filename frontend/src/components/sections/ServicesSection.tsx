@@ -69,7 +69,7 @@ export function ServicesSection() {
                 id="services-heading"
                 className="font-serif text-3xl md:text-4xl font-medium text-ink leading-tight mb-4"
               >
-                Appointments &amp; Botanical Care
+                Appointments &amp; Henna Care
               </h2>
             </TextReveal>
 

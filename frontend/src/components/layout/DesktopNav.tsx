@@ -310,7 +310,7 @@ export function DesktopNav() {
               <div className="col-span-7 p-6 lg:p-7 border-r border-hairline">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-umber">
-                    Apothecary &amp; Product Collections
+                    Henna Products &amp; Collections
                   </span>
                   <Link
                     href="/shop"

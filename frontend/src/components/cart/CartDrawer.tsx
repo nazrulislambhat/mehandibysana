@@ -429,7 +429,7 @@ export function CartDrawer() {
                   onClick={() => handleClose(false)}
                   className="rounded-md w-full sm:w-auto min-w-[210px]"
                 >
-                  Explore Full Apothecary
+                  Explore All Henna Products
                 </LinkButton>
               </div>
             </div>

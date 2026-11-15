@@ -21,6 +21,9 @@
   --color-terracotta-on-ink: var(--color-accent-on-ink);
   --color-terracotta-soft: var(--color-accent-soft);
 
+  --color-brand-green: var(--color-brand-green);
+  --color-brand-green-hover: var(--color-brand-green-hover);
+
   --color-hairline: var(--color-border);
   --color-divider: var(--color-border-strong);
   --color-ring-focus: var(--color-focus);

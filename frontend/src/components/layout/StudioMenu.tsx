@@ -307,7 +307,7 @@ export function StudioMenu() {
                     {/* Quick Apothecary Collections */}
                     <div className="rounded-2xl border border-hairline bg-linen/75 p-3.5 sm:p-5">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-umber mb-2">
-                        Apothecary Collections
+                        Henna Collections
                       </p>
                       <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {SHOP_COLLECTIONS.map((collection) => (

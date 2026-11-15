@@ -22,10 +22,10 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     index: '01',
     label: 'Shop',
     href: '/shop',
-    eyebrow: 'Small-Batch Botanicals & Tools',
+    eyebrow: 'Fresh Henna & Artist Tools',
     description:
       'Freshly hand-rolled organic henna cones, triple-sifted Rajasthani hair henna, essential aftercare oils, and precision artist tools.',
-    ctaLabel: 'Browse Full Apothecary',
+    ctaLabel: 'Browse All Henna Products',
     motif: 'botanical',
   },
   {

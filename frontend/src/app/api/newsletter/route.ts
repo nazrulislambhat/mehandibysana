@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
         'Assalamu Alaikum / Hello,',
         'Thank you for joining the Mehandi by Sana Dispatch List across Kashmir and Bengaluru. You will receive early alerts whenever fresh small-batch organic henna cones are rolled and when seasonal Eid or bridal booking windows open.',
       ],
-      ctaLabel: 'Explore the Apothecary',
+      ctaLabel: 'Explore Henna Products',
       ctaUrl: `${(process.env.NEXT_PUBLIC_SITE_URL || 'https://mehandibysana.com').replace(/\/+$/, '')}/shop`,
     }),
   });

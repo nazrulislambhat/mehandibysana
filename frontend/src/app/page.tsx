@@ -67,7 +67,7 @@ export default async function HomePage() {
                     className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                   />
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                    Apothecary &amp; Goods
+                    Organic Henna &amp; Cones
                   </p>
                 </div>
               </TextReveal>
@@ -76,11 +76,11 @@ export default async function HomePage() {
                   id="featured-products-heading"
                   className="font-serif text-3xl md:text-4xl font-medium text-ink leading-tight"
                 >
-                  Featured Botanical Products
+                  Featured Henna Products
                 </h2>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed mt-2 max-w-xl">
-                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and preparation tools mixed &amp; rolled fresh across Kashmir &amp; Bengaluru.
+                Triple-sifted organic Sojat henna cones, aftercare balms, essential oils, and preparation tools mixed &amp; rolled fresh across Kashmir &amp; Bengaluru.
               </p>
             </div>
 
@@ -153,7 +153,7 @@ export default async function HomePage() {
                       Collection 02
                     </p>
                     <h3 className="font-serif text-2xl text-ink mb-2">
-                      Aftercare &amp; Botanical Kits
+                      Aftercare &amp; Henna Kits
                     </h3>
                     <p className="text-sm text-umber leading-relaxed">
                       Steam-distilled eucalyptus oil, nourishing aftercare balms, chemical-free hair henna powder, and complete DIY starter kits.
@@ -200,7 +200,7 @@ export default async function HomePage() {
               <div className="rounded-2xl border border-hairline bg-paper p-8 md:p-10 flex flex-col items-center text-center shadow-xs">
                 <BotanicalCraftIllustration className="w-full max-w-[280px] h-auto mb-3" />
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-umber">
-                  Botanical Preparation
+                  Organic Henna Craft
                 </p>
               </div>
             </TextReveal>
@@ -227,7 +227,7 @@ export default async function HomePage() {
               </TextReveal>
               <TextReveal variant="fade" delayMs={120}>
                 <p className="text-base md:text-lg text-ink leading-relaxed">
-                  Sana left the world of circuits behind for something closer to her heart. In 2019, she began Kashmir’s first independent organic henna practice, and today she runs it full-time while raising her two little boys, replacing harsh chemical cones with pure, skin-safe botanicals.
+                  Sana left the world of circuits behind for something closer to her heart. In 2019, she began Kashmir’s first independent organic henna practice, and today she runs it full-time while raising her two little boys, replacing harsh chemical cones with pure, skin-safe natural henna.
                 </p>
               </TextReveal>
               <TextReveal variant="fade" delayMs={180}>

@@ -109,7 +109,7 @@ export function GalleryPreviewSection() {
                 id="gallery-heading"
                 className="font-serif text-3xl md:text-4xl font-medium text-ink leading-tight"
               >
-                Selected Work &amp; Botanical Studies
+                Selected Bridal &amp; Henna Artistry
               </h2>
             </TextReveal>
           </div>

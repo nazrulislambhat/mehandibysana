@@ -60,8 +60,8 @@ const CATEGORY_SEO_COPY: Record<
   'mehandi-products': {
     title: 'Organic Mehandi Cones, Hair Henna & Aftercare Products',
     description:
-      'Explore small-batch Mehandi By Sana apothecary formulations: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
-    lead: 'Our signature small-batch organic mehandi formulations—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and botanical stain aftercare.',
+      'Explore handcrafted Mehandi By Sana organic henna products: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
+    lead: 'Our signature handcrafted organic mehandi products—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and natural stain aftercare.',
   },
 };
 
@@ -292,7 +292,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                 />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  01 &middot; Apothecary &amp; Collection
+                  01 &middot; Henna &amp; Product Collection
                 </p>
               </div>
               <TextReveal variant="line" immediate>

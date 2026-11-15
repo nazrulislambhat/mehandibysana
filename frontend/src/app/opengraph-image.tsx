@@ -139,7 +139,7 @@ export default function OpenGraphImage() {
                 color: '#052225',
               }}
             >
-              Henna artistry &amp; natural botanical products.
+              Henna artistry &amp; organic henna products.
             </div>
             <div
               style={{
@@ -193,7 +193,7 @@ export default function OpenGraphImage() {
               fontWeight: 600,
             }}
           >
-            Artist &amp; Apothecary
+            Mehandi Artist &amp; Henna
           </div>
         </div>
       </div>

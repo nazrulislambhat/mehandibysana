@@ -110,8 +110,8 @@ export function InstagramFeedSection({
           <div className="max-w-2xl">
             <TextReveal variant="fade">
               <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 py-1.5 mb-3.5">
-                <InstagramIcon className="w-3.5 h-3.5 text-[#789904] shrink-0" />
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#789904]">
+                <InstagramIcon className="w-3.5 h-3.5 text-brand-green shrink-0" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-green">
                   Instagram Journal &middot; @{username}
                 </p>
               </div>
@@ -137,7 +137,7 @@ export function InstagramFeedSection({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Follow @${username} on Instagram`}
-              className="inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-inverse hover:bg-[#789904] transition-colors shadow-sm"
+              className="inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-inverse hover:bg-brand-green transition-colors shadow-sm"
             >
               <InstagramIcon className="w-4 h-4 shrink-0" />
               <span>Follow @{username}</span>
@@ -182,7 +182,7 @@ export function InstagramFeedSection({
           <div className="flex items-center gap-2">
             <span
               aria-hidden="true"
-              className="w-2 h-2 rounded-full bg-[var(--cl-green,#789904)] shrink-0 animate-pulse"
+              className="w-2 h-2 rounded-full bg-brand-green shrink-0 animate-pulse"
             />
             <span>Active daily updates on Instagram &middot; Kashmir &amp; Bengaluru</span>
           </div>
@@ -191,7 +191,7 @@ export function InstagramFeedSection({
             href={profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
           >
             <span>instagram.com/{username}</span>
             <span aria-hidden="true">&rarr;</span>

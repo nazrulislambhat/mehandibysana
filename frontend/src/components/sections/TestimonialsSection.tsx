@@ -15,7 +15,7 @@ interface RecognitionItem {
 const FOUNDER_STATEMENT: RecognitionItem = {
   id: 'founder-philosophy',
   quote:
-    'Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient botanical ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.',
+    'Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient natural ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.',
   author: 'Sana',
   context: 'Founder - Mehandi by Sana · Kashmir, J&K',
 };

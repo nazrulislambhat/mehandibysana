@@ -321,7 +321,7 @@ export default function PrivacyPolicyPage() {
             <strong>Email:</strong>{' '}
             <a
               href="mailto:sana@mehandibysana.com"
-              className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium"
+              className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium"
             >
               sana@mehandibysana.com
             </a>
@@ -330,7 +330,7 @@ export default function PrivacyPolicyPage() {
             <strong>Phone / WhatsApp:</strong>{' '}
             <a
               href="tel:+919149648717"
-              className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums"
+              className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums"
             >
               +91-9149648717
             </a>

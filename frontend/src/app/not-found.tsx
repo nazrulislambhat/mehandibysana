@@ -94,7 +94,7 @@ export default function NotFound() {
             </div>
 
             <h1 className="font-serif text-3xl sm:text-5xl font-medium text-ink leading-[1.12]">
-              This botanical trail could not be located.
+              This page could not be located.
             </h1>
 
             <p className="text-sm sm:text-base text-umber leading-relaxed max-w-xl">
@@ -204,7 +204,7 @@ export default function NotFound() {
                   <span>
                     Need help?{' '}
                     <a
-                      className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
+                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
                       href="mailto:sana@mehandibysana.com"
                     >
                       sana@mehandibysana.com
@@ -212,7 +212,7 @@ export default function NotFound() {
                   </span>
                   <a
                     href="tel:+919149648717"
-                    className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium tabular-nums transition-colors"
+                    className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
                   >
                     +91-9149648717
                   </a>
