@@ -55,8 +55,12 @@ function ResetPasswordForm() {
       }
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err?.message || 'Failed to update password. Please request a new reset link.');
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : 'Failed to update password. Please request a new reset link.';
+      setError(msg);
     } finally {
       setLoading(false);
     }

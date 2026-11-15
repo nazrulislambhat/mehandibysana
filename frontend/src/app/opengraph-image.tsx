@@ -124,7 +124,7 @@ export default function OpenGraphImage() {
                   color: '#525252',
                 }}
               >
-                Srinagar &amp; Bengaluru &middot; Est. 2019
+                Kashmir &amp; Bengaluru &middot; Est. 2019
               </div>
             </div>
           </div>

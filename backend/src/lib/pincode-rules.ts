@@ -4,8 +4,8 @@ import * as path from 'path';
 export interface PincodeRule {
   id: string;
   pattern: string; // e.g. "190*", "560*", "*"
-  label: string; // e.g. "Srinagar Metro Zone (190*)"
-  zone: string; // e.g. "Zone 1 — Srinagar Local Dispatch"
+  label: string; // e.g. "Kashmir Metro Zone (190*)"
+  zone: string; // e.g. "Zone 1 — Kashmir Local Dispatch"
   charge: number; // INR delivery fee, e.g. 60, 150
   estimatedDays: string; // e.g. "1–2 business days"
   codAvailable: boolean;
@@ -31,10 +31,10 @@ export interface PincodeCheckResult {
 
 const DEFAULT_PINCODE_RULES: PincodeRule[] = [
   {
-    id: 'rule-srinagar-190',
+    id: 'rule-kashmir-190',
     pattern: '190*',
-    label: 'Srinagar Metro Zone (190*)',
-    zone: 'Zone 1 — Srinagar Local Dispatch',
+    label: 'Kashmir Metro Zone (190*)',
+    zone: 'Zone 1 — Kashmir Local Dispatch',
     charge: 60,
     estimatedDays: '1–2 business days',
     codAvailable: true,

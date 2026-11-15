@@ -225,7 +225,7 @@ export interface BrandLockupProps {
 export function BrandLockup({
   tone = 'light',
   crestSize = 40,
-  subtitle = 'Srinagar · Bengaluru',
+  subtitle = 'Kashmir · Bengaluru',
   className = '',
 }: BrandLockupProps) {
   const isDark = tone === 'dark';

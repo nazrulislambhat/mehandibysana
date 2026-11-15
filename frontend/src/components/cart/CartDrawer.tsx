@@ -300,7 +300,7 @@ export function CartDrawer() {
                 className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
               />
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Bag Folio &middot; Srinagar &amp; Bengaluru
+                Bag Folio &middot; Kashmir &amp; Bengaluru
               </span>
               {highlightedKey ? (
                 <span
@@ -405,7 +405,7 @@ export function CartDrawer() {
                 </p>
                 <p className="text-sm text-umber leading-relaxed mb-5">
                   Explore fresh Sojat henna cones, aftercare balms, therapeutic
-                  oils, and precision tools mixed to order across Srinagar &amp;
+                  oils, and precision tools mixed to order across Kashmir &amp;
                   Bengaluru.
                 </p>
 
@@ -711,7 +711,7 @@ export function CartDrawer() {
 
                       <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
                         {[
-                          { pin: '190001', tag: '190001 · Srinagar' },
+                          { pin: '190001', tag: '190001 · Kashmir' },
                           { pin: '560001', tag: '560001 · Bengaluru' },
                           { pin: '110001', tag: '110001 · Delhi' },
                         ].map((sample) => (

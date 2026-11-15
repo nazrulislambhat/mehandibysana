@@ -72,7 +72,7 @@ export default function RefundPolicyPage() {
         </h2>
         <p className="text-umber">
           Every Mehandi By Sana order is mixed and packed to order in small
-          batches across Srinagar and Bengaluru without chemical stabilizers.
+          batches across Kashmir and Bengaluru without chemical stabilizers.
           For strict personal hygiene, botanical potency, and food-grade safety
           standards,{' '}
           <strong>

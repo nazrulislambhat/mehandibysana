@@ -123,7 +123,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         ctaUrl = `${siteUrl}/track-order?order=MBS-DEMO-73&email=${encodeURIComponent(targetEmail)}`;
         paragraphs = [
           "Assalamu Alaikum / Hello Test Customer,",
-          "Thank you for your order (#MBS-DEMO-73) with Mehandi by Sana! Fresh small-batch botanicals are being prepared for you across Srinagar & Bengaluru.",
+          "Thank you for your order (#MBS-DEMO-73) with Mehandi by Sana! Fresh small-batch botanicals are being prepared for you across Kashmir & Bengaluru.",
           "This is a demonstration preview of the automated Order Confirmation email sent to customers immediately upon checkout, including full line items, delivery address, and tracking link.",
         ];
         detailsHtml = `
@@ -162,7 +162,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           </table>
           <div style="padding:12px 14px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.6;color:#3D3D3D;">
             <strong>Payment:</strong> Paid &middot; Razorpay Online (Ref: pay_demo73)<br/>
-            <strong>Delivery To:</strong> Test Customer &mdash; Srinagar, J&amp;K 190001 &middot; +91-9149648717
+            <strong>Delivery To:</strong> Test Customer &mdash; Kashmir, J&amp;K &middot; +91-9149648717
           </div>
         `;
       } else if (template === "shipping_dispatch") {
@@ -182,7 +182,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
             <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#789904;">Courier Tracking Dossier</p>
             <strong>Courier Partner:</strong> Delhivery Express<br/>
             <strong>AWB / Tracking Number:</strong> <code style="background-color:#E7DDCF;padding:2px 6px;border-radius:4px;font-weight:600;">DL984128509IN</code><br/>
-            <strong>Destination:</strong> Srinagar, Jammu &amp; Kashmir (PIN 190001)<br/>
+            <strong>Destination:</strong> Kashmir, J&amp;K<br/>
             <strong>Direct Carrier Link:</strong> <a href="https://www.delhivery.com/track/package/DL984128509IN" target="_blank" style="color:#96410D;text-decoration:underline;font-weight:600;">Track on Delhivery.com &rarr;</a>
           </div>
         `;

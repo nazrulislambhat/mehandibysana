@@ -157,7 +157,7 @@ const BridalBookingsAdminPage = () => {
                     <div className="text-xs mt-0.5">
                       Date: <strong>{b.eventDate || "Flexible"}</strong>
                     </div>
-                    <div className="text-xs text-ui-fg-subtle">{b.location || "Srinagar"}</div>
+                    <div className="text-xs text-ui-fg-subtle">{b.location || "Kashmir, J&K"}</div>
                   </Table.Cell>
                   <Table.Cell className="max-w-xs">
                     <Text size="small" className="line-clamp-2">

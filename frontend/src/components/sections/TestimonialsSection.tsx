@@ -17,7 +17,7 @@ const FOUNDER_STATEMENT: RecognitionItem = {
   quote:
     'Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient botanical ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.',
   author: 'Sana',
-  context: 'Founder - Mehandi by Sana · Srinagar, Kashmir',
+  context: 'Founder - Mehandi by Sana · Kashmir, J&K',
 };
 
 const PRESS_RECOGNITION: RecognitionItem[] = [
@@ -25,7 +25,7 @@ const PRESS_RECOGNITION: RecognitionItem[] = [
     id: 'greater-kashmir',
     quote: 'Engineering graduate breaks stereotypes with her henna art',
     author: 'Greater Kashmir',
-    context: 'Print & Digital Feature · Srinagar, Kashmir',
+    context: 'Print & Digital Feature · Kashmir, J&K',
     href: 'https://www.greaterkashmir.com/todays-paper/engineering-graduate-breaks-stereotypes-with-her-henna-art',
     linkLabel: 'Read coverage',
   },

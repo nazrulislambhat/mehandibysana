@@ -148,7 +148,7 @@ const PincodeShippingPage = () => {
           <div>
             <Heading level="h1">Wildcard Pincode Delivery Rates</Heading>
             <Text className="text-ui-fg-subtle mt-1">
-              Configure prefix wildcards (e.g. <code>190*</code> for Srinagar PINs at ₹60,{" "}
+              Configure prefix wildcards (e.g. <code>190*</code> for Kashmir PINs at ₹60,{" "}
               <code>560*</code> for Bengaluru PINs at ₹60, or <code>*</code> for Pan-India at ₹150). Most specific prefix wins.
             </Text>
           </div>
@@ -200,7 +200,7 @@ const PincodeShippingPage = () => {
           <div>
             <Label>Region / Label</Label>
             <Input
-              placeholder="Srinagar Metro Zone (190*)"
+              placeholder="Kashmir Metro Zone (190*)"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
             />
@@ -216,7 +216,7 @@ const PincodeShippingPage = () => {
           <div>
             <Label>Zone Name</Label>
             <Input
-              placeholder="Zone 1 — Srinagar Local Dispatch"
+              placeholder="Zone 1 — Kashmir Local Dispatch"
               value={zone}
               onChange={(e) => setZone(e.target.value)}
             />

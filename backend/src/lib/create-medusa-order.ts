@@ -121,7 +121,7 @@ export async function createMedusaStoreOrder(
     last_name: body.customer.lastName || "",
     address_1: body.customer.address || "Address",
     address_2: body.customer.apartment || "",
-    city: body.customer.city || "Srinagar",
+    city: body.customer.city || "Kashmir",
     province: body.customer.state || "Jammu & Kashmir",
     postal_code: body.customer.pincode || "190001",
     country_code: "in",

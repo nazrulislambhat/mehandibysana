@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontalIcon } from 'lucide-react';
+import { LineDotRightHorizontalIcon } from 'lucide-react';
 export interface BookingFormProps {
   initialService?: string;
 }

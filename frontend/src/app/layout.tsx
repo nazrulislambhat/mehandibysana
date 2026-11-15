@@ -10,6 +10,7 @@ import { THEME_INIT_SCRIPT } from '@/lib/theme';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { FloatingContactBubble } from '@/components/layout/FloatingContactBubble';
 import { CartAddedToast } from '@/components/cart/CartAddedToast';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 
@@ -29,7 +30,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 const DEFAULT_TITLE = 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist';
 const DEFAULT_DESCRIPTION =
-  'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sana across Srinagar & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehandi services.';
+  'Independent freelance organic mehandi artist & small-batch botanical apothecary by Sana across Kashmir & Bengaluru — fresh henna cones, triple-sifted hair henna powder, botanical oils, and bespoke bridal mehandi services.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -142,6 +143,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <FloatingContactBubble />
         <SpeedInsights />
       </body>
     </html>

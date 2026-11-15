@@ -12,6 +12,7 @@ import {
 } from '@/lib/structured-data';
 import { LinkButton } from '@/components/ui/Button';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { InstagramFeedSection } from '@/components/sections/InstagramFeedSection';
 
 interface GalleryPlate {
   id: string;
@@ -46,7 +47,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
     category: 'Festive & Kashmiri Motif',
     title: 'Kashmiri Chinar Leaf Silhouette',
     caption:
-      'Inspired by the Chinar trees along Dal Lake in Srinagar, woven into a balanced floral palm composition.',
+      'Inspired by the Chinar trees along Dal Lake in Kashmir, woven into a balanced floral palm composition.',
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-22.webp',
     imageAlt:
@@ -189,7 +190,7 @@ export default function GalleryPage() {
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
                 A curated archive of Sana’s hand-drawn organic henna commissions
-                across Srinagar & Bengaluru, and destination
+                across Kashmir & Bengaluru, and destination
                 celebrations—created exclusively with freshly rolled, PPD-free
                 botanical cones.
               </p>
@@ -208,7 +209,7 @@ export default function GalleryPage() {
                   6 Curated Plates
                 </p>
                 <p className="text-xs text-plaque-ink/70 mt-1">
-                  Srinagar &middot; 0% PPD Organic Stain
+                  Kashmir &middot; 0% PPD Organic Stain
                 </p>
               </div>
             </div>
@@ -266,6 +267,14 @@ export default function GalleryPage() {
               </figure>
             </TextReveal>
           ))}
+        </div>
+
+        {/* Live Instagram Feed */}
+        <div className="mt-16 md:mt-24">
+          <InstagramFeedSection
+            title="Follow our daily portfolio on Instagram."
+            subtitle="Explore real bridal hand and foot compositions, intricate Kashmiri Chinar details, and fresh botanical cones posted weekly by Sana."
+          />
         </div>
 
         {/* Bespoke Commission Plaque Banner */}
