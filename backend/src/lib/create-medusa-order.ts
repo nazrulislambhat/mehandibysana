@@ -158,7 +158,7 @@ export async function createMedusaStoreOrder(
     Number.isFinite(Number(rawShippingFee));
 
   // Authoritatively enforce the configured 3-zone shipping rules whenever the PIN is serviceable
-  // (190* -> ₹60, 560* -> ₹60, all other -> ₹150) so stale client cache never drops shipping.
+  // (190* -> ₹60, 560* -> ₹60, all other -> ₹120) so stale client cache never drops shipping.
   const baseShippingFee = roundInr(
     pinEvaluation.serviceable
       ? Math.max(0, Number(pinEvaluation.deliveryCharge) || 0)

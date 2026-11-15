@@ -28,11 +28,11 @@
     "pattern": "*",
     "label": "Rest of India (All Other Pincodes)",
     "zone": "Zone 3 — Pan-India Express",
-    "charge": 150,
+    "charge": 120,
     "estimatedDays": "3–6 business days",
     "codAvailable": true,
     "freeShippingAbove": null,
     "active": true,
-    "updatedAt": "2026-11-10T15:00:00.000Z"
+    "updatedAt": "2026-11-15T08:09:00.000Z"
   }
 ]

@@ -69,7 +69,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         Number.isFinite(Number(body.shippingFee));
 
       // Enforce authoritative 3-zone delivery rates whenever the PIN is serviceable
-      // (190* -> ₹60, 560* -> ₹60, all other -> ₹150).
+      // (190* -> ₹60, 560* -> ₹60, all other -> ₹120).
       const baseShipping = roundInr(
         pinEval.serviceable
           ? Math.max(0, Number(pinEval.deliveryCharge) || 0)
