@@ -119,6 +119,95 @@ export function formatTelegramAddress(addr: TelegramAddressInput): string {
   return parts.length > 0 ? parts.join("\n") : "Not provided";
 }
 
+export function resolvePublicImageUrl(rawUrl?: string): string | null {
+  if (!rawUrl || typeof rawUrl !== "string") return null;
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return null;
+
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed;
+  }
+
+  const baseUrl =
+    process.env.STOREFRONT_URL?.trim().replace(/\/+$/, "") ||
+    "https://mehandibysana.vercel.app";
+
+  const cleanPath = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+  return `${baseUrl}${cleanPath}`;
+}
+
+export async function sendTelegramPhoto(
+  photoUrl: string,
+  caption?: string,
+  options?: { parseMode?: "HTML" | "Markdown" }
+): Promise<{ success: boolean; messageId?: number; error?: string }> {
+  const { configured, botToken, chatId, targetPhone } = getTelegramConfig();
+
+  if (!configured || !botToken || !chatId) {
+    console.log(
+      `[Telegram] Skipped photo dispatch (TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set for phone ${targetPhone}).`
+    );
+    appendTelegramLog({
+      status: "skipped",
+      reason: "credentials_not_configured",
+      targetPhone,
+      photoUrl,
+    });
+    return {
+      success: false,
+      error: "Telegram Bot Token or Chat ID not configured in backend .env",
+    };
+  }
+
+  try {
+    const url = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        photo: photoUrl,
+        caption: caption ? caption.slice(0, 1024) : undefined,
+        parse_mode: options?.parseMode || "HTML",
+      }),
+    });
+
+    const data = (await res.json()) as any;
+    if (!res.ok || !data.ok) {
+      const errMsg = data?.description || `HTTP ${res.status}`;
+      console.warn("[Telegram] sendPhoto API error:", errMsg);
+      appendTelegramLog({
+        status: "error",
+        error: errMsg,
+        photoUrl,
+        captionPreview: caption?.slice(0, 100),
+      });
+      return { success: false, error: errMsg };
+    }
+
+    appendTelegramLog({
+      status: "sent",
+      type: "photo",
+      messageId: data.result?.message_id,
+      chatId,
+      photoUrl,
+    });
+
+    return { success: true, messageId: data.result?.message_id };
+  } catch (err: any) {
+    console.error("[Telegram] sendPhoto network exception:", err);
+    appendTelegramLog({
+      status: "exception",
+      error: err?.message || String(err),
+      photoUrl,
+    });
+    return {
+      success: false,
+      error: err?.message || "Failed to reach Telegram API sendPhoto",
+    };
+  }
+}
+
 export async function sendTelegramMessage(
   text: string,
   options?: { parseMode?: "HTML" | "Markdown" }
@@ -189,7 +278,14 @@ export async function notifyTelegramOrderPlaced(order: {
   address?: TelegramAddressInput;
   city?: string;
   pincode?: string;
-  items: Array<{ title: string; variant?: string; quantity: number; lineTotal: number }>;
+  imageUrl?: string;
+  items: Array<{
+    title: string;
+    variant?: string;
+    quantity: number;
+    lineTotal: number;
+    thumbnail?: string;
+  }>;
   subtotal?: number;
   shippingFee?: number;
   discountAmount?: number;
@@ -198,6 +294,9 @@ export async function notifyTelegramOrderPlaced(order: {
   paymentMethod: string;
   paymentStatus: string;
   paymentRef?: string;
+  targetDeliveryDate?: string;
+  deliverySpeed?: string;
+  specialInstructions?: string;
 }) {
   const itemsText =
     order.items && order.items.length > 0
@@ -245,13 +344,36 @@ export async function notifyTelegramOrderPlaced(order: {
     ? `\n🔖 <b>Payment Ref:</b> <code>${escapeTelegramHtml(order.paymentRef)}</code>`
     : "";
 
+  const deliveryScheduleLine = order.targetDeliveryDate
+    ? `\n📅 <b>Preferred Delivery Date:</b> <b>${escapeTelegramHtml(order.targetDeliveryDate)}</b>`
+    : "";
+  const speedLine = order.deliverySpeed
+    ? `\n⚡ <b>Delivery Speed:</b> ${escapeTelegramHtml(order.deliverySpeed)}`
+    : "";
+  const notesLine = order.specialInstructions
+    ? `\n📝 <b>Special Instructions:</b> <i>${escapeTelegramHtml(order.specialInstructions)}</i>`
+    : "";
+
+  const isPriorityRequest = Boolean(
+    order.deliverySpeed?.toLowerCase().includes("priority") ||
+    order.deliverySpeed?.toLowerCase().includes("urgent")
+  );
+
+  const priorityActionBanner = isPriorityRequest
+    ? `\n\n⚠️ <b>ACTION REQUIRED — CALL CUSTOMER:</b>\nCheck courier availability for <b>${escapeTelegramHtml(
+        order.targetDeliveryDate || "requested date"
+      )}</b> and call <b>${escapeTelegramHtml(
+        order.phone || "customer"
+      )}</b> to decide whether we can ship it!`
+    : "";
+
   const message = `
 🛍️ <b>NEW ORDER PLACED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(order.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
 📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "Not provided"}
-✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}
+✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}${deliveryScheduleLine}${speedLine}${notesLine}${priorityActionBanner}
 
 📍 <b>Delivery Address:</b>
 ${formattedAddress}
@@ -264,6 +386,38 @@ ${breakdownBlock}
     order.paymentStatus.toUpperCase()
   )})${paymentRefLine}
   `.trim();
+
+  // Resolve item product image for Telegram photo delivery
+  const candidateImage =
+    order.imageUrl ||
+    (order.items || []).find((it) => Boolean(it.thumbnail))?.thumbnail;
+  const photoUrl = resolvePublicImageUrl(candidateImage);
+
+  if (photoUrl) {
+    // If the full message fits Telegram's 1024-character caption limit, send together
+    if (message.length <= 1024) {
+      const photoResult = await sendTelegramPhoto(photoUrl, message);
+      if (photoResult.success) {
+        return photoResult;
+      }
+      // If sendPhoto failed, fallback to standard message
+      return sendTelegramMessage(message);
+    }
+
+    // Otherwise, send photo with summary caption and immediately follow with full details
+    const summaryCaption = `
+🛍️ <b>NEW ORDER #${escapeTelegramHtml(order.orderNumber)}</b>
+<b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
+📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "N/A"}${deliveryScheduleLine}${speedLine}${priorityActionBanner}
+💰 <b>Payable Total:</b> ₹${Number(order.total || 0).toLocaleString("en-IN")} (${escapeTelegramHtml(order.paymentMethod.toUpperCase())})
+    `.trim();
+
+    const photoRes = await sendTelegramPhoto(photoUrl, summaryCaption);
+    if (photoRes.success) {
+      await sendTelegramMessage(message);
+      return photoRes;
+    }
+  }
 
   return sendTelegramMessage(message);
 }

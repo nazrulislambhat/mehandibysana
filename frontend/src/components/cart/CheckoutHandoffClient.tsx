@@ -6,7 +6,13 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Calendar, Zap, AlertCircle, Clock, Truck } from 'lucide-react';
+import {
+  evaluateDeliveryRules,
+  formatIsoDateDisplay,
+  PRIORITY_DELIVERY_SURCHARGE,
+  type DeliverySpeedType,
+} from '@/lib/delivery-schedule';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
@@ -116,6 +122,9 @@ export function CheckoutHandoffClient() {
 
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [deliverySpeed, setDeliverySpeed] = useState<DeliverySpeedType>('standard');
+  const [targetDate, setTargetDate] = useState<string>('');
+
   const [confirmedOrder, setConfirmedOrder] = useState<{
     orderNumber: string;
     subtotal: number;
@@ -127,7 +136,20 @@ export function CheckoutHandoffClient() {
     pattern: string;
     paymentMethod: string;
     razorpayPaymentId?: string;
+    targetDate?: string;
+    deliverySpeed?: string;
+    deliverySpeedLabel?: string;
   } | null>(null);
+
+  // Dynamically evaluate delivery rules based on the entered pincode and current IST time
+  const deliveryRules = evaluateDeliveryRules(pincode, deliverySpeed);
+
+  // Synchronize targetDate to remain valid within [minDate, maxDate]
+  useEffect(() => {
+    if (!targetDate || targetDate < deliveryRules.minDate) {
+      setTargetDate(deliveryRules.minDate);
+    }
+  }, [deliveryRules.minDate, targetDate]);
 
   useEffect(() => {
     if (isHydrated && cartToken && cart === null) {
@@ -151,7 +173,13 @@ export function CheckoutHandoffClient() {
       ? pincodeResult
       : null;
 
-  const deliveryFee = activePinCheck?.serviceable ? activePinCheck.deliveryCharge : 0;
+  const deliverySurcharge =
+    deliverySpeed === 'priority'
+      ? PRIORITY_DELIVERY_SURCHARGE
+      : 0;
+
+  const baseDeliveryFee = activePinCheck?.serviceable ? activePinCheck.deliveryCharge : 0;
+  const deliveryFee = baseDeliveryFee + deliverySurcharge;
   const activeCouponCode = couponValidation?.valid ? couponValidation.code : '';
   const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
   const grandTotal = Math.max(
@@ -199,7 +227,10 @@ export function CheckoutHandoffClient() {
       return;
     }
 
-    const finalShipping = resolvedDelivery.deliveryCharge;
+    const resolvedSpeedLabel =
+      deliveryRules.speedOptions.find((s) => s.id === deliverySpeed)?.title ||
+      'Standard Delivery';
+    const finalShipping = resolvedDelivery.deliveryCharge + deliverySurcharge;
     const finalDiscount = couponValidation?.valid ? couponValidation.discountAmount : 0;
     const resolvedCouponCode = couponValidation?.valid ? couponValidation.code : '';
     const finalTotal = Math.max(
@@ -244,6 +275,10 @@ export function CheckoutHandoffClient() {
         pincodeRule: matchedPattern,
       },
       deliveryDetails: {
+        targetDate: targetDate || deliveryRules.minDate,
+        deliverySpeed,
+        deliverySpeedLabel: resolvedSpeedLabel,
+        deliverySurcharge,
         specialInstructions: notes.trim(),
       },
     };
@@ -294,6 +329,9 @@ export function CheckoutHandoffClient() {
           pincode,
           pattern: matchedPattern,
           paymentMethod: '100% Coupon Discount',
+          targetDate: targetDate || deliveryRules.minDate,
+          deliverySpeed,
+          deliverySpeedLabel: resolvedSpeedLabel,
         });
         setSubmitting(false);
         return;
@@ -319,12 +357,16 @@ export function CheckoutHandoffClient() {
             items: baseOrderPayload.items,
             pincode,
             shippingFee: finalShipping,
+            deliverySpeed,
+            deliverySurcharge,
             ...(resolvedCouponCode ? { couponCode: resolvedCouponCode } : {}),
             notes: {
               customer_name: `${firstName.trim()} ${lastName.trim()}`.trim(),
               customer_email: email.trim(),
               pincode,
               pincode_rule: matchedPattern,
+              delivery_speed: deliverySpeed,
+              target_delivery_date: targetDate || deliveryRules.minDate,
               ...(resolvedCouponCode ? { coupon_code: resolvedCouponCode } : {}),
             },
           }),
@@ -450,6 +492,9 @@ export function CheckoutHandoffClient() {
                 paymentMethod: 'Razorpay Online (Paid)',
                 razorpayPaymentId:
                   verifyData.razorpayPaymentId || rzpResponse.razorpay_payment_id,
+                targetDate: targetDate || deliveryRules.minDate,
+                deliverySpeed,
+                deliverySpeedLabel: resolvedSpeedLabel,
               });
               setSubmitting(false);
             } catch (verifyErr) {
@@ -521,6 +566,9 @@ export function CheckoutHandoffClient() {
         pincode,
         pattern: matchedPattern,
         paymentMethod: 'Cash on Delivery (COD)',
+        targetDate: targetDate || deliveryRules.minDate,
+        deliverySpeed,
+        deliverySpeedLabel: resolvedSpeedLabel,
       });
       setSubmitting(false);
     } catch (err) {
@@ -597,6 +645,22 @@ export function CheckoutHandoffClient() {
                     {formatMoney(confirmedOrder.deliveryFee, currency)}
                   </dd>
                 </div>
+                {confirmedOrder.targetDate ? (
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-umber">Preferred Delivery Date</dt>
+                    <dd className="font-semibold text-terracotta">
+                      {formatIsoDateDisplay(confirmedOrder.targetDate)}
+                    </dd>
+                  </div>
+                ) : null}
+                {confirmedOrder.deliverySpeedLabel ? (
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-umber">Delivery Speed</dt>
+                    <dd className="font-medium text-ink">
+                      {confirmedOrder.deliverySpeedLabel}
+                    </dd>
+                  </div>
+                ) : null}
                 <div className="flex justify-between gap-3">
                   <dt className="text-umber">Payment Mode</dt>
                   <dd className="font-medium text-ink">{confirmedOrder.paymentMethod}</dd>
@@ -841,6 +905,161 @@ export function CheckoutHandoffClient() {
                     />
                   </div>
                 </div>
+
+                {/* Dispatch Schedule & Preferred Delivery Date */}
+                <div className="pt-5 border-t border-hairline space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta block">
+                        Dispatch Logistics &middot; {deliveryRules.zoneLabel}
+                      </span>
+                      <h3 className="font-serif text-xl sm:text-2xl font-medium text-ink">
+                        Delivery Speed &amp; Preferred Date
+                      </h3>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-umber bg-linen px-3 py-1 rounded-full border border-hairline">
+                      <Clock size={12} className="text-terracotta shrink-0" />
+                      <span className="font-medium">{deliveryRules.istTimeFormatted}</span>
+                    </span>
+                  </div>
+
+                  {/* Operational Notice Banner (e.g. Kashmir 9-11 AM cutoff or Bangalore Rapido) */}
+                  {deliveryRules.notice ? (
+                    <div
+                      className={`rounded-xl p-4 text-xs border leading-relaxed flex items-start gap-3 ${
+                        deliveryRules.notice.type === 'warning'
+                          ? 'border-amber-500/35 bg-amber-500/10 text-amber-950 dark:text-amber-200'
+                          : deliveryRules.notice.type === 'success'
+                            ? 'border-emerald-500/35 bg-emerald-500/10 text-emerald-950 dark:text-emerald-200'
+                            : 'border-terracotta/35 bg-terracotta/5 text-ink'
+                      }`}
+                    >
+                      <AlertCircle size={16} className="shrink-0 mt-0.5 text-terracotta" />
+                      <div className="space-y-0.5">
+                        <strong className="block font-semibold">
+                          {deliveryRules.notice.title}
+                        </strong>
+                        <p className="opacity-90">{deliveryRules.notice.message}</p>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {/* Delivery Speed Selector (Standard vs Urgent) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {deliveryRules.speedOptions.map((opt) => {
+                      const isSelected = deliverySpeed === opt.id;
+                      return (
+                        <button
+                          key={opt.id}
+                          type="button"
+                          onClick={() => setDeliverySpeed(opt.id)}
+                          className={`relative text-left p-4 rounded-xl border transition-all ${
+                            isSelected
+                              ? 'border-ink bg-ink text-inverse shadow-xs'
+                              : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2 mb-1">
+                            <span className="font-semibold text-sm flex items-center gap-1.5">
+                              {opt.id === 'priority' ? (
+                                <Zap size={15} className={isSelected ? 'text-terracotta' : 'text-amber-600'} />
+                              ) : (
+                                <Truck size={15} className={isSelected ? 'text-inverse/70' : 'text-umber'} />
+                              )}
+                              <span>{opt.title}</span>
+                            </span>
+                            {opt.badge ? (
+                              <span
+                                className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${
+                                  isSelected
+                                    ? 'bg-terracotta text-inverse'
+                                    : 'bg-terracotta/10 text-terracotta'
+                                }`}
+                              >
+                                {opt.badge}
+                              </span>
+                            ) : null}
+                          </div>
+                          <p
+                            className={`text-xs font-medium ${
+                              isSelected ? 'text-inverse/85' : 'text-umber'
+                            }`}
+                          >
+                            {opt.subtitle}
+                          </p>
+                          <p
+                            className={`text-[11px] mt-1.5 leading-relaxed ${
+                              isSelected ? 'text-inverse/65' : 'text-umber/80'
+                            }`}
+                          >
+                            {opt.description}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Preferred Delivery Date Input & Quick-Select */}
+                  <div className="space-y-2.5 pt-1">
+                    <label
+                      htmlFor="preferred-delivery-date"
+                      className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink"
+                    >
+                      Preferred Delivery Date <span className="text-terracotta">*</span>
+                    </label>
+
+                    {/* Quick Selection Buttons */}
+                    <div className="flex flex-wrap gap-2">
+                      {deliveryRules.quickDates.map((qd) => {
+                        const isDateSelected = targetDate === qd.date;
+                        return (
+                          <button
+                            key={qd.date}
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setTargetDate(qd.date);
+                            }}
+                            className={`px-3.5 py-2 rounded-xl text-xs border transition-colors flex items-center gap-1.5 cursor-pointer ${
+                              isDateSelected
+                                ? 'border-terracotta bg-terracotta text-inverse font-semibold shadow-xs'
+                                : 'border-divider bg-canvas text-ink hover:border-ink/50'
+                            }`}
+                          >
+                            <Calendar size={13} className={isDateSelected ? 'text-inverse' : 'text-terracotta'} />
+                            <span>{qd.label}</span>
+                            <span
+                              className={`text-[10px] opacity-75 ${
+                                isDateSelected ? 'text-inverse' : 'text-umber'
+                              }`}
+                            >
+                              ({qd.sublabel})
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Native Date Picker */}
+                    <div className="relative">
+                      <input
+                        id="preferred-delivery-date"
+                        type="date"
+                        required
+                        min={deliveryRules.minDate}
+                        max={deliveryRules.maxDate}
+                        value={targetDate}
+                        onChange={(e) => setTargetDate(e.target.value)}
+                        className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 text-sm font-semibold text-ink"
+                      />
+                    </div>
+
+                    <p className="text-[11px] text-umber leading-relaxed">
+                      🌿 <strong>Peak Henna Freshness:</strong> Fresh organic henna paste is mixed and rolled to order. Choosing your target delivery date ensures timely preparation and maximum stain potency on your celebration day.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Chapter 02 */}
@@ -1043,6 +1262,28 @@ export function CheckoutHandoffClient() {
                         : 'Enter 6-digit PIN'}
                     </dd>
                   </div>
+                  {deliverySpeed === 'priority' ? (
+                    <div className="flex justify-between text-xs">
+                      <dt className="text-terracotta flex items-center gap-1">
+                        <Zap size={11} className="shrink-0" />
+                        <span>Priority Request</span>
+                      </dt>
+                      <dd className="font-medium text-terracotta text-right text-[11px]">
+                        Subject to Courier Availability (Confirmed via call)
+                      </dd>
+                    </div>
+                  ) : null}
+                  {targetDate ? (
+                    <div className="flex justify-between text-xs pt-1 border-t border-plaque-ink/10">
+                      <dt className="text-plaque-ink/70 flex items-center gap-1">
+                        <Calendar size={11} className="shrink-0 text-terracotta" />
+                        <span>Target Delivery</span>
+                      </dt>
+                      <dd className="font-medium text-plaque-ink tabular-nums">
+                        {formatIsoDateDisplay(targetDate)}
+                      </dd>
+                    </div>
+                  ) : null}
                 </dl>
 
                 <div className="flex items-baseline justify-between">
