@@ -287,16 +287,18 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  aria-hidden="true"
-                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                />
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  01 &middot; Henna &amp; Product Collection
-                </p>
-              </div>
-              <TextReveal variant="line" immediate>
+              <TextReveal variant="fade" delayMs={40} immediate>
+                <div className="flex items-center gap-2 mb-3">
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                  />
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    01 &middot; Henna &amp; Product Collection
+                  </p>
+                </div>
+              </TextReveal>
+              <TextReveal variant="line" delayMs={100} immediate>
                 <h1
                   id="shop-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
@@ -304,30 +306,34 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   {pageHeading}
                 </h1>
               </TextReveal>
-              <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                {pageLead}
-              </p>
+              <TextReveal variant="fade" delayMs={180} immediate>
+                <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
+                  {pageLead}
+                </p>
+              </TextReveal>
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
-              <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink px-6 py-5 min-w-[260px] shadow-sm">
-                <div
-                  aria-hidden="true"
-                  className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
-                />
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
-                  Live Batch Inventory
-                </p>
-                <p className="font-serif text-3xl font-medium text-plaque-ink tabular-nums">
-                  {catalog.total !== null ? catalog.total : '—'}{' '}
-                  <span className="text-sm font-sans font-normal text-plaque-ink/75">
-                    {catalog.total === 1 ? 'formulation' : 'formulations'}
-                  </span>
-                </p>
-                <p className="mt-2 pt-2 border-t border-plaque-ink/15 text-[11px] text-plaque-ink/70">
-                  Small-batch dispatch &middot; Check PIN on product or bag
-                </p>
-              </div>
+              <TextReveal variant="fade" delayMs={240} immediate>
+                <div className="relative overflow-hidden rounded-2xl border border-plaque-border bg-plaque text-plaque-ink px-6 py-5 min-w-[260px] shadow-sm">
+                  <div
+                    aria-hidden="true"
+                    className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
+                  />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                    Live Batch Inventory
+                  </p>
+                  <p className="font-serif text-3xl font-medium text-plaque-ink tabular-nums">
+                    {catalog.total !== null ? catalog.total : '—'}{' '}
+                    <span className="text-sm font-sans font-normal text-plaque-ink/75">
+                      {catalog.total === 1 ? 'formulation' : 'formulations'}
+                    </span>
+                  </p>
+                  <p className="mt-2 pt-2 border-t border-plaque-ink/15 text-[11px] text-plaque-ink/70">
+                    Small-batch dispatch &middot; Check PIN on product or bag
+                  </p>
+                </div>
+              </TextReveal>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ export default async function sendTestOrderEmail({ container }: ExecArgs) {
   logger.info("  SENDING LIVE TEST ORDER CONFIRMATION EMAIL         ");
   logger.info("=====================================================");
 
-  const targetEmails = ["mehandibysana@gmail.com", "nazrulislambhat@gmail.com"];
+  const targetEmails = ["sana@mehandibysana.com"];
   const orderNumber = "MBS-TEST-VERIFY";
   const siteUrl = "https://mehandibysana.com";
 

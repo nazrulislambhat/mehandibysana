@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { TextReveal } from '@/components/ui/TextReveal';
 
 export interface StainStage {
   id: 'apply' | 'six-hours' | 'one-day';
@@ -134,18 +135,24 @@ export function StainProgressionGuide({ compact = false }: StainProgressionGuide
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 md:mb-12">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-terracotta mb-3">
-              Natural Oxidation Timeline
-            </p>
-            <h2
-              id="stain-guide-heading"
-              className="font-serif text-3xl sm:text-4xl font-medium text-ink leading-tight"
-            >
-              How your organic henna stain develops
-            </h2>
-            <p className="text-sm sm:text-base text-umber leading-relaxed mt-3">
-              Because our cones are 100% chemical-free, your stain evolves naturally from fresh olive paste and saffron-orange into deep bridal mahogany over 24 hours.
-            </p>
+            <TextReveal variant="fade">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-terracotta mb-3">
+                Natural Oxidation Timeline
+              </p>
+            </TextReveal>
+            <TextReveal variant="line" delayMs={60}>
+              <h2
+                id="stain-guide-heading"
+                className="font-serif text-3xl sm:text-4xl font-medium text-ink leading-tight"
+              >
+                How your organic henna stain develops
+              </h2>
+            </TextReveal>
+            <TextReveal variant="fade" delayMs={120}>
+              <p className="text-sm sm:text-base text-umber leading-relaxed mt-3">
+                Because our cones are 100% chemical-free, your stain evolves naturally from fresh olive paste and saffron-orange into deep bridal mahogany over 24 hours.
+              </p>
+            </TextReveal>
           </div>
 
           {/* Skin Undertone Switcher */}

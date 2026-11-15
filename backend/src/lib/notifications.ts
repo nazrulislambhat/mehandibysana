@@ -215,8 +215,8 @@ export async function sendStudioEmail(input: SendEmailInput): Promise<SendEmailR
 
   const replyTo =
     input.replyTo ||
-    (settings.adminEmail ? settings.adminEmail.split(/[,;\s]+/)[0] : "mehandibysana@gmail.com") ||
-    "mehandibysana@gmail.com";
+    (settings.adminEmail ? settings.adminEmail.split(/[,;\s]+/)[0] : "sana@mehandibysana.com") ||
+    "sana@mehandibysana.com";
 
   if (provider === "resend") {
     try {
@@ -473,22 +473,21 @@ export async function dispatchStudioNotification(
     });
   }
 
-  // Admin Operations Copy (Order alerts to both mehandibysana@gmail.com & nazrulislambhat@gmail.com; Contact queries to mehandibysana@gmail.com)
+  // Admin Operations Copy (Order alerts and inquiries to sana@mehandibysana.com)
   let adminRecipients: string[] = [];
   if (event.type === "bridal_booking_received") {
-    adminRecipients = ["mehandibysana@gmail.com"];
+    adminRecipients = ["sana@mehandibysana.com"];
   } else {
     const rawAdminConfig =
       settings.adminEmail ||
       process.env.STUDIO_ADMIN_EMAIL ||
-      "mehandibysana@gmail.com, nazrulislambhat@gmail.com";
+      "sana@mehandibysana.com";
     const parsed = rawAdminConfig
       .split(/[,;\s]+/)
       .map((e) => e.trim().toLowerCase())
       .filter((e) => Boolean(e) && e.includes("@"));
     const set = new Set(parsed);
-    set.add("mehandibysana@gmail.com");
-    set.add("nazrulislambhat@gmail.com");
+    set.add("sana@mehandibysana.com");
     adminRecipients = Array.from(set);
   }
 

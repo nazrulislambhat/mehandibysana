@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { LinkButton } from '@/components/ui/Button';
+import { TextReveal } from '@/components/ui/TextReveal';
 
 import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 
@@ -28,86 +29,95 @@ export function Hero({
       <div className="editorial-container py-12 md:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 py-1.5 mb-5">
-              <span
-                aria-hidden="true"
-                className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-              />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Mehandi By Sana &middot; Kashmir &amp; Bengaluru
-              </p>
-            </div>
+            <TextReveal variant="fade" delayMs={40} immediate>
+              <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 py-1.5 mb-5">
+                <span
+                  aria-hidden="true"
+                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+                  Mehandi By Sana &middot; Kashmir &amp; Bengaluru
+                </p>
+              </div>
+            </TextReveal>
 
-            <h1
-              id="hero-heading"
-              className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-ink leading-[1.09] tracking-tight mb-6"
-            >
-              Henna artistry &amp; organic henna products.
-            </h1>
-
-            <div className="space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8">
-              <p>
-                Founded by independent freelance artist Sana across Kashmir and Bengaluru, Mehandi By Sana is dedicated to 100% natural, PPD-free artistry and small-batch organic henna products.
-              </p>
-              
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3.5 mb-10">
-              <LinkButton
-                href="/shop"
-                variant="primary"
-                size="lg"
-                className="rounded-md"
+            <TextReveal variant="line" delayMs={100} immediate>
+              <h1
+                id="hero-heading"
+                className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-ink leading-[1.09] tracking-tight mb-6"
               >
-                Shop Products <ShoppingBag className='w-3.5 h-3.5'/>
-              </LinkButton>
-              <LinkButton
-                href="/contact"
-                variant="secondary"
-                size="lg"
-                className="rounded-md"
-              >
-                Book a Service <LineDotRightHorizontal className="w-3.5 h-3.5"/>
-              </LinkButton>
-            </div>
+                Henna artistry &amp; organic henna products.
+              </h1>
+            </TextReveal>
 
-            <dl className="border-t border-hairline pt-6 grid grid-cols-3 gap-6 max-w-xl">
-              <div className="flex flex-col">
-                <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
-                  Products Available
-                </dt>
-                <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-ink tabular-nums">
-                  {totalProducts !== null ? totalProducts : '—'}
-                </dd>
-                <dd className="order-3 text-xs text-umber mt-0.5">
-                  {isConfigured ? 'Live in store' : 'Catalog offline'}
-                </dd>
+            <TextReveal variant="fade" delayMs={180} immediate>
+              <div className="space-y-3 text-base md:text-lg text-umber leading-relaxed max-w-xl mb-8">
+                <p>
+                  Founded by independent freelance artist Sana across Kashmir and Bengaluru, Mehandi By Sana is dedicated to 100% natural, PPD-free artistry and small-batch organic henna products.
+                </p>
               </div>
+            </TextReveal>
 
-              <div className="flex flex-col border-l border-hairline pl-4 sm:pl-6">
-                <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
-                  Orders Completed
-                </dt>
-                <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-ink tabular-nums">
-                  {formattedOrders}
-                </dd>
-                <dd className="order-3 text-xs text-umber mt-0.5">
-                  Shipped across India
-                </dd>
+            <TextReveal variant="fade" delayMs={240} immediate>
+              <div className="flex flex-wrap items-center gap-3.5 mb-10">
+                <LinkButton
+                  href="/shop"
+                  variant="primary"
+                  size="lg"
+                  className="rounded-md"
+                >
+                  Shop Products <ShoppingBag className='w-3.5 h-3.5'/>
+                </LinkButton>
+                <LinkButton
+                  href="/contact"
+                  variant="secondary"
+                  size="lg"
+                  className="rounded-md"
+                >
+                  Book a Service <LineDotRightHorizontal className="w-3.5 h-3.5"/>
+                </LinkButton>
               </div>
+            </TextReveal>
 
-              <div className="flex flex-col border-l border-hairline pl-4 sm:pl-6">
-                <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
-                  Years in Practice
-                </dt>
-                <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-terracotta">
-                  7+ Years
-                </dd>
-                <dd className="order-3 text-xs text-umber mt-0.5">
-                  Since 2019 &middot; 0% PPD
-                </dd>
-              </div>
-            </dl>
+            <TextReveal variant="fade" delayMs={300} immediate>
+              <dl className="border-t border-hairline pt-6 grid grid-cols-3 gap-6 max-w-xl">
+                <div className="flex flex-col">
+                  <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
+                    Products Available
+                  </dt>
+                  <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-ink tabular-nums">
+                    {totalProducts !== null ? totalProducts : '—'}
+                  </dd>
+                  <dd className="order-3 text-xs text-umber mt-0.5">
+                    {isConfigured ? 'Live in store' : 'Catalog offline'}
+                  </dd>
+                </div>
+
+                <div className="flex flex-col border-l border-hairline pl-4 sm:pl-6">
+                  <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
+                    Orders Completed
+                  </dt>
+                  <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-ink tabular-nums">
+                    {formattedOrders}
+                  </dd>
+                  <dd className="order-3 text-xs text-umber mt-0.5">
+                    Shipped across India
+                  </dd>
+                </div>
+
+                <div className="flex flex-col border-l border-hairline pl-4 sm:pl-6">
+                  <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
+                    Years in Practice
+                  </dt>
+                  <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-terracotta">
+                    7+ Years
+                  </dd>
+                  <dd className="order-3 text-xs text-umber mt-0.5">
+                    Since 2019 &middot; 0% PPD
+                  </dd>
+                </div>
+              </dl>
+            </TextReveal>
           </div>
 
           <div className="lg:col-span-5">
