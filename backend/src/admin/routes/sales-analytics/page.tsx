@@ -132,12 +132,33 @@ const SalesAnalyticsAdminPage = () => {
     }
   }, [viewMode, range, selectedYear, selectedMonth]);
 
-  // When All-Time is loaded, scroll chart to the right (latest data)
+  // When All-Time or multi-year data is loaded, automatically scroll to the latest months (present/2026)
   useEffect(() => {
-    if (chartScrollRef.current && (range === "all" || (data?.months && data.months.length > 24))) {
-      chartScrollRef.current.scrollLeft = chartScrollRef.current.scrollWidth;
+    if (!loading && chartScrollRef.current && (range === "all" || (data?.months && data.months.length > 12))) {
+      const timer = setTimeout(() => {
+        if (chartScrollRef.current) {
+          chartScrollRef.current.scrollLeft = chartScrollRef.current.scrollWidth;
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
-  }, [data, range]);
+  }, [loading, data, range]);
+
+  const scrollChart = (direction: "start" | "left" | "right" | "end") => {
+    if (!chartScrollRef.current) return;
+    if (direction === "start") {
+      chartScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    } else if (direction === "end") {
+      chartScrollRef.current.scrollTo({
+        left: chartScrollRef.current.scrollWidth,
+        behavior: "smooth",
+      });
+    } else if (direction === "left") {
+      chartScrollRef.current.scrollBy({ left: -450, behavior: "smooth" });
+    } else if (direction === "right") {
+      chartScrollRef.current.scrollBy({ left: 450, behavior: "smooth" });
+    }
+  };
 
   const handleExportCsv = () => {
     if (!data) return;
@@ -586,6 +607,47 @@ const SalesAnalyticsAdminPage = () => {
           </div>
         </div>
 
+        {/* Horizontal Scroll Controls for Long Datasets (e.g. All Time 78 Months) */}
+        {!loading && chartItems.length > 12 && (
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-3 py-2 rounded-lg bg-ui-bg-subtle border border-ui-border-base text-xs">
+            <span className="text-ui-fg-subtle font-medium">
+              Horizontal Scroll ({chartItems.length} intervals): {chartItems[0]?.label} {chartItems[0]?.subLabel} &rarr; {chartItems[chartItems.length - 1]?.label} {chartItems[chartItems.length - 1]?.subLabel}
+            </span>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => scrollChart("start")}
+                className="px-2.5 py-1 rounded bg-ui-bg-base border border-ui-border-base text-ui-fg-base hover:bg-ui-bg-base-hover font-medium cursor-pointer transition-colors"
+                title="Scroll to beginning"
+              >
+                &laquo; Earliest ({chartItems[0]?.subLabel || "2020"})
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollChart("left")}
+                className="px-2.5 py-1 rounded bg-ui-bg-base border border-ui-border-base text-ui-fg-base hover:bg-ui-bg-base-hover cursor-pointer transition-colors"
+              >
+                &lsaquo; Scroll Left
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollChart("right")}
+                className="px-2.5 py-1 rounded bg-ui-bg-base border border-ui-border-base text-ui-fg-base hover:bg-ui-bg-base-hover cursor-pointer transition-colors"
+              >
+                Scroll Right &rsaquo;
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollChart("end")}
+                className="px-2.5 py-1 rounded bg-[#DD6013] text-white hover:bg-[#c7530e] font-semibold cursor-pointer transition-colors shadow-xs"
+                title="Scroll to present / Nov 2026"
+              >
+                Latest ({chartItems[chartItems.length - 1]?.subLabel || "2026"}) &raquo;
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Graphic Canvas */}
         {loading ? (
           <div className="h-64 flex items-center justify-center text-ui-fg-subtle">
@@ -597,12 +659,16 @@ const SalesAnalyticsAdminPage = () => {
             No sales records found for this selection.
           </div>
         ) : (
-          <div ref={chartScrollRef} className="relative overflow-x-auto pt-4 pb-2 scroll-smooth">
+          <div
+            ref={chartScrollRef}
+            className="relative overflow-x-auto pt-4 pb-4 scroll-smooth border-b border-ui-border-base"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
             <div
-              className="flex items-end justify-between gap-3 px-2"
+              className="flex items-end justify-between gap-3 px-3"
               style={{
                 height: `${chartHeight + 60}px`,
-                minWidth: `${Math.max(680, chartItems.length * (barWidth + 12))}px`,
+                minWidth: `${Math.max(780, chartItems.length * 52)}px`,
               }}
             >
               {chartItems.map((item, idx) => {
@@ -615,6 +681,7 @@ const SalesAnalyticsAdminPage = () => {
                 return (
                   <div
                     key={item.key}
+                    style={{ minWidth: chartItems.length > 24 ? "38px" : undefined }}
                     onMouseEnter={() => setHoveredIdx(idx)}
                     onMouseLeave={() => setHoveredIdx(null)}
                     onClick={() => {

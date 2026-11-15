@@ -338,17 +338,6 @@ export function CartDrawer() {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            {items.length > 0 ? (
-              <Link
-                href="/cart"
-                onClick={() => handleClose(false)}
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-umber hover:text-terracotta underline underline-offset-4 py-1.5"
-              >
-                <span>Open Full Cart</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
-              </Link>
-            ) : null}
-
             <button
               ref={closeButtonRef}
               type="button"
@@ -817,7 +806,6 @@ export function CartDrawer() {
                   className="w-full min-h-[48px] rounded-full text-sm inline-flex items-center justify-center gap-1.5"
                 >
                   <span>Proceed to Checkout</span>
-                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </LinkButton>
 
                 <div className="grid grid-cols-2 gap-2">
@@ -828,7 +816,7 @@ export function CartDrawer() {
                     onClick={() => handleClose(false)}
                     className="min-h-[42px] rounded-full text-xs border-plaque-ink/25"
                   >
-                    View Bag Ledger
+                    View Cart
                   </LinkButton>
                   <Button
                     type="button"

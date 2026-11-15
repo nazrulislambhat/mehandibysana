@@ -20,11 +20,16 @@ import {
   VALID_FULFILLMENT_STAGES,
   type StudioFulfillmentStage,
   normalizeFulfillmentStage,
+  deriveOrderNumber,
 } from "../../../../../lib/studio-order-meta";
 import {
   syncOrderNativePayment,
   type StudioPaymentStatus,
 } from "../../../../../lib/sync-order-payment";
+import {
+  notifyTelegramOrderShipped,
+  notifyTelegramPaymentReceived,
+} from "../../../../../lib/telegram";
 
 interface StudioDispatchBody {
   action?:
@@ -299,6 +304,27 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       }
 
       const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
+
+      if (resolvedPaymentStatus === "paid") {
+        void notifyTelegramPaymentReceived({
+          orderNumber: deriveOrderNumber(updatedOrder || existingOrder),
+          customerName:
+            `${existingOrder.shipping_address?.first_name || ""} ${
+              existingOrder.shipping_address?.last_name || ""
+            }`.trim() ||
+            existingOrder.email ||
+            "Customer",
+          amount:
+            Number(body.paymentAmount) ||
+            Number(existingMeta.total) ||
+            Number(updatedOrder?.total) ||
+            0,
+          paymentMethod: resolvedMethod,
+          referenceId: body.paymentReference,
+          note: body.offlinePaymentNote,
+        });
+      }
+
       return res.status(200).json({
         success: true,
         order: updatedOrder || existingOrder,
@@ -442,6 +468,28 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     const finalOrder = body.sendEmail
       ? await fetchRefreshedOrderDetail(req.scope, id)
       : updatedOrder;
+
+    if (
+      body.action === "ship_order" ||
+      updatedMeta.fulfillment_stage === "dispatched"
+    ) {
+      void notifyTelegramOrderShipped({
+        orderNumber: deriveOrderNumber(finalOrder || updatedOrder || existingOrder),
+        customerName:
+          `${existingOrder.shipping_address?.first_name || ""} ${
+            existingOrder.shipping_address?.last_name || ""
+          }`.trim() ||
+          existingOrder.email ||
+          "Customer",
+        dispatchOrigin: String(
+          updatedMeta.dispatch_origin || "Srinagar Atelier (Kashmir)"
+        ),
+        courierName: String(updatedMeta.courier_name || "Local Courier"),
+        trackingNumber: String(updatedMeta.tracking_number || ""),
+        trackingUrl: String(updatedMeta.tracking_url || ""),
+        dispatchNote: String(updatedMeta.dispatch_note || ""),
+      });
+    }
 
     return res.status(200).json({
       success: true,
