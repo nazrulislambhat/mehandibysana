@@ -4,7 +4,7 @@ import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { CheckCircle2, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import { CheckCircle2, Lock, AlertCircle, ShoppingBag } from 'lucide-react';
 
 function ResetPasswordForm() {
   const searchParams = useSearchParams();
@@ -77,8 +77,9 @@ function ResetPasswordForm() {
           Your password has been securely reset. You can now use your new credentials when shopping or tracking orders.
         </p>
         <Link href="/shop">
-          <Button variant="primary" size="md" className="rounded-md w-full sm:w-auto">
-            Continue to Shop <ArrowRight className="w-4 h-4 ml-1.5" />
+          <Button variant="primary" size="md" className="rounded-md w-full sm:w-auto inline-flex items-center gap-1.5">
+            <span>Continue to Shop</span>
+            <ShoppingBag className="w-4 h-4" />
           </Button>
         </Link>
       </div>

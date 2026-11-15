@@ -13,15 +13,17 @@ import { TextReveal } from '@/components/ui/TextReveal';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import {
   ClockWindowIcon,
+  InstagramIcon,
   LocationPinIcon,
   MailEnvelopeIcon,
   PhoneHandsetIcon,
+  WhatsAppChatIcon,
 } from '@/components/graphics/BrandIcons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact & Bridal Mehandi Bookings',
   description:
-    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or botanical order guidance directly from Sana across Kashmir & Bengaluru.',
+    'Inquire for bridal mehandi dates, celebration henna appointments, 15-day workshops, or henna order guidance directly from Sana across Kashmir & Bengaluru.',
   canonicalPath: '/contact',
   keywords: [
     'book bridal mehandi Kashmir',
@@ -162,14 +164,14 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <MailEnvelopeIcon
                       size={13}
-                      className="text-terracotta shrink-0"
+                      className="text-brand-green shrink-0"
                     />
                     <span>Direct Email</span>
                   </dt>
                   <dd className="text-plaque-ink">
                     <a
                       href="mailto:sana@mehandibysana.com"
-                      className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 transition-colors hover:no-underline"
+                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                     >
                       sana@mehandibysana.com
                     </a>
@@ -179,16 +181,54 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
                     <PhoneHandsetIcon
                       size={13}
-                      className="text-terracotta shrink-0"
+                      className="text-brand-green shrink-0"
                     />
-                    <span>Phone / WhatsApp</span>
+                    <span>Phone Call</span>
                   </dt>
                   <dd className="text-plaque-ink">
                     <a
                       href="tel:+919149648717"
-                      className="text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 transition-colors hover:no-underline"
+                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
                     >
                       +91-9149648717
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                    <WhatsAppChatIcon
+                      size={13}
+                      className="text-brand-green shrink-0"
+                    />
+                    <span>WhatsApp Chat</span>
+                  </dt>
+                  <dd className="text-plaque-ink">
+                    <a
+                      href="https://wa.me/919149648717"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                    >
+                      Chat on WhatsApp (+91-9149648717)
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                    <InstagramIcon
+                      size={13}
+                      className="text-brand-green shrink-0"
+                    />
+                    <span>Instagram</span>
+                  </dt>
+                  <dd className="text-plaque-ink">
+                    <a
+                      href="https://www.instagram.com/mehandibysana"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                    >
+                      @mehandibysana
                     </a>
                   </dd>
                 </div>
@@ -209,7 +249,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
             <div className="rounded-2xl border border-hairline bg-paper p-7">
               <h3 className="font-serif text-xl font-medium text-ink mb-2">
-                Ordering botanical products?
+                Ordering henna products?
               </h3>
               <p className="text-sm text-umber leading-relaxed mb-4">
                 Ready-to-ship henna cones, aftercare balms, and curated kits can

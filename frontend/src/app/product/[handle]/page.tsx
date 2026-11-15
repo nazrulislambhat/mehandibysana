@@ -26,6 +26,7 @@ import {
   PureBotanicalIcon,
 } from '@/components/graphics/BrandIcons';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { ShoppingBag } from 'lucide-react';
 
 export const revalidate = 3600;
 
@@ -41,7 +42,7 @@ export async function generateMetadata({
     return buildPageMetadata({
       title: 'Product Not Found',
       description:
-        'This botanical henna formulation could not be found in the Mehandi by Sana catalog.',
+        'This henna product could not be found in the Mehandi by Sana catalog.',
       canonicalPath: '/shop',
       robots: {
         index: false,
@@ -104,7 +105,7 @@ function buildProductCareNote(product: StorefrontProduct): string {
   if (haystack.includes('oil') || haystack.includes('balm') || haystack.includes('sealant')) {
     return 'Store tightly closed in a cool, shaded place away from direct heat or sunlight. Apply aftercare balm before water contact and throughout the 48-hour stain maturation window to protect and deepen the natural mahogany tone.';
   }
-  return 'Store in a cool, dry place away from direct sunlight and moisture. Keep containers tightly sealed between uses to preserve botanical potency.';
+  return 'Store in a cool, dry place away from direct sunlight and moisture. Keep containers tightly sealed between uses to preserve henna freshness and stain quality.';
 }
 
 export default async function ProductDetailPage({
@@ -320,15 +321,16 @@ export default async function ProductDetailPage({
                     id="related-products-heading"
                     className="font-serif text-3xl font-medium text-ink"
                   >
-                    Companion Botanicals
+                    Related Henna Products
                   </h2>
                 </TextReveal>
               </div>
               <Link
                 href="/shop"
-                className="link-kinetic text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
+                className="link-kinetic inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
               >
-                View all products &rarr;
+                <span>View all products</span>
+                <ShoppingBag className="w-3.5 h-3.5" />
               </Link>
             </div>
 

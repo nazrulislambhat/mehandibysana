@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { LinkButton } from '@/components/ui/Button';
 import { BotanicalHeroStudy } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { ShoppingBag, House } from 'lucide-react';
+import { ShoppingBag, House, LineDotRightHorizontal } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Page Not Found (404)',
   description:
@@ -94,7 +94,7 @@ export default function NotFound() {
             </div>
 
             <h1 className="font-serif text-3xl sm:text-5xl font-medium text-ink leading-[1.12]">
-              This botanical trail could not be located.
+              This page could not be located.
             </h1>
 
             <p className="text-sm sm:text-base text-umber leading-relaxed max-w-xl">
@@ -193,7 +193,7 @@ export default function NotFound() {
                           aria-hidden="true"
                           className="text-terracotta transition-transform duration-200 group-hover:translate-x-1"
                         >
-                          &rarr;
+                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
                         </span>
                       </Link>
                     </li>
@@ -204,7 +204,7 @@ export default function NotFound() {
                   <span>
                     Need help?{' '}
                     <a
-                      className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
+                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
                       href="mailto:sana@mehandibysana.com"
                     >
                       sana@mehandibysana.com
@@ -212,7 +212,7 @@ export default function NotFound() {
                   </span>
                   <a
                     href="tel:+919149648717"
-                    className="text-terracotta hover:text-plaque-ink underline underline-offset-4 tabular-nums"
+                    className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
                   >
                     +91-9149648717
                   </a>

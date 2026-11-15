@@ -446,7 +446,7 @@ export async function sendOrderConfirmationEmail(
       : "";
 
   const summary = [
-    `Thank you for your order (${b.orderNumber}) with Mehandi by Sana! Fresh small-batch botanicals are being prepared for you across Kashmir & Bengaluru.`,
+    `Thank you for your order (${b.orderNumber}) with Mehandi by Sana! Fresh organic henna is being prepared for you across Kashmir & Bengaluru.`,
     `Items Ordered:\n${itemLines}\n\nSubtotal: ${formatInr(b.subtotal)}\nShipping${
       b.pincode ? ` (PIN ${b.pincode})` : ""
     }: ${b.shippingFee === 0 ? "Free" : formatInr(b.shippingFee)}\n${couponLine}Total: ${formatInr(

@@ -8,6 +8,7 @@ import {
   serializeJsonLd,
 } from '@/lib/structured-data';
 import { LinkButton } from '@/components/ui/Button';
+import { LineDotRightHorizontal } from 'lucide-react';
 import { TextReveal } from '@/components/ui/TextReveal';
 import {
   BotanicalDivider,
@@ -70,7 +71,7 @@ const SERVICE_TIERS: ServicePackage[] = [
     includes: [
       'Sana personally (with independent guest artists arranged on request)',
       'Kashmiri Chinar, floral lotus, Arabic vine, or minimalist cuffs',
-      'Fresh botanical paste formulated with soothing lavender & eucalyptus',
+      'Fresh organic henna paste formulated with soothing lavender & eucalyptus',
     ],
   },
   {
@@ -183,9 +184,10 @@ export default function ServicesPage() {
                 href="/contact"
                 variant="accent"
                 size="md"
-                className="rounded-full"
+                className="rounded-full inline-flex items-center gap-1.5"
               >
-                Inquire for Availability &rarr;
+                <span>Inquire for Availability</span>
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </LinkButton>
             </div>
           </div>

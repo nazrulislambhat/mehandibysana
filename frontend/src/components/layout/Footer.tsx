@@ -4,6 +4,7 @@ import { LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import {
+  InstagramIcon,
   LocationPinIcon,
   MailEnvelopeIcon,
   PhoneHandsetIcon,
@@ -14,7 +15,7 @@ import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
 import { LineDotRightHorizontal } from 'lucide-react';
-const APOTHECARY_LINKS = [
+const HENNA_PRODUCT_LINKS = [
   { label: 'Shop', href: '/shop' },
   { label: 'Organic Henna', href: '/shop?category=organic-henna' },
   { label: 'Bridal & Care Kits', href: '/shop?category=henna-kits-combos' },
@@ -81,55 +82,68 @@ export function Footer() {
 
             <FooterNewsletterForm />
 
-            <div className="flex flex-wrap md:flex-nowrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-plaque-ink/80">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3 pt-1 text-xs">
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 hover:text-terracotta underline underline-offset-4 decoration-plaque-ink/30 hover:decoration-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
               >
                 <MailEnvelopeIcon
                   size={14}
-                  className="shrink-0 text-terracotta"
+                  className="shrink-0 text-brand-green"
                 />
                 <span>sana@mehandibysana.com</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">
+              <span aria-hidden="true" className="text-brand-green/50">
                 &middot;
               </span>
               <a
                 href="tel:+919149648717"
-                className="inline-flex items-center gap-1.5 hover:text-terracotta tabular-nums transition-colors"
+                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
               >
                 <PhoneHandsetIcon
                   size={14}
-                  className="shrink-0 text-terracotta"
+                  className="shrink-0 text-brand-green"
                 />
                 <span>+91-9149648717</span>
               </a>
-              <span aria-hidden="true" className="text-terracotta">
+              <span aria-hidden="true" className="text-brand-green/50">
                 &middot;
               </span>
               <a
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-terracotta hover:underline font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
               >
-                <WhatsAppChatIcon size={14} className="shrink-0" />
+                <WhatsAppChatIcon size={14} className="shrink-0 text-brand-green" />
                 <span>WhatsApp</span>
+              </a>
+              <span aria-hidden="true" className="text-brand-green/50">
+                &middot;
+              </span>
+              <a
+                href="https://www.instagram.com/mehandibysana"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                aria-label="Instagram profile @mehandibysana"
+              >
+                <InstagramIcon size={14} className="shrink-0 text-brand-green" />
+                <span>@mehandibysana</span>
               </a>
             </div>
           </div>
 
-          {/* Apothecary Index */}
+          {/* Henna Products Index */}
           <nav
-            aria-label="Footer apothecary categories"
+            aria-label="Footer henna product categories"
             className="lg:col-span-2"
           >
             <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-5">
-              Apothecary
+              Henna Products
             </h2>
             <ul className="space-y-2.5 text-sm">
-              {APOTHECARY_LINKS.map((item) => (
+              {HENNA_PRODUCT_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

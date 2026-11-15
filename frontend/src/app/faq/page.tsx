@@ -38,7 +38,7 @@ const FAQ_GROUPS: FaqGroup[] = [
   {
     id: 'ingredients-purity',
     number: '01',
-    title: 'Organic Cones & Botanical Purity',
+    title: 'Organic Cones & Pure Henna',
     items: [
       {
         question: 'Are Mehandi By Sana cones 100% chemical-free and PPD-free?',

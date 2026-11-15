@@ -22,10 +22,10 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     index: '01',
     label: 'Shop',
     href: '/shop',
-    eyebrow: 'Small-Batch Botanicals & Tools',
+    eyebrow: 'Fresh Henna & Artist Tools',
     description:
       'Freshly hand-rolled organic henna cones, triple-sifted Rajasthani hair henna, essential aftercare oils, and precision artist tools.',
-    ctaLabel: 'Browse Full Apothecary',
+    ctaLabel: 'Browse All Henna Products',
     motif: 'botanical',
   },
   {
@@ -34,7 +34,7 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     href: '/services',
     eyebrow: 'Bridal & Festive Commissions',
     description:
-      'Bespoke Kashmiri bridal mehandi, intimate engagement gatherings, and custom botanical stain consultations by Sumaiya Rashid Magray.',
+      'Bespoke Kashmiri bridal mehandi, intimate engagement gatherings, and custom henna stain consultations by Sumaiya Rashid Magray.',
     ctaLabel: 'Explore Booking Tiers',
     motif: 'bridal',
   },
@@ -54,7 +54,7 @@ export const STUDIO_NAV_ITEMS: StudioNavItem[] = [
     href: '/about',
     eyebrow: 'Kashmir & Bengaluru · Est. 2019',
     description:
-      'Rooted in zero-chemical botanical craft—how Sana blends Sojat henna harvests with pure eucalyptus and clove essential oils.',
+      'Rooted in zero-chemical organic henna craft—how Sana blends Sojat henna harvests with pure eucalyptus and lavender essential oils.',
     ctaLabel: 'Read Artist Story',
     motif: 'botanical',
   },

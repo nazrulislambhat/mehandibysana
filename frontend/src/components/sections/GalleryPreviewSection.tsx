@@ -56,11 +56,11 @@ const FEATURED_PLATES: SelectedWorkPlate[] = [
     id: 'plate-04',
     plate: 'Plate 04',
     tag: 'Engagement Lattice',
-    title: 'Botanical Lotus & Jali Grid',
+    title: 'Lotus & Jali Grid',
     caption:
-      'Delicate jali latticework framed by floating lotus blossoms and soft botanical shading.',
+      'Delicate jali latticework framed by floating lotus blossoms and soft henna shading.',
     src: 'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
-    alt: 'Botanical lotus and fine jali grid mehandi work on hands for engagement',
+    alt: 'Lotus and fine jali grid mehandi work on hands for engagement',
     aspectClass: 'aspect-[4/5]',
     colClass: 'lg:col-span-4',
   },
@@ -109,7 +109,7 @@ export function GalleryPreviewSection() {
                 id="gallery-heading"
                 className="font-serif text-3xl md:text-4xl font-medium text-ink leading-tight"
               >
-                Selected Work &amp; Botanical Studies
+                Selected Bridal &amp; Henna Artistry
               </h2>
             </TextReveal>
           </div>

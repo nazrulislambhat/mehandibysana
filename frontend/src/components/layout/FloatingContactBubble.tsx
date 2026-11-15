@@ -167,7 +167,7 @@ export function FloatingContactBubble() {
             <div className="flex items-center gap-1.5">
               <span
                 aria-hidden="true"
-                className="w-2 h-2 rounded-full bg-[var(--cl-green,#789904)] shrink-0 animate-pulse"
+                className="w-2 h-2 rounded-full bg-brand-green shrink-0 animate-pulse"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--cl-orange,#DD6013)]">
                 Connect with Sana
@@ -261,8 +261,8 @@ export function FloatingContactBubble() {
           aria-hidden="true"
           className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5"
         >
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--cl-green,#789904)] opacity-75" />
-          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[var(--cl-green,#789904)] border-2 border-[var(--cl-bg-dark,#181818)]" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-green border-2 border-[var(--cl-bg-dark,#181818)]" />
         </span>
 
         {/* Morphing icon between chat and close */}

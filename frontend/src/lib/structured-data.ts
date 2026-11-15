@@ -31,7 +31,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         foundingDate: '2019',
         description:
-          'Independent freelance organic mehandi practice and small-batch botanical apothecary founded in 2019 by Sana, serving clients across Kashmir and Bengaluru.',
+          'Independent freelance organic mehandi practice and handcrafted organic henna products founded in 2019 by Sana, serving clients across Kashmir and Bengaluru.',
         logo: {
           '@type': 'ImageObject',
           url: logoUrl,
@@ -76,7 +76,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
       {
         '@type': 'Service',
         '@id': `${siteUrl}/#freelance-artistry`,
-        name: `${SITE_NAME} — Freelance Bridal & Botanical Mehandi Services`,
+        name: `${SITE_NAME} — Freelance Bridal & Natural Mehandi Services`,
         serviceType: 'Freelance Bridal & Celebration Organic Mehandi Artistry',
         url: `${siteUrl}/services`,
         image: brandBannerUrl,
@@ -94,7 +94,7 @@ export function buildSiteGraphJsonLd(): Record<string, unknown> {
         url: siteUrl,
         name: SITE_NAME,
         description:
-          'Freelance organic mehandi artist & botanical apothecary working across Kashmir & Bengaluru since 2019 — small-batch fresh henna cones, triple-sifted hair henna powder, botanical oils, and bridal mehandi services.',
+          'Freelance organic mehandi artist working across Kashmir & Bengaluru since 2019 — handcrafted fresh henna cones, triple-sifted hair henna powder, essential oils, and bridal mehandi services.',
         publisher: { '@id': orgId },
         inLanguage: 'en-IN',
         potentialAction: {
@@ -265,7 +265,7 @@ export function buildAboutPageJsonLd(
     url: pageUrl,
     name: 'About Mehandi by Sana',
     description:
-      'Story of Sana, Electronics & Communication Engineering graduate turned Kashmir pioneer in 100% chemical-free organic henna artistry and apothecary care.',
+      'Story of Sana, Electronics & Communication Engineering graduate turned Kashmir pioneer in 100% chemical-free organic henna artistry and natural henna care.',
     isPartOf: { '@id': `${siteUrl}/#website` },
     mainEntity: {
       '@type': 'Person',
@@ -305,7 +305,7 @@ export function buildServicesJsonLd(): Record<string, unknown> {
           '@type': 'Service',
           name: 'Bridal Mehandi',
           description:
-            'Full-arm and feet bridal coverage with Kashmiri, Mughal archway, peacock, and botanical motifs applied with 0.38mm hand-rolled organic henna cones.',
+            'Full-arm and feet bridal coverage with Kashmiri, Mughal archway, peacock, and floral motifs applied with 0.38mm hand-rolled organic henna cones.',
           provider: { '@id': orgId },
           areaServed: ['Kashmir', 'Jammu and Kashmir', 'Bengaluru', 'India'],
         },
@@ -347,7 +347,7 @@ export function buildGalleryJsonLd(
     '@type': 'ImageGallery',
     '@id': `${pageUrl}#gallery`,
     url: pageUrl,
-    name: 'Bridal Mehandi Portfolio & Botanical Stain Gallery | Mehandi by Sana',
+    name: 'Bridal Mehandi Portfolio & Henna Stain Gallery | Mehandi by Sana',
     description:
       'Selected organic bridal mehandi designs, Kashmiri Chinar motifs, Mughal archways, and 48-hour natural mahogany stain studies.',
     isPartOf: { '@id': `${siteUrl}/#website` },

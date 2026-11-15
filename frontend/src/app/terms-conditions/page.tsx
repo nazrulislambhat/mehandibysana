@@ -13,18 +13,18 @@ import { LinkButton } from '@/components/ui/Button';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Terms & Conditions',
   description:
-    'Storefront, small-batch organic botanical product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi by Sana (Kashmir & Bengaluru).',
+    'Storefront, organic henna product, Razorpay & Cash on Delivery payment, shipping, and bridal booking terms for Mehandi by Sana (Kashmir & Bengaluru).',
   canonicalPath: '/terms-conditions',
   keywords: [
     'Mehandi by Sana terms and conditions',
-    'henna apothecary storefront terms India',
+    'henna storefront terms India',
   ],
 });
 
 const TOC: PolicyTocItem[] = [
   { id: 'definitions-scope', number: '01', title: 'Definitions & Brand Identity' },
   { id: 'eligibility-account', number: '02', title: 'Eligibility & Order Accuracy' },
-  { id: 'botanical-perishability', number: '03', title: 'Small-Batch Purity & Perishability' },
+  { id: 'henna-perishability', number: '03', title: 'Fresh Henna Purity & Perishability' },
   { id: 'allergy-safety', number: '04', title: 'Patch Testing & Safe External Use' },
   { id: 'pricing-coupons', number: '05', title: 'Pricing, Taxes & Promo Coupons' },
   { id: 'payments-verification', number: '06', title: 'Payments, Razorpay & Cash on Delivery' },
@@ -62,7 +62,7 @@ export default function TermsConditionsPage() {
           <strong>Bengaluru (Karnataka), India</strong>.
         </p>
         <p className="text-umber">
-          Throughout these Terms &amp; Conditions, &ldquo;Mehandi By Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent practice and botanical apothecary, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical apothecary goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
+          Throughout these Terms &amp; Conditions, &ldquo;Mehandi By Sana&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to Sumaiya Rashid Magray&rsquo;s independent organic henna practice, and &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;you&rdquo; refers to any person browsing the storefront, purchasing physical henna goods or artist tools, enrolling in training courses, or submitting a bridal/event booking inquiry. Accessing our website or completing checkout constitutes binding acceptance of these Terms, alongside our{' '}
           <Link href="/privacy-policy" className="text-terracotta underline underline-offset-4">
             Privacy Policy
           </Link>
@@ -100,7 +100,7 @@ export default function TermsConditionsPage() {
       </section>
 
       <section
-        id="botanical-perishability"
+        id="henna-perishability"
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
       >
         <p className="font-serif text-xs italic text-terracotta">Clause 03</p>
@@ -126,7 +126,7 @@ export default function TermsConditionsPage() {
           </p>
         </div>
         <p className="text-umber">
-          Because we harvest agricultural botanicals without artificial thickeners or dyes, minor variations in seasonal leaf hue, paste viscosity, or natural oil aroma between harvests are normal hallmarks of genuine organic craft.
+          Because we prepare pure henna without artificial thickeners or chemical dyes, minor variations in seasonal leaf hue, paste viscosity, or natural oil aroma between harvests are normal hallmarks of genuine organic craft.
         </p>
       </section>
 
@@ -143,7 +143,7 @@ export default function TermsConditionsPage() {
             <strong>External Application Only:</strong> All cones, essential oils, aftercare balms, and hair henna powders are intended strictly for external skin or hair cosmetic/ritual use.
           </li>
           <li>
-            <strong>Sensitivity &amp; Patch Test:</strong> Even pure botanical essential oils (such as clove or eucalyptus oil) can occasionally trigger dermal sensitivity on highly reactive skin. We strongly recommend applying a small drop on the inner wrist or behind the ear 24 hours prior to full bridal or scalp application.
+            <strong>Sensitivity &amp; Patch Test:</strong> Even pure natural essential oils (such as clove or eucalyptus oil) can occasionally trigger dermal sensitivity on highly reactive skin. We strongly recommend applying a small drop on the inner wrist or behind the ear 24 hours prior to full bridal or scalp application.
           </li>
           <li>
             <strong>Medical Contraindications:</strong> Natural lawsone (henna) should not be used by individuals with Glucose-6-Phosphate Dehydrogenase (G6PD) deficiency, open wounds, or broken skin. Discontinue use immediately and consult a physician if irritation occurs.
@@ -226,12 +226,13 @@ export default function TermsConditionsPage() {
           Cancellations, Returns &amp; Refunds
         </h2>
         <p className="text-umber">
-          Because freshly rolled organic henna cones and unsealed botanical oils are hygiene-sensitive and perishable, they cannot be returned after dispatch unless received physically damaged, leaked, or incorrect. Complete rules, evidence requirements, and refund processing timelines (5–7 business days) are set out in our dedicated{' '}
+          Because freshly rolled organic henna cones and unsealed essential oils are hygiene-sensitive and perishable, they cannot be returned after dispatch unless received physically damaged, leaked, or incorrect. Complete rules, evidence requirements, and refund processing timelines (5–7 business days) are set out in our dedicated{' '}
           <Link
             href="/refund-policy"
-            className="text-terracotta hover:text-terracotta-dark underline underline-offset-4 font-medium"
+            className="text-terracotta hover:text-terracotta-dark underline underline-offset-4 font-medium inline-flex items-center gap-1"
           >
-            Refund, Return &amp; Cancellation Policy &rarr;
+            <span>Refund, Return &amp; Cancellation Policy</span>
+            <LineDotRightHorizontal className="w-3.5 h-3.5" />
           </Link>
           .
         </p>
@@ -270,7 +271,7 @@ export default function TermsConditionsPage() {
           Intellectual Property &amp; Brand Content
         </h2>
         <p className="text-umber">
-          The brand name <strong>MEHANDI BY SANA</strong>, logo marks, product formulations, photography, original Chinar and Mughal bridal design plates, botanical illustrations, stain guide visuals, and editorial copy on mehandibysana.com are the exclusive intellectual property of Sumaiya Rashid Magray (Mehandi By Sana). Visitors may view or save personal bridal reference inspiration with attribution, but may not scrape, commercially reproduce, counterfeit product labels, or falsely claim affiliation.
+          The brand name <strong>MEHANDI BY SANA</strong>, logo marks, product formulations, photography, original Chinar and Mughal bridal design plates, henna artwork illustrations, stain guide visuals, and editorial copy on mehandibysana.com are the exclusive intellectual property of Sumaiya Rashid Magray (Mehandi By Sana). Visitors may view or save personal bridal reference inspiration with attribution, but may not scrape, commercially reproduce, counterfeit product labels, or falsely claim affiliation.
         </p>
       </section>
 
@@ -283,7 +284,7 @@ export default function TermsConditionsPage() {
           Natural Results Disclaimer &amp; Limitation of Liability
         </h2>
         <p className="text-umber">
-          Natural botanical stain darkness varies naturally across skin thickness, body warmth, circulation, pre-application oils/lotions, and post-removal water avoidance. While our formulations are crafted for rich mahogany oxidation, no artificial chemical guarantees are made. To the maximum extent permitted by Indian law, Mehandi by Sana&rsquo;s total cumulative liability for any claim relating to an order or booking shall not exceed the actual amount paid by the Customer for that specific order or booking.
+          Natural henna stain darkness varies naturally across skin thickness, body warmth, circulation, pre-application oils/lotions, and post-removal water avoidance. While our formulations are crafted for rich mahogany oxidation, no artificial chemical guarantees are made. To the maximum extent permitted by Indian law, Mehandi by Sana&rsquo;s total cumulative liability for any claim relating to an order or booking shall not exceed the actual amount paid by the Customer for that specific order or booking.
         </p>
       </section>
 

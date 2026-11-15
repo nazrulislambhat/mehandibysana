@@ -59,13 +59,13 @@ const GALLERY_PLATES: GalleryPlate[] = [
     id: 'plate-03',
     number: 'Plate 03',
     category: 'Engagement',
-    title: 'Botanical Lotus & Grid Work',
+    title: 'Lotus & Grid Work',
     caption:
       'Fine jali latticework framed by floating lotus blossoms and delicate shading techniques.',
     imageSrc:
       'https://mehandibysana.com/wp-content/uploads/2022/07/Mehandi-By-Sana-Square-New-21.webp',
     imageAlt:
-      'Botanical lotus and fine jali grid mehandi work on hands for engagement by Mehandi by Sana',
+      'Lotus and fine jali grid mehandi work on hands for engagement by Mehandi by Sana',
     aspectClass: 'aspect-square',
     spanClass: 'lg:col-span-5',
   },
@@ -113,7 +113,7 @@ const GALLERY_PLATES: GalleryPlate[] = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Bridal Mehandi Portfolio & Botanical Stain Gallery',
+  title: 'Bridal Mehandi Portfolio & Henna Stain Gallery',
   description:
     'Selected bridal henna designs, Kashmiri Chinar leaf motifs, Royal Mughal archways, and 48-hour natural mahogany stain studies by Sana.',
   canonicalPath: '/gallery',
@@ -185,14 +185,14 @@ export default function GalleryPage() {
                   id="gallery-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
                 >
-                  Selected Artistry &amp; Botanical Studies
+                  Selected Artistry &amp; Henna Stain Studies
                 </h1>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
                 A curated archive of Sana’s hand-drawn organic henna commissions
                 across Kashmir & Bengaluru, and destination
                 celebrations—created exclusively with freshly rolled, PPD-free
-                botanical cones.
+                organic henna cones.
               </p>
             </div>
 
@@ -273,7 +273,7 @@ export default function GalleryPage() {
         <div className="mt-16 md:mt-24">
           <InstagramFeedSection
             title="Follow our daily portfolio on Instagram."
-            subtitle="Explore real bridal hand and foot compositions, intricate Kashmiri Chinar details, and fresh botanical cones posted weekly by Sana."
+            subtitle="Explore real bridal hand and foot compositions, intricate Kashmiri Chinar details, and fresh organic henna cones posted weekly by Sana."
           />
         </div>
 

@@ -83,7 +83,7 @@ const AWARDS_AND_HONORS: AwardHonorItem[] = [
     category: 'Regional Press Profile',
     title: 'Indus Post',
     description:
-      '“Meet Kashmir’s first organic henna artist” — profiling Mehandi by Sana’s small-batch botanical cones and bridal practice.',
+      '“Meet Kashmir’s first organic henna artist” — profiling Mehandi by Sana’s handcrafted organic henna cones and bridal practice.',
     links: [
       {
         label: 'Read profile',
@@ -140,7 +140,7 @@ const AWARDS_AND_HONORS: AwardHonorItem[] = [
 const STUDIO_PILLARS = [
   {
     number: '01',
-    title: 'Botanical Purity',
+    title: '100% Pure Organic Henna',
     body: 'Triple-cloth sifted 100% pure Rajasthani henna leaf powder blended with steam-distilled eucalyptus and lavender essential oils—zero PPD, chemical dyes, or synthetic solvents.',
   },
   {
@@ -225,7 +225,7 @@ export default function AboutPage() {
               </TextReveal>
               <BotanicalSprig />
               <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with a small-batch botanical apothecary across Kashmir and Bengaluru.
+                Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi by Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with handcrafted organic henna products across Kashmir and Bengaluru.
               </p>
               
             </div>
@@ -248,7 +248,7 @@ export default function AboutPage() {
               &ldquo;
             </span>
             <blockquote className="font-serif text-2xl sm:text-3xl font-normal text-plaque-ink leading-[1.4]">
-              Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient botanical ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.
+              Henna was never meant to be instant, toxic, or skin-damaging. It is an ancient natural ritual of celebration, cooling therapy, and fragrance. My goal was simple: prove that natural, pure organic henna creates a far deeper, richer mahogany stain than any chemical ever could.
             </blockquote>
             <figcaption className="mt-6 pt-5 border-t border-plaque-ink/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               &mdash; Sana &middot;{' '}

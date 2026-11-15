@@ -68,12 +68,12 @@ export default function RefundPolicyPage() {
       >
         <p className="font-serif text-xs italic text-terracotta">Section 01</p>
         <h2 className="font-serif text-2xl font-medium text-ink">
-          Overview &amp; Perishable Botanical Standard
+          Overview &amp; Perishable Organic Henna Standard
         </h2>
         <p className="text-umber">
           Every Mehandi By Sana order is mixed and packed to order in small
           batches across Kashmir and Bengaluru without chemical stabilizers.
-          For strict personal hygiene, botanical potency, and food-grade safety
+          For strict personal hygiene, natural henna freshness, and safety
           standards,{' '}
           <strong>
             fresh organic henna cones, prepared paste, opened essential oils,
@@ -173,14 +173,16 @@ export default function RefundPolicyPage() {
             Email{' '}
             <a
               href="mailto:sana@mehandibysana.com"
-              className="text-terracotta underline underline-offset-4 font-medium"
+              className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
             >
               sana@mehandibysana.com
             </a>{' '}
             or WhatsApp{' '}
             <a
-              href="tel:+919149648717"
-              className="text-terracotta underline underline-offset-4 font-medium tabular-nums"
+              href="https://wa.me/919149648717"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
             >
               +91-9149648717
             </a>{' '}
@@ -260,14 +262,14 @@ export default function RefundPolicyPage() {
           and registered email to{' '}
           <a
             href="mailto:sana@mehandibysana.com"
-            className="text-terracotta underline underline-offset-4"
+            className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
           >
             sana@mehandibysana.com
           </a>{' '}
           or calling{' '}
           <a
             href="tel:+919149648717"
-            className="text-terracotta underline underline-offset-4 tabular-nums"
+            className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
           >
             +91-9149648717
           </a>

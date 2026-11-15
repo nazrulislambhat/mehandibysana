@@ -11,6 +11,7 @@ import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { ProductGallery as ProductGalleryLazy } from '@/components/shop/ProductGallery';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { HennaConeIcon } from '@/components/graphics/BrandIcons';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 
 export interface VariantSelectorProps {
   product: StorefrontProduct;
@@ -357,9 +358,11 @@ export function VariantSelector({
         </span>
         <Link
           href="/cart"
-          className="text-terracotta hover:text-terracotta-dark font-medium underline underline-offset-4 py-0.5"
+          className="text-terracotta hover:text-terracotta-dark font-medium underline underline-offset-4 py-0.5 inline-flex items-center gap-1"
         >
-          View Shopping Bag &rarr;
+          <ShoppingBag className="w-3.5 h-3.5" />
+          <span>View Shopping Bag</span>
+          <LineDotRightHorizontal className="w-3.5 h-3.5" />
         </Link>
       </div>
 

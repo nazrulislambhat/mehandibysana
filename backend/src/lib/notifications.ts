@@ -376,7 +376,7 @@ export async function dispatchStudioNotification(
     bridal_booking_confirmed: `Bridal Session Confirmed (${event.referenceId}) — Mehandi by Sana`,
     newsletter_subscribed: `Welcome to the Mehandi by Sana Dispatch List`,
     password_reset: `Reset Your Password (${event.referenceId}) — Mehandi by Sana`,
-    customer_welcome: `Welcome to Mehandi by Sana — Artisanal Botanical Henna`,
+    customer_welcome: `Welcome to Mehandi by Sana — 100% Pure Organic Henna`,
     admin_invite: `Invitation to Mehandi by Sana Admin Dashboard`,
   };
 

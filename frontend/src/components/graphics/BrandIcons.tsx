@@ -5,6 +5,7 @@ export interface BrandIconProps {
   className?: string;
   decorative?: boolean;
   label?: string;
+  accentColor?: string;
 }
 
 function getA11yProps(decorative = true, label?: string) {
@@ -209,13 +210,14 @@ export function LocationPinIcon({
 }
 
 /**
- * Architectural studio mail envelope with terracotta wax dot.
+ * Architectural studio mail envelope icon.
  */
 export function MailEnvelopeIcon({
   size = 16,
   className = '',
   decorative = true,
   label = 'Email',
+  accentColor = 'currentColor',
 }: BrandIconProps) {
   return (
     <svg
@@ -243,19 +245,20 @@ export function MailEnvelopeIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="13" r="1.4" fill="var(--color-accent)" />
+      <circle cx="12" cy="13" r="1.4" fill={accentColor} />
     </svg>
   );
 }
 
 /**
- * Concierge telephone handset icon with terracotta signal arc.
+ * Concierge telephone handset icon.
  */
 export function PhoneHandsetIcon({
   size = 16,
   className = '',
   decorative = true,
   label = 'Phone',
+  accentColor = 'currentColor',
 }: BrandIconProps) {
   return (
     <svg
@@ -275,7 +278,7 @@ export function PhoneHandsetIcon({
       />
       <path
         d="M15.2 5.2C17.1 5.6 18.4 6.9 18.8 8.8"
-        stroke="var(--color-accent)"
+        stroke={accentColor}
         strokeWidth="1.6"
         strokeLinecap="round"
       />
@@ -284,7 +287,7 @@ export function PhoneHandsetIcon({
 }
 
 /**
- * WhatsApp studio chat icon with crisp botanical dot core.
+ * WhatsApp studio chat official brand glyph icon.
  */
 export function WhatsAppChatIcon({
   size = 16,
@@ -297,25 +300,36 @@ export function WhatsAppChatIcon({
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="none"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...getA11yProps(decorative, label)}
     >
-      <path
-        d="M12 3.5C16.7 3.5 20.5 7.15 20.5 11.65C20.5 16.15 16.7 19.8 12 19.8C10.55 19.8 9.2 19.45 8 18.82L4.2 20.1L5.42 16.5C4.52 15.12 4 13.45 4 11.65C4 7.15 7.3 3.5 12 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9.6 9.3C9.6 9.3 10 11.4 11.5 12.8C13 14.2 14.8 14.6 14.8 14.6"
-        stroke="var(--color-accent)"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-      />
-      <circle cx="9.6" cy="9.3" r="1.1" fill="var(--color-accent)" />
-      <circle cx="14.8" cy="14.6" r="1.1" fill="var(--color-accent)" />
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z" />
+    </svg>
+  );
+}
+
+/**
+ * Instagram studio social handle icon.
+ */
+export function InstagramIcon({
+  size = 14,
+  className = '',
+  decorative = true,
+  label = 'Instagram',
+}: BrandIconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...getA11yProps(decorative, label)}
+    >
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
     </svg>
   );
 }
@@ -390,13 +404,13 @@ export function ShieldProtectIcon({
 }
 
 /**
- * 100% Chemical-free botanical Sojat leaf badge icon.
+ * 100% Chemical-free organic Sojat henna leaf badge icon.
  */
 export function PureBotanicalIcon({
   size = 18,
   className = '',
   decorative = true,
-  label = 'Pure organic botanical',
+  label = 'Pure organic henna',
 }: BrandIconProps) {
   return (
     <svg

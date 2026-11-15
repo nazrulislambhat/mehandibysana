@@ -223,7 +223,7 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
   const cleanTitle = decodeHtmlEntities(raw.title);
   const primaryCategoryLabel = raw.categories?.[0]?.name
     ? decodeHtmlEntities(raw.categories[0].name)
-    : 'Botanical Apothecary';
+    : 'Organic Henna Products';
   const buildProductImageAlt = (viewIndex: number): string =>
     viewIndex === 0
       ? `${cleanTitle} — ${primaryCategoryLabel} by Mehandi by Sana`

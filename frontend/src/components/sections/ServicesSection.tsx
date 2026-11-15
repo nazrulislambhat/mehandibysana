@@ -19,7 +19,7 @@ const SERVICES_OVERVIEW: ServiceItem[] = [
     motif: 'bridal',
     title: 'Bridal Mehandi',
     summary:
-      'Full arms and feet coverage featuring traditional Kashmiri, Mughal, and botanical motifs tailored to your wedding celebrations, applied with ultra-fine 0.38mm hand-rolled organic cones.',
+      'Full arms and feet coverage featuring traditional Kashmiri, Mughal, and floral motifs tailored to your wedding celebrations, applied with ultra-fine 0.38mm hand-rolled organic cones.',
     note: '3–8 hrs · Custom quote',
   },
   {
@@ -69,7 +69,7 @@ export function ServicesSection() {
                 id="services-heading"
                 className="font-serif text-3xl md:text-4xl font-medium text-ink leading-tight mb-4"
               >
-                Appointments &amp; Botanical Care
+                Appointments &amp; Henna Care
               </h2>
             </TextReveal>
 

@@ -17,6 +17,7 @@ import { ProductCard } from '@/components/shop/ProductCard';
 import { ShopFilters } from '@/components/shop/ShopFilters';
 import { FeedbackState } from '@/components/ui/FeedbackState';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { LineDotRightHorizontal } from 'lucide-react';
 
 export const revalidate = 1800;
 
@@ -60,8 +61,8 @@ const CATEGORY_SEO_COPY: Record<
   'mehandi-products': {
     title: 'Organic Mehandi Cones, Hair Henna & Aftercare Products',
     description:
-      'Explore small-batch Mehandi By Sana apothecary formulations: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
-    lead: 'Our signature small-batch organic mehandi formulations—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and botanical stain aftercare.',
+      'Explore handcrafted Mehandi By Sana organic henna products: 0.38mm fresh organic henna cones, bridal kits, Sojat hair powder, and stain-deepening balms.',
+    lead: 'Our signature handcrafted organic mehandi products—fresh henna cones, curated bridal kits, triple-sifted Sojat hair powder, and natural stain aftercare.',
   },
 };
 
@@ -109,7 +110,7 @@ export async function generateMetadata({
   const baseTitle = categoryCopy
     ? categoryCopy.title
     : activeCategoryObj
-      ? `${activeCategoryObj.name} — Botanical Henna Collection`
+      ? `${activeCategoryObj.name} — Organic Henna Collection`
       : 'Shop Organic Henna Cones, Balms & Artist Supplies';
 
   const title = activeQuery
@@ -121,8 +122,8 @@ export async function generateMetadata({
   const description = categoryCopy
     ? categoryCopy.description
     : activeCategoryObj
-      ? `Browse ${activeCategoryObj.name} formulations crafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`
-      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, botanical oils, aftercare balms, and artist tools crafted across Kashmir & Bengaluru.';
+      ? `Browse ${activeCategoryObj.name} products handcrafted in small batches by Mehandi by Sana across Kashmir & Bengaluru.`
+      : 'Explore 100% PPD-free organic henna cones, triple-sifted Sojat hair henna powder, essential oils, aftercare balms, and artist tools crafted across Kashmir & Bengaluru.';
 
   return buildPageMetadata({
     title,
@@ -227,7 +228,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
   const pageHeading = activeCategoryObj
     ? activeCategoryObj.name
-    : 'Shop Botanical Products';
+    : 'Shop Organic Henna Products';
   const pageLead = categoryCopy
     ? categoryCopy.lead
     : 'Small-batch 0.38mm organic henna cones, distilled essential oil blends, aftercare balms, and hair henna freshly prepared across Kashmir & Bengaluru.';
@@ -292,7 +293,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                 />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  01 &middot; Apothecary &amp; Collection
+                  01 &middot; Henna &amp; Product Collection
                 </p>
               </div>
               <TextReveal variant="line" immediate>
@@ -365,7 +366,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <h2 id="catalog-grid-heading" className="sr-only">
               {activeCategoryObj
                 ? `${activeCategoryObj.name} Catalog`
-                : 'Botanical Henna Formulations'}
+                : 'Organic Henna Products'}
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-x-7 lg:gap-y-10">
               {catalog.products.map((product, index) => (
@@ -403,7 +404,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                       rel="next"
                       className="inline-flex items-center min-h-[40px] px-5 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
                     >
-                      Next &rarr;
+                      <span>Next</span>
+                      <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1.5" />
                     </Link>
                   ) : null}
                 </div>

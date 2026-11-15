@@ -27,7 +27,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: 'Organic Henna Cones & Freelance Bridal Mehandi Artist',
   absoluteTitle: 'Mehandi by Sana — Organic Henna Cones & Freelance Bridal Mehandi Artist',
   description:
-    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & botanical hair henna, or book bridal mehandi with Sana across Kashmir & Bengaluru.',
+    'Shop 100% PPD-free fresh organic Sojat henna cones, aftercare balms & natural hair henna, or book bridal mehandi with Sana across Kashmir & Bengaluru.',
   canonicalPath: '/',
   keywords: [
     'organic henna cones India',
@@ -67,7 +67,7 @@ export default async function HomePage() {
                     className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                   />
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                    Apothecary &amp; Goods
+                    Organic Henna &amp; Cones
                   </p>
                 </div>
               </TextReveal>
@@ -76,11 +76,11 @@ export default async function HomePage() {
                   id="featured-products-heading"
                   className="font-serif text-3xl md:text-4xl font-medium text-ink leading-tight"
                 >
-                  Featured Botanical Products
+                  Featured Henna Products
                 </h2>
               </TextReveal>
               <p className="text-sm md:text-base text-umber leading-relaxed mt-2 max-w-xl">
-                Triple-sifted organic Sojat henna cones, aftercare balms, botanical oils, and preparation tools mixed &amp; rolled fresh across Kashmir &amp; Bengaluru.
+                Triple-sifted organic Sojat henna cones, aftercare balms, essential oils, and preparation tools mixed &amp; rolled fresh across Kashmir &amp; Bengaluru.
               </p>
             </div>
 
@@ -88,10 +88,10 @@ export default async function HomePage() {
               href="/shop"
               variant="secondary"
               size="sm"
-              className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em]"
+              className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em] inline-flex items-center gap-1.5"
             >
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
-              <span aria-hidden="true" className="text-terracotta group-hover/btn:text-on-accent transition-colors">&rarr;</span>
+              <ShoppingBag className="w-3.5 h-3.5 text-terracotta group-hover/btn:text-on-accent transition-colors" />
             </LinkButton>
           </div>
 
@@ -118,9 +118,10 @@ export default async function HomePage() {
                       href="/shop"
                       variant="secondary"
                       size="md"
-                      className="rounded-full"
+                      className="rounded-full inline-flex items-center gap-1.5"
                     >
-                      Open Shop Page
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Open Shop Page</span>
                     </LinkButton>
                   </div>
                 </div>
@@ -141,9 +142,10 @@ export default async function HomePage() {
                   </div>
                   <Link
                     href="/shop"
-                    className="mt-5 inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
+                    className="mt-5 inline-flex items-center gap-1.5 min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
                   >
-                    View cones &rarr;
+                    <span>View cones</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
@@ -153,7 +155,7 @@ export default async function HomePage() {
                       Collection 02
                     </p>
                     <h3 className="font-serif text-2xl text-ink mb-2">
-                      Aftercare &amp; Botanical Kits
+                      Aftercare &amp; Henna Kits
                     </h3>
                     <p className="text-sm text-umber leading-relaxed">
                       Steam-distilled eucalyptus oil, nourishing aftercare balms, chemical-free hair henna powder, and complete DIY starter kits.
@@ -161,9 +163,10 @@ export default async function HomePage() {
                   </div>
                   <Link
                     href="/shop"
-                    className="mt-5 inline-flex items-center min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
+                    className="mt-5 inline-flex items-center gap-1.5 min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
                   >
-                    View kits &rarr;
+                    <span>View kits</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -200,7 +203,7 @@ export default async function HomePage() {
               <div className="rounded-2xl border border-hairline bg-paper p-8 md:p-10 flex flex-col items-center text-center shadow-xs">
                 <BotanicalCraftIllustration className="w-full max-w-[280px] h-auto mb-3" />
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-umber">
-                  Botanical Preparation
+                  Organic Henna Craft
                 </p>
               </div>
             </TextReveal>
@@ -227,7 +230,7 @@ export default async function HomePage() {
               </TextReveal>
               <TextReveal variant="fade" delayMs={120}>
                 <p className="text-base md:text-lg text-ink leading-relaxed">
-                  Sana left the world of circuits behind for something closer to her heart. In 2019, she began Kashmir’s first independent organic henna practice, and today she runs it full-time while raising her two little boys, replacing harsh chemical cones with pure, skin-safe botanicals.
+                  Sana left the world of circuits behind for something closer to her heart. In 2019, she began Kashmir’s first independent organic henna practice, and today she runs it full-time while raising her two little boys, replacing harsh chemical cones with pure, skin-safe natural henna.
                 </p>
               </TextReveal>
               <TextReveal variant="fade" delayMs={180}>
@@ -239,9 +242,10 @@ export default async function HomePage() {
                 <div className="pt-2">
                   <Link
                     href="/about"
-                    className="link-kinetic min-h-[32px] text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
+                    className="link-kinetic inline-flex items-center gap-1.5 min-h-[32px] text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
                   >
-                    Read the full story &rarr;
+                    <span>Read the full story</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </TextReveal>

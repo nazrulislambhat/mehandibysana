@@ -7,6 +7,7 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
@@ -192,9 +193,10 @@ export function CartView() {
               href="/shop"
               variant="primary"
               size="lg"
-              className="rounded-full"
+              className="rounded-full inline-flex items-center gap-1.5"
             >
-              Browse Full Catalog &rarr;
+              <span>Browse Full Catalog</span>
+              <ShoppingBag className="w-4 h-4" />
             </LinkButton>
           </div>
         ) : (
@@ -324,6 +326,7 @@ export function CartView() {
                   href="/shop"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-2"
                 >
+                  <ShoppingBag className="w-3.5 h-3.5" />
                   <span>&larr; Continue browsing catalog</span>
                 </Link>
                 <span className="text-xs text-umber">
@@ -425,10 +428,10 @@ export function CartView() {
                   href="/checkout"
                   variant="accent"
                   size="lg"
-                  className="w-full min-h-[50px] rounded-full mb-3.5"
+                  className="w-full min-h-[50px] rounded-full mb-3.5 inline-flex items-center justify-center gap-1.5"
                 >
                   <span>Proceed to Checkout</span>
-                  <span aria-hidden="true">&rarr;</span>
+                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </LinkButton>
 
                 <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">

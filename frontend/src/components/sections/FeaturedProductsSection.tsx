@@ -6,6 +6,7 @@ import Image from 'next/image';
 import type { StorefrontProduct } from '@/types/storefront';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { LinkButton } from '@/components/ui/Button';
+import { LineDotRightHorizontal } from 'lucide-react';
 import { BotanicalSprig, ServiceMotifIcon } from '@/components/graphics/BotanicalIllustrations';
 
 export interface FeaturedProductsSectionProps {
@@ -21,7 +22,7 @@ const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   'mbs-henna-kit':
     'Ten 20g organic cones paired with stain-sealing balm and sealant mist for full bridal sessions.',
   'aftercare-henna-balm':
-    'Nourishing botanical balm locking natural lawsone oxidation while soothing skin post-flake.',
+    'Nourishing aftercare balm locking natural lawsone oxidation while soothing skin post-flake.',
   'henna-sealant-spray':
     'Lemongrass hydrosol & sugar mist keeping delicate bridal paste pliable for maximum stain depth.',
   'mbs-self-care-kit':
@@ -31,7 +32,7 @@ const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   'beginner-henna-kit':
     'Everything required to mix, sift, and roll your own small-batch organic cones from scratch.',
   'chemical-free-organic-hair-henna-powder':
-    'Triple-cloth sifted 100% pure Rajasthani henna leaf powder for conditioning botanical color.',
+    'Triple-cloth sifted 100% pure Rajasthani henna leaf powder for conditioning natural hair color.',
 };
 
 function formatPrice(value: number, symbol: string): string {
@@ -78,7 +79,7 @@ function getCleanNote(product: StorefrontProduct): string {
 
   return variantHint
     ? `Available options: ${variantHint}`
-    : 'Small-batch botanical formulation crafted at Mehandi by Sana (Kashmir & Bengaluru).';
+    : 'Handcrafted organic henna product made fresh at Mehandi by Sana (Kashmir & Bengaluru).';
 }
 
 export function FeaturedProductsSection({
@@ -224,7 +225,7 @@ export function FeaturedProductsSection({
                 <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center bg-canvas text-ink">
                   <ServiceMotifIcon variant="botanical" className="w-12 h-12 mb-2.5" />
                   <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
-                    {leadProduct.categories[0]?.name || 'Botanical Tool'}
+                    {leadProduct.categories[0]?.name || 'Henna Product'}
                   </span>
                   <span className="font-serif text-lg text-ink mt-1">
                     {leadProduct.name}
@@ -278,9 +279,10 @@ export function FeaturedProductsSection({
                 href={`/product/${leadProduct.slug}`}
                 variant="accent"
                 size="md"
-                className="rounded-full"
+                className="rounded-full inline-flex items-center gap-1.5"
               >
-                {leadProduct.inStock ? 'Choose Pack →' : 'View Formulation →'}
+                <span>{leadProduct.inStock ? 'Choose Pack' : 'View Formulation'}</span>
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </LinkButton>
             )}
           </div>
@@ -290,7 +292,7 @@ export function FeaturedProductsSection({
         <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {secondaryProducts.map((product, idx) => {
             const img = product.images[0] ?? null;
-            const category = product.categories[0]?.name ?? 'Botanical Formulation';
+            const category = product.categories[0]?.name ?? 'Henna Product';
             const indexLabel = `0${idx + 2}`;
             const defaultVar =
               product.variations.find((v) => v.inStock) ?? product.variations[0] ?? null;
@@ -376,9 +378,10 @@ export function FeaturedProductsSection({
                         href={`/product/${product.slug}`}
                         variant="ink"
                         size="xs"
-                        className="rounded-full"
+                        className="rounded-full inline-flex items-center gap-1.5"
                       >
-                        Select Pack &rarr;
+                        <span>Select Pack</span>
+                        <LineDotRightHorizontal className="w-3.5 h-3.5" />
                       </LinkButton>
                     ) : (
                       <AddToCartButton
@@ -396,9 +399,10 @@ export function FeaturedProductsSection({
                       href={`/product/${product.slug}`}
                       variant="secondary"
                       size="xs"
-                      className="rounded-full"
+                      className="rounded-full inline-flex items-center gap-1.5"
                     >
-                      Inspect &rarr;
+                      <span>Inspect</span>
+                      <LineDotRightHorizontal className="w-3.5 h-3.5" />
                     </LinkButton>
                   )}
                 </div>
