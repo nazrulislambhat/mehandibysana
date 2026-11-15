@@ -406,10 +406,10 @@ export function generateInvoiceHtml(data: InvoiceData): string {
             Mehandi By Sana
           </h1>
           <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#96410D;margin-bottom:8px;">
-            100% Pure Organic Rajasthani Henna
+            100% Pure Organic Henna
           </div>
           <div style="font-size:12px;line-height:1.6;color:#555;">
-            Atelier: Srinagar, Kashmir &middot; Bengaluru, Karnataka<br/>
+            Srinagar, Kashmir &middot; Bengaluru, Karnataka<br/>
             Email: sana@mehandibysana.com &middot; Phone: +91-9149648717<br/>
             Web: <a href="${escapeHtml(
               data.storefrontUrl
@@ -597,6 +597,22 @@ export function generateInvoiceHtml(data: InvoiceData): string {
               )}</td>
             </tr>
           </table>
+          ${
+            isPaid
+              ? `
+          <div style="margin-top:14px;text-align:right;">
+            <div style="display:inline-block;border:2.5px double #1b5e20;border-radius:8px;padding:8px 16px;text-align:center;color:#1b5e20;font-family:'Courier New',Courier,monospace;background:#f4fbf5;transform:rotate(-5deg);box-shadow:0 0 0 1px #81c784;user-select:none;">
+              <div style="font-size:9px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;">★ MEHANDI BY SANA ★</div>
+              <div style="font-size:20px;font-weight:900;letter-spacing:0.2em;line-height:1.15;margin:3px 0;">PAID</div>
+              <div style="font-size:8.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">OFFICIAL STUDIO SEAL</div>
+              <div style="font-size:8px;color:#2e7d32;margin-top:3px;font-weight:600;">${escapeHtml(
+                data.paymentDate || data.invoiceDate
+              )}</div>
+            </div>
+          </div>
+          `
+              : ""
+          }
         </td>
       </tr>
     </table>
@@ -642,9 +658,9 @@ export async function generateInvoicePdf(data: InvoiceData): Promise<Buffer> {
 
       // Studio Header
       doc.fillColor("#181818").font("Helvetica-Bold").fontSize(20).text("Mehandi By Sana", left, pageTop + 16);
-      doc.fillColor("#96410D").font("Helvetica-Bold").fontSize(9).text("100% PURE ORGANIC RAJASTHANI HENNA", left, pageTop + 40);
+      doc.fillColor("#96410D").font("Helvetica-Bold").fontSize(9).text("100% PURE ORGANIC HENNA", left, pageTop + 40);
       doc.fillColor("#555555").font("Helvetica").fontSize(9).text(
-        "Atelier: Srinagar, Kashmir & Bengaluru, Karnataka\nEmail: sana@mehandibysana.com | Phone: +91-9149648717\nWeb: https://mehandibysana.com",
+        "Srinagar, Kashmir & Bengaluru, Karnataka\nEmail: sana@mehandibysana.com | Phone: +91-9149648717\nWeb: https://mehandibysana.com",
         left,
         pageTop + 54,
         { lineGap: 2 }
@@ -774,6 +790,65 @@ export async function generateInvoicePdf(data: InvoiceData): Promise<Buffer> {
       doc.font("Helvetica-Bold").fontSize(10).fillColor("#181818").text("TOTAL (INR):", totalsX + 6, currentY + 4);
       doc.fillColor("#DD6013").text(formatInrPdf(data.total), totalsX + 80, currentY + 4, { width: 114, align: "right" });
 
+      // Official Studio Paid Seal
+      if (isPaid) {
+        doc.save();
+        const sealW = 145;
+        const sealH = 50;
+        const sealX = totalsX + 28;
+        const sealY = currentY + 28;
+
+        // Slight rotation for authentic rubber-stamp feel
+        doc.rotate(-6, { origin: [sealX + sealW / 2, sealY + sealH / 2] });
+
+        // Outer rounded double border
+        doc.roundedRect(sealX, sealY, sealW, sealH, 6)
+          .lineWidth(2)
+          .strokeColor("#1b5e20")
+          .stroke();
+
+        // Inner dashed border
+        doc.roundedRect(sealX + 3, sealY + 3, sealW - 6, sealH - 6, 4)
+          .lineWidth(0.8)
+          .dash(3, { space: 2 })
+          .strokeColor("#2e7d32")
+          .stroke();
+        doc.undash();
+
+        // Text inside seal
+        doc.fillColor("#1b5e20").font("Helvetica-Bold").fontSize(7.5).text(
+          "* MEHANDI BY SANA *",
+          sealX,
+          sealY + 6,
+          { width: sealW, align: "center" }
+        );
+
+        doc.fillColor("#1b5e20").font("Helvetica-Bold").fontSize(18).text(
+          "PAID",
+          sealX,
+          sealY + 16,
+          { width: sealW, align: "center", characterSpacing: 2 }
+        );
+
+        doc.fillColor("#2e7d32").font("Helvetica-Bold").fontSize(6.5).text(
+          "OFFICIAL STUDIO SEAL",
+          sealX,
+          sealY + 34,
+          { width: sealW, align: "center" }
+        );
+
+        if (data.paymentDate || data.invoiceDate) {
+          doc.fillColor("#388e3c").font("Helvetica").fontSize(5.5).text(
+            String(data.paymentDate || data.invoiceDate),
+            sealX,
+            sealY + 42,
+            { width: sealW, align: "center" }
+          );
+        }
+
+        doc.restore();
+      }
+
       // Left Notice Box (Fresh Henna Storage Instructions)
       const noticeY = currentY - 34;
       const noticeWidth = pageWidth - totalsWidth - 20;
@@ -792,7 +867,7 @@ export async function generateInvoicePdf(data: InvoiceData): Promise<Buffer> {
       const footerY = doc.page.height - 50;
       doc.rect(left, footerY - 8, pageWidth, 0.5).fill("#e7ddcf");
       doc.fillColor("#777777").font("Helvetica").fontSize(7.5).text(
-        "Thank you for your order with Mehandi By Sana! Artisanal 100% Organic Henna from Kashmir & Sojat, Rajasthan.\n" +
+        "Thank you for your order with Mehandi By Sana! Artisanal 100% Organic Henna from Kashmir.\n" +
           "Queries or support: sana@mehandibysana.com | Helpline: +91-9149648717 | Official Computer-Generated Tax Invoice",
         left,
         footerY,

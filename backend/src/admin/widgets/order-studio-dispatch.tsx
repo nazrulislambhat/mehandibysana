@@ -44,8 +44,8 @@ const STAGE_OPTIONS: Array<{ value: FulfillmentStage; label: string }> = [
 const DISPATCH_ORIGINS = [
   {
     value: "Srinagar Atelier (Kashmir)",
-    label: "🏔️ Srinagar Atelier (Kashmir)",
-    short: "Srinagar Atelier",
+    label: "🏔️ Srinagar Studio (Kashmir)",
+    short: "Srinagar Studio",
   },
   {
     value: "Bengaluru Studio (Karnataka)",
@@ -794,7 +794,7 @@ const OrderStudioDispatchWidget = ({
               <Label size="xsmall" className="mb-1 block font-medium">Message to Customer (Optional)</Label>
               <Input
                 size="small"
-                placeholder="e.g. Freshly packed at Srinagar Atelier, out for delivery via local courier."
+                placeholder="e.g. Freshly packed at Srinagar Studio, out for delivery via local courier."
                 value={dispatchNote}
                 onChange={(e) => setDispatchNote(e.target.value)}
               />
