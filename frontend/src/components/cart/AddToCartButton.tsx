@@ -29,7 +29,7 @@ export function AddToCartButton({
   variant = 'primary',
   size = 'md',
   className = '',
-  openDrawerOnAdd = false,
+  openDrawerOnAdd = true,
 }: AddToCartButtonProps) {
   const addItem = useCartStore((state) => state.addItem);
   const cart = useCartStore((state) => state.cart);
@@ -58,7 +58,9 @@ export function AddToCartButton({
     return matched?.quantity ?? 0;
   }, [isHydrated, cart, medusaVariantId, productId]);
 
-  const handleClick = async () => {
+  const handleClick = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     if (!inStock || submitting) return;
     setSubmitting(true);
     setLocalError(null);
@@ -94,8 +96,10 @@ export function AddToCartButton({
         : `Add More (${inCartQty} in bag)`
       : label;
 
+  const isFullWidth = className.includes('w-full');
+
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className={`flex flex-col gap-1.5 ${isFullWidth ? 'w-full' : 'w-auto'}`}>
       <Button
         type="button"
         variant={variant}

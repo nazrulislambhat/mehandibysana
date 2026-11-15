@@ -6,6 +6,7 @@ import {
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Refund, Return & Cancellation Policy',
@@ -182,9 +183,10 @@ export default function RefundPolicyPage() {
               href="https://wa.me/919149648717"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
+              className="inline-flex items-center gap-1 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
             >
-              +91-9149648717
+              <span>+91-9149648717</span>
+              <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
             </a>{' '}
             with subject <code>Claim: Your Order Number (MBS-...)</code>.
           </li>

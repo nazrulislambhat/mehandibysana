@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 export interface TrackedOrderItem {
   id: string;
@@ -322,10 +323,10 @@ export function OrderTrackerClient({
                   href={order.trackingUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-plaque-ink transition-colors inline-flex items-center gap-1"
+                  className="text-xs font-medium text-terracotta underline underline-offset-4 hover:text-plaque-ink transition-colors inline-flex items-center gap-1.5"
                 >
                   <span>Open Courier Tracking</span>
-                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                  <CircleArrowUpRightExit className="w-3.5 h-3.5" />
                 </a>
               ) : null}
             </div>
@@ -491,9 +492,10 @@ export function OrderTrackerClient({
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center min-h-[44px] rounded-md border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
+                className="inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-md border border-divider bg-paper px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-linen transition-colors"
               >
-                Ask Sana on WhatsApp
+                <span>Ask Sana on WhatsApp</span>
+                <CircleArrowUpRightExit className="w-3.5 h-3.5 opacity-80" />
               </a>
               <LinkButton
                 href="/shop"

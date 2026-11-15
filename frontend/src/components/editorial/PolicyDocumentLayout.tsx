@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { buildBreadcrumbJsonLd, serializeJsonLd } from '@/lib/structured-data';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 export interface PolicyTocItem {
   id: string;
@@ -213,18 +214,20 @@ export function PolicyDocumentLayout({
                   href="https://wa.me/919149648717"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                  className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
-                  WhatsApp Concierge
+                  <span>WhatsApp Concierge</span>
+                  <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
                 </a>
 
                 <a
                   href="https://www.instagram.com/mehandibysana"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                  className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
-                  @mehandibysana (Instagram)
+                  <span>@mehandibysana (Instagram)</span>
+                  <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
                 </a>
               </div>
             </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 /**
  * WhatsApp official icon SVG
@@ -75,27 +76,6 @@ function CloseIcon({ className = 'w-6 h-6' }: { className?: string }) {
     >
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-}
-
-/**
- * Chevron right arrow
- */
-function ArrowRightIcon({ className = 'w-4 h-4' }: { className?: string }) {
-  return (
-    <svg
-      role="img"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polyline points="9 18 15 12 9 6" />
     </svg>
   );
 }
@@ -210,8 +190,8 @@ export function FloatingContactBubble() {
                 </p>
               </div>
             </div>
-            <span className="text-[#128C7E] group-hover:translate-x-1 transition-transform duration-200">
-              <ArrowRightIcon className="w-4 h-4" />
+            <span className="text-[#128C7E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">
+              <CircleArrowUpRightExit className="w-4 h-4" />
             </span>
           </a>
 
@@ -236,8 +216,8 @@ export function FloatingContactBubble() {
                 </p>
               </div>
             </div>
-            <span className="text-[#bc1888] group-hover:translate-x-1 transition-transform duration-200">
-              <ArrowRightIcon className="w-4 h-4" />
+            <span className="text-[#bc1888] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">
+              <CircleArrowUpRightExit className="w-4 h-4" />
             </span>
           </a>
         </div>

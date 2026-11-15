@@ -15,6 +15,7 @@ import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
 import { LineDotRightHorizontal } from 'lucide-react';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 const HENNA_PRODUCT_LINKS = [
   { label: 'Shop', href: '/shop' },
   { label: 'Organic Henna', href: '/shop?category=organic-henna' },
@@ -117,6 +118,7 @@ export function Footer() {
               >
                 <WhatsAppChatIcon size={14} className="shrink-0 text-brand-green" />
                 <span>WhatsApp</span>
+                <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
               </a>
               <span aria-hidden="true" className="text-brand-green/50">
                 &middot;
@@ -130,6 +132,7 @@ export function Footer() {
               >
                 <InstagramIcon size={14} className="shrink-0 text-brand-green" />
                 <span>@mehandibysana</span>
+                <CircleArrowUpRightExit className="w-3.5 h-3.5 shrink-0 opacity-80" />
               </a>
             </div>
           </div>
