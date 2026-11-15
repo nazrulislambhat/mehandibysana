@@ -909,7 +909,7 @@ export async function generateInvoicePdf(data: InvoiceData): Promise<Buffer> {
       const footerY = doc.page.height - 50;
       doc.rect(left, footerY - 8, pageWidth, 0.5).fill("#e7ddcf");
       doc.fillColor("#777777").font("Helvetica").fontSize(7.5).text(
-        "Thank you for your order with Mehandi By Sana! Artisanal 100% Organic Henna from Kashmir.\n" +
+        "Thank you for your order with Mehandi By Sana! Artisanal 100% Organic Henna.\n" +
           "Queries or support: sana@mehandibysana.com | Helpline: +91-9149648717 | Official Computer-Generated Tax Invoice",
         left,
         footerY,
