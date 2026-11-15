@@ -107,7 +107,7 @@ export async function sendFrontendFallbackEmail(
   const replyTo =
     input.replyTo?.trim() ||
     process.env.STUDIO_ADMIN_EMAIL?.trim() ||
-    'mehandibysana@gmail.com';
+    'sana@mehandibysana.com';
   const recipients = (Array.isArray(input.to) ? input.to : [input.to])
     .map((e) => e.trim())
     .filter(Boolean);
