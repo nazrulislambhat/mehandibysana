@@ -191,7 +191,7 @@ export function InstagramFeedSection({
             href={profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-terracotta hover:text-terracotta-dark font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 text-[#789904] hover:text-[#789904]/80 underline underline-offset-4 decoration-[#789904]/40 hover:decoration-[#789904] font-medium transition-colors"
           >
             <span>instagram.com/{username}</span>
             <span aria-hidden="true">&rarr;</span>
