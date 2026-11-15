@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
@@ -140,6 +140,30 @@ export function CheckoutHandoffClient() {
     deliverySpeed?: string;
     deliverySpeedLabel?: string;
   } | null>(null);
+
+  const confirmationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (confirmedOrder) {
+      const scrollToReceipt = () => {
+        if (confirmationRef.current) {
+          const yOffset = -80;
+          const y =
+            confirmationRef.current.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+          confirmationRef.current.focus();
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      };
+
+      scrollToReceipt();
+      const timer = setTimeout(scrollToReceipt, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [confirmedOrder]);
 
   // Dynamically evaluate delivery rules based on the entered pincode and current IST time
   const deliveryRules = evaluateDeliveryRules(pincode, deliverySpeed);
@@ -581,7 +605,11 @@ export function CheckoutHandoffClient() {
 
   if (confirmedOrder) {
     return (
-      <div className="bg-canvas pb-20 md:pb-28">
+      <div
+        ref={confirmationRef}
+        tabIndex={-1}
+        className="bg-canvas pb-20 md:pb-28 outline-none"
+      >
         <div className="editorial-container py-12 md:py-20">
           <div className="max-w-2xl mx-auto overflow-hidden rounded-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.18)]">
             <div className="bg-plaque text-plaque-ink border-b border-plaque-border px-7 py-7 sm:px-10 sm:py-8 relative">
