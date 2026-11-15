@@ -207,16 +207,18 @@ export default function AboutPage() {
             </div>
 
             <div className="lg:col-span-7 order-1 lg:order-2 space-y-5">
-              <div className="flex items-center gap-2">
-                <span
-                  aria-hidden="true"
-                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                />
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  04 &middot; About Mehandi By Sana
-                </p>
-              </div>
-              <TextReveal variant="line" immediate>
+              <TextReveal variant="fade" delayMs={40} immediate>
+                <div className="flex items-center gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                  />
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    04 &middot; About Mehandi By Sana
+                  </p>
+                </div>
+              </TextReveal>
+              <TextReveal variant="line" delayMs={100} immediate>
                 <h1
                   id="about-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]"
@@ -225,9 +227,11 @@ export default function AboutPage() {
                 </h1>
               </TextReveal>
               <BotanicalSprig />
-              <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
-                Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi By Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with handcrafted organic henna products across Kashmir and Bengaluru.
-              </p>
+              <TextReveal variant="fade" delayMs={180} immediate>
+                <p className="text-base md:text-lg text-ink leading-relaxed max-w-2xl">
+                  Founded in 2019 in Kashmir by Sana—an Electronics &amp; Communication Engineering graduate and Kashmir’s first freelance organic henna artist—Mehandi By Sana operates independently without a walk-in storefront studio today (with hopes of opening a dedicated studio someday), bridging bespoke bridal artistry with handcrafted organic henna products across Kashmir and Bengaluru.
+                </p>
+              </TextReveal>
               
             </div>
           </div>

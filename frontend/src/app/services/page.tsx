@@ -154,16 +154,18 @@ export default function ServicesPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-end">
             <div className="lg:col-span-7">
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  aria-hidden="true"
-                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                />
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  02 &middot; Services &amp; Bookings
-                </p>
-              </div>
-              <TextReveal variant="line" immediate>
+              <TextReveal variant="fade" delayMs={40} immediate>
+                <div className="flex items-center gap-2 mb-3">
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                  />
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    02 &middot; Services &amp; Bookings
+                  </p>
+                </div>
+              </TextReveal>
+              <TextReveal variant="line" delayMs={100} immediate>
                 <h1
                   id="services-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]"
@@ -174,21 +176,25 @@ export default function ServicesPage() {
             </div>
 
             <div className="lg:col-span-5 space-y-5">
-              <p className="text-sm md:text-base text-umber leading-relaxed">
-                Working independently as a freelance artist across Kashmir and
-                Bengaluru, Sana travels for brides and celebrations across India
-                and destination venues using exclusively 100% organic, PPD-free
-                henna paste.
-              </p>
-              <LinkButton
-                href="/contact"
-                variant="accent"
-                size="md"
-                className="rounded-full inline-flex items-center gap-1.5"
-              >
-                <span>Inquire for Availability</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
-              </LinkButton>
+              <TextReveal variant="fade" delayMs={180} immediate>
+                <p className="text-sm md:text-base text-umber leading-relaxed">
+                  Working independently as a freelance artist across Kashmir and
+                  Bengaluru, Sana travels for brides and celebrations across India
+                  and destination venues using exclusively 100% organic, PPD-free
+                  henna paste.
+                </p>
+                <div className="mt-4">
+                  <LinkButton
+                    href="/contact"
+                    variant="accent"
+                    size="md"
+                    className="rounded-full inline-flex items-center gap-1.5"
+                  >
+                    <span>Inquire for Availability</span>
+                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                  </LinkButton>
+                </div>
+              </TextReveal>
             </div>
           </div>
         </div>

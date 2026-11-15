@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { buildBreadcrumbJsonLd, serializeJsonLd } from '@/lib/structured-data';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { TextReveal } from '@/components/ui/TextReveal';
 
 export interface PolicyTocItem {
   id: string;
@@ -82,21 +83,27 @@ export function PolicyDocumentLayout({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8 space-y-3">
-              <div className="flex items-center gap-2">
-                <span
-                  aria-hidden="true"
-                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                />
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  {eyebrow}
+              <TextReveal variant="fade" delayMs={40} immediate>
+                <div className="flex items-center gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                  />
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    {eyebrow}
+                  </p>
+                </div>
+              </TextReveal>
+              <TextReveal variant="line" delayMs={100} immediate>
+                <h1 className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]">
+                  {title}
+                </h1>
+              </TextReveal>
+              <TextReveal variant="fade" delayMs={180} immediate>
+                <p className="text-sm sm:text-base text-umber leading-relaxed max-w-2xl">
+                  {subtitle}
                 </p>
-              </div>
-              <h1 className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1]">
-                {title}
-              </h1>
-              <p className="text-sm sm:text-base text-umber leading-relaxed max-w-2xl">
-                {subtitle}
-              </p>
+              </TextReveal>
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">

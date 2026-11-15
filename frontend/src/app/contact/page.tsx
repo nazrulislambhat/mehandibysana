@@ -82,16 +82,18 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  aria-hidden="true"
-                  className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                />
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  05 &middot; Bookings &amp; Inquiries
-                </p>
-              </div>
-              <TextReveal variant="line" immediate>
+              <TextReveal variant="fade" delayMs={40} immediate>
+                <div className="flex items-center gap-2 mb-3">
+                  <span
+                    aria-hidden="true"
+                    className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                  />
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    05 &middot; Bookings &amp; Inquiries
+                  </p>
+                </div>
+              </TextReveal>
+              <TextReveal variant="line" delayMs={100} immediate>
                 <h1
                   id="contact-page-heading"
                   className="font-serif text-4xl sm:text-5xl font-medium text-ink leading-[1.1] mb-4"
@@ -99,27 +101,31 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   Plan an appointment or order.
                 </h1>
               </TextReveal>
-              <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
-                Working independently across Kashmir and Bengaluru, Sana
-                personally reviews every inquiry within 24 hours. Bridal dates
-                are best reserved 4–8 weeks ahead, custom cone batches dispatch
-                within 2 business days.
-              </p>
+              <TextReveal variant="fade" delayMs={180} immediate>
+                <p className="text-sm md:text-base text-umber leading-relaxed max-w-2xl">
+                  Working independently across Kashmir and Bengaluru, Sana
+                  personally reviews every inquiry within 24 hours. Bridal dates
+                  are best reserved 4–8 weeks ahead, custom cone batches dispatch
+                  within 2 business days.
+                </p>
+              </TextReveal>
             </div>
 
             <div className="lg:col-span-4 lg:flex lg:justify-end">
-              <div className="rounded-2xl border border-hairline bg-paper px-5 py-4 text-xs text-umber">
-                <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-[0.14em] text-ink mb-1">
-                  <ClockWindowIcon
-                    size={14}
-                    className="text-terracotta shrink-0"
-                  />
-                  <span>Response Window</span>
-                </span>
-                <span className="block">
-                  Within 24 Hours &middot; Mon–Sun (09:00 AM – 09:00 PM IST)
-                </span>
-              </div>
+              <TextReveal variant="fade" delayMs={240} immediate>
+                <div className="rounded-2xl border border-hairline bg-paper px-5 py-4 text-xs text-umber">
+                  <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-[0.14em] text-ink mb-1">
+                    <ClockWindowIcon
+                      size={14}
+                      className="text-terracotta shrink-0"
+                    />
+                    <span>Response Window</span>
+                  </span>
+                  <span className="block">
+                    Within 24 Hours &middot; Mon–Sun (09:00 AM – 09:00 PM IST)
+                  </span>
+                </div>
+              </TextReveal>
             </div>
           </div>
         </div>

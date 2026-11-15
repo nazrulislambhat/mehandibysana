@@ -1,14 +1,20 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export interface TextRevealProps {
   children: React.ReactNode;
   variant?: 'line' | 'fade';
   delayMs?: number;
+  /**
+   * If true, reveals immediately on mount/page change with no scroll threshold requirement.
+   * Useful for above-the-fold hero and masthead content.
+   */
   immediate?: boolean;
-  as?: 'div' | 'h2' | 'h3' | 'p' | 'span';
+  as?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
   className?: string;
+  threshold?: number;
 }
 
 export function TextReveal({
@@ -18,113 +24,146 @@ export function TextReveal({
   immediate = false,
   as = 'div',
   className = '',
+  threshold = 0.08,
 }: TextRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [revealState, setRevealState] = useState<'idle' | 'pending' | 'revealed'>('idle');
+  const ref = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const [isRevealed, setIsRevealed] = useState(false);
 
   useEffect(() => {
-    if (immediate) return;
-
-    const node = ref.current;
-    if (!node) return;
-
+    // Check reduced motion
     if (
       typeof window === 'undefined' ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      !('IntersectionObserver' in window)
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
+      setIsRevealed(true);
       return;
     }
 
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) {
-      const id = requestAnimationFrame(() => setRevealState('revealed'));
-      return () => cancelAnimationFrame(id);
+    const node = ref.current;
+    if (!node) {
+      setIsRevealed(true);
+      return;
     }
 
-    const startId = requestAnimationFrame(() => {
-      setRevealState('pending');
-    });
+    // Reset state on path change so page change triggers reveal animation
+    setIsRevealed(false);
+
+    let isCancelled = false;
+
+    // Fast check: If marked immediate OR already within the viewport on mount
+    const rect = node.getBoundingClientRect();
+    const inViewport =
+      immediate ||
+      (rect.top < window.innerHeight * 0.95 && rect.bottom > 0);
+
+    if (inViewport) {
+      const timer = setTimeout(() => {
+        if (!isCancelled) {
+          setIsRevealed(true);
+        }
+      }, delayMs + 50);
+
+      return () => {
+        isCancelled = true;
+        clearTimeout(timer);
+      };
+    }
+
+    // For below-the-fold elements: trigger on scroll via IntersectionObserver
+    if (!('IntersectionObserver' in window)) {
+      setIsRevealed(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setRevealState('revealed');
+            setTimeout(() => {
+              if (!isCancelled) {
+                setIsRevealed(true);
+              }
+            }, delayMs);
             observer.disconnect();
             break;
           }
         }
       },
       {
-        rootMargin: '0px 0px -24px 0px',
-        threshold: 0.04,
-      },
+        rootMargin: '0px 0px -20px 0px',
+        threshold,
+      }
     );
 
     observer.observe(node);
 
-    const handleScrollFallback = () => {
+    // Passive scroll listener fallback
+    const handleScroll = () => {
+      if (isCancelled) return;
       const box = node.getBoundingClientRect();
-      if (box.top < window.innerHeight + 60) {
-        setRevealState('revealed');
+      if (box.top < window.innerHeight * 0.95) {
+        setIsRevealed(true);
         observer.disconnect();
+        window.removeEventListener('scroll', handleScroll);
       }
     };
 
-    window.addEventListener('scroll', handleScrollFallback, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Safety timeout ensuring text is never permanently hidden
     const safetyTimer = setTimeout(() => {
-      setRevealState('revealed');
-      observer.disconnect();
-    }, 1800);
+      if (!isCancelled) {
+        setIsRevealed(true);
+        observer.disconnect();
+      }
+    }, Math.max(1600, delayMs + 1000));
 
     return () => {
-      cancelAnimationFrame(startId);
+      isCancelled = true;
       clearTimeout(safetyTimer);
-      window.removeEventListener('scroll', handleScrollFallback);
       observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [immediate]);
+  }, [pathname, delayMs, immediate, threshold]);
 
   const Tag = as;
-
-  if (immediate) {
-    if (as === 'div' && !className) {
-      return <>{children}</>;
-    }
-    return <Tag className={className || undefined}>{children}</Tag>;
-  }
+  const isSpan = as === 'span';
 
   if (variant === 'line') {
-    const isPending = revealState === 'pending';
-    const isRevealed = revealState === 'revealed';
-
+    const WrapperTag = isSpan ? 'span' : 'div';
     return (
-      <div ref={ref} className="overflow-hidden">
+      <WrapperTag
+        className={
+          isSpan
+            ? 'inline-block overflow-hidden align-top'
+            : 'block overflow-hidden'
+        }
+      >
         <Tag
-          data-reveal-pending={isPending ? 'true' : 'false'}
+          ref={ref as any}
           data-revealed={isRevealed ? 'true' : 'false'}
-          style={{ transitionDelay: isRevealed ? `${delayMs}ms` : '0ms' }}
+          style={{
+            transitionDelay: isRevealed ? `${delayMs}ms` : '0ms',
+          }}
           className={`reveal-line-inner ${className}`.trim()}
         >
           {children}
         </Tag>
-      </div>
+      </WrapperTag>
     );
   }
 
-  const isPending = revealState === 'pending';
-  const isRevealed = revealState === 'revealed';
-
   return (
-    <div
-      ref={ref}
-      data-reveal-pending={isPending ? 'true' : 'false'}
+    <Tag
+      ref={ref as any}
       data-revealed={isRevealed ? 'true' : 'false'}
-      style={{ transitionDelay: isRevealed ? `${delayMs}ms` : '0ms' }}
+      style={{
+        transitionDelay: isRevealed ? `${delayMs}ms` : '0ms',
+      }}
       className={`reveal-fade-block ${className}`.trim()}
     >
-      {as === 'div' ? children : <Tag className="contents">{children}</Tag>}
-    </div>
+      {children}
+    </Tag>
   );
 }
