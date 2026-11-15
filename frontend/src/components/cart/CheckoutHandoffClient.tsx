@@ -1016,8 +1016,12 @@ export function CheckoutHandoffClient() {
                           <button
                             key={qd.date}
                             type="button"
-                            onClick={() => setTargetDate(qd.date)}
-                            className={`px-3.5 py-2 rounded-xl text-xs border transition-colors flex items-center gap-1.5 ${
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setTargetDate(qd.date);
+                            }}
+                            className={`px-3.5 py-2 rounded-xl text-xs border transition-colors flex items-center gap-1.5 cursor-pointer ${
                               isDateSelected
                                 ? 'border-terracotta bg-terracotta text-inverse font-semibold shadow-xs'
                                 : 'border-divider bg-canvas text-ink hover:border-ink/50'

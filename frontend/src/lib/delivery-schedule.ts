@@ -161,6 +161,13 @@ export function resolveZoneFromPincode(pincode: string): {
 } {
   const cleaned = String(pincode || '').replace(/\D/g, '').slice(0, 6);
 
+  if (!cleaned || cleaned.length < 6) {
+    return {
+      zone: 'kashmir',
+      zoneLabel: 'Kashmir Valley & Srinagar (Local Atelier)',
+    };
+  }
+
   if (cleaned.startsWith('19')) {
     return {
       zone: 'kashmir',
@@ -201,7 +208,7 @@ export function evaluateDeliveryRules(
   const speedOptions: DeliverySpeedOption[] = [];
 
   // 1. Standard Delivery Option
-  // Regular scheduled dispatch (+1 day minimum)
+  // Regular scheduled dispatch starting tomorrow morning
   speedOptions.push({
     id: 'standard',
     title: 'Standard Delivery',
@@ -209,22 +216,19 @@ export function evaluateDeliveryRules(
     subtitle: `Tomorrow (${formatIsoDateCompact(tomorrowIso)}) or later`,
     description:
       zone === 'kashmir'
-        ? 'Scheduled morning rider run. Riders depart between 9:00 AM – 11:00 AM daily.'
+        ? 'Scheduled morning rider run. Riders depart between 9:00 AM – 11:00 AM daily across Kashmir.'
         : zone === 'bengaluru'
           ? 'Standard local courier route (1–2 business days).'
-          : 'Standard national express cargo transit (3–6 business days).',
+          : 'Standard express cargo transit (dispatched next morning).',
     surcharge: 0,
     available: true,
-    earliestDate: zone === 'pan_india' ? addDaysToIsoDate(todayIsoDate, 3) : tomorrowIso,
-    earliestDateLabel:
-      zone === 'pan_india'
-        ? `${formatIsoDateCompact(addDaysToIsoDate(todayIsoDate, 3))} onwards`
-        : `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
+    earliestDate: tomorrowIso,
+    earliestDateLabel: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
   });
 
   // 2. Priority Delivery Option
   // No set upfront charge — studio checks date & calls customer based on courier availability
-  const prioritySameDayPossible = !isNightClosed && zone !== 'pan_india';
+  const prioritySameDayPossible = !isNightClosed;
   const priorityEarliest = prioritySameDayPossible ? todayIsoDate : tomorrowIso;
 
   speedOptions.push({
@@ -235,16 +239,17 @@ export function evaluateDeliveryRules(
       ? `Requested for Today (${formatIsoDateCompact(todayIsoDate)}) · Confirmed via Call`
       : `Requested for Tomorrow (${formatIsoDateCompact(tomorrowIso)}) · Confirmed via Call`,
     description:
-      'We will check the date and call you directly to confirm courier/rider availability and coordinate dispatch.',
+      zone === 'kashmir'
+        ? 'Urgent delivery: We will check local Kashmir rider availability and call you directly to coordinate dispatch.'
+        : zone === 'bengaluru'
+          ? 'Urgent delivery: Can be coordinated via local couriers like Rapido (surcharge confirmed on call depending on live availability).'
+          : 'Urgent delivery: We will check express cargo/air courier options and call you directly to confirm delivery feasibility.',
     surcharge: 0,
     available: true,
-    earliestDate: zone === 'pan_india' ? addDaysToIsoDate(todayIsoDate, 2) : priorityEarliest,
-    earliestDateLabel:
-      zone === 'pan_india'
-        ? `${formatIsoDateCompact(addDaysToIsoDate(todayIsoDate, 2))} onwards`
-        : prioritySameDayPossible
-          ? `Today (${formatIsoDateCompact(todayIsoDate)})`
-          : `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
+    earliestDate: priorityEarliest,
+    earliestDateLabel: prioritySameDayPossible
+      ? `Today (${formatIsoDateCompact(todayIsoDate)})`
+      : `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
   });
 
   // Operational notices depending on current selection & logistics context
@@ -274,31 +279,36 @@ export function evaluateDeliveryRules(
   const minDate = activeOption.earliestDate;
   const defaultDate = minDate;
 
-  // Build quick dates
-  const quickDates: QuickDateOption[] = [];
-  if (minDate <= todayIsoDate) {
-    quickDates.push({
-      label: `Today (${formatIsoDateCompact(todayIsoDate)})`,
-      sublabel: 'Same-Day Priority',
-      date: todayIsoDate,
-      isToday: true,
+  // Build quick dates (only dates >= minDate so buttons are always valid and selectable)
+  const candidateDates: QuickDateOption[] = [
+    ...(minDate <= todayIsoDate
+      ? [
+          {
+            label: `Today (${formatIsoDateCompact(todayIsoDate)})`,
+            sublabel: 'Same-Day Priority',
+            date: todayIsoDate,
+            isToday: true,
+            isTomorrow: false,
+          },
+        ]
+      : []),
+    {
+      label: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
+      sublabel: selectedSpeed === 'priority' ? 'Priority Dispatch' : 'Standard Route',
+      date: tomorrowIso,
+      isToday: false,
+      isTomorrow: true,
+    },
+    {
+      label: formatIsoDateCompact(dayAfterIso),
+      sublabel: formatIsoDateDisplay(dayAfterIso).split(',')[0],
+      date: dayAfterIso,
+      isToday: false,
       isTomorrow: false,
-    });
-  }
-  quickDates.push({
-    label: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-    sublabel: selectedSpeed === 'priority' ? 'Priority Dispatch' : 'Standard Route',
-    date: tomorrowIso,
-    isToday: false,
-    isTomorrow: true,
-  });
-  quickDates.push({
-    label: formatIsoDateCompact(dayAfterIso),
-    sublabel: formatIsoDateDisplay(dayAfterIso).split(',')[0],
-    date: dayAfterIso,
-    isToday: false,
-    isTomorrow: false,
-  });
+    },
+  ];
+
+  const quickDates = candidateDates.filter((qd) => qd.date >= minDate);
 
   return {
     zone,
