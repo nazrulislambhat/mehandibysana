@@ -33,6 +33,8 @@ studio-data/*.csv
 studio-data/*.txt
 studio-data/*.dump
 studio-data/bridal-bookings.json
+studio-data/invoices/*
+!studio-data/invoices/.gitkeep
 
 # OS metadata
 .DS_Store
