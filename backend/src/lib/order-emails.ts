@@ -63,6 +63,9 @@ interface ComputedOrderBreakdown {
   trackingUrl: string;
   dispatchNote: string;
   dispatchOrigin: string;
+  targetDeliveryDate: string;
+  deliverySpeedLabel: string;
+  specialInstructions: string;
 }
 
 async function loadOrderForEmail(
@@ -255,6 +258,9 @@ async function loadOrderForEmail(
       trackingUrl: String(meta.tracking_url || labelTrackingUrl || "").trim(),
       dispatchNote: String(meta.dispatch_note || "").trim(),
       dispatchOrigin: String(meta.dispatch_origin || "").trim(),
+      targetDeliveryDate: String(meta.target_delivery_date || "").trim(),
+      deliverySpeedLabel: String(meta.delivery_speed_label || "").trim(),
+      specialInstructions: String(meta.special_instructions || "").trim(),
     },
   };
 }
@@ -377,6 +383,24 @@ function renderOrderDetailsTableHtml(
       <strong>Payment:</strong> ${escapeHtml(b.paymentStatusLabel)} (${escapeHtml(
         b.paymentMethodLabel
       )})${b.paymentRef ? ` &middot; Ref: <code>${escapeHtml(b.paymentRef)}</code>` : ""}${
+        b.targetDeliveryDate
+          ? `<br/><strong>📅 Preferred Delivery Date:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(
+              b.targetDeliveryDate
+            )}</span>`
+          : ""
+      }${
+        b.deliverySpeedLabel
+          ? `<br/><strong>⚡ Delivery Speed:</strong> ${escapeHtml(
+              b.deliverySpeedLabel
+            )}`
+          : ""
+      }${
+        b.specialInstructions
+          ? `<br/><strong>📝 Special Instructions:</strong> <em>${escapeHtml(
+              b.specialInstructions
+            )}</em>`
+          : ""
+      }${
         b.dispatchOrigin
           ? `<br/><strong>Dispatch Origin:</strong> ${escapeHtml(b.dispatchOrigin)}`
           : ""
@@ -467,7 +491,11 @@ export async function sendOrderConfirmationEmail(
     )}`,
     `Payment: ${b.paymentStatusLabel} (${b.paymentMethodLabel})${
       b.paymentRef ? ` · Ref: ${b.paymentRef}` : ""
-    }${b.addressText ? `\nDelivery Address: ${b.customerName}, ${b.addressText}` : ""}`,
+    }${b.targetDeliveryDate ? `\nPreferred Delivery Date: ${b.targetDeliveryDate}` : ""}${
+      b.deliverySpeedLabel ? ` · Speed: ${b.deliverySpeedLabel}` : ""
+    }${b.specialInstructions ? `\nInstructions: ${b.specialInstructions}` : ""}${
+      b.addressText ? `\nDelivery Address: ${b.customerName}, ${b.addressText}` : ""
+    }`,
   ].join("\n\n");
 
   const result = await dispatchStudioNotification({
@@ -515,6 +543,9 @@ export async function sendOrderConfirmationEmail(
       paymentMethod: b.paymentMethodLabel,
       paymentStatus: b.paymentStatusLabel,
       paymentRef: b.paymentRef,
+      targetDeliveryDate: b.targetDeliveryDate,
+      deliverySpeed: b.deliverySpeedLabel,
+      specialInstructions: b.specialInstructions,
     });
   }
 

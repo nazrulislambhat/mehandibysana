@@ -198,6 +198,9 @@ export async function notifyTelegramOrderPlaced(order: {
   paymentMethod: string;
   paymentStatus: string;
   paymentRef?: string;
+  targetDeliveryDate?: string;
+  deliverySpeed?: string;
+  specialInstructions?: string;
 }) {
   const itemsText =
     order.items && order.items.length > 0
@@ -245,13 +248,23 @@ export async function notifyTelegramOrderPlaced(order: {
     ? `\n🔖 <b>Payment Ref:</b> <code>${escapeTelegramHtml(order.paymentRef)}</code>`
     : "";
 
+  const deliveryScheduleLine = order.targetDeliveryDate
+    ? `\n📅 <b>Preferred Delivery Date:</b> <b>${escapeTelegramHtml(order.targetDeliveryDate)}</b>`
+    : "";
+  const speedLine = order.deliverySpeed
+    ? `\n⚡ <b>Delivery Speed:</b> ${escapeTelegramHtml(order.deliverySpeed)}`
+    : "";
+  const notesLine = order.specialInstructions
+    ? `\n📝 <b>Special Instructions:</b> <i>${escapeTelegramHtml(order.specialInstructions)}</i>`
+    : "";
+
   const message = `
 🛍️ <b>NEW ORDER PLACED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(order.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
 📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "Not provided"}
-✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}
+✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}${deliveryScheduleLine}${speedLine}${notesLine}
 
 📍 <b>Delivery Address:</b>
 ${formattedAddress}
