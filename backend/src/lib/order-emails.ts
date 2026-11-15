@@ -6,6 +6,7 @@ import {
   type DispatchNotificationResult,
   type NotificationEvent,
 } from "./notifications";
+import { notifyTelegramOrderPlaced } from "./telegram";
 import {
   deriveOrderNumber,
   formatOrderPaymentMethodLabel,
@@ -394,6 +395,7 @@ export async function sendOrderConfirmationEmail(
   options?: {
     force?: boolean;
     skipAdminAlert?: boolean;
+    skipTelegramAlert?: boolean;
     actorId?: string;
   }
 ): Promise<OrderEmailOutcome> {
@@ -416,6 +418,7 @@ export async function sendOrderConfirmationEmail(
   }
 
   const { order, breakdown: b } = loaded;
+  const shipAddr = (order.shipping_address || {}) as Record<string, unknown>;
   const existingMeta = (order.metadata || {}) as Record<string, unknown>;
 
   if (
@@ -471,9 +474,11 @@ export async function sendOrderConfirmationEmail(
     recipientName: b.customerName,
     recipientPhone: b.phone,
     referenceId: b.orderNumber,
+    deliveryAddress: shipAddr,
     summary,
     detailsHtml: renderOrderDetailsTableHtml(b),
     skipAdminAlert: options?.skipAdminAlert,
+    skipTelegramAlert: true, // notifyTelegramOrderPlaced is called directly with full items & complete address
     details: {
       orderId: order.id,
       orderNumber: b.orderNumber,
@@ -485,8 +490,30 @@ export async function sendOrderConfirmationEmail(
       pincode: b.pincode,
       paymentStatus: b.paymentStatusLabel,
       paymentMethod: b.paymentMethodLabel,
+      shippingAddress: shipAddr,
     },
   });
+
+  if (!options?.skipTelegramAlert) {
+    void notifyTelegramOrderPlaced({
+      orderNumber: b.orderNumber,
+      customerName: b.customerName,
+      email: b.email,
+      phone: b.phone,
+      address: shipAddr as any,
+      city: shipAddr.city ? String(shipAddr.city) : undefined,
+      pincode: b.pincode,
+      items: b.items,
+      subtotal: b.subtotal,
+      shippingFee: b.shippingFee,
+      discountAmount: b.discountAmount,
+      couponCode: b.couponCode,
+      total: b.total,
+      paymentMethod: b.paymentMethodLabel,
+      paymentStatus: b.paymentStatusLabel,
+      paymentRef: b.paymentRef,
+    });
+  }
 
   const nowIso = new Date().toISOString();
   await updateOrderWorkflow(scope as any)
@@ -531,6 +558,7 @@ export async function sendOrderShippingEmail(
     dispatchNote?: string;
     dispatchOrigin?: string;
     skipAdminAlert?: boolean;
+    skipTelegramAlert?: boolean;
     actorId?: string;
   }
 ): Promise<OrderEmailOutcome> {
@@ -545,6 +573,7 @@ export async function sendOrderShippingEmail(
   }
 
   const { order, breakdown: b } = loaded;
+  const shipAddr = (order.shipping_address || {}) as Record<string, unknown>;
   const existingMeta = (order.metadata || {}) as Record<string, unknown>;
 
   if (!isDeliverableCustomerEmail(b.email)) {
@@ -661,6 +690,7 @@ export async function sendOrderShippingEmail(
     recipientName: b.customerName,
     recipientPhone: b.phone,
     referenceId: b.orderNumber,
+    deliveryAddress: shipAddr,
     summary: summaryLines.join("\n\n"),
     detailsHtml: renderOrderDetailsTableHtml(
       b,
@@ -669,6 +699,7 @@ export async function sendOrderShippingEmail(
         : undefined
     ),
     skipAdminAlert: options?.skipAdminAlert ?? true,
+    skipTelegramAlert: options?.skipTelegramAlert ?? true,
   });
 
   const nowIso = new Date().toISOString();

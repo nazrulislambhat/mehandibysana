@@ -306,14 +306,21 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
 
       if (resolvedPaymentStatus === "paid") {
+        const shipAddr =
+          (updatedOrder || existingOrder).shipping_address ||
+          existingOrder.shipping_address ||
+          {};
+        const custName =
+          `${shipAddr?.first_name || ""} ${shipAddr?.last_name || ""}`.trim() ||
+          existingOrder.email ||
+          "Customer";
+
         void notifyTelegramPaymentReceived({
           orderNumber: deriveOrderNumber(updatedOrder || existingOrder),
-          customerName:
-            `${existingOrder.shipping_address?.first_name || ""} ${
-              existingOrder.shipping_address?.last_name || ""
-            }`.trim() ||
-            existingOrder.email ||
-            "Customer",
+          customerName: custName,
+          email: existingOrder.email || undefined,
+          phone: shipAddr?.phone || undefined,
+          address: shipAddr,
           amount:
             Number(body.paymentAmount) ||
             Number(existingMeta.total) ||
@@ -473,14 +480,21 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       body.action === "ship_order" ||
       updatedMeta.fulfillment_stage === "dispatched"
     ) {
+      const shipAddr =
+        (finalOrder || updatedOrder || existingOrder).shipping_address ||
+        existingOrder.shipping_address ||
+        {};
+      const custName =
+        `${shipAddr?.first_name || ""} ${shipAddr?.last_name || ""}`.trim() ||
+        existingOrder.email ||
+        "Customer";
+
       void notifyTelegramOrderShipped({
         orderNumber: deriveOrderNumber(finalOrder || updatedOrder || existingOrder),
-        customerName:
-          `${existingOrder.shipping_address?.first_name || ""} ${
-            existingOrder.shipping_address?.last_name || ""
-          }`.trim() ||
-          existingOrder.email ||
-          "Customer",
+        customerName: custName,
+        email: existingOrder.email || undefined,
+        phone: shipAddr?.phone || undefined,
+        address: shipAddr,
         dispatchOrigin: String(
           updatedMeta.dispatch_origin || "Srinagar Atelier (Kashmir)"
         ),
