@@ -664,7 +664,7 @@ export function CheckoutHandoffClient() {
               className="inline-flex items-center gap-1 rounded-full border border-hairline bg-paper p-1 self-start lg:self-auto"
             >
               {[
-                { num: '01', label: 'Bag Ledger', active: false },
+                { num: '01', label: 'Cart', active: false },
                 { num: '02', label: 'Delivery & Pay', active: true },
                 { num: '03', label: 'Order Confirmed', active: false },
               ].map((st) => (

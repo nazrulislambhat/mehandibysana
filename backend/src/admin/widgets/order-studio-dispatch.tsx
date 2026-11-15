@@ -41,33 +41,41 @@ const STAGE_OPTIONS: Array<{ value: FulfillmentStage; label: string }> = [
   { value: "cancelled", label: "Cancelled" },
 ];
 
-const PAYMENT_STATUS_OPTIONS: Array<{
-  value: PaymentStatusValue;
-  label: string;
-}> = [
-  { value: "pending", label: "Pending / Not Paid" },
-  { value: "paid", label: "Paid / Settled" },
-  { value: "refunded", label: "Refunded" },
+const DISPATCH_ORIGINS = [
+  {
+    value: "Srinagar Atelier (Kashmir)",
+    label: "🏔️ Srinagar Atelier (Kashmir)",
+    short: "Srinagar Atelier",
+  },
+  {
+    value: "Bengaluru Studio (Karnataka)",
+    label: "🏙️ Bengaluru Studio (Karnataka)",
+    short: "Bengaluru Studio",
+  },
+  {
+    value: "Customer Self-Pickup",
+    label: "🛍️ Direct Customer Pickup",
+    short: "Customer Pickup",
+  },
 ];
 
 const BASE_PAYMENT_METHOD_OPTIONS: Array<{ value: string; label: string }> = [
-  { value: "offline_upi", label: "Offline UPI (GPay / PhonePe)" },
-  { value: "offline_cash", label: "Offline Cash / Counter" },
-  { value: "offline_bank", label: "Offline Bank Transfer (NEFT / IMPS)" },
-  { value: "bacs", label: "Direct Bank Transfer (BACS)" },
+  { value: "offline_upi", label: "Offline UPI (GPay / PhonePe / Paytm)" },
+  { value: "razorpay", label: "Razorpay Online (UPI / Card / NetBanking)" },
   { value: "cod", label: "Cash on Delivery (COD)" },
-  { value: "razorpay", label: "Razorpay Online" },
+  { value: "offline_cash", label: "Cash on Counter / Hand-to-Hand" },
+  { value: "offline_bank", label: "Direct Bank Transfer (NEFT / IMPS / BACS)" },
   { value: "free_coupon", label: "100% Coupon Discount" },
 ];
 
 const COURIER_PRESETS = [
-  "Local Courier",
+  "Delhivery",
+  "Blue Dart",
+  "DTDC",
+  "India Post Speed Post",
   "Kashmir Local Rider",
   "Bengaluru Local Rider",
-  "India Post Speed Post",
-  "Delhivery",
-  "DTDC",
-  "Blue Dart",
+  "Direct Customer Pickup",
 ];
 
 function resolveStage(
@@ -86,7 +94,7 @@ function resolveStage(
   }
   const st = status.toLowerCase();
   if (st === "canceled" || st === "cancelled") return "cancelled";
-  if (st === "completed") return "preparing";
+  if (st === "completed") return "delivered";
   return "received";
 }
 
@@ -156,104 +164,28 @@ function resolvePaymentMethod(meta: Record<string, unknown>): string {
   return raw || "cod";
 }
 
-function resolveOrderBreakdown(order: any, meta: Record<string, unknown>) {
-  const items = Array.isArray(order?.items) ? order.items : [];
-  const itemsFromLines = items.reduce(
-    (sum: number, item: any) =>
-      sum + (Number(item?.unit_price) || 0) * (Number(item?.quantity) || 1),
-    0
-  );
-  const itemsTotal =
-    Number.isFinite(Number(order?.item_subtotal)) && Number(order?.item_subtotal) > 0
-      ? Number(order.item_subtotal)
-      : Number.isFinite(Number(order?.item_total)) && Number(order?.item_total) > 0
-        ? Number(order.item_total)
-        : itemsFromLines > 0
-          ? itemsFromLines
-          : Math.max(0, Number(meta.subtotal) || 0);
-
-  const shippingMethods = Array.isArray(order?.shipping_methods)
-    ? order.shipping_methods
-    : [];
-  const shippingFromMethods = shippingMethods.reduce(
-    (sum: number, sm: any) => sum + (Number(sm?.amount) || 0),
-    0
-  );
-  const shippingTotal =
-    Number.isFinite(Number(order?.shipping_total)) && Number(order?.shipping_total) > 0
-      ? Number(order.shipping_total)
-      : shippingMethods.length > 0
-        ? shippingFromMethods
-        : Math.max(0, Number(meta.shipping_fee) || 0);
-
-  const discountTotal =
-    Number.isFinite(Number(order?.discount_total)) && Number(order?.discount_total) > 0
-      ? Number(order.discount_total)
-      : Math.max(0, Number(meta.discount_amount) || 0);
-
-  const computedTotal = Math.max(0, itemsTotal + shippingTotal - discountTotal);
-  const orderTotal =
-    Number.isFinite(Number(order?.total)) && Number(order?.total) >= 0
-      ? Number(order.total)
-      : Number.isFinite(Number(order?.summary?.current_order_total)) &&
-          Number(order?.summary?.current_order_total) >= 0
-        ? Number(order.summary.current_order_total)
-        : Number.isFinite(Number(meta.total)) && Number(meta.total) >= 0
-          ? Number(meta.total)
-          : computedTotal;
-
-  return {
-    itemsTotal: Math.round(itemsTotal * 100) / 100,
-    shippingTotal: Math.round(shippingTotal * 100) / 100,
-    discountTotal: Math.round(discountTotal * 100) / 100,
-    orderTotal: Math.round(orderTotal * 100) / 100,
-  };
-}
-
-function resolveDefaultAmount(
-  order: any,
-  meta: Record<string, unknown>,
-  nativePayStatus?: string
-): string {
-  const { orderTotal } = resolveOrderBreakdown(order, meta);
-  const isSettled =
-    nativePayStatus === "captured" ||
-    nativePayStatus === "partially_captured" ||
-    nativePayStatus === "refunded";
-  if (
-    isSettled &&
-    meta.payment_amount !== undefined &&
-    meta.payment_amount !== null &&
-    String(meta.payment_amount).trim() !== ""
-  ) {
-    return String(meta.payment_amount);
-  }
-  if (Number.isFinite(orderTotal) && orderTotal >= 0) {
-    return String(orderTotal);
+function resolveOrderTotal(order: any, meta: Record<string, unknown>): number {
+  if (Number.isFinite(Number(order?.total)) && Number(order?.total) > 0) {
+    return Number(order.total);
   }
   if (
-    meta.payment_amount !== undefined &&
-    meta.payment_amount !== null &&
-    String(meta.payment_amount).trim() !== ""
+    Number.isFinite(Number(order?.summary?.current_order_total)) &&
+    Number(order?.summary?.current_order_total) > 0
   ) {
-    return String(meta.payment_amount);
+    return Number(order.summary.current_order_total);
   }
-  return "";
+  if (Number.isFinite(Number(meta.total)) && Number(meta.total) > 0) {
+    return Number(meta.total);
+  }
+  const subtotal = Math.max(0, Number(meta.subtotal) || 0);
+  const shipping = Math.max(0, Number(meta.shipping_fee) || 0);
+  const discount = Math.max(0, Number(meta.discount_amount) || 0);
+  return Math.max(0, subtotal + shipping - discount);
 }
 
 function formatPaymentLabel(raw: string): string {
   const found = BASE_PAYMENT_METHOD_OPTIONS.find((m) => m.value === raw);
-  return found ? found.label : raw || "Cash on Delivery";
-}
-
-function formatNativeStatusLabel(raw: string): string {
-  if (raw === "captured") return "PAID";
-  if (raw === "partially_captured") return "PARTIAL";
-  if (raw === "refunded") return "REFUNDED";
-  if (raw === "partially_refunded") return "PARTIAL REFUND";
-  if (raw === "authorized") return "AUTHORIZED";
-  if (raw === "awaiting") return "AWAITING";
-  return "NOT PAID";
+  return found ? found.label.split(" (")[0] : raw || "Cash on Delivery";
 }
 
 function formatTimestampShort(raw: unknown): string {
@@ -279,6 +211,7 @@ const OrderStudioDispatchWidget = ({
   const isCanceled = orderStatus === "canceled" || orderStatus === "cancelled";
   const isCompleted = orderStatus === "completed";
   const nativePayStatus = resolveNativePaymentStatus(orderAny);
+  const orderTotal = resolveOrderTotal(orderAny, initialMeta);
 
   const hasCustomerEmail =
     Boolean(data.email) &&
@@ -287,6 +220,7 @@ const OrderStudioDispatchWidget = ({
   const [emailProviderStatus, setEmailProviderStatus] =
     useState<EmailProviderInfo | null>(null);
 
+  // Payment states
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatusValue>(
     resolvePaymentStatus(initialMeta, orderStatus, nativePayStatus)
   );
@@ -297,7 +231,7 @@ const OrderStudioDispatchWidget = ({
     String(initialMeta.payment_id || "")
   );
   const [paymentAmount, setPaymentAmount] = useState<string>(
-    resolveDefaultAmount(orderAny, initialMeta, nativePayStatus)
+    String(initialMeta.payment_amount || orderTotal || "")
   );
   const [offlinePaymentNote, setOfflinePaymentNote] = useState<string>(
     String(initialMeta.offline_payment_note || "")
@@ -305,8 +239,12 @@ const OrderStudioDispatchWidget = ({
   const [sendPaymentReceiptEmail, setSendPaymentReceiptEmail] =
     useState<boolean>(false);
 
+  // Dispatch / Fulfillment states
   const [fulfillmentStage, setFulfillmentStage] = useState<FulfillmentStage>(
     resolveStage(initialMeta, orderStatus)
+  );
+  const [dispatchOrigin, setDispatchOrigin] = useState<string>(
+    String(initialMeta.dispatch_origin || "Srinagar Atelier (Kashmir)")
   );
   const [courierName, setCourierName] = useState<string>(
     String(initialMeta.courier_name || "")
@@ -320,9 +258,8 @@ const OrderStudioDispatchWidget = ({
   const [dispatchNote, setDispatchNote] = useState<string>(
     String(initialMeta.dispatch_note || "")
   );
-
-  const [alsoCompleteOrder, setAlsoCompleteOrder] = useState<boolean>(false);
   const [sendEmail, setSendEmail] = useState<boolean>(hasCustomerEmail);
+
   const [submitting, setSubmitting] = useState<
     | "complete"
     | "payment"
@@ -356,26 +293,24 @@ const OrderStudioDispatchWidget = ({
     setPaymentStatus(resolvePaymentStatus(meta, nextStatus, nextNativePay));
     setPaymentMethod(resolvePaymentMethod(meta));
     setPaymentReference(String(meta.payment_id || ""));
-    setPaymentAmount(resolveDefaultAmount(data as any, meta, nextNativePay));
+    setPaymentAmount(
+      String(meta.payment_amount || resolveOrderTotal(data as any, meta) || "")
+    );
     setOfflinePaymentNote(String(meta.offline_payment_note || ""));
     setFulfillmentStage(resolveStage(meta, nextStatus));
+    setDispatchOrigin(
+      String(meta.dispatch_origin || "Srinagar Atelier (Kashmir)")
+    );
     setCourierName(String(meta.courier_name || ""));
     setTrackingNumber(String(meta.tracking_number || ""));
     setTrackingUrl(String(meta.tracking_url || ""));
     setDispatchNote(String(meta.dispatch_note || ""));
-    setAlsoCompleteOrder(false);
   }, [data.id, data.status, data.metadata, nativePayStatus]);
 
-  const paymentMethodOptions = useMemo(() => {
-    const exists = BASE_PAYMENT_METHOD_OPTIONS.some(
-      (opt) => opt.value === paymentMethod
-    );
-    if (!paymentMethod || exists) return BASE_PAYMENT_METHOD_OPTIONS;
-    return [
-      ...BASE_PAYMENT_METHOD_OPTIONS,
-      { value: paymentMethod, label: paymentMethod },
-    ];
-  }, [paymentMethod]);
+  const isOrderPaid =
+    paymentStatus === "paid" ||
+    nativePayStatus === "captured" ||
+    isCompleted;
 
   const refreshOrderCaches = async () => {
     await queryClient.invalidateQueries({ queryKey: ["orders"] });
@@ -455,58 +390,55 @@ const OrderStudioDispatchWidget = ({
     }
   };
 
+  // 1-Click Action: Ship Order & Trigger Customer Email
+  const handleShipOrder = () => {
+    void submitStudioUpdate(
+      "dispatch",
+      {
+        action: "ship_order",
+        fulfillmentStage: "dispatched",
+        dispatchOrigin,
+        courierName: courierName || "Local Courier",
+        trackingNumber,
+        trackingUrl,
+        dispatchNote,
+        sendEmail: hasCustomerEmail && sendEmail,
+      },
+      "Order Dispatched & Customer Email Sent!"
+    );
+  };
+
+  // 1-Click Action: Complete Order & Trigger Customer Email
   const handleCompleteOrder = () => {
     void submitStudioUpdate(
       "complete",
       {
         action: "complete_order",
         completeOrder: true,
-        fulfillmentStage,
+        fulfillmentStage: "delivered",
+        dispatchOrigin,
         courierName,
         trackingNumber,
         trackingUrl,
         dispatchNote,
         sendEmail: hasCustomerEmail && sendEmail,
       },
-      "Order marked completed."
+      "Order Completed & Customer Delivery Email Sent!"
     );
   };
 
-  const handleSaveManualPayment = () => {
+  // 1-Click Action: Record Payment Received & Sync Ledger
+  const handleRecordPayment = () => {
     const parsedAmt =
       paymentAmount.trim() !== "" && Number.isFinite(Number(paymentAmount))
         ? Number(paymentAmount)
-        : undefined;
+        : orderTotal;
 
-    void submitStudioUpdate(
-      "payment",
-      {
-        action: "update_payment",
-        paymentStatus,
-        paymentMethod,
-        paymentReference,
-        paymentAmount: parsedAmt,
-        offlinePaymentNote,
-        sendEmail: hasCustomerEmail && sendPaymentReceiptEmail,
-      },
-      paymentStatus === "paid"
-        ? "Payment marked Paid & Medusa ledger synced."
-        : paymentStatus === "refunded"
-          ? "Payment marked Refunded & Medusa ledger synced."
-          : "Payment info saved."
-    );
-  };
-
-  const handleQuickMarkPaid = () => {
-    const parsedAmt =
-      paymentAmount.trim() !== "" && Number.isFinite(Number(paymentAmount))
-        ? Number(paymentAmount)
-        : undefined;
     setPaymentStatus("paid");
     void submitStudioUpdate(
       "payment",
       {
-        action: "update_payment",
+        action: "record_payment",
         paymentStatus: "paid",
         paymentMethod,
         paymentReference,
@@ -514,24 +446,7 @@ const OrderStudioDispatchWidget = ({
         offlinePaymentNote,
         sendEmail: hasCustomerEmail && sendPaymentReceiptEmail,
       },
-      "Payment marked Paid & Medusa ledger synced."
-    );
-  };
-
-  const handleSaveDispatch = () => {
-    void submitStudioUpdate(
-      "dispatch",
-      {
-        action: "update_dispatch",
-        fulfillmentStage,
-        courierName,
-        trackingNumber,
-        trackingUrl,
-        dispatchNote,
-        completeOrder: alsoCompleteOrder,
-        sendEmail: hasCustomerEmail && sendEmail,
-      },
-      "Shipping & courier details saved."
+      "Payment Recorded as PAID & Medusa Ledger Synced!"
     );
   };
 
@@ -555,6 +470,7 @@ const OrderStudioDispatchWidget = ({
         trackingNumber,
         trackingUrl,
         dispatchNote,
+        dispatchOrigin,
         sendEmail: true,
       },
       "Shipping email processed."
@@ -562,301 +478,115 @@ const OrderStudioDispatchWidget = ({
   };
 
   const currentStage = resolveStage(initialMeta, orderStatus);
-  const currentPaymentStatus = resolvePaymentStatus(
-    initialMeta,
-    orderStatus,
-    nativePayStatus
+  const currentOrigin = String(
+    initialMeta.dispatch_origin || dispatchOrigin || "Srinagar Atelier (Kashmir)"
   );
-  const currentPaymentMethod = resolvePaymentMethod(initialMeta);
-  const amountBreakdown = resolveOrderBreakdown(orderAny, initialMeta);
-  const isLedgerOutOfSync =
-    nativePayStatus === "not_paid" &&
-    (String(initialMeta.payment_status || "").toLowerCase() === "paid" ||
-      orderStatus === "completed");
-
-  const stageBadgeColor =
-    currentStage === "delivered"
-      ? "green"
-      : currentStage === "dispatched"
-        ? "blue"
-        : currentStage === "cancelled"
-          ? "red"
-          : "orange";
-
-  const ledgerBadgeColor =
-    nativePayStatus === "captured"
-      ? "green"
-      : nativePayStatus === "refunded" || nativePayStatus === "partially_refunded"
-        ? "grey"
-        : "orange";
 
   const confSentAt = formatTimestampShort(
     initialMeta.order_confirmation_email_sent_at ||
       initialMeta.order_confirmation_email_attempted_at
   );
   const confSent = Boolean(initialMeta.order_confirmation_email_sent);
-  const confError = String(initialMeta.order_confirmation_email_error || "");
-
   const shipSentAt = formatTimestampShort(
     initialMeta.shipping_email_sent_at || initialMeta.shipping_email_attempted_at
   );
   const shipSent = Boolean(initialMeta.shipping_email_sent);
-  const shipError = String(initialMeta.shipping_email_error || "");
 
   return (
-    <Container className="divide-y p-0">
-      {/* Header + Quick Complete */}
-      <div className="px-6 py-4 space-y-3">
-        <div>
-          <Heading level="h2">Order, Payment &amp; Courier Dispatch</Heading>
-          <Text size="small" className="text-ui-fg-subtle mt-0.5">
-            Sync payment status, record manual transactions, dispatch parcels, and send customer emails.
-          </Text>
+    <Container className="divide-y p-0 shadow-sm border border-ui-border-base bg-ui-bg-base mb-6">
+      {/* Top Banner: Status & Quick Overview */}
+      <div className="px-6 py-4 space-y-3 bg-ui-bg-subtle/50">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <div className="flex items-center gap-2">
+              <Heading level="h2" className="text-base font-semibold">
+                Simplified Order Flow &amp; Dispatch
+              </Heading>
+              {isCompleted ? (
+                <Badge size="2xsmall" color="green">COMPLETED</Badge>
+              ) : isCanceled ? (
+                <Badge size="2xsmall" color="red">CANCELLED</Badge>
+              ) : (
+                <Badge size="2xsmall" color="blue">ACTIVE</Badge>
+              )}
+            </div>
+            <Text size="xsmall" className="text-ui-fg-subtle mt-0.5">
+              1-click fulfillment, payment recording, origin tracking &amp; automated customer emails.
+            </Text>
+          </div>
+
+          <div className="text-right">
+            <span className="text-xs text-ui-fg-subtle block">Payable Total</span>
+            <span className="text-base font-bold text-ui-fg-base tabular-nums">
+              ₹{orderTotal.toLocaleString("en-IN")}
+            </span>
+          </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-1.5">
+        {/* Live Badges */}
+        <div className="flex flex-wrap items-center gap-2 pt-1">
           <Badge
-            size="2xsmall"
-            color={isCompleted ? "green" : isCanceled ? "red" : "orange"}
+            size="small"
+            color={isOrderPaid ? "green" : "orange"}
+            className="font-medium"
           >
-            ORDER: {orderStatus.toUpperCase()}
+            {isOrderPaid ? "✓ PAID" : "⏳ UNPAID / COD"} · {formatPaymentLabel(paymentMethod)}
           </Badge>
-          <Badge size="2xsmall" color={ledgerBadgeColor}>
-            PAY: {formatNativeStatusLabel(nativePayStatus)} ·{" "}
-            {formatPaymentLabel(currentPaymentMethod)}
+
+          <Badge
+            size="small"
+            color={
+              currentStage === "delivered"
+                ? "green"
+                : currentStage === "dispatched"
+                  ? "blue"
+                  : "orange"
+            }
+            className="font-medium"
+          >
+            STAGE: {currentStage.toUpperCase()}
           </Badge>
-          <Badge size="2xsmall" color={stageBadgeColor}>
-            SHIP: {currentStage.toUpperCase()}
+
+          <Badge size="small" color="purple" className="font-medium">
+            HUB: {currentOrigin.split(" (")[0]}
           </Badge>
-          {Boolean(initialMeta.coupon_code) && (
-            <Badge size="2xsmall" color="purple">
-              COUPON: {String(initialMeta.coupon_code)}
-              {Number(initialMeta.discount_amount) > 0
-                ? ` (-₹${Number(initialMeta.discount_amount).toLocaleString("en-IN")})`
-                : ""}
+
+          {Boolean(courierName) && (
+            <Badge size="small" color="grey" className="font-mono">
+              {courierName} {trackingNumber ? `· ${trackingNumber}` : ""}
             </Badge>
           )}
         </div>
-
-        {isLedgerOutOfSync && !isCanceled && (
-          <div className="rounded-md border border-ui-tag-orange-border bg-ui-tag-orange-bg p-3 space-y-2">
-            <Text size="xsmall" weight="plus">
-              Medusa payment ledger shows NOT PAID even though payment status is{" "}
-              {currentPaymentStatus.toUpperCase()}.
-            </Text>
-            <Button
-              size="small"
-              variant="secondary"
-              className="w-full"
-              disabled={submitting !== null}
-              isLoading={submitting === "payment"}
-              onClick={handleQuickMarkPaid}
-            >
-              Sync Medusa Ledger to Paid
-            </Button>
-          </div>
-        )}
-
-        {emailProviderStatus && !emailProviderStatus.configured && (
-          <div className="rounded-md border border-ui-border-base bg-ui-bg-subtle p-2.5 text-[11px] leading-relaxed">
-            <span className="font-semibold">Email Delivery: Log-Only.</span>{" "}
-            Configure SMTP / Resend / Brevo in{" "}
-            <a
-              href="/app/email-campaigns"
-              className="underline font-medium text-ui-fg-interactive"
-            >
-              Email Campaigns
-            </a>{" "}
-            so customer order &amp; shipping emails reach inboxes.
-          </div>
-        )}
-
-        {!isCompleted && !isCanceled && (
-          <Button
-            size="small"
-            variant="primary"
-            className="w-full"
-            disabled={submitting !== null}
-            isLoading={submitting === "complete"}
-            onClick={handleCompleteOrder}
-          >
-            Complete Order
-          </Button>
-        )}
-
-        {isCanceled && (
-          <Text size="small" className="text-ui-fg-error">
-            This order is cancelled and locked from payment &amp; dispatch edits.
-          </Text>
-        )}
       </div>
 
-      {/* Customer Email Delivery Status + Manual Triggers */}
-      {!isCanceled && (
-        <div className="px-6 py-4 space-y-2.5">
-          <div className="flex items-center justify-between gap-2">
-            <Text size="small" weight="plus">
-              Customer Emails
-            </Text>
-            {emailProviderStatus && (
-              <Badge
-                size="2xsmall"
-                color={emailProviderStatus.configured ? "green" : "orange"}
-              >
-                {emailProviderStatus.configured
-                  ? emailProviderStatus.provider.toUpperCase()
-                  : "LOG ONLY"}
-              </Badge>
-            )}
-          </div>
-
-          <div className="space-y-1.5 text-xs text-ui-fg-subtle">
-            <div className="flex items-center justify-between gap-2">
-              <span>Order Confirmation:</span>
-              <span
-                className={
-                  confSent
-                    ? "text-ui-fg-base font-medium"
-                    : confError
-                      ? "text-ui-fg-error"
-                      : ""
-                }
-              >
-                {confSent
-                  ? `Sent${confSentAt ? ` (${confSentAt})` : ""}`
-                  : confSentAt
-                    ? `Not sent (${confSentAt})`
-                    : "Not recorded"}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between gap-2">
-              <span>Shipping Notification:</span>
-              <span
-                className={
-                  shipSent
-                    ? "text-ui-fg-base font-medium"
-                    : shipError
-                      ? "text-ui-fg-error"
-                      : ""
-                }
-              >
-                {shipSent
-                  ? `Sent${shipSentAt ? ` (${shipSentAt})` : ""}`
-                  : shipSentAt
-                    ? `Not sent (${shipSentAt})`
-                    : "Not sent yet"}
-              </span>
-            </div>
-
-            {(confError || shipError) && (
-              <Text size="xsmall" className="text-ui-fg-error">
-                {shipError || confError}
+      {/* SECTION 1: IF UNPAID -> RECORD PAYMENT RECEIVED */}
+      {!isOrderPaid && !isCanceled && (
+        <div className="px-6 py-5 space-y-4 bg-ui-tag-orange-bg/20 border-l-4 border-l-ui-tag-orange-border">
+          <div className="flex items-center justify-between">
+            <div>
+              <Text size="small" weight="plus" className="text-ui-fg-base flex items-center gap-1.5">
+                <span>💰</span> Step 1: Record Payment Received
               </Text>
-            )}
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 pt-1">
-            <Button
-              size="small"
-              variant="secondary"
-              disabled={submitting !== null || !hasCustomerEmail}
-              isLoading={submitting === "resend_confirm"}
-              onClick={handleResendConfirmationEmail}
-            >
-              {confSent ? "Resend Confirmation" : "Send Confirmation"}
-            </Button>
-            <Button
-              size="small"
-              variant="secondary"
-              disabled={submitting !== null || !hasCustomerEmail}
-              isLoading={submitting === "resend_ship"}
-              onClick={handleResendShippingEmail}
-            >
-              {shipSent ? "Resend Shipping" : "Email Shipping"}
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* Manual Payment Info Section */}
-      {!isCanceled && (
-        <div className="px-6 py-4 space-y-3">
-          <div>
-            <Text size="small" weight="plus">
-              Manual Payment Info &amp; Ledger Sync
-            </Text>
-            <Text size="xsmall" className="text-ui-fg-subtle">
-              Update Payment Status, Mode, UTR / Transaction ID, or Amount. Syncs Medusa&apos;s native payment status automatically.
-            </Text>
-          </div>
-
-          <div className="rounded-md border border-ui-border-base bg-ui-bg-subtle px-3 py-2 text-xs space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="text-ui-fg-subtle">Items Value</span>
-              <span className="tabular-nums">
-                ₹{amountBreakdown.itemsTotal.toLocaleString("en-IN")}
-              </span>
+              <Text size="xsmall" className="text-ui-fg-subtle">
+                Customer hasn&apos;t paid yet or ordered via COD. Select the payment mode to mark Paid and sync the ledger.
+              </Text>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-ui-fg-subtle">Shipping</span>
-              <span className="tabular-nums">
-                {amountBreakdown.shippingTotal === 0
-                  ? "₹0"
-                  : `₹${amountBreakdown.shippingTotal.toLocaleString("en-IN")}`}
-              </span>
-            </div>
-            {amountBreakdown.discountTotal > 0 && (
-              <div className="flex items-center justify-between text-ui-fg-interactive">
-                <span>Discount</span>
-                <span className="tabular-nums">
-                  -₹{amountBreakdown.discountTotal.toLocaleString("en-IN")}
-                </span>
-              </div>
-            )}
-            <div className="flex items-center justify-between border-t border-ui-border-base pt-1 font-semibold">
-              <span>Payable Total (Items + Shipping)</span>
-              <span className="tabular-nums">
-                ₹{amountBreakdown.orderTotal.toLocaleString("en-IN")}
-              </span>
-            </div>
+            <Badge size="2xsmall" color="orange">ACTION REQUIRED</Badge>
           </div>
 
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <Label size="xsmall">Payment Status</Label>
-              <Select
-                size="small"
-                value={paymentStatus}
-                onValueChange={(val) =>
-                  setPaymentStatus(val as PaymentStatusValue)
-                }
-              >
-                <Select.Trigger>
-                  <Select.Value placeholder="Select payment status" />
-                </Select.Trigger>
-                <Select.Content>
-                  {PAYMENT_STATUS_OPTIONS.map((opt) => (
-                    <Select.Item key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select>
-            </div>
-
-            <div>
-              <Label size="xsmall">Payment Mode</Label>
+              <Label size="xsmall" className="mb-1 block font-medium">Payment Mode</Label>
               <Select
                 size="small"
                 value={paymentMethod}
                 onValueChange={(val) => setPaymentMethod(val)}
               >
                 <Select.Trigger>
-                  <Select.Value placeholder="Select payment method" />
+                  <Select.Value placeholder="Select mode" />
                 </Select.Trigger>
                 <Select.Content>
-                  {paymentMethodOptions.map((opt) => (
+                  {BASE_PAYMENT_METHOD_OPTIONS.map((opt) => (
                     <Select.Item key={opt.value} value={opt.value}>
                       {opt.label}
                     </Select.Item>
@@ -865,226 +595,281 @@ const OrderStudioDispatchWidget = ({
               </Select>
             </div>
 
-            <div className="grid grid-cols-2 gap-2.5">
-              <div>
-                <Label size="xsmall">Amount (INR)</Label>
-                <Input
-                  size="small"
-                  type="number"
-                  placeholder="330"
-                  value={paymentAmount}
-                  onChange={(e) => setPaymentAmount(e.target.value)}
-                />
-              </div>
-              <div>
-                <Label size="xsmall">Transaction / UTR ID</Label>
-                <Input
-                  size="small"
-                  placeholder="pay_... / UPI Ref"
-                  value={paymentReference}
-                  onChange={(e) => setPaymentReference(e.target.value)}
-                />
-              </div>
+            <div>
+              <Label size="xsmall" className="mb-1 block font-medium">Amount Received (₹)</Label>
+              <Input
+                size="small"
+                type="number"
+                placeholder={String(orderTotal)}
+                value={paymentAmount}
+                onChange={(e) => setPaymentAmount(e.target.value)}
+              />
             </div>
 
             <div>
-              <Label size="xsmall">Payment Note (Optional)</Label>
+              <Label size="xsmall" className="mb-1 block font-medium">Transaction / UTR ID</Label>
               <Input
                 size="small"
-                placeholder="e.g. Verified GPay screenshot / Cash collected"
-                value={offlinePaymentNote}
-                onChange={(e) => setOfflinePaymentNote(e.target.value)}
+                placeholder="e.g. UPI Ref / Cash collected"
+                value={paymentReference}
+                onChange={(e) => setPaymentReference(e.target.value)}
               />
             </div>
           </div>
 
-          <label
-            className={`flex items-start gap-2 ${
-              hasCustomerEmail ? "cursor-pointer" : "opacity-60"
-            }`}
-          >
-            <Checkbox
-              checked={hasCustomerEmail && sendPaymentReceiptEmail}
-              disabled={!hasCustomerEmail}
-              onCheckedChange={(v) => setSendPaymentReceiptEmail(Boolean(v))}
-            />
-            <Text size="xsmall">
-              {hasCustomerEmail
-                ? `Also email payment receipt to ${data.email}`
-                : "No customer email on file"}
-            </Text>
-          </label>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+            <label
+              className={`flex items-center gap-2 ${
+                hasCustomerEmail ? "cursor-pointer" : "opacity-60"
+              }`}
+            >
+              <Checkbox
+                checked={hasCustomerEmail && sendPaymentReceiptEmail}
+                disabled={!hasCustomerEmail}
+                onCheckedChange={(v) => setSendPaymentReceiptEmail(Boolean(v))}
+              />
+              <Text size="xsmall">
+                {hasCustomerEmail
+                  ? `Send payment receipt email to ${data.email}`
+                  : "No customer email on file"}
+              </Text>
+            </label>
 
-          <div className="space-y-2">
-            {nativePayStatus !== "captured" && paymentStatus !== "paid" && (
-              <Button
-                size="small"
-                variant="primary"
-                className="w-full"
-                disabled={submitting !== null}
-                isLoading={submitting === "payment"}
-                onClick={handleQuickMarkPaid}
-              >
-                Mark as Paid Now
-              </Button>
-            )}
             <Button
               size="small"
-              variant={
-                nativePayStatus !== "captured" && paymentStatus === "paid"
-                  ? "primary"
-                  : "secondary"
-              }
-              className="w-full"
+              variant="primary"
               disabled={submitting !== null}
               isLoading={submitting === "payment"}
-              onClick={handleSaveManualPayment}
+              onClick={handleRecordPayment}
+              className="bg-emerald-700 hover:bg-emerald-800 text-white"
             >
-              {nativePayStatus !== "captured" && paymentStatus === "paid"
-                ? "Mark as Paid & Save Info"
-                : "Save Payment Info"}
+              ✓ Record Payment Received &amp; Mark Paid
             </Button>
           </div>
         </div>
       )}
 
-      {/* Courier & Shipping Section */}
+      {/* SECTION 2: SHIP ORDER & SELECT DISPATCH ORIGIN */}
       {!isCanceled && (
-        <div className="px-6 py-4 space-y-3">
-          <div>
-            <Text size="small" weight="plus">
-              Courier &amp; Shipping Update
-            </Text>
-            <Text size="xsmall" className="text-ui-fg-subtle">
-              Add local courier or AWB tracking details and email the customer.
-            </Text>
+        <div className="px-6 py-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <Text size="small" weight="plus" className="text-ui-fg-base flex items-center gap-1.5">
+                <span>🚀</span> Step 2: Ship Order (From Origin)
+              </Text>
+              <Text size="xsmall" className="text-ui-fg-subtle">
+                Select where this parcel is shipped or picked up from, choose courier, and send customer tracking email.
+              </Text>
+            </div>
+            {currentStage === "dispatched" ? (
+              <Badge size="2xsmall" color="blue">DISPATCHED</Badge>
+            ) : currentStage === "delivered" ? (
+              <Badge size="2xsmall" color="green">DELIVERED</Badge>
+            ) : (
+              <Badge size="2xsmall" color="orange">READY TO SHIP</Badge>
+            )}
           </div>
 
+          {/* Dispatch Origin Selector */}
           <div>
-            <Label size="xsmall">Fulfillment Stage</Label>
-            <Select
-              size="small"
-              value={fulfillmentStage}
-              onValueChange={(val) =>
-                setFulfillmentStage(val as FulfillmentStage)
-              }
-            >
-              <Select.Trigger>
-                <Select.Value placeholder="Select stage" />
-              </Select.Trigger>
-              <Select.Content>
-                {STAGE_OPTIONS.map((opt) => (
-                  <Select.Item key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select>
-          </div>
-
-          <div>
-            <Label size="xsmall">Quick Courier Presets</Label>
-            <div className="flex flex-wrap gap-1.5 mt-1">
-              {COURIER_PRESETS.map((preset) => (
-                <button
-                  key={preset}
-                  type="button"
-                  onClick={() => {
-                    setCourierName(preset);
-                    if (
-                      fulfillmentStage === "received" ||
-                      fulfillmentStage === "preparing"
-                    ) {
-                      setFulfillmentStage("dispatched");
-                    }
-                  }}
-                  className="rounded-md border border-ui-border-base bg-ui-bg-subtle px-2 py-1 text-[11px] font-medium text-ui-fg-base hover:bg-ui-bg-base-hover transition-colors"
-                >
-                  {preset}
-                </button>
-              ))}
+            <Label size="xsmall" className="mb-1.5 block font-medium">
+              From Where Is It Shipped or Picked Up? *
+            </Label>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {DISPATCH_ORIGINS.map((origin) => {
+                const isSelected = dispatchOrigin === origin.value;
+                return (
+                  <button
+                    key={origin.value}
+                    type="button"
+                    onClick={() => setDispatchOrigin(origin.value)}
+                    className={`flex items-center justify-between p-3 rounded-lg border text-left text-xs transition-all ${
+                      isSelected
+                        ? "border-emerald-600 bg-emerald-50 text-emerald-950 font-semibold shadow-xs ring-1 ring-emerald-600"
+                        : "border-ui-border-base bg-ui-bg-subtle text-ui-fg-base hover:bg-ui-bg-base-hover"
+                    }`}
+                  >
+                    <span>{origin.label}</span>
+                    {isSelected && <span className="text-emerald-700 font-bold">✓</span>}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <div>
-            <Label size="xsmall">Courier / Delivery Service</Label>
-            <Input
-              size="small"
-              placeholder="e.g. Local Courier / India Post"
-              value={courierName}
-              onChange={(e) => setCourierName(e.target.value)}
-            />
-          </div>
+          {/* Courier & Tracking */}
+          <div className="space-y-3 pt-1">
+            <div>
+              <Label size="xsmall" className="mb-1 block font-medium">Courier Quick Presets</Label>
+              <div className="flex flex-wrap gap-1.5">
+                {COURIER_PRESETS.map((preset) => (
+                  <button
+                    key={preset}
+                    type="button"
+                    onClick={() => {
+                      setCourierName(preset);
+                      if (preset === "Direct Customer Pickup") {
+                        setDispatchOrigin("Customer Self-Pickup");
+                      }
+                    }}
+                    className={`rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
+                      courierName === preset
+                        ? "border-ui-border-interactive bg-ui-bg-interactive text-ui-fg-on-color"
+                        : "border-ui-border-base bg-ui-bg-subtle text-ui-fg-base hover:bg-ui-bg-base-hover"
+                    }`}
+                  >
+                    {preset}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          <div>
-            <Label size="xsmall">Tracking ID / Rider / Courier Info</Label>
-            <Input
-              size="small"
-              placeholder="AWB # or e.g. Local rider dispatch today"
-              value={trackingNumber}
-              onChange={(e) => setTrackingNumber(e.target.value)}
-            />
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <Label size="xsmall" className="mb-1 block font-medium">Courier Partner</Label>
+                <Input
+                  size="small"
+                  placeholder="e.g. Delhivery / India Post"
+                  value={courierName}
+                  onChange={(e) => setCourierName(e.target.value)}
+                />
+              </div>
 
-          <div>
-            <Label size="xsmall">Tracking Link (Optional)</Label>
-            <Input
-              size="small"
-              placeholder="https://..."
-              value={trackingUrl}
-              onChange={(e) => setTrackingUrl(e.target.value)}
-            />
-          </div>
+              <div>
+                <Label size="xsmall" className="mb-1 block font-medium">Tracking / AWB Number</Label>
+                <Input
+                  size="small"
+                  placeholder="e.g. DEL123456789 / Rider Phone"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
+                />
+              </div>
 
-          <div>
-            <Label size="xsmall">Message to Customer (Optional)</Label>
-            <Textarea
-              rows={2}
-              placeholder="e.g. Shipped via local Kashmir courier, reaching today by 6 PM."
-              value={dispatchNote}
-              onChange={(e) => setDispatchNote(e.target.value)}
-            />
-          </div>
+              <div>
+                <Label size="xsmall" className="mb-1 block font-medium">Tracking Link (Optional)</Label>
+                <Input
+                  size="small"
+                  placeholder="https://..."
+                  value={trackingUrl}
+                  onChange={(e) => setTrackingUrl(e.target.value)}
+                />
+              </div>
+            </div>
 
-          {!isCompleted && (
-            <label className="flex items-center gap-2 cursor-pointer pt-1">
-              <Checkbox
-                checked={alsoCompleteOrder}
-                onCheckedChange={(v) => setAlsoCompleteOrder(Boolean(v))}
+            <div>
+              <Label size="xsmall" className="mb-1 block font-medium">Message to Customer (Optional)</Label>
+              <Input
+                size="small"
+                placeholder="e.g. Freshly packed at Srinagar Atelier, out for delivery via local courier."
+                value={dispatchNote}
+                onChange={(e) => setDispatchNote(e.target.value)}
               />
-              <Text size="xsmall">Also mark order Completed</Text>
+            </div>
+          </div>
+
+          {/* Action Row */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-ui-border-base">
+            <label
+              className={`flex items-center gap-2 ${
+                hasCustomerEmail ? "cursor-pointer" : "opacity-60"
+              }`}
+            >
+              <Checkbox
+                checked={hasCustomerEmail && sendEmail}
+                disabled={!hasCustomerEmail}
+                onCheckedChange={(v) => setSendEmail(Boolean(v))}
+              />
+              <Text size="xsmall">
+                {hasCustomerEmail
+                  ? `Trigger Customer Shipment Email to ${data.email}`
+                  : "No customer email on file (email disabled)"}
+              </Text>
             </label>
-          )}
 
-          <label
-            className={`flex items-start gap-2 ${
-              hasCustomerEmail ? "cursor-pointer" : "opacity-60"
-            }`}
-          >
-            <Checkbox
-              checked={hasCustomerEmail && sendEmail}
-              disabled={!hasCustomerEmail}
-              onCheckedChange={(v) => setSendEmail(Boolean(v))}
-            />
-            <Text size="xsmall">
-              {hasCustomerEmail
-                ? `Email shipping update to ${data.email}`
-                : "No customer email on file (email disabled)"}
+            <div className="flex items-center gap-2">
+              <Button
+                size="small"
+                variant="primary"
+                disabled={submitting !== null}
+                isLoading={submitting === "dispatch"}
+                onClick={handleShipOrder}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium"
+              >
+                🚀 Ship Order &amp; Send Customer Email
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SECTION 3: COMPLETE ORDER */}
+      {!isCanceled && (
+        <div className="px-6 py-5 bg-ui-bg-subtle/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <Text size="small" weight="plus" className="text-ui-fg-base flex items-center gap-1.5">
+              <span>✅</span> Step 3: Complete Order
             </Text>
-          </label>
+            <Text size="xsmall" className="text-ui-fg-subtle">
+              Marks order as Completed / Delivered and sends the customer delivery confirmation email.
+            </Text>
+          </div>
 
-          <Button
-            size="small"
-            variant="primary"
-            className="w-full"
-            disabled={submitting !== null}
-            isLoading={submitting === "dispatch"}
-            onClick={handleSaveDispatch}
-          >
-            {hasCustomerEmail && sendEmail
-              ? "Save & Email Shipping Info"
-              : "Save Shipping Details"}
-          </Button>
+          <div>
+            {isCompleted ? (
+              <Badge size="small" color="green">✓ ORDER ALREADY COMPLETED</Badge>
+            ) : (
+              <Button
+                size="small"
+                variant="primary"
+                disabled={submitting !== null}
+                isLoading={submitting === "complete"}
+                onClick={handleCompleteOrder}
+                className="bg-emerald-700 hover:bg-emerald-800 text-white font-medium"
+              >
+                ✓ Complete Order &amp; Send Delivery Email
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Email History & Manual Triggers */}
+      {!isCanceled && (
+        <div className="px-6 py-3 bg-ui-bg-base flex flex-wrap items-center justify-between gap-3 text-xs text-ui-fg-subtle">
+          <div className="flex items-center gap-4">
+            <span>
+              Confirmation:{" "}
+              <strong className={confSent ? "text-emerald-700" : ""}>
+                {confSent ? `Sent (${confSentAt})` : "Not recorded"}
+              </strong>
+            </span>
+            <span>
+              Shipping Email:{" "}
+              <strong className={shipSent ? "text-blue-700" : ""}>
+                {shipSent ? `Sent (${shipSentAt})` : "Not sent yet"}
+              </strong>
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              disabled={submitting !== null || !hasCustomerEmail}
+              onClick={handleResendConfirmationEmail}
+              className="text-xs text-ui-fg-interactive hover:underline"
+            >
+              Resend Confirmation
+            </button>
+            <span>·</span>
+            <button
+              type="button"
+              disabled={submitting !== null || !hasCustomerEmail}
+              onClick={handleResendShippingEmail}
+              className="text-xs text-ui-fg-interactive hover:underline"
+            >
+              Resend Shipping
+            </button>
+          </div>
         </div>
       )}
     </Container>
@@ -1092,7 +877,7 @@ const OrderStudioDispatchWidget = ({
 };
 
 export const config = defineWidgetConfig({
-  zone: "order.details.side",
+  zone: "order.details.before",
 });
 
 export default OrderStudioDispatchWidget;

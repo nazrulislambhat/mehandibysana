@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import nodemailer from "nodemailer";
+import { sendTelegramMessage } from "./telegram";
 import {
   ensureStudioEmailSettingsLoaded,
   getEffectiveEmailSettings,
@@ -492,6 +493,47 @@ export async function dispatchStudioNotification(
       to: adminEmail,
       ...adminRes,
     });
+  }
+
+  // Optional Telegram Instant Alert (Direct to Phone via Bot API)
+  try {
+    const icon =
+      event.type === "order_confirmed"
+        ? "🛍️"
+        : event.type === "order_dispatched"
+          ? "🚀"
+          : event.type === "order_payment_offline"
+            ? "💰"
+            : event.type === "order_delivered"
+              ? "✅"
+              : "📦";
+
+    const title =
+      event.type === "order_confirmed"
+        ? "NEW ORDER RECEIVED"
+        : event.type === "order_dispatched"
+          ? "ORDER SHIPPED / DISPATCHED"
+          : event.type === "order_payment_offline"
+            ? "PAYMENT RECEIVED"
+            : event.type === "order_delivered"
+              ? "ORDER DELIVERED"
+              : "ORDER UPDATE";
+
+    const telegramText = `
+${icon} <b>${title} — Mehandi by Sana</b>
+
+<b>Order:</b> ${event.referenceId}
+<b>Customer:</b> ${event.recipientName} (${event.recipientEmail}${
+      event.recipientPhone ? ` · ${event.recipientPhone}` : ""
+    })
+
+<b>Summary:</b>
+${event.summary}
+    `.trim();
+
+    void sendTelegramMessage(telegramText);
+  } catch (teleErr) {
+    console.warn("[Notifications] Telegram alert dispatch failed:", teleErr);
   }
 
   // Optional WhatsApp / Automation Webhook

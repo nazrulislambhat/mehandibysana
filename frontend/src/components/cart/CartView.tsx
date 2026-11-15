@@ -25,7 +25,7 @@ function formatMoney(amount: number, symbol: string): string {
 }
 
 const BAG_STEPS = [
-  { num: '01', label: 'Bag Ledger', active: true },
+  { num: '01', label: 'Cart', active: true },
   { num: '02', label: 'Delivery & Pay', active: false },
   { num: '03', label: 'Order Confirmed', active: false },
 ];
@@ -327,7 +327,7 @@ export function CartView() {
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-2"
                 >
                   <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>&larr; Continue browsing catalog</span>
+                  <span>Continue browsing catalog</span>
                 </Link>
                 <span className="text-xs text-umber">
                   Packed fresh in protective batches &middot; Sealed before
@@ -431,7 +431,6 @@ export function CartView() {
                   className="w-full min-h-[50px] rounded-full mb-3.5 inline-flex items-center justify-center gap-1.5"
                 >
                   <span>Proceed to Checkout</span>
-                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
                 </LinkButton>
 
                 <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">

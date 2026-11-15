@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { LineDotRightHorizontal, SquareArrowUpRightExit } from 'lucide-react';
+import { LineDotRightHorizontal } from 'lucide-react';
 
 import { buildPageMetadata, toAbsoluteUrl } from '@/lib/seo';
 import {
@@ -315,7 +315,6 @@ export default function GalleryPage() {
               className="inline-flex items-center gap-2 justify-center min-h-[44px] rounded-md border border-plaque-ink/30 bg-transparent px-6 py-2.5 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
             >
               Instagram
-              <SquareArrowUpRightExit className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

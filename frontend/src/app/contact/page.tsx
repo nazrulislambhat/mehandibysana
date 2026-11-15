@@ -207,7 +207,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                       href="https://wa.me/919149648717"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                      className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                     >
                       Chat on WhatsApp (+91-9149648717)
                     </a>
@@ -226,7 +226,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                       href="https://www.instagram.com/mehandibysana"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                      className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                     >
                       @mehandibysana
                     </a>

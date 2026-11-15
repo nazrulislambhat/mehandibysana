@@ -22,9 +22,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (typeof parsed.id !== 'number' || !Number.isInteger(parsed.id) || parsed.id <= 0) {
+  const numericId =
+    typeof parsed.id === 'number' && Number.isInteger(parsed.id) && parsed.id > 0
+      ? parsed.id
+      : typeof parsed.id === 'string' && /^\d+$/.test(parsed.id)
+        ? parseInt(parsed.id, 10)
+        : null;
+
+  const hasValidMedusaVariantId =
+    typeof parsed.medusaVariantId === 'string' && parsed.medusaVariantId.length > 0;
+
+  if (numericId === null && !hasValidMedusaVariantId) {
     return NextResponse.json(
-      { cart: null, cartToken, nonce, error: 'A valid numeric product ID is required.' },
+      { cart: null, cartToken, nonce, error: 'A valid product ID or variant ID is required.' },
       { status: 400 }
     );
   }
@@ -32,14 +42,19 @@ export async function POST(req: NextRequest) {
   const quantity =
     typeof parsed.quantity === 'number' && Number.isInteger(parsed.quantity) && parsed.quantity > 0
       ? parsed.quantity
-      : 1;
+      : typeof parsed.quantity === 'string' && /^\d+$/.test(parsed.quantity) && parseInt(parsed.quantity, 10) > 0
+        ? parseInt(parsed.quantity, 10)
+        : 1;
 
   const body: Record<string, unknown> = {
-    id: parsed.id,
     quantity,
   };
 
-  if (typeof parsed.medusaVariantId === 'string' && parsed.medusaVariantId.length > 0) {
+  if (numericId !== null) {
+    body.id = numericId;
+  }
+
+  if (hasValidMedusaVariantId) {
     body.medusaVariantId = parsed.medusaVariantId;
   }
 

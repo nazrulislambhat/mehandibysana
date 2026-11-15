@@ -20,18 +20,25 @@ import {
   VALID_FULFILLMENT_STAGES,
   type StudioFulfillmentStage,
   normalizeFulfillmentStage,
+  deriveOrderNumber,
 } from "../../../../../lib/studio-order-meta";
 import {
   syncOrderNativePayment,
   type StudioPaymentStatus,
 } from "../../../../../lib/sync-order-payment";
+import {
+  notifyTelegramOrderShipped,
+  notifyTelegramPaymentReceived,
+} from "../../../../../lib/telegram";
 
 interface StudioDispatchBody {
   action?:
+    | "ship_order"
+    | "complete_order"
+    | "record_payment"
     | "update_dispatch"
     | "update_payment"
     | "mark_offline_paid"
-    | "complete_order"
     | "cancel_order"
     | "resend_confirmation_email"
     | "resend_shipping_email";
@@ -42,6 +49,7 @@ interface StudioDispatchBody {
   paymentAmount?: number | string | null;
   paidAt?: string | null;
   offlinePaymentNote?: string;
+  dispatchOrigin?: string;
   fulfillmentStage?: StudioFulfillmentStage;
   courierName?: string;
   trackingNumber?: string;
@@ -235,7 +243,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
     if (
       body.action === "update_payment" ||
-      body.action === "mark_offline_paid"
+      body.action === "mark_offline_paid" ||
+      body.action === "record_payment"
     ) {
       const requestedStatusRaw = String(body.paymentStatus || "")
         .trim()
@@ -247,7 +256,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       const resolvedPaymentStatus: StudioPaymentStatus =
         VALID_PAYMENT_STATUSES.has(requestedStatusRaw)
           ? requestedStatusRaw
-          : body.action === "mark_offline_paid"
+          : body.action === "mark_offline_paid" || body.action === "record_payment"
             ? "paid"
             : VALID_PAYMENT_STATUSES.has(existingPayRaw)
               ? existingPayRaw
@@ -295,6 +304,27 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       }
 
       const updatedOrder = await fetchRefreshedOrderDetail(req.scope, id);
+
+      if (resolvedPaymentStatus === "paid") {
+        void notifyTelegramPaymentReceived({
+          orderNumber: deriveOrderNumber(updatedOrder || existingOrder),
+          customerName:
+            `${existingOrder.shipping_address?.first_name || ""} ${
+              existingOrder.shipping_address?.last_name || ""
+            }`.trim() ||
+            existingOrder.email ||
+            "Customer",
+          amount:
+            Number(body.paymentAmount) ||
+            Number(existingMeta.total) ||
+            Number(updatedOrder?.total) ||
+            0,
+          paymentMethod: resolvedMethod,
+          referenceId: body.paymentReference,
+          note: body.offlinePaymentNote,
+        });
+      }
+
       return res.status(200).json({
         success: true,
         order: updatedOrder || existingOrder,
@@ -306,7 +336,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     }
 
     // Dispatch / stage / order completion update
-    if (body.fulfillmentStage !== undefined) {
+    if (body.action === "ship_order") {
+      nextMeta.fulfillment_stage = "dispatched";
+      nextMeta.dispatched_at = existingMeta.dispatched_at || nowIso;
+    } else if (body.fulfillmentStage !== undefined) {
       const stage = String(body.fulfillmentStage)
         .trim()
         .toLowerCase() as StudioFulfillmentStage;
@@ -321,6 +354,15 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           nextMeta.delivered_at = existingMeta.delivered_at || nowIso;
         }
       }
+    }
+
+    if (body.dispatchOrigin !== undefined) {
+      nextMeta.dispatch_origin = String(body.dispatchOrigin).trim();
+    } else if (
+      body.action === "ship_order" &&
+      !String(nextMeta.dispatch_origin || "").trim()
+    ) {
+      nextMeta.dispatch_origin = "Srinagar Atelier (Kashmir)";
     }
 
     if (body.courierName !== undefined) {
@@ -414,6 +456,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         trackingNumber: String(updatedMeta.tracking_number || "").trim(),
         trackingUrl: String(updatedMeta.tracking_url || "").trim(),
         dispatchNote: String(updatedMeta.dispatch_note || "").trim(),
+        dispatchOrigin: String(updatedMeta.dispatch_origin || "").trim(),
         skipAdminAlert: true,
         actorId,
       });
@@ -425,6 +468,28 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     const finalOrder = body.sendEmail
       ? await fetchRefreshedOrderDetail(req.scope, id)
       : updatedOrder;
+
+    if (
+      body.action === "ship_order" ||
+      updatedMeta.fulfillment_stage === "dispatched"
+    ) {
+      void notifyTelegramOrderShipped({
+        orderNumber: deriveOrderNumber(finalOrder || updatedOrder || existingOrder),
+        customerName:
+          `${existingOrder.shipping_address?.first_name || ""} ${
+            existingOrder.shipping_address?.last_name || ""
+          }`.trim() ||
+          existingOrder.email ||
+          "Customer",
+        dispatchOrigin: String(
+          updatedMeta.dispatch_origin || "Srinagar Atelier (Kashmir)"
+        ),
+        courierName: String(updatedMeta.courier_name || "Local Courier"),
+        trackingNumber: String(updatedMeta.tracking_number || ""),
+        trackingUrl: String(updatedMeta.tracking_url || ""),
+        dispatchNote: String(updatedMeta.dispatch_note || ""),
+      });
+    }
 
     return res.status(200).json({
       success: true,

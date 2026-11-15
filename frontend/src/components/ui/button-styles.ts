@@ -46,7 +46,7 @@ export function buttonClasses({
     .some((token) => /^(?:[a-z0-9-]+:)*rounded(?:$|-)/.test(token));
 
   return [
-    'btn-dir group/btn relative inline-flex items-center justify-center gap-2 overflow-hidden isolate font-medium tracking-[0.01em] text-center leading-snug',
+    'btn-dir group/btn relative inline-flex items-center justify-center gap-2 overflow-hidden isolate font-medium tracking-[0.01em] text-center leading-snug touch-manipulation select-none',
     hasRadiusOverride ? '' : 'rounded-md',
     'disabled:bg-linen disabled:text-umber disabled:border-divider disabled:opacity-100 disabled:cursor-not-allowed cursor-pointer',
     VARIANT_CLASSES[variant],

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextReveal } from '@/components/ui/TextReveal';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 import type { StorefrontReview } from '@/types/storefront';
 
 interface RecognitionItem {
@@ -138,9 +139,10 @@ export function TestimonialsSection({ reviews = [] }: TestimonialsSectionProps) 
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-full border border-terracotta/45 px-3 py-1 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-terracotta/45 px-3 py-1 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
                       >
-                        {item.linkLabel || 'Read article'} &#8599;
+                        <span>{item.linkLabel || 'Read article'}</span>
+                        <CircleArrowUpRightExit className="w-3 h-3" />
                       </a>
                     ) : null}
                   </figcaption>

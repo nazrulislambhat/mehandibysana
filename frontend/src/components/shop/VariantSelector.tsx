@@ -337,12 +337,13 @@ export function VariantSelector({
             }
             quantity={quantity}
             inStock={activeInStock}
+            openDrawerOnAdd={true}
             unavailableLabel={
               hasMissingVariation ? 'Option unavailable' : 'Out of stock'
             }
             size="lg"
             variant="primary"
-            className="w-full rounded-md min-h-[50px]"
+            className="w-full rounded-md min-h-[50px] cursor-pointer"
           />
         </div>
       </div>

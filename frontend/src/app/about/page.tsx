@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
-import {ShoppingBag, LineDotRightHorizontal } from 'lucide-react'
+import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 import {
   buildAboutPageJsonLd,
   buildBreadcrumbJsonLd,
@@ -412,9 +413,10 @@ export default function AboutPage() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center rounded-full border border-terracotta/45 px-3.5 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-terracotta/45 px-3.5 py-1.5 text-xs font-medium text-terracotta hover:bg-terracotta-solid hover:border-terracotta-solid hover:text-on-accent transition-colors"
                         >
-                          {link.label} &#8599;
+                          <span>{link.label}</span>
+                          <CircleArrowUpRightExit className="w-3 h-3" />
                         </a>
                       ))}
                     </div>
