@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { loadPickupSettings } from './pickup-settings';
 
 export interface PincodeRule {
   id: string;
@@ -27,6 +28,8 @@ export interface PincodeCheckResult {
   zone: string;
   label: string;
   message: string;
+  isPickupEligible: boolean;
+  pickupLocationName: string | null;
 }
 
 const DEFAULT_PINCODE_RULES: PincodeRule[] = [
@@ -176,8 +179,23 @@ export function evaluatePincode(
       zone: '',
       label: '',
       message: 'Enter a valid 6-digit Indian PIN code.',
+      isPickupEligible: false,
+      pickupLocationName: null,
     };
   }
+
+  const pickupSettings = loadPickupSettings();
+  const isKashmir = digits.startsWith('19') || digits.startsWith('18');
+  const isBengaluru = digits.startsWith('56');
+  const isPickupEligible =
+    (isKashmir && pickupSettings.enableSrinagarPickup) ||
+    (isBengaluru && pickupSettings.enableBengaluruPickup);
+  const pickupLocationName =
+    isKashmir && pickupSettings.enableSrinagarPickup
+      ? pickupSettings.srinagarLocationName
+      : isBengaluru && pickupSettings.enableBengaluruPickup
+        ? pickupSettings.bengaluruLocationName
+        : null;
 
   const activeRules = loadPincodeRules()
     .filter((r) => r.active)
@@ -203,6 +221,8 @@ export function evaluatePincode(
       zone: 'Unserviceable',
       label: 'Not currently serviceable',
       message: `Delivery is not yet configured for PIN ${digits}.`,
+      isPickupEligible,
+      pickupLocationName,
     };
   }
 
@@ -232,5 +252,7 @@ export function evaluatePincode(
     message: isFreeShipping
       ? `Free delivery unlocked for PIN ${digits} (${matched.pattern}) — ${matched.estimatedDays}.`
       : `Delivery to PIN ${digits} (${matched.pattern}): ₹${deliveryCharge} · ${matched.estimatedDays}.`,
+    isPickupEligible,
+    pickupLocationName,
   };
 }

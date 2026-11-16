@@ -378,6 +378,8 @@ export async function notifyTelegramOrderPlaced(order: {
   paymentRef?: string;
   targetDeliveryDate?: string;
   deliverySpeed?: string;
+  fulfillmentType?: "delivery" | "pickup";
+  fulfillmentLabel?: string;
   specialInstructions?: string;
   invoicePdfBuffer?: Buffer;
   invoicePdfPath?: string;
@@ -429,12 +431,24 @@ export async function notifyTelegramOrderPlaced(order: {
     ? `\n🔖 <b>Payment Ref:</b> <code>${escapeTelegramHtml(order.paymentRef)}</code>`
     : "";
 
+  const isPickup =
+    order.fulfillmentType === "pickup" ||
+    order.specialInstructions?.toLowerCase().includes("pickup");
+
+  const fulfillmentLine = isPickup
+    ? `\n🏬 <b>Fulfillment:</b> <b>Studio Self-Pickup</b> (${escapeTelegramHtml(
+        order.fulfillmentLabel || "Customer Self-Pickup"
+      )})`
+    : `\n🚚 <b>Fulfillment:</b> <b>Doorstep Delivery</b>`;
+
+  const dateLabel = isPickup ? "Preferred Pickup Date" : "Preferred Delivery Date";
   const deliveryScheduleLine = order.targetDeliveryDate
-    ? `\n📅 <b>Preferred Delivery Date:</b> <b>${escapeTelegramHtml(order.targetDeliveryDate)}</b>`
+    ? `\n📅 <b>${dateLabel}:</b> <b>${escapeTelegramHtml(order.targetDeliveryDate)}</b>`
     : "";
-  const speedLine = order.deliverySpeed
-    ? `\n⚡ <b>Delivery Speed:</b> ${escapeTelegramHtml(order.deliverySpeed)}`
-    : "";
+  const speedLine =
+    order.deliverySpeed && !isPickup
+      ? `\n⚡ <b>Delivery Speed:</b> ${escapeTelegramHtml(order.deliverySpeed)}`
+      : "";
   const notesLine = order.specialInstructions
     ? `\n📝 <b>Special Instructions:</b> <i>${escapeTelegramHtml(order.specialInstructions)}</i>`
     : "";
@@ -452,15 +466,19 @@ export async function notifyTelegramOrderPlaced(order: {
       )}</b> to decide whether we can ship it!`
     : "";
 
+  const addressHeader = isPickup
+    ? `📍 <b>Pickup Studio / Customer Details:</b>`
+    : `📍 <b>Delivery Address:</b>`;
+
   const message = `
 🛍️ <b>NEW ORDER PLACED — Mehandi By Sana</b>
 
 <b>Order:</b> #${escapeTelegramHtml(order.orderNumber)}
 <b>Customer:</b> ${escapeTelegramHtml(order.customerName)}
 📞 <b>Phone:</b> ${order.phone ? `<b>${escapeTelegramHtml(order.phone)}</b>` : "Not provided"}
-✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}${deliveryScheduleLine}${speedLine}${notesLine}${priorityActionBanner}
+✉️ <b>Email:</b> ${escapeTelegramHtml(order.email)}${fulfillmentLine}${deliveryScheduleLine}${speedLine}${notesLine}${priorityActionBanner}
 
-📍 <b>Delivery Address:</b>
+${addressHeader}
 ${formattedAddress}
 
 📦 <b>Items Ordered (${order.items?.length || 0}):</b>

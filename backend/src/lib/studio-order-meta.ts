@@ -36,8 +36,8 @@ export function normalizeFulfillmentStage(
 export function formatOrderPaymentMethodLabel(raw?: unknown): string {
   const val = String(raw || "").trim();
   const key = val.toLowerCase();
-  if (!key || key === "cod") return "Cash on Delivery";
-  if (key === "razorpay") return "Razorpay Online";
+  if (!key || key === "cod") return "Cash on Delivery / Pickup";
+  if (key === "razorpay") return "Pay Online (Secured by Razorpay)";
   if (key === "free_coupon") return "100% Coupon Discount";
   if (key === "offline_cash") return "Offline Cash Payment";
   if (key === "offline_upi") return "Offline UPI Payment";

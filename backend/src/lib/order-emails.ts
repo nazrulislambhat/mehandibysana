@@ -75,6 +75,8 @@ interface ComputedOrderBreakdown {
   dispatchOrigin: string;
   targetDeliveryDate: string;
   deliverySpeedLabel: string;
+  fulfillmentType?: string;
+  fulfillmentLabel?: string;
   specialInstructions: string;
 }
 
@@ -274,6 +276,21 @@ async function loadOrderForEmail(
       dispatchOrigin: String(meta.dispatch_origin || "").trim(),
       targetDeliveryDate: String(meta.target_delivery_date || "").trim(),
       deliverySpeedLabel: String(meta.delivery_speed_label || "").trim(),
+      fulfillmentType: String(
+        meta.fulfillment_type ||
+          (meta.special_instructions &&
+          String(meta.special_instructions).toLowerCase().includes("pickup")
+            ? "pickup"
+            : "delivery")
+      ).trim(),
+      fulfillmentLabel: String(
+        meta.fulfillment_label ||
+          (meta.fulfillment_type === "pickup" ||
+          (meta.special_instructions &&
+            String(meta.special_instructions).toLowerCase().includes("pickup"))
+            ? "Studio Self-Pickup"
+            : "Doorstep Delivery")
+      ).trim(),
       specialInstructions: String(meta.special_instructions || "").trim(),
     },
   };
@@ -407,21 +424,38 @@ function renderOrderDetailsTableHtml(
     </table>
     <div style="margin-top:16px;padding:14px 16px;border:1px solid #d4c8b8;border-radius:8px;background-color:#fbf9f6;font-size:13px;line-height:1.65;color:#3D3D3D;">
       <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#96410D;">
-        Customer &amp; Delivery Information
+        Customer &amp; Fulfillment Information
       </p>
+      <strong>Fulfillment:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(
+        b.fulfillmentLabel ||
+          (b.fulfillmentType === "pickup"
+            ? "Studio Self-Pickup"
+            : "Doorstep Delivery")
+      )}</span><br/>
       <strong>Customer:</strong> ${escapeHtml(b.customerName)}${
         b.phone ? ` &middot; 📞 ${escapeHtml(b.phone)}` : ""
       }${b.email ? ` &middot; ✉️ ${escapeHtml(b.email)}` : ""}<br/>
       ${
-        b.addressText
-          ? `<strong>Delivery Address:</strong> ${escapeHtml(b.addressText)}<br/>`
-          : ""
+        b.fulfillmentType === "pickup"
+          ? `<strong>Pickup Studio Location:</strong> ${escapeHtml(
+              b.dispatchOrigin ||
+                (b.pincode?.startsWith("19") || b.pincode?.startsWith("18")
+                  ? "Srinagar Studio, Kashmir"
+                  : "Bengaluru Studio, Karnataka")
+            )}<br/>`
+          : b.addressText
+            ? `<strong>Delivery Address:</strong> ${escapeHtml(b.addressText)}<br/>`
+            : ""
       }
       <strong>Payment:</strong> ${escapeHtml(b.paymentStatusLabel)} (${escapeHtml(
         b.paymentMethodLabel
       )})${b.paymentRef ? ` &middot; Ref: <code>${escapeHtml(b.paymentRef)}</code>` : ""}${
         b.targetDeliveryDate
-          ? `<br/><strong>📅 Preferred Delivery Date:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(
+          ? `<br/><strong>📅 ${
+              b.fulfillmentType === "pickup"
+                ? "Preferred Pickup Date"
+                : "Preferred Delivery Date"
+            }:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(
               b.targetDeliveryDate
             )}</span>`
           : ""
@@ -615,6 +649,8 @@ export async function sendOrderConfirmationEmail(
       paymentRef: b.paymentRef,
       targetDeliveryDate: b.targetDeliveryDate,
       deliverySpeed: b.deliverySpeedLabel,
+      fulfillmentType: (b.fulfillmentType as any) || "delivery",
+      fulfillmentLabel: b.fulfillmentLabel,
       specialInstructions: b.specialInstructions,
       invoicePdfBuffer: generatedPdfBuffer,
       invoiceNumber: generatedInvoiceNumber,

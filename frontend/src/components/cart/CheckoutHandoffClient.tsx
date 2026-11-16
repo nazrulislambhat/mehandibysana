@@ -6,7 +6,7 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal, Calendar, Zap, AlertCircle, Clock, Truck } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Calendar, AlertCircle, Clock, ChevronDown, Store, Truck } from 'lucide-react';
 import {
   evaluateDeliveryRules,
   formatIsoDateDisplay,
@@ -18,6 +18,45 @@ import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { ShieldProtectIcon } from '@/components/graphics/BrandIcons';
+
+export const INDIAN_STATES_AND_UTS = [
+  'Andaman & Nicobar Islands',
+  'Andhra Pradesh',
+  'Arunachal Pradesh',
+  'Assam',
+  'Bihar',
+  'Chandigarh',
+  'Chhattisgarh',
+  'Dadra & Nagar Haveli and Daman & Diu',
+  'Delhi',
+  'Goa',
+  'Gujarat',
+  'Haryana',
+  'Himachal Pradesh',
+  'Jammu & Kashmir',
+  'Jharkhand',
+  'Karnataka',
+  'Kerala',
+  'Ladakh',
+  'Lakshadweep',
+  'Madhya Pradesh',
+  'Maharashtra',
+  'Manipur',
+  'Meghalaya',
+  'Mizoram',
+  'Nagaland',
+  'Odisha',
+  'Puducherry',
+  'Punjab',
+  'Rajasthan',
+  'Sikkim',
+  'Tamil Nadu',
+  'Telangana',
+  'Tripura',
+  'Uttar Pradesh',
+  'Uttarakhand',
+  'West Bengal',
+] as const;
 
 interface RazorpaySuccessResponse {
   razorpay_payment_id: string;
@@ -123,6 +162,7 @@ export function CheckoutHandoffClient() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [deliverySpeed, setDeliverySpeed] = useState<DeliverySpeedType>('standard');
+  const [fulfillmentType, setFulfillmentType] = useState<'delivery' | 'pickup'>('delivery');
   const [targetDate, setTargetDate] = useState<string>('');
 
   const [confirmedOrder, setConfirmedOrder] = useState<{
@@ -139,6 +179,8 @@ export function CheckoutHandoffClient() {
     targetDate?: string;
     deliverySpeed?: string;
     deliverySpeedLabel?: string;
+    fulfillmentType?: 'delivery' | 'pickup';
+    fulfillmentLabel?: string;
   } | null>(null);
 
   const confirmationRef = useRef<HTMLDivElement>(null);
@@ -197,13 +239,65 @@ export function CheckoutHandoffClient() {
       ? pincodeResult
       : null;
 
-  const deliverySurcharge =
-    deliverySpeed === 'priority'
-      ? PRIORITY_DELIVERY_SURCHARGE
-      : 0;
+  // Backend Studio Pickup Settings (synced from Medusa backend)
+  const [pickupSettings, setPickupSettings] = useState<{
+    enableSrinagarPickup: boolean;
+    enableBengaluruPickup: boolean;
+    srinagarLocationName?: string;
+    bengaluruLocationName?: string;
+  }>({
+    enableSrinagarPickup: true,
+    enableBengaluruPickup: true,
+  });
 
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/pickup-settings')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (isMounted && data) {
+          setPickupSettings({
+            enableSrinagarPickup: Boolean(data.enableSrinagarPickup),
+            enableBengaluruPickup: Boolean(data.enableBengaluruPickup),
+            srinagarLocationName: data.srinagarLocationName,
+            bengaluruLocationName: data.bengaluruLocationName,
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not load pickup settings:', err);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Pickup eligibility: Respects backend Medusa toggle per region:
+  // - Kashmir (19*, 18*): only eligible if enableSrinagarPickup is true in Medusa
+  // - Bengaluru (56*): only eligible if enableBengaluruPickup is true in Medusa
+  // - All other Indian PIN codes: always false (only Doorstep Delivery is offered)
+  const isPickupEligible =
+    pincode.length === 6 &&
+    ((deliveryRules.zone === 'kashmir' &&
+      (activePinCheck?.isPickupEligible !== undefined
+        ? activePinCheck.isPickupEligible
+        : pickupSettings.enableSrinagarPickup)) ||
+      (deliveryRules.zone === 'bengaluru' &&
+        (activePinCheck?.isPickupEligible !== undefined
+          ? activePinCheck.isPickupEligible
+          : pickupSettings.enableBengaluruPickup)));
+
+  const isPickup = isPickupEligible && fulfillmentType === 'pickup';
+
+  useEffect(() => {
+    if (!isPickupEligible && fulfillmentType === 'pickup') {
+      setFulfillmentType('delivery');
+    }
+  }, [isPickupEligible, fulfillmentType]);
+
+  const deliverySurcharge = 0;
   const baseDeliveryFee = activePinCheck?.serviceable ? activePinCheck.deliveryCharge : 0;
-  const deliveryFee = baseDeliveryFee + deliverySurcharge;
+  const deliveryFee = isPickup ? 0 : baseDeliveryFee;
   const activeCouponCode = couponValidation?.valid ? couponValidation.code : '';
   const discountAmount = couponValidation?.valid ? couponValidation.discountAmount : 0;
   const grandTotal = Math.max(
@@ -217,6 +311,17 @@ export function CheckoutHandoffClient() {
     setPincode(clean);
     if (clean.length === 6) {
       void checkPincode(clean, subtotal);
+      if (clean.startsWith('56')) {
+        setStateName('Karnataka');
+        if (!city || city === 'Kashmir' || city === 'Srinagar') {
+          setCity('Bengaluru');
+        }
+      } else if (clean.startsWith('19') || clean.startsWith('18')) {
+        setStateName('Jammu & Kashmir');
+        if (!city || city === 'Bengaluru') {
+          setCity('Srinagar');
+        }
+      }
     }
   };
 
@@ -251,10 +356,19 @@ export function CheckoutHandoffClient() {
       return;
     }
 
-    const resolvedSpeedLabel =
-      deliveryRules.speedOptions.find((s) => s.id === deliverySpeed)?.title ||
-      'Standard Delivery';
-    const finalShipping = resolvedDelivery.deliveryCharge + deliverySurcharge;
+    const resolvedAddress = isPickup
+      ? address.trim() || `Studio Self-Pickup (${deliveryRules.zone === 'kashmir' ? 'Srinagar Studio' : 'Bengaluru Studio'})`
+      : address.trim();
+
+    if (!isPickup && !resolvedAddress) {
+      setSubmitError('Please enter your street address for delivery.');
+      return;
+    }
+
+    const resolvedSpeedLabel = isPickup
+      ? `Studio Self-Pickup (${deliveryRules.zone === 'kashmir' ? 'Srinagar Studio' : 'Bengaluru Studio'})`
+      : deliveryRules.speedOptions.find((s) => s.id === deliverySpeed)?.title || 'Standard Delivery';
+    const finalShipping = isPickup ? 0 : (resolvedDelivery.deliveryCharge + deliverySurcharge);
     const finalDiscount = couponValidation?.valid ? couponValidation.discountAmount : 0;
     const resolvedCouponCode = couponValidation?.valid ? couponValidation.code : '';
     const finalTotal = Math.max(
@@ -265,7 +379,7 @@ export function CheckoutHandoffClient() {
 
     if (finalTotal > 0 && paymentMethod === 'cod' && !resolvedDelivery.codAvailable) {
       setSubmitError(
-        `Cash on Delivery is unavailable for PIN ${pincode}. Please choose Razorpay Online Payment.`
+        `Cash on Delivery / Pickup is unavailable for PIN ${pincode}. Please choose Online Payment.`
       );
       return;
     }
@@ -277,7 +391,7 @@ export function CheckoutHandoffClient() {
         lastName: lastName.trim(),
         email: email.trim(),
         phone: phone.trim(),
-        address: address.trim(),
+        address: resolvedAddress,
         city: city.trim(),
         state: stateName.trim(),
         pincode,
@@ -302,8 +416,19 @@ export function CheckoutHandoffClient() {
         targetDate: targetDate || deliveryRules.minDate,
         deliverySpeed,
         deliverySpeedLabel: resolvedSpeedLabel,
-        deliverySurcharge,
-        specialInstructions: notes.trim(),
+        deliverySurcharge: 0,
+        fulfillmentType: isPickup ? 'pickup' : 'delivery',
+        fulfillmentLabel: isPickup
+          ? `Studio Self-Pickup (${deliveryRules.zone === 'kashmir' ? 'Srinagar Studio' : 'Bengaluru Studio'})`
+          : 'Doorstep Delivery',
+        specialInstructions: [
+          notes.trim(),
+          isPickup
+            ? `[Fulfillment: Studio Self-Pickup - ${deliveryRules.zone === 'kashmir' ? 'Srinagar Studio' : 'Bengaluru Studio'}]`
+            : '[Fulfillment: Doorstep Delivery]',
+        ]
+          .filter(Boolean)
+          .join(' · '),
       },
     };
 
@@ -356,6 +481,10 @@ export function CheckoutHandoffClient() {
           targetDate: targetDate || deliveryRules.minDate,
           deliverySpeed,
           deliverySpeedLabel: resolvedSpeedLabel,
+          fulfillmentType: isPickup ? 'pickup' : 'delivery',
+          fulfillmentLabel: isPickup
+            ? `Studio Self-Pickup (${deliveryRules.zone === 'kashmir' ? 'Srinagar' : 'Bengaluru'})`
+            : 'Doorstep Delivery',
         });
         setSubmitting(false);
         return;
@@ -519,6 +648,10 @@ export function CheckoutHandoffClient() {
                 targetDate: targetDate || deliveryRules.minDate,
                 deliverySpeed,
                 deliverySpeedLabel: resolvedSpeedLabel,
+                fulfillmentType: isPickup ? 'pickup' : 'delivery',
+                fulfillmentLabel: isPickup
+                  ? `Studio Self-Pickup (${deliveryRules.zone === 'kashmir' ? 'Srinagar' : 'Bengaluru'})`
+                  : 'Doorstep Delivery',
               });
               setSubmitting(false);
             } catch (verifyErr) {
@@ -589,10 +722,14 @@ export function CheckoutHandoffClient() {
         deliveryFee: data.pricing?.shippingFee ?? finalShipping,
         pincode,
         pattern: matchedPattern,
-        paymentMethod: 'Cash on Delivery (COD)',
+        paymentMethod: 'Cash on Delivery / Pickup',
         targetDate: targetDate || deliveryRules.minDate,
         deliverySpeed,
         deliverySpeedLabel: resolvedSpeedLabel,
+        fulfillmentType: isPickup ? 'pickup' : 'delivery',
+        fulfillmentLabel: isPickup
+          ? `Studio Self-Pickup (${deliveryRules.zone === 'kashmir' ? 'Srinagar' : 'Bengaluru'})`
+          : 'Doorstep Delivery',
       });
       setSubmitting(false);
     } catch (err) {
@@ -666,16 +803,24 @@ export function CheckoutHandoffClient() {
                   </div>
                 ) : null}
                 <div className="flex justify-between gap-3">
+                  <dt className="text-umber">Fulfillment Mode</dt>
+                  <dd className="font-semibold text-ink">
+                    {confirmedOrder.fulfillmentLabel || (confirmedOrder.fulfillmentType === 'pickup' ? 'Studio Self-Pickup' : 'Doorstep Delivery')}
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-3">
                   <dt className="text-umber">
-                    Delivery PIN ({confirmedOrder.pincode} &middot; {confirmedOrder.pattern})
+                    Delivery / Pickup PIN ({confirmedOrder.pincode} &middot; {confirmedOrder.pattern})
                   </dt>
                   <dd className="font-medium text-ink tabular-nums">
-                    {formatMoney(confirmedOrder.deliveryFee, currency)}
+                    {confirmedOrder.deliveryFee === 0 ? 'FREE' : formatMoney(confirmedOrder.deliveryFee, currency)}
                   </dd>
                 </div>
                 {confirmedOrder.targetDate ? (
                   <div className="flex justify-between gap-3">
-                    <dt className="text-umber">Preferred Delivery Date</dt>
+                    <dt className="text-umber">
+                      {confirmedOrder.fulfillmentType === 'pickup' ? 'Preferred Pickup Date' : 'Preferred Delivery Date'}
+                    </dt>
                     <dd className="font-semibold text-terracotta">
                       {formatIsoDateDisplay(confirmedOrder.targetDate)}
                     </dd>
@@ -813,9 +958,7 @@ export function CheckoutHandoffClient() {
                       Contact &amp; Shipping Address
                     </h2>
                   </div>
-                  <span className="text-[11px] uppercase tracking-[0.12em] text-umber">
-                    Auto PIN rates
-                  </span>
+              
                 </div>
 
                 {submitError ? (
@@ -878,20 +1021,6 @@ export function CheckoutHandoffClient() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5">
-                    Street Address <span className="text-terracotta">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="House / Street / Locality"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 text-sm text-ink"
-                  />
-                </div>
-
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5">
@@ -921,35 +1050,117 @@ export function CheckoutHandoffClient() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5">
+                    <label
+                      htmlFor="shipping-state"
+                      className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5"
+                    >
                       State <span className="text-terracotta">*</span>
                     </label>
-                    <input
-                      type="text"
-                      required
-                      value={stateName}
-                      onChange={(e) => setStateName(e.target.value)}
-                      className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 text-sm text-ink"
-                    />
+                    <div className="relative">
+                      <select
+                        id="shipping-state"
+                        required
+                        value={stateName}
+                        onChange={(e) => setStateName(e.target.value)}
+                        className="w-full min-h-[44px] appearance-none rounded-xl border border-divider bg-canvas px-3.5 pr-9 text-sm text-ink focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta cursor-pointer"
+                      >
+                        <option value="" disabled>
+                          Select State / Union Territory
+                        </option>
+                        {INDIAN_STATES_AND_UTS.map((st) => (
+                          <option key={st} value={st}>
+                            {st}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-umber">
+                        <ChevronDown size={15} />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Dispatch Schedule & Preferred Delivery Date */}
-                <div className="pt-5 border-t border-hairline space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta block">
-                        Dispatch Logistics &middot; {deliveryRules.zoneLabel}
+                {/* Fulfillment Option (Only Kashmir & Bengaluru PIN codes) */}
+                {isPickupEligible ? (
+                  <div className="p-4 rounded-xl border border-terracotta/25 bg-terracotta/[0.04] space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
+                        Fulfillment Method
                       </span>
-                      <h3 className="font-serif text-xl sm:text-2xl font-medium text-ink">
-                        Delivery Speed &amp; Preferred Date
-                      </h3>
+                    
                     </div>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-umber bg-linen px-3 py-1 rounded-full border border-hairline">
-                      <Clock size={12} className="text-terracotta shrink-0" />
-                      <span className="font-medium">{deliveryRules.istTimeFormatted}</span>
-                    </span>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setFulfillmentType('delivery')}
+                        className={`flex items-start gap-3 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                          !isPickup
+                            ? 'border-ink bg-ink text-inverse shadow-xs'
+                            : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                        }`}
+                      >
+                        <Truck size={17} className={!isPickup ? 'text-terracotta shrink-0 mt-0.5' : 'text-umber shrink-0 mt-0.5'} />
+                        <div>
+                          <span className="block font-semibold text-sm">Doorstep Delivery</span>
+                          <span className={`block text-[11px] mt-0.5 ${!isPickup ? 'text-inverse/75' : 'text-umber'}`}>
+                            Dispatched via courier / rider to your door
+                          </span>
+                        </div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setFulfillmentType('pickup')}
+                        className={`flex items-start gap-3 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                          isPickup
+                            ? 'border-ink bg-ink text-inverse shadow-xs'
+                            : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                        }`}
+                      >
+                        <Store size={17} className={isPickup ? 'text-terracotta shrink-0 mt-0.5' : 'text-umber shrink-0 mt-0.5'} />
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="block font-semibold text-sm">Studio Self-Pickup</span>
+                            <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${isPickup ? 'bg-terracotta text-inverse' : 'bg-terracotta/15 text-terracotta'}`}>
+                              FREE
+                            </span>
+                          </div>
+                          <span className={`block text-[11px] mt-0.5 ${isPickup ? 'text-inverse/75' : 'text-umber'}`}>
+                            {deliveryRules.zone === 'kashmir'
+                              ? (pickupSettings.srinagarLocationName ? `Pick up from ${pickupSettings.srinagarLocationName}` : 'Pick up from Srinagar Studio')
+                              : (pickupSettings.bengaluruLocationName ? `Pick up from ${pickupSettings.bengaluruLocationName}` : 'Pick up from Bengaluru Studio')}
+                          </span>
+                        </div>
+                      </button>
+                    </div>
+
+                    {isPickup && (
+                      <p className="text-xs text-umber leading-relaxed pt-1">
+                        ✓ <strong>Delivery charge waived:</strong> You pay ₹0 shipping. We will coordinate exact pickup coordinates and timing via WhatsApp or Call once your batch is ready.
+                      </p>
+                    )}
                   </div>
+                ) : null}
+
+                <div>
+                  <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mb-1.5">
+                    {isPickup ? 'Street Address (Optional for Studio Pickup)' : 'Street Address'} <span className="text-terracotta">{isPickup ? '' : '*'}</span>
+                  </label>
+                  <input
+                    type="text"
+                    required={!isPickup}
+                    placeholder={isPickup ? 'Optional (Self-pickup at studio)' : 'House / Street / Locality'}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    className="w-full min-h-[44px] rounded-xl border border-divider bg-canvas px-3.5 text-sm text-ink"
+                  />
+                </div>
+
+                {/* Dispatch Schedule & Preferred Delivery / Pickup Date */}
+                <div className="pt-5 border-t border-hairline space-y-4">
+               
+                
 
                   {/* Operational Notice Banner (e.g. Kashmir 9-11 AM cutoff or Bangalore Rapido) */}
                   {deliveryRules.notice ? (
@@ -972,68 +1183,15 @@ export function CheckoutHandoffClient() {
                     </div>
                   ) : null}
 
-                  {/* Delivery Speed Selector (Standard vs Urgent) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {deliveryRules.speedOptions.map((opt) => {
-                      const isSelected = deliverySpeed === opt.id;
-                      return (
-                        <button
-                          key={opt.id}
-                          type="button"
-                          onClick={() => setDeliverySpeed(opt.id)}
-                          className={`relative text-left p-4 rounded-xl border transition-all ${
-                            isSelected
-                              ? 'border-ink bg-ink text-inverse shadow-xs'
-                              : 'border-divider bg-canvas text-ink hover:border-ink/60'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between gap-2 mb-1">
-                            <span className="font-semibold text-sm flex items-center gap-1.5">
-                              {opt.id === 'priority' ? (
-                                <Zap size={15} className={isSelected ? 'text-terracotta' : 'text-amber-600'} />
-                              ) : (
-                                <Truck size={15} className={isSelected ? 'text-inverse/70' : 'text-umber'} />
-                              )}
-                              <span>{opt.title}</span>
-                            </span>
-                            {opt.badge ? (
-                              <span
-                                className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${
-                                  isSelected
-                                    ? 'bg-terracotta text-inverse'
-                                    : 'bg-terracotta/10 text-terracotta'
-                                }`}
-                              >
-                                {opt.badge}
-                              </span>
-                            ) : null}
-                          </div>
-                          <p
-                            className={`text-xs font-medium ${
-                              isSelected ? 'text-inverse/85' : 'text-umber'
-                            }`}
-                          >
-                            {opt.subtitle}
-                          </p>
-                          <p
-                            className={`text-[11px] mt-1.5 leading-relaxed ${
-                              isSelected ? 'text-inverse/65' : 'text-umber/80'
-                            }`}
-                          >
-                            {opt.description}
-                          </p>
-                        </button>
-                      );
-                    })}
-                  </div>
-
                   {/* Preferred Delivery Date Input & Quick-Select */}
                   <div className="space-y-2.5 pt-1">
                     <label
                       htmlFor="preferred-delivery-date"
                       className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-ink"
                     >
-                      Preferred Delivery Date <span className="text-terracotta">*</span>
+                        {isPickup ? 'Preferred Pickup Date' : 'Preferred Delivery Date'} <span className="text-terracotta">*</span>
+                        
+
                     </label>
 
                     {/* Quick Selection Buttons */}
@@ -1084,7 +1242,7 @@ export function CheckoutHandoffClient() {
                     </div>
 
                     <p className="text-[11px] text-umber leading-relaxed">
-                      🌿 <strong>Peak Henna Freshness:</strong> Fresh organic henna paste is mixed and rolled to order. Choosing your target delivery date ensures timely preparation and maximum stain potency on your celebration day.
+                      🌿 <strong>Peak Henna Freshness:</strong> Fresh organic henna paste is mixed and rolled to order. Choosing your {isPickup ? 'pickup' : 'target delivery'} date ensures timely preparation and maximum stain potency on your celebration day.
                     </p>
                   </div>
                 </div>
@@ -1127,7 +1285,18 @@ export function CheckoutHandoffClient() {
                         className="mt-1 accent-terracotta"
                       />
                       <div>
-                        <span className="block font-semibold">Razorpay</span>
+                        <div className="flex items-center gap-2">
+                          <span className="block font-semibold">Pay Online</span>
+                          <span
+                            className={`text-[10px] ${
+                              paymentMethod === 'razorpay'
+                                ? 'text-inverse/70'
+                                : 'text-umber/80'
+                            }`}
+                          >
+                            (Secured by Razorpay)
+                          </span>
+                        </div>
                         <span
                           className={`block text-[11px] mt-0.5 ${
                             paymentMethod === 'razorpay'
@@ -1155,7 +1324,7 @@ export function CheckoutHandoffClient() {
                         className="mt-1 accent-terracotta"
                       />
                       <div>
-                        <span className="block font-semibold">Cash on Delivery</span>
+                        <span className="block font-semibold">Cash on Delivery / Pickup</span>
                         <span
                           className={`block text-[11px] mt-0.5 ${
                             paymentMethod === 'cod'
@@ -1163,7 +1332,7 @@ export function CheckoutHandoffClient() {
                               : 'text-umber'
                           }`}
                         >
-                          Pay in cash upon parcel arrival
+                          Pay in cash upon parcel arrival or studio pickup
                         </span>
                       </div>
                     </label>
@@ -1195,13 +1364,13 @@ export function CheckoutHandoffClient() {
                   ? isZeroTotalCouponOrder
                     ? 'Confirming Free Order…'
                     : paymentMethod === 'razorpay'
-                      ? 'Opening Razorpay…'
+                      ? 'Opening Online Payment…'
                       : 'Placing Order…'
                   : isZeroTotalCouponOrder
                     ? `Complete Order · ${formatMoney(0, currency)}`
                     : paymentMethod === 'razorpay'
-                      ? `Pay with Razorpay · ${formatMoney(grandTotal, currency)}`
-                      : `Place COD Order · ${formatMoney(grandTotal, currency)}`}
+                      ? `Pay Online · ${formatMoney(grandTotal, currency)}`
+                      : `Place Order (Cash on Delivery / Pickup) · ${formatMoney(grandTotal, currency)}`}
               </Button>
             </form>
 
@@ -1220,10 +1389,6 @@ export function CheckoutHandoffClient() {
                   <div>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
                       Bag Dossier ({itemCount})
-                    </span>
-                    <span className="inline-flex items-center gap-1 font-serif text-xs italic text-plaque-ink/70 mt-0.5">
-                      <ShieldProtectIcon size={13} className="text-terracotta shrink-0" />
-                      <span>Razorpay Protected &middot; MedusaJS Sync</span>
                     </span>
                   </div>
                   <BrandCrest tone="transparent-cream" size={32} decorative className="shrink-0" />
@@ -1275,37 +1440,30 @@ export function CheckoutHandoffClient() {
                   ) : null}
                   <div className="flex justify-between">
                     <dt className="text-plaque-ink/75">
-                      Delivery
-                      {activePinCheck?.matchedRule
+                      {isPickup ? 'Fulfillment' : 'Delivery'}
+                      {!isPickup && activePinCheck?.matchedRule
                         ? ` (${activePinCheck.pincode} · ${activePinCheck.matchedRule.pattern})`
-                        : ''}
+                        : isPickup
+                          ? ` (Studio Pickup · ${deliveryRules.zone === 'kashmir' ? 'Srinagar' : 'Bengaluru'})`
+                          : ''}
                     </dt>
                     <dd className="font-medium text-terracotta tabular-nums">
-                      {activePinCheck
-                        ? activePinCheck.serviceable
-                          ? deliveryFee === 0
-                            ? 'FREE'
-                            : formatMoney(deliveryFee, currency)
-                          : 'Unserviceable'
-                        : 'Enter 6-digit PIN'}
+                      {isPickup
+                        ? 'FREE'
+                        : activePinCheck
+                          ? activePinCheck.serviceable
+                            ? deliveryFee === 0
+                              ? 'FREE'
+                              : formatMoney(deliveryFee, currency)
+                            : 'Unserviceable'
+                          : 'Enter 6-digit PIN'}
                     </dd>
                   </div>
-                  {deliverySpeed === 'priority' ? (
-                    <div className="flex justify-between text-xs">
-                      <dt className="text-terracotta flex items-center gap-1">
-                        <Zap size={11} className="shrink-0" />
-                        <span>Priority Request</span>
-                      </dt>
-                      <dd className="font-medium text-terracotta text-right text-[11px]">
-                        Subject to Courier Availability (Confirmed via call)
-                      </dd>
-                    </div>
-                  ) : null}
                   {targetDate ? (
                     <div className="flex justify-between text-xs pt-1 border-t border-plaque-ink/10">
                       <dt className="text-plaque-ink/70 flex items-center gap-1">
                         <Calendar size={11} className="shrink-0 text-terracotta" />
-                        <span>Target Delivery</span>
+                        <span>{isPickup ? 'Target Pickup' : 'Target Delivery'}</span>
                       </dt>
                       <dd className="font-medium text-plaque-ink tabular-nums">
                         {formatIsoDateDisplay(targetDate)}

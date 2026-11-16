@@ -43,7 +43,7 @@ const STAGE_OPTIONS: Array<{ value: FulfillmentStage; label: string }> = [
 
 const DISPATCH_ORIGINS = [
   {
-    value: "Srinagar Atelier (Kashmir)",
+    value: "Srinagar Studio (Kashmir)",
     label: "🏔️ Srinagar Studio (Kashmir)",
     short: "Srinagar Studio",
   },
@@ -244,7 +244,7 @@ const OrderStudioDispatchWidget = ({
     resolveStage(initialMeta, orderStatus)
   );
   const [dispatchOrigin, setDispatchOrigin] = useState<string>(
-    String(initialMeta.dispatch_origin || "Srinagar Atelier (Kashmir)")
+    String(initialMeta.dispatch_origin || "Srinagar Studio (Kashmir)")
   );
   const [courierName, setCourierName] = useState<string>(
     String(initialMeta.courier_name || "")
@@ -304,7 +304,7 @@ const OrderStudioDispatchWidget = ({
     setOfflinePaymentNote(String(meta.offline_payment_note || ""));
     setFulfillmentStage(resolveStage(meta, nextStatus));
     setDispatchOrigin(
-      String(meta.dispatch_origin || "Srinagar Atelier (Kashmir)")
+      String(meta.dispatch_origin || "Srinagar Studio (Kashmir)")
     );
     setCourierName(String(meta.courier_name || ""));
     setTrackingNumber(String(meta.tracking_number || ""));
@@ -549,7 +549,7 @@ const OrderStudioDispatchWidget = ({
 
   const currentStage = resolveStage(initialMeta, orderStatus);
   const currentOrigin = String(
-    initialMeta.dispatch_origin || dispatchOrigin || "Srinagar Atelier (Kashmir)"
+    initialMeta.dispatch_origin || dispatchOrigin || "Srinagar Studio (Kashmir)"
   );
 
   const confSentAt = formatTimestampShort(

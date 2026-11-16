@@ -42,9 +42,52 @@ const PincodeShippingPage = () => {
   const [freeShippingAbove, setFreeShippingAbove] = useState("");
   const [active, setActive] = useState(true);
 
+  // Studio Pickup settings state
+  const [enableSrinagarPickup, setEnableSrinagarPickup] = useState(true);
+  const [enableBengaluruPickup, setEnableBengaluruPickup] = useState(true);
+  const [savingPickup, setSavingPickup] = useState(false);
+  const [pickupSavedNotice, setPickupSavedNotice] = useState(false);
+
   // Live Pincode Simulator
   const [testPin, setTestPin] = useState("190001");
   const [testResult, setTestResult] = useState<any>(null);
+
+  const fetchPickupSettings = async () => {
+    try {
+      const res = await fetch("/admin/pickup-settings", {
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.settings) {
+        setEnableSrinagarPickup(Boolean(data.settings.enableSrinagarPickup));
+        setEnableBengaluruPickup(Boolean(data.settings.enableBengaluruPickup));
+      }
+    } catch (err) {
+      console.warn("Could not load pickup settings:", err);
+    }
+  };
+
+  const handleSavePickupSettings = async () => {
+    setSavingPickup(true);
+    setPickupSavedNotice(false);
+    try {
+      const res = await fetch("/admin/pickup-settings", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          enableSrinagarPickup,
+          enableBengaluruPickup,
+        }),
+      });
+      if (res.ok) {
+        setPickupSavedNotice(true);
+        setTimeout(() => setPickupSavedNotice(false), 3000);
+      }
+    } finally {
+      setSavingPickup(false);
+    }
+  };
 
   const fetchRules = async () => {
     setLoading(true);
@@ -61,6 +104,7 @@ const PincodeShippingPage = () => {
 
   useEffect(() => {
     fetchRules();
+    fetchPickupSettings();
   }, []);
 
   const resetForm = () => {
@@ -168,8 +212,95 @@ const PincodeShippingPage = () => {
           <div className="mt-4 rounded-lg border border-ui-border-base bg-ui-bg-subtle p-3 text-sm">
             <strong>Result for {testResult.pincode}:</strong> {testResult.message} (COD:{" "}
             {testResult.codAvailable ? "Yes" : "No"})
+            {testResult.isPickupEligible !== undefined && (
+              <span className="ml-2 font-medium">
+                · Pickup: {testResult.isPickupEligible ? `✅ Available (${testResult.pickupLocationName || "Active"})` : "❌ Disabled / Delivery Only"}
+              </span>
+            )}
           </div>
         )}
+      </Container>
+
+      {/* Studio Self-Pickup Availability Controls */}
+      <Container className="p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <Heading level="h2">Studio Self-Pickup Locations &amp; Availability</Heading>
+              <Badge color="orange">Storefront Checkout Control</Badge>
+            </div>
+            <Text className="text-ui-fg-subtle mt-1 text-sm max-w-2xl">
+              Enable or disable Studio Self-Pickup independently for Srinagar and Bengaluru. If enabled, customers in that region can choose between Doorstep Delivery and Studio Self-Pickup (Free). If disabled, only Doorstep Delivery is offered. All other Indian PIN codes always see Doorstep Delivery only.
+            </Text>
+          </div>
+          <div className="flex items-center gap-3">
+            {pickupSavedNotice && (
+              <Badge color="green">Saved to Storefront</Badge>
+            )}
+            <Button
+              variant="primary"
+              size="small"
+              isLoading={savingPickup}
+              onClick={handleSavePickupSettings}
+            >
+              Save Pickup Availability
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          {/* Srinagar Card */}
+          <div className="p-4 rounded-xl border border-ui-border-base bg-ui-bg-subtle flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-semibold text-ui-fg-base flex items-center gap-1.5">
+                  🏔️ Srinagar Studio (Kashmir)
+                </span>
+                <Badge color={enableSrinagarPickup ? "green" : "grey"}>
+                  {enableSrinagarPickup ? "Pickup Active" : "Delivery Only"}
+                </Badge>
+              </div>
+              <Text className="text-xs text-ui-fg-subtle leading-relaxed mb-4">
+                Applicable to Kashmir PIN codes (<code>19xxxx</code>, <code>18xxxx</code>). When enabled, customers see the Studio Self-Pickup option (FREE). When disabled, only Doorstep Delivery is shown.
+              </Text>
+            </div>
+            <div className="pt-3 border-t border-ui-border-base flex items-center justify-between">
+              <span className="text-sm font-medium text-ui-fg-base">
+                Enable Srinagar Pickup
+              </span>
+              <Switch
+                checked={enableSrinagarPickup}
+                onCheckedChange={setEnableSrinagarPickup}
+              />
+            </div>
+          </div>
+
+          {/* Bengaluru Card */}
+          <div className="p-4 rounded-xl border border-ui-border-base bg-ui-bg-subtle flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-semibold text-ui-fg-base flex items-center gap-1.5">
+                  🌿 Bengaluru Studio (Karnataka)
+                </span>
+                <Badge color={enableBengaluruPickup ? "green" : "grey"}>
+                  {enableBengaluruPickup ? "Pickup Active" : "Delivery Only"}
+                </Badge>
+              </div>
+              <Text className="text-xs text-ui-fg-subtle leading-relaxed mb-4">
+                Applicable to Bengaluru PIN codes (<code>56xxxx</code>). When enabled, customers see the Studio Self-Pickup option (FREE). When disabled, only Doorstep Delivery is shown.
+              </Text>
+            </div>
+            <div className="pt-3 border-t border-ui-border-base flex items-center justify-between">
+              <span className="text-sm font-medium text-ui-fg-base">
+                Enable Bengaluru Pickup
+              </span>
+              <Switch
+                checked={enableBengaluruPickup}
+                onCheckedChange={setEnableBengaluruPickup}
+              />
+            </div>
+          </div>
+        </div>
       </Container>
 
       <Container className="p-6">
