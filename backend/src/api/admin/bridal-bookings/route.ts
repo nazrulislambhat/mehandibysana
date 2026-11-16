@@ -6,8 +6,8 @@ import {
 } from "../../../lib/bridal-bookings";
 import { dispatchStudioNotification } from "../../../lib/notifications";
 
-export async function GET(_req: MedusaRequest, res: MedusaResponse) {
-  const bookings = loadBridalBookings();
+export async function GET(req: MedusaRequest, res: MedusaResponse) {
+  const bookings = loadBridalBookings(req.scope);
   return res.status(200).json({ bookings });
 }
 
@@ -24,11 +24,11 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return res.status(400).json({ success: false, message: "Booking id is required." });
   }
 
-  const current = loadBridalBookings();
+  const current = loadBridalBookings(req.scope);
 
   if (body.action === "delete") {
     const next = current.filter((b) => b.id !== body.id);
-    saveBridalBookings(next);
+    saveBridalBookings(next, req.scope);
     return res.status(200).json({ success: true, bookings: next });
   }
 
@@ -60,7 +60,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     updatedAt: new Date().toISOString(),
   };
 
-  saveBridalBookings(current);
+  saveBridalBookings(current, req.scope);
 
   if (body.status === "confirmed" && target.status !== "confirmed") {
     await dispatchStudioNotification({

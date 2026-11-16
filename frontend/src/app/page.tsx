@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
 import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
-import { fetchHomepageCatalogSummary } from '@/lib/wc-catalog';
+import { fetchHomepageCatalogSummary } from '@/lib/catalog';
 import { Hero } from '@/components/sections/Hero';
 import { FeaturedProductsSection } from '@/components/sections/FeaturedProductsSection';
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';

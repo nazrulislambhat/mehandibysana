@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerEnv } from '@/lib/env';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limiter';
 import {
   renderStudioFallbackEmailHtml,
   sendFrontendFallbackEmail,
@@ -19,6 +20,15 @@ interface ContactPayload {
 }
 
 export async function POST(req: NextRequest) {
+  const clientIp = getClientIp(req);
+  const rateLimit = checkRateLimit(`contact:${clientIp}`, { limit: 5, windowMs: 60 * 1000 });
+  if (!rateLimit.success) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many messages submitted. Please wait a minute before trying again.' },
+      { status: 429 }
+    );
+  }
+
   let body: ContactPayload;
   try {
     body = (await req.json()) as ContactPayload;

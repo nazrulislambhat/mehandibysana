@@ -1,6 +1,6 @@
 import { getSiteUrl } from '@/lib/env';
 import { cleanSeoText, DEFAULT_OG_IMAGE_PATH, SITE_NAME, toAbsoluteUrl } from '@/lib/seo';
-import { fetchCatalogProducts } from '@/lib/wc-catalog';
+import { fetchCatalogProducts } from '@/lib/catalog';
 import type { StorefrontProduct } from '@/types/storefront';
 
 function escapeXml(unsafe: string): string {

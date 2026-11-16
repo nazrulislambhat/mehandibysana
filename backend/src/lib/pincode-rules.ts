@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
 import { loadPickupSettings } from './pickup-settings';
 
 export interface PincodeRule {
@@ -95,37 +96,119 @@ export function normalizePattern(raw: string): string {
   return digitsAndStar.slice(0, 6);
 }
 
-export function loadPincodeRules(): PincodeRule[] {
+let cachedRules: PincodeRule[] | null = null;
+let tableEnsured = false;
+
+async function ensureTable(pg: any): Promise<void> {
+  if (tableEnsured) return;
+  await pg.raw(`
+    CREATE TABLE IF NOT EXISTS "studio_pincode_rules" (
+      "id" TEXT PRIMARY KEY,
+      "rules" JSONB NOT NULL,
+      "updated_at" TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
+  tableEnsured = true;
+}
+
+export function loadPincodeRules(scope?: { resolve: (key: string) => any }): PincodeRule[] {
+  if (scope) {
+    try {
+      const pg = scope.resolve(ContainerRegistrationKeys.PG_CONNECTION);
+      if (pg) {
+        void (async () => {
+          try {
+            await ensureTable(pg);
+            const res = await pg.raw(
+              `SELECT "rules" FROM "studio_pincode_rules" WHERE "id" = 'default' LIMIT 1`
+            );
+            const row = res?.rows?.[0];
+            if (row?.rules) {
+              const loaded = typeof row.rules === 'string' ? JSON.parse(row.rules) : row.rules;
+              if (Array.isArray(loaded) && loaded.length > 0) {
+                cachedRules = loaded;
+              }
+            }
+          } catch (err) {
+            console.warn('[Studio Pincode] PG load error:', err);
+          }
+        })();
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  if (cachedRules && cachedRules.length > 0) {
+    return cachedRules;
+  }
+
   const filePath = getRulesFilePath();
   try {
     if (!fs.existsSync(filePath)) {
-      savePincodeRules(DEFAULT_PINCODE_RULES);
-      return [...DEFAULT_PINCODE_RULES];
+      savePincodeRules(DEFAULT_PINCODE_RULES, scope);
+      cachedRules = [...DEFAULT_PINCODE_RULES];
+      return cachedRules;
     }
     const parsed = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     if (Array.isArray(parsed) && parsed.length > 0) {
+      cachedRules = parsed;
       return parsed;
     }
   } catch {
     // Fallback to defaults if corrupted
   }
-  savePincodeRules(DEFAULT_PINCODE_RULES);
-  return [...DEFAULT_PINCODE_RULES];
+  savePincodeRules(DEFAULT_PINCODE_RULES, scope);
+  cachedRules = [...DEFAULT_PINCODE_RULES];
+  return cachedRules;
 }
 
-export function savePincodeRules(rules: PincodeRule[]): PincodeRule[] {
+export function savePincodeRules(
+  rules: PincodeRule[],
+  scope?: { resolve: (key: string) => any }
+): PincodeRule[] {
+  cachedRules = rules;
   const filePath = getRulesFilePath();
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(rules, null, 2));
+  try {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, JSON.stringify(rules, null, 2));
+  } catch (err) {
+    console.error('[Studio Pincode] Failed to write pincode-rules.json:', err);
+  }
+
+  if (scope) {
+    void (async () => {
+      try {
+        const pg = scope.resolve(ContainerRegistrationKeys.PG_CONNECTION);
+        if (pg) {
+          await ensureTable(pg);
+          await pg.raw(
+            `
+            INSERT INTO "studio_pincode_rules" ("id", "rules", "updated_at")
+            VALUES ('default', ?::jsonb, NOW())
+            ON CONFLICT ("id") DO UPDATE SET
+              "rules" = EXCLUDED."rules",
+              "updated_at" = NOW()
+            `,
+            [JSON.stringify(rules)]
+          );
+        }
+      } catch (err) {
+        console.warn('[Studio Pincode] PG save error:', err);
+      }
+    })();
+  }
+
   return rules;
 }
 
-export function resetDefaultPincodeRules(): PincodeRule[] {
+export function resetDefaultPincodeRules(scope?: { resolve: (key: string) => any }): PincodeRule[] {
   return savePincodeRules(
     DEFAULT_PINCODE_RULES.map((r) => ({
       ...r,
       updatedAt: new Date().toISOString(),
     })),
+    scope
   );
 }
 
@@ -160,6 +243,7 @@ export function matchesWildcardPattern(
 export function evaluatePincode(
   rawPincode: string,
   subtotal = 0,
+  scope?: { resolve: (key: string) => any },
 ): PincodeCheckResult {
   const digits = String(rawPincode || '')
     .replace(/\D/g, '')
@@ -184,7 +268,7 @@ export function evaluatePincode(
     };
   }
 
-  const pickupSettings = loadPickupSettings();
+  const pickupSettings = loadPickupSettings(scope);
   // Srinagar Studio pickup is strictly restricted to Kashmir PIN codes (19xxxx).
   // Jammu PIN codes (18xxxx) are strictly excluded from pickup and receive doorstep delivery.
   const isKashmir = digits.startsWith('19');
@@ -199,7 +283,7 @@ export function evaluatePincode(
         ? pickupSettings.bengaluruLocationName
         : null;
 
-  const activeRules = loadPincodeRules()
+  const activeRules = loadPincodeRules(scope)
     .filter((r) => r.active)
     .sort(
       (a, b) =>

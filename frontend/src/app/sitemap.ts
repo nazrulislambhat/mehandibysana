@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getSiteUrl } from '@/lib/env';
 import { toAbsoluteUrl } from '@/lib/seo';
-import { fetchCatalogCategories, fetchCatalogProducts } from '@/lib/wc-catalog';
+import { fetchCatalogCategories, fetchCatalogProducts } from '@/lib/catalog';
 
 export const dynamic = 'force-dynamic';
 
