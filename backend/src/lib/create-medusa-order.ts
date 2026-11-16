@@ -174,7 +174,9 @@ export async function createMedusaStoreOrder(
 
   const pickupSettings = loadPickupSettings();
   const postal = String(shippingAddress.postal_code || "").trim();
-  const isKashmir = postal.startsWith("19") || postal.startsWith("18");
+  // Srinagar Studio pickup is strictly restricted to Kashmir PIN codes (19xxxx).
+  // Jammu PIN codes (18xxxx) are strictly excluded from pickup.
+  const isKashmir = postal.startsWith("19");
   const isBengaluru = postal.startsWith("56");
   const isPickupAllowed =
     (isKashmir && pickupSettings.enableSrinagarPickup) ||
