@@ -79,6 +79,11 @@ const nextConfig: NextConfig = {
         destination: '/product/reusable-acrylic-mehandi-practice-hand',
         permanent: true,
       },
+      {
+        source: '/feed/google-shopping.xml',
+        destination: '/feed/google-shopping',
+        permanent: true,
+      },
     ];
   },
 };
