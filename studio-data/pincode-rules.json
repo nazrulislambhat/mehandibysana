@@ -18,7 +18,7 @@
     "zone": "Zone 2 — Bengaluru Local Dispatch",
     "charge": 60,
     "estimatedDays": "1–2 business days",
-    "codAvailable": true,
+    "codAvailable": false,
     "freeShippingAbove": null,
     "active": true,
     "updatedAt": "2026-11-10T15:00:00.000Z"
@@ -30,7 +30,7 @@
     "zone": "Zone 3 — Pan-India Express",
     "charge": 120,
     "estimatedDays": "3–6 business days",
-    "codAvailable": true,
+    "codAvailable": false,
     "freeShippingAbove": null,
     "active": true,
     "updatedAt": "2026-11-15T08:09:00.000Z"
