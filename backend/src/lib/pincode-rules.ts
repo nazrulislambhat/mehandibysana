@@ -246,7 +246,7 @@ export function evaluatePincode(
     isFreeShipping,
     freeShippingAbove: threshold,
     estimatedDays: matched.estimatedDays || '3–5 business days',
-    codAvailable: Boolean(matched.codAvailable && digits.startsWith('190')),
+    codAvailable: Boolean(matched.codAvailable),
     zone: matched.zone || matched.label,
     label: matched.label,
     message: isFreeShipping

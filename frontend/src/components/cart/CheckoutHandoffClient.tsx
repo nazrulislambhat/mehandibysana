@@ -230,7 +230,7 @@ export function CheckoutHandoffClient() {
 
   useEffect(() => {
     if (pincode.length === 6) {
-      void checkPincode(pincode, subtotal);
+      void checkPincode(pincode, subtotal, { force: true });
     }
   }, [pincode, subtotal, checkPincode]);
 
@@ -295,12 +295,8 @@ export function CheckoutHandoffClient() {
     }
   }, [isPickupEligible, fulfillmentType]);
 
-  // Cash on Delivery is strictly available only for Srinagar PIN codes (190xxx)
-  const isCodAvailable =
-    pincode.length === 6 &&
-    (activePinCheck?.codAvailable !== undefined
-      ? Boolean(activePinCheck.codAvailable && pincode.startsWith('190'))
-      : pincode.startsWith('190'));
+  // Cash on Delivery availability is authoritatively driven by Medusa Pincode Rules
+  const isCodAvailable = Boolean(activePinCheck?.serviceable && activePinCheck?.codAvailable);
 
   useEffect(() => {
     if (!isCodAvailable && paymentMethod === 'cod') {
@@ -323,7 +319,7 @@ export function CheckoutHandoffClient() {
     const clean = val.replace(/\D/g, '').slice(0, 6);
     setPincode(clean);
     if (clean.length === 6) {
-      void checkPincode(clean, subtotal);
+      void checkPincode(clean, subtotal, { force: true });
       if (clean.startsWith('56')) {
         setStateName('Karnataka');
         if (!city || city === 'Kashmir' || city === 'Srinagar') {

@@ -306,12 +306,9 @@ export async function createMedusaStoreOrder(
       ? "free_coupon"
       : "cod";
 
-  if (
-    resolvedPaymentMethod === "cod" &&
-    !shippingAddress.postal_code.startsWith("190")
-  ) {
+  if (resolvedPaymentMethod === "cod" && !pinEvaluation.codAvailable) {
     throw new Error(
-      "Cash on Delivery (COD) is only available for Srinagar PIN codes (190xxx). Due to logistics limitations in your area, please choose Pay Online."
+      "Cash on Delivery (COD) is currently unavailable for your delivery area. Due to logistics limitations, please choose Pay Online."
     );
   }
   const resolvedPaymentStatus =
