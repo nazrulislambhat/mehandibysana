@@ -185,7 +185,9 @@ export function evaluatePincode(
   }
 
   const pickupSettings = loadPickupSettings();
-  const isKashmir = digits.startsWith('19') || digits.startsWith('18');
+  // Srinagar Studio pickup is strictly restricted to Kashmir PIN codes (19xxxx).
+  // Jammu PIN codes (18xxxx) are strictly excluded from pickup and receive doorstep delivery.
+  const isKashmir = digits.startsWith('19');
   const isBengaluru = digits.startsWith('56');
   const isPickupEligible =
     (isKashmir && pickupSettings.enableSrinagarPickup) ||
