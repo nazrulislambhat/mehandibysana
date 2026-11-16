@@ -106,7 +106,7 @@ const EmailCampaignsAdminPage = () => {
   const [preferredProvider, setPreferredProvider] =
     useState<PreferredProvider>("auto");
   const [fromEmail, setFromEmail] = useState(
-    "Mehandi By Sana <orders@mehandibysana.com>"
+    "Mehandi By Sana <sana@mehandibysana.com>"
   );
   const [adminEmail, setAdminEmail] = useState("");
   const [storefrontUrl, setStorefrontUrl] = useState(
@@ -152,7 +152,7 @@ const EmailCampaignsAdminPage = () => {
     setSavedMeta(s);
     setPreferredProvider(s.preferredProvider || "auto");
     setFromEmail(
-      s.fromEmail || "Mehandi By Sana <orders@mehandibysana.com>"
+      s.fromEmail || "Mehandi By Sana <sana@mehandibysana.com>"
     );
     setAdminEmail(s.adminEmail || "");
     setStorefrontUrl(s.storefrontUrl || "https://mehandibysana.com");
@@ -607,7 +607,7 @@ const EmailCampaignsAdminPage = () => {
             <Label size="xsmall">From Email</Label>
             <Input
               size="small"
-              placeholder="Mehandi By Sana <orders@mehandibysana.com>"
+              placeholder="Mehandi By Sana <sana@mehandibysana.com>"
               value={fromEmail}
               onChange={(e) => setFromEmail(e.target.value)}
             />
@@ -787,7 +787,7 @@ const EmailCampaignsAdminPage = () => {
                 <Label size="xsmall">SMTP Username / Email</Label>
                 <Input
                   size="small"
-                  placeholder="orders@mehandibysana.com"
+                  placeholder="sana@mehandibysana.com"
                   value={smtpUser}
                   onChange={(e) => setSmtpUser(e.target.value)}
                 />

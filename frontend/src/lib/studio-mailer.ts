@@ -103,7 +103,7 @@ export async function sendFrontendFallbackEmail(
 ): Promise<FrontendEmailResult> {
   const fromEmail =
     process.env.STUDIO_FROM_EMAIL?.trim() ||
-    'Mehandi By Sana <orders@mehandibysana.com>';
+    'Mehandi By Sana <sana@mehandibysana.com>';
   const replyTo =
     input.replyTo?.trim() ||
     process.env.STUDIO_ADMIN_EMAIL?.trim() ||

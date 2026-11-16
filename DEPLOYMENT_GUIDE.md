@@ -40,7 +40,7 @@ S3_ENDPOINT=https://<account-id>.r2.cloudflarestorage.com
 
 # Optional Order & Booking Notifications (Resend + WhatsApp Webhook)
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxx
-STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
+STUDIO_FROM_EMAIL="Mehandi By Sana <sana@mehandibysana.com>"
 WHATSAPP_WEBHOOK_URL=https://your-automation-webhook.example.com/notify
 ```
 
