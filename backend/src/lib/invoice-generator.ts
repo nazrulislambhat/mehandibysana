@@ -942,11 +942,58 @@ export async function generateInvoicePdf(data: InvoiceData): Promise<Buffer> {
 /**
  * Save invoice PDF and HTML to persistent storage directory
  */
+async function uploadInvoicePdfToR2(
+  safeFilename: string,
+  pdfBuffer: Buffer
+): Promise<string | null> {
+  const bucket = process.env.S3_BUCKET?.trim();
+  const accessKeyId = process.env.S3_ACCESS_KEY_ID?.trim();
+  const secretAccessKey = process.env.S3_SECRET_ACCESS_KEY?.trim();
+  const rawEndpoint = process.env.S3_ENDPOINT?.trim();
+  const fileUrl = (process.env.S3_FILE_URL?.trim() || '').replace(/\/+$/, '');
+
+  if (!bucket || !accessKeyId || !secretAccessKey) {
+    return null;
+  }
+
+  try {
+    const { S3Client, PutObjectCommand } = await import('@aws-sdk/client-s3');
+    const endpoint = rawEndpoint
+      ? rawEndpoint.replace(/\/+$/, '').replace(new RegExp(`/${bucket}$`), '')
+      : undefined;
+
+    const s3 = new S3Client({
+      region: process.env.S3_REGION || 'auto',
+      endpoint,
+      credentials: {
+        accessKeyId,
+        secretAccessKey,
+      },
+      forcePathStyle: true,
+    });
+
+    const key = `invoices/${safeFilename}.pdf`;
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: key,
+        Body: pdfBuffer,
+        ContentType: 'application/pdf',
+      })
+    );
+
+    return fileUrl ? `${fileUrl}/${key}` : key;
+  } catch (err) {
+    console.warn(`[Invoice R2] Failed to upload ${safeFilename}.pdf to Cloudflare R2:`, err);
+    return null;
+  }
+}
+
 export async function saveInvoiceFiles(
   data: InvoiceData,
   pdfBuffer: Buffer,
   htmlContent: string
-): Promise<{ pdfPath: string; htmlPath: string; relativePdfPath: string }> {
+): Promise<{ pdfPath: string; htmlPath: string; relativePdfPath: string; r2Url?: string }> {
   const dir = getInvoicesStorageDir();
   const safeFilename = data.invoiceNumber.replace(/[^a-zA-Z0-9_-]/g, "_");
   const pdfPath = path.join(dir, `${safeFilename}.pdf`);
@@ -955,10 +1002,21 @@ export async function saveInvoiceFiles(
   fs.writeFileSync(pdfPath, pdfBuffer);
   fs.writeFileSync(htmlPath, htmlContent, "utf8");
 
+  let r2Url: string | undefined;
+  try {
+    const uploaded = await uploadInvoicePdfToR2(safeFilename, pdfBuffer);
+    if (uploaded) {
+      r2Url = uploaded;
+    }
+  } catch {
+    // Non-fatal
+  }
+
   return {
     pdfPath,
     htmlPath,
     relativePdfPath: `studio-data/invoices/${safeFilename}.pdf`,
+    r2Url,
   };
 }
 

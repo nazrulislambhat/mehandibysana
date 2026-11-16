@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerEnv } from '@/lib/env';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limiter';
 
 function buildHeaders(publishableKey: string | null): Record<string, string> {
   const headers: Record<string, string> = {
@@ -13,6 +14,15 @@ function buildHeaders(publishableKey: string | null): Record<string, string> {
 }
 
 export async function GET(request: NextRequest) {
+  const clientIp = getClientIp(request);
+  const rateLimit = checkRateLimit(`pincode:${clientIp}`, { limit: 30, windowMs: 60 * 1000 });
+  if (!rateLimit.success) {
+    return NextResponse.json(
+      { error: 'Too many pincode checks. Please wait a minute.' },
+      { status: 429 }
+    );
+  }
+
   const { medusaBackendUrl, medusaPublishableKey } = getServerEnv();
   if (!medusaBackendUrl) {
     return NextResponse.json(

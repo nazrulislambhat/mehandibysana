@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { proxyStoreCart } from '@/lib/wc-store-server';
+import { proxyStoreCart } from '@/lib/store-server';
 
 interface UpdateItemBody {
   key?: unknown;

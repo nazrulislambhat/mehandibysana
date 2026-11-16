@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { proxyStoreCart } from '@/lib/wc-store-server';
+import { proxyStoreCart } from '@/lib/store-server';
 
 export async function GET(req: NextRequest) {
   const cartToken = req.headers.get('x-cart-token');
