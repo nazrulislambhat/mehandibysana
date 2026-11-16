@@ -65,7 +65,7 @@ Medusa uses `@medusajs/medusa/file-s3` automatically whenever `S3_BUCKET`, `S3_A
    - `S3_ACCESS_KEY_ID=<token_access_key>`
    - `S3_SECRET_ACCESS_KEY=<token_secret_key>`
 
-> **Note on existing images:** Existing legacy product & portfolio URLs under `https://mehandibysana.com/wp-content/uploads/...` are already whitelisted in `frontend/next.config.ts`. If you plan to decommission your old WordPress hosting after cutover, copy `wp-content/uploads/` into `mehandibysana-media` on R2 (or update image URLs inside Medusa Admin).
+> **Note on existing images:** Product and portfolio media assets can be synchronized directly to Cloudflare R2 using the automated R2 image sync pipeline (`npm run sync:r2` in `backend` or via the Medusa Admin one-click sync button).
 
 ---
 
@@ -172,9 +172,9 @@ vercel --prod
 
 ---
 
-## 3. Importing the Latest WooCommerce Database (Local & Production)
+## 3. Seeding and Database Synchronization (Local & Production)
 
-You have **three idempotent ways** to keep your Medusa PostgreSQL database synced with the latest WordPress/WooCommerce catalog, customers, and orders with **zero data loss**.
+You have **three idempotent ways** to keep your Medusa PostgreSQL database synced with your complete catalog, customers, and orders with **zero data loss**.
 
 ### Option 3A — Clone Your Already-Verified Local Database -> Railway (Fastest Initial Prod Seed)
 
@@ -198,9 +198,9 @@ Your local Postgres database (`medusa_mehandibysana`) already has **19 products*
 
 ---
 
-### Option 3B — Import a Newer WordPress `.sql` Dump (Delta Sync Without Duplicates)
+### Option 3B — Import a Database `.sql` Dump (Delta Sync Without Duplicates)
 
-Whenever you export a fresh `.sql` backup from WordPress (`phpMyAdmin`, `UpdraftPlus`, `WP-CLI db export`):
+Whenever you export a fresh `.sql` backup (`phpMyAdmin`, `UpdraftPlus`, CLI db export):
 
 #### 1. Test Locally First
 ```bash
@@ -234,9 +234,9 @@ If you prefer live API extraction over a `.sql` dump:
 
 1. Configure `migration/.env`:
    ```bash
-   WP_BASE_URL=https://mehandibysana.com
-   WC_CONSUMER_KEY=ck_xxxxxxxxxxxxxxxx
-   WC_CONSUMER_SECRET=cs_xxxxxxxxxxxxxxxx
+   WOOCOMMERCE_URL=https://mehandibysana.com
+   WOOCOMMERCE_CONSUMER_KEY=ck_xxxxxxxxxxxxxxxx
+   WOOCOMMERCE_CONSUMER_SECRET=cs_xxxxxxxxxxxxxxxx
    ```
 2. Run extraction + validation, then sync to production Postgres:
    ```bash

@@ -160,7 +160,7 @@ export async function syncAllImagesToR2(
     }
   }
 
-  // 2. Query Medusa Products and sync remote WordPress product images
+  // 2. Query Medusa Products and sync remote product images to R2
   if (scope) {
     try {
       const query = scope.resolve(ContainerRegistrationKeys.QUERY);

@@ -2,7 +2,6 @@ import {
   createCustomersWorkflow,
   createProductCategoriesWorkflow,
   createProductsWorkflow,
-  updateProductsWorkflow,
 } from "@medusajs/medusa/core-flows";
 import {
   ContainerRegistrationKeys,
@@ -100,7 +99,7 @@ export default async function syncMigratedData({ container }: ExecArgs) {
   logger.info(`Syncing ${migratedProducts.length} migrated products into MedusaJS...`);
 
   let createdCount = 0;
-  let updatedCount = 0;
+  let skippedCount = 0;
 
   for (const mp of migratedProducts) {
     const resolvedCategoryIds: string[] = [];
@@ -123,45 +122,10 @@ export default async function syncMigratedData({ container }: ExecArgs) {
       .filter((img: any) => Boolean(img?.url))
       .map((img: any) => ({ url: img.url }));
 
+    // If product already exists in Medusa, do nothing (skip)
     if (existingProds && existingProds.length > 0) {
-      const existing = existingProds[0];
-      const existingCategoryIds: string[] = Array.isArray(existing.categories)
-        ? existing.categories.map((c: any) => String(c.id)).filter(Boolean)
-        : [];
-      const mergedCategoryIds = Array.from(
-        new Set<string>([...existingCategoryIds, ...resolvedCategoryIds])
-      );
-      try {
-        await updateProductsWorkflow(container).run({
-          input: {
-            products: [
-              {
-                id: existing.id,
-                title: mp.title,
-                subtitle: mp.subtitle || "",
-                description: mp.description || "",
-                status:
-                  mp.status === "published"
-                    ? ProductStatus.PUBLISHED
-                    : ProductStatus.DRAFT,
-                weight: mp.weight || undefined,
-                thumbnail: imageList[0]?.url || undefined,
-                images: imageList,
-                category_ids:
-                  mergedCategoryIds.length > 0 ? mergedCategoryIds : undefined,
-                metadata: {
-                  ...(mp.metadata || {}),
-                  zero_loss_synced_at: new Date().toISOString(),
-                },
-              },
-            ],
-          },
-        });
-        updatedCount++;
-        logger.info(`✓ Updated existing product with full WP parity: "${mp.title}" (${mp.handle})`);
-      } catch (err: any) {
-        logger.warn(`Could not update "${mp.title}": ${err.message}`);
-      }
+      skippedCount++;
+      logger.info(`Product already exists, skipping: "${mp.title}" (${mp.handle})`);
       continue;
     }
 
@@ -297,7 +261,7 @@ export default async function syncMigratedData({ container }: ExecArgs) {
 
   logger.info("=====================================================");
   logger.info(
-    `  SYNC COMPLETE: ${createdCount} PRODUCTS CREATED, ${updatedCount} UPDATED, ${customersCreated} NEW CUSTOMERS (0 DATA LOSS)`
+    `  SYNC COMPLETE: ${createdCount} NEW PRODUCTS CREATED, ${skippedCount} EXISTING PRODUCTS PRESERVED, ${customersCreated} NEW CUSTOMERS (0 DATA LOSS)`
   );
   logger.info("=====================================================");
 }

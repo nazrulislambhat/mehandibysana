@@ -29,7 +29,6 @@ function buildRemotePatterns(): NonNullable<NextConfig['images']>['remotePattern
 
   for (const rawUrl of [
     process.env.NEXT_PUBLIC_SITE_URL,
-    process.env.WP_BASE_URL,
     process.env.MEDUSA_BACKEND_URL,
     process.env.S3_FILE_URL,
   ]) {

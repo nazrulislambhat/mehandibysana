@@ -24,20 +24,17 @@ export class WooCommerceClient {
   constructor(config?: Partial<WooClientConfig>) {
     const siteUrl =
       config?.url ||
-      process.env.WOOCOMMERCE_URL ||
-      process.env.WP_BASE_URL;
+      process.env.WOOCOMMERCE_URL;
     const key =
       config?.consumerKey ||
-      process.env.WOOCOMMERCE_CONSUMER_KEY ||
-      process.env.WC_CONSUMER_KEY;
+      process.env.WOOCOMMERCE_CONSUMER_KEY;
     const secret =
       config?.consumerSecret ||
-      process.env.WOOCOMMERCE_CONSUMER_SECRET ||
-      process.env.WC_CONSUMER_SECRET;
+      process.env.WOOCOMMERCE_CONSUMER_SECRET;
 
     if (!siteUrl || !key || !secret) {
       throw new Error(
-        'Missing WooCommerce credentials. Set WOOCOMMERCE_URL/WOOCOMMERCE_CONSUMER_KEY/WOOCOMMERCE_CONSUMER_SECRET in migration/.env or WP_BASE_URL/WC_CONSUMER_KEY/WC_CONSUMER_SECRET in frontend/.env.local.'
+        'Missing WooCommerce credentials. Set WOOCOMMERCE_URL/WOOCOMMERCE_CONSUMER_KEY/WOOCOMMERCE_CONSUMER_SECRET in migration/.env.'
       );
     }
 
