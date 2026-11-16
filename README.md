@@ -1,20 +1,22 @@
 # Mehandi By Sana — Headless Storefront
 
-Minimal, editorial headless storefront for **mehandibysana.com** built with **Next.js 16 (App Router, TypeScript, Tailwind CSS v4)** and **Zustand**, backed by **WordPress + WooCommerce**.
+Minimal, editorial headless storefront for **mehandibysana.com** built with **Next.js 16 (App Router, TypeScript, Tailwind CSS v4)** and **Zustand**, backed by **MedusaJS v2** on Railway.
 
 ---
 
 ## 1. Architecture Overview
 
-- **Catalog & ISR (`frontend/src/lib/wc-catalog.ts`)**:
-  - Server Components fetch products, variations, categories, and live product totals (`X-WP-Total`) from WooCommerce REST v3 (when read-only keys are configured) or public WooCommerce Store API v1 (`/wp-json/wc/store/v1/products`).
-  - Cached via Next.js ISR (`revalidate = 3600`) with cache tags (`products`, `categories`, `product:<slug>`) invalidated on demand via `POST /api/revalidate`.
+- **Catalog & ISR (`frontend/src/lib/wc-catalog.ts` & `wc-store-server.ts`)**:
+  - Server Components fetch products, variations, categories, and inventory from MedusaJS v2 Store API (`/store/products`).
+  - Cached via Next.js ISR (`revalidate = 3600`) with cache tags (`products`, `categories`, `product:<handle>`) invalidated on demand via `POST /api/revalidate`.
 - **Shopping Bag (`frontend/src/store/cart-store.ts` + `frontend/src/app/api/cart/*`)**:
-  - Client state managed in Zustand (`mbs_wc_cart_session` in `localStorage`) and proxied through `/api/cart`, `/api/cart/add-item`, `/api/cart/update-item`, and `/api/cart/remove-item` to forward WooCommerce `Cart-Token` and `Nonce` headers cleanly with automatic expired-nonce retry.
-- **Checkout Handoff (`frontend/src/app/checkout/page.tsx` + `frontend/src/app/api/checkout-handoff/route.ts`)**:
-  - Payment is handled exclusively by WordPress WooCommerce. `/checkout` attaches the active `cart_token` and redirects to `${WP_BASE_URL}/checkout/?cart_token=...`. See [`WORDPRESS_THEME_NOTES.md`](./WORDPRESS_THEME_NOTES.md) for the WordPress checkout CSS and `mu-plugin` session bridge.
+  - Client state managed in Zustand with instant local badge updates, persistent cart items, and seamless checkout handoff.
+- **Native Checkout & Payments (`frontend/src/app/checkout/page.tsx` & `CheckoutHandoffClient.tsx`)**:
+  - Fully headless native checkout integrated with MedusaJS backend order processing (`/api/checkout-order`).
+  - **Payment Options**: Online Prepaid via Razorpay (cards, UPI, net banking) and Cash on Delivery (COD) governed authoritatively by Medusa Pincode Rules.
+  - **Studio Pickup**: Self-pickup option for Srinagar Studio (Kashmir `19xxxx`) and Bengaluru Studio (`56xxxx`) when enabled in Medusa backend.
 - **Portable Design System (`frontend/src/styles/tokens.css`)**:
-  - All colors, typography, spacing, radii, and transitions live in `frontend/src/styles/tokens.css`, consumed by Tailwind CSS v4 and shared verbatim with WordPress checkout.
+  - All colors, typography, spacing, radii, and transitions live in `frontend/src/styles/tokens.css`, consumed by Tailwind CSS v4.
 
 ---
 
@@ -23,7 +25,7 @@ Minimal, editorial headless storefront for **mehandibysana.com** built with **Ne
 ### Prerequisites
 - Node.js `>= 20`
 - npm `>= 10`
-- A **staging** WordPress + WooCommerce instance with Store API enabled
+- Running MedusaJS v2 backend (local or Railway)
 
 ### Installation
 
@@ -35,17 +37,14 @@ npm install
 cp frontend/.env.example frontend/.env.local
 ```
 
-Edit `frontend/.env.local` with your **staging** WordPress URL and optional read-only WooCommerce REST keys:
+Edit `frontend/.env.local` with your Medusa backend URL and publishable API key:
 
 ```env
-WP_BASE_URL=https://staging.example.com
-WC_CONSUMER_KEY=ck_your_readonly_staging_consumer_key
-WC_CONSUMER_SECRET=cs_your_readonly_staging_consumer_secret
-REVALIDATE_SECRET=replace_with_a_long_random_secret
+MEDUSA_BACKEND_URL=http://localhost:9000
+MEDUSA_PUBLISHABLE_KEY=pk_your_medusa_publishable_key
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+REVALIDATE_SECRET=replace_with_a_long_random_secret
 ```
-
-> **Safety Rule:** Always point `WP_BASE_URL` and WooCommerce keys to your **staging** WordPress environment during development and testing. Never expose `WC_CONSUMER_KEY`, `WC_CONSUMER_SECRET`, or `REVALIDATE_SECRET` with a `NEXT_PUBLIC_` prefix.
 
 ### Development & Verification Commands
 
@@ -66,11 +65,11 @@ npm run build --workspace=frontend
 
 | Variable | Scope | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `WP_BASE_URL` | Server-only | Yes | Base URL of your staging WordPress site (e.g. `https://staging.example.com`, no trailing slash). |
-| `WC_CONSUMER_KEY` | Server-only | Optional | Read-only WooCommerce REST v3 consumer key (`ck_...`). If omitted, catalog falls back to public Store API v1. |
-| `WC_CONSUMER_SECRET` | Server-only | Optional | Read-only WooCommerce REST v3 consumer secret (`cs_...`). |
-| `REVALIDATE_SECRET` | Server-only | Recommended | Shared secret authenticating WooCommerce webhooks calling `POST /api/revalidate`. |
+| `MEDUSA_BACKEND_URL` | Server-only | Yes | Base URL of MedusaJS v2 backend (e.g. `http://localhost:9000` or Railway backend URL). |
+| `MEDUSA_PUBLISHABLE_KEY` | Server-only | Yes | Medusa v2 publishable API key (`pk_...`) used to authenticate store API requests. |
 | `NEXT_PUBLIC_SITE_URL` | Public | Recommended | Canonical frontend URL used for metadata, OpenGraph tags, `sitemap.xml`, and `robots.txt`. |
+| `S3_FILE_URL` | Server-only | Optional | Cloudflare R2 / S3 public media bucket URL for optimized product assets. |
+| `REVALIDATE_SECRET` | Server-only | Recommended | Shared secret authenticating webhook calls to `POST /api/revalidate`. |
 
 ---
 
@@ -78,29 +77,22 @@ npm run build --workspace=frontend
 
 1. **Host the Next.js App** (Vercel, Netlify, or Node.js container):
    - Set **Root Directory** to `frontend` (or run `npm run build --workspace=frontend` and `npm run start --workspace=frontend` from the repo root).
-   - Configure all environment variables (`WP_BASE_URL`, `WC_CONSUMER_KEY`, `WC_CONSUMER_SECRET`, `REVALIDATE_SECRET`, `NEXT_PUBLIC_SITE_URL`) in your hosting provider's dashboard.
-2. **Configure WordPress Checkout Theme & Session Bridge**:
-   - Follow [`WORDPRESS_THEME_NOTES.md`](./WORDPRESS_THEME_NOTES.md) to enqueue `tokens.css`, Google Fonts, `checkout.css`, and install `mbs-cart-token-handoff.php` in `wp-content/mu-plugins/`.
-3. **Verify Remote Images**:
-   - `frontend/next.config.ts` automatically allows images from `WP_BASE_URL` and `*.mehandibysana.com`. If media is served from a separate CDN hostname, add its hostname to `images.remotePatterns` in `frontend/next.config.ts`.
+   - Configure all environment variables (`MEDUSA_BACKEND_URL`, `MEDUSA_PUBLISHABLE_KEY`, `NEXT_PUBLIC_SITE_URL`, `REVALIDATE_SECRET`, `S3_FILE_URL`) in your hosting provider's dashboard.
+2. **Verify Remote Images**:
+   - `frontend/next.config.ts` automatically configures allowed image domains for Medusa media, Cloudflare R2, and `*.mehandibysana.com`.
 
 ---
 
 ## 5. On-Demand ISR Revalidation Webhook
 
-To purge cached product and category pages immediately whenever inventory or pricing changes in WooCommerce:
+To purge cached product and category pages immediately whenever catalog changes occur:
 
-1. In WordPress Admin, navigate to **WooCommerce → Settings → Advanced → Webhooks → Add webhook**.
-2. Create webhooks for:
-   - **Topic**: `Product created`, `Product updated`, `Product deleted`
-   - **Delivery URL**: `https://<your-frontend-domain>/api/revalidate?secret=<REVALIDATE_SECRET>`
-   - **Status**: `Active`
-3. You can also trigger targeted revalidation manually via `POST /api/revalidate`:
+Trigger targeted revalidation manually or via webhook using `POST /api/revalidate`:
 
 ```bash
 curl -X POST "https://<your-frontend-domain>/api/revalidate" \
   -H "Content-Type: application/json" \
   -H "x-revalidate-secret: <REVALIDATE_SECRET>" \
-  -d '{"tag":"products","slug":"organic-henna-cones"}'
+  -d '{"tag":"products"}'
 ```
 

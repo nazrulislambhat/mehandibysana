@@ -124,14 +124,14 @@ export const RELATED_HENNA_SUPPLIES = [
 ];
 
 async function run() {
-  const wpBaseUrl = (process.env.WP_BASE_URL || '').replace(/\/+$/, '');
-  const key = process.env.WC_CONSUMER_KEY || '';
-  const secret = process.env.WC_CONSUMER_SECRET || '';
+  const wpBaseUrl = (process.env.WOOCOMMERCE_URL || '').replace(/\/+$/, '');
+  const key = process.env.WOOCOMMERCE_CONSUMER_KEY || '';
+  const secret = process.env.WOOCOMMERCE_CONSUMER_SECRET || '';
 
   console.log(
     `Mode: ${apply ? `APPLY (status=${targetStatus})` : 'DRY-RUN (preview only)'}`,
   );
-  console.log(`Target store: ${wpBaseUrl || '(WP_BASE_URL not set)'}`);
+  console.log(`Target store: ${wpBaseUrl || '(WOOCOMMERCE_URL not set)'}`);
   console.log(`Category: ${RELATED_CATEGORY.name} (${RELATED_CATEGORY.slug})`);
   console.log(`Items (${RELATED_HENNA_SUPPLIES.length}):`);
   for (const item of RELATED_HENNA_SUPPLIES) {
@@ -149,7 +149,7 @@ async function run() {
 
   if (!wpBaseUrl || !key || !secret) {
     console.error(
-      'Missing WP_BASE_URL, WC_CONSUMER_KEY, or WC_CONSUMER_SECRET in environment.',
+      'Missing WOOCOMMERCE_URL, WOOCOMMERCE_CONSUMER_KEY, or WOOCOMMERCE_CONSUMER_SECRET in environment.',
     );
     process.exit(1);
   }

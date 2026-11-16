@@ -234,9 +234,9 @@ If you prefer live API extraction over a `.sql` dump:
 
 1. Configure `migration/.env`:
    ```bash
-   WP_BASE_URL=https://mehandibysana.com
-   WC_CONSUMER_KEY=ck_xxxxxxxxxxxxxxxx
-   WC_CONSUMER_SECRET=cs_xxxxxxxxxxxxxxxx
+   WOOCOMMERCE_URL=https://mehandibysana.com
+   WOOCOMMERCE_CONSUMER_KEY=ck_xxxxxxxxxxxxxxxx
+   WOOCOMMERCE_CONSUMER_SECRET=cs_xxxxxxxxxxxxxxxx
    ```
 2. Run extraction + validation, then sync to production Postgres:
    ```bash

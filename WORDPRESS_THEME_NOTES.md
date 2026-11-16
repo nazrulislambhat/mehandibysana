@@ -264,7 +264,7 @@ body.woocommerce-checkout {
 
 ### How the Handoff Works
 1. The Next.js storefront manages guest carts via the **WooCommerce Store API** (`/wp-json/wc/store/v1/cart/*`), persisting the `Cart-Token` JWT in `localStorage` (`mbs_wc_cart_session`).
-2. When the shopper selects **Proceed to Checkout**, Next.js navigates to `/checkout`, calls `GET /api/checkout-handoff?cart_token=<token>`, and redirects the browser to `${WP_BASE_URL}/checkout/?cart_token=<token>`.
+2. When the shopper selects **Proceed to Checkout**, Next.js navigates to `/checkout` (which in earlier staging redirected to `${WOOCOMMERCE_URL}/checkout/?cart_token=<token>`).
 3. Because standard WordPress `/checkout/` reads the `wp_woocommerce_session_<hash>` cookie rather than the Store API JWT, add the following lightweight `mu-plugin` (`wp-content/mu-plugins/mbs-cart-token-handoff.php`) to bridge the JWT customer/session ID into WooCommerce's native PHP session cookie and strip `cart_token` from the URL:
 
 ```php
