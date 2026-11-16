@@ -5,7 +5,7 @@ import {
   fetchCatalogCategories,
   fetchCatalogProducts,
   type ProductQueryOptions,
-} from '@/lib/wc-catalog';
+} from '@/lib/catalog';
 import { normalizeCategorySlug } from '@/lib/category-slugs';
 import { buildPageMetadata } from '@/lib/seo';
 import {

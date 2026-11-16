@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { wcStoreClient } from '@/lib/wc-store-api';
+import { wcStoreClient } from '@/lib/store-api';
 import type { StorefrontCart } from '@/types/storefront';
 
 let cartMutationQueue: Promise<unknown> = Promise.resolve();

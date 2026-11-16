@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerEnv } from '@/lib/env';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limiter';
 
 async function proxyValidate(params: {
   code: string;
@@ -54,6 +55,20 @@ async function proxyValidate(params: {
 }
 
 export async function POST(request: NextRequest) {
+  const clientIp = getClientIp(request);
+  const rateLimit = checkRateLimit(`coupon:${clientIp}`, { limit: 15, windowMs: 60 * 1000 });
+  if (!rateLimit.success) {
+    return NextResponse.json(
+      {
+        valid: false,
+        code: '',
+        message: 'Too many coupon validation attempts. Please wait a minute before trying again.',
+        discountAmount: 0,
+      },
+      { status: 429 }
+    );
+  }
+
   try {
     const body = (await request.json()) as {
       code?: string;
@@ -79,6 +94,20 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const clientIp = getClientIp(request);
+  const rateLimit = checkRateLimit(`coupon:${clientIp}`, { limit: 15, windowMs: 60 * 1000 });
+  if (!rateLimit.success) {
+    return NextResponse.json(
+      {
+        valid: false,
+        code: '',
+        message: 'Too many coupon validation attempts. Please wait a minute before trying again.',
+        discountAmount: 0,
+      },
+      { status: 429 }
+    );
+  }
+
   const sp = request.nextUrl.searchParams;
   return proxyValidate({
     code: String(sp.get('code') || '').trim(),

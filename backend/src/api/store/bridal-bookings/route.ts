@@ -44,16 +44,19 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       });
     }
 
-    const booking = createBridalBooking({
-      referenceId: body.referenceId,
-      name,
-      email,
-      phone: body.phone,
-      service: body.service,
-      eventDate: body.eventDate,
-      location: body.location,
-      message,
-    });
+    const booking = createBridalBooking(
+      {
+        referenceId: body.referenceId,
+        name,
+        email,
+        phone: body.phone,
+        service: body.service,
+        eventDate: body.eventDate,
+        location: body.location,
+        message,
+      },
+      req.scope
+    );
 
     const serviceLabel = formatServiceLabel(booking.service);
     const detailsHtml = `

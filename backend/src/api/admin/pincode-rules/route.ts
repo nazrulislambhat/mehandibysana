@@ -9,7 +9,7 @@ import {
 } from "../../../lib/pincode-rules";
 
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
-  const rules = loadPincodeRules();
+  const rules = loadPincodeRules(req.scope);
   const rawPin = String(req.query.pincode || "").trim();
   if (rawPin) {
     const subtotal = Number(req.query.subtotal || 0) || 0;
@@ -26,18 +26,18 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const action = String(body.action || "upsert");
 
   if (action === "reset") {
-    const rules = resetDefaultPincodeRules();
+    const rules = resetDefaultPincodeRules(req.scope);
     return res.status(200).json({ rules });
   }
 
-  const current = loadPincodeRules();
+  const current = loadPincodeRules(req.scope);
 
   if (action === "delete") {
     const targetId = String(body.id || "").trim();
     if (!targetId) {
       return res.status(400).json({ error: "Rule id is required to delete." });
     }
-    const updated = savePincodeRules(current.filter((r) => r.id !== targetId));
+    const updated = savePincodeRules(current.filter((r) => r.id !== targetId), req.scope);
     return res.status(200).json({ rules: updated });
   }
 
@@ -85,7 +85,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     current.unshift(nextRule);
   }
 
-  const saved = savePincodeRules(current);
+  const saved = savePincodeRules(current, req.scope);
   return res.status(200).json({ rules: saved, rule: nextRule });
 }
 

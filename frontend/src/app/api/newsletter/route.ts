@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerEnv } from '@/lib/env';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limiter';
 import {
   renderStudioFallbackEmailHtml,
   sendFrontendFallbackEmail,
@@ -8,6 +9,15 @@ import {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export async function POST(req: NextRequest) {
+  const clientIp = getClientIp(req);
+  const rateLimit = checkRateLimit(`newsletter:${clientIp}`, { limit: 5, windowMs: 60 * 1000 });
+  if (!rateLimit.success) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests. Please wait a minute before subscribing again.' },
+      { status: 429 }
+    );
+  }
+
   let body: {
     email?: unknown;
     firstName?: unknown;

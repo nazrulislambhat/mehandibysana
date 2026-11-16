@@ -28,8 +28,9 @@ flowchart TD
         PDFGen["PDF Invoice Generator"]
     end
 
-    subgraph Data["Database & Storage"]
+    subgraph Data["Database, Queue & Storage"]
         Postgres[(PostgreSQL Database)]
+        Redis[(Redis Event Bus & Locks)]
         StudioData["Persistent Volume (/studio-data)"]
         R2["Cloudflare R2 Object Storage"]
     end
@@ -48,6 +49,7 @@ flowchart TD
     Catalog --> Medusa
     Checkout --> Medusa
     Medusa <--> Postgres
+    Medusa <--> Redis
     Medusa <--> StudioData
     Medusa <--> R2
     Medusa <--> Razorpay
@@ -58,6 +60,33 @@ flowchart TD
     Dispatch -->|Customer Shipping Alert| Email
     Dispatch -->|Live Dispatch Update| Telegram
 ```
+
+---
+
+## 2. What Exactly Is Redis Doing & Why Was It Added?
+
+In an enterprise MedusaJS v2 headless setup, **Redis acts as the backbone for asynchronous operations, distributed concurrency, and cache acceleration**.
+
+Without Redis, Medusa operates in an in-memory fallback mode, which outputs the following startup warnings:
+```text
+info:    redisUrl not found. A fake redis instance will be used.
+warn:    Local Event Bus installed. This is not recommended for production.
+info:    Locking module: Using "in-memory" as default.
+```
+
+### 1. Persistent Asynchronous Event Bus (Message Queuing)
+* **What happens without Redis**: When a customer completes checkout or a shipment is marked as dispatched, Medusa triggers background events (`order.placed`, `shipment.created`, `delivery.created`). In the default in-memory event bus, these tasks live inside the Node.js process memory. If the backend restarts, redeploys, or crashes under load while jobs are queued, **pending emails, invoices, and Telegram alerts are permanently lost**.
+* **What Redis does**: Redis acts as a durable message queue using Pub/Sub and streams. Events are safely persisted in Redis. If the backend process restarts during high traffic, it immediately resumes processing all queued background jobs without losing a single customer email or admin notification.
+
+### 2. Distributed Locking & Race Condition Prevention
+* **What happens without Redis**: In-memory locking only works inside a single isolated thread. If two shoppers buy the last organic henna cone at the exact same millisecond, or if Razorpay sends two duplicate payment webhook pings simultaneously, both threads could read inventory as available, causing **overselling** or **duplicate order records**.
+* **What Redis does**: Redis provides atomic, distributed locks (`ioredis` distributed redlock keys). When an order is placed or inventory is decremented, Redis acquires an exclusive key in microseconds (`SET lock:order:id ... NX PX 5000`). Only one process executes the database mutation, while the duplicate is safely blocked or queued.
+
+### 3. High-Speed Cache Layer
+* Repetitive calculations (such as region tax rules, store settings, and catalog summaries) can be cached in Redis with sub-millisecond read times, taking significant query load off PostgreSQL.
+
+### 4. Zero-Downtime Horizontal Scaling
+* If traffic surges (e.g. during Eid or peak bridal wedding season) and multiple backend containers are deployed on Railway, Redis synchronizes the event bus and locks across all container instances seamlessly.
 
 ---
 
@@ -248,6 +277,7 @@ npm --prefix frontend run lint
 | Variable | Scope | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `DATABASE_URL` | Server-only | Yes | PostgreSQL connection string. |
+| `REDIS_URL` | Server-only | Recommended | Redis service connection string (e.g. `redis://default:...@...:6379`). Powers durable event queues and distributed locks. |
 | `JWT_SECRET` | Server-only | Yes | 64-character random string for authenticating sessions. |
 | `COOKIE_SECRET` | Server-only | Yes | 64-character random string for signing admin session cookies. |
 | `STORE_CORS` | Server-only | Yes | Allowed frontend origins (e.g. `https://mehandibysana.com`). |
@@ -267,6 +297,8 @@ npm --prefix frontend run lint
 
 1. **Frontend**: Deployed to **Vercel** with automatic preview deployments and production branch tracking on `develop` / `main`.
 2. **Backend**: Deployed to **Railway** running `npm run build && cd .medusa/server && npx medusa db:migrate && npx medusa start`.
-3. **Database**: Managed **PostgreSQL** on Railway.
-4. **Volume Storage**: `/studio-data` volume mounted on Railway to preserve `pincode-rules.json`, `pickup-settings.json`, `email-settings.json`, and generated invoices across redeployments.
+3. **Database**: Managed **PostgreSQL** on Railway. Studio configurations (`studio_pickup_settings`, `studio_pincode_rules`, `studio_bridal_bookings`, `studio_newsletter_subscribers`) are permanently stored in PostgreSQL tables.
+4. **Queue & Lock Coordinator**: Managed **Redis** on Railway providing atomic distributed locks and durable event bus messaging.
+5. **Media & Invoices**: **Cloudflare R2** bucket (`mehandibysana-media`) serving product photography and generated invoice PDFs via CDN (`https://media.mehandibysana.com`).
+6. **Volume Storage**: `/studio-data` volume mounted on Railway as a secondary local cache.
 

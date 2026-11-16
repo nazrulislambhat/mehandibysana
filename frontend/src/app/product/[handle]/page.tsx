@@ -7,7 +7,7 @@ import {
   fetchCatalogProducts,
   fetchProductBySlug,
   pickCompanionProducts,
-} from '@/lib/wc-catalog';
+} from '@/lib/catalog';
 import type { StorefrontProduct } from '@/types/storefront';
 import { buildPageMetadata, cleanSeoText, toAbsoluteUrl } from '@/lib/seo';
 import {
