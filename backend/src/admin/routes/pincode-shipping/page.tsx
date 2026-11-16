@@ -261,7 +261,7 @@ const PincodeShippingPage = () => {
                 </Badge>
               </div>
               <Text className="text-xs text-ui-fg-subtle leading-relaxed mb-4">
-                Applicable to Kashmir PIN codes (<code>19xxxx</code>, <code>18xxxx</code>). When enabled, customers see the Studio Self-Pickup option (FREE). When disabled, only Doorstep Delivery is shown.
+                Applicable strictly to Kashmir PIN codes (<code>19xxxx</code>). Jammu PIN codes (<code>18xxxx</code>) are excluded from pickup and receive doorstep delivery. When enabled, Kashmir customers see the Studio Self-Pickup option (FREE). When disabled, only Doorstep Delivery is shown.
               </Text>
             </div>
             <div className="pt-3 border-t border-ui-border-base flex items-center justify-between">
