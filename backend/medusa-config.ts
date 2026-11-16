@@ -34,7 +34,12 @@ module.exports = defineConfig({
                   secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
                   region: process.env.S3_REGION || 'auto',
                   bucket: process.env.S3_BUCKET,
-                  endpoint: process.env.S3_ENDPOINT,
+                  endpoint: process.env.S3_ENDPOINT
+                    ? process.env.S3_ENDPOINT.replace(/\/+$/, '').replace(
+                        new RegExp(`/${process.env.S3_BUCKET}$`),
+                        ''
+                      )
+                    : undefined,
                   additional_client_config: {
                     forcePathStyle: true,
                   },

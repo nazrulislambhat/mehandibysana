@@ -68,6 +68,7 @@ flowchart TD
 - **Google Shopping #1 Rank Optimization**:
   - Exact URL match: `https://mehandibysana.com/product/organic-henna-cones`
   - Valid `Schema.org/Product` JSON-LD with live price (`INR`), availability (`InStock`), and brand (`Mehandi By Sana`).
+  - **Google Shopping XML RSS 2.0 Feed**: Live endpoint at `/feed/google-shopping` (and `/api/feed/google-shopping`) formatted for Google Merchant Center with automatic product taxonomy, Cloudflare R2 image links, and shipping specs.
   - Dynamic `sitemap.xml` generated automatically from the Medusa catalog.
 - **Persistent Shopping Bag**: Instant, optimistic UI updates powered by Zustand client storage.
 
