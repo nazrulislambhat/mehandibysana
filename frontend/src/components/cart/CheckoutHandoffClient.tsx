@@ -230,7 +230,7 @@ export function CheckoutHandoffClient() {
 
   useEffect(() => {
     if (pincode.length === 6) {
-      void checkPincode(pincode, subtotal);
+      void checkPincode(pincode, subtotal, { force: true });
     }
   }, [pincode, subtotal, checkPincode]);
 
@@ -295,6 +295,15 @@ export function CheckoutHandoffClient() {
     }
   }, [isPickupEligible, fulfillmentType]);
 
+  // Cash on Delivery availability is authoritatively driven by Medusa Pincode Rules
+  const isCodAvailable = Boolean(activePinCheck?.serviceable && activePinCheck?.codAvailable);
+
+  useEffect(() => {
+    if (!isCodAvailable && paymentMethod === 'cod') {
+      setPaymentMethod('razorpay');
+    }
+  }, [isCodAvailable, paymentMethod]);
+
   const deliverySurcharge = 0;
   const baseDeliveryFee = activePinCheck?.serviceable ? activePinCheck.deliveryCharge : 0;
   const deliveryFee = isPickup ? 0 : baseDeliveryFee;
@@ -310,7 +319,7 @@ export function CheckoutHandoffClient() {
     const clean = val.replace(/\D/g, '').slice(0, 6);
     setPincode(clean);
     if (clean.length === 6) {
-      void checkPincode(clean, subtotal);
+      void checkPincode(clean, subtotal, { force: true });
       if (clean.startsWith('56')) {
         setStateName('Karnataka');
         if (!city || city === 'Kashmir' || city === 'Srinagar') {
@@ -1269,73 +1278,94 @@ export function CheckoutHandoffClient() {
                     </p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <label
-                      className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
-                        paymentMethod === 'razorpay'
-                          ? 'border-ink bg-ink text-inverse shadow-xs'
-                          : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                  <div className="space-y-3">
+                    <div
+                      className={`grid gap-3.5 ${
+                        isCodAvailable
+                          ? 'grid-cols-1 sm:grid-cols-2'
+                          : 'grid-cols-1'
                       }`}
                     >
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        checked={paymentMethod === 'razorpay'}
-                        onChange={() => setPaymentMethod('razorpay')}
-                        className="mt-1 accent-terracotta"
-                      />
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="block font-semibold">Pay Online</span>
+                      <label
+                        className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
+                          paymentMethod === 'razorpay'
+                            ? 'border-ink bg-ink text-inverse shadow-xs'
+                            : 'border-divider bg-canvas text-ink hover:border-ink/60'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          checked={paymentMethod === 'razorpay'}
+                          onChange={() => setPaymentMethod('razorpay')}
+                          className="mt-1 accent-terracotta"
+                        />
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="block font-semibold">Pay Online</span>
+                            <span
+                              className={`text-[10px] ${
+                                paymentMethod === 'razorpay'
+                                  ? 'text-inverse/70'
+                                  : 'text-umber/80'
+                              }`}
+                            >
+                              (Secured by Razorpay)
+                            </span>
+                          </div>
                           <span
-                            className={`text-[10px] ${
+                            className={`block text-[11px] mt-0.5 ${
                               paymentMethod === 'razorpay'
-                                ? 'text-inverse/70'
-                                : 'text-umber/80'
+                                ? 'text-inverse/75'
+                                : 'text-umber'
                             }`}
                           >
-                            (Secured by Razorpay)
+                            UPI, Credit/Debit Cards, NetBanking
                           </span>
                         </div>
-                        <span
-                          className={`block text-[11px] mt-0.5 ${
-                            paymentMethod === 'razorpay'
-                              ? 'text-inverse/75'
-                              : 'text-umber'
-                          }`}
-                        >
-                          UPI, Credit/Debit Cards, NetBanking
-                        </span>
-                      </div>
-                    </label>
+                      </label>
 
-                    <label
-                      className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
-                        paymentMethod === 'cod'
-                          ? 'border-ink bg-ink text-inverse shadow-xs'
-                          : 'border-divider bg-canvas text-ink hover:border-ink/60'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        checked={paymentMethod === 'cod'}
-                        onChange={() => setPaymentMethod('cod')}
-                        className="mt-1 accent-terracotta"
-                      />
-                      <div>
-                        <span className="block font-semibold">Cash on Delivery / Pickup</span>
-                        <span
-                          className={`block text-[11px] mt-0.5 ${
+                      {isCodAvailable && (
+                        <label
+                          className={`flex items-start gap-3 rounded-xl border p-4 text-sm cursor-pointer transition-all ${
                             paymentMethod === 'cod'
-                              ? 'text-inverse/75'
-                              : 'text-umber'
+                              ? 'border-ink bg-ink text-inverse shadow-xs'
+                              : 'border-divider bg-canvas text-ink hover:border-ink/60'
                           }`}
                         >
-                          Pay in cash upon parcel arrival or studio pickup
-                        </span>
+                          <input
+                            type="radio"
+                            name="paymentMethod"
+                            checked={paymentMethod === 'cod'}
+                            onChange={() => setPaymentMethod('cod')}
+                            className="mt-1 accent-terracotta"
+                          />
+                          <div>
+                            <span className="block font-semibold">Cash on Delivery / Pickup</span>
+                            <span
+                              className={`block text-[11px] mt-0.5 ${
+                                paymentMethod === 'cod'
+                                  ? 'text-inverse/75'
+                                  : 'text-umber'
+                              }`}
+                            >
+                              Pay in cash upon parcel arrival or studio pickup
+                            </span>
+                          </div>
+                        </label>
+                      )}
+                    </div>
+
+                    {!isCodAvailable && pincode.length === 6 && (
+                      <div className="p-3.5 rounded-xl border border-terracotta/25 bg-terracotta/[0.04] text-xs leading-relaxed text-umber">
+                        <p className="font-semibold text-terracotta mb-0.5">
+                          Heads up! 🛍️
+                        </p>
+                        <p>
+                          Due to logistics limitations in your area, Cash on Delivery (COD) is currently unavailable. But no worries — we offer secure and fast prepaid payment options to ensure your order reaches you without delay!
+                        </p>
                       </div>
-                    </label>
+                    )}
                   </div>
                 )}
 

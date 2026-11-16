@@ -305,6 +305,12 @@ export async function createMedusaStoreOrder(
     : total === 0 && couponValidation?.coupon
       ? "free_coupon"
       : "cod";
+
+  if (resolvedPaymentMethod === "cod" && !pinEvaluation.codAvailable) {
+    throw new Error(
+      "Cash on Delivery (COD) is currently unavailable for your delivery area. Due to logistics limitations, please choose Pay Online."
+    );
+  }
   const resolvedPaymentStatus =
     options?.verifiedPaymentCapture || (total === 0 && couponValidation?.coupon)
       ? "paid"
