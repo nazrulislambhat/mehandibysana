@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
+import { Space_Grotesk } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { getSiteUrl } from '@/lib/env';
@@ -14,16 +14,16 @@ import { FloatingContactBubble } from '@/components/layout/FloatingContactBubble
 import { CartAddedToast } from '@/components/cart/CartAddedToast';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 
-const cormorantGaramond = Cormorant_Garamond({
+const spaceGroteskHeading = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-heading',
   display: 'swap',
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const spaceGroteskBody = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 });
@@ -125,7 +125,7 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${cormorantGaramond.variable} ${plusJakartaSans.variable}`}
+      className={`${spaceGroteskHeading.variable} ${spaceGroteskBody.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />

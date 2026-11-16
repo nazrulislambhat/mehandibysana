@@ -61,8 +61,8 @@
   /* ==========================================================================
      TYPOGRAPHY
      ========================================================================== */
-  --font-serif: var(--font-heading, "Cormorant Garamond"), Georgia, serif;
-  --font-sans: var(--font-body, "Plus Jakarta Sans"), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: var(--font-heading, "Space Grotesk"), "Space Grotesk Fallback", sans-serif;
+  --font-sans: var(--font-body, "Space Grotesk"), "Space Grotesk Fallback", sans-serif;
 
   --text-xs: 0.75rem;      /* 12px */
   --text-sm: 0.875rem;     /* 14px */

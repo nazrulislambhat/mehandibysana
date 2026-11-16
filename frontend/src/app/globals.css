@@ -31,6 +31,9 @@
   --color-botanical: var(--color-success);
   --color-ochre: var(--color-warning);
   --color-crimson: var(--color-error);
+
+  --font-sans: var(--font-body, "Space Grotesk"), "Space Grotesk Fallback", sans-serif;
+  --font-serif: var(--font-heading, "Space Grotesk"), "Space Grotesk Fallback", sans-serif;
 }
 
 @layer base {
