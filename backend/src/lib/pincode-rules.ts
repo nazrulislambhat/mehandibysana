@@ -52,7 +52,7 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     zone: 'Zone 2 — Bengaluru Local Dispatch',
     charge: 60,
     estimatedDays: '1–2 business days',
-    codAvailable: true,
+    codAvailable: false,
     freeShippingAbove: null,
     active: true,
     updatedAt: new Date().toISOString(),
@@ -64,7 +64,7 @@ const DEFAULT_PINCODE_RULES: PincodeRule[] = [
     zone: 'Zone 3 — Pan-India Express',
     charge: 120,
     estimatedDays: '3–6 business days',
-    codAvailable: true,
+    codAvailable: false,
     freeShippingAbove: null,
     active: true,
     updatedAt: new Date().toISOString(),
@@ -185,7 +185,9 @@ export function evaluatePincode(
   }
 
   const pickupSettings = loadPickupSettings();
-  const isKashmir = digits.startsWith('19') || digits.startsWith('18');
+  // Srinagar Studio pickup is strictly restricted to Kashmir PIN codes (19xxxx).
+  // Jammu PIN codes (18xxxx) are strictly excluded from pickup and receive doorstep delivery.
+  const isKashmir = digits.startsWith('19');
   const isBengaluru = digits.startsWith('56');
   const isPickupEligible =
     (isKashmir && pickupSettings.enableSrinagarPickup) ||

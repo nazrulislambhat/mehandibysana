@@ -164,7 +164,7 @@ export function resolveZoneFromPincode(pincode: string): {
   if (!cleaned || cleaned.length < 6) {
     return {
       zone: 'kashmir',
-      zoneLabel: 'Kashmir Valley & Srinagar (Local Atelier)',
+      zoneLabel: 'Kashmir Valley & Srinagar (Local Studio)',
     };
   }
 

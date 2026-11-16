@@ -1,6 +1,6 @@
 # Mehandi By Sana — Production Deployment & Zero-Data-Loss Cutover Guide
 
-> **Full Step-by-Step Option A (Managed PaaS) Guide Available:** See [PRODUCTION_LAUNCH_GUIDE.md](./PRODUCTION_LAUNCH_GUIDE.md) for the complete Local-to-Production runbook covering **Cloudflare R2 -> Railway -> Vercel**, importing the latest WooCommerce `.sql` dump, Razorpay live + webhooks, Resend/Brevo/SMTP email integration, and exporting/running campaigns from your **2,065+ customer email list**.
+> **Full Step-by-Step Option A (Managed PaaS) Guide Available:** See [PRODUCTION_LAUNCH_GUIDE.md](./PRODUCTION_LAUNCH_GUIDE.md) for the complete Local-to-Production runbook covering **Cloudflare R2 -> Railway -> Vercel**, importing historical customer & order data, Razorpay live + webhooks, Resend/Brevo/SMTP email integration, and exporting/running campaigns from your **2,065+ customer email list**.
 
 ## 1. Architecture Overview
 
