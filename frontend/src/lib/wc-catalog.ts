@@ -178,10 +178,19 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
   const normalizedVariations: StorefrontVariation[] = (raw.variants || []).map(
     (v): StorefrontVariation => {
       const { price, regularPrice } = extractVariantInrPrice(v);
+      const vMeta = (v as any).metadata;
+      const rawMeta = (raw as any).metadata;
+      const isExplicitlyOutOfStock =
+        vMeta?.out_of_stock === true ||
+        vMeta?.out_of_stock === 'true' ||
+        rawMeta?.out_of_stock === true ||
+        rawMeta?.out_of_stock === 'true';
+
       const inStock =
-        !v.manage_inventory ||
-        Boolean(v.allow_backorder) ||
-        (typeof v.inventory_quantity === 'number' ? v.inventory_quantity > 0 : true);
+        !isExplicitlyOutOfStock &&
+        (!v.manage_inventory ||
+          Boolean(v.allow_backorder) ||
+          (typeof v.inventory_quantity === 'number' ? v.inventory_quantity > 0 : true));
 
       const attributes = (v.options || [])
         .map((optVal) => {
