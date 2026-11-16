@@ -29,6 +29,8 @@ export interface PincodeCheckResult {
   zone: string;
   label: string;
   message: string;
+  isPickupEligible?: boolean;
+  pickupLocationName?: string | null;
 }
 
 interface PincodeCheckOptions {

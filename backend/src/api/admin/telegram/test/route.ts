@@ -106,7 +106,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         postal_code: "190008",
         country_code: "IN",
       },
-      dispatchOrigin: "Srinagar Atelier (Kashmir)",
+      dispatchOrigin: "Srinagar Studio (Kashmir)",
       courierName: "Delhivery Surface Express",
       trackingNumber: "DEL1984712093IN",
       trackingUrl: "https://www.delhivery.com/track/package/DEL1984712093IN",

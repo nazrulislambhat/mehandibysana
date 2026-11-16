@@ -56,7 +56,7 @@ export function PincodeChecker({
             Delivery &amp; PIN Estimator
           </p>
         </div>
-        <span className="text-[11px] text-umber">India Post / Courier</span>
+      
       </div>
 
       <form onSubmit={handleCheckSubmit} className="flex items-stretch gap-2">
@@ -122,7 +122,7 @@ export function PincodeChecker({
                 <p className="font-semibold text-ink">{result.label}</p>
                 <p className="text-umber mt-0.5">
                   ETA: {result.estimatedDays} &middot;{' '}
-                  {result.codAvailable ? 'Cash on Delivery available' : 'Prepaid only'}
+                  {result.codAvailable ? 'Cash on Delivery / Pickup available' : 'Prepaid only'}
                 </p>
               </div>
               <span className="shrink-0 rounded-full bg-ink px-3 py-1 font-serif text-base font-medium text-inverse tabular-nums">

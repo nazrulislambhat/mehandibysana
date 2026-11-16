@@ -48,6 +48,8 @@ export interface InvoiceData {
   trackingNumber?: string;
   targetDeliveryDate?: string;
   deliverySpeed?: string;
+  fulfillmentType?: "delivery" | "pickup";
+  fulfillmentLabel?: string;
   specialInstructions?: string;
   storefrontUrl: string;
 }
@@ -298,6 +300,15 @@ export function buildInvoiceDataFromOrder(
       String(meta.target_delivery_date || "").trim() || undefined,
     deliverySpeed:
       String(meta.delivery_speed_label || "").trim() || undefined,
+    fulfillmentType: (String(
+      meta.fulfillment_type ||
+        (meta.special_instructions &&
+        String(meta.special_instructions).toLowerCase().includes("pickup")
+          ? "pickup"
+          : "delivery")
+    ).trim() as "delivery" | "pickup") || "delivery",
+    fulfillmentLabel:
+      String(meta.fulfillment_label || "").trim() || undefined,
     specialInstructions:
       String(meta.special_instructions || "").trim() || undefined,
     storefrontUrl:
@@ -496,11 +507,16 @@ export function generateInvoiceHtml(data: InvoiceData): string {
         </td>
         <td style="padding:14px 18px;width:50%;vertical-align:top;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#96410D;margin-bottom:6px;">
-            Delivery Details
+            ${data.fulfillmentType === "pickup" ? "Fulfillment &amp; Pickup Details" : "Delivery Details"}
           </div>
           <div style="font-size:12px;line-height:1.6;color:#444;">
             ${
-              data.deliverySpeed
+              data.fulfillmentType === "pickup"
+                ? `<strong>Fulfillment:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(data.fulfillmentLabel || "Studio Self-Pickup")}</span><br/>`
+                : ""
+            }
+            ${
+              data.deliverySpeed && data.fulfillmentType !== "pickup"
                 ? `<strong>Delivery Speed:</strong> ${escapeHtml(
                     data.deliverySpeed
                   )}<br/>`
@@ -508,7 +524,7 @@ export function generateInvoiceHtml(data: InvoiceData): string {
             }
             ${
               data.targetDeliveryDate
-                ? `<strong>Preferred Delivery Date:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(
+                ? `<strong>${data.fulfillmentType === "pickup" ? "Preferred Pickup Date" : "Preferred Delivery Date"}:</strong> <span style="color:#96410D;font-weight:700;">${escapeHtml(
                     data.targetDeliveryDate
                   )}</span><br/>`
                 : ""

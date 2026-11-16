@@ -10,6 +10,7 @@ import {
 } from "./coupons";
 import { sendOrderConfirmationEmail } from "./order-emails";
 import { evaluatePincode } from "./pincode-rules";
+import { loadPickupSettings } from "./pickup-settings";
 import {
   calculateDeliverySurcharge,
   resolveDeliverySpeedLabel,
@@ -59,6 +60,8 @@ export interface StoreOrderPayload {
     deliverySpeed?: "standard" | "urgent";
     deliverySpeedLabel?: string;
     deliverySurcharge?: number;
+    fulfillmentType?: "delivery" | "pickup";
+    fulfillmentLabel?: string;
   };
 }
 
@@ -169,12 +172,39 @@ export async function createMedusaStoreOrder(
           : 0
   );
 
+  const pickupSettings = loadPickupSettings();
+  const postal = String(shippingAddress.postal_code || "").trim();
+  const isKashmir = postal.startsWith("19") || postal.startsWith("18");
+  const isBengaluru = postal.startsWith("56");
+  const isPickupAllowed =
+    (isKashmir && pickupSettings.enableSrinagarPickup) ||
+    (isBengaluru && pickupSettings.enableBengaluruPickup);
+
+  const rawPickupRequested =
+    body.deliveryDetails?.fulfillmentType === "pickup" ||
+    Boolean(
+      body.deliveryDetails?.specialInstructions &&
+        body.deliveryDetails.specialInstructions.toLowerCase().includes("pickup")
+    );
+
+  const isPickup = isPickupAllowed && rawPickupRequested;
+
+  const fulfillmentType: "delivery" | "pickup" = isPickup ? "pickup" : "delivery";
+  const defaultLocationName = isKashmir
+    ? pickupSettings.srinagarLocationName || "Srinagar Studio"
+    : pickupSettings.bengaluruLocationName || "Bengaluru Studio";
+  const fulfillmentLabel = isPickup
+    ? body.deliveryDetails?.fulfillmentLabel || `Studio Self-Pickup (${defaultLocationName})`
+    : "Doorstep Delivery";
+
   const deliverySpeed = body.deliveryDetails?.deliverySpeed || "standard";
-  const urgentSurcharge = calculateDeliverySurcharge(
-    shippingAddress.postal_code,
-    deliverySpeed
-  );
-  const shippingFee = roundInr(baseShippingFee + urgentSurcharge);
+  const urgentSurcharge = isPickup
+    ? 0
+    : calculateDeliverySurcharge(
+        shippingAddress.postal_code,
+        deliverySpeed
+      );
+  const shippingFee = isPickup ? 0 : roundInr(baseShippingFee + urgentSurcharge);
 
   const rawCouponCode = normalizeCouponCode(
     body.couponCode ?? body.pricing?.couponCode ?? ""
@@ -242,8 +272,9 @@ export async function createMedusaStoreOrder(
       body.deliveryDetails?.targetDate
     );
 
-  const shippingMethodName =
-    deliverySpeed === "urgent"
+  const shippingMethodName = isPickup
+    ? `Studio Self-Pickup (Free) · ${fulfillmentLabel}`
+    : deliverySpeed === "urgent"
       ? `⚡ Urgent Express (${resolvedSpeedLabel}) · ${shippingZoneLabel}`
       : shippingFee === 0
         ? `Free Delivery · ${shippingZoneLabel}`
@@ -318,7 +349,11 @@ export async function createMedusaStoreOrder(
           pincode: shippingAddress.postal_code,
           pincode_rule: matchedPincodeRule,
           zone: pinEvaluation.zone || "",
-          estimated_days: pinEvaluation.estimatedDays || "",
+          estimated_days: isPickup
+            ? "Ready for Studio Pickup"
+            : (pinEvaluation.estimatedDays || ""),
+          fulfillment_type: fulfillmentType,
+          fulfillment_label: fulfillmentLabel,
         },
       },
     ],
@@ -349,6 +384,8 @@ export async function createMedusaStoreOrder(
       delivery_speed: deliverySpeed,
       delivery_speed_label: resolvedSpeedLabel,
       delivery_surcharge: urgentSurcharge,
+      fulfillment_type: fulfillmentType,
+      fulfillment_label: fulfillmentLabel,
       special_instructions: body.deliveryDetails?.specialInstructions || "",
       is_gift: body.deliveryDetails?.isGift || false,
     },

@@ -41,3 +41,5 @@ studio-data/invoices/*
 Thumbs.db
 
 
+.vercel
+.env*

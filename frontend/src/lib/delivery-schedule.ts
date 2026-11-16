@@ -202,13 +202,9 @@ export function evaluateDeliveryRules(
   const dayAfterIso = addDaysToIsoDate(todayIsoDate, 2);
   const maxDate = addDaysToIsoDate(todayIsoDate, 60);
 
-  const isNightClosed = hour >= NIGHT_CUTOFF_HOUR;
-  const isKashmirMorningRiderPassed = hour >= KASHMIR_MORNING_CUTOFF_HOUR;
-
   const speedOptions: DeliverySpeedOption[] = [];
 
-  // 1. Standard Delivery Option
-  // Regular scheduled dispatch starting tomorrow morning
+  // 1. Standard Delivery Option (Scheduled dispatch)
   speedOptions.push({
     id: 'standard',
     title: 'Standard Delivery',
@@ -226,53 +222,8 @@ export function evaluateDeliveryRules(
     earliestDateLabel: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
   });
 
-  // 2. Priority Delivery Option
-  // No set upfront charge — studio checks date & calls customer based on courier availability
-  const prioritySameDayPossible = !isNightClosed;
-  const priorityEarliest = prioritySameDayPossible ? todayIsoDate : tomorrowIso;
-
-  speedOptions.push({
-    id: 'priority',
-    title: 'Priority Delivery',
-    badge: '⚡ Subject to Availability',
-    subtitle: prioritySameDayPossible
-      ? `Requested for Today (${formatIsoDateCompact(todayIsoDate)}) · Confirmed via Call`
-      : `Requested for Tomorrow (${formatIsoDateCompact(tomorrowIso)}) · Confirmed via Call`,
-    description:
-      zone === 'kashmir'
-        ? 'Urgent delivery: We will check local Kashmir rider availability and call you directly to coordinate dispatch.'
-        : zone === 'bengaluru'
-          ? 'Urgent delivery: Can be coordinated via local couriers like Rapido (surcharge confirmed on call depending on live availability).'
-          : 'Urgent delivery: We will check express cargo/air courier options and call you directly to confirm delivery feasibility.',
-    surcharge: 0,
-    available: true,
-    earliestDate: priorityEarliest,
-    earliestDateLabel: prioritySameDayPossible
-      ? `Today (${formatIsoDateCompact(todayIsoDate)})`
-      : `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-  });
-
-  // Operational notices depending on current selection & logistics context
-  let notice: ZoneDeliveryRules['notice'] = undefined;
-
-  if (selectedSpeed === 'priority') {
-    notice = {
-      type: 'info',
-      title: `⚡ Priority Delivery Verification (${formattedTime}) · Confirmed via Call`,
-      message:
-        'Because courier and rider availability varies dynamically by location and time, there is no fixed upfront charge. Our atelier will check your preferred date, verify live courier availability (local riders in Kashmir or Rapido in Bengaluru), and call you directly to confirm whether we can ship it and coordinate delivery.',
-    };
-  } else {
-    // Standard Delivery notice
-    if (zone === 'kashmir' && isKashmirMorningRiderPassed) {
-      notice = {
-        type: 'info',
-        title: `Scheduled Next-Day Dispatch (${formattedTime})`,
-        message:
-          'Kashmir riders take the daily load between 9:00 AM – 11:00 AM. Standard delivery orders placed now will be dispatched tomorrow morning. Need it faster? Choose Priority Delivery above (we will call you to confirm courier availability).',
-      };
-    }
-  }
+  // Operational notices depending on logistics context
+  const notice: ZoneDeliveryRules['notice'] = undefined;
 
   // Active minimum selectable date
   const activeOption = speedOptions.find((s) => s.id === selectedSpeed) || speedOptions[0];
@@ -294,7 +245,7 @@ export function evaluateDeliveryRules(
       : []),
     {
       label: `Tomorrow (${formatIsoDateCompact(tomorrowIso)})`,
-      sublabel: selectedSpeed === 'priority' ? 'Priority Dispatch' : 'Standard Route',
+      sublabel: 'Standard Route',
       date: tomorrowIso,
       isToday: false,
       isTomorrow: true,

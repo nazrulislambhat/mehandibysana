@@ -389,7 +389,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       body.action === "ship_order" &&
       !String(nextMeta.dispatch_origin || "").trim()
     ) {
-      nextMeta.dispatch_origin = "Srinagar Atelier (Kashmir)";
+      nextMeta.dispatch_origin = "Srinagar Studio (Kashmir)";
     }
 
     if (body.courierName !== undefined) {
@@ -523,7 +523,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         phone: shipAddr?.phone || undefined,
         address: shipAddr,
         dispatchOrigin: String(
-          updatedMeta.dispatch_origin || "Srinagar Atelier (Kashmir)"
+          updatedMeta.dispatch_origin || "Srinagar Studio (Kashmir)"
         ),
         courierName: String(updatedMeta.courier_name || "Local Courier"),
         trackingNumber: String(updatedMeta.tracking_number || ""),
