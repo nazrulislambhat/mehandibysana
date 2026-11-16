@@ -33,8 +33,9 @@ flowchart TD
         StudioDispatch["Studio Dispatch & Fulfillment Manager"]
     end
 
-    subgraph Storage["Data & Object Storage"]
+    subgraph Storage["Data, Queues & Object Storage"]
         Postgres[(PostgreSQL Database)]
+        Redis[(Redis Event Bus & Distributed Locks)]
         StudioData["Persistent Volume (/studio-data)"]
         CloudflareR2["Cloudflare R2 Media Bucket"]
     end
@@ -53,6 +54,7 @@ flowchart TD
     FrontendAPI -->|API Request + Publishable Key| MedusaCore
 
     MedusaCore <--> Postgres
+    MedusaCore <--> Redis
     MedusaCore <--> StudioData
     MedusaCore --> CloudflareR2
     MedusaCore <--> Razorpay
@@ -196,6 +198,24 @@ In `backend/src/admin/widgets/order-studio-dispatch.tsx`:
   - Enter tracking number / AWB.
   - Advance status: `Preparing Paste Fresh` → `Dispatched / Out for Delivery` → `Delivered / Picked Up`.
   - Automatically emails the customer with live tracking updates.
+
+### 4.5 Redis Engine: Durable Event Bus & Distributed Locks
+Configured in `backend/medusa-config.ts` via `redisUrl: process.env.REDIS_URL`:
+1. **Durable Message Queue (Event Bus)**:
+   - When an order is placed (`order.placed`) or shipped (`shipment.created`), subscribers handle background email dispatch, Telegram alerts, and invoice generation.
+   - Without Redis, Node.js memory queues drop pending jobs if a container restarts or redeploys. Redis guarantees that **no customer notification or invoice email is lost**.
+2. **Distributed Concurrency Locks**:
+   - Uses atomic keys (`SET lock:order:id ... NX PX 5000`) to protect against duplicate payment webhooks from Razorpay or simultaneous checkout attempts for the last available item in stock.
+3. **Cache Acceleration**:
+   - Caches region configurations, tax rules, and pricing calculations to drastically reduce load on the PostgreSQL database.
+
+### 4.6 PostgreSQL Database Persistence Layer
+- All operational studio configurations that originally lived in local JSON files have been upgraded to dedicated PostgreSQL tables:
+  - `studio_pickup_settings`: Srinagar and Bengaluru studio pickup addresses, toggles, and hours.
+  - `studio_pincode_rules`: Wildcard shipping patterns, zone charges, COD rules, and free-shipping thresholds.
+  - `studio_bridal_bookings`: Inquiries and booking records with customer contact, date, and advance payment status.
+  - `studio_newsletter_subscribers`: Verified subscriber email list.
+- **Why**: Protects all store configurations from being wiped when Railway restarts or creates fresh container instances, while maintaining local JSON files as a fallback for offline development.
 
 ---
 
