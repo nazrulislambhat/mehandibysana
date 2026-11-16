@@ -439,7 +439,7 @@ function renderOrderDetailsTableHtml(
         b.fulfillmentType === "pickup"
           ? `<strong>Pickup Studio Location:</strong> ${escapeHtml(
               b.dispatchOrigin ||
-                (b.pincode?.startsWith("19") || b.pincode?.startsWith("18")
+                (b.pincode?.startsWith("19")
                   ? "Srinagar Studio, Kashmir"
                   : "Bengaluru Studio, Karnataka")
             )}<br/>`

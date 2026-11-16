@@ -273,12 +273,13 @@ export function CheckoutHandoffClient() {
   }, []);
 
   // Pickup eligibility: Respects backend Medusa toggle per region:
-  // - Kashmir (19*, 18*): only eligible if enableSrinagarPickup is true in Medusa
+  // - Kashmir (19* strictly; 18* is Jammu and excluded from pickup): only eligible if enableSrinagarPickup is true in Medusa
   // - Bengaluru (56*): only eligible if enableBengaluruPickup is true in Medusa
-  // - All other Indian PIN codes: always false (only Doorstep Delivery is offered)
+  // - All other Indian PIN codes (including Jammu 18*): always false (only Doorstep Delivery is offered)
   const isPickupEligible =
     pincode.length === 6 &&
-    ((deliveryRules.zone === 'kashmir' &&
+    ((pincode.startsWith('19') &&
+      deliveryRules.zone === 'kashmir' &&
       (activePinCheck?.isPickupEligible !== undefined
         ? activePinCheck.isPickupEligible
         : pickupSettings.enableSrinagarPickup)) ||
@@ -322,13 +323,18 @@ export function CheckoutHandoffClient() {
       void checkPincode(clean, subtotal, { force: true });
       if (clean.startsWith('56')) {
         setStateName('Karnataka');
-        if (!city || city === 'Kashmir' || city === 'Srinagar') {
+        if (!city || city === 'Kashmir' || city === 'Srinagar' || city === 'Jammu') {
           setCity('Bengaluru');
         }
-      } else if (clean.startsWith('19') || clean.startsWith('18')) {
+      } else if (clean.startsWith('19')) {
         setStateName('Jammu & Kashmir');
-        if (!city || city === 'Bengaluru') {
+        if (!city || city === 'Bengaluru' || city === 'Jammu') {
           setCity('Srinagar');
+        }
+      } else if (clean.startsWith('18')) {
+        setStateName('Jammu & Kashmir');
+        if (!city || city === 'Bengaluru' || city === 'Srinagar') {
+          setCity('Jammu');
         }
       }
     }
