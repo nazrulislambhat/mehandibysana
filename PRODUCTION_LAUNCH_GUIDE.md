@@ -125,7 +125,7 @@ Medusa uses `@medusajs/medusa/file-s3` automatically whenever `S3_BUCKET`, `S3_A
 
    # Email Notifications & Campaigns (Step 5)
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxx
-   STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
+   STUDIO_FROM_EMAIL="Mehandi By Sana <sana@mehandibysana.com>"
    STUDIO_ADMIN_EMAIL=sana@mehandibysana.com
    ```
 
@@ -312,7 +312,7 @@ It supports **three providers automatically** (priority order):
 5. Add to **Railway Backend Variables** (and `backend/.env` locally if testing):
    ```bash
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxx
-   STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
+   STUDIO_FROM_EMAIL="Mehandi By Sana <sana@mehandibysana.com>"
    STUDIO_ADMIN_EMAIL=sana@mehandibysana.com
    STORE_SITE_URL=https://mehandibysana.com
    ```
@@ -325,9 +325,9 @@ If you prefer SMTP instead of Resend (`RESEND_API_KEY` and `BREVO_API_KEY` left 
 SMTP_HOST=smtp.zoho.in
 SMTP_PORT=465
 SMTP_SECURE=true
-SMTP_USER=orders@mehandibysana.com
+SMTP_USER=sana@mehandibysana.com
 SMTP_PASS=<ZOHO_APP_SPECIFIC_PASSWORD>
-STUDIO_FROM_EMAIL="Mehandi By Sana <orders@mehandibysana.com>"
+STUDIO_FROM_EMAIL="Mehandi By Sana <sana@mehandibysana.com>"
 STUDIO_ADMIN_EMAIL=sana@mehandibysana.com
 ```
 *(If on Railway free/hobby tier and port `465`/`587` times out, switch immediately to `RESEND_API_KEY` or `BREVO_API_KEY`.)*
@@ -378,7 +378,7 @@ grep -viE '@(gmail\.con|gamil\.com|yahoo\.con|hotmail\.con),' \
 3. **Full Broadcast Campaigns for 2,000+ Subscribers (Recommended)**:
    - Import `customer-emails-clean.csv` into **Resend Audiences & Broadcasts** (or **Brevo** / **Mailchimp** / **Zoho Campaigns**).
    - Always segment your first broadcast cleanly:
-     - **Campaign 1 (Warm-up)**: Send to **Repeat Buyers (`634` contacts)** first — high open rates build strong sender reputation for `orders@mehandibysana.com`!
+     - **Campaign 1 (Warm-up)**: Send to **Repeat Buyers (`634` contacts)** first — high open rates build strong sender reputation for `sana@mehandibysana.com`!
      - **Campaign 2**: Send seasonal Eid / Wedding Batch updates to **Kashmir Local (`1,902` contacts)** and **One-Time Buyers**.
    - Include a clear opt-out/unsubscribe link (built automatically into Resend Broadcasts and Brevo).
 

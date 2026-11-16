@@ -174,7 +174,7 @@ export function getEffectiveEmailSettings(): StudioEmailSettingsRecord {
   const fromEmail =
     db.fromEmail?.trim() ||
     process.env.STUDIO_FROM_EMAIL?.trim() ||
-    "Mehandi By Sana <orders@mehandibysana.com>";
+    "Mehandi By Sana <sana@mehandibysana.com>";
 
   const adminEmail =
     db.adminEmail !== undefined && db.updatedAt && db.adminEmail.trim()
