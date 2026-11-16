@@ -296,13 +296,7 @@ export function CartDrawer() {
         <div className="flex items-center justify-between gap-4 border-b border-hairline bg-canvas px-5 sm:px-8 py-4 sm:py-5 shrink-0">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span
-                aria-hidden="true"
-                className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-              />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                Bag Folio &middot; Kashmir &amp; Bengaluru
-              </span>
+             
               {highlightedKey ? (
                 <span
                   role="status"
@@ -381,23 +375,14 @@ export function CartDrawer() {
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 sm:gap-8 items-center">
               <div className="sm:col-span-5 rounded-2xl border border-hairline bg-linen p-6 flex flex-col items-center justify-center text-center">
                 <BotanicalEmptyCartGraphic className="mb-3" />
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                  00 &middot; Fresh Batch Ready
-                </span>
-                <p className="text-xs text-umber mt-1 max-w-[180px] leading-relaxed">
-                  Hand-rolled small batches shipped Mon–Sat nationwide.
-                </p>
+                
               </div>
 
               <div className="sm:col-span-7 flex flex-col items-start text-left">
                 <p className="font-serif text-3xl sm:text-4xl font-medium text-ink leading-tight mb-2">
                   Your bag is awaiting fresh henna
                 </p>
-                <p className="text-sm text-umber leading-relaxed mb-5">
-                  Explore fresh Sojat henna cones, aftercare balms, therapeutic
-                  oils, and precision tools mixed to order across Kashmir &amp;
-                  Bengaluru.
-                </p>
+               
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {SHOP_COLLECTIONS.slice(1).map((col) => (

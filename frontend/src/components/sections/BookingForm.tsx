@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { ChevronDown, LineDotRightHorizontalIcon } from 'lucide-react';
 export interface BookingFormProps {
@@ -40,6 +40,29 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const confirmationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (submittedRef) {
+      const scrollToConfirmation = () => {
+        if (confirmationRef.current) {
+          const yOffset = -90;
+          const y =
+            confirmationRef.current.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+          confirmationRef.current.focus();
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      };
+
+      scrollToConfirmation();
+      const timer = setTimeout(scrollToConfirmation, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [submittedRef]);
 
   const validate = (): FormErrors => {
     const next: FormErrors = {};
@@ -95,8 +118,10 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
   if (submittedRef) {
     return (
       <div
+        ref={confirmationRef}
         role="status"
-        className="overflow-hidden rounded-2xl border border-hairline bg-paper shadow-sm"
+        tabIndex={-1}
+        className="overflow-hidden rounded-2xl border border-hairline bg-paper shadow-sm outline-none"
       >
         <div className="bg-plaque text-plaque-ink border-b border-plaque-border p-7 sm:p-9 relative">
           <div
@@ -112,7 +137,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         </div>
         <div className="p-7 sm:p-9 space-y-5">
           <p className="text-sm md:text-base text-umber leading-relaxed">
-            Your booking or order inquiry has been logged for review. Sana will follow up via email ({values.email}) or phone regarding availability.
+            Your booking or order inquiry has been logged for review. We will get in touch with you via phone, email, or call regarding availability.
           </p>
           <Button
             type="button"

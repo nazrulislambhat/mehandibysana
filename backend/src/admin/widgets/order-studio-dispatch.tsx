@@ -271,6 +271,9 @@ const OrderStudioDispatchWidget = ({
     | null
   >(null);
 
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
   useEffect(() => {
     let active = true;
     fetch(`/admin/orders/${data.id}/studio-dispatch`, {
@@ -504,6 +507,46 @@ const OrderStudioDispatchWidget = ({
     }
   };
 
+  const handleDeleteOrder = async () => {
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/admin/orders/${data.id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.success) {
+        // Fallback to studio-dispatch action if DELETE route was bypassed
+        const fallbackRes = await fetch(
+          `/admin/orders/${data.id}/studio-dispatch`,
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "delete_order" }),
+          }
+        );
+        const fallbackJson = await fallbackRes.json().catch(() => ({}));
+        if (!fallbackRes.ok || !fallbackJson.success) {
+          toast.error(
+            fallbackJson.message || json.message || "Failed to delete order."
+          );
+          setIsDeleting(false);
+          return;
+        }
+      }
+      toast.success(
+        `Order #${orderAny.display_id || data.id.slice(-6)} deleted permanently.`
+      );
+      setTimeout(() => {
+        window.location.href = "/app/orders";
+      }, 500);
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to delete order.");
+      setIsDeleting(false);
+    }
+  };
+
   const currentStage = resolveStage(initialMeta, orderStatus);
   const currentOrigin = String(
     initialMeta.dispatch_origin || dispatchOrigin || "Srinagar Atelier (Kashmir)"
@@ -549,13 +592,53 @@ const OrderStudioDispatchWidget = ({
             </Text>
           </div>
 
-          <div className="text-right">
-            <span className="text-xs text-ui-fg-subtle block">Payable Total</span>
-            <span className="text-base font-bold text-ui-fg-base tabular-nums">
-              ₹{orderTotal.toLocaleString("en-IN")}
-            </span>
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <span className="text-xs text-ui-fg-subtle block">Payable Total</span>
+              <span className="text-base font-bold text-ui-fg-base tabular-nums">
+                ₹{orderTotal.toLocaleString("en-IN")}
+              </span>
+            </div>
+            <Button
+              size="small"
+              variant="danger"
+              onClick={() => setShowDeleteConfirm((prev) => !prev)}
+              disabled={isDeleting || submitting !== null}
+              className="text-xs font-medium"
+            >
+              🗑️ Delete Order
+            </Button>
           </div>
         </div>
+
+        {showDeleteConfirm && (
+          <div className="p-3.5 bg-red-50 border border-red-200 rounded-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-red-900 animate-in fade-in">
+            <div className="text-xs">
+              <strong className="block font-semibold text-red-950">⚠️ Permanently delete this order?</strong>
+              Order #{orderAny.display_id || data.id.slice(-6)} and all its associated items and records will be deleted. This action cannot be undone.
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={() => setShowDeleteConfirm(false)}
+                disabled={isDeleting}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="small"
+                variant="danger"
+                isLoading={isDeleting}
+                disabled={isDeleting}
+                onClick={handleDeleteOrder}
+                className="bg-red-700 hover:bg-red-800 text-white font-medium"
+              >
+                Yes, Delete Order
+              </Button>
+            </div>
+          </div>
+        )}
 
         {/* Live Badges */}
         <div className="flex flex-wrap items-center gap-2 pt-1">
