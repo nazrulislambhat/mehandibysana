@@ -6,6 +6,7 @@ import {
   normalizeFulfillmentStage,
   sanitizeHttpUrl,
 } from "../../../lib/studio-order-meta";
+import { evaluatePincode } from "../../../lib/pincode-rules";
 
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const rawOrder = String(req.query.orderNumber || req.query.order || "")
@@ -34,6 +35,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         "currency_code",
         "created_at",
         "metadata",
+        "summary.*",
         "items.*",
         "items.adjustments.*",
         "shipping_methods.*",
@@ -111,9 +113,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       meta.shipping_fee !== null &&
       String(meta.shipping_fee).trim() !== "" &&
       Number.isFinite(Number(meta.shipping_fee));
-    const shippingFee =
+    let shippingFee =
       Array.isArray(matched.shipping_methods) &&
-      matched.shipping_methods.length > 0
+      matched.shipping_methods.length > 0 &&
+      methodsShipping > 0
         ? methodsShipping
         : hasMetaShipping
           ? Number(meta.shipping_fee)
@@ -150,17 +153,46 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       .trim()
       .toUpperCase();
 
+    const postalCode = String(matched.shipping_address?.postal_code || "").trim();
+    const pinCheck = evaluatePincode(postalCode, subtotal);
+    const pincodeRule = String(
+      meta.pincode_rule && meta.pincode_rule !== "*"
+        ? meta.pincode_rule
+        : pinCheck.matchedRule?.pattern || meta.pincode_rule || "*"
+    ).trim();
+
     const hasMetaTotal =
       meta.total !== undefined &&
       meta.total !== null &&
       String(meta.total).trim() !== "" &&
       Number.isFinite(Number(meta.total));
-    const total = hasMetaTotal
-      ? Math.max(0, Number(meta.total))
+    const rawCandidateTotal = hasMetaTotal
+      ? Number(meta.total)
+      : Number(
+          matched.summary?.current_order_total ||
+          matched.summary?.original_order_total ||
+          0
+        );
+
+    // Fallback: If shippingFee is 0, infer from candidate total vs subtotal
+    if (shippingFee === 0 && rawCandidateTotal > subtotal - discountAmount) {
+      shippingFee = Math.max(
+        0,
+        Math.round((rawCandidateTotal - (subtotal - discountAmount)) * 100) / 100
+      );
+    }
+
+    const total = rawCandidateTotal > 0
+      ? Math.max(0, rawCandidateTotal)
       : Math.max(
           0,
           Math.round((subtotal + shippingFee - discountAmount) * 100) / 100
         );
+
+    const shippingMethodName =
+      matched.shipping_methods?.[0]?.name ||
+      pinCheck.matchedRule?.label ||
+      (shippingFee > 0 ? `Standard Delivery (${pincodeRule})` : "Free Delivery");
 
     const paymentCollections = Array.isArray((matched as any).payment_collections)
       ? (matched as any).payment_collections.filter(
@@ -197,7 +229,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         trackingUrl: sanitizeHttpUrl(meta.tracking_url),
         courierName: meta.courier_name || "Mehandi By Sana Dispatch",
         dispatchNote: meta.dispatch_note ? String(meta.dispatch_note) : "",
-        pincodeRule: meta.pincode_rule || "*",
+        pincodeRule,
+        shippingMethodName,
         couponCode,
         discountAmount,
         subtotal,

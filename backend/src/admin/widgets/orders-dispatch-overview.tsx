@@ -20,7 +20,7 @@ export const OrdersDispatchOverviewWidget = () => {
   useEffect(() => {
     let active = true;
     fetch(
-      "/admin/orders?limit=15&fields=id,display_id,created_at,email,status,payment_status,total,metadata",
+      "/admin/orders?limit=15&fields=id,display_id,created_at,email,status,payment_status,total,metadata,summary.*",
       { credentials: "include" }
     )
       .then((res) => res.json())
@@ -102,6 +102,7 @@ export const OrdersDispatchOverviewWidget = () => {
             <tr className="border-b border-ui-border-base bg-ui-bg-subtle/20 text-ui-fg-muted uppercase tracking-wider text-[10px]">
               <th className="py-2.5 px-4 font-semibold">Order</th>
               <th className="py-2.5 px-4 font-semibold">Customer</th>
+              <th className="py-2.5 px-4 font-semibold">Total &amp; Shipping</th>
               <th className="py-2.5 px-4 font-semibold">Dispatch Origin / Hub</th>
               <th className="py-2.5 px-4 font-semibold">Courier &amp; Tracking</th>
               <th className="py-2.5 px-4 font-semibold">Payment</th>
@@ -157,6 +158,41 @@ export const OrdersDispatchOverviewWidget = () => {
                   </td>
                   <td className="py-3 px-4 text-ui-fg-subtle whitespace-nowrap max-w-[200px] truncate">
                     {o.email || "Guest"}
+                  </td>
+                  <td className="py-3 px-4 whitespace-nowrap">
+                    {(() => {
+                      const metaTotal = Number.isFinite(Number(meta.total)) ? Number(meta.total) : 0;
+                      const summaryTotal = Number.isFinite(Number((o as any).summary?.current_order_total))
+                        ? Number((o as any).summary?.current_order_total)
+                        : 0;
+                      const orderTotal = Number.isFinite(Number(o.total)) ? Number(o.total) : 0;
+                      const total = Math.max(metaTotal, summaryTotal, orderTotal);
+
+                      const subtotal = Math.max(0, Number(meta.subtotal) || 0);
+                      const metaShip = Number.isFinite(Number(meta.shipping_fee)) ? Number(meta.shipping_fee) : 0;
+                      const shippingFee = metaShip > 0
+                        ? metaShip
+                        : total > subtotal && subtotal > 0
+                          ? total - subtotal
+                          : 0;
+
+                      return (
+                        <div>
+                          <div className="font-semibold text-ui-fg-base tabular-nums">
+                            ₹{total.toLocaleString("en-IN")}
+                          </div>
+                          <div className="text-[10px]">
+                            {shippingFee > 0 ? (
+                              <span className="text-blue-600 font-medium">
+                                +₹{shippingFee.toLocaleString("en-IN")} ship
+                              </span>
+                            ) : (
+                              <span className="text-ui-fg-muted">Free ship</span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </td>
                   <td className="py-3 px-4 whitespace-nowrap">
                     {origin ? (
