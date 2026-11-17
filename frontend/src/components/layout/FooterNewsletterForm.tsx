@@ -64,17 +64,17 @@ export function FooterNewsletterForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-hairline bg-paper/60 p-4 sm:p-5 space-y-3">
+    <div className="rounded-2xl border border-plaque-ink/15 bg-plaque-ink/[0.04] p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
           Fresh Batch Dispatch
         </p>
-        <span className="text-[10px] uppercase tracking-[0.16em] text-umber font-medium">
+        <span className="text-[10px] uppercase tracking-[0.16em] text-plaque-ink/60 font-medium">
           Small-Batch Drops
         </span>
       </div>
 
-      <p className="text-xs text-umber leading-relaxed">
+      <p className="text-xs text-plaque-ink/75 leading-relaxed">
         Be notified when fresh Sojat henna cones are rolled or bridal slots open.
       </p>
 
@@ -106,7 +106,7 @@ export function FooterNewsletterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="min-h-[40px] flex-1 rounded-md border border-hairline bg-canvas px-3.5 py-2 text-xs text-ink placeholder:text-umber/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta transition-colors"
+            className="min-h-[40px] flex-1 rounded-md border border-plaque-ink/20 bg-plaque px-3.5 py-2 text-xs text-plaque-ink placeholder:text-plaque-ink/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta transition-colors"
           />
           <Button
             type="submit"
@@ -127,7 +127,7 @@ export function FooterNewsletterForm() {
         <p
           role={status === 'error' ? 'alert' : 'status'}
           className={`text-xs leading-relaxed ${
-            status === 'error' ? 'text-crimson' : 'text-botanical font-medium'
+            status === 'error' ? 'text-[#fca5a5]' : 'text-brand-green font-medium'
           }`}
         >
           {feedback}

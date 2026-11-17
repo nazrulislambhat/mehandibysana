@@ -43,9 +43,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-linen text-ink border-t border-hairline transition-colors duration-300 overflow-hidden">
+    <footer className="relative bg-plaque text-plaque-ink border-t border-plaque-border overflow-hidden">
       {/* Top terracotta architectural hairline */}
-      <div aria-hidden="true" className="h-[2px] w-full bg-terracotta" />
+      <div aria-hidden="true" className="h-[2px] w-full bg-terracotta-solid" />
 
       {/* Main Editorial Footer Container */}
       <div className="editorial-container pt-12 md:pt-16 pb-8">
@@ -55,10 +55,10 @@ export function Footer() {
             <Link
               href="/"
               aria-label="Mehandi By Sana Home"
-              className="group inline-flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-medium tracking-tight text-ink hover:text-terracotta transition-colors"
+              className="group inline-flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-medium tracking-tight text-plaque-ink hover:text-terracotta transition-colors"
             >
               <BrandCrest
-                tone="auto-badge"
+                tone="ink-badge"
                 size={38}
                 decorative
                 className="shrink-0 transition-transform duration-500 group-hover:scale-105"
@@ -66,7 +66,7 @@ export function Footer() {
               <span>Mehandi By Sana</span>
             </Link>
 
-            <p className="text-xs sm:text-sm text-umber leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-plaque-ink/75 leading-relaxed max-w-sm">
               Artisanal organic Sojat henna cones, therapeutic essential oils,
               and heirloom bridal artistry. Handcrafted fresh in small batches
               across Kashmir &amp; Bengaluru.
@@ -78,7 +78,7 @@ export function Footer() {
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Chat on WhatsApp"
               >
                 <WhatsAppChatIcon size={13} className="text-brand-green" />
@@ -88,7 +88,7 @@ export function Footer() {
                 href="https://www.instagram.com/mehandibysana"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Instagram profile @mehandibysana"
               >
                 <InstagramIcon size={13} className="text-terracotta" />
@@ -96,18 +96,18 @@ export function Footer() {
               </a>
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Email sana@mehandibysana.com"
               >
-                <MailEnvelopeIcon size={13} className="text-umber" />
+                <MailEnvelopeIcon size={13} className="text-plaque-ink/70" />
                 <span>Email</span>
               </a>
               <a
                 href="tel:+919149648717"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Call +91-9149648717"
               >
-                <PhoneHandsetIcon size={13} className="text-umber" />
+                <PhoneHandsetIcon size={13} className="text-plaque-ink/70" />
                 <span>Call</span>
               </a>
             </div>
@@ -123,7 +123,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-umber hover:text-ink hover:translate-x-0.5 inline-block transition-all"
+                    className="text-plaque-ink/75 hover:text-plaque-ink hover:translate-x-0.5 inline-block transition-all"
                   >
                     {item.label}
                   </Link>
@@ -142,7 +142,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-umber hover:text-ink hover:translate-x-0.5 inline-block transition-all"
+                    className="text-plaque-ink/75 hover:text-plaque-ink hover:translate-x-0.5 inline-block transition-all"
                   >
                     {item.label}
                   </Link>
@@ -154,7 +154,7 @@ export function Footer() {
           {/* Col 4: Fresh Batch Dispatch (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-4">
             <FooterNewsletterForm />
-            <div className="flex items-center gap-2 text-xs text-umber pt-0.5">
+            <div className="flex items-center gap-2 text-xs text-plaque-ink/75 pt-0.5">
               <LocationPinIcon size={14} className="text-terracotta shrink-0" />
               <span>Studios in Srinagar &amp; Bengaluru &middot; Dispatch Pan-India</span>
             </div>
@@ -168,8 +168,8 @@ export function Footer() {
       </div>
 
       {/* Bottom Legal, Trust & Theme Strip */}
-      <div className="relative z-10 border-t border-hairline bg-canvas/40">
-        <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-umber">
+      <div className="relative z-10 border-t border-plaque-ink/12 bg-black/20">
+        <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/70">
           <p className="text-[11px]">
             &copy; {currentYear} Mehandi By Sana. All rights reserved.
           </p>
@@ -179,12 +179,12 @@ export function Footer() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="hover:text-ink transition-colors"
+                className="hover:text-plaque-ink transition-colors"
               >
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle variant="segmented" surface="canvas" />
+            <ThemeToggle variant="segmented" surface="plaque" />
           </div>
         </div>
       </div>
