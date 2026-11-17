@@ -1,12 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import {
-  InstagramIcon,
-  MailEnvelopeIcon,
-  PhoneHandsetIcon,
-  WhatsAppChatIcon,
-} from '@/components/graphics/BrandIcons';
+import { MessageCircle, Camera, Mail, Phone } from 'lucide-react';
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
@@ -80,8 +75,8 @@ export function Footer() {
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Chat on WhatsApp"
               >
-                <WhatsAppChatIcon size={13} className="text-brand-green" />
                 <span>WhatsApp</span>
+                <MessageCircle className="w-3 h-3 text-brand-green" />
               </a>
               <a
                 href="https://www.instagram.com/mehandibysana"
@@ -90,24 +85,24 @@ export function Footer() {
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Instagram profile @mehandibysana"
               >
-                <InstagramIcon size={13} className="text-terracotta" />
                 <span>@mehandibysana</span>
+                <Camera className="w-3 h-3 text-terracotta" />
               </a>
               <a
                 href="mailto:sana@mehandibysana.com"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Email sana@mehandibysana.com"
               >
-                <MailEnvelopeIcon size={13} className="text-plaque-ink/70" />
                 <span>Email</span>
+                <Mail className="w-3 h-3 text-plaque-ink/70" />
               </a>
               <a
                 href="tel:+919149648717"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
                 aria-label="Call +91-9149648717"
               >
-                <PhoneHandsetIcon size={13} className="text-plaque-ink/70" />
                 <span>Call</span>
+                <Phone className="w-3 h-3 text-plaque-ink/70" />
               </a>
             </div>
           </div>

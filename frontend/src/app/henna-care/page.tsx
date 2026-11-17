@@ -12,11 +12,7 @@ import {
 } from '@/components/editorial/PolicyDocumentLayout';
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';
 import { LinkButton } from '@/components/ui/Button';
-import {
-  FreezerStorageIcon,
-  HennaConeIcon,
-  PureBotanicalIcon,
-} from '@/components/graphics/BrandIcons';
+import { Snowflake, Sparkles, Leaf } from 'lucide-react';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Henna Storage, Application & 48-Hour Stain Care Guide',
@@ -84,7 +80,7 @@ export default function HennaCarePage() {
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
       >
         <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
-          <FreezerStorageIcon size={14} className="shrink-0" />
+          <Snowflake className="w-3 h-3 shrink-0" />
           <span>Step 01</span>
         </p>
         <h2 className="font-serif text-2xl font-medium text-ink">
@@ -116,7 +112,7 @@ export default function HennaCarePage() {
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
       >
         <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
-          <HennaConeIcon size={14} className="shrink-0" />
+          <Sparkles className="w-3 h-3 shrink-0" />
           <span>Step 02</span>
         </p>
         <h2 className="font-serif text-2xl font-medium text-ink">
@@ -227,7 +223,7 @@ export default function HennaCarePage() {
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
       >
         <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
-          <PureBotanicalIcon size={14} className="shrink-0" />
+          <Leaf className="w-3 h-3 shrink-0" />
           <span>Step 06</span>
         </p>
         <h2 className="font-serif text-2xl font-medium text-ink">

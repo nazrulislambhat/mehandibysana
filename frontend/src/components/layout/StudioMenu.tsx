@@ -10,14 +10,12 @@ import {
   type StudioNavItem,
 } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal, Waypoints } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Waypoints, X, Sparkles, Calendar, Leaf } from 'lucide-react';
 import {
   BotanicalHeroStudy,
   BotanicalSprig,
-  ServiceMotifIcon,
 } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
 type MenuPhase = 'closed' | 'opening' | 'open' | 'closing';
@@ -187,7 +185,7 @@ export function StudioMenu() {
                     className="inline-flex items-center gap-2.5 min-h-[44px] px-4 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:bg-linen hover:border-ink cursor-pointer"
                   >
                     <span>Close</span>
-                    <CloseCrossIcon size={16} />
+                    <X className="w-3 h-3" />
                   </button>
                 </div>
               </div>
@@ -262,7 +260,7 @@ export function StudioMenu() {
                                 aria-hidden="true"
                                 className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-transparent group-hover:border-divider group-hover:bg-paper text-umber group-hover:text-terracotta group-hover:translate-x-0.5 transition-all"
                               >
-                                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                                <LineDotRightHorizontal className="w-3 h-3" />
                               </span>
                             </div>
                           </Link>
@@ -279,10 +277,13 @@ export function StudioMenu() {
                         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
                           {activePreview.index} &middot; {activePreview.eyebrow}
                         </span>
-                        <ServiceMotifIcon
-                          variant={activePreview.motif}
-                          className="w-7 h-7 shrink-0"
-                        />
+                        {activePreview.motif === 'events' ? (
+                          <Calendar className="w-3 h-3 text-terracotta shrink-0" />
+                        ) : activePreview.motif === 'botanical' ? (
+                          <Leaf className="w-3 h-3 text-terracotta shrink-0" />
+                        ) : (
+                          <Sparkles className="w-3 h-3 text-terracotta shrink-0" />
+                        )}
                       </div>
 
                       <h2 className="font-serif text-2xl lg:text-3xl font-medium text-ink leading-snug">
@@ -299,7 +300,7 @@ export function StudioMenu() {
                           className="inline-flex items-center gap-2 text-sm font-medium text-terracotta hover:text-terracotta-dark"
                         >
                           <span>{activePreview.ctaLabel}</span>
-                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                          <LineDotRightHorizontal className="w-3 h-3" />
                         </Link>
                         <BotanicalSprig className="w-11 h-4" />
                       </div>
@@ -334,7 +335,7 @@ export function StudioMenu() {
                         className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6 inline-flex items-center justify-center gap-1.5"
                       >
                         <span>Shop Products</span>
-                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <ShoppingBag className="w-3 h-3" />
                       </LinkButton>
                       <LinkButton
                         href="/contact"

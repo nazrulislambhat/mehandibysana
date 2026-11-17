@@ -5,9 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SHOP_COLLECTIONS, STUDIO_NAV_ITEMS } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
-import { ShoppingBag,Waypoints, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, Waypoints, LineDotRightHorizontal, ChevronDown, Sparkles } from 'lucide-react';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
-import { ChevronDownIcon, HennaConeIcon } from '@/components/graphics/BrandIcons';
 
 type PanelPhase = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -239,9 +238,8 @@ export function DesktopNav() {
                       : 'text-umber hover:text-terracotta hover:bg-linen'
                   }`}
                 >
-                  <ChevronDownIcon
-                    size={12}
-                    className={`transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  <ChevronDown
+                    className={`w-3 h-3 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       isMegaExpanded ? 'rotate-180 text-terracotta-on-ink' : ''
                     }`}
                   />
@@ -319,7 +317,7 @@ export function DesktopNav() {
                     className="text-xs font-medium text-terracotta hover:text-terracotta-dark inline-flex items-center gap-1.5"
                   >
                     <span>View full catalog</span>
-                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <ShoppingBag className="w-3 h-3" />
                   </Link>
                 </div>
 
@@ -361,7 +359,7 @@ export function DesktopNav() {
                         aria-hidden="true"
                         className="mt-1 text-umber/60 group-hover:text-terracotta group-hover:translate-x-0.5 transition-all text-sm shrink-0"
                       >
-                        <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                        <LineDotRightHorizontal className="w-3 h-3" />
                       </span>
                     </Link>
                   ))}
@@ -373,7 +371,7 @@ export function DesktopNav() {
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
-                      <HennaConeIcon size={14} className="shrink-0" />
+                      <Sparkles className="w-3 h-3 shrink-0" />
                       <span>Kashmir &amp; Bengaluru Batch</span>
                     </span>
                     <BotanicalSprig className="w-12 h-4" />
@@ -422,7 +420,7 @@ export function DesktopNav() {
                     className="rounded-lg text-xs min-h-[36px] py-2 inline-flex items-center gap-1.5"
                   >
                     <span>Shop All 19 Items</span>
-                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <ShoppingBag className="w-3 h-3" />
                   </LinkButton>
                 </div>
               </div>

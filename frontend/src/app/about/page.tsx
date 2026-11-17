@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Leaf, Sparkles, CheckCircle2 } from 'lucide-react';
 import { CircleArrowUpRightExit } from '@/components/ui/icons';
 import {
   buildAboutPageJsonLd,
@@ -15,12 +15,6 @@ import {
   BotanicalDivider,
   BotanicalSprig,
 } from '@/components/graphics/BotanicalIllustrations';
-import {
-  BridalArchIcon,
-  HennaConeIcon,
-  PureBotanicalIcon,
-  VerifiedHonorSealIcon,
-} from '@/components/graphics/BrandIcons';
 import { SanaBurqaAtelierPortrait } from '@/components/graphics/HennaArtworkPlates';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -294,11 +288,9 @@ export default function AboutPage() {
                   </span>
                   <span className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-hairline bg-linen text-ink">
                     {pillar.number === '01' ? (
-                      <PureBotanicalIcon size={18} />
-                    ) : pillar.number === '02' ? (
-                      <HennaConeIcon size={18} />
+                      <Leaf className="w-3 h-3" />
                     ) : (
-                      <BridalArchIcon size={18} />
+                      <Sparkles className="w-3 h-3" />
                     )}
                   </span>
                 </div>
@@ -323,7 +315,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <VerifiedHonorSealIcon size={15} className="text-terracotta shrink-0" />
+                <CheckCircle2 className="w-3 h-3 text-terracotta shrink-0" />
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
                   07 Honors, Jury &amp; Press Features
                 </p>
@@ -430,13 +422,13 @@ export default function AboutPage() {
                         {item.number}
                       </span>
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
-                        <VerifiedHonorSealIcon size={14} className="shrink-0" />
+                        <CheckCircle2 className="w-3 h-3 shrink-0" />
                         <span>Verified Honor</span>
                       </span>
                     </div>
                   ) : (
                     <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] pt-2 text-umber/80">
-                      <VerifiedHonorSealIcon size={14} className="text-terracotta shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-terracotta shrink-0" />
                       <span>Verified Honor</span>
                     </div>
                   )}
@@ -453,7 +445,7 @@ export default function AboutPage() {
                 size="md"
                 className="rounded-md"
               >
-                Explore Products <ShoppingBag className='w-3.5 h-3.5'/>
+                Explore Products <ShoppingBag className='w-3 h-3'/>
               </LinkButton>
               <LinkButton
                 href="/services"
@@ -461,7 +453,7 @@ export default function AboutPage() {
                 size="md"
                 className="rounded-md"
               >
-                View Services <LineDotRightHorizontal className='w-3.5 h-3.5'/>
+                View Services <LineDotRightHorizontal className='w-3 h-3'/>
               </LinkButton>
             </div>
             <Link

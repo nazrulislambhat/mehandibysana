@@ -8,7 +8,7 @@ import {
   subscribeTheme,
   toggleTheme,
 } from '@/lib/theme';
-import { CrescentMoonIcon, SunBurstIcon } from '@/components/graphics/BrandIcons';
+import { Sun, Moon } from 'lucide-react';
 
 export interface ThemeToggleProps {
   variant?: 'icon' | 'segmented';
@@ -46,6 +46,7 @@ export function ThemeToggle({
           onClick={() => setTheme('light')}
           aria-pressed={!isDark}
           data-theme-option="light"
+          aria-label="Light mode"
           className={`inline-flex items-center gap-1.5 min-h-[24px] rounded-full px-2 py-1 text-xs font-medium transition-all cursor-pointer ${
             !isDark
               ? isPlaque
@@ -56,17 +57,15 @@ export function ThemeToggle({
                 : 'text-umber hover:text-ink'
           }`}
         >
-          <SunBurstIcon
-            size={14}
-            className={
+          <Sun
+            className={`w-3 h-3 ${
               !isDark
                 ? isPlaque
                   ? 'text-terracotta-dark shrink-0'
                   : 'text-terracotta-on-ink shrink-0'
                 : 'shrink-0'
-            }
+            }`}
           />
-          
         </button>
 
         <button
@@ -74,6 +73,7 @@ export function ThemeToggle({
           onClick={() => setTheme('dark')}
           aria-pressed={isDark}
           data-theme-option="dark"
+          aria-label="Dark mode"
           className={`inline-flex items-center gap-1.5 min-h-[24px] rounded-full px-2 py-1 text-xs font-medium transition-all cursor-pointer ${
             isDark
               ? isPlaque
@@ -84,17 +84,15 @@ export function ThemeToggle({
                 : 'text-umber hover:text-ink'
           }`}
         >
-          <CrescentMoonIcon
-            size={14}
-            className={
+          <Moon
+            className={`w-3 h-3 ${
               isDark
                 ? isPlaque
                   ? 'text-terracotta-dark shrink-0'
                   : 'text-terracotta-on-ink shrink-0'
                 : 'shrink-0'
-            }
+            }`}
           />
-      
         </button>
       </div>
     );
@@ -115,17 +113,15 @@ export function ThemeToggle({
         aria-hidden="true"
         className="relative flex items-center justify-center w-5 h-5"
       >
-        <SunBurstIcon
-          size={17}
-          className={`absolute transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        <Sun
+          className={`w-3 h-3 absolute transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             isDark
               ? 'opacity-100 scale-100 rotate-0'
               : 'opacity-0 scale-75 -rotate-45 pointer-events-none'
           }`}
         />
-        <CrescentMoonIcon
-          size={17}
-          className={`absolute transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        <Moon
+          className={`w-3 h-3 absolute transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             !isDark
               ? 'opacity-100 scale-100 rotate-0'
               : 'opacity-0 scale-75 rotate-45 pointer-events-none'

@@ -274,7 +274,7 @@ export default function TechStackPage() {
         <div className="editorial-container">
           <div className="max-w-3xl space-y-4">
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
-              <Code2Icon className="w-4 h-4" />
+              <Code2Icon className="w-3 h-3" />
               <span>Architecture &amp; Engineering</span>
             </div>
 
@@ -294,7 +294,7 @@ export default function TechStackPage() {
                 Live in Production
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-umber">
-                <GitBranch className="w-3.5 h-3.5 text-terracotta" />
+                <GitBranch className="w-3 h-3 text-terracotta" />
                 Headless Architecture
               </span>
               <a
@@ -307,14 +307,14 @@ export default function TechStackPage() {
                 <span className="font-semibold text-terracotta group-hover:text-ink underline underline-offset-2 transition-colors">
                   stacknothing.com
                 </span>
-                <CircleArrowUpRightExit className="w-2.5 h-2.5 text-terracotta group-hover:text-ink transition-colors" />
+                <CircleArrowUpRightExit className="w-3 h-3 text-terracotta group-hover:text-ink transition-colors" />
               </a>
               <Link
                 href="/changelog"
                 className="inline-flex items-center gap-1 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 ml-1"
               >
                 <span>View Release Changelog</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                <LineDotRightHorizontal className="w-3 h-3" />
               </Link>
             </div>
           </div>
@@ -371,7 +371,7 @@ export default function TechStackPage() {
       {/* Main Layers Section */}
       <section className="py-16 sm:py-20">
         <div className="editorial-container space-y-16">
-          {STACK_LAYERS.map((layer, idx) => {
+          {STACK_LAYERS.map((layer) => {
             const Icon = layer.icon;
             return (
               <div
@@ -381,7 +381,7 @@ export default function TechStackPage() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2.5">
                     <span className="w-8 h-8 rounded-lg bg-linen flex items-center justify-center text-terracotta border border-hairline">
-                      <Icon className="w-4 h-4" />
+                      <Icon className="w-3 h-3" />
                     </span>
                     <h2 className="font-serif text-xl sm:text-2xl font-medium text-ink">
                       {layer.category}
@@ -423,7 +423,7 @@ export default function TechStackPage() {
                             aria-label={`Official website of ${tech.name}`}
                             className="text-umber hover:text-ink transition-colors p-1"
                           >
-                            <CircleArrowUpRightExit className="w-4 h-4" />
+                            <CircleArrowUpRightExit className="w-3 h-3" />
                           </a>
                         )}
                       </div>
@@ -434,7 +434,7 @@ export default function TechStackPage() {
                             key={hIdx}
                             className="flex items-start gap-2 text-xs text-umber leading-relaxed"
                           >
-                            <CheckCircle2 className="w-3.5 h-3.5 text-brand-green shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-3 h-3 text-brand-green shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -465,7 +465,7 @@ export default function TechStackPage() {
                 className="group font-medium text-terracotta hover:text-ink underline underline-offset-4 inline-flex items-center gap-1"
               >
                 StackNothing LLC
-                <CircleArrowUpRightExit className="w-2.5 h-2.5 text-terracotta group-hover:text-ink" />
+                <CircleArrowUpRightExit className="w-3 h-3 text-terracotta group-hover:text-ink" />
               </a>
               . Explore our release roadmap and version history to see how our engineering
               evolves alongside our small-batch organic henna paste batches.
@@ -474,7 +474,7 @@ export default function TechStackPage() {
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <LinkButton href="/changelog" variant="accent" size="md">
               <span>View Release Changelog</span>
-              <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1.5" />
+              <LineDotRightHorizontal className="w-3 h-3 ml-1.5" />
             </LinkButton>
             <LinkButton href="/shop" variant="secondary" size="md">
               <span>Explore Products</span>

@@ -283,7 +283,7 @@ export function FeaturedProductsSection({
                 className="rounded-full inline-flex items-center gap-1.5"
               >
                 <span>{leadProduct.inStock ? 'Choose Pack' : 'View Formulation'}</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                <LineDotRightHorizontal className="w-3 h-3" />
               </LinkButton>
             )}
           </div>
@@ -382,7 +382,7 @@ export function FeaturedProductsSection({
                         className="rounded-full inline-flex items-center gap-1.5"
                       >
                         <span>Select Pack</span>
-                        <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                        <LineDotRightHorizontal className="w-3 h-3" />
                       </LinkButton>
                     ) : (
                       <AddToCartButton
@@ -404,7 +404,7 @@ export function FeaturedProductsSection({
                       className="rounded-full inline-flex items-center gap-1.5"
                     >
                       <span>Inspect</span>
-                      <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                      <LineDotRightHorizontal className="w-3 h-3" />
                     </LinkButton>
                   )}
                 </div>

@@ -69,8 +69,8 @@ function ResetPasswordForm() {
   if (success) {
     return (
       <div className="rounded-2xl border border-hairline bg-paper p-8 sm:p-10 shadow-sm text-center">
-        <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center mx-auto mb-5">
-          <CheckCircle2 className="w-6 h-6" />
+        <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center mx-auto mb-5">
+          <CheckCircle2 className="w-3 h-3" />
         </div>
         <h2 className="font-serif text-2xl font-medium text-ink mb-2">Password Updated</h2>
         <p className="text-sm text-umber mb-6 max-w-sm mx-auto">
@@ -79,7 +79,7 @@ function ResetPasswordForm() {
         <Link href="/shop">
           <Button variant="primary" size="md" className="rounded-md w-full sm:w-auto inline-flex items-center gap-1.5">
             <span>Continue to Shop</span>
-            <ShoppingBag className="w-4 h-4" />
+            <ShoppingBag className="w-3 h-3" />
           </Button>
         </Link>
       </div>
@@ -88,8 +88,8 @@ function ResetPasswordForm() {
 
   return (
     <div className="rounded-2xl border border-hairline bg-paper p-8 sm:p-10 shadow-sm">
-      <div className="w-10 h-10 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center mb-5">
-        <Lock className="w-5 h-5" />
+      <div className="w-8 h-8 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center mb-5">
+        <Lock className="w-3 h-3" />
       </div>
 
       <h1 className="font-serif text-2xl sm:text-3xl font-medium text-ink mb-2">
@@ -107,7 +107,7 @@ function ResetPasswordForm() {
 
       {error && (
         <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 text-sm flex items-start gap-2.5">
-          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+          <AlertCircle className="w-3 h-3 shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
       )}

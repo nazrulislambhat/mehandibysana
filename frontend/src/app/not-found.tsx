@@ -111,7 +111,7 @@ export default function NotFound() {
                 size="lg"
                 className="rounded-md"
               >
-                Shop <ShoppingBag className="w-3.5 h-3.5" />
+                Shop <ShoppingBag className="w-3 h-3" />
               </LinkButton>
               <LinkButton
                 href="/"
@@ -119,7 +119,7 @@ export default function NotFound() {
                 size="lg"
                 className="rounded-md"
               >
-                Return Home <House className="w-3.5 h-3.5" />
+                Return Home <House className="w-3 h-3" />
               </LinkButton>
             </div>
 
@@ -193,7 +193,7 @@ export default function NotFound() {
                           aria-hidden="true"
                           className="text-terracotta transition-transform duration-200 group-hover:translate-x-1"
                         >
-                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                          <LineDotRightHorizontal className="w-3 h-3" />
                         </span>
                       </Link>
                     </li>

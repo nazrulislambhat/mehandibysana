@@ -1,6 +1,27 @@
 import React from 'react';
+import {
+  ShoppingBag,
+  Sparkles,
+  Snowflake,
+  Package,
+  MapPin,
+  Mail,
+  Phone,
+  MessageCircle,
+  Camera,
+  CheckCircle2,
+  ShieldCheck,
+  Leaf,
+  Clock,
+  Search,
+  Sun,
+  Moon,
+  ChevronDown,
+  X,
+  type LucideProps,
+} from 'lucide-react';
 
-export interface BrandIconProps {
+export interface BrandIconProps extends LucideProps {
   size?: number | string;
   className?: string;
   decorative?: boolean;
@@ -8,643 +29,78 @@ export interface BrandIconProps {
   accentColor?: string;
 }
 
-function getA11yProps(decorative = true, label?: string) {
-  if (decorative) {
-    return { 'aria-hidden': true as const };
-  }
-  return {
-    role: 'img' as const,
-    'aria-label': label,
-  };
+export function ApothecaryBagIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <ShoppingBag className={className} {...props} />;
 }
 
-/**
- * Structured apothecary bag with botanical henna drop seal.
- */
-export function ApothecaryBagIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Shopping bag',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M5.5 8.5L4.2 19.5C4.08 20.55 4.9 21.5 5.95 21.5H18.05C19.1 21.5 19.92 20.55 19.8 19.5L18.5 8.5H5.5Z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.75 8.5V6.75C8.75 4.95 10.2 3.5 12 3.5C13.8 3.5 15.25 4.95 15.25 6.75V8.5"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12 12.25C10.8 13.75 10.4 14.85 10.4 15.7C10.4 16.75 11.12 17.5 12 17.5C12.88 17.5 13.6 16.75 13.6 15.7C13.6 14.85 13.2 13.75 12 12.25Z"
-        fill="var(--color-accent)"
-      />
-    </svg>
-  );
+export function HennaConeIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Sparkles className={className} {...props} />;
 }
 
-/**
- * Diagonal 0.38mm rolled organic henna cone with tip pin and paste drop.
- */
-export function HennaConeIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = '0.38mm henna cone',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M18.6 3.8C19.9 5.1 20.1 6.7 19.2 7.6L8.8 15.8C8.3 16.2 7.6 16.1 7.3 15.6C6.9 15.1 7 14.4 7.5 14L15.4 4.1C16.3 3.2 17.5 2.7 18.6 3.8Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12.9 7.3L16.3 10.7"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M7.3 15.7L5 18"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <circle cx="4" cy="19.5" r="1.4" fill="var(--color-accent)" />
-    </svg>
-  );
+export function FreezerStorageIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Snowflake className={className} {...props} />;
 }
 
-/**
- * Deep freezer storage crystal (-18°C henna cone conservation).
- */
-export function FreezerStorageIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Freezer storage',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M12 3V21M4.2 7.5L19.8 16.5M19.8 7.5L4.2 16.5"
-        stroke="currentColor"
-        strokeWidth="1.55"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9.8 5L12 7.2L14.2 5M9.8 19L12 16.8L14.2 19"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="12" r="2.2" fill="var(--color-accent)" />
-    </svg>
-  );
+export function CourierDispatchIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Package className={className} {...props} />;
 }
 
-/**
- * Small-batch courier parcel sealed with terracotta botanical mark.
- */
-export function CourierDispatchIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Parcel dispatch',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M12 3L20.5 7.6V16.4L12 21L3.5 16.4V7.6L12 3Z"
-        stroke="currentColor"
-        strokeWidth="1.55"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M3.8 7.8L12 12.2L20.2 7.8M12 12.2V20.6"
-        stroke="currentColor"
-        strokeWidth="1.45"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8 5.4L16.2 9.9"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="16.2" cy="14.6" r="1.4" fill="var(--color-accent)" />
-    </svg>
-  );
+export function LocationPinIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <MapPin className={className} {...props} />;
 }
 
-/**
- * Botanical location pin with warm terracotta core.
- */
-export function LocationPinIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Location pin',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M12 21C12 21 18.5 14.9 18.5 9.75C18.5 6.16 15.59 3.25 12 3.25C8.41 3.25 5.5 6.16 5.5 9.75C5.5 14.9 12 21 12 21Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="9.75" r="2.25" fill="var(--color-accent)" />
-    </svg>
-  );
+export function MailEnvelopeIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Mail className={className} {...props} />;
 }
 
-/**
- * Architectural studio mail envelope icon.
- */
-export function MailEnvelopeIcon({
-  size = 16,
-  className = '',
-  decorative = true,
-  label = 'Email',
-  accentColor = 'currentColor',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <rect
-        x="3"
-        y="5.5"
-        width="18"
-        height="13"
-        rx="2.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M4.2 7L12 13L19.8 7"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="13" r="1.4" fill={accentColor} />
-    </svg>
-  );
+export function PhoneHandsetIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Phone className={className} {...props} />;
 }
 
-/**
- * Concierge telephone handset icon.
- */
-export function PhoneHandsetIcon({
-  size = 16,
-  className = '',
-  decorative = true,
-  label = 'Phone',
-  accentColor = 'currentColor',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M6.4 4.2H9.2L10.7 8L8.9 9.5C9.85 11.6 11.4 13.15 13.5 14.1L15 12.3L18.8 13.8V16.6C18.8 17.85 17.75 18.85 16.5 18.75C10.5 18.2 5.8 13.5 5.25 7.5C5.15 6.25 6.15 5.2 6.4 4.2Z"
-        stroke="currentColor"
-        strokeWidth="1.55"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M15.2 5.2C17.1 5.6 18.4 6.9 18.8 8.8"
-        stroke={accentColor}
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+export function WhatsAppChatIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <MessageCircle className={className} {...props} />;
 }
 
-/**
- * WhatsApp studio chat official brand glyph icon.
- */
-export function WhatsAppChatIcon({
-  size = 16,
-  className = '',
-  decorative = true,
-  label = 'WhatsApp',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z" />
-    </svg>
-  );
+export function InstagramIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Camera className={className} {...props} />;
 }
 
-/**
- * Instagram studio social handle icon.
- */
-export function InstagramIcon({
-  size = 14,
-  className = '',
-  decorative = true,
-  label = 'Instagram',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-    </svg>
-  );
+export function VerifiedHonorSealIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <CheckCircle2 className={className} {...props} />;
 }
 
-/**
- * 8-petal rosette seal for Verified Studio Honors & Press Features.
- */
-export function VerifiedHonorSealIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Verified honor',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M12 2.8L14.3 4.8L17.3 4.5L18.5 7.3L21.2 8.7L20.5 11.6L21.6 14.4L19.4 16.5L19.2 19.5L16.3 20.2L14.5 22.5L11.7 21.4L8.9 22.5L7.1 20.2L4.2 19.5L4 16.5L1.8 14.4L2.9 11.6L2.2 8.7L4.9 7.3L6.1 4.5L9.1 4.8L12 2.8Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.7 12.6L11 14.9L15.6 9.9"
-        stroke="var(--color-accent)"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+export function ShieldProtectIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <ShieldCheck className={className} {...props} />;
 }
 
-/**
- * Shield security mark for PCI-DSS payments & checkout assurance.
- */
-export function ShieldProtectIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Protected transaction',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M12 3.2L19 6.2V11.6C19 16.1 16 19.7 12 21C8 19.7 5 16.1 5 11.6V6.2L12 3.2Z"
-        stroke="currentColor"
-        strokeWidth="1.55"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 8.5L14.6 11.1L12 13.7L9.4 11.1L12 8.5Z"
-        fill="var(--color-accent)"
-      />
-    </svg>
-  );
+export function PureBotanicalIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Leaf className={className} {...props} />;
 }
 
-/**
- * 100% Chemical-free organic Sojat henna leaf badge icon.
- */
-export function PureBotanicalIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Pure organic henna',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M12 20.5C12 20.5 6 16.8 6 10.6C6 6.6 8.8 3.6 12 3.6C15.2 3.6 18 6.6 18 10.6C18 16.8 12 20.5 12 20.5Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 6.5V18.8M12 11.5L15 9.6M12 14.6L9 12.7"
-        stroke="currentColor"
-        strokeWidth="1.35"
-        strokeLinecap="round"
-      />
-      <circle cx="12" cy="11.5" r="1.5" fill="var(--color-accent)" />
-    </svg>
-  );
+export function BridalArchIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Sparkles className={className} {...props} />;
 }
 
-/**
- * Mughal arch + lotus finial crown icon for Bridal Mehandi Sessions.
- */
-export function BridalArchIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Bridal mehandi session',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M5.5 20.5V11.2C5.5 7.9 8.4 5.5 12 4C15.6 5.5 18.5 7.9 18.5 11.2V20.5H5.5Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 10.5C10.5 12.2 10.1 13.7 10.1 14.8C10.1 16.2 11 17.2 12 17.2C13 17.2 13.9 16.2 13.9 14.8C13.9 13.7 13.5 12.2 12 10.5Z"
-        fill="var(--color-accent)"
-      />
-      <circle cx="12" cy="2.5" r="1.2" fill="var(--color-accent)" />
-    </svg>
-  );
+export function ClockWindowIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Clock className={className} {...props} />;
 }
 
-/**
- * Studio schedule / booking response clock window icon.
- */
-export function ClockWindowIcon({
-  size = 18,
-  className = '',
-  decorative = true,
-  label = 'Hours and response time',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.55" />
-      <path
-        d="M12 7.5V12L15.2 13.8"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="12" r="1.35" fill="var(--color-accent)" />
-    </svg>
-  );
+export function SearchLensIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Search className={className} {...props} />;
 }
 
-/**
- * Refined search lens for ShopFilters.
- */
-export function SearchLensIcon({
-  size = 16,
-  className = '',
-  decorative = true,
-  label = 'Search',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <circle cx="10.75" cy="10.75" r="6.25" stroke="currentColor" strokeWidth="1.7" />
-      <path
-        d="M15.4 15.4L19.8 19.8"
-        stroke="var(--color-accent)"
-        strokeWidth="1.9"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+export function SunBurstIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Sun className={className} {...props} />;
 }
 
-/**
- * Sunburst Atelier icon for Light Mode toggle state.
- */
-export function SunBurstIcon({
-  size = 16,
-  className = '',
-  decorative = true,
-  label = 'Light mode',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <circle cx="12" cy="12" r="4.1" stroke="currentColor" strokeWidth="1.65" />
-      <circle cx="12" cy="12" r="1.3" fill="var(--color-accent)" />
-      <path
-        d="M12 2.75V5M12 19V21.25M2.75 12H5M19 12H21.25M5.46 5.46L7.05 7.05M16.95 16.95L18.54 18.54M18.54 5.46L16.95 7.05M7.05 16.95L5.46 18.54"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+export function CrescentMoonIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <Moon className={className} {...props} />;
 }
 
-/**
- * Crescent & Starlet icon for Deep Pine Obsidian Dark Mode toggle state.
- */
-export function CrescentMoonIcon({
-  size = 16,
-  className = '',
-  decorative = true,
-  label = 'Dark mode',
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      {...getA11yProps(decorative, label)}
-    >
-      <path
-        d="M19.4 14.3A7.8 7.8 0 0 1 9.7 4.6a8.2 8.2 0 1 0 9.7 9.7Z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <polygon points="17.2,4.4 18.1,6.2 19.9,7.1 18.1,8 17.2,9.8 16.3,8 14.5,7.1 16.3,6.2" fill="var(--color-accent)" />
-    </svg>
-  );
+export function ChevronDownIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <ChevronDown className={className} {...props} />;
 }
 
-/**
- * Crisp architectural chevron for dropdowns & navigation.
- */
-export function ChevronDownIcon({
-  size = 12,
-  className = '',
-  decorative = true,
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...getA11yProps(decorative)}
-    >
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
-}
-
-/**
- * Crisp architectural close mark for drawers, toast & studio menu.
- */
-export function CloseCrossIcon({
-  size = 14,
-  className = '',
-  decorative = true,
-}: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.9"
-      strokeLinecap="round"
-      className={className}
-      {...getA11yProps(decorative)}
-    >
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
+export function CloseCrossIcon({ className = 'w-3 h-3', ...props }: BrandIconProps) {
+  return <X className={className} {...props} />;
 }

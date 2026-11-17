@@ -85,7 +85,7 @@ export function ServicesSection() {
                 size="md"
                 className="rounded-md"
               >
-                Explore all services <LineDotRightHorizontal className='w-3.5 h-3.5' />
+                Explore all services <LineDotRightHorizontal className='w-3 h-3' />
               </LinkButton>
             </TextReveal>
           </div>

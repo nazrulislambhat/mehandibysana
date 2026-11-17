@@ -266,7 +266,7 @@ export function OrderTrackerClient({
             className="rounded-md inline-flex items-center gap-1.5"
           >
             <span>{loading ? 'Checking Status…' : 'Track Order'}</span>
-            <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            <LineDotRightHorizontal className="w-3 h-3" />
           </Button>
         </div>
       </form>
@@ -523,7 +523,7 @@ export function OrderTrackerClient({
                 className="rounded-md inline-flex items-center gap-1.5"
               >
                 <span>Continue Shopping</span>
-                <ShoppingBag className="w-3.5 h-3.5" />
+                <ShoppingBag className="w-3 h-3" />
               </LinkButton>
             </div>
           </div>

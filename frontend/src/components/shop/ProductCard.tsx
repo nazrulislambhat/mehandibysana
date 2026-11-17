@@ -125,7 +125,7 @@ export function ProductCard({
                 className="rounded-full inline-flex items-center gap-1.5"
               >
                 <span>Select Options</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                <LineDotRightHorizontal className="w-3 h-3" />
               </LinkButton>
             ) : (
               <AddToCartButton

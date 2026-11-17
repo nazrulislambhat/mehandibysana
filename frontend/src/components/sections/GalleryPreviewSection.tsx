@@ -119,7 +119,7 @@ export function GalleryPreviewSection() {
             className="inline-flex items-center min-h-[36px] text-sm gap-2 font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 self-start md:self-auto py-1.5"
           >
             Explore full gallery
-            <LineDotRightHorizontalIcon className="w-3.5 h-3.5 underline" />
+            <LineDotRightHorizontalIcon className="w-3 h-3 underline" />
           </Link>
         </div>
 

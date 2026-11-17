@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button, LinkButton } from '@/components/ui/Button';
 import { normalizeCategorySlug } from '@/lib/category-slugs';
-import { SearchLensIcon } from '@/components/graphics/BrandIcons';
-import { ChevronDown } from 'lucide-react';
+import { Search, ChevronDown } from 'lucide-react';
 import type { StorefrontCategory } from '@/types/storefront';
 
 export interface ShopFiltersProps {
@@ -134,10 +133,10 @@ export function ShopFilters({
               type="submit"
               variant="secondary"
               size="sm"
-              className="rounded-full"
+              className="rounded-full inline-flex items-center gap-1.5"
             >
-              <SearchLensIcon size={14} className="shrink-0" />
               <span>Search</span>
+              <Search className="w-3 h-3 shrink-0" />
             </Button>
           </form>
 
@@ -159,7 +158,7 @@ export function ShopFilters({
                 <option value="title">Name: A to Z</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-umber">
-                <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
+                <ChevronDown className="w-3 h-3" aria-hidden="true" />
               </div>
             </div>
           </div>

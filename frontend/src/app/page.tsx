@@ -91,7 +91,7 @@ export default async function HomePage() {
               className="rounded-md self-start md:self-auto text-xs font-semibold uppercase tracking-[0.12em] inline-flex items-center gap-1.5"
             >
               <span>Browse All {catalog.totalProducts ?? 19} Products</span>
-              <ShoppingBag className="w-3.5 h-3.5 text-terracotta group-hover/btn:text-on-accent transition-colors" />
+              <ShoppingBag className="w-3 h-3 text-terracotta group-hover/btn:text-on-accent transition-colors" />
             </LinkButton>
           </div>
 
@@ -121,7 +121,7 @@ export default async function HomePage() {
                       className="rounded-full inline-flex items-center gap-1.5"
                     >
                       <span>Open Shop Page</span>
-                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <ShoppingBag className="w-3 h-3" />
                     </LinkButton>
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export default async function HomePage() {
                     className="mt-5 inline-flex items-center gap-1.5 min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
                   >
                     <span>View cones</span>
-                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                    <LineDotRightHorizontal className="w-3 h-3" />
                   </Link>
                 </div>
 
@@ -166,7 +166,7 @@ export default async function HomePage() {
                     className="mt-5 inline-flex items-center gap-1.5 min-h-[36px] text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-1"
                   >
                     <span>View kits</span>
-                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                    <LineDotRightHorizontal className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
@@ -245,7 +245,7 @@ export default async function HomePage() {
                     className="link-kinetic inline-flex items-center gap-1.5 min-h-[32px] text-sm font-medium text-terracotta hover:text-terracotta-dark py-1"
                   >
                     <span>Read the full story</span>
-                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                    <LineDotRightHorizontal className="w-3 h-3" />
                   </Link>
                 </div>
               </TextReveal>
@@ -294,7 +294,7 @@ export default async function HomePage() {
                   size="lg"
                   className="rounded-md"
                 >
-                  Request a Booking <LineDotRightHorizontal className='w-3.5 h-3.5'/>
+                  Request a Booking <LineDotRightHorizontal className='w-3 h-3'/>
                 </LinkButton>
                 <LinkButton
                   href="/shop"
@@ -302,7 +302,7 @@ export default async function HomePage() {
                   size="lg"
                   className="rounded-md"
                 >
-                  Shop Products <ShoppingBag className='w-3.5 h-3.5'/>
+                  Shop Products <ShoppingBag className='w-3 h-3'/>
                 </LinkButton>
               </div>
             </div>

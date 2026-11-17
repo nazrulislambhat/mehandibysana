@@ -6,7 +6,7 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal, Calendar, AlertCircle, Clock, ChevronDown, Store, Truck } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Calendar, AlertCircle, ChevronDown, Store, Truck } from 'lucide-react';
 import {
   evaluateDeliveryRules,
   formatIsoDateDisplay,
@@ -17,7 +17,6 @@ import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { ShieldProtectIcon } from '@/components/graphics/BrandIcons';
 
 export const INDIAN_STATES_AND_UTS = [
   'Andaman & Nicobar Islands',
@@ -873,7 +872,7 @@ export function CheckoutHandoffClient() {
                   className="rounded-full inline-flex items-center gap-1.5"
                 >
                   <span>Track This Order</span>
-                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                  <LineDotRightHorizontal className="w-3 h-3" />
                 </LinkButton>
                 <LinkButton
                   href="/shop"
@@ -882,7 +881,7 @@ export function CheckoutHandoffClient() {
                   className="rounded-full inline-flex items-center gap-1.5"
                 >
                   <span>Continue Shopping</span>
-                  <ShoppingBag className="w-4 h-4" />
+                  <ShoppingBag className="w-3 h-3" />
                 </LinkButton>
               </div>
             </div>
@@ -953,7 +952,7 @@ export function CheckoutHandoffClient() {
             </p>
             <LinkButton href="/shop" variant="primary" size="lg" className="rounded-full inline-flex items-center gap-1.5">
               <span>Browse Products</span>
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-3 h-3" />
             </LinkButton>
           </div>
         ) : (
@@ -1089,7 +1088,7 @@ export function CheckoutHandoffClient() {
                         ))}
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-umber">
-                        <ChevronDown size={15} />
+                        <ChevronDown className="w-3 h-3" />
                       </div>
                     </div>
                   </div>
@@ -1115,7 +1114,7 @@ export function CheckoutHandoffClient() {
                             : 'border-divider bg-canvas text-ink hover:border-ink/60'
                         }`}
                       >
-                        <Truck size={17} className={!isPickup ? 'text-terracotta shrink-0 mt-0.5' : 'text-umber shrink-0 mt-0.5'} />
+                        <Truck className={`w-3 h-3 ${!isPickup ? 'text-terracotta shrink-0 mt-0.5' : 'text-umber shrink-0 mt-0.5'}`} />
                         <div>
                           <span className="block font-semibold text-sm">Doorstep Delivery</span>
                           <span className={`block text-[11px] mt-0.5 ${!isPickup ? 'text-inverse/75' : 'text-umber'}`}>
@@ -1133,7 +1132,7 @@ export function CheckoutHandoffClient() {
                             : 'border-divider bg-canvas text-ink hover:border-ink/60'
                         }`}
                       >
-                        <Store size={17} className={isPickup ? 'text-terracotta shrink-0 mt-0.5' : 'text-umber shrink-0 mt-0.5'} />
+                        <Store className={`w-3 h-3 ${isPickup ? 'text-terracotta shrink-0 mt-0.5' : 'text-umber shrink-0 mt-0.5'}`} />
                         <div>
                           <div className="flex items-center gap-1.5">
                             <span className="block font-semibold text-sm">Studio Self-Pickup</span>
@@ -1188,7 +1187,7 @@ export function CheckoutHandoffClient() {
                             : 'border-terracotta/35 bg-terracotta/5 text-ink'
                       }`}
                     >
-                      <AlertCircle size={16} className="shrink-0 mt-0.5 text-terracotta" />
+                      <AlertCircle className="w-3 h-3 shrink-0 mt-0.5 text-terracotta" />
                       <div className="space-y-0.5">
                         <strong className="block font-semibold">
                           {deliveryRules.notice.title}
@@ -1228,7 +1227,7 @@ export function CheckoutHandoffClient() {
                                 : 'border-divider bg-canvas text-ink hover:border-ink/50'
                             }`}
                           >
-                            <Calendar size={13} className={isDateSelected ? 'text-inverse' : 'text-terracotta'} />
+                            <Calendar className={`w-3 h-3 ${isDateSelected ? 'text-inverse' : 'text-terracotta'}`} />
                             <span>{qd.label}</span>
                             <span
                               className={`text-[10px] opacity-75 ${
@@ -1498,7 +1497,7 @@ export function CheckoutHandoffClient() {
                   {targetDate ? (
                     <div className="flex justify-between text-xs pt-1 border-t border-plaque-ink/10">
                       <dt className="text-plaque-ink/70 flex items-center gap-1">
-                        <Calendar size={11} className="shrink-0 text-terracotta" />
+                        <Calendar className="w-3 h-3 shrink-0 text-terracotta" />
                         <span>{isPickup ? 'Target Pickup' : 'Target Delivery'}</span>
                       </dt>
                       <dd className="font-medium text-plaque-ink tabular-nums">
