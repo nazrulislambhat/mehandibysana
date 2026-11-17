@@ -7,6 +7,7 @@ const BRAND_LETTERS = 'MEHANDI BY SANA'.split('');
 export function FooterBrandWordmark() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [revealState, setRevealState] = useState<'idle' | 'pending' | 'revealed'>('idle');
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -17,6 +18,7 @@ export function FooterBrandWordmark() {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
       !('IntersectionObserver' in window)
     ) {
+      setRevealState('revealed');
       return;
     }
 
@@ -60,29 +62,72 @@ export function FooterBrandWordmark() {
   return (
     <div
       ref={containerRef}
-      className="footer-wordmark-frame w-full pointer-events-none select-none overflow-hidden"
+      className="footer-wordmark-frame w-full select-none py-2"
     >
+      {/* Decorative Atelier Hallmark Header */}
+      <div className="flex items-center justify-center gap-3 mb-3 text-[10px] font-mono uppercase tracking-[0.24em] text-terracotta/80">
+        <span aria-hidden="true" className="w-8 sm:w-14 h-[1px] bg-gradient-to-r from-transparent to-terracotta/40" />
+        <span className="inline-flex items-center gap-1.5 font-medium">
+          <span className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
+          Artisanal Organic Henna Atelier
+          <span className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
+        </span>
+        <span aria-hidden="true" className="w-8 sm:w-14 h-[1px] bg-gradient-to-l from-transparent to-terracotta/40" />
+      </div>
+
+      {/* Main Kinetic Interactive Brand Heading */}
       <p
         aria-label="Mehandi By Sana"
-        className="m-0 font-sans font-semibold uppercase tracking-[-0.015em] leading-[0.84] text-[clamp(2rem,10.2cqi,9.75rem)] text-plaque-ink/[0.025] flex items-baseline justify-center whitespace-nowrap w-full"
+        onMouseLeave={() => setHoveredIndex(null)}
+        className="m-0 font-serif font-medium uppercase tracking-[-0.015em] leading-[0.88] text-[clamp(2.1rem,8.6cqi,7.25rem)] flex items-baseline justify-center whitespace-nowrap w-full cursor-default"
       >
         <span className="sr-only">MEHANDI BY SANA</span>
         <span aria-hidden="true" className="inline-flex items-baseline whitespace-nowrap">
-          {BRAND_LETTERS.map((char, charIndex) => (
-            <span
-              key={`brand-${charIndex}`}
-              className="footer-brand-letter"
-              data-reveal-pending={revealState === 'pending' ? 'true' : 'false'}
-              data-revealed={revealState === 'revealed' ? 'true' : 'false'}
-              style={{
-                transitionDelay:
-                  revealState === 'revealed' ? `${charIndex * 28}ms` : '0ms',
-              }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
+          {BRAND_LETTERS.map((char, charIndex) => {
+            const distance =
+              hoveredIndex !== null ? Math.abs(hoveredIndex - charIndex) : null;
+            const isHovered = distance === 0;
+            const isNear = distance === 1;
+
+            return (
+              <span
+                key={`brand-${charIndex}`}
+                onMouseEnter={() => setHoveredIndex(charIndex)}
+                className="footer-brand-letter inline-block transition-all duration-300"
+                data-reveal-pending={revealState === 'pending' ? 'true' : 'false'}
+                data-revealed={revealState === 'revealed' ? 'true' : 'false'}
+                style={{
+                  transform: isHovered
+                    ? 'translate3d(0, -10px, 0) scale(1.12)'
+                    : isNear
+                      ? 'translate3d(0, -4px, 0) scale(1.04)'
+                      : 'translate3d(0, 0, 0) scale(1)',
+                  color: isHovered
+                    ? '#d4683b'
+                    : isNear
+                      ? '#fceee3'
+                      : 'rgba(252, 238, 227, 0.45)',
+                  textShadow: isHovered
+                    ? '0 0 28px rgba(212, 104, 59, 0.65)'
+                    : isNear
+                      ? '0 0 16px rgba(252, 238, 227, 0.25)'
+                      : 'none',
+                  transitionDelay:
+                    hoveredIndex === null && revealState === 'revealed'
+                      ? `${charIndex * 26}ms`
+                      : '0ms',
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            );
+          })}
         </span>
+      </p>
+
+      {/* Sub-label hallmark */}
+      <p className="text-center text-[10px] sm:text-[11px] font-mono tracking-[0.22em] text-plaque-ink/40 uppercase mt-3">
+        Kashmir &middot; Bengaluru &middot; Pan-India Dispatch
       </p>
     </div>
   );

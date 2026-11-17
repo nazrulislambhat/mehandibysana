@@ -162,18 +162,15 @@ export function Footer() {
         </div>
       </div>
 
-      {/* BACKGROUND BRANDING WATERMARK */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none select-none absolute inset-x-0 bottom-3 sm:bottom-5 z-0 overflow-hidden flex items-baseline justify-center"
-      >
-        <div className="w-full max-w-[85rem] px-4">
+      {/* ANIMATED BRAND SHOWCASE SECTION */}
+      <div className="relative z-10 border-t border-plaque-ink/10 py-7 sm:py-9 bg-plaque-ink/[0.02]">
+        <div className="editorial-container">
           <FooterBrandWordmark />
         </div>
       </div>
 
       {/* Bottom Legal, Trust & Theme Strip */}
-      <div className="relative z-10 border-t border-plaque-ink/10 bg-black/40 backdrop-blur-[2px]">
+      <div className="relative z-10 border-t border-plaque-ink/12 bg-black/30">
         <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/70">
           <p className="text-[11px]">
             &copy; {currentYear} Mehandi By Sana. All rights reserved.
