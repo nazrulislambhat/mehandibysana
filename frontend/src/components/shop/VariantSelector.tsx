@@ -361,8 +361,8 @@ export function VariantSelector({
           href="/cart"
           className="text-terracotta hover:text-terracotta-dark font-medium underline underline-offset-4 py-0.5 inline-flex items-center gap-1"
         >
-          <ShoppingBag className="w-3.5 h-3.5" />
           <span>View Shopping Bag</span>
+          <ShoppingBag className="w-3.5 h-3.5" />
         </Link>
       </div>
 

@@ -120,8 +120,8 @@ export default async function HomePage() {
                       size="md"
                       className="rounded-full inline-flex items-center gap-1.5"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5" />
                       <span>Open Shop Page</span>
+                      <ShoppingBag className="w-3.5 h-3.5" />
                     </LinkButton>
                   </div>
                 </div>

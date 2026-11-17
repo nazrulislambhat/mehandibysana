@@ -248,7 +248,7 @@ export default function FaqPage() {
           </LinkButton>
           <Link
             href="/henna-care"
-            className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-plaque-ink/30 px-5 py-2 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
+            className="inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-plaque-ink underline underline-offset-4 transition-colors hover:no-underline"
           >
             Read Stain Care Guide
           </Link>

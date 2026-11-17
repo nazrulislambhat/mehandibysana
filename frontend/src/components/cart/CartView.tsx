@@ -326,8 +326,8 @@ export function CartView() {
                   href="/shop"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-2"
                 >
-                  <ShoppingBag className="w-3.5 h-3.5" />
                   <span>Continue browsing catalog</span>
+                  <ShoppingBag className="w-3.5 h-3.5" />
                 </Link>
                 <span className="text-xs text-umber">
                   Packed fresh in protective batches &middot; Sealed before
