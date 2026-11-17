@@ -12,7 +12,7 @@ import {
   FileCode2,
   CheckCircle2,
   GitBranch,
-  ArrowRight,
+  LineDotRightHorizontal,
 } from 'lucide-react';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { LinkButton } from '@/components/ui/Button';
@@ -314,7 +314,7 @@ export default function TechStackPage() {
                 className="inline-flex items-center gap-1 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 ml-1"
               >
                 <span>View Release Changelog</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -474,7 +474,7 @@ export default function TechStackPage() {
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <LinkButton href="/changelog" variant="accent" size="md">
               <span>View Release Changelog</span>
-              <ArrowRight className="w-4 h-4 ml-1.5" />
+              <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1.5" />
             </LinkButton>
             <LinkButton href="/shop" variant="secondary" size="md">
               <span>Explore Products</span>

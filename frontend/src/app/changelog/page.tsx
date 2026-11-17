@@ -11,7 +11,7 @@ import {
   Sparkles,
   Rocket,
   Clock,
-  ArrowRight,
+  LineDotRightHorizontal,
   ShieldAlert,
   Search,
   MessageSquare,
@@ -341,7 +341,7 @@ export default function ChangelogPage() {
                 className="inline-flex items-center gap-1 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 ml-1"
               >
                 <span>View Full Tech Stack</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <LineDotRightHorizontal className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
