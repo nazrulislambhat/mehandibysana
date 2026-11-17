@@ -164,23 +164,75 @@ function resolvePaymentMethod(meta: Record<string, unknown>): string {
   return raw || "cod";
 }
 
-function resolveOrderTotal(order: any, meta: Record<string, unknown>): number {
-  if (Number.isFinite(Number(order?.total)) && Number(order?.total) > 0) {
-    return Number(order.total);
-  }
-  if (
+function resolveOrderFinancials(order: any, meta: Record<string, unknown>) {
+  const items = Array.isArray(order?.items) ? order.items : [];
+  const itemsSubtotal = items.reduce(
+    (acc: number, it: any) =>
+      acc + (Number(it.unit_price) || 0) * (Number(it.quantity) || 1),
+    0
+  );
+  const subtotal = Math.max(0, Number(meta.subtotal) || itemsSubtotal);
+
+  const methodsShipping = Array.isArray(order?.shipping_methods)
+    ? order.shipping_methods.reduce(
+        (acc: number, sm: any) => acc + (Number(sm.amount) || 0),
+        0
+      )
+    : 0;
+  const metaShipping = Number.isFinite(Number(meta.shipping_fee))
+    ? Number(meta.shipping_fee)
+    : 0;
+
+  const metaTotal =
+    Number.isFinite(Number(meta.total)) && Number(meta.total) > 0
+      ? Number(meta.total)
+      : 0;
+  const summaryTotal =
     Number.isFinite(Number(order?.summary?.current_order_total)) &&
     Number(order?.summary?.current_order_total) > 0
-  ) {
-    return Number(order.summary.current_order_total);
-  }
-  if (Number.isFinite(Number(meta.total)) && Number(meta.total) > 0) {
-    return Number(meta.total);
-  }
-  const subtotal = Math.max(0, Number(meta.subtotal) || 0);
-  const shipping = Math.max(0, Number(meta.shipping_fee) || 0);
+      ? Number(order.summary.current_order_total)
+      : 0;
+  const orderTotal =
+    Number.isFinite(Number(order?.total)) && Number(order?.total) > 0
+      ? Number(order.total)
+      : 0;
+
+  const maxCandidate = Math.max(metaTotal, summaryTotal, orderTotal);
   const discount = Math.max(0, Number(meta.discount_amount) || 0);
-  return Math.max(0, subtotal + shipping - discount);
+
+  let shippingFee = methodsShipping > 0 ? methodsShipping : metaShipping;
+  if (shippingFee === 0 && maxCandidate > subtotal - discount) {
+    shippingFee = Math.max(
+      0,
+      Math.round((maxCandidate - (subtotal - discount)) * 100) / 100
+    );
+  }
+
+  const total =
+    maxCandidate > 0
+      ? maxCandidate
+      : Math.max(0, subtotal + shippingFee - discount);
+
+  const methodName =
+    order?.shipping_methods?.[0]?.name ||
+    (meta.pincode_rule
+      ? `Delivery (${meta.pincode_rule})`
+      : shippingFee > 0
+        ? "Standard Delivery"
+        : "Free Delivery");
+
+  return {
+    subtotal,
+    shippingFee,
+    discount,
+    total,
+    methodName,
+    pincodeRule: String(meta.pincode_rule || ""),
+  };
+}
+
+function resolveOrderTotal(order: any, meta: Record<string, unknown>): number {
+  return resolveOrderFinancials(order, meta).total;
 }
 
 function formatPaymentLabel(raw: string): string {
@@ -211,7 +263,8 @@ const OrderStudioDispatchWidget = ({
   const isCanceled = orderStatus === "canceled" || orderStatus === "cancelled";
   const isCompleted = orderStatus === "completed";
   const nativePayStatus = resolveNativePaymentStatus(orderAny);
-  const orderTotal = resolveOrderTotal(orderAny, initialMeta);
+  const financials = resolveOrderFinancials(orderAny, initialMeta);
+  const orderTotal = financials.total;
 
   const hasCustomerEmail =
     Boolean(data.email) &&
@@ -673,6 +726,44 @@ const OrderStudioDispatchWidget = ({
               {courierName} {trackingNumber ? `· ${trackingNumber}` : ""}
             </Badge>
           )}
+        </div>
+
+        {/* Order Financials & Shipping Breakdown */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3 border-t border-ui-border-base text-xs">
+          <div className="p-2.5 rounded bg-ui-bg-base border border-ui-border-base">
+            <span className="text-[11px] text-ui-fg-subtle block">Items Subtotal</span>
+            <span className="font-semibold text-ui-fg-base text-sm tabular-nums">
+              ₹{financials.subtotal.toLocaleString("en-IN")}
+            </span>
+          </div>
+          <div className="p-2.5 rounded bg-blue-50/70 border border-blue-200">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] text-blue-800 font-medium">Shipping / Tracking</span>
+              {financials.pincodeRule && (
+                <span className="text-[10px] text-blue-700 bg-blue-100 px-1 py-0.5 rounded font-mono">
+                  {financials.pincodeRule}
+                </span>
+              )}
+            </div>
+            <span className="font-bold text-blue-900 text-sm tabular-nums">
+              {financials.shippingFee > 0 ? `₹${financials.shippingFee.toLocaleString("en-IN")}` : "Free Shipping"}
+            </span>
+            <span className="block text-[10px] text-blue-700/80 truncate">
+              {financials.methodName}
+            </span>
+          </div>
+          <div className="p-2.5 rounded bg-ui-bg-base border border-ui-border-base">
+            <span className="text-[11px] text-ui-fg-subtle block">Discounts</span>
+            <span className="font-semibold text-ui-fg-base text-sm tabular-nums">
+              {financials.discount > 0 ? `-₹${financials.discount.toLocaleString("en-IN")}` : "—"}
+            </span>
+          </div>
+          <div className="p-2.5 rounded bg-emerald-50/70 border border-emerald-200">
+            <span className="text-[11px] text-emerald-800 font-medium block">Total Payable</span>
+            <span className="font-bold text-base text-emerald-950 tabular-nums">
+              ₹{financials.total.toLocaleString("en-IN")}
+            </span>
+          </div>
         </div>
       </div>
 
