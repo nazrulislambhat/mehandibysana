@@ -142,8 +142,8 @@ export default function ShippingPolicyPage() {
             size="sm"
             className="rounded-md inline-flex items-center gap-1.5"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
             <span>Browse Products to Check PIN</span>
+            <ShoppingBag className="w-3.5 h-3.5" />
           </LinkButton>
           <LinkButton
             href="/cart"

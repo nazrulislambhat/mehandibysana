@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SHOP_COLLECTIONS, STUDIO_NAV_ITEMS } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag,Waypoints, LineDotRightHorizontal } from 'lucide-react';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { ChevronDownIcon, HennaConeIcon } from '@/components/graphics/BrandIcons';
 
@@ -409,9 +409,10 @@ export function DesktopNav() {
                   <Link
                     href="/services"
                     onClick={() => closeMegaMenu(false)}
-                    className="text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
+                    className="text-xs flex gap-2 items-center font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
                   >
-                    Book Bridal Session
+                    <span>Book Bridal Session</span>
+                    <Waypoints className="w-3 h-3" />
                   </Link>
                   <LinkButton
                     href="/shop"
@@ -420,8 +421,8 @@ export function DesktopNav() {
                     onClick={() => closeMegaMenu(false)}
                     className="rounded-lg text-xs min-h-[36px] py-2 inline-flex items-center gap-1.5"
                   >
-                    <ShoppingBag className="w-3.5 h-3.5" />
                     <span>Shop All 19 Items</span>
+                    <ShoppingBag className="w-3.5 h-3.5" />
                   </LinkButton>
                 </div>
               </div>

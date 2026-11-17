@@ -404,8 +404,8 @@ export function CartDrawer() {
                   onClick={() => handleClose(false)}
                   className="rounded-md w-full sm:w-auto min-w-[210px] inline-flex items-center justify-center gap-1.5"
                 >
-                  <ShoppingBag className="w-3.5 h-3.5" />
                   <span>Explore All Henna Products</span>
+                  <ShoppingBag className="w-3.5 h-3.5" />
                 </LinkButton>
               </div>
             </div>

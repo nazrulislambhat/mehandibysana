@@ -10,7 +10,7 @@ import {
   type StudioNavItem,
 } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Waypoints } from 'lucide-react';
 import {
   BotanicalHeroStudy,
   BotanicalSprig,
@@ -333,17 +333,18 @@ export function StudioMenu() {
                         onClick={() => closeMenu(false)}
                         className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6 inline-flex items-center justify-center gap-1.5"
                       >
-                        <ShoppingBag className="w-3.5 h-3.5" />
                         <span>Shop Products</span>
+                        <ShoppingBag className="w-3.5 h-3.5" />
                       </LinkButton>
                       <LinkButton
                         href="/contact"
                         variant="secondary"
                         size="md"
                         onClick={() => closeMenu(false)}
-                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6"
+                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6 inline-flex items-center justify-center gap-1.5"
                       >
-                        Book Mehandi
+                        <span>Book Mehandi</span>
+                        <Waypoints className="w-3 h-3" />
                       </LinkButton>
                     </div>
                   </div>

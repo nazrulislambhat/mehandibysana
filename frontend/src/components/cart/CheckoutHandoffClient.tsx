@@ -881,8 +881,8 @@ export function CheckoutHandoffClient() {
                   size="lg"
                   className="rounded-full inline-flex items-center gap-1.5"
                 >
-                  <ShoppingBag className="w-4 h-4" />
                   <span>Continue Shopping</span>
+                  <ShoppingBag className="w-4 h-4" />
                 </LinkButton>
               </div>
             </div>
