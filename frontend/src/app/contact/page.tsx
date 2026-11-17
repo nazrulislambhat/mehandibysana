@@ -137,7 +137,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 decorative
                 className="pointer-events-none hidden sm:block absolute top-6 right-6"
               />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta mb-2 sm:pr-14">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta mb-2 sm:pr-14">
                 Kashmir &amp; Bengaluru Concierge Desk
               </p>
               <h2 className="font-serif text-3xl font-medium text-plaque-ink mb-5 sm:pr-14">
@@ -145,7 +145,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </h2>
               <dl className="space-y-4 text-sm">
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90 mb-1">
                     <MapPin
                       className="w-3 h-3 text-terracotta shrink-0"
                     />
@@ -157,7 +157,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90 mb-1">
                     <Mail
                       className="w-3 h-3 text-brand-green shrink-0"
                     />
@@ -173,7 +173,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90 mb-1">
                     <Phone
                       className="w-3 h-3 text-brand-green shrink-0"
                     />
@@ -189,7 +189,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90 mb-1">
                     <MessageCircle
                       className="w-3 h-3 text-brand-green shrink-0"
                     />
@@ -207,7 +207,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90 mb-1">
                     <Camera
                       className="w-3 h-3 text-brand-green shrink-0"
                     />
@@ -225,13 +225,13 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
+                  <dt className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90 mb-1">
                     <Clock
                       className="w-3 h-3 text-terracotta shrink-0"
                     />
                     <span>Hours</span>
                   </dt>
-                  <dd className="text-plaque-ink/80">
+                  <dd className="text-plaque-ink">
                     Mon – Sun, 09:00 AM – 09:00 PM IST
                   </dd>
                 </div>

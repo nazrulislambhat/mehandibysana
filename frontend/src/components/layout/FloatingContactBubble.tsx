@@ -67,11 +67,11 @@ export function FloatingContactBubble() {
                 aria-hidden="true"
                 className="w-2 h-2 rounded-full bg-brand-green shrink-0 animate-pulse"
               />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
                 Connect with Sana
               </p>
             </div>
-            <p className="text-xs text-[#fceee3]/75 mt-0.5">
+            <p className="text-xs text-[#fceee3]/90 mt-0.5">
               Kashmir, J&amp;K &middot; Bengaluru, Karnataka
             </p>
           </div>
@@ -79,7 +79,7 @@ export function FloatingContactBubble() {
             type="button"
             onClick={() => setIsOpen(false)}
             aria-label="Close contact popup"
-            className="p-1 rounded-full text-[#fceee3]/60 hover:text-[#fceee3] hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1 rounded-full text-[#fceee3]/80 hover:text-[#fceee3] hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-3 h-3" />
           </button>
@@ -103,7 +103,7 @@ export function FloatingContactBubble() {
                 <p className="text-sm font-semibold text-white group-hover:text-[#25D366] transition-colors leading-tight">
                   WhatsApp
                 </p>
-                <p className="text-[11px] text-[#fceee3]/70 leading-tight mt-0.5">
+                <p className="text-xs text-[#fceee3]/85 leading-tight mt-0.5">
                   +91 91496 48717 &middot; Instant chat
                 </p>
               </div>
@@ -129,7 +129,7 @@ export function FloatingContactBubble() {
                 <p className="text-sm font-semibold text-white group-hover:text-[#bc1888] transition-colors leading-tight">
                   Instagram
                 </p>
-                <p className="text-[11px] text-[#fceee3]/70 leading-tight mt-0.5">
+                <p className="text-xs text-[#fceee3]/85 leading-tight mt-0.5">
                   @mehandibysana &middot; DM &amp; feed
                 </p>
               </div>

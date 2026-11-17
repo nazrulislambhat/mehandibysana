@@ -150,7 +150,7 @@ export function InstagramFeedSection({
                 <span className="w-8 h-8 rounded-full bg-paper/20 backdrop-blur-sm border border-paper/40 flex items-center justify-center text-[#ffffff] mb-1.5 shadow-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   <Camera className="w-3 h-3" />
                 </span>
-                <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-[#DBCAB6] line-clamp-1">
+                <span className="text-xs font-medium uppercase tracking-[0.12em] text-[#DBCAB6] line-clamp-1">
                   View Post
                 </span>
               </div>

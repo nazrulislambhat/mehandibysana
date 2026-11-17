@@ -224,7 +224,7 @@ export function VariantSelector({
               key={spec.name}
               className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3.5 py-1.5 text-xs text-umber"
             >
-              <span className="font-semibold uppercase tracking-[0.12em] text-[10px]">
+              <span className="font-semibold uppercase tracking-[0.12em] text-xs">
                 {spec.name}:
               </span>
               <span className="font-medium text-ink">{spec.options[0]}</span>

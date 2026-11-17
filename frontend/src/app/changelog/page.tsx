@@ -375,7 +375,7 @@ export default function ChangelogPage() {
                       <span className="font-mono text-lg sm:text-xl font-bold text-ink">
                         {rel.version}
                       </span>
-                      <span className="text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-linen text-terracotta border border-hairline">
+                      <span className="text-xs uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-linen text-terracotta border border-hairline">
                         {rel.tag}
                       </span>
                     </div>
@@ -396,7 +396,7 @@ export default function ChangelogPage() {
 
                 {/* Change list */}
                 <div className="space-y-2.5 pt-2">
-                  <h4 className="text-[11px] font-semibold uppercase tracking-wider text-umber">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-umber">
                     Detailed Changes
                   </h4>
                   <ul className="space-y-2">
@@ -406,25 +406,25 @@ export default function ChangelogPage() {
                         className="flex items-start gap-2.5 text-xs sm:text-sm text-ink leading-relaxed"
                       >
                         {ch.type === 'added' && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded bg-brand-green/10 text-brand-green border border-brand-green/20 shrink-0 mt-0.5">
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-semibold uppercase px-2 py-0.5 rounded bg-brand-green/10 text-brand-green border border-brand-green/20 shrink-0 mt-0.5">
                             <CheckCircle2 className="w-3 h-3" />
                             Added
                           </span>
                         )}
                         {ch.type === 'removed' && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded bg-crimson/10 text-crimson border border-crimson/20 shrink-0 mt-0.5">
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-semibold uppercase px-2 py-0.5 rounded bg-crimson/10 text-crimson border border-crimson/20 shrink-0 mt-0.5">
                             <MinusCircle className="w-3 h-3" />
                             Removed
                           </span>
                         )}
                         {ch.type === 'fixed' && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded bg-ochre/10 text-ochre border border-ochre/20 shrink-0 mt-0.5">
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-semibold uppercase px-2 py-0.5 rounded bg-ochre/10 text-ochre border border-ochre/20 shrink-0 mt-0.5">
                             <Wrench className="w-3 h-3" />
                             Fixed
                           </span>
                         )}
                         {ch.type === 'improved' && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded bg-terracotta/10 text-terracotta border border-terracotta/20 shrink-0 mt-0.5">
+                          <span className="inline-flex items-center gap-1 text-xs font-mono font-semibold uppercase px-2 py-0.5 rounded bg-terracotta/10 text-terracotta border border-terracotta/20 shrink-0 mt-0.5">
                             <Sparkles className="w-3 h-3" />
                             Refactor
                           </span>
@@ -469,7 +469,7 @@ export default function ChangelogPage() {
                     <div className="w-9 h-9 rounded-lg bg-linen flex items-center justify-center text-terracotta border border-hairline shrink-0">
                       <Icon className="w-3 h-3" />
                     </div>
-                    <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-linen text-umber border border-hairline font-semibold">
+                    <span className="text-xs font-mono uppercase px-2.5 py-0.5 rounded-full bg-linen text-umber border border-hairline font-semibold">
                       {item.quarter}
                     </span>
                   </div>
@@ -503,25 +503,26 @@ export default function ChangelogPage() {
 
       {/* Bottom Plaque */}
       <section className="border-t border-hairline bg-paper py-14">
-        <div className="editorial-container text-center space-y-4 max-w-xl mx-auto">
-          <BrandCrest tone="ink-badge" size={40} className="mx-auto" />
-          <h2 className="font-serif text-2xl font-medium text-ink">
-            Continuous Improvement
-          </h2>
-          <p className="text-xs sm:text-sm text-umber leading-relaxed">
-            Architected and maintained by the engineering team at{' '}        
-            <a
-              href="https://stacknothing.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group font-medium text-terracotta hover:text-ink underline underline-offset-4 inline-flex items-center gap-1"
-            >
-              StackNothing LLC
-              <CircleArrowUpRightExit className="w-3 h-3 text-terracotta group-hover:text-ink" />
-            </a>.
-            Have questions about an upcoming release or need support for a custom order?
-          </p>
-         
+        <div className="editorial-container">
+          <div className="max-w-xl mx-auto text-center space-y-4">
+            <BrandCrest tone="ink-badge" size={40} className="mx-auto" />
+            <h2 className="font-serif text-2xl font-medium text-ink">
+              Continuous Improvement
+            </h2>
+            <p className="text-xs sm:text-sm text-umber leading-relaxed">
+              Architected and maintained by the engineering team at{' '}        
+              <a
+                href="https://stacknothing.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group font-medium text-terracotta hover:text-ink underline underline-offset-4 inline-flex items-center gap-1"
+              >
+                StackNothing LLC
+                <CircleArrowUpRightExit className="w-3 h-3 text-terracotta group-hover:text-ink" />
+              </a>.
+              Have questions about an upcoming release or need support for a custom order?
+            </p>
+          </div>
         </div>
       </section>
     </div>

@@ -295,7 +295,7 @@ export function CartDrawer() {
               {highlightedKey ? (
                 <span
                   role="status"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-terracotta bg-canvas px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-terracotta"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-terracotta bg-canvas px-2.5 py-0.5 text-xs font-semibold uppercase tracking-[0.14em] text-terracotta"
                 >
                   <span
                     aria-hidden="true"
@@ -465,7 +465,7 @@ export function CartDrawer() {
                         <div className="relative h-24 w-20 sm:h-28 sm:w-[88px] shrink-0 overflow-hidden rounded-xl border border-hairline bg-linen">
                           <span
                             aria-hidden="true"
-                            className="absolute top-1.5 left-1.5 z-10 rounded-full bg-plaque px-1.5 py-0.5 font-serif text-[10px] italic text-plaque-ink border border-plaque-border leading-none"
+                            className="absolute top-1.5 left-1.5 z-10 rounded-full bg-plaque px-2 py-0.5 font-serif text-xs italic text-plaque-ink border border-plaque-border leading-none"
                           >
                             {dossierIndex}
                           </span>
@@ -479,7 +479,7 @@ export function CartDrawer() {
                               className="object-cover"
                             />
                           ) : (
-                            <div className="h-full w-full flex items-center justify-center text-[10px] uppercase tracking-wider text-umber">
+                            <div className="h-full w-full flex items-center justify-center text-xs uppercase tracking-wider text-umber">
                               Item
                             </div>
                           )}
@@ -519,7 +519,7 @@ export function CartDrawer() {
                                 each
                               </span>
                               {isJustAdded ? (
-                                <span className="inline-flex items-center gap-1 rounded-full border border-terracotta bg-canvas px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-terracotta">
+                                <span className="inline-flex items-center gap-1 rounded-full border border-terracotta bg-canvas px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-terracotta">
                                   Just Added
                                 </span>
                               ) : null}
@@ -607,7 +607,7 @@ export function CartDrawer() {
                 {/* Dossier Header */}
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
                       Order Dossier
                     </p>
                     <h3 className="font-serif text-2xl font-medium text-plaque-ink leading-tight mt-0.5">
@@ -624,7 +624,7 @@ export function CartDrawer() {
                 <div className="rounded-xl border border-plaque-ink/15 bg-plaque-ink/5 p-3.5 space-y-2.5">
                   <div className="flex items-center justify-between gap-2 text-xs">
                     <div className="min-w-0">
-                      <span className="text-plaque-ink/70 uppercase tracking-[0.12em] text-[10px] font-semibold block">
+                      <span className="text-plaque-ink/85 uppercase tracking-[0.12em] text-xs font-semibold block">
                         Delivery PIN
                       </span>
                       {activeDelivery ? (
@@ -633,7 +633,7 @@ export function CartDrawer() {
                           {activeDelivery.matchedRule?.pattern}
                         </span>
                       ) : (
-                        <span className="text-plaque-ink/75 block mt-0.5">
+                        <span className="text-plaque-ink/90 block mt-0.5">
                           Enter PIN for exact charge
                         </span>
                       )}
@@ -726,7 +726,7 @@ export function CartDrawer() {
                 {/* Pricing Breakdown */}
                 <div className="border-t border-plaque-ink/15 pt-4 space-y-2">
                   <div className="flex items-baseline justify-between text-xs">
-                    <span className="uppercase tracking-[0.14em] text-plaque-ink/75">
+                    <span className="uppercase tracking-[0.14em] text-plaque-ink/90">
                       Items ({itemCount})
                     </span>
                     <span className="font-serif text-lg font-medium text-plaque-ink tabular-nums">
@@ -743,7 +743,7 @@ export function CartDrawer() {
                     </div>
                   ) : null}
 
-                  <div className="flex items-center justify-between text-xs text-plaque-ink/80">
+                  <div className="flex items-center justify-between text-xs text-plaque-ink/90">
                     <span>
                       {activeDelivery
                         ? `Shipping (PIN ${activeDelivery.pincode})`
@@ -753,7 +753,7 @@ export function CartDrawer() {
                       className={`font-semibold tabular-nums ${
                         activeDelivery
                           ? 'text-terracotta'
-                          : 'text-plaque-ink/70'
+                          : 'text-plaque-ink/85'
                       }`}
                     >
                       {activeDelivery
@@ -808,7 +808,7 @@ export function CartDrawer() {
                   </Button>
                 </div>
 
-                <p className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] text-plaque-ink/65 text-center leading-relaxed pt-0.5">
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/85 text-center leading-relaxed pt-0.5">
                   <ShieldCheck
                     className="w-3 h-3 text-terracotta shrink-0"
                   />

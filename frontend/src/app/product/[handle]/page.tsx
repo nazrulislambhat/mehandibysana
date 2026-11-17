@@ -277,7 +277,7 @@ export default async function ProductDetailPage({
                   contentClassName="mt-3 text-sm text-umber leading-relaxed"
                 >
                   <p>
-                    Orders sync live with our MedusaJS batch inventory. Delivery charges and estimated transit times are calculated for your 6-digit PIN code&mdash;use the Delivery &amp; PIN Estimator above on this product page or in your shopping bag before checkout.
+                    Delivery charges and estimated transit times are calculated for your 6-digit PIN code&mdash;use the Delivery &amp; PIN Estimator above on this product page or in your shopping bag before checkout.
                   </p>
                 </AccordionDisclosure>
               </div>

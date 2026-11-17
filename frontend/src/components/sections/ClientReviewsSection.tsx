@@ -139,8 +139,8 @@ export function ClientReviewsSection() {
                   <blockquote
                     className={`leading-relaxed ${
                       review.featured
-                        ? 'text-sm md:text-[15px] text-plaque-ink/90'
-                        : 'text-sm text-ink/90'
+                        ? 'text-sm md:text-base text-plaque-ink'
+                        : 'text-sm text-ink'
                     }`}
                   >
                     {review.quote}
@@ -150,7 +150,7 @@ export function ClientReviewsSection() {
                 <figcaption
                   className={`pt-4 border-t flex items-center justify-between gap-2 text-xs ${
                     review.featured
-                      ? 'border-plaque-ink/15 text-plaque-ink/75'
+                      ? 'border-plaque-ink/15 text-plaque-ink/85'
                       : 'border-hairline text-umber'
                   }`}
                 >

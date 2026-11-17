@@ -131,12 +131,12 @@ export function Hero({
                 className="object-cover object-center w-full h-full"
               />
               <div className="pointer-events-none absolute inset-3 rounded-t-[13rem] rounded-b-xl border border-ink/10" />
-              <div className="pointer-events-none absolute bottom-5 left-5 right-5 flex items-center justify-between gap-2 rounded-full border border-plaque-border bg-plaque/95 backdrop-blur-sm px-4 py-2 text-[11px] font-medium text-plaque-ink">
+              <div className="pointer-events-none absolute bottom-5 left-5 right-5 flex items-center justify-between gap-2 rounded-full border border-plaque-border bg-plaque/95 backdrop-blur-sm px-4 py-2 text-xs font-medium text-plaque-ink">
                 <span className="flex items-center gap-2">
                   <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-terracotta" />
                   <span>0.38mm Fresh Cone Batch</span>
                 </span>
-                <span className="text-plaque-ink/80">100% Pure Sojat</span>
+                <span className="text-plaque-ink/90">100% Pure Sojat</span>
               </div>
             </div>
           </div>

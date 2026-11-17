@@ -230,7 +230,7 @@ export function StudioMenu() {
                                 className={`font-serif text-sm sm:text-base italic transition-colors ${
                                   isCurrent || isHighlighted
                                     ? 'text-terracotta'
-                                    : 'text-umber/70 group-hover:text-terracotta'
+                                    : 'text-umber group-hover:text-terracotta'
                                 }`}
                               >
                                 {item.index}
@@ -248,11 +248,11 @@ export function StudioMenu() {
 
                             <div className="flex items-center gap-3 shrink-0">
                               {isCurrent ? (
-                                <span className="inline-flex items-center rounded-full border border-terracotta/45 bg-paper px-2.5 py-0.5 text-[11px] font-medium text-terracotta">
+                                <span className="inline-flex items-center rounded-full border border-terracotta/45 bg-paper px-2.5 py-0.5 text-xs font-medium text-terracotta">
                                   Current
                                 </span>
                               ) : (
-                                <span className="hidden sm:inline text-xs text-umber/80 group-hover:text-ink transition-colors">
+                                <span className="hidden sm:inline text-xs text-umber group-hover:text-ink transition-colors">
                                   {item.eyebrow}
                                 </span>
                               )}
@@ -307,17 +307,17 @@ export function StudioMenu() {
                     </div>
 
                     {/* Quick Apothecary Collections */}
-                    <div className="rounded-2xl border border-hairline bg-linen/75 p-3.5 sm:p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-umber mb-2">
+                    <div className="rounded-2xl border border-hairline bg-linen/75 p-4 sm:p-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink mb-2.5">
                         Henna Collections
                       </p>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                      <div className="flex flex-wrap gap-2">
                         {SHOP_COLLECTIONS.map((collection) => (
                           <Link
                             key={collection.href}
                             href={collection.href}
                             onClick={() => closeMenu(false)}
-                            className="inline-flex items-center gap-1.5 min-h-[30px] sm:min-h-[36px] rounded-full border border-divider bg-paper px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+                            className="inline-flex items-center gap-1.5 min-h-[34px] sm:min-h-[36px] rounded-full border border-divider bg-paper px-3 sm:px-3.5 py-1.5 text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
                           >
                             <span>{collection.title}</span>
                           </Link>
