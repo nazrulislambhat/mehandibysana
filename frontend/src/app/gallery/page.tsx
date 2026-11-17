@@ -311,7 +311,7 @@ export default function GalleryPage() {
               className="rounded-md"
             >
               Request a Booking{' '}
-              <LineDotRightHorizontal className="w-3.5 h-3.5" />
+              <LineDotRightHorizontal className="w-3 h-3" />
             </LinkButton>
 
             <Link

@@ -232,7 +232,7 @@ export default function TermsConditionsPage() {
             className="text-terracotta hover:text-terracotta-dark underline underline-offset-4 font-medium inline-flex items-center gap-1"
           >
             <span>Refund, Return &amp; Cancellation Policy</span>
-            <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            <LineDotRightHorizontal className="w-3 h-3" />
           </Link>
           .
         </p>
@@ -302,7 +302,7 @@ export default function TermsConditionsPage() {
         </p>
         <div className="pt-3 flex flex-wrap gap-2">
           <LinkButton href="/refund-policy" variant="primary" size="md" className="rounded-md">
-            Read Refund Policy <LineDotRightHorizontal className='w-3.5 h-3.5'/>
+            Read Refund Policy <LineDotRightHorizontal className='w-3 h-3'/>
           </LinkButton>
           <LinkButton href="/privacy-policy" size="md" className="rounded-md" variant="secondary">
             Privacy Policy

@@ -7,12 +7,11 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, ShieldCheck } from 'lucide-react';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { ShieldProtectIcon } from '@/components/graphics/BrandIcons';
 
 function formatMoney(amount: number, symbol: string): string {
   const formatted = Number.isInteger(amount)
@@ -196,7 +195,7 @@ export function CartView() {
               className="rounded-full inline-flex items-center gap-1.5"
             >
               <span>Browse Full Catalog</span>
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-3 h-3" />
             </LinkButton>
           </div>
         ) : (
@@ -327,7 +326,7 @@ export function CartView() {
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-2"
                 >
                   <span>Continue browsing catalog</span>
-                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <ShoppingBag className="w-3 h-3" />
                 </Link>
                 <span className="text-xs text-umber">
                   Packed fresh in protective batches &middot; Sealed before
@@ -431,12 +430,12 @@ export function CartView() {
                   className="w-full min-h-[50px] rounded-full mb-3.5 inline-flex items-center justify-center gap-1.5"
                 >
                   <span>Proceed to Checkout</span>
+                  <LineDotRightHorizontal className="w-3 h-3" />
                 </LinkButton>
 
                 <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">
-                  <ShieldProtectIcon
-                    size={14}
-                    className="text-terracotta shrink-0"
+                  <ShieldCheck
+                    className="w-3 h-3 text-terracotta shrink-0"
                   />
                   <span>
                     Supports Razorpay UPI / Cards &amp; Cash on Delivery across

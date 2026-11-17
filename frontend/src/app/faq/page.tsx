@@ -8,6 +8,7 @@ import {
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
+import { AccordionDisclosure } from '@/components/ui/AccordionDisclosure';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Frequently Asked Questions (FAQ)',
@@ -204,23 +205,15 @@ export default function FaqPage() {
 
           <div className="space-y-3">
             {group.items.map((item) => (
-              <details
+              <AccordionDisclosure
                 key={item.question}
-                className="group rounded-xl border border-hairline bg-canvas px-5 py-4 open:border-terracotta/50"
+                title={item.question}
+                className="rounded-xl border border-hairline bg-canvas px-5 py-4 data-[state=open]:border-terracotta/50"
+                triggerClassName="text-sm sm:text-base font-medium text-ink"
+                contentClassName="mt-3 text-xs sm:text-sm text-umber leading-relaxed border-t border-hairline/70 pt-3"
               >
-                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-sm sm:text-base font-medium text-ink">
-                  <span>{item.question}</span>
-                  <span
-                    aria-hidden="true"
-                    className="text-terracotta text-lg leading-none font-semibold shrink-0 transition-transform duration-200 group-open:rotate-45 mt-0.5"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 text-xs sm:text-sm text-umber leading-relaxed border-t border-hairline/70 pt-3">
-                  {item.answer}
-                </p>
-              </details>
+                <p>{item.answer}</p>
+              </AccordionDisclosure>
             ))}
           </div>
         </section>

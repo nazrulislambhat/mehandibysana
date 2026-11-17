@@ -117,7 +117,7 @@ export function FooterNewsletterForm() {
           >
             <span>{status === 'submitting' ? 'Joining…' : 'Subscribe'}</span>
             {status !== 'submitting' ? (
-              <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1" />
+              <LineDotRightHorizontal className="w-3 h-3 ml-1" />
             ) : null}
           </Button>
         </div>

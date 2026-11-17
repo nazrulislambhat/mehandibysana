@@ -71,7 +71,7 @@ export default function RouteError({
                 className="rounded-md"
                 onClick={() => reset()}
               >
-                Try Again <Repeat className="w-3.5 h-3.5" />
+                Try Again <Repeat className="w-3 h-3" />
               </Button>
               <LinkButton
                 href="/"
@@ -79,14 +79,14 @@ export default function RouteError({
                 size="md"
                 className="rounded-md"
               >
-                Return Home <House className="w-3.5 h-3.5" />
+                Return Home <House className="w-3 h-3" />
               </LinkButton>
               <Link
                 href="/shop"
                 className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
               >
                 <span>Browse Shop</span>
-                <ShoppingBag className="w-3.5 h-3.5" />
+                <ShoppingBag className="w-3 h-3" />
               </Link>
             </div>
 

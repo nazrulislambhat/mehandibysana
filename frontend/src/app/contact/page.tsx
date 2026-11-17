@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Clock, Camera, MapPin, Mail, Phone, MessageCircle } from 'lucide-react';
 import { buildPageMetadata } from '@/lib/seo';
 import {
   buildBreadcrumbJsonLd,
@@ -11,14 +11,6 @@ import {
 import { BookingForm } from '@/components/sections/BookingForm';
 import { TextReveal } from '@/components/ui/TextReveal';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import {
-  ClockWindowIcon,
-  InstagramIcon,
-  LocationPinIcon,
-  MailEnvelopeIcon,
-  PhoneHandsetIcon,
-  WhatsAppChatIcon,
-} from '@/components/graphics/BrandIcons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact & Bridal Mehandi Bookings',
@@ -115,9 +107,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <TextReveal variant="fade" delayMs={240} immediate>
                 <div className="rounded-2xl border border-hairline bg-paper px-5 py-4 text-xs text-umber">
                   <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-[0.14em] text-ink mb-1">
-                    <ClockWindowIcon
-                      size={14}
-                      className="text-terracotta shrink-0"
+                    <Clock
+                      className="w-3 h-3 text-terracotta shrink-0"
                     />
                     <span>Response Window</span>
                   </span>
@@ -155,9 +146,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <dl className="space-y-4 text-sm">
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <LocationPinIcon
-                      size={13}
-                      className="text-terracotta shrink-0"
+                    <MapPin
+                      className="w-3 h-3 text-terracotta shrink-0"
                     />
                     <span>Service Bases &amp; Dispatch</span>
                   </dt>
@@ -168,9 +158,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <MailEnvelopeIcon
-                      size={13}
-                      className="text-brand-green shrink-0"
+                    <Mail
+                      className="w-3 h-3 text-brand-green shrink-0"
                     />
                     <span>Direct Email</span>
                   </dt>
@@ -185,9 +174,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <PhoneHandsetIcon
-                      size={13}
-                      className="text-brand-green shrink-0"
+                    <Phone
+                      className="w-3 h-3 text-brand-green shrink-0"
                     />
                     <span>Phone Call</span>
                   </dt>
@@ -202,9 +190,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <WhatsAppChatIcon
-                      size={13}
-                      className="text-brand-green shrink-0"
+                    <MessageCircle
+                      className="w-3 h-3 text-brand-green shrink-0"
                     />
                     <span>WhatsApp Chat</span>
                   </dt>
@@ -221,9 +208,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <InstagramIcon
-                      size={13}
-                      className="text-brand-green shrink-0"
+                    <Camera
+                      className="w-3 h-3 text-brand-green shrink-0"
                     />
                     <span>Instagram</span>
                   </dt>
@@ -240,9 +226,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div>
                   <dt className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/65 mb-1">
-                    <ClockWindowIcon
-                      size={13}
-                      className="text-terracotta shrink-0"
+                    <Clock
+                      className="w-3 h-3 text-terracotta shrink-0"
                     />
                     <span>Hours</span>
                   </dt>
@@ -265,7 +250,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 href="/shop"
                 className="inline-flex gap-1.5 items-center justify-center rounded-md border border-divider bg-canvas px-4 py-2 text-xs sm:text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
               >
-                Visit the Shop <ShoppingBag className="w-3.5 h-3.5" />
+                Visit the Shop <ShoppingBag className="w-3 h-3" />
               </Link>
             </div>
           </aside>

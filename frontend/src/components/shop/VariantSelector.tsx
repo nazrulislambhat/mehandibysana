@@ -10,8 +10,7 @@ import type {
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { ProductGallery as ProductGalleryLazy } from '@/components/shop/ProductGallery';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
-import { HennaConeIcon } from '@/components/graphics/BrandIcons';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, Sparkles } from 'lucide-react';
 
 export interface VariantSelectorProps {
   product: StorefrontProduct;
@@ -350,7 +349,7 @@ export function VariantSelector({
 
       <div className="rounded-full border border-hairline bg-paper px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs text-umber">
         <span className="inline-flex items-center gap-2 font-mono">
-          <HennaConeIcon size={14} className="text-terracotta shrink-0" />
+          <Sparkles className="w-3 h-3 text-terracotta shrink-0" />
           <span>
             {activeVariation?.sku
               ? `SKU: ${activeVariation.sku}`
@@ -362,7 +361,7 @@ export function VariantSelector({
           className="text-terracotta hover:text-terracotta-dark font-medium underline underline-offset-4 py-0.5 inline-flex items-center gap-1"
         >
           <span>View Shopping Bag</span>
-          <ShoppingBag className="w-3.5 h-3.5" />
+          <ShoppingBag className="w-3 h-3" />
         </Link>
       </div>
 

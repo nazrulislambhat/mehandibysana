@@ -411,7 +411,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                       className="inline-flex items-center min-h-[40px] px-5 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
                     >
                       <span>Next</span>
-                      <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1.5" />
+                      <LineDotRightHorizontal className="w-3 h-3 ml-1.5" />
                     </Link>
                   ) : null}
                 </div>

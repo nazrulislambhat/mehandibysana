@@ -1,4 +1,5 @@
 import React from 'react';
+import { Sparkles, Calendar, Leaf } from 'lucide-react';
 
 export function BotanicalHeroStudy({ className = '' }: { className?: string }) {
   return (
@@ -147,76 +148,12 @@ export function ServiceMotifIcon({
   className?: string;
 }) {
   if (variant === 'bridal') {
-    return (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        className={className}
-      >
-        <circle cx="16" cy="16" r="12" stroke="var(--color-border-strong)" strokeWidth="1.2" />
-        <path
-          d="M16 7C13.5 10.5 12 13 12 16C12 18.2 13.8 20 16 20C18.2 20 20 18.2 20 16C20 13 18.5 10.5 16 7Z"
-          stroke="var(--color-accent)"
-          strokeWidth="1.35"
-        />
-        <circle cx="16" cy="24" r="1.5" fill="var(--color-text)" />
-      </svg>
-    );
+    return <Sparkles className={`w-3 h-3 text-terracotta ${className}`} />;
   }
-
   if (variant === 'events') {
-    return (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        className={className}
-      >
-        <path
-          d="M16 4V28M4 16H28"
-          stroke="var(--color-border-strong)"
-          strokeWidth="1"
-        />
-        <rect
-          x="10.5"
-          y="10.5"
-          width="11"
-          height="11"
-          transform="rotate(45 16 16)"
-          stroke="var(--color-accent)"
-          strokeWidth="1.35"
-        />
-        <circle cx="16" cy="16" r="2.2" fill="var(--color-text)" />
-      </svg>
-    );
+    return <Calendar className={`w-3 h-3 text-terracotta ${className}`} />;
   }
-
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={className}
-    >
-      <path
-        d="M16 27C16 27 8 22 8 13.5C8 9.2 11.5 6 16 6C20.5 6 24 9.2 24 13.5C24 22 16 27 16 27Z"
-        stroke="var(--color-accent)"
-        strokeWidth="1.35"
-      />
-      <path d="M16 9V25" stroke="var(--color-text)" strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M16 15L20 12.5M16 19L12 16.5" stroke="var(--color-text)" strokeWidth="1.15" strokeLinecap="round" />
-    </svg>
-  );
+  return <Leaf className={`w-3 h-3 text-terracotta ${className}`} />;
 }
 
 export function BotanicalCraftIllustration({ className = '' }: { className?: string }) {
