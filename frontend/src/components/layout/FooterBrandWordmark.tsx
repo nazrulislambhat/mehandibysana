@@ -69,7 +69,7 @@ export function FooterBrandWordmark() {
         <span aria-hidden="true" className="w-8 sm:w-14 h-[1px] bg-gradient-to-r from-transparent to-terracotta/40" />
         <span className="inline-flex items-center gap-1.5 font-medium">
           <span className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
-          Artisanal Organic Henna Atelier
+          Organic Henna Studio
           <span className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
         </span>
         <span aria-hidden="true" className="w-8 sm:w-14 h-[1px] bg-gradient-to-l from-transparent to-terracotta/40" />

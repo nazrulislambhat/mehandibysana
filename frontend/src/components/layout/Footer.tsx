@@ -67,7 +67,7 @@ export function Footer() {
             </Link>
 
             <p className="text-xs sm:text-sm text-plaque-ink/75 leading-relaxed max-w-sm">
-              Artisanal organic Sojat henna cones, therapeutic essential oils,
+              Organic henna cones, therapeutic essential oils,
               and heirloom bridal artistry. Handcrafted fresh in small batches
               across Kashmir &amp; Bengaluru.
             </p>
