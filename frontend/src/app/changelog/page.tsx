@@ -18,6 +18,7 @@ import {
   Truck,
   Camera,
   Layers,
+  ExternalLink,
 } from 'lucide-react';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { LinkButton } from '@/components/ui/Button';
@@ -322,6 +323,16 @@ export default function ChangelogPage() {
                 <GitCommit className="w-3.5 h-3.5 text-terracotta" />
                 5 Major Releases Documented
               </span>
+              <a
+                href="https://stacknothing.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-ink hover:text-terracotta hover:border-terracotta/40 transition-colors"
+              >
+                <span>Engineered by</span>
+                <span className="font-semibold text-terracotta underline underline-offset-2">stacknothing.com</span>
+                <ExternalLink className="w-3 h-3 text-umber" />
+              </a>
               <Link
                 href="/tech-stack"
                 className="inline-flex items-center gap-1 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 ml-1"
@@ -494,8 +505,18 @@ export default function ChangelogPage() {
           <h2 className="font-serif text-2xl font-medium text-ink">
             Continuous Improvement
           </h2>
-          <p className="text-xs sm:text-sm text-umber">
-            Have questions about an upcoming release or need support for a custom order?
+          <p className="text-xs sm:text-sm text-umber leading-relaxed">
+            Architected and maintained by the engineering team at{' '}
+            <a
+              href="https://stacknothing.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-ink hover:text-terracotta underline underline-offset-4 inline-flex items-center gap-1"
+            >
+              <span>stacknothing.com</span>
+              <ExternalLink className="w-3 h-3 text-terracotta inline" />
+            </a>
+            . Have questions about an upcoming release or need support for a custom order?
           </p>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <LinkButton href="/tech-stack" variant="inverse" size="md">

@@ -302,6 +302,16 @@ export default function TechStackPage() {
                 <GitBranch className="w-3.5 h-3.5 text-terracotta" />
                 Headless Architecture
               </span>
+              <a
+                href="https://stacknothing.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-ink hover:text-terracotta hover:border-terracotta/40 transition-colors"
+              >
+                <span>Engineered by</span>
+                <span className="font-semibold text-terracotta underline underline-offset-2">stacknothing.com</span>
+                <ExternalLink className="w-3 h-3 text-umber" />
+              </a>
               <Link
                 href="/changelog"
                 className="inline-flex items-center gap-1 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 ml-1"
@@ -450,7 +460,17 @@ export default function TechStackPage() {
               Engineered for Artisanal Reliability
             </h2>
             <p className="text-xs sm:text-sm text-umber leading-relaxed">
-              Explore our release roadmap and version history to see how our engineering
+              Designed, built, and continuously maintained by the product engineering team at{' '}
+              <a
+                href="https://stacknothing.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-ink hover:text-terracotta underline underline-offset-4 inline-flex items-center gap-1"
+              >
+                <span>stacknothing.com</span>
+                <ExternalLink className="w-3 h-3 text-terracotta inline" />
+              </a>
+              . Explore our release roadmap and version history to see how our engineering
               evolves alongside our small-batch organic henna paste batches.
             </p>
           </div>
