@@ -222,7 +222,7 @@ export function PolicyDocumentLayout({
                   rel="noopener noreferrer"
                   className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
-                  WhatsApp Concierge
+                  WhatsApp
                 </a>
 
                 <a
@@ -231,7 +231,7 @@ export function PolicyDocumentLayout({
                   rel="noopener noreferrer"
                   className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
                 >
-                  @mehandibysana (Instagram)
+                  @mehandibysana
                 </a>
               </div>
             </div>
