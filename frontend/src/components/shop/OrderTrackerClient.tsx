@@ -33,6 +33,7 @@ export interface TrackedOrder {
   courierName: string;
   dispatchNote?: string;
   pincodeRule: string;
+  shippingMethodName?: string;
   couponCode?: string;
   discountAmount?: number;
   subtotal: number;
@@ -466,14 +467,33 @@ export function OrderTrackerClient({
                       </dd>
                     </div>
                   ) : null}
-                  <div className="flex justify-between">
-                    <dt className="text-umber">
-                      Delivery ({order.pincodeRule})
-                    </dt>
-                    <dd className="font-medium text-ink tabular-nums">
-                      {formatInr(order.shippingFee)}
-                    </dd>
-                  </div>
+                  {(() => {
+                    const discount = Number(order.discountAmount || 0);
+                    const subtotal = Number(order.subtotal || 0);
+                    const total = Number(order.total || 0);
+                    const calculatedShipping =
+                      order.shippingFee > 0
+                        ? order.shippingFee
+                        : total > subtotal - discount
+                          ? Math.max(0, Math.round((total - (subtotal - discount)) * 100) / 100)
+                          : 0;
+                    const deliveryLabel =
+                      order.shippingMethodName ||
+                      (order.pincodeRule && order.pincodeRule !== "*"
+                        ? `Delivery (${order.pincodeRule})`
+                        : "Standard Delivery");
+
+                    return (
+                      <div className="flex justify-between">
+                        <dt className="text-umber">{deliveryLabel}</dt>
+                        <dd className="font-medium text-ink tabular-nums">
+                          {calculatedShipping > 0
+                            ? formatInr(calculatedShipping)
+                            : "Free"}
+                        </dd>
+                      </div>
+                    );
+                  })()}
                   <div className="flex justify-between border-t border-divider/60 pt-2 text-sm font-semibold text-ink">
                     <dt>Total</dt>
                     <dd className="font-serif text-lg tabular-nums">
