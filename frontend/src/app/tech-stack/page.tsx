@@ -14,7 +14,6 @@ import {
   Send,
   Search,
   FileCode2,
-  ExternalLink,
   CheckCircle2,
   GitBranch,
   ArrowRight,
@@ -22,6 +21,7 @@ import {
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { LinkButton } from '@/components/ui/Button';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Technology Stack & Engineering Architecture',
@@ -310,7 +310,7 @@ export default function TechStackPage() {
               >
                 <span>Engineered by</span>
                 <span className="font-semibold text-terracotta underline underline-offset-2">stacknothing.com</span>
-                <ExternalLink className="w-3 h-3 text-umber" />
+                <CircleArrowUpRightExit className="w-3.5 h-3.5 text-umber" />
               </a>
               <Link
                 href="/changelog"
@@ -426,7 +426,7 @@ export default function TechStackPage() {
                             aria-label={`Official website of ${tech.name}`}
                             className="text-umber hover:text-ink transition-colors p-1"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <CircleArrowUpRightExit className="w-4 h-4" />
                           </a>
                         )}
                       </div>
@@ -468,7 +468,7 @@ export default function TechStackPage() {
                 className="font-medium text-ink hover:text-terracotta underline underline-offset-4 inline-flex items-center gap-1"
               >
                 <span>stacknothing.com</span>
-                <ExternalLink className="w-3 h-3 text-terracotta inline" />
+                <CircleArrowUpRightExit className="w-3.5 h-3.5 text-terracotta inline" />
               </a>
               . Explore our release roadmap and version history to see how our engineering
               evolves alongside our small-batch organic henna paste batches.
@@ -479,7 +479,7 @@ export default function TechStackPage() {
               <span>View Release Changelog</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </LinkButton>
-            <LinkButton href="/shop" variant="inverse" size="md">
+            <LinkButton href="/shop" variant="secondary" size="md">
               <span>Explore Products</span>
             </LinkButton>
           </div>

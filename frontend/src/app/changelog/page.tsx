@@ -18,10 +18,10 @@ import {
   Truck,
   Camera,
   Layers,
-  ExternalLink,
 } from 'lucide-react';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { LinkButton } from '@/components/ui/Button';
+import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Changelog & Release Notes',
@@ -331,7 +331,7 @@ export default function ChangelogPage() {
               >
                 <span>Engineered by</span>
                 <span className="font-semibold text-terracotta underline underline-offset-2">stacknothing.com</span>
-                <ExternalLink className="w-3 h-3 text-umber" />
+                <CircleArrowUpRightExit className="w-3.5 h-3.5 text-umber" />
               </a>
               <Link
                 href="/tech-stack"
@@ -514,12 +514,12 @@ export default function ChangelogPage() {
               className="font-medium text-ink hover:text-terracotta underline underline-offset-4 inline-flex items-center gap-1"
             >
               <span>stacknothing.com</span>
-              <ExternalLink className="w-3 h-3 text-terracotta inline" />
+              <CircleArrowUpRightExit className="w-3.5 h-3.5 text-terracotta inline" />
             </a>
             . Have questions about an upcoming release or need support for a custom order?
           </p>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <LinkButton href="/tech-stack" variant="inverse" size="md">
+            <LinkButton href="/tech-stack" variant="secondary" size="md">
               <span>View Tech Stack</span>
             </LinkButton>
             <LinkButton href="/contact" variant="accent" size="md">
