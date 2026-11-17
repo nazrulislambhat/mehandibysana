@@ -23,6 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/refund-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${siteUrl}/terms-conditions`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${siteUrl}/privacy-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${siteUrl}/tech-stack`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${siteUrl}/changelog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
   ];
 
   const [catalog, categories] = await Promise.all([

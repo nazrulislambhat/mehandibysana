@@ -34,6 +34,8 @@ const STUDIO_POLICY_LINKS = [
   { label: 'Terms & Conditions', href: '/terms-conditions' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'FAQs', href: '/faq' },
+  { label: 'Tech Stack', href: '/tech-stack' },
+  { label: 'Changelog', href: '/changelog' },
 ] as const;
 
 export function Footer() {
@@ -298,6 +300,24 @@ export function Footer() {
               className="hover:text-terracotta transition-colors"
             >
               Terms
+            </Link>
+            <span aria-hidden="true" className="text-terracotta">
+              &middot;
+            </span>
+            <Link
+              href="/tech-stack"
+              className="hover:text-terracotta transition-colors"
+            >
+              Tech Stack
+            </Link>
+            <span aria-hidden="true" className="text-terracotta">
+              &middot;
+            </span>
+            <Link
+              href="/changelog"
+              className="hover:text-terracotta transition-colors"
+            >
+              Changelog
             </Link>
             <ThemeToggle variant="segmented" surface="plaque" />
           </div>

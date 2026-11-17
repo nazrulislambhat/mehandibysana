@@ -50,6 +50,9 @@ function buildRemotePatterns(): NonNullable<NextConfig['images']>['remotePattern
 }
 
 const nextConfig: NextConfig = {
+  experimental: {
+    agentUpgrade: 'security',
+  },
   turbopack: {
     root: path.resolve(__dirname, '..'),
   },
