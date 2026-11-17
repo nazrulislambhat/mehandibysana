@@ -152,9 +152,9 @@ export function PolicyDocumentLayout({
 
       {beforeContent}
 
-      {/* Asymmetric Sticky TOC + Longform Clauses */}
-      <div className="editorial-container pt-12 md:pt-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      {/* Symmetrical Sticky TOC + Longform Clauses */}
+      <div className="editorial-container pt-10 md:pt-14 pb-16 md:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Sticky Sidebar */}
           <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-5">
             {toc.length > 0 ? (
@@ -163,17 +163,17 @@ export function PolicyDocumentLayout({
                 className="rounded-2xl border border-hairline bg-paper p-6 space-y-4"
               >
                 <div className="flex items-center justify-between gap-2 border-b border-hairline pb-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
                     Clause Index
                   </span>
                   <BotanicalSprig className="w-10 h-4" />
                 </div>
-                <ol className="space-y-1.5 text-xs">
+                <ol className="space-y-1.5 text-xs sm:text-sm">
                   {toc.map((item) => (
                     <li key={item.id}>
                       <a
                         href={`#${item.id}`}
-                        className="group flex items-baseline gap-2.5 rounded-lg px-2 py-1.5 text-umber hover:bg-linen hover:text-ink transition-colors"
+                        className="group flex items-baseline gap-2.5 rounded-lg px-2.5 py-1.5 text-umber hover:bg-linen hover:text-ink transition-colors"
                       >
                         <span className="font-serif italic text-terracotta shrink-0">
                           {item.number}
@@ -194,24 +194,24 @@ export function PolicyDocumentLayout({
                 aria-hidden="true"
                 className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
               />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
                 Direct Contact &amp; Grievance Desk
               </p>
               <h2 className="font-serif text-xl font-medium text-plaque-ink">
                 Mehandi By Sana
               </h2>
 
-              <div className="pt-2 border-t border-plaque-ink/15 space-y-2 text-xs">
+              <div className="pt-2 border-t border-plaque-ink/15 space-y-2 text-xs sm:text-sm">
                 <a
                   href="mailto:sana@mehandibysana.com"
-                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                  className="block text-plaque-ink/90 hover:text-terracotta underline underline-offset-4 decoration-terracotta/40 hover:decoration-terracotta font-medium transition-colors"
                 >
                   sana@mehandibysana.com
                 </a>
 
                 <a
                   href="tel:+919149648717"
-                  className="block text-brand-green hover:text-brand-green-hover tabular-nums underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                  className="block text-plaque-ink/90 hover:text-terracotta tabular-nums underline underline-offset-4 decoration-terracotta/40 hover:decoration-terracotta font-medium transition-colors"
                 >
                   +91-9149648717
                 </a>
@@ -220,7 +220,7 @@ export function PolicyDocumentLayout({
                   href="https://wa.me/919149648717"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                  className="block text-plaque-ink/90 hover:text-terracotta underline underline-offset-4 decoration-terracotta/40 hover:decoration-terracotta font-medium transition-colors"
                 >
                   WhatsApp
                 </a>
@@ -229,7 +229,7 @@ export function PolicyDocumentLayout({
                   href="https://www.instagram.com/mehandibysana"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                  className="block text-plaque-ink/90 hover:text-terracotta underline underline-offset-4 decoration-terracotta/40 hover:decoration-terracotta font-medium transition-colors"
                 >
                   @mehandibysana
                 </a>
@@ -238,7 +238,7 @@ export function PolicyDocumentLayout({
           </aside>
 
           {/* Right 8 Columns Main Document */}
-          <article className="lg:col-span-8 space-y-6 text-sm sm:text-[15px] text-ink/90 leading-relaxed">
+          <article className="lg:col-span-8 space-y-6 text-sm sm:text-base text-ink leading-relaxed">
             {children}
           </article>
         </div>

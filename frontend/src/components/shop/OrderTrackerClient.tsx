@@ -336,7 +336,7 @@ export function OrderTrackerClient({
           <div className="p-6 sm:p-8 md:p-10 space-y-8">
             {order.dispatchNote ? (
               <div className="rounded-xl border border-terracotta/35 bg-linen p-4 text-xs sm:text-sm text-ink leading-relaxed">
-                <span className="font-semibold uppercase tracking-[0.12em] text-[10px] text-terracotta block mb-1">
+                <span className="font-semibold uppercase tracking-[0.12em] text-xs text-terracotta block mb-1">
                   Dispatch Update
                 </span>
                 {order.dispatchNote}

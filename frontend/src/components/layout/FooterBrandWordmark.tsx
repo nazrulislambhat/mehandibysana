@@ -65,7 +65,7 @@ export function FooterBrandWordmark() {
       className="footer-wordmark-frame w-full select-none py-2"
     >
       {/* Decorative Atelier Hallmark Header */}
-      <div className="flex items-center justify-center gap-3 mb-3 text-[10px] font-mono uppercase tracking-[0.24em] text-terracotta/80">
+      <div className="flex items-center justify-center gap-3 mb-3 text-xs font-mono uppercase tracking-[0.24em] text-terracotta">
         <span aria-hidden="true" className="w-8 sm:w-14 h-[1px] bg-gradient-to-r from-transparent to-terracotta/40" />
         <span className="inline-flex items-center gap-1.5 font-medium">
           <span className="w-1.5 h-1.5 rotate-45 bg-terracotta" />
@@ -126,7 +126,7 @@ export function FooterBrandWordmark() {
       </p>
 
       {/* Sub-label hallmark */}
-      <p className="text-center text-[10px] sm:text-[11px] font-mono tracking-[0.22em] text-plaque-ink/40 uppercase mt-3">
+      <p className="text-center text-xs font-mono tracking-[0.22em] text-plaque-ink/75 uppercase mt-3">
         Kashmir &middot; Bengaluru &middot; Pan-India Dispatch
       </p>
     </div>

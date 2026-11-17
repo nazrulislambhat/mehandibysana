@@ -145,7 +145,7 @@ export function CouponCodeBox({
           </p>
         </div>
         {isApplied && validation?.coupon ? (
-          <span className="rounded-full bg-ink px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-inverse">
+          <span className="rounded-full bg-ink px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-inverse">
             {validation.coupon.summaryLabel}
           </span>
         ) : null}

@@ -284,7 +284,7 @@ export default async function HomePage() {
               >
                 Celebrating something special? Let’s create it together.
               </h2>
-              <p className="text-base text-plaque-ink/75 leading-relaxed max-w-xl mx-auto mb-8">
+              <p className="text-base text-plaque-ink/90 leading-relaxed max-w-xl mx-auto mb-8">
                 Bridal and celebration bookings are taken in advance across Kashmir, Bengaluru, and destination venues. Custom bulk cones are freshly mixed and dispatched within 2 business days.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3.5">

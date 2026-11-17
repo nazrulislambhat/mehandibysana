@@ -209,8 +209,8 @@ export default function FaqPage() {
                 key={item.question}
                 title={item.question}
                 className="rounded-xl border border-hairline bg-canvas px-5 py-4 data-[state=open]:border-terracotta/50"
-                triggerClassName="text-sm sm:text-base font-medium text-ink"
-                contentClassName="mt-3 text-xs sm:text-sm text-umber leading-relaxed border-t border-hairline/70 pt-3"
+                triggerClassName="text-sm sm:text-base font-medium text-ink min-h-[28px]"
+                contentClassName="mt-3 text-sm text-umber leading-relaxed border-t border-hairline pt-3"
               >
                 <p>{item.answer}</p>
               </AccordionDisclosure>
@@ -219,14 +219,14 @@ export default function FaqPage() {
         </section>
       ))}
 
-      <section className="rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-7 sm:p-8 space-y-4">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
+      <section className="rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 sm:p-8 space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
           Still Have Questions?
         </p>
         <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
           Reach out directly to Sana
         </h2>
-        <p className="text-sm text-plaque-ink/75 leading-relaxed">
+        <p className="text-sm sm:text-base text-plaque-ink/90 leading-relaxed">
           Need guidance picking cone counts for a bridal event, verifying an
           order reference, or planning an urgent delivery? Reach out anytime.
         </p>
@@ -239,12 +239,14 @@ export default function FaqPage() {
           >
             Ask Sana Directly
           </LinkButton>
-          <Link
+          <LinkButton
             href="/henna-care"
-            className="inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-plaque-ink underline underline-offset-4 transition-colors hover:no-underline"
+            variant="inverse"
+            size="md"
+            className="rounded-md"
           >
             Read Stain Care Guide
-          </Link>
+          </LinkButton>
         </div>
       </section>
     </PolicyDocumentLayout>

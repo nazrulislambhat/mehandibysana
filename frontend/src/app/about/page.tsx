@@ -175,7 +175,7 @@ export default function AboutPage() {
         aria-labelledby="about-page-heading"
         className="border-b border-hairline bg-canvas"
       >
-        <div className="editorial-container py-10 md:py-18">
+        <div className="editorial-container py-10 md:py-16">
           <nav
             aria-label="Breadcrumb"
             className="inline-flex flex-wrap items-center gap-2 rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs text-umber mb-8"
@@ -251,7 +251,7 @@ export default function AboutPage() {
             </blockquote>
             <figcaption className="mt-6 pt-5 border-t border-plaque-ink/15 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               &mdash; Sana &middot;{' '}
-              <span className="text-plaque-ink/75 font-normal">Kashmir &amp; Bengaluru</span>
+              <span className="text-plaque-ink/90 font-normal">Kashmir &amp; Bengaluru</span>
             </figcaption>
           </figure>
         </TextReveal>
@@ -393,7 +393,7 @@ export default function AboutPage() {
                     <p
                       className={`text-sm leading-relaxed ${
                         item.number === '07'
-                          ? 'text-plaque-ink/80 max-w-3xl'
+                          ? 'text-plaque-ink/90 max-w-3xl'
                           : 'text-umber'
                       }`}
                     >
@@ -421,13 +421,13 @@ export default function AboutPage() {
                       <span className="hidden md:inline-flex items-center justify-center w-8 h-8 rounded-full bg-terracotta-solid text-on-accent font-serif text-sm font-semibold italic shrink-0">
                         {item.number}
                       </span>
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-terracotta">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-terracotta">
                         <CheckCircle2 className="w-3 h-3 shrink-0" />
                         <span>Verified Honor</span>
                       </span>
                     </div>
                   ) : (
-                    <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] pt-2 text-umber/80">
+                    <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] pt-2 text-umber">
                       <CheckCircle2 className="w-3 h-3 text-terracotta shrink-0" />
                       <span>Verified Honor</span>
                     </div>

@@ -194,7 +194,7 @@ export function DesktopNav() {
                   setHoveredHref(item.href);
                   openMegaMenu();
                 }}
-                className={`relative z-10 flex items-center rounded-full pl-3.5 pr-1.5 py-1.5 transition-all duration-200 ${
+                className={`relative z-10 inline-flex items-center rounded-full pl-3.5 pr-1 h-[32px] transition-all duration-200 ${
                   isActivePill
                     ? 'bg-ink text-inverse shadow-xs'
                     : 'text-ink hover:text-terracotta'
@@ -204,7 +204,7 @@ export function DesktopNav() {
                   href={item.href}
                   aria-current={isCurrent ? 'page' : undefined}
                   onClick={() => closeMegaMenu(false)}
-                  className="inline-flex items-baseline gap-1.5 text-[13px] font-medium pr-1"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-medium pr-1"
                 >
                   <span
                     className={`font-serif text-[11px] italic transition-colors ${
@@ -232,7 +232,7 @@ export function DesktopNav() {
                       openMegaMenu();
                     }
                   }}
-                  className={`inline-flex items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-colors ${
+                  className={`inline-flex items-center justify-center w-5 h-5 rounded-full cursor-pointer transition-colors ${
                     isActivePill
                       ? 'text-inverse/80 hover:text-terracotta-on-ink hover:bg-inverse/10'
                       : 'text-umber hover:text-terracotta hover:bg-linen'
@@ -266,7 +266,7 @@ export function DesktopNav() {
                 href={item.href}
                 prefetch={item.prefetch}
                 aria-current={isCurrent ? 'page' : undefined}
-                className={`group inline-flex items-baseline gap-1.5 rounded-full px-3.5 lg:px-4 py-1.5 text-[13px] font-medium transition-all duration-200 ${
+                className={`group inline-flex items-center gap-1.5 rounded-full px-3.5 lg:px-4 h-[32px] text-[13px] font-medium transition-all duration-200 ${
                   isCurrent
                     ? 'bg-ink text-inverse shadow-xs'
                     : 'text-ink hover:text-terracotta'
@@ -344,7 +344,7 @@ export function DesktopNav() {
                               {col.title}
                             </span>
                             {col.badge ? (
-                              <span className="inline-flex items-center rounded-full border border-terracotta/45 bg-paper px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-terracotta">
+                              <span className="inline-flex items-center rounded-full border border-terracotta/45 bg-paper px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-terracotta">
                                 {col.badge}
                               </span>
                             ) : null}
@@ -357,7 +357,7 @@ export function DesktopNav() {
 
                       <span
                         aria-hidden="true"
-                        className="mt-1 text-umber/60 group-hover:text-terracotta group-hover:translate-x-0.5 transition-all text-sm shrink-0"
+                        className="mt-1 text-umber group-hover:text-terracotta group-hover:translate-x-0.5 transition-all text-sm shrink-0"
                       >
                         <LineDotRightHorizontal className="w-3 h-3" />
                       </span>

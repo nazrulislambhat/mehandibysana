@@ -355,10 +355,10 @@ export function CartView() {
 
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta block">
                       Order Dossier
                     </span>
-                    <span className="font-serif text-xs italic text-plaque-ink/70 block mt-0.5">
+                    <span className="font-serif text-xs italic text-plaque-ink/85 block mt-0.5">
                       Kashmir &amp; Bengaluru
                     </span>
                   </div>
@@ -376,7 +376,7 @@ export function CartView() {
 
                 <dl className="space-y-3 text-sm border-b border-plaque-ink/15 pb-5 mb-5">
                   <div className="flex justify-between gap-3">
-                    <dt className="text-plaque-ink/75">Items ({itemCount})</dt>
+                    <dt className="text-plaque-ink/90">Items ({itemCount})</dt>
                     <dd className="font-medium text-plaque-ink tabular-nums">
                       {formatMoney(subtotal, currency)}
                     </dd>
@@ -392,7 +392,7 @@ export function CartView() {
                     </div>
                   ) : null}
                   <div className="flex justify-between gap-3">
-                    <dt className="text-plaque-ink/75">
+                    <dt className="text-plaque-ink/90">
                       Delivery
                       {pincodeResult?.serviceable && pincodeResult.matchedRule
                         ? ` (PIN ${pincodeResult.pincode} · ${pincodeResult.matchedRule.pattern})`
@@ -402,7 +402,7 @@ export function CartView() {
                       className={`font-medium tabular-nums ${
                         deliveryFee !== null
                           ? 'text-terracotta'
-                          : 'text-plaque-ink/70'
+                          : 'text-plaque-ink/85'
                       }`}
                     >
                       {deliveryFee !== null
@@ -415,7 +415,7 @@ export function CartView() {
                 </dl>
 
                 <div className="flex items-baseline justify-between mb-6">
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink/80">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink/90">
                     Estimated Total
                   </span>
                   <span className="font-serif text-4xl font-medium text-plaque-ink tabular-nums">
@@ -433,7 +433,7 @@ export function CartView() {
                   <LineDotRightHorizontal className="w-3 h-3" />
                 </LinkButton>
 
-                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/85 text-center leading-relaxed">
                   <ShieldCheck
                     className="w-3 h-3 text-terracotta shrink-0"
                   />

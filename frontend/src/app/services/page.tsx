@@ -266,7 +266,7 @@ export default function ServicesPage() {
                     </p>
                     <p
                       className={`text-sm leading-relaxed mb-6 ${
-                        isFeatured ? 'text-plaque-ink/80' : 'text-umber'
+                        isFeatured ? 'text-plaque-ink/90' : 'text-umber'
                       }`}
                     >
                       {tier.summary}

@@ -405,7 +405,7 @@ export default function TechStackPage() {
                               {tech.name}
                             </h3>
                             {tech.version && (
-                              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-linen text-umber border border-hairline">
+                              <span className="text-xs font-mono px-2 py-0.5 rounded bg-linen text-umber border border-hairline">
                                 {tech.version}
                               </span>
                             )}
@@ -450,7 +450,8 @@ export default function TechStackPage() {
 
       {/* Call to Action Footer Plaque */}
       <section className="border-t border-hairline bg-linen/50 py-14">
-        <div className="editorial-container text-center space-y-5 max-w-2xl">
+        <div className="editorial-container">
+          <div className="max-w-2xl mx-auto text-center space-y-5">
           <BrandCrest tone="auto-badge" size={44} className="mx-auto" />
           <div className="space-y-2">
             <h2 className="font-serif text-2xl sm:text-3xl font-medium text-ink">
@@ -480,6 +481,7 @@ export default function TechStackPage() {
               <span>Explore Products</span>
             </LinkButton>
           </div>
+        </div>
         </div>
       </section>
     </div>
