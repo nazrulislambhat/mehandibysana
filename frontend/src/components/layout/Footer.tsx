@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import {
   InstagramIcon,
-  LocationPinIcon,
   MailEnvelopeIcon,
   PhoneHandsetIcon,
   WhatsAppChatIcon,
@@ -154,10 +153,6 @@ export function Footer() {
           {/* Col 4: Fresh Batch Dispatch (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-4">
             <FooterNewsletterForm />
-            <div className="flex items-center gap-2 text-xs text-plaque-ink/75 pt-0.5">
-              <LocationPinIcon size={14} className="text-terracotta shrink-0" />
-              <span>Studios in Srinagar &amp; Bengaluru &middot; Dispatch Pan-India</span>
-            </div>
           </div>
         </div>
       </div>
