@@ -1,39 +1,40 @@
 import React from 'react';
 import Link from 'next/link';
-import { LinkButton } from '@/components/ui/Button';
-import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import {
   InstagramIcon,
   LocationPinIcon,
   MailEnvelopeIcon,
   PhoneHandsetIcon,
-  ShieldProtectIcon,
   WhatsAppChatIcon,
 } from '@/components/graphics/BrandIcons';
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
-import { LineDotRightHorizontal } from 'lucide-react';
+
 const HENNA_PRODUCT_LINKS = [
-  { label: 'Shop', href: '/shop' },
-  { label: 'Organic Henna', href: '/shop?category=organic-henna' },
+  { label: 'All Products', href: '/shop' },
+  { label: 'Organic Henna Cones', href: '/shop?category=organic-henna' },
   { label: 'Bridal & Care Kits', href: '/shop?category=henna-kits-combos' },
   { label: 'Essential Oils', href: '/shop?category=henna-care-essential-oils' },
   { label: 'Tools & Supplies', href: '/shop?category=mehandi-tools-supplies' },
   { label: 'Henna Care Guide', href: '/henna-care' },
 ] as const;
 
-const STUDIO_POLICY_LINKS = [
+const STUDIO_SERVICES_LINKS = [
   { label: 'Bridal Services', href: '/services' },
   { label: 'Stain Portfolio', href: '/gallery' },
   { label: 'About Sana', href: '/about' },
-  { label: 'Track Order', href: '/track-order' },
-  { label: 'Shipping & Pincode', href: '/shipping-policy' },
-  { label: 'Refund & Returns', href: '/refund-policy' },
-  { label: 'Terms & Conditions', href: '/terms-conditions' },
-  { label: 'Privacy Policy', href: '/privacy-policy' },
-  { label: 'FAQs', href: '/faq' },
+  { label: 'Track Your Order', href: '/track-order' },
+  { label: 'FAQs & Support', href: '/faq' },
+  { label: 'Contact & Inquiries', href: '/contact' },
+] as const;
+
+const LEGAL_POLICY_LINKS = [
+  { label: 'Shipping', href: '/shipping-policy' },
+  { label: 'Refunds', href: '/refund-policy' },
+  { label: 'Privacy', href: '/privacy-policy' },
+  { label: 'Terms', href: '/terms-conditions' },
   { label: 'Tech Stack', href: '/tech-stack' },
   { label: 'Changelog', href: '/changelog' },
 ] as const;
@@ -42,284 +43,148 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-plaque text-plaque-ink border-t border-plaque-border overflow-hidden">
-      {/* Top burnt-terracotta architectural hairline */}
-      <div aria-hidden="true" className="h-[3px] w-full bg-terracotta-solid" />
+    <footer className="relative bg-linen text-ink border-t border-hairline transition-colors duration-300 overflow-hidden">
+      {/* Top terracotta architectural hairline */}
+      <div aria-hidden="true" className="h-[2px] w-full bg-terracotta" />
 
-      {/* Main Editorial Footer Matrix */}
-      <div className="editorial-container pt-14 md:pt-20 pb-8 md:pb-10">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
-          {/* Colophon + Batch Dispatch Subscription */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
-                  href="/"
-                  aria-label="Mehandi By Sana Home"
-                  className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-[2.1rem] font-medium tracking-tight text-plaque-ink hover:text-terracotta transition-colors"
-                >
-                  <BrandCrest
-                    tone="ink-badge"
-                    size={44}
-                    decorative
-                    className="shrink-0 transition-transform duration-500 group-hover:scale-105"
-                  />
-                </Link>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-plaque-ink/80">
-                  <span
-                    aria-hidden="true"
-                    className="w-1.5 h-1.5 rotate-45 bg-terracotta"
-                  />
-                  Est. 2019 &middot; Kashmir &amp; Bengaluru
-                </span>
-              </div>
+      {/* Main Editorial Footer Container */}
+      <div className="editorial-container pt-12 md:pt-16 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+          {/* Col 1: Brand & Craft Identity (lg:col-span-4) */}
+          <div className="lg:col-span-4 space-y-4">
+            <Link
+              href="/"
+              aria-label="Mehandi By Sana Home"
+              className="group inline-flex items-center gap-2.5 font-serif text-2xl sm:text-3xl font-medium tracking-tight text-ink hover:text-terracotta transition-colors"
+            >
+              <BrandCrest
+                tone="auto-badge"
+                size={38}
+                decorative
+                className="shrink-0 transition-transform duration-500 group-hover:scale-105"
+              />
+              <span>Mehandi By Sana</span>
+            </Link>
 
-              <p className="text-sm text-plaque-ink/75 leading-relaxed max-w-md">
-                Founded by Sana, a freelance organic mehandi artist working
-                across Kashmir &amp; Bengaluru. She offers fresh small-batch
-                Sojat henna cones, therapeutic essential oils, aftercare balms,
-                and heirloom bridal artistry.
-              </p>
-            </div>
+            <p className="text-xs sm:text-sm text-umber leading-relaxed max-w-sm">
+              Artisanal organic Sojat henna cones, therapeutic essential oils,
+              and heirloom bridal artistry. Handcrafted fresh in small batches
+              across Kashmir &amp; Bengaluru.
+            </p>
 
-            <FooterNewsletterForm />
-
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-3 pt-1 text-xs">
-              <a
-                href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
-              >
-                <MailEnvelopeIcon
-                  size={14}
-                  className="shrink-0 text-brand-green"
-                />
-                <span>sana@mehandibysana.com</span>
-              </a>
-              <span aria-hidden="true" className="text-brand-green/50">
-                &middot;
-              </span>
-              <a
-                href="tel:+919149648717"
-                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium tabular-nums transition-colors"
-              >
-                <PhoneHandsetIcon
-                  size={14}
-                  className="shrink-0 text-brand-green"
-                />
-                <span>+91-9149648717</span>
-              </a>
-              <span aria-hidden="true" className="text-brand-green/50">
-                &middot;
-              </span>
+            {/* Direct Social & Connect Quick Links */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
               <a
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                aria-label="Chat on WhatsApp"
               >
-                <WhatsAppChatIcon size={14} className="shrink-0 text-brand-green" />
+                <WhatsAppChatIcon size={13} className="text-brand-green" />
                 <span>WhatsApp</span>
               </a>
-              <span aria-hidden="true" className="text-brand-green/50">
-                &middot;
-              </span>
               <a
                 href="https://www.instagram.com/mehandibysana"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
                 aria-label="Instagram profile @mehandibysana"
               >
-                <InstagramIcon size={14} className="shrink-0 text-brand-green" />
+                <InstagramIcon size={13} className="text-terracotta" />
                 <span>@mehandibysana</span>
+              </a>
+              <a
+                href="mailto:sana@mehandibysana.com"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                aria-label="Email sana@mehandibysana.com"
+              >
+                <MailEnvelopeIcon size={13} className="text-umber" />
+                <span>Email</span>
+              </a>
+              <a
+                href="tel:+919149648717"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-paper text-umber hover:text-ink hover:border-terracotta transition-colors"
+                aria-label="Call +91-9149648717"
+              >
+                <PhoneHandsetIcon size={13} className="text-umber" />
+                <span>Call</span>
               </a>
             </div>
           </div>
 
-          {/* Henna Products Index */}
-          <nav
-            aria-label="Footer henna product categories"
-            className="lg:col-span-2"
-          >
-            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-5">
-              Henna Products
+          {/* Col 2: Shop & Formulations (lg:col-span-2) */}
+          <nav aria-label="Footer products" className="lg:col-span-2 space-y-3">
+            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+              Shop
             </h2>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs sm:text-sm">
               {HENNA_PRODUCT_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="group inline-flex items-center gap-2 py-0.5 text-plaque-ink/80 hover:text-plaque-ink transition-colors"
+                    className="text-umber hover:text-ink hover:translate-x-0.5 inline-block transition-all"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="h-1 w-1 rounded-full bg-terracotta/50 group-hover:bg-terracotta group-hover:scale-125 transition-all"
-                    />
-                    <span className="group-hover:translate-x-0.5 transition-transform">
-                      {item.label}
-                    </span>
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* Artist & Policies Index */}
-          <nav
-            aria-label="Footer artist links and legal policies"
-            className="lg:col-span-2"
-          >
-            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta mb-5">
-              Artist &amp; Care
+          {/* Col 3: Studio & Services (lg:col-span-2) */}
+          <nav aria-label="Footer studio links" className="lg:col-span-2 space-y-3">
+            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+              Studio
             </h2>
-            <ul className="space-y-2.5 text-sm">
-              {STUDIO_POLICY_LINKS.map((item) => (
+            <ul className="space-y-2 text-xs sm:text-sm">
+              {STUDIO_SERVICES_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="group inline-flex items-center gap-2 py-0.5 text-plaque-ink/80 hover:text-plaque-ink transition-colors"
+                    className="text-umber hover:text-ink hover:translate-x-0.5 inline-block transition-all"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="h-1 w-1 rounded-full bg-plaque-ink/30 group-hover:bg-terracotta transition-colors"
-                    />
-                    <span className="group-hover:translate-x-0.5 transition-transform">
-                      {item.label}
-                    </span>
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* Service Bases Arch Plaque */}
-          <div className="lg:col-span-3">
-            <div className="relative h-full rounded-2xl border border-plaque-ink/15 bg-gradient-to-b from-plaque-ink/[0.05] to-transparent p-6 flex flex-col justify-between gap-5">
-              <div className="space-y-3.5">
-                <div className="flex items-center justify-between gap-2">
-                  <h2 className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
-                    <LocationPinIcon size={14} className="shrink-0" />
-                    <span>Kashmir &amp; Bengaluru</span>
-                  </h2>
-                  <BotanicalSprig className="w-10 opacity-75 shrink-0" />
-                </div>
-
-                <div className="space-y-2.5 text-xs text-plaque-ink/80 leading-relaxed">
-                  <p>
-                    <span className="font-medium text-plaque-ink block">
-                      Kashmir: Dispatch &amp; Bookings
-                    </span>
-                    <span className="text-plaque-ink/70">
-                      Kashmir, J&amp;K
-                    </span>
-                  </p>
-                  <p>
-                    <span className="font-medium text-plaque-ink block">
-                      Bengaluru: Dispatch &amp; Bookings
-                    </span>
-                    <span className="text-plaque-ink/70">
-                      Bengaluru, Karnataka
-                    </span>
-                  </p>
-                  <p className="text-plaque-ink/70 pt-0.5">
-                    Contact: Mon &ndash; Sun, 09:00 AM &ndash; 09:00 PM IST
-                  </p>
-                  <p className="text-plaque-ink/70">
-                    Dispatch: Small-batch courier Mon &ndash; Sat within
-                    3&ndash;5 business days across India.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 pt-2">
-                <LinkButton
-                  href="/contact"
-                  variant="accent"
-                  size="md"
-                  className="w-full rounded-md text-xs"
-                >
-                  <span>Request Bridal Date</span>{' '}
-                  <LineDotRightHorizontal className="w-3.5 h-3.5" />
-                </LinkButton>
-                <LinkButton
-                  href="/track-order"
-                  variant="inverse"
-                  size="sm"
-                  className="w-full rounded-md text-xs border-plaque-ink/20"
-                >
-                  Track Your Order
-                </LinkButton>
-              </div>
+          {/* Col 4: Fresh Batch Dispatch (lg:col-span-4) */}
+          <div className="lg:col-span-4 space-y-4">
+            <FooterNewsletterForm />
+            <div className="flex items-center gap-2 text-xs text-umber pt-0.5">
+              <LocationPinIcon size={14} className="text-terracotta shrink-0" />
+              <span>Studios in Srinagar &amp; Bengaluru &middot; Dispatch Pan-India</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Background Wordmark & Bottom Copyright Bar */}
-      <div className="relative overflow-hidden">
-        <div className="w-full max-w-[72rem] mx-auto px-8 md:px-6 pt-2 pb-1">
-          <FooterBrandWordmark />
-        </div>
+      {/* BIG MEHANDIBYSANA BRANDING WATERMARK */}
+      <div className="relative overflow-hidden w-full max-w-[72rem] mx-auto px-4 sm:px-6 pt-4 pb-2">
+        <FooterBrandWordmark />
+      </div>
 
-        {/* Bottom Copyright & Trust Strip */}
-        <div className="relative z-10 w-full max-w-[72rem] mx-auto px-4 md:px-8 -mt-4 sm:-mt-8 md:-mt-12 pt-5 pb-8 border-t border-plaque-ink/12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-plaque-ink/70">
-          <p className="text-[10px]">
-            &copy; {currentYear} Mehandi By Sana . All rights reserved.
+      {/* Bottom Legal, Trust & Theme Strip */}
+      <div className="relative z-10 border-t border-hairline bg-canvas/40">
+        <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-umber">
+          <p className="text-[11px]">
+            &copy; {currentYear} Mehandi By Sana. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-medium text-plaque-ink/75">
-            <span className="inline-flex items-center gap-1.5">
-              <ShieldProtectIcon
-                size={14}
-                className="text-terracotta shrink-0"
-              />
-              <span>Razorpay PCI-DSS</span>
-            </span>
-            <span aria-hidden="true" className="text-terracotta">
-              &middot;
-            </span>
-            <span>COD Eligible PINs</span>
-            <span aria-hidden="true" className="text-terracotta">
-              &middot;
-            </span>
-            <span>India DPDP Compliant</span>
-            <span aria-hidden="true" className="text-terracotta">
-              &middot;
-            </span>
-            <Link
-              href="/privacy-policy"
-              className="hover:text-terracotta transition-colors"
-            >
-              Privacy
-            </Link>
-            <span aria-hidden="true" className="text-terracotta">
-              &middot;
-            </span>
-            <Link
-              href="/terms-conditions"
-              className="hover:text-terracotta transition-colors"
-            >
-              Terms
-            </Link>
-            <span aria-hidden="true" className="text-terracotta">
-              &middot;
-            </span>
-            <Link
-              href="/tech-stack"
-              className="hover:text-terracotta transition-colors"
-            >
-              Tech Stack
-            </Link>
-            <span aria-hidden="true" className="text-terracotta">
-              &middot;
-            </span>
-            <Link
-              href="/changelog"
-              className="hover:text-terracotta transition-colors"
-            >
-              Changelog
-            </Link>
-            <ThemeToggle variant="segmented" surface="plaque" />
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px]">
+            {LEGAL_POLICY_LINKS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hover:text-ink transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <ThemeToggle variant="segmented" surface="canvas" />
           </div>
         </div>
       </div>

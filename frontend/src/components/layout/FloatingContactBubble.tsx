@@ -155,7 +155,7 @@ export function FloatingContactBubble() {
         role="dialog"
         aria-label="Contact options"
         aria-hidden={!isOpen}
-        className={`mb-3 w-[290px] sm:w-[320px] rounded-2xl border border-hairline/80 bg-[var(--cl-white,#ffffff)] dark:bg-[var(--cl-bg-dark,#181818)] shadow-[0_18px_45px_-10px_rgba(0,0,0,0.3)] backdrop-blur-md p-4 transition-all duration-300 ease-out origin-bottom-right ${
+        className={`mb-3 w-[290px] sm:w-[320px] rounded-2xl border border-hairline bg-paper/95 text-ink shadow-[0_18px_45px_-10px_rgba(74,52,38,0.2)] dark:shadow-[0_18px_45px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md p-4 transition-all duration-300 ease-out origin-bottom-right ${
           isOpen
             ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto visible'
             : 'opacity-0 scale-90 translate-y-4 pointer-events-none invisible'
@@ -169,11 +169,11 @@ export function FloatingContactBubble() {
                 aria-hidden="true"
                 className="w-2 h-2 rounded-full bg-brand-green shrink-0 animate-pulse"
               />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--cl-orange,#DD6013)]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
                 Connect with Sana
               </p>
             </div>
-            <p className="text-xs text-[var(--cl-txt,#3D3D3D)] dark:text-[var(--cl-txt-light,#DBCAB6)] mt-0.5">
+            <p className="text-xs text-umber mt-0.5">
               Kashmir, J&amp;K &middot; Bengaluru, Karnataka
             </p>
           </div>
@@ -195,7 +195,7 @@ export function FloatingContactBubble() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="group flex items-center justify-between p-2.5 rounded-xl border border-[#25D366]/20 bg-[#25D366]/10 hover:bg-[#25D366]/20 transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+            className="group flex items-center justify-between p-2.5 rounded-xl border border-[#25D366]/25 bg-[#25D366]/10 hover:bg-[#25D366]/20 transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform duration-200">
@@ -221,7 +221,7 @@ export function FloatingContactBubble() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="group flex items-center justify-between p-2.5 rounded-xl border border-[#E1306C]/20 bg-gradient-to-r from-[#f09433]/10 via-[#dc2743]/10 to-[#bc1888]/10 hover:from-[#f09433]/20 hover:via-[#dc2743]/20 hover:to-[#bc1888]/20 transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E1306C]"
+            className="group flex items-center justify-between p-2.5 rounded-xl border border-[#E1306C]/25 bg-gradient-to-r from-[#f09433]/10 via-[#dc2743]/10 to-[#bc1888]/10 hover:from-[#f09433]/20 hover:via-[#dc2743]/20 hover:to-[#bc1888]/20 transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E1306C]"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform duration-200">
@@ -254,7 +254,7 @@ export function FloatingContactBubble() {
             ? 'Close contact options'
             : 'Open contact options: Instagram and WhatsApp'
         }
-        className="pointer-events-auto group relative flex items-center justify-center w-14 h-14 rounded-full bg-[var(--cl-bg-dark,#181818)] text-[var(--cl-white,#ffffff)] hover:bg-[var(--cl-orange,#DD6013)] border-2 border-[var(--cl-bg,#E7DDCF)]/40 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.4)] hover:shadow-[0_14px_30px_-5px_rgba(221,96,19,0.45)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cl-orange,#DD6013)]"
+        className="pointer-events-auto group relative flex items-center justify-center w-14 h-14 rounded-full bg-paper text-ink hover:text-terracotta hover:border-terracotta border-2 border-hairline shadow-[0_10px_25px_-5px_rgba(74,52,38,0.2)] dark:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_30px_-5px_rgba(184,83,42,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
       >
         {/* Pulsing online indicator dot */}
         <span
@@ -262,7 +262,7 @@ export function FloatingContactBubble() {
           className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5"
         >
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75" />
-          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-green border-2 border-[var(--cl-bg-dark,#181818)]" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-green border-2 border-paper" />
         </span>
 
         {/* Morphing icon between chat and close */}
@@ -282,7 +282,7 @@ export function FloatingContactBubble() {
         {!isOpen && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full bg-[var(--cl-bg-dark,#181818)]/90 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-[var(--cl-white,#ffffff)] shadow-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 hidden sm:block"
+            className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full bg-paper text-ink border border-hairline shadow-md px-3 py-1.5 text-xs font-medium opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 hidden sm:block"
           >
             Chat with Sana &middot; WhatsApp &amp; Instagram
           </span>

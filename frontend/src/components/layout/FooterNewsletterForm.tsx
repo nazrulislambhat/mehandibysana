@@ -64,19 +64,18 @@ export function FooterNewsletterForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-plaque-ink/15 bg-plaque-ink/[0.04] p-4 sm:p-5 space-y-3">
+    <div className="rounded-2xl border border-hairline bg-paper/60 p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
-          Fresh Batch Dispatch List
+          Fresh Batch Dispatch
         </p>
-        <span className="text-[10px] uppercase tracking-[0.16em] text-plaque-ink/60">
-          Small-Batch Alerts
+        <span className="text-[10px] uppercase tracking-[0.16em] text-umber font-medium">
+          Small-Batch Drops
         </span>
       </div>
 
-      <p className="text-xs text-plaque-ink/75 leading-relaxed">
-        Receive fresh-batch alerts when new 0.38mm cone harvests are rolled or
-        Eid &amp; bridal slots open.
+      <p className="text-xs text-umber leading-relaxed">
+        Be notified when fresh Sojat henna cones are rolled or bridal slots open.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-2.5" noValidate>
@@ -106,19 +105,19 @@ export function FooterNewsletterForm() {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            className="min-h-[42px] flex-1 rounded-full border border-plaque-ink/20 bg-plaque px-4 py-2 text-xs text-plaque-ink placeholder:text-plaque-ink/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta"
+            placeholder="Enter your email"
+            className="min-h-[40px] flex-1 rounded-md border border-hairline bg-canvas px-3.5 py-2 text-xs text-ink placeholder:text-umber/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta transition-colors"
           />
           <Button
             type="submit"
             variant="accent"
             size="sm"
             disabled={status === 'submitting'}
-            className="min-h-[42px] shrink-0 rounded-md text-xs"
+            className="min-h-[40px] shrink-0 rounded-md text-xs px-4"
           >
-            <span>{status === 'submitting' ? 'Joining…' : 'Join List'}</span>
+            <span>{status === 'submitting' ? 'Joining…' : 'Subscribe'}</span>
             {status !== 'submitting' ? (
-              <LineDotRightHorizontal className="w-3.5 h-3.5" />
+              <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1" />
             ) : null}
           </Button>
         </div>
@@ -128,7 +127,7 @@ export function FooterNewsletterForm() {
         <p
           role={status === 'error' ? 'alert' : 'status'}
           className={`text-xs leading-relaxed ${
-            status === 'error' ? 'text-[#fca5a5]' : 'text-plaque-ink/90'
+            status === 'error' ? 'text-crimson' : 'text-botanical font-medium'
           }`}
         >
           {feedback}
