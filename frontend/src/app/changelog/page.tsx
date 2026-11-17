@@ -20,7 +20,6 @@ import {
   Layers,
 } from 'lucide-react';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { LinkButton } from '@/components/ui/Button';
 import { CircleArrowUpRightExit } from '@/components/ui/icons';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -322,17 +321,21 @@ export default function ChangelogPage() {
               <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-umber">
                 <GitCommit className="w-3.5 h-3.5 text-terracotta" />
                 5 Major Releases Documented
+              </span>        
+            <a
+              href="https://stacknothing.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-ink transition-colors"
+            >
+              <span>Engineered by</span>
+              <span className="font-semibold text-terracotta group-hover:text-ink underline underline-offset-2 transition-colors">
+                stacknothing.com
               </span>
-              <a
-                href="https://stacknothing.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-ink hover:text-terracotta hover:border-terracotta/40 transition-colors"
-              >
-                <span>Engineered by</span>
-                <span className="font-semibold text-terracotta underline underline-offset-2">stacknothing.com</span>
-                <CircleArrowUpRightExit className="w-3.5 h-3.5 text-umber" />
-              </a>
+              <CircleArrowUpRightExit className="w-2.5 h-2.5 text-terracotta group-hover:text-ink transition-colors" />
+            </a>
+
+
               <Link
                 href="/tech-stack"
                 className="inline-flex items-center gap-1 text-xs font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 ml-1"
@@ -506,26 +509,19 @@ export default function ChangelogPage() {
             Continuous Improvement
           </h2>
           <p className="text-xs sm:text-sm text-umber leading-relaxed">
-            Architected and maintained by the engineering team at{' '}
+            Architected and maintained by the engineering team at{' '}        
             <a
               href="https://stacknothing.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-ink hover:text-terracotta underline underline-offset-4 inline-flex items-center gap-1"
+              className="group font-medium text-terracotta hover:text-ink underline underline-offset-4 inline-flex items-center gap-1"
             >
-              <span>stacknothing.com</span>
-              <CircleArrowUpRightExit className="w-3.5 h-3.5 text-terracotta inline" />
-            </a>
-            . Have questions about an upcoming release or need support for a custom order?
+              StackNothing LLC
+              <CircleArrowUpRightExit className="w-2.5 h-2.5 text-terracotta group-hover:text-ink" />
+            </a>.
+            Have questions about an upcoming release or need support for a custom order?
           </p>
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <LinkButton href="/tech-stack" variant="secondary" size="md">
-              <span>View Tech Stack</span>
-            </LinkButton>
-            <LinkButton href="/contact" variant="accent" size="md">
-              <span>Contact Sana</span>
-            </LinkButton>
-          </div>
+         
         </div>
       </section>
     </div>

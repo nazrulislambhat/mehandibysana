@@ -3,22 +3,17 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
 import {
-  Server,
   Database,
   Cpu,
   Layers,
-  ShieldCheck,
-  Zap,
   Cloud,
   CreditCard,
-  Send,
   Search,
   FileCode2,
   CheckCircle2,
   GitBranch,
   ArrowRight,
 } from 'lucide-react';
-import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 import { LinkButton } from '@/components/ui/Button';
 import { CircleArrowUpRightExit } from '@/components/ui/icons';
@@ -306,11 +301,13 @@ export default function TechStackPage() {
                 href="https://stacknothing.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-ink hover:text-terracotta hover:border-terracotta/40 transition-colors"
+                className="group inline-flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-medium text-ink transition-colors"
               >
                 <span>Engineered by</span>
-                <span className="font-semibold text-terracotta underline underline-offset-2">stacknothing.com</span>
-                <CircleArrowUpRightExit className="w-3.5 h-3.5 text-umber" />
+                <span className="font-semibold text-terracotta group-hover:text-ink underline underline-offset-2 transition-colors">
+                  stacknothing.com
+                </span>
+                <CircleArrowUpRightExit className="w-2.5 h-2.5 text-terracotta group-hover:text-ink transition-colors" />
               </a>
               <Link
                 href="/changelog"
@@ -465,10 +462,10 @@ export default function TechStackPage() {
                 href="https://stacknothing.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-ink hover:text-terracotta underline underline-offset-4 inline-flex items-center gap-1"
+                className="group font-medium text-terracotta hover:text-ink underline underline-offset-4 inline-flex items-center gap-1"
               >
-                <span>stacknothing.com</span>
-                <CircleArrowUpRightExit className="w-3.5 h-3.5 text-terracotta inline" />
+                StackNothing LLC
+                <CircleArrowUpRightExit className="w-2.5 h-2.5 text-terracotta group-hover:text-ink" />
               </a>
               . Explore our release roadmap and version history to see how our engineering
               evolves alongside our small-batch organic henna paste batches.
