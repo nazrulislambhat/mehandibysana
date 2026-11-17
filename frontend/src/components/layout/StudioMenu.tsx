@@ -10,14 +10,12 @@ import {
   type StudioNavItem,
 } from '@/components/layout/nav-data';
 import { LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, Waypoints, X, Sparkles, Calendar, Leaf } from 'lucide-react';
 import {
   BotanicalHeroStudy,
   BotanicalSprig,
-  ServiceMotifIcon,
 } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
 type MenuPhase = 'closed' | 'opening' | 'open' | 'closing';
@@ -187,7 +185,7 @@ export function StudioMenu() {
                     className="inline-flex items-center gap-2.5 min-h-[44px] px-4 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:bg-linen hover:border-ink cursor-pointer"
                   >
                     <span>Close</span>
-                    <CloseCrossIcon size={16} />
+                    <X className="w-3 h-3" />
                   </button>
                 </div>
               </div>
@@ -232,7 +230,7 @@ export function StudioMenu() {
                                 className={`font-serif text-sm sm:text-base italic transition-colors ${
                                   isCurrent || isHighlighted
                                     ? 'text-terracotta'
-                                    : 'text-umber/70 group-hover:text-terracotta'
+                                    : 'text-umber group-hover:text-terracotta'
                                 }`}
                               >
                                 {item.index}
@@ -250,11 +248,11 @@ export function StudioMenu() {
 
                             <div className="flex items-center gap-3 shrink-0">
                               {isCurrent ? (
-                                <span className="inline-flex items-center rounded-full border border-terracotta/45 bg-paper px-2.5 py-0.5 text-[11px] font-medium text-terracotta">
+                                <span className="inline-flex items-center rounded-full border border-terracotta/45 bg-paper px-2.5 py-0.5 text-xs font-medium text-terracotta">
                                   Current
                                 </span>
                               ) : (
-                                <span className="hidden sm:inline text-xs text-umber/80 group-hover:text-ink transition-colors">
+                                <span className="hidden sm:inline text-xs text-umber group-hover:text-ink transition-colors">
                                   {item.eyebrow}
                                 </span>
                               )}
@@ -262,7 +260,7 @@ export function StudioMenu() {
                                 aria-hidden="true"
                                 className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-transparent group-hover:border-divider group-hover:bg-paper text-umber group-hover:text-terracotta group-hover:translate-x-0.5 transition-all"
                               >
-                                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                                <LineDotRightHorizontal className="w-3 h-3" />
                               </span>
                             </div>
                           </Link>
@@ -279,10 +277,13 @@ export function StudioMenu() {
                         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta">
                           {activePreview.index} &middot; {activePreview.eyebrow}
                         </span>
-                        <ServiceMotifIcon
-                          variant={activePreview.motif}
-                          className="w-7 h-7 shrink-0"
-                        />
+                        {activePreview.motif === 'events' ? (
+                          <Calendar className="w-3 h-3 text-terracotta shrink-0" />
+                        ) : activePreview.motif === 'botanical' ? (
+                          <Leaf className="w-3 h-3 text-terracotta shrink-0" />
+                        ) : (
+                          <Sparkles className="w-3 h-3 text-terracotta shrink-0" />
+                        )}
                       </div>
 
                       <h2 className="font-serif text-2xl lg:text-3xl font-medium text-ink leading-snug">
@@ -299,24 +300,24 @@ export function StudioMenu() {
                           className="inline-flex items-center gap-2 text-sm font-medium text-terracotta hover:text-terracotta-dark"
                         >
                           <span>{activePreview.ctaLabel}</span>
-                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                          <LineDotRightHorizontal className="w-3 h-3" />
                         </Link>
                         <BotanicalSprig className="w-11 h-4" />
                       </div>
                     </div>
 
                     {/* Quick Apothecary Collections */}
-                    <div className="rounded-2xl border border-hairline bg-linen/75 p-3.5 sm:p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-umber mb-2">
+                    <div className="rounded-2xl border border-hairline bg-linen/75 p-4 sm:p-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink mb-2.5">
                         Henna Collections
                       </p>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                      <div className="flex flex-wrap gap-2">
                         {SHOP_COLLECTIONS.map((collection) => (
                           <Link
                             key={collection.href}
                             href={collection.href}
                             onClick={() => closeMenu(false)}
-                            className="inline-flex items-center gap-1.5 min-h-[30px] sm:min-h-[36px] rounded-full border border-divider bg-paper px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+                            className="inline-flex items-center gap-1.5 min-h-[34px] sm:min-h-[36px] rounded-full border border-divider bg-paper px-3 sm:px-3.5 py-1.5 text-xs font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors"
                           >
                             <span>{collection.title}</span>
                           </Link>
@@ -333,17 +334,18 @@ export function StudioMenu() {
                         onClick={() => closeMenu(false)}
                         className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6 inline-flex items-center justify-center gap-1.5"
                       >
-                        <ShoppingBag className="w-3.5 h-3.5" />
                         <span>Shop Products</span>
+                        <ShoppingBag className="w-3 h-3" />
                       </LinkButton>
                       <LinkButton
                         href="/contact"
                         variant="secondary"
                         size="md"
                         onClick={() => closeMenu(false)}
-                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6"
+                        className="min-h-[42px] sm:min-h-[46px] rounded-xl text-xs sm:text-sm px-3 sm:px-6 inline-flex items-center justify-center gap-1.5"
                       >
-                        Book Mehandi
+                        <span>Book Mehandi</span>
+                        <Waypoints className="w-3 h-3" />
                       </LinkButton>
                     </div>
                   </div>

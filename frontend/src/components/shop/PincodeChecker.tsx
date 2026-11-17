@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { usePincodeStore } from '@/store/pincode-store';
-import { LocationPinIcon } from '@/components/graphics/BrandIcons';
+import { MapPin } from 'lucide-react';
 
 export interface PincodeCheckerProps {
   subtotal?: number;
@@ -51,7 +51,7 @@ export function PincodeChecker({
     >
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-1.5">
-          <LocationPinIcon size={15} className="text-terracotta shrink-0" />
+          <MapPin className="w-3 h-3 text-terracotta shrink-0" />
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
             Delivery &amp; PIN Estimator
           </p>

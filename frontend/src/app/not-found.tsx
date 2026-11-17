@@ -111,7 +111,7 @@ export default function NotFound() {
                 size="lg"
                 className="rounded-md"
               >
-                Shop <ShoppingBag className="w-3.5 h-3.5" />
+                Shop <ShoppingBag className="w-3 h-3" />
               </LinkButton>
               <LinkButton
                 href="/"
@@ -119,7 +119,7 @@ export default function NotFound() {
                 size="lg"
                 className="rounded-md"
               >
-                Return Home <House className="w-3.5 h-3.5" />
+                Return Home <House className="w-3 h-3" />
               </LinkButton>
             </div>
 
@@ -185,7 +185,7 @@ export default function NotFound() {
                           <span className="block font-medium text-plaque-ink group-hover:text-terracotta transition-colors">
                             {link.label}
                           </span>
-                          <span className="block text-xs text-plaque-ink/60">
+                          <span className="block text-xs text-plaque-ink/85">
                             {link.meta}
                           </span>
                         </div>
@@ -193,14 +193,14 @@ export default function NotFound() {
                           aria-hidden="true"
                           className="text-terracotta transition-transform duration-200 group-hover:translate-x-1"
                         >
-                          <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                          <LineDotRightHorizontal className="w-3 h-3" />
                         </span>
                       </Link>
                     </li>
                   ))}
                 </ul>
 
-                <div className="pt-2 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-2 text-xs text-plaque-ink/70">
+                <div className="pt-2 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-2 text-xs text-plaque-ink/85">
                   <span>
                     Need help?{' '}
                     <a

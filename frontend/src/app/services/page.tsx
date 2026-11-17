@@ -191,7 +191,7 @@ export default function ServicesPage() {
                     className="rounded-full inline-flex items-center gap-1.5"
                   >
                     <span>Inquire for Availability</span>
-                    <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                    <LineDotRightHorizontal className="w-3 h-3" />
                   </LinkButton>
                 </div>
               </TextReveal>
@@ -266,7 +266,7 @@ export default function ServicesPage() {
                     </p>
                     <p
                       className={`text-sm leading-relaxed mb-6 ${
-                        isFeatured ? 'text-plaque-ink/80' : 'text-umber'
+                        isFeatured ? 'text-plaque-ink/90' : 'text-umber'
                       }`}
                     >
                       {tier.summary}

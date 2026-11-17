@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { TextReveal } from '@/components/ui/TextReveal';
-import { LineDotRightHorizontal } from 'lucide-react';
+import { LineDotRightHorizontal, Camera } from 'lucide-react';
 
 export interface InstagramPost {
   id: string;
@@ -67,26 +67,6 @@ export const INSTAGRAM_POSTS: InstagramPost[] = [
   },
 ];
 
-function InstagramIcon({ className = 'w-4 h-4' }: { className?: string }) {
-  return (
-    <svg
-      role="img"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
 export interface InstagramFeedSectionProps {
   className?: string;
   title?: string;
@@ -111,7 +91,7 @@ export function InstagramFeedSection({
           <div className="max-w-2xl">
             <TextReveal variant="fade">
               <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 py-1.5 mb-3.5">
-                <InstagramIcon className="w-3.5 h-3.5 text-brand-green shrink-0" />
+                <Camera className="w-3 h-3 text-brand-green shrink-0" />
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-green">
                   Instagram Journal &middot; @{username}
                 </p>
@@ -140,8 +120,8 @@ export function InstagramFeedSection({
               aria-label={`Follow @${username} on Instagram`}
               className="inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-inverse hover:bg-brand-green transition-colors shadow-sm"
             >
-              <InstagramIcon className="w-4 h-4 shrink-0" />
               <span>Follow @{username}</span>
+              <Camera className="w-3 h-3 shrink-0" />
             </a>
           </div>
         </div>
@@ -168,9 +148,9 @@ export function InstagramFeedSection({
               {/* Hover Scrim with Instagram Glyph */}
               <div className="pointer-events-none absolute inset-0 bg-[#181818]/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-2 text-center">
                 <span className="w-8 h-8 rounded-full bg-paper/20 backdrop-blur-sm border border-paper/40 flex items-center justify-center text-[#ffffff] mb-1.5 shadow-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <InstagramIcon className="w-4 h-4" />
+                  <Camera className="w-3 h-3" />
                 </span>
-                <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-[#DBCAB6] line-clamp-1">
+                <span className="text-xs font-medium uppercase tracking-[0.12em] text-[#DBCAB6] line-clamp-1">
                   View Post
                 </span>
               </div>
@@ -195,7 +175,7 @@ export function InstagramFeedSection({
             className="inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-hover underline underline-offset-4 decoration-brand-green/40 hover:decoration-brand-green font-medium transition-colors"
           >
             <span>instagram.com/{username}</span>
-            <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            <LineDotRightHorizontal className="w-3 h-3" />
           </a>
         </div>
       </div>

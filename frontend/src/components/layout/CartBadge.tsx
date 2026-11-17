@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useCartStore } from '@/store/cart-store';
-import { ApothecaryBagIcon } from '@/components/graphics/BrandIcons';
+import { ShoppingBag } from 'lucide-react';
 
 export function CartBadge() {
   const cart = useCartStore((state) => state.cart);
@@ -56,8 +56,8 @@ export function CartBadge() {
           : 'border-divider/80 text-ink hover:border-terracotta hover:text-terracotta'
       }`}
     >
-      <ApothecaryBagIcon size={17} className="shrink-0" />
       <span>Bag</span>
+      <ShoppingBag className="w-3 h-3 shrink-0" />
       {itemCount > 0 && subtotal > 0 ? (
         <span className="hidden xl:inline text-[11px] font-normal text-umber group-hover:text-terracotta tabular-nums border-l border-hairline pl-2">
           {currency}

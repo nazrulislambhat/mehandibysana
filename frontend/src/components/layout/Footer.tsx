@@ -1,12 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import {
-  InstagramIcon,
-  MailEnvelopeIcon,
-  PhoneHandsetIcon,
-  WhatsAppChatIcon,
-} from '@/components/graphics/BrandIcons';
+import { MessageCircle, Camera, Mail, Phone } from 'lucide-react';
 import { FooterBrandWordmark } from './FooterBrandWordmark';
 import { FooterNewsletterForm } from './FooterNewsletterForm';
 import { ThemeToggle } from './ThemeToggle';
@@ -65,7 +60,7 @@ export function Footer() {
               <span>Mehandi By Sana</span>
             </Link>
 
-            <p className="text-xs sm:text-sm text-plaque-ink/75 leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-plaque-ink/90 leading-relaxed max-w-sm">
               Organic henna cones, therapeutic essential oils,
               and heirloom bridal artistry. Handcrafted fresh in small batches
               across Kashmir &amp; Bengaluru.
@@ -77,44 +72,44 @@ export function Footer() {
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Chat on WhatsApp"
               >
-                <WhatsAppChatIcon size={13} className="text-brand-green" />
                 <span>WhatsApp</span>
+                <MessageCircle className="w-3 h-3 text-brand-green" />
               </a>
               <a
                 href="https://www.instagram.com/mehandibysana"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Instagram profile @mehandibysana"
               >
-                <InstagramIcon size={13} className="text-terracotta" />
                 <span>@mehandibysana</span>
+                <Camera className="w-3 h-3 text-terracotta" />
               </a>
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Email sana@mehandibysana.com"
               >
-                <MailEnvelopeIcon size={13} className="text-plaque-ink/70" />
                 <span>Email</span>
+                <Mail className="w-3 h-3 text-terracotta" />
               </a>
               <a
                 href="tel:+919149648717"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/15 bg-plaque-ink/[0.04] text-plaque-ink/80 hover:text-plaque-ink hover:border-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Call +91-9149648717"
               >
-                <PhoneHandsetIcon size={13} className="text-plaque-ink/70" />
                 <span>Call</span>
+                <Phone className="w-3 h-3 text-terracotta" />
               </a>
             </div>
           </div>
 
           {/* Col 2: Shop & Formulations (lg:col-span-2) */}
           <nav aria-label="Footer products" className="lg:col-span-2 space-y-3">
-            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
               Shop
             </h2>
             <ul className="space-y-2 text-xs sm:text-sm">
@@ -122,7 +117,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-plaque-ink/75 hover:text-plaque-ink hover:translate-x-0.5 inline-block transition-all"
+                    className="text-plaque-ink/85 hover:text-plaque-ink hover:translate-x-0.5 inline-block transition-all"
                   >
                     {item.label}
                   </Link>
@@ -133,7 +128,7 @@ export function Footer() {
 
           {/* Col 3: Studio & Services (lg:col-span-2) */}
           <nav aria-label="Footer studio links" className="lg:col-span-2 space-y-3">
-            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
               Studio
             </h2>
             <ul className="space-y-2 text-xs sm:text-sm">
@@ -141,7 +136,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-plaque-ink/75 hover:text-plaque-ink hover:translate-x-0.5 inline-block transition-all"
+                    className="text-plaque-ink/85 hover:text-plaque-ink hover:translate-x-0.5 inline-block transition-all"
                   >
                     {item.label}
                   </Link>
@@ -166,12 +161,12 @@ export function Footer() {
 
       {/* Bottom Legal, Trust & Theme Strip */}
       <div className="relative z-10 border-t border-plaque-ink/12 bg-black/30">
-        <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/70">
-          <p className="text-[11px]">
+        <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/85">
+          <p className="text-xs">
             &copy; {currentYear} Mehandi By Sana. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px]">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
             {LEGAL_POLICY_LINKS.map((item) => (
               <Link
                 key={item.href}

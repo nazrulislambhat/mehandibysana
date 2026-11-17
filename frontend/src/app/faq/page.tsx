@@ -8,6 +8,7 @@ import {
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
+import { AccordionDisclosure } from '@/components/ui/AccordionDisclosure';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Frequently Asked Questions (FAQ)',
@@ -204,36 +205,28 @@ export default function FaqPage() {
 
           <div className="space-y-3">
             {group.items.map((item) => (
-              <details
+              <AccordionDisclosure
                 key={item.question}
-                className="group rounded-xl border border-hairline bg-canvas px-5 py-4 open:border-terracotta/50"
+                title={item.question}
+                className="rounded-xl border border-hairline bg-canvas px-5 py-4 data-[state=open]:border-terracotta/50"
+                triggerClassName="text-sm sm:text-base font-medium text-ink min-h-[28px]"
+                contentClassName="mt-3 text-sm text-umber leading-relaxed border-t border-hairline pt-3"
               >
-                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-sm sm:text-base font-medium text-ink">
-                  <span>{item.question}</span>
-                  <span
-                    aria-hidden="true"
-                    className="text-terracotta text-lg leading-none font-semibold shrink-0 transition-transform duration-200 group-open:rotate-45 mt-0.5"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 text-xs sm:text-sm text-umber leading-relaxed border-t border-hairline/70 pt-3">
-                  {item.answer}
-                </p>
-              </details>
+                <p>{item.answer}</p>
+              </AccordionDisclosure>
             ))}
           </div>
         </section>
       ))}
 
-      <section className="rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-7 sm:p-8 space-y-4">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
+      <section className="rounded-2xl border border-plaque-border bg-plaque text-plaque-ink p-6 sm:p-8 space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
           Still Have Questions?
         </p>
         <h2 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink">
           Reach out directly to Sana
         </h2>
-        <p className="text-sm text-plaque-ink/75 leading-relaxed">
+        <p className="text-sm sm:text-base text-plaque-ink/90 leading-relaxed">
           Need guidance picking cone counts for a bridal event, verifying an
           order reference, or planning an urgent delivery? Reach out anytime.
         </p>
@@ -246,12 +239,14 @@ export default function FaqPage() {
           >
             Ask Sana Directly
           </LinkButton>
-          <Link
+          <LinkButton
             href="/henna-care"
-            className="inline-flex items-center justify-center min-h-[44px] rounded-full border border-plaque-ink/30 px-5 py-2 text-sm font-medium text-plaque-ink hover:border-plaque-ink hover:bg-plaque-ink/10 transition-colors"
+            variant="inverse"
+            size="md"
+            className="rounded-md"
           >
             Read Stain Care Guide
-          </Link>
+          </LinkButton>
         </div>
       </section>
     </PolicyDocumentLayout>

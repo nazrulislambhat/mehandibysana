@@ -266,7 +266,7 @@ export function OrderTrackerClient({
             className="rounded-md inline-flex items-center gap-1.5"
           >
             <span>{loading ? 'Checking Status…' : 'Track Order'}</span>
-            <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            <LineDotRightHorizontal className="w-3 h-3" />
           </Button>
         </div>
       </form>
@@ -336,7 +336,7 @@ export function OrderTrackerClient({
           <div className="p-6 sm:p-8 md:p-10 space-y-8">
             {order.dispatchNote ? (
               <div className="rounded-xl border border-terracotta/35 bg-linen p-4 text-xs sm:text-sm text-ink leading-relaxed">
-                <span className="font-semibold uppercase tracking-[0.12em] text-[10px] text-terracotta block mb-1">
+                <span className="font-semibold uppercase tracking-[0.12em] text-xs text-terracotta block mb-1">
                   Dispatch Update
                 </span>
                 {order.dispatchNote}
@@ -522,8 +522,8 @@ export function OrderTrackerClient({
                 size="md"
                 className="rounded-md inline-flex items-center gap-1.5"
               >
-                <ShoppingBag className="w-3.5 h-3.5" />
                 <span>Continue Shopping</span>
+                <ShoppingBag className="w-3 h-3" />
               </LinkButton>
             </div>
           </div>

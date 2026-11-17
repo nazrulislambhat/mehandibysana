@@ -311,7 +311,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
               <option value="order-support">Existing Store Order Question</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-umber/80">
-              <ChevronDown className="w-4 h-4" aria-hidden="true" />
+              <ChevronDown className="w-3 h-3" aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -396,7 +396,7 @@ export function BookingForm({ initialService = 'bridal' }: BookingFormProps) {
         disabled={submitting}
         className="w-full rounded-md min-h-[50px]"
       >
-        {submitting ? 'Submitting Inquiry…' : 'Send Inquiry'} <LineDotRightHorizontalIcon className='w-3.5 h-3.5'/>
+        {submitting ? 'Submitting Inquiry…' : 'Send Inquiry'} <LineDotRightHorizontalIcon className='w-3 h-3'/>
       </Button>
     </form>
   );

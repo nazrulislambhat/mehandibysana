@@ -7,11 +7,7 @@ import {
   type PolicyTocItem,
 } from '@/components/editorial/PolicyDocumentLayout';
 import { LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
-import {
-  CourierDispatchIcon,
-  LocationPinIcon,
-} from '@/components/graphics/BrandIcons';
+import { ShoppingBag, LineDotRightHorizontal, Package, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Shipping & Delivery Policy',
@@ -62,7 +58,7 @@ export default function ShippingPolicyPage() {
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-3"
       >
         <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
-          <CourierDispatchIcon size={14} className="shrink-0" />
+          <Package className="w-3 h-3 shrink-0" />
           <span>Section 01</span>
         </p>
         <h2 className="font-serif text-2xl font-medium text-ink">
@@ -98,7 +94,7 @@ export default function ShippingPolicyPage() {
         className="scroll-mt-28 rounded-2xl border border-hairline bg-paper p-6 sm:p-8 space-y-4"
       >
         <p className="inline-flex items-center gap-1.5 font-serif text-xs italic text-terracotta">
-          <LocationPinIcon size={14} className="shrink-0" />
+          <MapPin className="w-3 h-3 shrink-0" />
           <span>Section 02</span>
         </p>
         <h2 className="font-serif text-2xl font-medium text-ink">
@@ -142,8 +138,8 @@ export default function ShippingPolicyPage() {
             size="sm"
             className="rounded-md inline-flex items-center gap-1.5"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
             <span>Browse Products to Check PIN</span>
+            <ShoppingBag className="w-3 h-3" />
           </LinkButton>
           <LinkButton
             href="/cart"
@@ -203,7 +199,7 @@ export default function ShippingPolicyPage() {
             className="text-terracotta underline underline-offset-4 font-medium inline-flex items-center gap-1"
           >
             <span>Track Order portal</span>
-            <LineDotRightHorizontal className="w-3.5 h-3.5" />
+            <LineDotRightHorizontal className="w-3 h-3" />
           </Link>
           .
         </p>

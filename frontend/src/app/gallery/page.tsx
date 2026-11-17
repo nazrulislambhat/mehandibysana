@@ -207,13 +207,13 @@ export default function GalleryPage() {
                     aria-hidden="true"
                     className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                   />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
                     Exhibition Folio
                   </p>
                   <p className="font-serif text-2xl font-medium text-plaque-ink">
                     6 Curated Plates
                   </p>
-                  <p className="text-xs text-plaque-ink/70 mt-1">
+                  <p className="text-xs text-plaque-ink/85 mt-1">
                     Kashmir &middot; 0% PPD Organic Stain
                   </p>
                 </div>
@@ -242,7 +242,7 @@ export default function GalleryPage() {
                 <div
                   className={`relative ${plate.aspectClass} w-full overflow-hidden rounded-2xl border border-hairline bg-linen`}
                 >
-                  <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full bg-plaque/90 backdrop-blur-sm border border-plaque-border/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-plaque-ink">
+                  <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full bg-plaque/90 backdrop-blur-sm border border-plaque-border/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink">
                     <span
                       aria-hidden="true"
                       className="w-1.5 h-1.5 rounded-full bg-terracotta"
@@ -296,7 +296,7 @@ export default function GalleryPage() {
             <h2 className="font-serif text-3xl sm:text-4xl font-medium text-plaque-ink mb-2.5">
               Inquire about a bespoke design
             </h2>
-            <p className="text-sm text-plaque-ink/75 leading-relaxed">
+            <p className="text-sm sm:text-base text-plaque-ink/90 leading-relaxed">
               Share your celebration date, venue location, and motif
               inspirations—Sana tailors each bridal or festive layout to your
               preferences and prepares fresh cones specifically for your
@@ -311,7 +311,7 @@ export default function GalleryPage() {
               className="rounded-md"
             >
               Request a Booking{' '}
-              <LineDotRightHorizontal className="w-3.5 h-3.5" />
+              <LineDotRightHorizontal className="w-3 h-3" />
             </LinkButton>
 
             <Link

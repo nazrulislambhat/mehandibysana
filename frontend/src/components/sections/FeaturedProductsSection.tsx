@@ -196,7 +196,7 @@ export function FeaturedProductsSection({
                 </span>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-plaque-ink/90">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90">
                 <span
                   aria-hidden="true"
                   className={`w-1.5 h-1.5 rounded-full ${
@@ -249,14 +249,14 @@ export function FeaturedProductsSection({
               </h3>
             </Link>
 
-            <p className="text-sm text-plaque-ink/75 leading-relaxed mt-3 line-clamp-3">
+            <p className="text-sm text-plaque-ink/90 leading-relaxed mt-3 line-clamp-3">
               {getCleanNote(leadProduct)}
             </p>
           </div>
 
           <div className="pt-5 mt-6 border-t border-plaque-ink/15 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-plaque-ink/55">
+              <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-plaque-ink/80">
                 Price
               </span>
               <span className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink tabular-nums">
@@ -283,7 +283,7 @@ export function FeaturedProductsSection({
                 className="rounded-full inline-flex items-center gap-1.5"
               >
                 <span>{leadProduct.inStock ? 'Choose Pack' : 'View Formulation'}</span>
-                <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                <LineDotRightHorizontal className="w-3 h-3" />
               </LinkButton>
             )}
           </div>
@@ -317,7 +317,7 @@ export function FeaturedProductsSection({
                     </span>
 
                     <span
-                      className={`absolute top-2.5 right-2.5 z-10 inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] bg-canvas/95 ${
+                      className={`absolute top-2.5 right-2.5 z-10 inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold uppercase tracking-[0.1em] bg-canvas/95 ${
                         product.inStock
                           ? 'border-terracotta/45 text-terracotta'
                           : 'border-hairline text-umber'
@@ -350,7 +350,7 @@ export function FeaturedProductsSection({
                     )}
                   </Link>
 
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
                     {category}
                   </p>
 
@@ -382,7 +382,7 @@ export function FeaturedProductsSection({
                         className="rounded-full inline-flex items-center gap-1.5"
                       >
                         <span>Select Pack</span>
-                        <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                        <LineDotRightHorizontal className="w-3 h-3" />
                       </LinkButton>
                     ) : (
                       <AddToCartButton
@@ -404,7 +404,7 @@ export function FeaturedProductsSection({
                       className="rounded-full inline-flex items-center gap-1.5"
                     >
                       <span>Inspect</span>
-                      <LineDotRightHorizontal className="w-3.5 h-3.5" />
+                      <LineDotRightHorizontal className="w-3 h-3" />
                     </LinkButton>
                   )}
                 </div>

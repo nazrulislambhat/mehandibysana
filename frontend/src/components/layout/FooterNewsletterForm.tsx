@@ -66,15 +66,15 @@ export function FooterNewsletterForm() {
   return (
     <div className="rounded-2xl border border-plaque-ink/15 bg-plaque-ink/[0.04] p-4 sm:p-5 space-y-3">
       <div className="flex items-center justify-between gap-2">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
           Fresh Batch Dispatch
         </p>
-        <span className="text-[10px] uppercase tracking-[0.16em] text-plaque-ink/60 font-medium">
+        <span className="text-xs uppercase tracking-[0.16em] text-plaque-ink/80 font-medium">
           Small-Batch Drops
         </span>
       </div>
 
-      <p className="text-xs text-plaque-ink/75 leading-relaxed">
+      <p className="text-xs text-plaque-ink/90 leading-relaxed">
         Be notified when fresh henna cones are rolled or bridal slots open.
       </p>
 
@@ -117,7 +117,7 @@ export function FooterNewsletterForm() {
           >
             <span>{status === 'submitting' ? 'Joining…' : 'Subscribe'}</span>
             {status !== 'submitting' ? (
-              <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1" />
+              <LineDotRightHorizontal className="w-3 h-3 ml-1" />
             ) : null}
           </Button>
         </div>

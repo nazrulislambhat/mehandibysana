@@ -320,16 +320,16 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                     aria-hidden="true"
                     className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
                   />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
                     Live Batch Inventory
                   </p>
                   <p className="font-serif text-3xl font-medium text-plaque-ink tabular-nums">
                     {catalog.total !== null ? catalog.total : '—'}{' '}
-                    <span className="text-sm font-sans font-normal text-plaque-ink/75">
+                    <span className="text-sm font-sans font-normal text-plaque-ink/90">
                       {catalog.total === 1 ? 'formulation' : 'formulations'}
                     </span>
                   </p>
-                  <p className="mt-2 pt-2 border-t border-plaque-ink/15 text-[11px] text-plaque-ink/70">
+                  <p className="mt-2 pt-2 border-t border-plaque-ink/15 text-xs text-plaque-ink/85">
                     Small-batch dispatch &middot; Check PIN on product or bag
                   </p>
                 </div>
@@ -411,7 +411,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                       className="inline-flex items-center min-h-[40px] px-5 py-2 rounded-full border border-divider bg-paper text-sm font-medium text-ink hover:border-ink hover:bg-ink hover:text-inverse transition-colors"
                     >
                       <span>Next</span>
-                      <LineDotRightHorizontal className="w-3.5 h-3.5 ml-1.5" />
+                      <LineDotRightHorizontal className="w-3 h-3 ml-1.5" />
                     </Link>
                   ) : null}
                 </div>

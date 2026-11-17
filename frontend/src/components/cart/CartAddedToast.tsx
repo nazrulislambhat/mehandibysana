@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useCartStore } from '@/store/cart-store';
-import { CloseCrossIcon } from '@/components/graphics/BrandIcons';
+import { X } from 'lucide-react';
 
 function formatMoney(amount: number, symbol: string): string {
   const formatted = Number.isInteger(amount)
@@ -116,7 +116,7 @@ export function CartAddedToast() {
           )}
 
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-terracotta">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
               Added &middot; Keep Shopping
             </p>
             <p className="text-xs font-medium text-plaque-ink truncate mt-0.5">
@@ -143,7 +143,7 @@ export function CartAddedToast() {
               aria-label="Dismiss bag notification"
               className="relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-full border border-plaque-ink/20 text-plaque-ink/80 hover:border-plaque-ink/50 hover:text-plaque-ink transition-colors cursor-pointer pointer-events-auto"
             >
-              <CloseCrossIcon size={13} />
+              <X className="w-3 h-3" />
             </button>
           </div>
         </div>

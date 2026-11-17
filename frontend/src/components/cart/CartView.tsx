@@ -7,12 +7,11 @@ import { useCartStore } from '@/store/cart-store';
 import { useCouponStore } from '@/store/coupon-store';
 import { usePincodeStore } from '@/store/pincode-store';
 import { Button, LinkButton } from '@/components/ui/Button';
-import { ShoppingBag, LineDotRightHorizontal } from 'lucide-react';
+import { ShoppingBag, LineDotRightHorizontal, ShieldCheck } from 'lucide-react';
 import { CouponCodeBox } from '@/components/shop/CouponCodeBox';
 import { PincodeChecker } from '@/components/shop/PincodeChecker';
 import { BotanicalEmptyCartGraphic } from '@/components/graphics/BotanicalIllustrations';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
-import { ShieldProtectIcon } from '@/components/graphics/BrandIcons';
 
 function formatMoney(amount: number, symbol: string): string {
   const formatted = Number.isInteger(amount)
@@ -196,7 +195,7 @@ export function CartView() {
               className="rounded-full inline-flex items-center gap-1.5"
             >
               <span>Browse Full Catalog</span>
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-3 h-3" />
             </LinkButton>
           </div>
         ) : (
@@ -326,8 +325,8 @@ export function CartView() {
                   href="/shop"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4 py-2"
                 >
-                  <ShoppingBag className="w-3.5 h-3.5" />
                   <span>Continue browsing catalog</span>
+                  <ShoppingBag className="w-3 h-3" />
                 </Link>
                 <span className="text-xs text-umber">
                   Packed fresh in protective batches &middot; Sealed before
@@ -356,10 +355,10 @@ export function CartView() {
 
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta block">
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta block">
                       Order Dossier
                     </span>
-                    <span className="font-serif text-xs italic text-plaque-ink/70 block mt-0.5">
+                    <span className="font-serif text-xs italic text-plaque-ink/85 block mt-0.5">
                       Kashmir &amp; Bengaluru
                     </span>
                   </div>
@@ -377,7 +376,7 @@ export function CartView() {
 
                 <dl className="space-y-3 text-sm border-b border-plaque-ink/15 pb-5 mb-5">
                   <div className="flex justify-between gap-3">
-                    <dt className="text-plaque-ink/75">Items ({itemCount})</dt>
+                    <dt className="text-plaque-ink/90">Items ({itemCount})</dt>
                     <dd className="font-medium text-plaque-ink tabular-nums">
                       {formatMoney(subtotal, currency)}
                     </dd>
@@ -393,7 +392,7 @@ export function CartView() {
                     </div>
                   ) : null}
                   <div className="flex justify-between gap-3">
-                    <dt className="text-plaque-ink/75">
+                    <dt className="text-plaque-ink/90">
                       Delivery
                       {pincodeResult?.serviceable && pincodeResult.matchedRule
                         ? ` (PIN ${pincodeResult.pincode} · ${pincodeResult.matchedRule.pattern})`
@@ -403,7 +402,7 @@ export function CartView() {
                       className={`font-medium tabular-nums ${
                         deliveryFee !== null
                           ? 'text-terracotta'
-                          : 'text-plaque-ink/70'
+                          : 'text-plaque-ink/85'
                       }`}
                     >
                       {deliveryFee !== null
@@ -416,7 +415,7 @@ export function CartView() {
                 </dl>
 
                 <div className="flex items-baseline justify-between mb-6">
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink/80">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-plaque-ink/90">
                     Estimated Total
                   </span>
                   <span className="font-serif text-4xl font-medium text-plaque-ink tabular-nums">
@@ -431,12 +430,12 @@ export function CartView() {
                   className="w-full min-h-[50px] rounded-full mb-3.5 inline-flex items-center justify-center gap-1.5"
                 >
                   <span>Proceed to Checkout</span>
+                  <LineDotRightHorizontal className="w-3 h-3" />
                 </LinkButton>
 
-                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/65 text-center leading-relaxed">
-                  <ShieldProtectIcon
-                    size={14}
-                    className="text-terracotta shrink-0"
+                <p className="inline-flex items-center justify-center gap-1.5 w-full text-xs text-plaque-ink/85 text-center leading-relaxed">
+                  <ShieldCheck
+                    className="w-3 h-3 text-terracotta shrink-0"
                   />
                   <span>
                     Supports Razorpay UPI / Cards &amp; Cash on Delivery across

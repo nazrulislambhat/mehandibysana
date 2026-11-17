@@ -21,7 +21,7 @@ export default function RouteError({
     <div className="bg-canvas py-16 md:py-24">
       <section className="editorial-container">
         <div className="max-w-2xl mx-auto overflow-hidden rounded-2xl border border-hairline bg-paper shadow-[0_24px_60px_-20px_rgba(17,17,17,0.16)]">
-          <div className="relative border-b border-plaque-border bg-plaque text-plaque-ink px-7 py-7 sm:px-10 sm:py-8">
+          <div className="relative border-b border-plaque-border bg-plaque text-plaque-ink p-6 sm:p-8">
             <div
               aria-hidden="true"
               className="absolute top-0 left-0 right-0 h-[3px] bg-terracotta-solid"
@@ -33,7 +33,7 @@ export default function RouteError({
                     aria-hidden="true"
                     className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                   />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">
                     Temporary Hiccup
                   </p>
                 </div>
@@ -50,7 +50,7 @@ export default function RouteError({
             </div>
           </div>
 
-          <div className="p-7 sm:p-10 space-y-6">
+          <div className="p-6 sm:p-8 space-y-6">
             <p className="text-sm sm:text-base text-umber leading-relaxed">
               Our storefront encountered an unexpected interruption while
               loading live catalog or order details. Your shopping bag items
@@ -71,7 +71,7 @@ export default function RouteError({
                 className="rounded-md"
                 onClick={() => reset()}
               >
-                Try Again <Repeat className="w-3.5 h-3.5" />
+                Try Again <Repeat className="w-3 h-3" />
               </Button>
               <LinkButton
                 href="/"
@@ -79,15 +79,16 @@ export default function RouteError({
                 size="md"
                 className="rounded-md"
               >
-                Return Home <House className="w-3.5 h-3.5" />
+                Return Home <House className="w-3 h-3" />
               </LinkButton>
-              <Link
+              <LinkButton
                 href="/shop"
-                className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-terracotta hover:text-terracotta-dark underline underline-offset-4"
+                variant="ghost"
+                size="md"
+                className="rounded-md"
               >
-                <span>Browse Shop</span>
-                <ShoppingBag className="w-3.5 h-3.5" />
-              </Link>
+                Browse Shop <ShoppingBag className="w-3 h-3" />
+              </LinkButton>
             </div>
 
             <div className="pt-4 border-t border-hairline text-xs text-umber flex flex-wrap items-center justify-between gap-2">
