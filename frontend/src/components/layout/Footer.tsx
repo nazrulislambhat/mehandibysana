@@ -48,7 +48,7 @@ export function Footer() {
       <div aria-hidden="true" className="h-[2px] w-full bg-terracotta-solid" />
 
       {/* Main Editorial Footer Container */}
-      <div className="editorial-container pt-12 md:pt-16 pb-8">
+      <div className="relative z-10 editorial-container pt-12 md:pt-16 pb-10 md:pb-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Col 1: Brand & Craft Identity (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-4">
@@ -162,13 +162,18 @@ export function Footer() {
         </div>
       </div>
 
-      {/* BIG MEHANDIBYSANA BRANDING WATERMARK */}
-      <div className="relative overflow-hidden w-full max-w-[72rem] mx-auto px-4 sm:px-6 pt-4 pb-2">
-        <FooterBrandWordmark />
+      {/* BACKGROUND BRANDING WATERMARK */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute inset-x-0 bottom-3 sm:bottom-5 z-0 overflow-hidden flex items-baseline justify-center"
+      >
+        <div className="w-full max-w-[85rem] px-4">
+          <FooterBrandWordmark />
+        </div>
       </div>
 
       {/* Bottom Legal, Trust & Theme Strip */}
-      <div className="relative z-10 border-t border-plaque-ink/12 bg-black/20">
+      <div className="relative z-10 border-t border-plaque-ink/10 bg-black/40 backdrop-blur-[2px]">
         <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/70">
           <p className="text-[11px]">
             &copy; {currentYear} Mehandi By Sana. All rights reserved.
