@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
+import { Tag } from 'lucide-react';
 
 export interface TopSellingBadgeProps {
   rank?: number;
@@ -29,7 +29,7 @@ export function TopSellingBadge({
         className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 animate-pulse"
       />
       <span>Top-Selling</span>
-      <Sparkles className="w-3 h-3 text-emerald-300 shrink-0" />
+      <Tag className="w-3 h-3 text-emerald-300 shrink-0" />
     </span>
   );
 }
