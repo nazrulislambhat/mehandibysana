@@ -15,7 +15,7 @@ export interface FeaturedProductsSectionProps {
   allProducts: StorefrontProduct[];
 }
 
-type ShelfTab = 'signature' | 'ready' | 'kits';
+type ShelfTab = 'signature' | 'kits';
 
 const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   'organic-henna-cones':
@@ -89,11 +89,6 @@ export function FeaturedProductsSection({
 }: FeaturedProductsSectionProps) {
   const [activeTab, setActiveTab] = useState<ShelfTab>('signature');
 
-  const readyProducts = useMemo(
-    () => allProducts.filter((p) => p.inStock),
-    [allProducts],
-  );
-
   const kitsAndCareProducts = useMemo(
     () =>
       allProducts.filter((p) =>
@@ -106,13 +101,11 @@ export function FeaturedProductsSection({
 
   const visibleProducts = useMemo(() => {
     const source =
-      activeTab === 'ready'
-        ? readyProducts
-        : activeTab === 'kits'
-          ? kitsAndCareProducts
-          : featuredProducts;
+      activeTab === 'kits'
+        ? kitsAndCareProducts
+        : featuredProducts;
     return (source.length > 0 ? source : featuredProducts).slice(0, 5);
-  }, [activeTab, readyProducts, kitsAndCareProducts, featuredProducts]);
+  }, [activeTab, kitsAndCareProducts, featuredProducts]);
 
   const leadProduct = visibleProducts[0] ?? null;
   const secondaryProducts = visibleProducts.slice(1, 5);
@@ -138,12 +131,7 @@ export function FeaturedProductsSection({
           {(
             [
               { id: 'signature', index: '01', label: 'Signature Batch' },
-              {
-                id: 'ready',
-                index: '02',
-                label: `Ready to Ship (${readyProducts.length})`,
-              },
-              { id: 'kits', index: '03', label: 'Bridal Kits & Oils' },
+              { id: 'kits', index: '02', label: 'Bridal Kits & Oils' },
             ] as Array<{ id: ShelfTab; index: string; label: string }>
           ).map((tab) => {
             const isSelected = activeTab === tab.id;
@@ -189,7 +177,7 @@ export function FeaturedProductsSection({
 
           <div>
             {/* Flagship Header Row */}
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <div className="flex items-center justify-between gap-3 mb-5">
               <div className="inline-flex items-center gap-2">
                 {leadProduct.isTopSeller ? (
                   <TopSellingBadge rank={leadProduct.topSellerRank} size="sm" />
