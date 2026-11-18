@@ -161,12 +161,17 @@ export function Footer() {
 
       {/* Bottom Legal, Trust & Theme Strip */}
       <div className="relative z-10 border-t border-plaque-ink/12 bg-black/30">
-        <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/85">
-          <p className="text-xs">
+        <div className="editorial-container py-5 flex flex-col md:grid md:grid-cols-3 items-center justify-between gap-4 text-xs text-plaque-ink/85">
+          <p className="text-xs text-center md:text-left order-2 md:order-1">
             &copy; {currentYear} Mehandi By Sana. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+          {/* Desktop Center-Aligned Theme Toggle Switch */}
+          <div className="hidden md:flex items-center justify-center order-1 md:order-2">
+            <ThemeToggle variant="switch" surface="plaque" />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-4 gap-y-2 text-xs order-3">
             {LEGAL_POLICY_LINKS.map((item) => (
               <Link
                 key={item.href}
@@ -176,7 +181,6 @@ export function Footer() {
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle variant="switch" surface="plaque" className="hidden md:inline-flex" />
           </div>
         </div>
       </div>
