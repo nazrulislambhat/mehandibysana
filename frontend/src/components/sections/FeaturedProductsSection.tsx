@@ -8,6 +8,7 @@ import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { LinkButton } from '@/components/ui/Button';
 import { LineDotRightHorizontal } from 'lucide-react';
 import { BotanicalSprig, ServiceMotifIcon } from '@/components/graphics/BotanicalIllustrations';
+import { TopSellingBadge } from '@/components/shop/TopSellingBadge';
 
 export interface FeaturedProductsSectionProps {
   featuredProducts: StorefrontProduct[];
@@ -188,8 +189,11 @@ export function FeaturedProductsSection({
 
           <div>
             {/* Flagship Header Row */}
-            <div className="flex items-center justify-between gap-3 mb-5">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
               <div className="inline-flex items-center gap-2">
+                {leadProduct.isTopSeller ? (
+                  <TopSellingBadge rank={leadProduct.topSellerRank} size="sm" />
+                ) : null}
                 <span className="font-serif text-xs italic text-terracotta">No. 01</span>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
                   Signature Spotlight
@@ -331,6 +335,12 @@ export function FeaturedProductsSection({
                       />
                       {product.inStock ? 'In Stock' : 'Out of Stock'}
                     </span>
+
+                    {product.isTopSeller ? (
+                      <div className="absolute bottom-2.5 left-2.5 z-10">
+                        <TopSellingBadge rank={product.topSellerRank} size="sm" />
+                      </div>
+                    ) : null}
 
                     {img ? (
                       <Image
