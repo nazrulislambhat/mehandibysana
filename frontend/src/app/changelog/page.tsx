@@ -51,8 +51,42 @@ interface ReleaseVersion {
 
 const RELEASES: ReleaseVersion[] = [
   {
+    version: 'v1.5.0',
+    tag: 'Latest Release',
+    title: 'Editorial Design Polish, Mobile Hierarchy & Dynamic Live Counter',
+    date: 'November 18, 2026',
+    summary:
+      'Elevated product card readability across mobile viewports with terracotta title typography, moved the theme toggle switch to the desktop footer with automatic system preference sync on mobile, added top-selling badges, made the hero completed orders counter live with offline sales multipliers, and refined homepage featured shelf navigation.',
+    changes: [
+      {
+        type: 'improved',
+        text: 'Mobile Product Card Hierarchy: Replaced heavy uppercase category tags with subtle muted umber kickers (text-[10px] font-medium) and set product names to primary brand color (text-terracotta) across all viewports to eliminate visual confusion on 2-column mobile displays.',
+      },
+      {
+        type: 'improved',
+        text: 'Footer Theme Toggle Strategy: Relocated theme switch to the desktop footer legal row with dedicated clearance from the floating contact bubble; mobile devices now automatically follow system dark/light preferences and sync notification bar theme-color.',
+      },
+      {
+        type: 'added',
+        text: 'Top-Selling Product Badges: Provisioned emerald green, fully-rounded badges for top-performing henna products across homepage, shop catalog, and related product cards.',
+      },
+      {
+        type: 'added',
+        text: 'Dynamic Orders Completed Hero Counter: Connected hero metric to live Medusa order counts with a 2x multiplier accounting for untracked WhatsApp and Instagram sales volume.',
+      },
+      {
+        type: 'fixed',
+        text: 'Footer Newsletter Component Boundary: Resolved subscribe button overflow on tablet and small laptop viewports with responsive stacking (flex-col xl:flex-row) and min-w-0 flexbox constraints.',
+      },
+      {
+        type: 'removed',
+        text: 'Homepage Featured Shelf Clutter: Removed redundant "Ready to Ship" shelf filter tab and removed "Signature Spotlight" and "Ready to Ship" badges from the flagship featured henna card.',
+      },
+    ],
+  },
+  {
     version: 'v1.4.0',
-    tag: 'Latest Production Release',
+    tag: 'Infrastructure & Persistence',
     title: 'Production Hardening, Redis Event Bus & Database Persistence',
     date: 'November 16, 2026',
     summary:
