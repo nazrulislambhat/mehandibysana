@@ -48,6 +48,8 @@ export interface StorefrontProduct {
   onSale: boolean;
   inStock: boolean;
   featured: boolean;
+  isTopSeller?: boolean;
+  topSellerRank?: number;
   categories: Array<{ id: number; medusaId?: string; name: string; slug: string }>;
   images: StorefrontImage[];
   attributes: Array<{

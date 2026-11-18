@@ -308,6 +308,15 @@ function normalizeMedusaProduct(raw: MedusaProduct): StorefrontProduct {
         'beginner-henna-kit',
         'chemical-free-organic-hair-henna-powder',
       ].includes(raw.handle),
+    isTopSeller:
+      raw.metadata?.is_top_seller === true ||
+      ['organic-henna-cones', 'mbs-henna-kit', 'aftercare-henna-balm'].includes(raw.handle),
+    topSellerRank:
+      typeof raw.metadata?.top_seller_rank === 'number'
+        ? raw.metadata.top_seller_rank
+        : ['organic-henna-cones', 'mbs-henna-kit', 'aftercare-henna-balm'].indexOf(raw.handle) !== -1
+          ? ['organic-henna-cones', 'mbs-henna-kit', 'aftercare-henna-balm'].indexOf(raw.handle) + 1
+          : undefined,
     categories: (raw.categories || []).map((c) => ({
       id: hashMedusaId(c.id),
       medusaId: c.id,
