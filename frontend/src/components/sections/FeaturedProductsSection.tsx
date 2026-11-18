@@ -214,7 +214,7 @@ export function FeaturedProductsSection({
             </Link>
 
             {leadProduct.categories[0] ? (
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta mb-1.5">
+              <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-plaque-ink/70 mb-1.5">
                 {leadProduct.categories[0].name}
               </p>
             ) : null}
@@ -223,7 +223,7 @@ export function FeaturedProductsSection({
               href={`/product/${leadProduct.slug}`}
               className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus rounded-sm"
             >
-              <h3 className="font-serif text-2xl sm:text-3xl font-medium text-plaque-ink group-hover:text-terracotta leading-tight transition-colors">
+              <h3 className="font-serif text-2xl sm:text-3xl font-medium text-terracotta hover:text-terracotta-light leading-tight transition-colors">
                 {leadProduct.name}
               </h3>
             </Link>
@@ -335,7 +335,7 @@ export function FeaturedProductsSection({
                     )}
                   </Link>
 
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                  <p className="text-[11px] sm:text-xs font-medium uppercase tracking-[0.14em] text-umber mb-1">
                     {category}
                   </p>
 
@@ -343,7 +343,7 @@ export function FeaturedProductsSection({
                     href={`/product/${product.slug}`}
                     className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus rounded-sm"
                   >
-                    <h3 className="font-serif text-xl font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 transition-colors">
+                    <h3 className="font-serif text-lg sm:text-xl font-medium text-terracotta hover:text-terracotta-dark leading-snug line-clamp-2 transition-colors">
                       {product.name}
                     </h3>
                   </Link>
