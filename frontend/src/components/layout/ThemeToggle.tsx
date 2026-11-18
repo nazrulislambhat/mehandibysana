@@ -11,7 +11,7 @@ import {
 import { Sun, Moon } from 'lucide-react';
 
 export interface ThemeToggleProps {
-  variant?: 'icon' | 'segmented';
+  variant?: 'icon' | 'segmented' | 'switch';
   surface?: 'canvas' | 'plaque';
   className?: string;
 }
@@ -27,6 +27,56 @@ export function ThemeToggle({
     getServerThemeSnapshot,
   );
   const isDark = theme === 'dark';
+
+  if (variant === 'switch') {
+    const isPlaque = surface === 'plaque';
+    return (
+      <div
+        className={`inline-flex items-center gap-2.5 ${className}`}
+        data-theme-toggle="switch"
+      >
+        <span
+          id="theme-switch-label"
+          className={`text-[11px] font-medium uppercase tracking-[0.12em] select-none ${
+            isPlaque ? 'text-plaque-ink/75' : 'text-umber'
+          }`}
+        >
+          {isDark ? 'Dark Mode' : 'Light Mode'}
+        </span>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={isDark}
+          aria-labelledby="theme-switch-label"
+          onClick={() => toggleTheme()}
+          title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
+          className={`group relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border transition-colors duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta ${
+            isDark
+              ? 'border-terracotta/40 bg-terracotta shadow-[0_0_12px_rgba(217,84,30,0.3)]'
+              : isPlaque
+                ? 'border-plaque-ink/20 bg-plaque-ink/15 hover:bg-plaque-ink/25'
+                : 'border-divider bg-paper hover:bg-linen'
+          }`}
+        >
+          <span className="sr-only">Toggle theme</span>
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none flex h-5 w-5 items-center justify-center rounded-full bg-paper shadow-sm transition-transform duration-300 ease-in-out ${
+              isDark
+                ? 'translate-x-5 text-terracotta'
+                : 'translate-x-0.5 text-umber'
+            }`}
+          >
+            {isDark ? (
+              <Moon className="w-3 h-3 text-terracotta shrink-0" />
+            ) : (
+              <Sun className="w-3 h-3 text-terracotta shrink-0" />
+            )}
+          </span>
+        </button>
+      </div>
+    );
+  }
 
   if (variant === 'segmented') {
     const isPlaque = surface === 'plaque';

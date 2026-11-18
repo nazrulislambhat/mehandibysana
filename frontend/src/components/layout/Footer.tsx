@@ -176,7 +176,7 @@ export function Footer() {
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle variant="segmented" surface="plaque" />
+            <ThemeToggle variant="switch" surface="plaque" className="hidden md:inline-flex" />
           </div>
         </div>
       </div>
