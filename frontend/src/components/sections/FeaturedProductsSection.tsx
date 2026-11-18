@@ -15,7 +15,7 @@ export interface FeaturedProductsSectionProps {
   allProducts: StorefrontProduct[];
 }
 
-type ShelfTab = 'signature' | 'ready' | 'kits';
+type ShelfTab = 'signature' | 'kits';
 
 const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   'organic-henna-cones':
@@ -89,11 +89,6 @@ export function FeaturedProductsSection({
 }: FeaturedProductsSectionProps) {
   const [activeTab, setActiveTab] = useState<ShelfTab>('signature');
 
-  const readyProducts = useMemo(
-    () => allProducts.filter((p) => p.inStock),
-    [allProducts],
-  );
-
   const kitsAndCareProducts = useMemo(
     () =>
       allProducts.filter((p) =>
@@ -106,13 +101,11 @@ export function FeaturedProductsSection({
 
   const visibleProducts = useMemo(() => {
     const source =
-      activeTab === 'ready'
-        ? readyProducts
-        : activeTab === 'kits'
-          ? kitsAndCareProducts
-          : featuredProducts;
+      activeTab === 'kits'
+        ? kitsAndCareProducts
+        : featuredProducts;
     return (source.length > 0 ? source : featuredProducts).slice(0, 5);
-  }, [activeTab, readyProducts, kitsAndCareProducts, featuredProducts]);
+  }, [activeTab, kitsAndCareProducts, featuredProducts]);
 
   const leadProduct = visibleProducts[0] ?? null;
   const secondaryProducts = visibleProducts.slice(1, 5);
@@ -138,12 +131,7 @@ export function FeaturedProductsSection({
           {(
             [
               { id: 'signature', index: '01', label: 'Signature Batch' },
-              {
-                id: 'ready',
-                index: '02',
-                label: `Ready to Ship (${readyProducts.length})`,
-              },
-              { id: 'kits', index: '03', label: 'Bridal Kits & Oils' },
+              { id: 'kits', index: '02', label: 'Bridal Kits & Oils' },
             ] as Array<{ id: ShelfTab; index: string; label: string }>
           ).map((tab) => {
             const isSelected = activeTab === tab.id;
@@ -189,15 +177,12 @@ export function FeaturedProductsSection({
 
           <div>
             {/* Flagship Header Row */}
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <div className="flex items-center justify-between gap-3 mb-5">
               <div className="inline-flex items-center gap-2">
                 {leadProduct.isTopSeller ? (
                   <TopSellingBadge rank={leadProduct.topSellerRank} size="sm" />
                 ) : null}
-                <span className="font-serif text-xs italic text-terracotta">No. 01</span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta">
-                  Signature Spotlight
-                </span>
+             
               </div>
 
               <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-ink/20 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink/90">
@@ -207,7 +192,7 @@ export function FeaturedProductsSection({
                     leadProduct.inStock ? 'bg-terracotta' : 'bg-plaque-ink/45'
                   }`}
                 />
-                {leadProduct.inStock ? 'Ready to Ship' : 'Batch Restocking'}
+               
               </span>
             </div>
 
@@ -360,7 +345,7 @@ export function FeaturedProductsSection({
                     )}
                   </Link>
 
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta mb-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/80 mb-1">
                     {category}
                   </p>
 
@@ -368,7 +353,7 @@ export function FeaturedProductsSection({
                     href={`/product/${product.slug}`}
                     className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus rounded-sm"
                   >
-                    <h3 className="font-serif text-xl font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 transition-colors">
+                    <h3 className="font-serif text-xl font-medium text-terracotta group-hover:text-terracotta leading-snug line-clamp-2 transition-colors">
                       {product.name}
                     </h3>
                   </Link>
