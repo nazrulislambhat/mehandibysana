@@ -86,7 +86,7 @@ export function ProductCard({
                   aria-hidden="true"
                   className="w-1.5 h-1.5 rotate-45 bg-terracotta"
                 />
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-terracotta">
                   {primaryCategory}
                 </p>
               </div>
@@ -195,12 +195,12 @@ export function ProductCard({
 
         <div className="px-1 sm:px-1.5 flex flex-col gap-0.5 sm:gap-1">
           {primaryCategory ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-terracotta truncate">
+            <p className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.14em] text-umber truncate">
               {primaryCategory}
             </p>
           ) : null}
 
-          <h3 className="font-serif text-sm sm:text-xl font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 min-h-[2.5rem] sm:min-h-0">
+          <h3 className="font-serif text-[15px] sm:text-lg lg:text-xl font-semibold sm:font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 min-h-[2.6rem] sm:min-h-0">
             {product.name}
           </h3>
 
