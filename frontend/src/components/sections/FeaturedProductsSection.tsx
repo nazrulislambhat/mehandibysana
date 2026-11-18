@@ -182,7 +182,7 @@ export function FeaturedProductsSection({
                 {leadProduct.isTopSeller ? (
                   <TopSellingBadge rank={leadProduct.topSellerRank} size="sm" />
                 ) : null}
-                <span className="font-serif text-xs italic text-terracotta">No. 01</span>
+                
               </div>
             </div>
 
