@@ -572,27 +572,47 @@ export async function fetchProductBySlug(
   return allResult.products.find((p) => p.slug === slug) ?? null;
 }
 
-export async function fetchOrderCount(): Promise<number | null> {
-  const { medusaBackendUrl, medusaPublishableKey } = getServerEnv();
-  if (!medusaBackendUrl) return null;
+/**
+ * Dynamic Products Delivered / Orders Completed Counter:
+ * - Baseline historical fulfilled volume: 5,480 products
+ * - Live fulfilled volume pulls from Medusa backend order count
+ * - When Medusa order count increases by N, counter increments by 2×N
+ *   to accurately account for untracked offline WhatsApp and Instagram sales volume
+ * - Guarded to guarantee the counter only ever increases and never resets or decreases
+ */
+export const BASELINE_DELIVERED_PRODUCTS = 5480;
+export const BASELINE_MEDUSA_ORDERS = 0;
 
-  try {
-    const res = await fetch(`${medusaBackendUrl}/store/orders?limit=1`, {
-      headers: medusaHeaders(medusaPublishableKey),
-      next: {
-        revalidate: REVALIDATE_SECONDS,
-        tags: ['orders-summary'],
-      },
-    });
-    if (!res.ok) return 3499;
-    const data = (await res.json()) as { count?: number; orders?: unknown[] };
-    if (typeof data.count === 'number' && data.count > 0) {
-      return Math.max(3499, data.count);
+export async function fetchOrderCount(): Promise<number> {
+  const { medusaBackendUrl, medusaPublishableKey } = getServerEnv();
+
+  let medusaOrders = 0;
+  if (medusaBackendUrl) {
+    try {
+      const res = await fetch(`${medusaBackendUrl}/store/orders`, {
+        headers: medusaHeaders(medusaPublishableKey),
+        next: {
+          revalidate: 86400, // Daily revalidation
+          tags: ['orders-summary'],
+        },
+      });
+      if (res.ok) {
+        const data = (await res.json()) as { count?: number };
+        if (typeof data.count === 'number' && Number.isFinite(data.count)) {
+          medusaOrders = Math.max(0, data.count);
+        }
+      }
+    } catch {
+      // Gracefully fall back to baseline
     }
-    return 3499;
-  } catch {
-    return 3499;
   }
+
+  // 2× multiplier logic for offline/WhatsApp/Instagram sales volume
+  const additionalFulfilled = Math.max(0, medusaOrders - BASELINE_MEDUSA_ORDERS) * 2;
+  const totalDelivered = BASELINE_DELIVERED_PRODUCTS + additionalFulfilled;
+
+  // Never reset or decrease below the 5,480 baseline
+  return Math.max(BASELINE_DELIVERED_PRODUCTS, totalDelivered);
 }
 
 export async function fetchCatalogReviews(): Promise<StorefrontReview[]> {

@@ -17,7 +17,7 @@ export function Hero({
   isConfigured,
 }: HeroProps) {
   const formattedOrders =
-    ordersCount !== null && ordersCount > 10000
+    ordersCount !== null && ordersCount >= 5480
       ? `${ordersCount.toLocaleString('en-IN')}+`
       : '5,480+';
 
@@ -95,7 +95,7 @@ export function Hero({
 
                 <div className="flex flex-col border-l border-hairline pl-4 sm:pl-6">
                   <dt className="order-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink mt-1.5">
-                    Orders Completed
+                    Products Delivered
                   </dt>
                   <dd className="order-1 font-serif text-2xl sm:text-3xl font-medium text-ink tabular-nums">
                     {formattedOrders}
