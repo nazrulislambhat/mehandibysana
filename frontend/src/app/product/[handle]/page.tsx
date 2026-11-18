@@ -206,7 +206,7 @@ export default async function ProductDetailPage({
                         aria-hidden="true"
                         className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
                       />
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
+                      <p className="text-xs font-medium uppercase tracking-[0.18em] text-umber">
                         {primaryCategory.name}
                       </p>
                     </div>
@@ -215,7 +215,7 @@ export default async function ProductDetailPage({
               </div>
 
               <TextReveal variant="line" delayMs={100} immediate>
-                <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.85rem] font-medium text-ink leading-[1.12] mb-3">
+                <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.85rem] font-medium text-terracotta leading-[1.12] mb-3">
                   {product.name}
                 </h1>
               </TextReveal>

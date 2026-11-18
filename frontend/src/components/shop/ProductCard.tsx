@@ -96,7 +96,7 @@ export function ProductCard({
               href={`/product/${product.slug}`}
               className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus rounded-sm"
             >
-              <h3 className="font-serif text-3xl sm:text-4xl font-medium text-ink group-hover:text-terracotta leading-tight mb-3">
+              <h3 className="font-serif text-3xl sm:text-4xl font-medium text-terracotta hover:text-terracotta-dark leading-tight mb-3 transition-colors">
                 {product.name}
               </h3>
             </Link>
@@ -200,7 +200,7 @@ export function ProductCard({
             </p>
           ) : null}
 
-          <h3 className="font-serif text-[15px] sm:text-lg lg:text-xl font-semibold sm:font-medium text-ink group-hover:text-terracotta leading-snug line-clamp-2 min-h-[2.6rem] sm:min-h-0">
+          <h3 className="font-serif text-[15px] sm:text-lg lg:text-xl font-semibold sm:font-medium text-terracotta hover:text-terracotta-dark leading-snug line-clamp-2 min-h-[2.6rem] sm:min-h-0 transition-colors">
             {product.name}
           </h3>
 
