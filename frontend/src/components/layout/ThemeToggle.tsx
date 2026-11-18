@@ -39,13 +39,13 @@ export function ThemeToggle({
         onClick={() => toggleTheme()}
         title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
         data-theme-toggle="switch"
-        className={`group relative inline-flex h-6 w-11 shrink-0 items-center cursor-pointer rounded-full border transition-colors duration-300 ease-in-out p-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta ${
+        className={`group relative h-6 w-11 shrink-0 items-center cursor-pointer rounded-full border transition-colors duration-300 ease-in-out p-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta ${
           isDark
             ? 'border-terracotta/40 bg-terracotta shadow-[0_0_12px_rgba(217,84,30,0.3)]'
             : isPlaque
               ? 'border-plaque-ink/20 bg-plaque-ink/15 hover:bg-plaque-ink/25'
               : 'border-divider bg-paper hover:bg-linen'
-        } ${className}`.trim()}
+        } ${className ? className : 'inline-flex'}`.trim()}
       >
         <span className="sr-only">
           {isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
