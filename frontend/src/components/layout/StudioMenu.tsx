@@ -361,7 +361,7 @@ export function StudioMenu() {
                       Pan-India Courier &amp; Speed Post Dispatch
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                  <div className="hidden md:flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-umber">
                       Appearance
                     </span>

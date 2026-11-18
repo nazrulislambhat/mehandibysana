@@ -162,21 +162,29 @@ export function Footer() {
       {/* Bottom Legal, Trust & Theme Strip */}
       <div className="relative z-10 border-t border-plaque-ink/12 bg-black/30">
         <div className="editorial-container py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-plaque-ink/85">
-          <p className="text-xs">
+          <p className="text-xs whitespace-nowrap text-center md:text-left">
             &copy; {currentYear} Mehandi By Sana. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-center md:justify-end gap-x-3 sm:gap-x-4 gap-y-2 text-xs md:mr-16">
             {LEGAL_POLICY_LINKS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="hover:text-plaque-ink transition-colors"
+                className="hover:text-plaque-ink transition-colors whitespace-nowrap"
               >
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle variant="segmented" surface="plaque" />
+            <span
+              aria-hidden="true"
+              className="hidden md:inline-block h-3.5 w-px bg-plaque-ink/20 self-center shrink-0"
+            />
+            <ThemeToggle
+              variant="switch"
+              surface="plaque"
+              className="hidden md:inline-flex shrink-0 self-center"
+            />
           </div>
         </div>
       </div>

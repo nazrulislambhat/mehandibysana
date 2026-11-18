@@ -93,7 +93,7 @@ export function FooterNewsletterForm() {
           />
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2">
+        <div className="flex flex-col xl:flex-row gap-2">
           <label htmlFor="footer-newsletter-email" className="sr-only">
             Email address for batch dispatch alerts
           </label>
@@ -106,14 +106,14 @@ export function FooterNewsletterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="min-h-[40px] flex-1 rounded-md border border-plaque-ink/20 bg-plaque px-3.5 py-2 text-xs text-plaque-ink placeholder:text-plaque-ink/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta transition-colors"
+            className="min-w-0 min-h-[40px] flex-1 rounded-md border border-plaque-ink/20 bg-plaque px-3.5 py-2 text-xs text-plaque-ink placeholder:text-plaque-ink/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:border-terracotta transition-colors"
           />
           <Button
             type="submit"
             variant="accent"
             size="sm"
             disabled={status === 'submitting'}
-            className="min-h-[40px] shrink-0 rounded-md text-xs px-4"
+            className="w-full xl:w-auto min-h-[40px] shrink-0 rounded-md text-xs px-4 justify-center"
           >
             <span>{status === 'submitting' ? 'Joining…' : 'Subscribe'}</span>
             {status !== 'submitting' ? (

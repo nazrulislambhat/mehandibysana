@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { CartBadge } from '@/components/layout/CartBadge';
 import { DesktopNav } from '@/components/layout/DesktopNav';
 import { StudioMenu } from '@/components/layout/StudioMenu';
-import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { BrandCrest } from '@/components/graphics/BrandMarks';
 
 export function Header() {
@@ -32,7 +31,6 @@ export function Header() {
 
         <div className="flex items-center gap-2 sm:gap-2.5">
           <CartBadge />
-          <ThemeToggle variant="icon" />
           <StudioMenu />
         </div>
       </div>
