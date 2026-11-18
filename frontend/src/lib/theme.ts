@@ -9,16 +9,25 @@ export const THEME_COLOR_BY_MODE: Record<Theme, string> = {
 
 /**
  * Blocking pre-paint bootstrap injected in <head> to eliminate any light/dark FOUC.
- * Reads explicit localStorage preference ('mbs-theme'), falling back to OS prefers-color-scheme.
+ * - On mobile (< 768px): strictly follows OS device prefers-color-scheme.
+ * - On desktop: reads explicit localStorage preference ('mbs-theme'), falling back to OS prefers-color-scheme.
+ * Synchronizes document theme, colorScheme, and <meta name="theme-color"> for notification/browser bars.
  */
-export const THEME_INIT_SCRIPT = `(function(){try{var k='${THEME_STORAGE_KEY}';var s=localStorage.getItem(k);var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||s==='light'?s:(m?'dark':'light');var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t;var c=t==='dark'?'#181818':'#E7DDCF';var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){metas[i].setAttribute('content',c);metas[i].removeAttribute('media');}}catch(e){}})();`;
+export const THEME_INIT_SCRIPT = `(function(){try{var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var isMob=window.matchMedia&&window.matchMedia('(max-width: 767px)').matches;var k='${THEME_STORAGE_KEY}';var s=isMob?null:localStorage.getItem(k);var t=(!isMob&&(s==='dark'||s==='light'))?s:(m?'dark':'light');var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t;var c=t==='dark'?'#181818':'#E7DDCF';var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){metas[i].setAttribute('content',c);metas[i].removeAttribute('media');}}catch(e){}})();`;
 
 const listeners = new Set<() => void>();
 let globalListenersAttached = false;
 let transitionCleanupTimer: number | null = null;
 
+export function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
+}
+
 function readStoredTheme(): Theme | null {
   if (typeof window === 'undefined') return null;
+  // Mobile devices follow system setting automatically, ignoring manual override
+  if (isMobileDevice()) return null;
   try {
     const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
     if (stored === 'dark' || stored === 'light') {
@@ -32,6 +41,15 @@ function readStoredTheme(): Theme | null {
 
 export function resolvePreferredTheme(): Theme {
   if (typeof window === 'undefined') return 'light';
+
+  // Mobile strictly follows device system setting
+  if (isMobileDevice()) {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+
+  // Desktop checks manual preference first, then falls back to system setting
   const stored = readStoredTheme();
   if (stored) return stored;
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -61,6 +79,7 @@ function applyThemeToDocument(theme: Theme, animate = false): void {
   root.dataset.theme = theme;
   root.style.colorScheme = theme;
 
+  // Dynamically update mobile browser address bar and notification bar theme color
   const themeColor = THEME_COLOR_BY_MODE[theme];
   const metas = document.querySelectorAll('meta[name="theme-color"]');
   metas.forEach((meta) => {
@@ -78,7 +97,6 @@ function ensureGlobalListeners(): void {
   globalListenersAttached = true;
 
   // Ensure <meta name="theme-color"> & attributes reflect the resolved theme
-  // even if framework-managed <meta> tags mounted after <head> bootstrap.
   applyThemeToDocument(resolvePreferredTheme(), false);
 
   window.addEventListener('storage', (event) => {
@@ -92,13 +110,24 @@ function ensureGlobalListeners(): void {
   });
 
   if (window.matchMedia) {
+    // Listen for device system setting changes (e.g. night mode scheduled change on mobile)
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const handleMediaChange = (event: MediaQueryListEvent) => {
-      if (readStoredTheme() !== null) return;
-      applyThemeToDocument(event.matches ? 'dark' : 'light', true);
-      notifyListeners();
+      if (isMobileDevice() || readStoredTheme() === null) {
+        applyThemeToDocument(event.matches ? 'dark' : 'light', true);
+        notifyListeners();
+      }
     };
     media.addEventListener('change', handleMediaChange);
+
+    // Listen for viewport breakpoint transition between mobile & desktop
+    const mobileMedia = window.matchMedia('(max-width: 767px)');
+    const handleViewportChange = () => {
+      const next = resolvePreferredTheme();
+      applyThemeToDocument(next, true);
+      notifyListeners();
+    };
+    mobileMedia.addEventListener('change', handleViewportChange);
   }
 }
 
@@ -121,7 +150,7 @@ export function subscribeTheme(listener: () => void): () => void {
 
 export function setTheme(next: Theme, options: { persist?: boolean; animate?: boolean } = {}): void {
   const { persist = true, animate = true } = options;
-  if (persist && typeof window !== 'undefined') {
+  if (persist && typeof window !== 'undefined' && !isMobileDevice()) {
     try {
       window.localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {
