@@ -5,6 +5,7 @@ import type { StorefrontProduct } from '@/types/storefront';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { LinkButton } from '@/components/ui/Button';
 import { LineDotRightHorizontal } from 'lucide-react';
+import { TopSellingBadge } from '@/components/shop/TopSellingBadge';
 
 export interface ProductCardProps {
   product: StorefrontProduct;
@@ -46,13 +47,18 @@ export function ProductCard({
           className="md:col-span-6 block overflow-hidden rounded-xl bg-linen border border-hairline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring-focus"
         >
           <div className="relative aspect-[4/5] w-full">
-            <span className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 rounded-full border border-plaque-border bg-plaque px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-plaque-ink">
-              <span
-                aria-hidden="true"
-                className="w-1.5 h-1.5 rounded-full bg-terracotta"
-              />
-              Signature Spotlight
-            </span>
+            <div className="absolute top-3.5 left-3.5 z-10 flex flex-wrap items-center gap-2">
+              {product.isTopSeller ? (
+                <TopSellingBadge rank={product.topSellerRank} />
+              ) : null}
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-plaque-border bg-plaque px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-plaque-ink">
+                <span
+                  aria-hidden="true"
+                  className="w-1.5 h-1.5 rounded-full bg-terracotta"
+                />
+                Signature Spotlight
+              </span>
+            </div>
             {primaryImage ? (
               <Image
                 src={primaryImage.src}
@@ -175,11 +181,16 @@ export function ProductCard({
             </div>
           )}
 
-          {!product.inStock ? (
-            <span className="absolute top-2 left-2 sm:top-3 sm:left-3 rounded-md border border-plaque-border bg-terracotta px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink">
-              Out of stock
-            </span>
-          ) : null}
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 flex flex-col gap-1.5 items-start">
+            {product.isTopSeller ? (
+              <TopSellingBadge rank={product.topSellerRank} size="sm" />
+            ) : null}
+            {!product.inStock ? (
+              <span className="rounded-md border border-plaque-border bg-terracotta px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold uppercase tracking-[0.12em] text-plaque-ink">
+                Out of stock
+              </span>
+            ) : null}
+          </div>
         </div>
 
         <div className="px-1 sm:px-1.5 flex flex-col gap-0.5 sm:gap-1">

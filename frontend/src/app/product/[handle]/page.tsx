@@ -17,6 +17,7 @@ import {
 } from '@/lib/structured-data';
 import { ProductDetailInteractive } from '@/components/shop/VariantSelector';
 import { ProductCard } from '@/components/shop/ProductCard';
+import { TopSellingBadge } from '@/components/shop/TopSellingBadge';
 import { StainProgressionGuide } from '@/components/shop/StainProgressionGuide';
 import { BotanicalSprig } from '@/components/graphics/BotanicalIllustrations';
 import { TextReveal } from '@/components/ui/TextReveal';
@@ -192,19 +193,26 @@ export default async function ProductDetailPage({
           product={product}
           headerChildren={
             <div>
-              {primaryCategory ? (
-                <TextReveal variant="fade" delayMs={40} immediate>
-                  <div className="flex items-center gap-2 mb-2.5">
-                    <span
-                      aria-hidden="true"
-                      className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
-                    />
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
-                      {primaryCategory.name}
-                    </p>
-                  </div>
-                </TextReveal>
-              ) : null}
+              <div className="flex flex-wrap items-center gap-3 mb-2.5">
+                {product.isTopSeller ? (
+                  <TextReveal variant="fade" delayMs={20} immediate>
+                    <TopSellingBadge rank={product.topSellerRank} size="sm" />
+                  </TextReveal>
+                ) : null}
+                {primaryCategory ? (
+                  <TextReveal variant="fade" delayMs={40} immediate>
+                    <div className="flex items-center gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="w-1.5 h-1.5 rotate-45 bg-terracotta shrink-0"
+                      />
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
+                        {primaryCategory.name}
+                      </p>
+                    </div>
+                  </TextReveal>
+                ) : null}
+              </div>
 
               <TextReveal variant="line" delayMs={100} immediate>
                 <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.85rem] font-medium text-ink leading-[1.12] mb-3">
