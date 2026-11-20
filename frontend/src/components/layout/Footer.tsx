@@ -72,37 +72,37 @@ export function Footer() {
                 href="https://wa.me/919149648717"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Chat on WhatsApp"
               >
                 <span>WhatsApp</span>
-                <MessageCircle className="w-3 h-3 text-brand-green" />
+                <MessageCircle className="w-3 h-3 text-brand-green group-hover:text-on-accent transition-colors" />
               </a>
               <a
                 href="https://www.instagram.com/mehandibysana"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Instagram profile @mehandibysana"
               >
                 <span>@mehandibysana</span>
-                <Camera className="w-3 h-3 text-terracotta" />
+                <Camera className="w-3 h-3 text-terracotta group-hover:text-on-accent transition-colors" />
               </a>
               <a
                 href="mailto:sana@mehandibysana.com"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Email sana@mehandibysana.com"
               >
                 <span>Email</span>
-                <Mail className="w-3 h-3 text-terracotta" />
+                <Mail className="w-3 h-3 text-terracotta group-hover:text-on-accent transition-colors" />
               </a>
               <a
                 href="tel:+919149648717"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
+                className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-plaque-ink/20 bg-plaque-ink/[0.06] text-plaque-ink hover:border-terracotta hover:text-on-accent hover:bg-terracotta-solid transition-colors"
                 aria-label="Call +91-9149648717"
               >
                 <span>Call</span>
-                <Phone className="w-3 h-3 text-terracotta" />
+                <Phone className="w-3 h-3 text-terracotta group-hover:text-on-accent transition-colors" />
               </a>
             </div>
           </div>
